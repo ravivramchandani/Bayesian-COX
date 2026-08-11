@@ -274,7 +274,7 @@
       ],
       "eval_time": 522.0
     },
-    "cox_baseline_test_c_index": 0.4685,
+    "cox_baseline_test_c_index": 0.4677,
     "cox_baseline_test_ibs": 0.1565
   },
   "metabric": {

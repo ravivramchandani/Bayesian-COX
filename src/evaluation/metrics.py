@@ -14,6 +14,7 @@ from typing import Any
 import numpy as np
 
 
+
 def concordance_index(
     y_time: np.ndarray, y_event: np.ndarray, risk_scores: np.ndarray
 ) -> tuple[float, float]:
