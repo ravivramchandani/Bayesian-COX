@@ -159,9 +159,16 @@ Bayesian-Survival-Models/
 
 All experiments are fully deterministic, pinning the random seed to `42`.
 
+> **Hyperparameter Source of Truth:** All model hyperparameters are loaded from `config/*.yaml` files
+> (specifically `config/model.yaml` and `config/training.yaml`) via `src/utils/config.get_project_config()`.
+> CLI arguments act only as overrides when explicitly passed — they are never the default source.
+> To understand what hyperparameters produced a given result, check the `resolved_config` field
+> in the JSON output under `reports/tables/` or the printed run header in stdout.
+
 - **Python version**: `3.10.12`
 - **PyMC version**: `5.10.3`
 - **PyTorch version**: `2.1.2`
 - **Operating System**: Linux kernel 6.x
 - **Hardware Profile**: x86_64, minimum 8GB RAM, CPU execution default (due to missing `g++` compilation fallback in PyTensor, ADVI variational parameters are optimized in pure Python space).
+
 # Bayesian-COX
