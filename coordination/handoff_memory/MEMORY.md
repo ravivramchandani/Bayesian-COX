@@ -31,6 +31,12 @@ tool, vendor or model, and must not contain AI-assistance disclosures or similar
 process statements. The work is the student's responsibility and authorship.
 Do not add such language unless the owner explicitly reverses this instruction.
 
+## Delivery deadline
+
+The owner requires the thesis and paper package to be finished by 2026-11-30.
+Use the compressed 15-week schedule in `coordination/TODO.md`; do not restore
+the earlier 2027 deadline.
+
 ## Environment
 
 Conda environment `bayes-cox`. PyMC chains run sequentially because the

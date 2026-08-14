@@ -299,3 +299,16 @@ and no partial metric or effect was admitted as evidence. The owner requested
 a local checkpoint commit now, followed by completion and verification of this
 confirmatory run. Robustness, confirmatory explanation and post-confirmatory
 thesis result writing are paused until a later owner instruction.
+
+## 2026-08-15 — Owner compresses delivery programme to 30 November 2026
+
+The owner set 2026-11-30 as the final thesis and paper-package deadline. The
+live task register is therefore compressed from 26 weeks to 15 weeks beginning
+2026-08-17. Dependencies, acceptance evidence and analytical scope are
+unchanged; writing, review and publication preparation overlap more tightly.
+
+The earlier dates inside the write-once frozen protocol and decision history
+remain as the administrative schedule recorded at analysis freeze. They are
+superseded for current project management by `coordination/TODO.md` and this
+entry. Their bytes cannot be changed while the confirmatory run and its
+downstream frozen analyses rely on the recorded 80-input hash set.

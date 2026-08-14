@@ -43,3 +43,10 @@ active run, still changing.
    confirmatory checkpoint commit.
 4. Stop for owner review. Do not begin robustness, confirmatory explanation or
    post-confirmatory thesis results writing without a new instruction.
+
+## Administrative schedule update
+
+The owner has set 2026-11-30 as the completion deadline. The live task register
+now compresses all remaining thesis, review, paper-package and contingency work
+into 15 weeks beginning 2026-08-17. This administrative update does not alter
+the frozen analytical design or its evidence gates.

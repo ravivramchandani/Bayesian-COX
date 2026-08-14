@@ -4,6 +4,11 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-08-15
 
+Administrative deadline: the live programme in `TODO.md` runs from 2026-08-17
+to 2026-11-30. This 15-week schedule supersedes the earlier 26-week dates for
+project management without changing any frozen analytical method or claim
+gate.
+
 ## Exact runtime
 
 Use the verified locked environment directly. The older environment named
