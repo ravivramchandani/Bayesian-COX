@@ -2,12 +2,17 @@
 
 Generated 2026-08-14 from `reports/tables/benchmark.json`.
 
+**Evidence status: exploratory pilot.** The inspected holdout, current
+cross-validation preprocessing and test-derived horizons prevent
+confirmatory model-comparison claims; see ADR-014.
+
 Three model families are compared on three clinical cohorts: the Cox
 proportional hazards baseline, a random survival forest, and the
 Bayesian Cox model fitted under each of three coefficient priors.
 Discrimination is measured by Harrell's concordance index and
-time-dependent AUC; calibration by the integrated Brier score, where
-lower is better.
+time-dependent AUC. Integrated Brier score is an overall probabilistic
+prediction-error measure affected by discrimination and calibration;
+lower is better. It does not establish calibration by itself.
 
 Cross-validated concordance uses a shorter sampling chain than the
 reported test-set fit, so it is comparable across models but not

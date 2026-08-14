@@ -205,3 +205,126 @@ Format:
   identical across models. Agreement is reported as Spearman and Kendall rank
   correlation plus top-k overlap.
 - Consequences: The explainability claim is measured rather than asserted.
+
+## ADR-014 — Existing results are exploratory; repeated nested CV is confirmatory
+
+- Status: ACCEPTED
+- Date: 2026-08-14
+- Context: The current holdout has been inspected and used to interpret model
+  behaviour. Cross-validation uses data preprocessed on the full training
+  split, selects evaluation horizons from test outcomes, and stores only
+  aggregate mean and standard deviation. It cannot support the planned paired
+  confirmatory inference.
+- Decision: Preserve the current 15 fits and 18 explanation comparisons as
+  exploratory pilot evidence. The primary analysis is five repeats of
+  five-fold outer cross-validation with all preprocessing and horizon choice
+  fitted inside each outer-training fold. Compact random-forest and DeepSurv
+  tuning occurs in three inner folds. Per-subject out-of-fold predictions and
+  per-fold metrics are retained. A result-blind compute rehearsal may reduce
+  the repeats to three before confirmatory effects are inspected.
+- Consequences: No untouched holdout claim is made. The confirmatory analysis
+  is paired and reproducible but materially more expensive. Pilot values can
+  motivate hypotheses and check code, not establish superiority.
+
+## ADR-015 — Prediction times and baseline-only primary predictors
+
+- Status: ACCEPTED
+- Date: 2026-08-14
+- Context: Prediction time was not defined. WHAS500 length of stay resolves
+  after admission, while METABRIC surgery and treatment-received variables
+  occur after diagnosis. Including them in a baseline clinical-prediction
+  model risks post-baseline information leakage. ADR-012 retained length of
+  stay as primary for published comparability.
+- Decision: The primary WHAS500 target is admission-time mortality prediction
+  and excludes length of stay plus any complication not verified as available
+  at admission. The intended primary METABRIC target uses diagnosis/pathology
+  variables available before adjuvant treatment and excludes surgery type and
+  treatment received unless a defensible timing audit establishes otherwise;
+  its exact survival time origin must be verified before that label is used.
+  Full published/augmented feature sets are comparability sensitivities. This
+  decision supersedes ADR-012.
+- Consequences: The primary claims have a clear intended prediction time and
+  avoid readily fixable leakage. Some performance may fall and direct
+  comparison with published full-feature baselines moves to sensitivity
+  analysis. The historical T-032 referenced by ADR-012 is replaced by T-142.
+
+## ADR-016 — Confirmatory data sources; no fourth core cohort
+
+- Status: ACCEPTED
+- Date: 2026-08-14
+- Context: GBSG2 and WHAS500 are reproducible from scikit-survival. The active
+  1,904-row Kaggle METABRIC source omits 77 otherwise eligible positive-time
+  survival records and 41 deaths relative to the 2,509-row cBioPortal clinical
+  export already stored with the proposal. A new dataset would add work while
+  calibration, robustness, governance and thesis writing remain unfinished.
+- Decision: Pin GBSG2 and WHAS500 to an exact scikit-survival source release.
+  Rebuild confirmatory METABRIC from cBioPortal DataHub commit
+  `165bd77077b03038f9c2ee104959eb474770b2a9`, expecting 1,980 positive-time
+  records and 1,144 deaths. Keep the Kaggle subset only for pilot
+  reproducibility. Add no fourth independently refitted core cohort. A locked
+  Rotterdam-to-GBSG2 transport evaluation is optional only if the Week 4 gate
+  verifies licence, endpoint/predictor compatibility and schedule.
+- Consequences: The core is feasible with locally and publicly available data
+  and METABRIC selection becomes auditable. All existing METABRIC performance
+  numbers remain exploratory and must be rerun. Multi-cohort fitting is called
+  benchmarking, not external validation.
+
+## ADR-017 — Primary estimands, calibration and inference
+
+- Status: ACCEPTED
+- Date: 2026-08-14
+- Context: Harrell's C-index is optimistic under heavy censoring, IBS is
+  incorrectly labelled calibration, actual calibration is unwired, and a
+  statistics stub returns a constant p-value. An unrestricted all-pairs test
+  family would be underpowered and difficult to interpret.
+- Decision: IPCW IBS is the primary probabilistic-error estimand and Uno's
+  IPCW C-index the primary discrimination estimand. Calibration requires
+  curves plus calibration intercept/calibration-in-the-large and slope at
+  training-defined horizons. The primary inferential family is the three
+  pairwise Bayesian-prior contrasts within three cohorts, with Holm control.
+  Repeated-CV effects use a prespecified corrected paired procedure and a
+  paired out-of-fold bootstrap sensitivity. Cox, forest and DeepSurv contrasts
+  are secondary and estimation-led.
+- Consequences: “Calibration,” “superior,” “equivalent” and “robust” have
+  explicit evidence gates. Existing mean/standard-deviation summaries and the
+  comparable-pair standard error are descriptive only. The stubbed
+  permutation result cannot enter any report.
+
+## ADR-018 — Explanation target is model-conditional stability
+
+- Status: ACCEPTED
+- Date: 2026-08-14
+- Context: Current agreement compares posterior probability-of-direction
+  rankings with SHAP from other model families on the first 40 test rows.
+  Probability of direction, coefficient magnitude, prior-specific shrinkage
+  and SHAP attribution are different constructs, while raw/log duplicates and
+  encoded levels fragment one clinical concept.
+- Decision: Use posterior expected absolute contribution as the common primary
+  Bayesian importance, compute SHAP on the same posterior-mean Bayesian risk
+  model for the primary comparison, and retain Cox/forest SHAP as secondary
+  cross-model comparisons. Subjects and backgrounds are sampled within folds
+  with recorded seeds. Importance is grouped by source variable and stability
+  is estimated across folds, subjects and SHAP seeds. Prior-specific
+  shrinkage/mixing weights remain secondary signals.
+- Consequences: The thesis can claim measured rank agreement and stability,
+  not explanatory truth, causality or clinical usefulness. The continuous
+  mixing weight is never called a discrete posterior inclusion probability.
+
+## ADR-019 — Six-month scope and publication target
+
+- Status: ACCEPTED
+- Date: 2026-08-14
+- Context: A high-quality paper benefits from robustness, transparent
+  reporting and reproducibility, but a master's thesis has a fixed six-month
+  window. Adding datasets, priors and models can delay the evidence and the
+  largely unwritten thesis.
+- Decision: Run the 26-week programme in `TODO.md`, targeting an examiner-ready
+  thesis by Week 22, thesis delivery in Week 23 and a journal package by Week
+  26. Thesis-essential work takes priority. Optional external transport and a
+  lean ADEMP simulation are admitted only at their written gates. No new model
+  family, prior, real dataset or analysis enters after the Week 8 protocol
+  freeze. Reporting follows TRIPOD+AI and is audited with PROBAST+AI.
+- Consequences: The work targets Q1-journal quality but does not promise a Q1
+  ranking or acceptance. When a gate slips, optional transport, simulation and
+  non-primary explanation work are dropped before any integrity, thesis or
+  reproducibility requirement.

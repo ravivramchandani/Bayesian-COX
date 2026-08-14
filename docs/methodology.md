@@ -1,5 +1,10 @@
 # Methodology
 
+This file describes the implemented exploratory models. The confirmatory
+analysis replaces the current validation/evaluation path according to
+`docs/study_protocol.md`; until those tasks pass, statements below are model
+specifications rather than publication-quality validation claims.
+
 ## Cox proportional hazards
 
 The hazard for subject $i$ at time $t$:
@@ -7,8 +12,9 @@ The hazard for subject $i$ at time $t$:
 $$\lambda(t \mid X_i) = \lambda_0(t) \exp(\beta^\top X_i)$$
 
 $\lambda_0(t)$ is the unspecified baseline hazard and $\beta$ the log hazard
-ratios. Fitted with lifelines; the proportional-hazards assumption is checked
-with Schoenfeld residuals.
+ratios. The model is fitted with lifelines. Schoenfeld-residual checks are
+specified but are not yet wired into the benchmark output; T-143 completes
+and reports them under a frozen response rule.
 
 ## Random survival forest
 
@@ -59,28 +65,40 @@ is the inclusion signal.
 ### Inference and diagnostics
 
 NUTS, four chains, 2000 tuning and 2000 posterior draws, target acceptance
-0.95 (0.99 for the horseshoe). Every fit reports R-hat, bulk and tail
-effective sample size, and divergent transitions, computed from the trace
-with arviz. A fit counts as converged when R-hat is below 1.01, bulk
-effective sample size exceeds 400, and divergences are under 0.5% of draws.
+0.95 (0.99 for the horseshoe). The pilot reports R-hat, effective sample size
+and divergent transitions computed from the trace with arviz, but its gate is
+centred on `beta`. Confirmatory fits extend diagnostics to baseline hazards
+and all prior hyperparameters, plus MCSE, BFMI, tree-depth and prior/posterior
+predictive checks. The minimum gate is R-hat below 1.01 and bulk effective
+sample size above 400; the confirmatory divergence target is zero.
 
-## Evaluation
+## Confirmatory evaluation
 
-- **Concordance index** — discrimination.
-- **Integrated Brier score** — calibration over the follow-up window, with
-  inverse-probability-of-censoring weights.
-- **Time-dependent AUC** — discrimination as a function of time.
+- **IPCW integrated Brier score** — primary overall probabilistic prediction
+  error over a supported follow-up window; it reflects both discrimination
+  and calibration.
+- **Uno's IPCW concordance index** — primary censoring-robust discrimination
+  estimate. Harrell's concordance remains descriptive.
+- **Cumulative/dynamic AUC** — discrimination as a function of time.
+- **Calibration curves, intercept/calibration-in-the-large and slope** —
+  explicit calibration at prespecified horizons.
 
-Evaluation times are quantiles of the observed event times, clipped inside
-both the training and test follow-up so censoring weights remain estimable.
-All three metrics come from scikit-survival.
+Every evaluation window/horizon is chosen from the outer-training fold and
+restricted to estimable censoring support; test outcomes never select it. The
+pilot currently violates this rule and is exploratory. Reference metrics come
+from scikit-survival, with calibration estimators independently tested.
 
-## Explainability
+## Confirmatory explainability
 
-The Bayesian posterior supplies a built-in signal: the probability that a
-coefficient's effect has a consistent direction, plus the inclusion signal
-from each sparsity prior. This is compared against post-hoc SHAP computed on
-Cox PH and the random survival forest, using a kernel explainer over each
-model's risk prediction so the attribution method is constant across models.
-Agreement is reported as Spearman and Kendall rank correlation and top-k
-overlap.
+The common primary Bayesian importance is posterior expected absolute
+contribution over validation subjects and posterior draws. Probability of
+direction is a certainty measure; horseshoe shrinkage and the continuous
+spike-and-slab mixing weight are secondary, prior-specific signals.
+
+Primary agreement compares intrinsic importance with SHAP on the same
+Bayesian posterior-mean risk model. Cox PH and random-survival-forest SHAP are
+secondary cross-model comparisons. Subjects and backgrounds are sampled
+within folds with recorded seeds, encoded/transformed terms are grouped by
+source variable, and agreement/stability is reported with resampling
+uncertainty. The analysis estimates model-conditional ranking agreement, not
+causality, feature truth or clinical usefulness.

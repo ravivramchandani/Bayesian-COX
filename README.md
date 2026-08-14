@@ -3,9 +3,11 @@
 Codebase for a Master of Applied Technologies thesis at the School of
 Computing, Unitec.
 
-Four model families are benchmarked on three clinical cohorts, and the
-explainability signal built into the Bayesian posterior is compared against
-post-hoc SHAP attribution on the baselines.
+The completed exploratory benchmark covers three implemented model families
+on three clinical cohorts. A DeepSurv comparator, explicit calibration and a
+leakage-safe confirmatory analysis are planned and gated in
+`coordination/TODO.md`. Current result files are pilot evidence, not final
+inferential results.
 
 ## Models
 
@@ -16,6 +18,7 @@ post-hoc SHAP attribution on the baselines.
 | Bayesian Cox, weakly-informative Normal prior | PyMC, NUTS |
 | Bayesian Cox, regularised horseshoe prior | PyMC, NUTS |
 | Bayesian Cox, continuous spike-and-slab prior | PyMC, NUTS |
+| DeepSurv comparator | Local implementation awaiting reference validation and benchmark integration |
 
 The Bayesian Cox model uses a piecewise-exponential baseline hazard expressed
 as a Poisson regression over subject-interval exposures. The two sparsity
@@ -28,11 +31,13 @@ explainability.
 | :--- | ---: | ---: | :--- |
 | GBSG2 | 686 | 299 | scikit-survival |
 | WHAS500 | 500 | 215 | scikit-survival |
-| METABRIC | 1903 | 1103 | `data/external/METABRIC_RNA_Mutation.csv` |
+| METABRIC pilot subset | 1903 | 1103 | `data/external/METABRIC_RNA_Mutation.csv` |
 
 All three carry time-to-event data with right censoring. In the METABRIC
 source `overall_survival` encodes *alive*, so the event indicator is its
-complement.
+complement. Confirmatory METABRIC will be rebuilt from a pinned cBioPortal
+clinical snapshot and is expected to contain 1,980 positive-time records and
+1,144 deaths; see `docs/datasets.md`.
 
 ## Setup
 
@@ -84,12 +89,17 @@ tests/          test suite
 reports/        generated reports, tables and figures
 ```
 
-## Reproducibility
+## Reproducibility status
 
 Every stochastic step takes an explicit seed. Cohort sizes and event counts
 are asserted against their published values, preprocessing is checked to
 preserve prognostic signal, metrics are checked against scikit-survival, and
 baselines are checked against their published concordance range. Sampler
 diagnostics are computed from the posterior trace rather than asserted.
+
+Exact clean-clone numerical reproducibility is not yet claimed: dependencies,
+source manifests and result manifests still need publication locks, and the
+confirmatory fold-local pipeline is not yet implemented. Those acceptance
+gates are T-110, T-120, T-125 and T-129.
 
 Run `make test` to verify all of the above.

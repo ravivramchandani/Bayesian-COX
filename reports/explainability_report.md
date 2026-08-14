@@ -2,6 +2,9 @@
 
 Generated 2026-08-14 from `reports/tables/explainability.json`.
 
+**Evidence status: exploratory pilot.** Rankings use a limited test-row
+sample and do not yet quantify fold, subject or SHAP-seed stability.
+
 The Bayesian posterior provides a built-in feature signal: the
 posterior probability that a coefficient's effect has a consistent
 direction. This is compared against post-hoc SHAP attributions

@@ -132,3 +132,47 @@ The features the sparsity priors retain are the clinically expected ones —
 positive lymph nodes on GBSG2, cardiogenic shock and age on WHAS500, age and
 nodal status on METABRIC — so the signal is recovering known prognostic
 structure rather than arbitrary directions.
+
+## 2026-08-14 — Current benchmark is exploratory, not confirmatory
+
+The benchmark holdout has been inspected and used in model interpretation.
+Cross-validation receives a matrix whose imputation, encoding and scaling were
+fitted on the full development training split, so each validation fold
+informed its preprocessing. Evaluation horizons are selected from test event
+times, and the result JSON retains only fold mean/standard deviation rather
+than paired fold predictions. `src/statistics/permutation.py` also returns the
+constant value `0.05` for every input and is not valid evidence.
+
+The 15 fits and 18 explanation comparisons remain useful pipeline and
+hypothesis-generating evidence. They cannot support confirmatory superiority,
+equivalence, calibration or multiplicity-controlled claims. ADR-014 defines a
+fold-local repeated nested-CV replacement.
+
+## 2026-08-14 — Active METABRIC source omits eligible survival records
+
+The active source is the 1,904-row, 693-column Kaggle version-1 combined
+clinical/omics export, SHA-256
+`d4802594827667a71a75b5ae5c3cad1eb4346222052fcc792361c64abc7e43bc`.
+It produces 1,903 positive-time records and 1,103 deaths. The single excluded
+record has zero follow-up, not missing follow-up.
+
+The 2,509-row clinical export stored with the proposal matches the pinned
+cBioPortal DataHub patient/sample files on patient IDs, outcome status,
+outcome missingness and clinical values. Requiring complete overall-survival
+outcomes and positive time produces 1,980 records and 1,144 deaths. The active
+pilot therefore omits 77 otherwise eligible records and 41 deaths. ADR-016
+requires the pinned cBioPortal source for confirmatory METABRIC.
+
+## 2026-08-14 — Thesis source fails a clean publication build
+
+The Overleaf source fails `latexmk -halt-on-error` at the malformed
+Kaplan–Meier equation in `literature_review.tex`. A nonstop diagnostic build
+reported hundreds of LaTeX errors and 349 undefined-citation warnings. Static
+bibliography inspection found 62 entries, 56 cited keys, missing key `ref8`,
+seven unused entries, 38 entries without a stable identifier and malformed
+BibTeX entry `ref23`.
+
+The literature review is about 25,700 words, while the introduction,
+methodology, results, conclusion, abstract and appendices are template or
+effectively empty. Writing and bibliography repair therefore start in Week 1
+in parallel with confirmatory engineering.

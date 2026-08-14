@@ -33,7 +33,10 @@ scikit-survival and derives the METABRIC clinical cohort from
 
 **`scripts/prepare_dataset.py`** reads schemas from `config/datasets.yaml`,
 then imputes, encodes, scales, splits, and writes CV folds. Transformers are
-fitted on the training split only.
+fitted on the development training split only. The exploratory CV then reuses
+that processed matrix, so its validation folds still informed preprocessing;
+T-120 replaces it with transformers fitted inside every outer/inner training
+fold.
 
 **`scripts/run_benchmark.py`** fits every model on every cohort and writes
 `reports/tables/benchmark.json`.
@@ -42,8 +45,10 @@ fitted on the training split only.
 against SHAP attributions on the baselines, writing
 `reports/tables/explainability.json`.
 
-**`scripts/make_figures.py`** and **`scripts/make_reports.py`** render
-figures and markdown from those result files. Neither recomputes anything.
+**`scripts/make_reports.py`** renders markdown from result files.
+`scripts/make_figures.py` currently refits Bayesian models for some figures,
+which breaks immutable figure lineage; T-126 converts it to a pure renderer of
+frozen artefacts.
 
 ## Model layer
 

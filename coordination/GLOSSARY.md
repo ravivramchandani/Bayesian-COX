@@ -27,9 +27,28 @@ Format:
 - Symbol: $\mathrm{IBS}$
 - Definition: The squared error between predicted survival probability and
   observed status, weighted for censoring and averaged over an evaluation
-  window. Lower is better; it measures calibration rather than ranking.
+  window. Lower is better. It is a proper overall prediction-error measure
+  affected by both calibration and discrimination, so it does not establish
+  calibration by itself.
 - Formula: $\mathrm{IBS} = \frac{1}{t_{\max}} \int_0^{t_{\max}} \mathrm{BS}(t)\,dt$
 - Used in: `src/evaluation/metrics.py`, results chapter.
+
+## Uno concordance index [Uno's C]
+- Symbol: $C_{\mathrm{Uno}}$
+- Definition: An inverse-probability-of-censoring-weighted concordance
+  estimator evaluated up to a supported horizon. It is less sensitive than
+  Harrell's concordance estimator to bias under heavy censoring.
+- Formula: —
+- Used in: confirmatory evaluation, results chapter.
+
+## Calibration intercept and slope
+- Symbol: $\alpha_{\mathrm{cal}}, \beta_{\mathrm{cal}}$
+- Definition: Calibration-in-the-large/intercept measures systematic
+  underprediction or overprediction at a horizon; calibration slope measures
+  whether predictions are too extreme or too compressed. Their estimator and
+  ideal values must be stated for the chosen survival-calibration model.
+- Formula: —
+- Used in: `src/evaluation/calibration.py`, confirmatory results chapter.
 
 ## Time-dependent AUC
 - Symbol: $\mathrm{AUC}(t)$
