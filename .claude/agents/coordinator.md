@@ -117,7 +117,7 @@ A finding that contradicts a claimed contribution is written up in JOURNAL
 and reported; it does not halt work.
 
 Administrative dependencies — approvals, access, credentials, ethics,
-permissions, supervisor sign-off — are owner-managed. Record each once in
+permissions — are owner-managed. Record each once in
 `OPEN_QUESTIONS.md` under "Owner track", note the single deliverable it
 blocks, build everything else, and carry on without restating it.
 

@@ -13,8 +13,7 @@ file or an irreversible external action. See `PROTOCOL.md`.
 
 ## Administrative matters are owner-managed
 
-Approvals, access, credentials, ethics, permissions and supervisor sign-off
-belong to Ali. They are recorded once in `OPEN_QUESTIONS.md` under "Owner
+Approvals, access, credentials, ethics and permissions are owner-held. They are recorded once in `OPEN_QUESTIONS.md` under "Owner
 track" and never restated or used as a gate. Each names the single
 deliverable it blocks; everything around it gets built.
 

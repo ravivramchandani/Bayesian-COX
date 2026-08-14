@@ -51,7 +51,8 @@ def main() -> int:
     parser.add_argument("--draws", type=int, default=2000)
     parser.add_argument("--tune", type=int, default=2000)
     parser.add_argument("--chains", type=int, default=4)
-    parser.add_argument("--n-explain", type=int, default=60)
+    parser.add_argument("--n-explain", type=int, default=40)
+    parser.add_argument("--shap-samples", type=int, default=256)
     parser.add_argument("--datasets", nargs="*", default=DATASETS)
     args = parser.parse_args()
 
@@ -70,9 +71,11 @@ def main() -> int:
         )
 
         shap_tables = {
-            "Cox PH": shap_importance(cox, train[features], explain_set),
+            "Cox PH": shap_importance(
+                cox, train[features], explain_set, nsamples=args.shap_samples
+            ),
             "Random Survival Forest": shap_importance(
-                rsf, train[features], explain_set
+                rsf, train[features], explain_set, nsamples=args.shap_samples
             ),
         }
 

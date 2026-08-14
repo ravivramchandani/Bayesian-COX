@@ -88,9 +88,18 @@ def model_comparison_plot(
     ax.set_title(title)
     if higher_is_better and metric.startswith("c_index"):
         ax.axhline(0.5, color="#e53e3e", linestyle="--", linewidth=1)
-    ax.legend(fontsize=8, ncols=2)
+        ax.text(
+            ax.get_xlim()[0], 0.505, "chance", color="#e53e3e", fontsize=8, va="bottom"
+        )
+    ax.legend(
+        fontsize=8,
+        ncols=3,
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.08),
+        frameon=False,
+    )
     fig.tight_layout()
-    fig.savefig(path, dpi=150)
+    fig.savefig(path, dpi=150, bbox_inches="tight")
     plt.close(fig)
 
 

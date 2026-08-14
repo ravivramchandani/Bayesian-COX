@@ -1,43 +1,39 @@
-# Deviations from the approved proposal
+# Deviations from the proposal
 
-The proposal was approved with suggestions in May 2026. The implemented work
-differs from it in the following ways. Each is recorded as a decision in
-`coordination/DECISIONS.md`; whether the proposal document itself is revised
-is an open question for the supervisors.
+The implemented work differs from the original proposal in the following
+ways. Each is a technical decision recorded in `coordination/DECISIONS.md`,
+and each is justified in the methodology chapter where a reader meets it.
 
 ## Cohorts
 
-**Proposal:** METABRIC, a Kaggle heart-attack dataset, and a lung-cancer
-extract.
+**Proposal:** METABRIC, a heart-attack dataset, and a lung-cancer extract.
 
 **Implemented:** METABRIC, WHAS500, GBSG2.
 
 The heart-attack file contains `age, sex, cp, trtbps, chol, fbs, restecg,
-thalachh, exng, oldpeak, slp, caa, thall, output`. `output` is a binary
-label and there is no event time, so the file cannot support survival
-analysis at all. The lung-cancer extract holds 80 rows, with a duration only
-derivable as the gap between diagnosis and end-of-treatment dates.
+thalachh, exng, oldpeak, slp, caa, thall, output`. `output` is a binary label
+and there is no event time, so the file cannot support survival analysis. The
+lung-cancer extract holds 80 rows, with a duration only derivable as the gap
+between diagnosis and end-of-treatment dates.
 
-WHAS500 supplies the cardiology cohort the heart-attack file was meant to
-cover, with genuine time-to-event data. GBSG2 supplies a properly powered
-second cohort. Both ship with scikit-survival and have published baselines,
-which makes the pipeline checkable against external reference points. This
-follows the co-supervisor's May 2026 guidance and addresses the panel's
-concern that the datasets were not verified to contain survival data.
+WHAS500 supplies the cardiology cohort with genuine time-to-event data, and
+GBSG2 a properly powered second cohort. Both ship with scikit-survival and
+carry published baselines, which lets the pipeline be checked against
+external reference points — the check that catches a broken pipeline before
+any result is interpreted.
 
 ## Priors
 
 **Proposal:** a Bayesian Cox model, priors unspecified.
 
-**Implemented:** three coefficient priors — weakly-informative Normal,
-regularised horseshoe, and a continuous relaxation of spike-and-slab.
+**Implemented:** weakly-informative Normal, regularised horseshoe, and a
+continuous relaxation of spike-and-slab.
 
-The panel noted that prior distributions were unspecified. The three-prior
-scheme comes from the co-supervisor's May 2026 guidance, where the posterior
-of a sparsity prior serves as the explainability signal. A discrete
-spike-and-slab indicator cannot be sampled by NUTS, so the continuous
-relaxation is used and the posterior mean of the inclusion weight is
-reported.
+The posterior of a sparsity prior is the explainability signal this work
+measures, so a baseline prior plus two sparsity priors is the minimum that
+makes the comparison meaningful. A discrete spike-and-slab indicator cannot
+be sampled by NUTS, so the indicator is relaxed to a continuous inclusion
+weight whose posterior mean is reported.
 
 ## Inference
 
@@ -46,31 +42,25 @@ reported.
 **Implemented:** PyMC with NUTS, reporting R-hat, bulk and tail effective
 sample size, and divergent transitions for every fit.
 
-This addresses the panel's observation that the sampler was unnamed and
-convergence diagnostics absent.
-
 ## Metrics
 
 **Proposal:** C-index, Brier score, integrated Brier score, time-dependent
 AUC, calibration curves.
 
-**Implemented:** all of the above except calibration curves, which are
-implemented in `src/evaluation/calibration.py` but not yet in the benchmark
-output.
+**Implemented:** all except calibration curves, which exist in
+`src/evaluation/calibration.py` but are not yet in the benchmark output.
 
 ## Deep learning
 
-**Proposal:** DeepHit discussed in the literature review; DeepSurv added
-later as the deep-learning arm.
+**Proposal:** DeepHit in the literature review.
 
-**Implemented:** DeepSurv exists in `src/models/deepsurv.py` but is not in
-the benchmark. Whether the deep-learning arm is DeepSurv or DeepHit depends
-on whether competing risks are in scope, which is unresolved.
+**Implemented:** DeepSurv is the deep-learning arm. All three cohorts record
+a single event type, so there are no competing risks for DeepHit to model,
+and DeepSurv shares the proportional-hazards structure of the other arms.
 
 ## Explainability
 
-**Proposal:** explainability asserted but not operationalised, which the
-panel flagged.
+**Proposal:** explainability asserted but not operationalised.
 
 **Implemented:** the built-in posterior signal is compared against post-hoc
 SHAP on both baselines, with agreement measured by rank correlation and

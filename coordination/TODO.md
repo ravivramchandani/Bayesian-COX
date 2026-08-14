@@ -10,14 +10,15 @@ git.
 Complete. The data path, metrics, baselines, Bayesian inference, diagnostics
 and explainability were rebuilt and put under test.
 
-## Phase 1 — Benchmark
+## Phase 1 — Benchmark (done)
 
-- T-010 — Run the full benchmark across all three cohorts and commit
-  `reports/tables/benchmark.json`.
-- T-011 — Run the explainability comparison and commit
-  `reports/tables/explainability.json`.
-- T-012 — Generate figures: posterior forest plots, survival curves with
-  credible bands, calibration curves, SHAP summaries.
+Complete. Fifteen model-cohort fits and eighteen explainability comparisons
+in `reports/tables/`, 21 figures in `reports/figures/`, reports generated
+from those files.
+
+- T-013 — Add calibration curves to the benchmark output. The estimator
+  exists in `src/evaluation/calibration.py` but nothing calls it.
+- T-014 — Add DeepSurv to the benchmark as the deep-learning arm (ADR-009).
 
 ## Phase 2 — Statistical comparison
 
@@ -33,7 +34,10 @@ and explainability were rebuilt and put under test.
 - T-030 — Censoring-rate sensitivity by administrative truncation.
 - T-031 — Small-sample behaviour by subsampling the training split, which is
   where the sparsity priors should show their advantage.
-- T-032 — WHAS500 sensitivity run without `los` (Q-005).
+- T-032 — WHAS500 sensitivity run without `los`, settling whether it leaks
+  outcome information (ADR-012).
+- T-033 — If T-031 shows the existing priors degrading on small samples, add
+  a catalytic prior as a fourth arm and measure it against them (Q-001).
 
 ## Phase 4 — Thesis writing
 

@@ -13,6 +13,7 @@
           906.5,
           1580.0
         ],
+        "n_administratively_censored": 1,
         "auc_at_times": [
           0.8936079972170452,
           0.729231594530239,
@@ -21,134 +22,427 @@
         "mean_auc": 0.7369197950356579,
         "ibs": 0.15840038475523344,
         "fit_seconds": 0.03,
-        "cv_c_index_mean": 0.6746539389500655,
-        "cv_c_index_std": 0.02258143822802795,
-        "cv_folds": 3
+        "cv_c_index_mean": 0.6713680881017918,
+        "cv_c_index_std": 0.047972033676680785,
+        "cv_folds": 5
       },
       "Random Survival Forest": {
-        "c_index": 0.6910277324632953,
-        "c_index_se": 0.008346266524843894,
+        "c_index": 0.6864600326264274,
+        "c_index_se": 0.008379900139039716,
         "eval_times": [
           233.0,
           906.5,
           1580.0
         ],
+        "n_administratively_censored": 1,
         "auc_at_times": [
-          0.887407868001503,
-          0.6836922389914308,
-          0.7162308381575503
+          0.8915755163868978,
+          0.6825658731308768,
+          0.7020059300981178
         ],
-        "mean_auc": 0.7196436537390782,
-        "ibs": 0.16468362443203874,
-        "fit_seconds": 0.09,
-        "cv_c_index_mean": 0.6789934000109671,
-        "cv_c_index_std": 0.008839303654483061,
-        "cv_folds": 3
+        "mean_auc": 0.7135367332612554,
+        "ibs": 0.16518859482527987,
+        "fit_seconds": 0.15,
+        "cv_c_index_mean": 0.6816527515407674,
+        "cv_c_index_std": 0.051189587676220526,
+        "cv_folds": 5
       },
       "Bayesian Cox (normal)": {
-        "c_index": 0.700815660685155,
-        "c_index_se": 0.008270963191315714,
+        "c_index": 0.699510603588907,
+        "c_index_se": 0.008281261282905841,
         "eval_times": [
           233.0,
           906.5,
           1580.0
         ],
+        "n_administratively_censored": 1,
         "auc_at_times": [
-          0.89566720431923,
-          0.7260155289542969,
-          0.6995073506190169
+          0.8956672043192301,
+          0.7242556699504498,
+          0.6974363041903521
         ],
-        "mean_auc": 0.7332167964655005,
-        "ibs": 0.1593069523316645,
-        "fit_seconds": 9.31,
+        "mean_auc": 0.7315162799482525,
+        "ibs": 0.15918844612760766,
+        "fit_seconds": 54.38,
         "diagnostics": {
-          "r_hat_max": 1.01,
-          "ess_bulk_min": 266.0,
-          "ess_tail_min": 379.0,
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2291.0,
+          "ess_tail_min": 2595.0,
           "n_divergent": 0,
           "divergence_rate": 0.0,
-          "converged": false,
-          "failures": [
-            "R-hat 1.0100 >= 1.01",
-            "bulk ESS 266 <= 400"
-          ],
+          "converged": true,
+          "failures": [],
           "method": "nuts",
-          "n_chains": 2,
-          "n_draws": 500
+          "n_chains": 4,
+          "n_draws": 2000
         },
-        "cv_c_index_mean": 0.6772012213854118,
-        "cv_c_index_std": 0.023257783574587063,
-        "cv_folds": 3
+        "cv_c_index_mean": 0.6726034210972732,
+        "cv_c_index_std": 0.04654944929340361,
+        "cv_folds": 5
       },
       "Bayesian Cox (horseshoe)": {
-        "c_index": 0.700489396411093,
-        "c_index_se": 0.008273545212538593,
+        "c_index": 0.7017944535073409,
+        "c_index_se": 0.008263187068741053,
         "eval_times": [
           233.0,
           906.5,
           1580.0
         ],
+        "n_administratively_censored": 1,
         "auc_at_times": [
-          0.8831868828505341,
-          0.7230195693964054,
-          0.7090221855077726
+          0.8852818652557104,
+          0.7241740228695794,
+          0.7096289730872718
         ],
-        "mean_auc": 0.7344964808851067,
-        "ibs": 0.15879437408305272,
-        "fit_seconds": 23.66,
+        "mean_auc": 0.7355208848093653,
+        "ibs": 0.1585762210804631,
+        "fit_seconds": 167.86,
         "diagnostics": {
-          "r_hat_max": 1.02,
-          "ess_bulk_min": 227.0,
-          "ess_tail_min": 312.0,
-          "n_divergent": 0,
-          "divergence_rate": 0.0,
-          "converged": false,
-          "failures": [
-            "R-hat 1.0200 >= 1.01",
-            "bulk ESS 227 <= 400"
-          ],
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 1155.0,
+          "ess_tail_min": 713.0,
+          "n_divergent": 1,
+          "divergence_rate": 0.000125,
+          "converged": true,
+          "failures": [],
           "method": "nuts",
-          "n_chains": 2,
-          "n_draws": 500
+          "n_chains": 4,
+          "n_draws": 2000
         },
-        "cv_c_index_mean": 0.6810404338527523,
-        "cv_c_index_std": 0.02947218508153279,
-        "cv_folds": 3
+        "cv_c_index_mean": 0.6762908794495257,
+        "cv_c_index_std": 0.043880693088365265,
+        "cv_folds": 5
       },
       "Bayesian Cox (spike_slab)": {
-        "c_index": 0.6949429037520392,
-        "c_index_se": 0.008316678034670634,
+        "c_index": 0.6942903752039151,
+        "c_index_se": 0.00832165849056815,
         "eval_times": [
           233.0,
           906.5,
           1580.0
         ],
+        "n_administratively_censored": 1,
         "auc_at_times": [
-          0.8977487278463725,
-          0.7225875626280667,
-          0.6955900457391927
+          0.8977621867244062,
+          0.7207165374428689,
+          0.6955368560864948
         ],
-        "mean_auc": 0.7301802862825763,
-        "ibs": 0.1597908306814556,
-        "fit_seconds": 18.82,
+        "mean_auc": 0.7292852443667881,
+        "ibs": 0.15990585265504265,
+        "fit_seconds": 120.44,
         "diagnostics": {
-          "r_hat_max": 1.01,
-          "ess_bulk_min": 389.0,
-          "ess_tail_min": 506.0,
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2092.0,
+          "ess_tail_min": 3480.0,
           "n_divergent": 0,
           "divergence_rate": 0.0,
-          "converged": false,
-          "failures": [
-            "R-hat 1.0100 >= 1.01",
-            "bulk ESS 389 <= 400"
-          ],
+          "converged": true,
+          "failures": [],
           "method": "nuts",
-          "n_chains": 2,
-          "n_draws": 500
+          "n_chains": 4,
+          "n_draws": 2000
         },
-        "cv_c_index_mean": 0.6742009087771628,
-        "cv_c_index_std": 0.02175520603773217,
-        "cv_folds": 3
+        "cv_c_index_mean": 0.6717441576841827,
+        "cv_c_index_std": 0.051079483564510815,
+        "cv_folds": 5
+      }
+    }
+  },
+  "whas500": {
+    "n_train": 349,
+    "n_test": 77,
+    "n_features": 16,
+    "event_rate_train": 0.4297994269340974,
+    "models": {
+      "Cox PH": {
+        "c_index": 0.7215119510839355,
+        "c_index_se": 0.0105684053963692,
+        "eval_times": [
+          1.2000000000000002,
+          314.4,
+          627.6
+        ],
+        "n_administratively_censored": 0,
+        "auc_at_times": [
+          0.6095890410958904,
+          0.7448979591836734,
+          0.7998139035677067
+        ],
+        "mean_auc": 0.7444611897474611,
+        "ibs": 0.14453922044603043,
+        "fit_seconds": 0.02,
+        "cv_c_index_mean": 0.7878759343721733,
+        "cv_c_index_std": 0.0526688071326972,
+        "cv_folds": 5
+      },
+      "Random Survival Forest": {
+        "c_index": 0.7504168982768205,
+        "c_index_se": 0.010203362345068231,
+        "eval_times": [
+          1.2000000000000002,
+          314.4,
+          627.6
+        ],
+        "n_administratively_censored": 0,
+        "auc_at_times": [
+          0.7328767123287672,
+          0.7865646258503401,
+          0.8198035708552689
+        ],
+        "mean_auc": 0.78998642813084,
+        "ibs": 0.13316027686641596,
+        "fit_seconds": 0.14,
+        "cv_c_index_mean": 0.7904061084374419,
+        "cv_c_index_std": 0.03231408541592278,
+        "cv_folds": 5
+      },
+      "Bayesian Cox (normal)": {
+        "c_index": 0.7309616453585325,
+        "c_index_se": 0.010455355693932552,
+        "eval_times": [
+          1.2000000000000002,
+          314.4,
+          627.6
+        ],
+        "n_administratively_censored": 0,
+        "auc_at_times": [
+          0.7191780821917808,
+          0.7670068027210885,
+          0.8034107132155336
+        ],
+        "mean_auc": 0.7721880051118581,
+        "ibs": 0.13749668796659137,
+        "fit_seconds": 29.09,
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2166.0,
+          "ess_tail_min": 3080.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "cv_c_index_mean": 0.7879480650543258,
+        "cv_c_index_std": 0.04202468916712557,
+        "cv_folds": 5
+      },
+      "Bayesian Cox (horseshoe)": {
+        "c_index": 0.745414118954975,
+        "c_index_se": 0.010270708015751999,
+        "eval_times": [
+          1.2000000000000002,
+          314.4,
+          627.6
+        ],
+        "n_administratively_censored": 0,
+        "auc_at_times": [
+          0.7431506849315068,
+          0.7899659863945577,
+          0.8158673881048678
+        ],
+        "mean_auc": 0.7919818225335635,
+        "ibs": 0.1313496855864012,
+        "fit_seconds": 116.17,
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 3489.0,
+          "ess_tail_min": 2198.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "cv_c_index_mean": 0.7923309747853591,
+        "cv_c_index_std": 0.0378357374135994,
+        "cv_folds": 5
+      },
+      "Bayesian Cox (spike_slab)": {
+        "c_index": 0.7292940522512507,
+        "c_index_se": 0.010475738603010274,
+        "eval_times": [
+          1.2000000000000002,
+          314.4,
+          627.6
+        ],
+        "n_administratively_censored": 0,
+        "auc_at_times": [
+          0.7089041095890412,
+          0.7653061224489796,
+          0.8023705401886012
+        ],
+        "mean_auc": 0.7695744802800766,
+        "ibs": 0.1380262247167908,
+        "fit_seconds": 63.46,
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2821.0,
+          "ess_tail_min": 4663.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "cv_c_index_mean": 0.7882444672648039,
+        "cv_c_index_std": 0.043354061094234814,
+        "cv_folds": 5
+      }
+    }
+  },
+  "metabric": {
+    "n_train": 1332,
+    "n_test": 286,
+    "n_features": 24,
+    "event_rate_train": 0.5795795795795796,
+    "models": {
+      "Cox PH": {
+        "c_index": 0.6648941865029799,
+        "c_index_se": 0.002819846279141843,
+        "eval_times": [
+          25.8,
+          114.8,
+          203.8
+        ],
+        "n_administratively_censored": 1,
+        "auc_at_times": [
+          0.6529662187412056,
+          0.7207555617394907,
+          0.7041160812679998
+        ],
+        "mean_auc": 0.7077156730269042,
+        "ibs": 0.1696140614966561,
+        "fit_seconds": 0.08,
+        "cv_c_index_mean": 0.6670220157496554,
+        "cv_c_index_std": 0.024056848632772826,
+        "cv_folds": 5
+      },
+      "Random Survival Forest": {
+        "c_index": 0.6746725670033189,
+        "c_index_se": 0.0027987561049893955,
+        "eval_times": [
+          25.8,
+          114.8,
+          203.8
+        ],
+        "n_administratively_censored": 1,
+        "auc_at_times": [
+          0.6505587185812937,
+          0.7282323704369011,
+          0.7204257008925435
+        ],
+        "mean_auc": 0.7175356864811357,
+        "ibs": 0.16770022864471282,
+        "fit_seconds": 0.4,
+        "cv_c_index_mean": 0.6805674201543828,
+        "cv_c_index_std": 0.012852655907067065,
+        "cv_folds": 5
+      },
+      "Bayesian Cox (normal)": {
+        "c_index": 0.6662503122658007,
+        "c_index_se": 0.0028170031443672605,
+        "eval_times": [
+          25.8,
+          114.8,
+          203.8
+        ],
+        "n_administratively_censored": 1,
+        "auc_at_times": [
+          0.6518351364768299,
+          0.7205102270396174,
+          0.7026967550197643
+        ],
+        "mean_auc": 0.7069393359716846,
+        "ibs": 0.1700686661588913,
+        "fit_seconds": 87.9,
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 3621.0,
+          "ess_tail_min": 5177.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "cv_c_index_mean": 0.6670135557058332,
+        "cv_c_index_std": 0.022383974633281158,
+        "cv_folds": 5
+      },
+      "Bayesian Cox (horseshoe)": {
+        "c_index": 0.6638949359409014,
+        "c_index_se": 0.0028219245051456354,
+        "eval_times": [
+          25.8,
+          114.8,
+          203.8
+        ],
+        "n_administratively_censored": 1,
+        "auc_at_times": [
+          0.6495691871176599,
+          0.7176391253765411,
+          0.7074471722702675
+        ],
+        "mean_auc": 0.7070018857209447,
+        "ibs": 0.16957366757385353,
+        "fit_seconds": 423.76,
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2407.0,
+          "ess_tail_min": 2239.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "cv_c_index_mean": 0.6676538092722604,
+        "cv_c_index_std": 0.020807302778402224,
+        "cv_folds": 5
+      },
+      "Bayesian Cox (spike_slab)": {
+        "c_index": 0.6661789372256521,
+        "c_index_se": 0.0028171534353942603,
+        "eval_times": [
+          25.8,
+          114.8,
+          203.8
+        ],
+        "n_administratively_censored": 1,
+        "auc_at_times": [
+          0.6513837299852573,
+          0.7205837744667781,
+          0.7031071582912887
+        ],
+        "mean_auc": 0.7070874723435648,
+        "ibs": 0.16999005018538388,
+        "fit_seconds": 302.15,
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 5378.0,
+          "ess_tail_min": 5588.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "cv_c_index_mean": 0.6673976891606859,
+        "cv_c_index_std": 0.022377064510455884,
+        "cv_folds": 5
       }
     }
   }

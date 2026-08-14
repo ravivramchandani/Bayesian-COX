@@ -5,101 +5,101 @@
       "Cox PH": [
         {
           "feature": "horTh_yes",
-          "mean_abs_shap": 0.8126281262319417
+          "mean_abs_shap": 0.7974431629103337
         },
         {
           "feature": "age_x_horTh",
-          "mean_abs_shap": 0.6562082552411904
+          "mean_abs_shap": 0.6735113933900632
         },
         {
           "feature": "log_pnodes",
-          "mean_abs_shap": 0.4729490264024409
+          "mean_abs_shap": 0.6040968082323734
         },
         {
           "feature": "log_progrec",
-          "mean_abs_shap": 0.29090734354999276
+          "mean_abs_shap": 0.2974832261762229
         },
         {
           "feature": "age",
-          "mean_abs_shap": 0.2272258135833577
+          "mean_abs_shap": 0.22635710682613755
         },
         {
           "feature": "menostat_Pre",
-          "mean_abs_shap": 0.19208382481769082
+          "mean_abs_shap": 0.19243410974205574
         },
         {
           "feature": "progrec",
-          "mean_abs_shap": 0.14242000952403347
+          "mean_abs_shap": 0.15256498241353844
         },
         {
           "feature": "pnodes",
-          "mean_abs_shap": 0.08046894215986007
+          "mean_abs_shap": 0.12149644802937265
         },
         {
           "feature": "tgrade",
-          "mean_abs_shap": 0.07507051101036427
+          "mean_abs_shap": 0.08609052242968436
         },
         {
           "feature": "estrec",
-          "mean_abs_shap": 0.05618416058131118
+          "mean_abs_shap": 0.05200044035654609
         },
         {
           "feature": "log_estrec",
-          "mean_abs_shap": 0.03144721356374327
+          "mean_abs_shap": 0.028050920331698804
         },
         {
           "feature": "tsize",
-          "mean_abs_shap": 0.0
+          "mean_abs_shap": 0.007934095136919683
         }
       ],
       "Random Survival Forest": [
         {
           "feature": "pnodes",
-          "mean_abs_shap": 11.06339420639105
-        },
-        {
-          "feature": "log_progrec",
-          "mean_abs_shap": 10.905193184387935
+          "mean_abs_shap": 11.091995141147745
         },
         {
           "feature": "log_pnodes",
-          "mean_abs_shap": 10.66631763521838
+          "mean_abs_shap": 10.886768238426457
+        },
+        {
+          "feature": "log_progrec",
+          "mean_abs_shap": 10.73996088061723
         },
         {
           "feature": "progrec",
-          "mean_abs_shap": 7.365226667244021
+          "mean_abs_shap": 6.9608816575510675
         },
         {
           "feature": "log_estrec",
-          "mean_abs_shap": 3.3680097761209535
-        },
-        {
-          "feature": "estrec",
-          "mean_abs_shap": 3.04669045018351
-        },
-        {
-          "feature": "age",
-          "mean_abs_shap": 2.415547669693284
+          "mean_abs_shap": 2.826015404528337
         },
         {
           "feature": "tsize",
-          "mean_abs_shap": 2.043193218230654
+          "mean_abs_shap": 2.3897987649095933
+        },
+        {
+          "feature": "estrec",
+          "mean_abs_shap": 2.3188681505726647
+        },
+        {
+          "feature": "age",
+          "mean_abs_shap": 2.2497568639194423
         },
         {
           "feature": "age_x_horTh",
-          "mean_abs_shap": 1.4742520056241228
+          "mean_abs_shap": 1.4667393941659754
         },
         {
           "feature": "horTh_yes",
-          "mean_abs_shap": 1.3426533610734097
+          "mean_abs_shap": 1.3536036667543745
         },
         {
           "feature": "tgrade",
-          "mean_abs_shap": 0.46563008943108325
+          "mean_abs_shap": 0.5417076779306178
         },
         {
           "feature": "menostat_Pre",
-          "mean_abs_shap": 0.002733698313303279
+          "mean_abs_shap": 0.012867892394175958
         }
       ]
     },
@@ -108,480 +108,471 @@
         "importance": [
           {
             "feature": "log_pnodes",
-            "posterior_mean": 0.5728397131335015,
-            "hazard_ratio": 1.7732955589835506,
-            "credible_lower": 1.2644258360011604,
-            "credible_upper": 2.436375058060924,
-            "prob_direction": 1.0,
+            "posterior_mean": 0.5620842183876552,
+            "hazard_ratio": 1.7543250891862174,
+            "credible_lower": 1.280294095658832,
+            "credible_upper": 2.4503415557150814,
+            "prob_direction": 0.99925,
             "excludes_null": true
           },
           {
             "feature": "horTh_yes",
-            "posterior_mean": -1.757202369252434,
-            "hazard_ratio": 0.17252685572735985,
-            "credible_lower": 0.04765001030880367,
-            "credible_upper": 0.5878965425700198,
-            "prob_direction": 0.9975,
-            "excludes_null": true
-          },
-          {
-            "feature": "age",
-            "posterior_mean": -0.24792433954999943,
-            "hazard_ratio": 0.7804189878961482,
-            "credible_lower": 0.6267267604724273,
-            "credible_upper": 0.9570165932872206,
-            "prob_direction": 0.98,
-            "excludes_null": true
-          },
-          {
-            "feature": "menostat_Pre",
-            "posterior_mean": -0.4402684686764989,
-            "hazard_ratio": 0.6438635406850803,
-            "credible_lower": 0.4284030541161421,
-            "credible_upper": 0.9322434495881629,
-            "prob_direction": 0.9725,
+            "posterior_mean": -1.8037016590857045,
+            "hazard_ratio": 0.16468813917990158,
+            "credible_lower": 0.04717714127705562,
+            "credible_upper": 0.5454651539633619,
+            "prob_direction": 0.996,
             "excludes_null": true
           },
           {
             "feature": "age_x_horTh",
-            "posterior_mean": 0.7141661000577122,
-            "hazard_ratio": 2.0424827456572543,
-            "credible_lower": 1.1103021271608358,
-            "credible_upper": 3.8858977061126287,
-            "prob_direction": 0.97,
+            "posterior_mean": 0.741544321024736,
+            "hazard_ratio": 2.099174812390021,
+            "credible_lower": 1.1497916783449125,
+            "credible_upper": 3.8878342901817216,
+            "prob_direction": 0.9862500000000001,
+            "excludes_null": true
+          },
+          {
+            "feature": "age",
+            "posterior_mean": -0.253745351967257,
+            "hazard_ratio": 0.7758893555901252,
+            "credible_lower": 0.6239767336835301,
+            "credible_upper": 0.9579501480642711,
+            "prob_direction": 0.98225,
+            "excludes_null": true
+          },
+          {
+            "feature": "menostat_Pre",
+            "posterior_mean": -0.452432732671742,
+            "hazard_ratio": 0.6360788580575206,
+            "credible_lower": 0.4194730332868088,
+            "credible_upper": 0.9511488193169536,
+            "prob_direction": 0.97175,
             "excludes_null": true
           },
           {
             "feature": "log_progrec",
-            "posterior_mean": -0.23811287159713404,
-            "hazard_ratio": 0.7881137304178225,
-            "credible_lower": 0.6314307261343324,
-            "credible_upper": 1.0076831026653732,
-            "prob_direction": 0.9299999999999999,
+            "posterior_mean": -0.23946505597746198,
+            "hazard_ratio": 0.7870487755115885,
+            "credible_lower": 0.6176812025415884,
+            "credible_upper": 1.0067228356552695,
+            "prob_direction": 0.9425,
             "excludes_null": false
           },
           {
             "feature": "progrec",
-            "posterior_mean": -0.2810444589497631,
-            "hazard_ratio": 0.7549947684595539,
-            "credible_lower": 0.5072104667051834,
-            "credible_upper": 1.0344285451151545,
-            "prob_direction": 0.8925,
+            "posterior_mean": -0.2641855244568303,
+            "hazard_ratio": 0.7678310749986491,
+            "credible_lower": 0.5405660686273709,
+            "credible_upper": 1.0382631703567458,
+            "prob_direction": 0.906,
             "excludes_null": false
           },
           {
             "feature": "tgrade",
-            "posterior_mean": 0.07889310643323591,
-            "hazard_ratio": 1.082088647572901,
-            "credible_lower": 0.9285771603710008,
-            "credible_upper": 1.252422627541997,
-            "prob_direction": 0.72,
+            "posterior_mean": 0.07952451881445863,
+            "hazard_ratio": 1.0827721074923797,
+            "credible_lower": 0.932321588609758,
+            "credible_upper": 1.2531911302035377,
+            "prob_direction": 0.70075,
             "excludes_null": false
           },
           {
             "feature": "pnodes",
-            "posterior_mean": -0.10411796420340727,
-            "hazard_ratio": 0.9011189913671818,
-            "credible_lower": 0.6950183581052649,
-            "credible_upper": 1.1894796717536185,
-            "prob_direction": 0.5475,
+            "posterior_mean": -0.09535445150144171,
+            "hazard_ratio": 0.9090506629844184,
+            "credible_lower": 0.6796541987935037,
+            "credible_upper": 1.1829823560090849,
+            "prob_direction": 0.49350000000000005,
             "excludes_null": false
           },
           {
             "feature": "estrec",
-            "posterior_mean": 0.054095487339371334,
-            "hazard_ratio": 1.0555853923835061,
-            "credible_lower": 0.8385938299971838,
-            "credible_upper": 1.301608515785457,
-            "prob_direction": 0.375,
+            "posterior_mean": 0.050520892642595454,
+            "hazard_ratio": 1.05181883840051,
+            "credible_lower": 0.8273381715558267,
+            "credible_upper": 1.3141991329970635,
+            "prob_direction": 0.34575,
             "excludes_null": false
           },
           {
             "feature": "log_estrec",
-            "posterior_mean": 0.027110744308816246,
-            "hazard_ratio": 1.0274815842009135,
-            "credible_lower": 0.8056924948791621,
-            "credible_upper": 1.2962102007389076,
-            "prob_direction": 0.1625000000000001,
+            "posterior_mean": 0.023447506160556346,
+            "hazard_ratio": 1.0237245601034226,
+            "credible_lower": 0.7969163089012457,
+            "credible_upper": 1.3130199861520704,
+            "prob_direction": 0.14474999999999993,
             "excludes_null": false
           },
           {
             "feature": "tsize",
-            "posterior_mean": 0.008924840689049087,
-            "hazard_ratio": 1.0089647858259383,
-            "credible_lower": 0.8855701673146636,
-            "credible_upper": 1.13991086985767,
-            "prob_direction": 0.11749999999999994,
+            "posterior_mean": 0.011684347585642064,
+            "hazard_ratio": 1.0117528762189312,
+            "credible_lower": 0.8865432956868152,
+            "credible_upper": 1.1513461642943708,
+            "prob_direction": 0.13375000000000004,
             "excludes_null": false
           }
         ],
         "diagnostics": {
-          "r_hat_max": 1.01,
-          "ess_bulk_min": 249.0,
-          "ess_tail_min": 272.0,
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2291.0,
+          "ess_tail_min": 2595.0,
           "n_divergent": 0,
           "divergence_rate": 0.0,
-          "converged": false,
-          "failures": [
-            "R-hat 1.0100 >= 1.01",
-            "bulk ESS 249 <= 400"
-          ],
+          "converged": true,
+          "failures": [],
           "method": "nuts",
-          "n_chains": 2,
-          "n_draws": 400
+          "n_chains": 4,
+          "n_draws": 2000
         }
       },
       "horseshoe": {
         "importance": [
           {
             "feature": "log_pnodes",
-            "posterior_mean": 0.43198415664336176,
-            "hazard_ratio": 1.5403107112758754,
-            "credible_lower": 1.199387037892891,
-            "credible_upper": 1.9251963927049762,
-            "prob_direction": 1.0,
+            "posterior_mean": 0.4371771966360944,
+            "hazard_ratio": 1.5483304116905494,
+            "credible_lower": 1.2190970468860647,
+            "credible_upper": 1.929783977754332,
+            "prob_direction": 0.9995,
             "excludes_null": true
           },
           {
             "feature": "log_progrec",
-            "posterior_mean": -0.23403332618226863,
-            "hazard_ratio": 0.7913354432669188,
-            "credible_lower": 0.6493540299470179,
-            "credible_upper": 0.9979693757201185,
-            "prob_direction": 0.955,
+            "posterior_mean": -0.22921160315209863,
+            "hazard_ratio": 0.7951602572849675,
+            "credible_lower": 0.645811056563987,
+            "credible_upper": 0.9953990611264981,
+            "prob_direction": 0.95975,
             "excludes_null": true
           },
           {
             "feature": "progrec",
-            "posterior_mean": -0.1593016381834809,
-            "hazard_ratio": 0.8527391014981849,
-            "credible_lower": 0.5763288534118702,
-            "credible_upper": 1.0355068054569712,
-            "prob_direction": 0.745,
+            "posterior_mean": -0.16440668222950094,
+            "hazard_ratio": 0.8483969237598702,
+            "credible_lower": 0.5902143329576568,
+            "credible_upper": 1.0402862653357805,
+            "prob_direction": 0.7695,
             "excludes_null": false
           },
           {
             "feature": "horTh_yes",
-            "posterior_mean": -0.22548260184513802,
-            "hazard_ratio": 0.7981309463329007,
-            "credible_lower": 0.3665522124410067,
-            "credible_upper": 1.0789529843566634,
-            "prob_direction": 0.6875,
-            "excludes_null": false
-          },
-          {
-            "feature": "menostat_Pre",
-            "posterior_mean": -0.13186352604045432,
-            "hazard_ratio": 0.8764606009662428,
-            "credible_lower": 0.5820565552495205,
-            "credible_upper": 1.0721190646022545,
-            "prob_direction": 0.6,
+            "posterior_mean": -0.32615002785443986,
+            "hazard_ratio": 0.7216969046710401,
+            "credible_lower": 0.14921118126081362,
+            "credible_upper": 1.069782580523046,
+            "prob_direction": 0.73325,
             "excludes_null": false
           },
           {
             "feature": "tgrade",
-            "posterior_mean": 0.050949003206308546,
-            "hazard_ratio": 1.052269229558069,
-            "credible_lower": 0.9519584751731999,
-            "credible_upper": 1.2154654203395026,
-            "prob_direction": 0.5674999999999999,
+            "posterior_mean": 0.05512840722643967,
+            "hazard_ratio": 1.0566762908361589,
+            "credible_lower": 0.9572053943006019,
+            "credible_upper": 1.2197962577710086,
+            "prob_direction": 0.621,
+            "excludes_null": false
+          },
+          {
+            "feature": "menostat_Pre",
+            "posterior_mean": -0.12839165223108473,
+            "hazard_ratio": 0.8795088500778672,
+            "credible_lower": 0.5826894816779054,
+            "credible_upper": 1.0766315810871603,
+            "prob_direction": 0.60375,
             "excludes_null": false
           },
           {
             "feature": "age",
-            "posterior_mean": -0.03725032848857816,
-            "hazard_ratio": 0.9634349299501638,
-            "credible_lower": 0.809981123186739,
-            "credible_upper": 1.0794815420740747,
-            "prob_direction": 0.35,
+            "posterior_mean": -0.039305439372853,
+            "hazard_ratio": 0.9614569974707625,
+            "credible_lower": 0.7893887706050713,
+            "credible_upper": 1.0795470728097227,
+            "prob_direction": 0.367,
             "excludes_null": false
           },
           {
             "feature": "estrec",
-            "posterior_mean": 0.022510294269113724,
-            "hazard_ratio": 1.022765562734197,
-            "credible_lower": 0.912516794626042,
-            "credible_upper": 1.1835389709821094,
-            "prob_direction": 0.29499999999999993,
-            "excludes_null": false
-          },
-          {
-            "feature": "age_x_horTh",
-            "posterior_mean": -0.0003982492283828497,
-            "hazard_ratio": 0.999601830062315,
-            "credible_lower": 0.8192746705566433,
-            "credible_upper": 1.391395824380126,
-            "prob_direction": 0.16000000000000003,
-            "excludes_null": false
-          },
-          {
-            "feature": "tsize",
-            "posterior_mean": 0.003255637075499123,
-            "hazard_ratio": 1.0032609424177434,
-            "credible_lower": 0.9173175626491367,
-            "credible_upper": 1.0990875428000497,
-            "prob_direction": 0.08499999999999996,
+            "posterior_mean": 0.017826396875922797,
+            "hazard_ratio": 1.0179862354581055,
+            "credible_lower": 0.9003000188763632,
+            "credible_upper": 1.1812713783043522,
+            "prob_direction": 0.20825000000000005,
             "excludes_null": false
           },
           {
             "feature": "pnodes",
-            "posterior_mean": 0.011734030674176821,
-            "hazard_ratio": 1.0118031444753863,
-            "credible_lower": 0.845632361061119,
-            "credible_upper": 1.2104512023314025,
-            "prob_direction": 0.08250000000000002,
+            "posterior_mean": 0.011037084384050457,
+            "hazard_ratio": 1.011098217704089,
+            "credible_lower": 0.8506131571195694,
+            "credible_upper": 1.2201721212405763,
+            "prob_direction": 0.11624999999999996,
+            "excludes_null": false
+          },
+          {
+            "feature": "age_x_horTh",
+            "posterior_mean": 0.04412442662665221,
+            "hazard_ratio": 1.04511238660731,
+            "credible_lower": 0.8274413664057674,
+            "credible_upper": 2.1732720855582492,
+            "prob_direction": 0.09150000000000003,
             "excludes_null": false
           },
           {
             "feature": "log_estrec",
-            "posterior_mean": 0.003313838827892032,
-            "hazard_ratio": 1.0033193356619776,
-            "credible_lower": 0.8668405875415143,
-            "credible_upper": 1.1642306934230435,
-            "prob_direction": 0.0475000000000001,
+            "posterior_mean": 0.007361576754088928,
+            "hazard_ratio": 1.0073887397735495,
+            "credible_lower": 0.8771085369379845,
+            "credible_upper": 1.1736526694790974,
+            "prob_direction": 0.06774999999999998,
+            "excludes_null": false
+          },
+          {
+            "feature": "tsize",
+            "posterior_mean": 0.0032801010275655238,
+            "hazard_ratio": 1.0032854864455696,
+            "credible_lower": 0.9150806769844807,
+            "credible_upper": 1.104139331862253,
+            "prob_direction": 0.052000000000000046,
             "excludes_null": false
           }
         ],
         "diagnostics": {
-          "r_hat_max": 1.01,
-          "ess_bulk_min": 274.0,
-          "ess_tail_min": 424.0,
-          "n_divergent": 0,
-          "divergence_rate": 0.0,
-          "converged": false,
-          "failures": [
-            "R-hat 1.0100 >= 1.01",
-            "bulk ESS 274 <= 400"
-          ],
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 1155.0,
+          "ess_tail_min": 713.0,
+          "n_divergent": 1,
+          "divergence_rate": 0.000125,
+          "converged": true,
+          "failures": [],
           "method": "nuts",
-          "n_chains": 2,
-          "n_draws": 400
+          "n_chains": 4,
+          "n_draws": 2000
         },
         "sparsity_signal": [
           {
             "feature": "log_pnodes",
-            "shrinkage_factor": 0.1747792090620681
+            "shrinkage_factor": 0.1817038407141155
           },
           {
             "feature": "log_progrec",
-            "shrinkage_factor": 0.3415650892980954
+            "shrinkage_factor": 0.3526916040094686
           },
           {
             "feature": "horTh_yes",
-            "shrinkage_factor": 0.4314890348202898
+            "shrinkage_factor": 0.40895080773592285
           },
           {
             "feature": "progrec",
-            "shrinkage_factor": 0.49376565226307517
+            "shrinkage_factor": 0.4767567698187891
           },
           {
             "feature": "menostat_Pre",
-            "shrinkage_factor": 0.5257968668786163
+            "shrinkage_factor": 0.5413051415916417
           },
           {
             "feature": "age_x_horTh",
-            "shrinkage_factor": 0.6226295371423959
-          },
-          {
-            "feature": "pnodes",
-            "shrinkage_factor": 0.6600445292543156
+            "shrinkage_factor": 0.6053800474908185
           },
           {
             "feature": "tgrade",
-            "shrinkage_factor": 0.66189496906634
+            "shrinkage_factor": 0.6442401918871783
+          },
+          {
+            "feature": "pnodes",
+            "shrinkage_factor": 0.6715138081756878
           },
           {
             "feature": "age",
-            "shrinkage_factor": 0.6664136522400712
-          },
-          {
-            "feature": "estrec",
-            "shrinkage_factor": 0.6776006424620256
+            "shrinkage_factor": 0.6758513692489897
           },
           {
             "feature": "log_estrec",
-            "shrinkage_factor": 0.6928072032617059
+            "shrinkage_factor": 0.6954492435933175
+          },
+          {
+            "feature": "estrec",
+            "shrinkage_factor": 0.7013805992541325
           },
           {
             "feature": "tsize",
-            "shrinkage_factor": 0.7341572467040457
+            "shrinkage_factor": 0.7377874634563387
           }
         ]
       },
       "spike_slab": {
         "importance": [
           {
-            "feature": "horTh_yes",
-            "posterior_mean": -2.4184943651392414,
-            "hazard_ratio": 0.08905560178693424,
-            "credible_lower": 0.019133501314756773,
-            "credible_upper": 0.4282781354105002,
-            "prob_direction": 1.0,
+            "feature": "log_pnodes",
+            "posterior_mean": 0.5654878990664128,
+            "hazard_ratio": 1.7603064251007818,
+            "credible_lower": 1.2797200210128254,
+            "credible_upper": 2.461905814186298,
+            "prob_direction": 0.9995,
             "excludes_null": true
           },
           {
-            "feature": "log_pnodes",
-            "posterior_mean": 0.5658259757652951,
-            "hazard_ratio": 1.7609016442952021,
-            "credible_lower": 1.2808252499503208,
-            "credible_upper": 2.3828141460848253,
-            "prob_direction": 0.9975,
+            "feature": "horTh_yes",
+            "posterior_mean": -2.3826450244221267,
+            "hazard_ratio": 0.09230610243634924,
+            "credible_lower": 0.0188790057188869,
+            "credible_upper": 0.4329657431709259,
+            "prob_direction": 0.998,
             "excludes_null": true
           },
           {
             "feature": "age_x_horTh",
-            "posterior_mean": 1.035897662601912,
-            "hazard_ratio": 2.8176343857553405,
-            "credible_lower": 1.3197694570712455,
-            "credible_upper": 6.046460848585978,
-            "prob_direction": 0.9950000000000001,
+            "posterior_mean": 1.0181423559290044,
+            "hazard_ratio": 2.7680479371195634,
+            "credible_lower": 1.2923677351498806,
+            "credible_upper": 6.0615632857163675,
+            "prob_direction": 0.99075,
             "excludes_null": true
           },
           {
             "feature": "age",
-            "posterior_mean": -0.27136440347758556,
-            "hazard_ratio": 0.7623386469294435,
-            "credible_lower": 0.6082671876574663,
-            "credible_upper": 0.948050008241436,
-            "prob_direction": 0.9825,
+            "posterior_mean": -0.26883134520848423,
+            "hazard_ratio": 0.7642721429380924,
+            "credible_lower": 0.6134025837112531,
+            "credible_upper": 0.9531447033644364,
+            "prob_direction": 0.98475,
             "excludes_null": true
           },
           {
             "feature": "menostat_Pre",
-            "posterior_mean": -0.44754816018664945,
-            "hazard_ratio": 0.639193431834062,
-            "credible_lower": 0.41709652867404157,
-            "credible_upper": 0.9581810620188054,
-            "prob_direction": 0.975,
+            "posterior_mean": -0.4450935076410119,
+            "hazard_ratio": 0.6407643568674574,
+            "credible_lower": 0.42061768012951667,
+            "credible_upper": 0.9776080814241381,
+            "prob_direction": 0.9645,
             "excludes_null": true
           },
           {
             "feature": "log_progrec",
-            "posterior_mean": -0.24415340450294007,
-            "hazard_ratio": 0.7833674529501817,
-            "credible_lower": 0.621275855363078,
-            "credible_upper": 0.9837739191837076,
-            "prob_direction": 0.9625,
+            "posterior_mean": -0.24211098110948695,
+            "hazard_ratio": 0.784969055980749,
+            "credible_lower": 0.616736248282466,
+            "credible_upper": 0.9994819883077304,
+            "prob_direction": 0.95025,
             "excludes_null": true
           },
           {
             "feature": "progrec",
-            "posterior_mean": -0.25442765883498986,
-            "hazard_ratio": 0.7753601415179341,
-            "credible_lower": 0.5440657941708854,
-            "credible_upper": 1.0206916772089267,
-            "prob_direction": 0.92,
+            "posterior_mean": -0.2564861822458073,
+            "hazard_ratio": 0.7737656861896596,
+            "credible_lower": 0.5468194269813431,
+            "credible_upper": 1.0360460010444206,
+            "prob_direction": 0.9095,
             "excludes_null": false
           },
           {
             "feature": "tgrade",
-            "posterior_mean": 0.07056559307058037,
-            "hazard_ratio": 1.0731149560273028,
-            "credible_lower": 0.9293804934539113,
-            "credible_upper": 1.242384279027155,
-            "prob_direction": 0.6599999999999999,
+            "posterior_mean": 0.07594618919025452,
+            "hazard_ratio": 1.0789045158695791,
+            "credible_lower": 0.9291695133804648,
+            "credible_upper": 1.2480719281018247,
+            "prob_direction": 0.68225,
             "excludes_null": false
           },
           {
             "feature": "pnodes",
-            "posterior_mean": -0.09557467911693973,
-            "hazard_ratio": 0.9088504869674949,
-            "credible_lower": 0.6934516893155224,
-            "credible_upper": 1.175889380863083,
-            "prob_direction": 0.5349999999999999,
+            "posterior_mean": -0.0981576335643822,
+            "hazard_ratio": 0.9065059967193475,
+            "credible_lower": 0.6841645936802887,
+            "credible_upper": 1.1737188020961393,
+            "prob_direction": 0.5325,
             "excludes_null": false
           },
           {
             "feature": "estrec",
-            "posterior_mean": 0.04467962189364523,
-            "hazard_ratio": 1.0456927891612968,
-            "credible_lower": 0.8276045047333095,
-            "credible_upper": 1.2856270132509355,
-            "prob_direction": 0.33499999999999996,
-            "excludes_null": false
-          },
-          {
-            "feature": "log_estrec",
-            "posterior_mean": 0.021270883539650808,
-            "hazard_ratio": 1.0214987213525897,
-            "credible_lower": 0.7942620558879053,
-            "credible_upper": 1.31123621080672,
-            "prob_direction": 0.135,
+            "posterior_mean": 0.04338706090816016,
+            "hazard_ratio": 1.044342040609723,
+            "credible_lower": 0.8346498650575068,
+            "credible_upper": 1.2990767190499317,
+            "prob_direction": 0.31174999999999997,
             "excludes_null": false
           },
           {
             "feature": "tsize",
-            "posterior_mean": 0.009968446304982441,
-            "hazard_ratio": 1.0100182967720592,
-            "credible_lower": 0.8778161800596437,
-            "credible_upper": 1.1546047455835515,
-            "prob_direction": 0.125,
+            "posterior_mean": 0.013153872979526278,
+            "hazard_ratio": 1.0132407657408293,
+            "credible_lower": 0.8900206737374189,
+            "credible_upper": 1.1476372897145062,
+            "prob_direction": 0.15999999999999992,
+            "excludes_null": false
+          },
+          {
+            "feature": "log_estrec",
+            "posterior_mean": 0.021613415691827488,
+            "hazard_ratio": 1.0218486774402447,
+            "credible_lower": 0.8091340157580482,
+            "credible_upper": 1.2881414941691742,
+            "prob_direction": 0.14674999999999994,
             "excludes_null": false
           }
         ],
         "diagnostics": {
-          "r_hat_max": 1.01,
-          "ess_bulk_min": 289.0,
-          "ess_tail_min": 445.0,
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2092.0,
+          "ess_tail_min": 3480.0,
           "n_divergent": 0,
           "divergence_rate": 0.0,
-          "converged": false,
-          "failures": [
-            "R-hat 1.0100 >= 1.01",
-            "bulk ESS 289 <= 400"
-          ],
+          "converged": true,
+          "failures": [],
           "method": "nuts",
-          "n_chains": 2,
-          "n_draws": 400
+          "n_chains": 4,
+          "n_draws": 2000
         },
         "sparsity_signal": [
           {
             "feature": "horTh_yes",
-            "inclusion_probability": 0.6701626305630077
+            "inclusion_probability": 0.661032714745117
           },
           {
             "feature": "age_x_horTh",
-            "inclusion_probability": 0.49715872711571846
+            "inclusion_probability": 0.5049841673464215
           },
           {
             "feature": "log_pnodes",
-            "inclusion_probability": 0.4585493627045875
+            "inclusion_probability": 0.4388968039166511
           },
           {
             "feature": "menostat_Pre",
-            "inclusion_probability": 0.4028468025201647
+            "inclusion_probability": 0.41806866873324383
           },
           {
             "feature": "progrec",
-            "inclusion_probability": 0.3956456361668152
+            "inclusion_probability": 0.3871562648127503
           },
           {
             "feature": "age",
-            "inclusion_probability": 0.3918888955327542
+            "inclusion_probability": 0.38609816754421267
           },
           {
             "feature": "log_progrec",
-            "inclusion_probability": 0.3886845681163112
-          },
-          {
-            "feature": "log_estrec",
-            "inclusion_probability": 0.36834327042203113
-          },
-          {
-            "feature": "tgrade",
-            "inclusion_probability": 0.3665723657408611
-          },
-          {
-            "feature": "estrec",
-            "inclusion_probability": 0.36447021825984893
+            "inclusion_probability": 0.37396879820966705
           },
           {
             "feature": "pnodes",
-            "inclusion_probability": 0.36396615267265614
+            "inclusion_probability": 0.35676056848714915
+          },
+          {
+            "feature": "tgrade",
+            "inclusion_probability": 0.3566681268213969
+          },
+          {
+            "feature": "estrec",
+            "inclusion_probability": 0.35224997422162696
+          },
+          {
+            "feature": "log_estrec",
+            "inclusion_probability": 0.35111870568694653
           },
           {
             "feature": "tsize",
-            "inclusion_probability": 0.32887680891696774
+            "inclusion_probability": 0.34707692306379895
           }
         ]
       }
@@ -589,10 +580,10 @@
     "agreement": {
       "normal vs Cox PH": {
         "n_features": 12,
-        "spearman_rho": 0.9020979020979022,
-        "spearman_p": 5.997857446537692e-05,
-        "kendall_tau": 0.7878787878787877,
-        "kendall_p": 0.00010742344075677409,
+        "spearman_rho": 0.9510489510489512,
+        "spearman_p": 2.038424632465578e-06,
+        "kendall_tau": 0.8484848484848484,
+        "kendall_p": 1.6342325370103148e-05,
         "top_k": 5,
         "top_k_overlap": 4,
         "top_k_jaccard": 0.6666666666666666,
@@ -613,10 +604,10 @@
       },
       "normal vs Random Survival Forest": {
         "n_features": 12,
-        "spearman_rho": -0.15384615384615385,
-        "spearman_p": 0.6330906812462617,
-        "kendall_tau": -0.0909090909090909,
-        "kendall_p": 0.7373055246579552,
+        "spearman_rho": -0.18181818181818185,
+        "spearman_p": 0.5717012385276553,
+        "kendall_tau": -0.1212121212121212,
+        "kendall_p": 0.6383612539081289,
         "top_k": 5,
         "top_k_overlap": 1,
         "top_k_jaccard": 0.1111111111111111,
@@ -637,8 +628,8 @@
       },
       "horseshoe vs Cox PH": {
         "n_features": 12,
-        "spearman_rho": 0.6013986013986015,
-        "spearman_p": 0.03858845292201946,
+        "spearman_rho": 0.5734265734265735,
+        "spearman_p": 0.05126558978649151,
         "kendall_tau": 0.4545454545454545,
         "kendall_p": 0.04473689858238469,
         "top_k": 5,
@@ -648,8 +639,8 @@
           "horTh_yes",
           "log_pnodes",
           "log_progrec",
-          "menostat_Pre",
-          "progrec"
+          "progrec",
+          "tgrade"
         ],
         "post_hoc_top_k": [
           "age",
@@ -661,10 +652,10 @@
       },
       "horseshoe vs Random Survival Forest": {
         "n_features": 12,
-        "spearman_rho": 0.04895104895104895,
-        "spearman_p": 0.8799185788786748,
-        "kendall_tau": 0.0,
-        "kendall_p": 1.0,
+        "spearman_rho": 0.1258741258741259,
+        "spearman_p": 0.696683109395766,
+        "kendall_tau": 0.0909090909090909,
+        "kendall_p": 0.7373055246579552,
         "top_k": 5,
         "top_k_overlap": 3,
         "top_k_jaccard": 0.42857142857142855,
@@ -672,8 +663,8 @@
           "horTh_yes",
           "log_pnodes",
           "log_progrec",
-          "menostat_Pre",
-          "progrec"
+          "progrec",
+          "tgrade"
         ],
         "post_hoc_top_k": [
           "log_estrec",
@@ -685,10 +676,10 @@
       },
       "spike_slab vs Cox PH": {
         "n_features": 12,
-        "spearman_rho": 0.965034965034965,
-        "spearman_p": 3.880985299627467e-07,
-        "kendall_tau": 0.8787878787878787,
-        "kendall_p": 5.319397680508792e-06,
+        "spearman_rho": 0.9440559440559443,
+        "spearman_p": 3.927261080965948e-06,
+        "kendall_tau": 0.8181818181818181,
+        "kendall_p": 4.4129288920955584e-05,
         "top_k": 5,
         "top_k_overlap": 4,
         "top_k_jaccard": 0.6666666666666666,
@@ -709,10 +700,10 @@
       },
       "spike_slab vs Random Survival Forest": {
         "n_features": 12,
-        "spearman_rho": -0.1958041958041958,
-        "spearman_p": 0.5419358857313173,
-        "kendall_tau": -0.1212121212121212,
-        "kendall_p": 0.6383612539081289,
+        "spearman_rho": -0.18881118881118883,
+        "spearman_p": 0.5567370561768314,
+        "kendall_tau": -0.1515151515151515,
+        "kendall_p": 0.5452047007776174,
         "top_k": 5,
         "top_k_overlap": 1,
         "top_k_jaccard": 0.1111111111111111,
@@ -729,6 +720,2144 @@
           "log_progrec",
           "pnodes",
           "progrec"
+        ]
+      }
+    }
+  },
+  "whas500": {
+    "n_features": 16,
+    "shap": {
+      "Cox PH": [
+        {
+          "feature": "chf_1",
+          "mean_abs_shap": 35.06253333074978
+        },
+        {
+          "feature": "age_x_chf",
+          "mean_abs_shap": 30.393254166594954
+        },
+        {
+          "feature": "age",
+          "mean_abs_shap": 9.193876088290008
+        },
+        {
+          "feature": "diasbp",
+          "mean_abs_shap": 3.463301712600356
+        },
+        {
+          "feature": "bmi",
+          "mean_abs_shap": 3.2206250312943467
+        },
+        {
+          "feature": "hr",
+          "mean_abs_shap": 2.8017482385226526
+        },
+        {
+          "feature": "gender_1",
+          "mean_abs_shap": 2.279468604339859
+        },
+        {
+          "feature": "mitype_1",
+          "mean_abs_shap": 2.166872610253347
+        },
+        {
+          "feature": "sho_1",
+          "mean_abs_shap": 2.1078059440307526
+        },
+        {
+          "feature": "cvd_1",
+          "mean_abs_shap": 1.9074804270856192
+        },
+        {
+          "feature": "afb_1",
+          "mean_abs_shap": 1.5187639873968881
+        },
+        {
+          "feature": "sysbp",
+          "mean_abs_shap": 1.388221351074965
+        },
+        {
+          "feature": "los",
+          "mean_abs_shap": 1.0928913235631217
+        },
+        {
+          "feature": "bmi_low",
+          "mean_abs_shap": 0.9607255568132846
+        },
+        {
+          "feature": "miord_1",
+          "mean_abs_shap": 0.9143553295655529
+        },
+        {
+          "feature": "av3_1",
+          "mean_abs_shap": 0.03340560446817259
+        }
+      ],
+      "Random Survival Forest": [
+        {
+          "feature": "age",
+          "mean_abs_shap": 11.937103104864123
+        },
+        {
+          "feature": "bmi",
+          "mean_abs_shap": 7.774623126018897
+        },
+        {
+          "feature": "chf_1",
+          "mean_abs_shap": 7.0453656365426385
+        },
+        {
+          "feature": "age_x_chf",
+          "mean_abs_shap": 6.357959625612857
+        },
+        {
+          "feature": "diasbp",
+          "mean_abs_shap": 3.948519205357686
+        },
+        {
+          "feature": "hr",
+          "mean_abs_shap": 3.624605447500541
+        },
+        {
+          "feature": "sysbp",
+          "mean_abs_shap": 1.726253943076702
+        },
+        {
+          "feature": "mitype_1",
+          "mean_abs_shap": 1.034051187194141
+        },
+        {
+          "feature": "los",
+          "mean_abs_shap": 0.9481192664655987
+        },
+        {
+          "feature": "miord_1",
+          "mean_abs_shap": 0.42559503139602645
+        },
+        {
+          "feature": "gender_1",
+          "mean_abs_shap": 0.35875560220649216
+        },
+        {
+          "feature": "bmi_low",
+          "mean_abs_shap": 0.04041226038496201
+        },
+        {
+          "feature": "afb_1",
+          "mean_abs_shap": 0.014857046049500272
+        },
+        {
+          "feature": "cvd_1",
+          "mean_abs_shap": 0.003766955480498879
+        },
+        {
+          "feature": "sho_1",
+          "mean_abs_shap": 0.0
+        },
+        {
+          "feature": "av3_1",
+          "mean_abs_shap": 0.0
+        }
+      ]
+    },
+    "posterior": {
+      "normal": {
+        "importance": [
+          {
+            "feature": "age",
+            "posterior_mean": 0.6461325716911159,
+            "hazard_ratio": 1.9081469191090754,
+            "credible_lower": 1.4830486504246831,
+            "credible_upper": 2.469667042520685,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "sho_1",
+            "posterior_mean": 1.5481508922735951,
+            "hazard_ratio": 4.702766216438967,
+            "credible_lower": 2.27965410782091,
+            "credible_upper": 9.151201474270396,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "hr",
+            "posterior_mean": 0.27034810487366995,
+            "hazard_ratio": 1.3104205351208755,
+            "credible_lower": 1.1012535510618344,
+            "credible_upper": 1.551553505898213,
+            "prob_direction": 0.9970000000000001,
+            "excludes_null": true
+          },
+          {
+            "feature": "mitype_1",
+            "posterior_mean": -0.5178888842626036,
+            "hazard_ratio": 0.5957769754204632,
+            "credible_lower": 0.3828416456726532,
+            "credible_upper": 0.9164421107988807,
+            "prob_direction": 0.98075,
+            "excludes_null": true
+          },
+          {
+            "feature": "diasbp",
+            "posterior_mean": -0.28522274318387963,
+            "hazard_ratio": 0.751846766924083,
+            "credible_lower": 0.5995008319333718,
+            "credible_upper": 0.9560692174337998,
+            "prob_direction": 0.98,
+            "excludes_null": true
+          },
+          {
+            "feature": "cvd_1",
+            "posterior_mean": -0.4156053370642283,
+            "hazard_ratio": 0.659940673218883,
+            "credible_lower": 0.4568425076197687,
+            "credible_upper": 0.9742707512238015,
+            "prob_direction": 0.96275,
+            "excludes_null": true
+          },
+          {
+            "feature": "bmi",
+            "posterior_mean": -0.19914566348256146,
+            "hazard_ratio": 0.8194305235354511,
+            "credible_lower": 0.6537369065017631,
+            "credible_upper": 1.0170990748033373,
+            "prob_direction": 0.924,
+            "excludes_null": false
+          },
+          {
+            "feature": "gender_1",
+            "posterior_mean": -0.25793876418986944,
+            "hazard_ratio": 0.772642544050447,
+            "credible_lower": 0.5534112661873631,
+            "credible_upper": 1.0743186049585975,
+            "prob_direction": 0.87475,
+            "excludes_null": false
+          },
+          {
+            "feature": "bmi_low",
+            "posterior_mean": 0.4600940617088768,
+            "hazard_ratio": 1.5842229927083478,
+            "credible_lower": 0.8001978579379402,
+            "credible_upper": 3.0623952210511773,
+            "prob_direction": 0.8207500000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "age_x_chf",
+            "posterior_mean": 0.236045467310501,
+            "hazard_ratio": 1.2662318810161746,
+            "credible_lower": 0.6474507900682981,
+            "credible_upper": 2.4571142928048335,
+            "prob_direction": 0.5169999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "afb_1",
+            "posterior_mean": -0.11486584767856814,
+            "hazard_ratio": 0.8914857307655303,
+            "credible_lower": 0.5879321363529858,
+            "credible_upper": 1.3362389991808203,
+            "prob_direction": 0.41725,
+            "excludes_null": false
+          },
+          {
+            "feature": "sysbp",
+            "posterior_mean": 0.0594924045596221,
+            "hazard_ratio": 1.06129769992552,
+            "credible_lower": 0.8478817224487465,
+            "credible_upper": 1.3228968251582651,
+            "prob_direction": 0.41375000000000006,
+            "excludes_null": false
+          },
+          {
+            "feature": "los",
+            "posterior_mean": 0.030057512617553312,
+            "hazard_ratio": 1.0305137997952847,
+            "credible_lower": 0.8771617261281347,
+            "credible_upper": 1.1987295240685367,
+            "prob_direction": 0.3182499999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "chf_1",
+            "posterior_mean": 0.28452598724786177,
+            "hazard_ratio": 1.329131853330078,
+            "credible_lower": 0.3114005855286904,
+            "credible_upper": 5.7129265526536805,
+            "prob_direction": 0.30000000000000004,
+            "excludes_null": false
+          },
+          {
+            "feature": "av3_1",
+            "posterior_mean": -0.06204638572375119,
+            "hazard_ratio": 0.9398392906542707,
+            "credible_lower": 0.3398224251558785,
+            "credible_upper": 2.265505219698378,
+            "prob_direction": 0.05725000000000002,
+            "excludes_null": false
+          },
+          {
+            "feature": "miord_1",
+            "posterior_mean": -0.010708936922948968,
+            "hazard_ratio": 0.9893481996030263,
+            "credible_lower": 0.7024301961742779,
+            "credible_upper": 1.3935763339255585,
+            "prob_direction": 0.054749999999999965,
+            "excludes_null": false
+          }
+        ],
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2166.0,
+          "ess_tail_min": 3080.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        }
+      },
+      "horseshoe": {
+        "importance": [
+          {
+            "feature": "age",
+            "posterior_mean": 0.6634917480813993,
+            "hazard_ratio": 1.9415599503525232,
+            "credible_lower": 1.5093239945756263,
+            "credible_upper": 2.4891974916051973,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "hr",
+            "posterior_mean": 0.21189091077021777,
+            "hazard_ratio": 1.23601304201292,
+            "credible_lower": 1.0276563131660237,
+            "credible_upper": 1.468796384853852,
+            "prob_direction": 0.9824999999999999,
+            "excludes_null": true
+          },
+          {
+            "feature": "sho_1",
+            "posterior_mean": 1.2005980727687162,
+            "hazard_ratio": 3.3221031881634158,
+            "credible_lower": 1.1423193698528125,
+            "credible_upper": 7.325196417090424,
+            "prob_direction": 0.9817499999999999,
+            "excludes_null": true
+          },
+          {
+            "feature": "diasbp",
+            "posterior_mean": -0.20615773264253287,
+            "hazard_ratio": 0.8137047183646009,
+            "credible_lower": 0.6541943450794053,
+            "credible_upper": 1.0006284431257801,
+            "prob_direction": 0.9485,
+            "excludes_null": false
+          },
+          {
+            "feature": "bmi",
+            "posterior_mean": -0.19697903902857644,
+            "hazard_ratio": 0.8212078464464575,
+            "credible_lower": 0.6549235080487402,
+            "credible_upper": 1.003195431566982,
+            "prob_direction": 0.9365,
+            "excludes_null": false
+          },
+          {
+            "feature": "mitype_1",
+            "posterior_mean": -0.34640348635347445,
+            "hazard_ratio": 0.7072270730572505,
+            "credible_lower": 0.4299961768372889,
+            "credible_upper": 1.0321087442844374,
+            "prob_direction": 0.884,
+            "excludes_null": false
+          },
+          {
+            "feature": "age_x_chf",
+            "posterior_mean": 0.23766016308128504,
+            "hazard_ratio": 1.268278111854839,
+            "credible_lower": 0.9148114919228747,
+            "credible_upper": 1.7292552837145423,
+            "prob_direction": 0.80925,
+            "excludes_null": false
+          },
+          {
+            "feature": "cvd_1",
+            "posterior_mean": -0.23644541711686792,
+            "hazard_ratio": 0.7894289704352553,
+            "credible_lower": 0.5255257141696418,
+            "credible_upper": 1.0548059711121398,
+            "prob_direction": 0.8085,
+            "excludes_null": false
+          },
+          {
+            "feature": "gender_1",
+            "posterior_mean": -0.10498637239879192,
+            "hazard_ratio": 0.900336791933418,
+            "credible_lower": 0.6541436346469431,
+            "credible_upper": 1.1204901423616898,
+            "prob_direction": 0.563,
+            "excludes_null": false
+          },
+          {
+            "feature": "bmi_low",
+            "posterior_mean": 0.1997436988449484,
+            "hazard_ratio": 1.221089751336189,
+            "credible_lower": 0.8356928223147556,
+            "credible_upper": 2.31326376700664,
+            "prob_direction": 0.54925,
+            "excludes_null": false
+          },
+          {
+            "feature": "chf_1",
+            "posterior_mean": 0.1981889467035253,
+            "hazard_ratio": 1.219192734508048,
+            "credible_lower": 0.6890303649827367,
+            "credible_upper": 2.7224456218870494,
+            "prob_direction": 0.39425,
+            "excludes_null": false
+          },
+          {
+            "feature": "afb_1",
+            "posterior_mean": -0.040183461963908505,
+            "hazard_ratio": 0.9606131870031909,
+            "credible_lower": 0.7002556456944469,
+            "credible_upper": 1.224645142195262,
+            "prob_direction": 0.21299999999999997,
+            "excludes_null": false
+          },
+          {
+            "feature": "los",
+            "posterior_mean": 0.013801854231013473,
+            "hazard_ratio": 1.0138975395258412,
+            "credible_lower": 0.9012866193647455,
+            "credible_upper": 1.1531182413337644,
+            "prob_direction": 0.1645000000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "sysbp",
+            "posterior_mean": -0.009918230608582993,
+            "hazard_ratio": 0.9901307928314885,
+            "credible_lower": 0.8285360341281796,
+            "credible_upper": 1.1701225899684666,
+            "prob_direction": 0.08499999999999996,
+            "excludes_null": false
+          },
+          {
+            "feature": "av3_1",
+            "posterior_mean": -0.027154657467958917,
+            "hazard_ratio": 0.973210715579594,
+            "credible_lower": 0.5316057512053464,
+            "credible_upper": 1.5607649517071553,
+            "prob_direction": 0.04849999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "miord_1",
+            "posterior_mean": 0.005437953806215571,
+            "hazard_ratio": 1.0054527663147554,
+            "credible_lower": 0.7971157829342623,
+            "credible_upper": 1.279799142327028,
+            "prob_direction": 0.03550000000000009,
+            "excludes_null": false
+          }
+        ],
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 3489.0,
+          "ess_tail_min": 2198.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "sparsity_signal": [
+          {
+            "feature": "sho_1",
+            "shrinkage_factor": 0.13872459934944623
+          },
+          {
+            "feature": "age",
+            "shrinkage_factor": 0.22572896629700065
+          },
+          {
+            "feature": "mitype_1",
+            "shrinkage_factor": 0.43672749043062026
+          },
+          {
+            "feature": "age_x_chf",
+            "shrinkage_factor": 0.4927225315397874
+          },
+          {
+            "feature": "hr",
+            "shrinkage_factor": 0.5131316815167042
+          },
+          {
+            "feature": "cvd_1",
+            "shrinkage_factor": 0.518569876463587
+          },
+          {
+            "feature": "diasbp",
+            "shrinkage_factor": 0.5211618060049351
+          },
+          {
+            "feature": "chf_1",
+            "shrinkage_factor": 0.5320605595531112
+          },
+          {
+            "feature": "bmi",
+            "shrinkage_factor": 0.5363353186843234
+          },
+          {
+            "feature": "bmi_low",
+            "shrinkage_factor": 0.557325064521391
+          },
+          {
+            "feature": "av3_1",
+            "shrinkage_factor": 0.6320579909945279
+          },
+          {
+            "feature": "gender_1",
+            "shrinkage_factor": 0.64471014377775
+          },
+          {
+            "feature": "afb_1",
+            "shrinkage_factor": 0.6867321358636015
+          },
+          {
+            "feature": "miord_1",
+            "shrinkage_factor": 0.7119895716729059
+          },
+          {
+            "feature": "sysbp",
+            "shrinkage_factor": 0.7422458337844158
+          },
+          {
+            "feature": "los",
+            "shrinkage_factor": 0.7709220005710085
+          }
+        ]
+      },
+      "spike_slab": {
+        "importance": [
+          {
+            "feature": "age",
+            "posterior_mean": 0.6538709523157631,
+            "hazard_ratio": 1.9229701662500638,
+            "credible_lower": 1.4937439926141198,
+            "credible_upper": 2.5092412698599196,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "sho_1",
+            "posterior_mean": 1.6224322952062917,
+            "hazard_ratio": 5.065395883236514,
+            "credible_lower": 2.4224498674706125,
+            "credible_upper": 10.141418009782475,
+            "prob_direction": 0.9995,
+            "excludes_null": true
+          },
+          {
+            "feature": "hr",
+            "posterior_mean": 0.2662847905978369,
+            "hazard_ratio": 1.3051066878800484,
+            "credible_lower": 1.1023652465981648,
+            "credible_upper": 1.5437564643232518,
+            "prob_direction": 0.9975,
+            "excludes_null": true
+          },
+          {
+            "feature": "mitype_1",
+            "posterior_mean": -0.5286584469123273,
+            "hazard_ratio": 0.5893951444050082,
+            "credible_lower": 0.36844993459522557,
+            "credible_upper": 0.9121048739617063,
+            "prob_direction": 0.98325,
+            "excludes_null": true
+          },
+          {
+            "feature": "diasbp",
+            "posterior_mean": -0.27778962412909547,
+            "hazard_ratio": 0.7574561552520941,
+            "credible_lower": 0.6042049788538066,
+            "credible_upper": 0.9519202766111917,
+            "prob_direction": 0.9825,
+            "excludes_null": true
+          },
+          {
+            "feature": "cvd_1",
+            "posterior_mean": -0.4220539021451661,
+            "hazard_ratio": 0.6556986948746413,
+            "credible_lower": 0.4486714938190395,
+            "credible_upper": 0.9687864157322417,
+            "prob_direction": 0.96775,
+            "excludes_null": true
+          },
+          {
+            "feature": "bmi",
+            "posterior_mean": -0.20106331837921274,
+            "hazard_ratio": 0.8178606443039151,
+            "credible_lower": 0.6536177583762104,
+            "credible_upper": 1.0194780901930824,
+            "prob_direction": 0.9245,
+            "excludes_null": false
+          },
+          {
+            "feature": "gender_1",
+            "posterior_mean": -0.2511645022817616,
+            "hazard_ratio": 0.777894395630029,
+            "credible_lower": 0.5572697340774221,
+            "credible_upper": 1.087424244898898,
+            "prob_direction": 0.8512500000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "bmi_low",
+            "posterior_mean": 0.4478885361480889,
+            "hazard_ratio": 1.5650042445298527,
+            "credible_lower": 0.8113181384297636,
+            "credible_upper": 3.056832411342734,
+            "prob_direction": 0.8202499999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "age_x_chf",
+            "posterior_mean": 0.19945358339676503,
+            "hazard_ratio": 1.220735545718453,
+            "credible_lower": 0.6024476792107117,
+            "credible_upper": 2.4407312789953273,
+            "prob_direction": 0.4590000000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "afb_1",
+            "posterior_mean": -0.1146584678382258,
+            "hazard_ratio": 0.8916706261051642,
+            "credible_lower": 0.5864330997066622,
+            "credible_upper": 1.3216155066163158,
+            "prob_direction": 0.4065,
+            "excludes_null": false
+          },
+          {
+            "feature": "sysbp",
+            "posterior_mean": 0.05620417060932644,
+            "hazard_ratio": 1.0578136361449393,
+            "credible_lower": 0.847885159146131,
+            "credible_upper": 1.3189282139042413,
+            "prob_direction": 0.38450000000000006,
+            "excludes_null": false
+          },
+          {
+            "feature": "chf_1",
+            "posterior_mean": 0.3617451239177933,
+            "hazard_ratio": 1.4358329358458393,
+            "credible_lower": 0.3123387210725189,
+            "credible_upper": 7.010989617141646,
+            "prob_direction": 0.3700000000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "los",
+            "posterior_mean": 0.026606877437032214,
+            "hazard_ratio": 1.0269640006768126,
+            "credible_lower": 0.8819763709856475,
+            "credible_upper": 1.1905914431966163,
+            "prob_direction": 0.27374999999999994,
+            "excludes_null": false
+          },
+          {
+            "feature": "av3_1",
+            "posterior_mean": -0.09028699877856745,
+            "hazard_ratio": 0.9136689257732385,
+            "credible_lower": 0.3342042531269453,
+            "credible_upper": 2.1971085583992065,
+            "prob_direction": 0.12275000000000003,
+            "excludes_null": false
+          },
+          {
+            "feature": "miord_1",
+            "posterior_mean": -0.004864522331876495,
+            "hazard_ratio": 0.9951472902948578,
+            "credible_lower": 0.707854355640902,
+            "credible_upper": 1.3900746200256344,
+            "prob_direction": 0.03225,
+            "excludes_null": false
+          }
+        ],
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2821.0,
+          "ess_tail_min": 4663.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "sparsity_signal": [
+          {
+            "feature": "sho_1",
+            "inclusion_probability": 0.5874586010379373
+          },
+          {
+            "feature": "age",
+            "inclusion_probability": 0.4570271729083315
+          },
+          {
+            "feature": "chf_1",
+            "inclusion_probability": 0.4537011100303413
+          },
+          {
+            "feature": "mitype_1",
+            "inclusion_probability": 0.43566821070938916
+          },
+          {
+            "feature": "bmi_low",
+            "inclusion_probability": 0.4263755856947547
+          },
+          {
+            "feature": "cvd_1",
+            "inclusion_probability": 0.4098965153994434
+          },
+          {
+            "feature": "av3_1",
+            "inclusion_probability": 0.4009680224955323
+          },
+          {
+            "feature": "age_x_chf",
+            "inclusion_probability": 0.3950157168624485
+          },
+          {
+            "feature": "hr",
+            "inclusion_probability": 0.39140918290227217
+          },
+          {
+            "feature": "diasbp",
+            "inclusion_probability": 0.3896366937026646
+          },
+          {
+            "feature": "gender_1",
+            "inclusion_probability": 0.3810428063314846
+          },
+          {
+            "feature": "bmi",
+            "inclusion_probability": 0.3763012135314392
+          },
+          {
+            "feature": "afb_1",
+            "inclusion_probability": 0.37237785405395
+          },
+          {
+            "feature": "miord_1",
+            "inclusion_probability": 0.3595670080893848
+          },
+          {
+            "feature": "sysbp",
+            "inclusion_probability": 0.3578718680601714
+          },
+          {
+            "feature": "los",
+            "inclusion_probability": 0.3533052675498339
+          }
+        ]
+      }
+    },
+    "agreement": {
+      "normal vs Cox PH": {
+        "n_features": 16,
+        "spearman_rho": 0.4621046136986292,
+        "spearman_p": 0.07153226229920125,
+        "kendall_tau": 0.35983578576496095,
+        "kendall_p": 0.052631355244461255,
+        "top_k": 5,
+        "top_k_overlap": 2,
+        "top_k_jaccard": 0.25,
+        "built_in_top_k": [
+          "age",
+          "diasbp",
+          "hr",
+          "mitype_1",
+          "sho_1"
+        ],
+        "post_hoc_top_k": [
+          "age",
+          "age_x_chf",
+          "bmi",
+          "chf_1",
+          "diasbp"
+        ]
+      },
+      "normal vs Random Survival Forest": {
+        "n_features": 16,
+        "spearman_rho": 0.16568483063328424,
+        "spearman_p": 0.5397163983430601,
+        "kendall_tau": 0.11764705882352942,
+        "kendall_p": 0.5276538786097438,
+        "top_k": 5,
+        "top_k_overlap": 2,
+        "top_k_jaccard": 0.25,
+        "built_in_top_k": [
+          "age",
+          "diasbp",
+          "hr",
+          "mitype_1",
+          "sho_1"
+        ],
+        "post_hoc_top_k": [
+          "age",
+          "age_x_chf",
+          "bmi",
+          "chf_1",
+          "diasbp"
+        ]
+      },
+      "horseshoe vs Cox PH": {
+        "n_features": 16,
+        "spearman_rho": 0.6823529411764706,
+        "spearman_p": 0.0035879704117567236,
+        "kendall_tau": 0.5166666666666667,
+        "kendall_p": 0.004639144437791718,
+        "top_k": 5,
+        "top_k_overlap": 3,
+        "top_k_jaccard": 0.42857142857142855,
+        "built_in_top_k": [
+          "age",
+          "bmi",
+          "diasbp",
+          "hr",
+          "sho_1"
+        ],
+        "post_hoc_top_k": [
+          "age",
+          "age_x_chf",
+          "bmi",
+          "chf_1",
+          "diasbp"
+        ]
+      },
+      "horseshoe vs Random Survival Forest": {
+        "n_features": 16,
+        "spearman_rho": 0.4032377839281032,
+        "spearman_p": 0.1214455668350199,
+        "kendall_tau": 0.2761530448893886,
+        "kendall_p": 0.1369484856145005,
+        "top_k": 5,
+        "top_k_overlap": 3,
+        "top_k_jaccard": 0.42857142857142855,
+        "built_in_top_k": [
+          "age",
+          "bmi",
+          "diasbp",
+          "hr",
+          "sho_1"
+        ],
+        "post_hoc_top_k": [
+          "age",
+          "age_x_chf",
+          "bmi",
+          "chf_1",
+          "diasbp"
+        ]
+      },
+      "spike_slab vs Cox PH": {
+        "n_features": 16,
+        "spearman_rho": 0.5058823529411764,
+        "spearman_p": 0.04558161612394021,
+        "kendall_tau": 0.38333333333333336,
+        "kendall_p": 0.041261775989402893,
+        "top_k": 5,
+        "top_k_overlap": 2,
+        "top_k_jaccard": 0.25,
+        "built_in_top_k": [
+          "age",
+          "diasbp",
+          "hr",
+          "mitype_1",
+          "sho_1"
+        ],
+        "post_hoc_top_k": [
+          "age",
+          "age_x_chf",
+          "bmi",
+          "chf_1",
+          "diasbp"
+        ]
+      },
+      "spike_slab vs Random Survival Forest": {
+        "n_features": 16,
+        "spearman_rho": 0.2045622334525779,
+        "spearman_p": 0.4472751519912379,
+        "kendall_tau": 0.1422606594884729,
+        "kendall_p": 0.44358128760577287,
+        "top_k": 5,
+        "top_k_overlap": 2,
+        "top_k_jaccard": 0.25,
+        "built_in_top_k": [
+          "age",
+          "diasbp",
+          "hr",
+          "mitype_1",
+          "sho_1"
+        ],
+        "post_hoc_top_k": [
+          "age",
+          "age_x_chf",
+          "bmi",
+          "chf_1",
+          "diasbp"
+        ]
+      }
+    }
+  },
+  "metabric": {
+    "n_features": 24,
+    "shap": {
+      "Cox PH": [
+        {
+          "feature": "age_at_diagnosis",
+          "mean_abs_shap": 0.5216968518872644
+        },
+        {
+          "feature": "log_lymph_nodes",
+          "mean_abs_shap": 0.3919276514948139
+        },
+        {
+          "feature": "inferred_menopausal_state_Pre",
+          "mean_abs_shap": 0.18336455469781973
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_LumA",
+          "mean_abs_shap": 0.12807162490000779
+        },
+        {
+          "feature": "her2_status_Positive",
+          "mean_abs_shap": 0.09931992154403504
+        },
+        {
+          "feature": "radio_therapy_1",
+          "mean_abs_shap": 0.07313839121727228
+        },
+        {
+          "feature": "neoplasm_histologic_grade",
+          "mean_abs_shap": 0.06527123196002713
+        },
+        {
+          "feature": "cellularity_Moderate",
+          "mean_abs_shap": 0.06523829065307231
+        },
+        {
+          "feature": "type_of_breast_surgery_MASTECTOMY",
+          "mean_abs_shap": 0.06205093776284576
+        },
+        {
+          "feature": "age_x_stage",
+          "mean_abs_shap": 0.05180578902717696
+        },
+        {
+          "feature": "er_status_Positive",
+          "mean_abs_shap": 0.04528775874316669
+        },
+        {
+          "feature": "tumor_size",
+          "mean_abs_shap": 0.043458376674036264
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_LumB",
+          "mean_abs_shap": 0.029054158387676866
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_claudin-low",
+          "mean_abs_shap": 0.024809741720514977
+        },
+        {
+          "feature": "hormone_therapy_1",
+          "mean_abs_shap": 0.013040576459938733
+        },
+        {
+          "feature": "chemotherapy_1",
+          "mean_abs_shap": 0.011083570269120145
+        },
+        {
+          "feature": "pr_status_Positive",
+          "mean_abs_shap": 0.008365543520597572
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_Normal",
+          "mean_abs_shap": 0.007328099705477651
+        },
+        {
+          "feature": "lymph_nodes_examined_positive",
+          "mean_abs_shap": 0.006154917733386475
+        },
+        {
+          "feature": "nottingham_prognostic_index",
+          "mean_abs_shap": 0.002348907821586145
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_Her2",
+          "mean_abs_shap": 0.0012442654546622584
+        },
+        {
+          "feature": "cellularity_Low",
+          "mean_abs_shap": 0.0
+        },
+        {
+          "feature": "tumor_stage",
+          "mean_abs_shap": 0.0
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_NC",
+          "mean_abs_shap": 0.0
+        }
+      ],
+      "Random Survival Forest": [
+        {
+          "feature": "age_at_diagnosis",
+          "mean_abs_shap": 57.930739161722194
+        },
+        {
+          "feature": "nottingham_prognostic_index",
+          "mean_abs_shap": 34.171205596710266
+        },
+        {
+          "feature": "age_x_stage",
+          "mean_abs_shap": 24.750064732799718
+        },
+        {
+          "feature": "lymph_nodes_examined_positive",
+          "mean_abs_shap": 24.7095615193193
+        },
+        {
+          "feature": "tumor_size",
+          "mean_abs_shap": 23.08977411943064
+        },
+        {
+          "feature": "log_lymph_nodes",
+          "mean_abs_shap": 19.88905784477047
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_LumA",
+          "mean_abs_shap": 15.176564644452835
+        },
+        {
+          "feature": "type_of_breast_surgery_MASTECTOMY",
+          "mean_abs_shap": 11.329595041524264
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_LumB",
+          "mean_abs_shap": 6.371542523492608
+        },
+        {
+          "feature": "radio_therapy_1",
+          "mean_abs_shap": 5.790443432726744
+        },
+        {
+          "feature": "her2_status_Positive",
+          "mean_abs_shap": 4.618105420243078
+        },
+        {
+          "feature": "neoplasm_histologic_grade",
+          "mean_abs_shap": 4.581141093347499
+        },
+        {
+          "feature": "pr_status_Positive",
+          "mean_abs_shap": 4.408380199235755
+        },
+        {
+          "feature": "tumor_stage",
+          "mean_abs_shap": 2.5693646797033733
+        },
+        {
+          "feature": "inferred_menopausal_state_Pre",
+          "mean_abs_shap": 2.3756710604072224
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_Her2",
+          "mean_abs_shap": 1.94902615932331
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_claudin-low",
+          "mean_abs_shap": 0.902589630814734
+        },
+        {
+          "feature": "er_status_Positive",
+          "mean_abs_shap": 0.7243506444660615
+        },
+        {
+          "feature": "cellularity_Moderate",
+          "mean_abs_shap": 0.5032456956371245
+        },
+        {
+          "feature": "hormone_therapy_1",
+          "mean_abs_shap": 0.25315438930728906
+        },
+        {
+          "feature": "chemotherapy_1",
+          "mean_abs_shap": 0.2161629665955341
+        },
+        {
+          "feature": "cellularity_Low",
+          "mean_abs_shap": 0.0
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_NC",
+          "mean_abs_shap": 0.0
+        },
+        {
+          "feature": "pam50_+_claudin-low_subtype_Normal",
+          "mean_abs_shap": 0.0
+        }
+      ]
+    },
+    "posterior": {
+      "normal": {
+        "importance": [
+          {
+            "feature": "age_at_diagnosis",
+            "posterior_mean": 0.5390320913337947,
+            "hazard_ratio": 1.714346727830504,
+            "credible_lower": 1.496308198078407,
+            "credible_upper": 1.9623685961936495,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "log_lymph_nodes",
+            "posterior_mean": 0.338772791927063,
+            "hazard_ratio": 1.4032244850591489,
+            "credible_lower": 1.1588851707851837,
+            "credible_upper": 1.697278113012733,
+            "prob_direction": 0.9995,
+            "excludes_null": true
+          },
+          {
+            "feature": "inferred_menopausal_state_Pre",
+            "posterior_mean": 0.44646986993709786,
+            "hazard_ratio": 1.5627856000181883,
+            "credible_lower": 1.1794292240959126,
+            "credible_upper": 2.0746454375741057,
+            "prob_direction": 0.9975,
+            "excludes_null": true
+          },
+          {
+            "feature": "tumor_size",
+            "posterior_mean": 0.07768913915203143,
+            "hazard_ratio": 1.0807866321950943,
+            "credible_lower": 1.0097182068615238,
+            "credible_upper": 1.1541391200864546,
+            "prob_direction": 0.9722500000000001,
+            "excludes_null": true
+          },
+          {
+            "feature": "her2_status_Positive",
+            "posterior_mean": 0.2565048375051332,
+            "hazard_ratio": 1.2924050178004653,
+            "credible_lower": 1.0052564392660233,
+            "credible_upper": 1.6444394895464727,
+            "prob_direction": 0.95625,
+            "excludes_null": true
+          },
+          {
+            "feature": "radio_therapy_1",
+            "posterior_mean": -0.1801711441676468,
+            "hazard_ratio": 0.8351272720181505,
+            "credible_lower": 0.689792646452311,
+            "credible_upper": 1.0051418993072794,
+            "prob_direction": 0.9435,
+            "excludes_null": false
+          },
+          {
+            "feature": "type_of_breast_surgery_MASTECTOMY",
+            "posterior_mean": 0.16643388663953557,
+            "hazard_ratio": 1.1810854477611215,
+            "credible_lower": 0.9779856281999239,
+            "credible_upper": 1.4294569113751896,
+            "prob_direction": 0.9192499999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "cellularity_Moderate",
+            "posterior_mean": 0.13355553582771315,
+            "hazard_ratio": 1.1428847354224456,
+            "credible_lower": 0.9814417466234723,
+            "credible_upper": 1.3304695932315338,
+            "prob_direction": 0.91225,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumA",
+            "posterior_mean": -0.2803413930594654,
+            "hazard_ratio": 0.7555257661699273,
+            "credible_lower": 0.5423390230712923,
+            "credible_upper": 1.05452322473216,
+            "prob_direction": 0.90575,
+            "excludes_null": false
+          },
+          {
+            "feature": "neoplasm_histologic_grade",
+            "posterior_mean": 0.07929966945454499,
+            "hazard_ratio": 1.0825286742460083,
+            "credible_lower": 0.9799172033315868,
+            "credible_upper": 1.19419354028356,
+            "prob_direction": 0.88025,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_claudin-low",
+            "posterior_mean": -0.2506412374492365,
+            "hazard_ratio": 0.7783015469253678,
+            "credible_lower": 0.5606736072422325,
+            "credible_upper": 1.0709040173751418,
+            "prob_direction": 0.8745,
+            "excludes_null": false
+          },
+          {
+            "feature": "age_x_stage",
+            "posterior_mean": 0.1051019370300494,
+            "hazard_ratio": 1.1108238386675502,
+            "credible_lower": 0.931895133754235,
+            "credible_upper": 1.3225451606903962,
+            "prob_direction": 0.7575000000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "hormone_therapy_1",
+            "posterior_mean": -0.09404372824896727,
+            "hazard_ratio": 0.9102429580397994,
+            "credible_lower": 0.7607292524316053,
+            "credible_upper": 1.0904482345815127,
+            "prob_direction": 0.6985,
+            "excludes_null": false
+          },
+          {
+            "feature": "er_status_Positive",
+            "posterior_mean": -0.1353428219768925,
+            "hazard_ratio": 0.8734164340086452,
+            "credible_lower": 0.6546719906837909,
+            "credible_upper": 1.1617741042202026,
+            "prob_direction": 0.64375,
+            "excludes_null": false
+          },
+          {
+            "feature": "chemotherapy_1",
+            "posterior_mean": -0.11194207796027403,
+            "hazard_ratio": 0.8940960438671285,
+            "credible_lower": 0.6903667359302533,
+            "credible_upper": 1.1586308804141316,
+            "prob_direction": 0.585,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Normal",
+            "posterior_mean": 0.12922417401801187,
+            "hazard_ratio": 1.1379451933209888,
+            "credible_lower": 0.7740549182561868,
+            "credible_upper": 1.6629007865137617,
+            "prob_direction": 0.47825000000000006,
+            "excludes_null": false
+          },
+          {
+            "feature": "lymph_nodes_examined_positive",
+            "posterior_mean": -0.03926370263700969,
+            "hazard_ratio": 0.9614971263849098,
+            "credible_lower": 0.8434265101174881,
+            "credible_upper": 1.0876054185253756,
+            "prob_direction": 0.45025000000000004,
+            "excludes_null": false
+          },
+          {
+            "feature": "pr_status_Positive",
+            "posterior_mean": -0.05101109188426624,
+            "hazard_ratio": 0.9502681302098488,
+            "credible_lower": 0.7971960442886249,
+            "credible_upper": 1.136666353757024,
+            "prob_direction": 0.43200000000000005,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumB",
+            "posterior_mean": 0.05280651328229718,
+            "hazard_ratio": 1.0542256467243996,
+            "credible_lower": 0.7561955999753611,
+            "credible_upper": 1.4654382278735154,
+            "prob_direction": 0.24124999999999996,
+            "excludes_null": false
+          },
+          {
+            "feature": "nottingham_prognostic_index",
+            "posterior_mean": 0.01893379045002847,
+            "hazard_ratio": 1.0191141712929601,
+            "credible_lower": 0.8981261340910175,
+            "credible_upper": 1.1660063638047138,
+            "prob_direction": 0.20675,
+            "excludes_null": false
+          },
+          {
+            "feature": "cellularity_Low",
+            "posterior_mean": -0.022574260568595503,
+            "hazard_ratio": 0.9776786315264199,
+            "credible_lower": 0.7439776252109696,
+            "credible_upper": 1.2620081881540528,
+            "prob_direction": 0.11824999999999997,
+            "excludes_null": false
+          },
+          {
+            "feature": "tumor_stage",
+            "posterior_mean": -0.014272797557612087,
+            "hazard_ratio": 0.9858285759498372,
+            "credible_lower": 0.8293273261323224,
+            "credible_upper": 1.1676083422794339,
+            "prob_direction": 0.11199999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_NC",
+            "posterior_mean": -0.09363343573796344,
+            "hazard_ratio": 0.9106165005342809,
+            "credible_lower": 0.3022626404517274,
+            "credible_upper": 2.3775310596941286,
+            "prob_direction": 0.09375,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Her2",
+            "posterior_mean": 0.01363510563699276,
+            "hazard_ratio": 1.0137284876316186,
+            "credible_lower": 0.7436475655564266,
+            "credible_upper": 1.385430300408571,
+            "prob_direction": 0.07224999999999993,
+            "excludes_null": false
+          }
+        ],
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 3621.0,
+          "ess_tail_min": 5177.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        }
+      },
+      "horseshoe": {
+        "importance": [
+          {
+            "feature": "age_at_diagnosis",
+            "posterior_mean": 0.5133631726904521,
+            "hazard_ratio": 1.6709012853779004,
+            "credible_lower": 1.4605163849460008,
+            "credible_upper": 1.9055597135904643,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "log_lymph_nodes",
+            "posterior_mean": 0.2612491510228827,
+            "hazard_ratio": 1.2985511604823552,
+            "credible_lower": 1.1082320792174605,
+            "credible_upper": 1.4943721524849094,
+            "prob_direction": 0.9982500000000001,
+            "excludes_null": true
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumA",
+            "posterior_mean": -0.2570588418281054,
+            "hazard_ratio": 0.7733227087047662,
+            "credible_lower": 0.6269525156859387,
+            "credible_upper": 0.9746290655362154,
+            "prob_direction": 0.9785,
+            "excludes_null": true
+          },
+          {
+            "feature": "inferred_menopausal_state_Pre",
+            "posterior_mean": 0.30963065651872573,
+            "hazard_ratio": 1.36292163493817,
+            "credible_lower": 1.0023760953672358,
+            "credible_upper": 1.85971920043838,
+            "prob_direction": 0.95625,
+            "excludes_null": true
+          },
+          {
+            "feature": "tumor_size",
+            "posterior_mean": 0.06714054206139751,
+            "hazard_ratio": 1.0694457697262407,
+            "credible_lower": 0.9986186445736832,
+            "credible_upper": 1.144536024441636,
+            "prob_direction": 0.9390000000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "radio_therapy_1",
+            "posterior_mean": -0.15050869155100102,
+            "hazard_ratio": 0.8602702528921417,
+            "credible_lower": 0.7049862511116334,
+            "credible_upper": 1.0125752851582253,
+            "prob_direction": 0.9007499999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "type_of_breast_surgery_MASTECTOMY",
+            "posterior_mean": 0.1440801701357381,
+            "hazard_ratio": 1.1549766994521198,
+            "credible_lower": 0.9795254313096241,
+            "credible_upper": 1.4168788845437013,
+            "prob_direction": 0.87025,
+            "excludes_null": false
+          },
+          {
+            "feature": "her2_status_Positive",
+            "posterior_mean": 0.16375929168351624,
+            "hazard_ratio": 1.1779307432389001,
+            "credible_lower": 0.9737049649222613,
+            "credible_upper": 1.5264045919212652,
+            "prob_direction": 0.8365,
+            "excludes_null": false
+          },
+          {
+            "feature": "neoplasm_histologic_grade",
+            "posterior_mean": 0.06525608924642923,
+            "hazard_ratio": 1.0674323473306073,
+            "credible_lower": 0.9850681709364283,
+            "credible_upper": 1.1802672239156127,
+            "prob_direction": 0.8345,
+            "excludes_null": false
+          },
+          {
+            "feature": "cellularity_Moderate",
+            "posterior_mean": 0.07622221531511467,
+            "hazard_ratio": 1.0792023628070657,
+            "credible_lower": 0.9683929311349903,
+            "credible_upper": 1.2581817116976206,
+            "prob_direction": 0.7362500000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "age_x_stage",
+            "posterior_mean": 0.06542603216837979,
+            "hazard_ratio": 1.0676137653176119,
+            "credible_lower": 0.9670027009446551,
+            "credible_upper": 1.2182502830727708,
+            "prob_direction": 0.7137500000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_claudin-low",
+            "posterior_mean": -0.12240642823777691,
+            "hazard_ratio": 0.8847886923072776,
+            "credible_lower": 0.665948283218436,
+            "credible_upper": 1.0539234915956188,
+            "prob_direction": 0.70375,
+            "excludes_null": false
+          },
+          {
+            "feature": "er_status_Positive",
+            "posterior_mean": -0.06301723136081157,
+            "hazard_ratio": 0.9389272945547511,
+            "credible_lower": 0.7515193393376132,
+            "credible_upper": 1.0825662140476602,
+            "prob_direction": 0.49850000000000005,
+            "excludes_null": false
+          },
+          {
+            "feature": "hormone_therapy_1",
+            "posterior_mean": -0.045852928092159205,
+            "hazard_ratio": 0.955182432363517,
+            "credible_lower": 0.812856337115702,
+            "credible_upper": 1.0646337018426542,
+            "prob_direction": 0.488,
+            "excludes_null": false
+          },
+          {
+            "feature": "pr_status_Positive",
+            "posterior_mean": -0.04011965515325256,
+            "hazard_ratio": 0.9606744826224457,
+            "credible_lower": 0.8270920618738554,
+            "credible_upper": 1.0691653878934033,
+            "prob_direction": 0.4635,
+            "excludes_null": false
+          },
+          {
+            "feature": "nottingham_prognostic_index",
+            "posterior_mean": 0.032549375504459334,
+            "hazard_ratio": 1.0330849009728285,
+            "credible_lower": 0.9430895613141844,
+            "credible_upper": 1.1663943715326959,
+            "prob_direction": 0.4544999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "tumor_stage",
+            "posterior_mean": 0.023583237830163185,
+            "hazard_ratio": 1.0238635213776925,
+            "credible_lower": 0.9193452001279516,
+            "credible_upper": 1.1511547447996955,
+            "prob_direction": 0.3420000000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Normal",
+            "posterior_mean": 0.04618548424811724,
+            "hazard_ratio": 1.0472686447798767,
+            "credible_lower": 0.881251020916727,
+            "credible_upper": 1.3512836920468168,
+            "prob_direction": 0.3165,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Her2",
+            "posterior_mean": 0.03580149351847899,
+            "hazard_ratio": 1.0364500840095574,
+            "credible_lower": 0.8933282897668949,
+            "credible_upper": 1.267136802754448,
+            "prob_direction": 0.3107500000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumB",
+            "posterior_mean": 0.023536333377070864,
+            "hazard_ratio": 1.0238154987454275,
+            "credible_lower": 0.8865636395841996,
+            "credible_upper": 1.2390946508024652,
+            "prob_direction": 0.20550000000000002,
+            "excludes_null": false
+          },
+          {
+            "feature": "chemotherapy_1",
+            "posterior_mean": -0.014545063172446956,
+            "hazard_ratio": 0.9855602052621973,
+            "credible_lower": 0.8183408647880589,
+            "credible_upper": 1.1480179870550289,
+            "prob_direction": 0.13075000000000003,
+            "excludes_null": false
+          },
+          {
+            "feature": "lymph_nodes_examined_positive",
+            "posterior_mean": 0.004451023965138167,
+            "hazard_ratio": 1.0044609444856711,
+            "credible_lower": 0.9149980630541945,
+            "credible_upper": 1.1038982820187015,
+            "prob_direction": 0.08574999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "cellularity_Low",
+            "posterior_mean": -0.010407714666739192,
+            "hazard_ratio": 0.989646258188574,
+            "credible_lower": 0.827961422655999,
+            "credible_upper": 1.1520164101555201,
+            "prob_direction": 0.07350000000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_NC",
+            "posterior_mean": -0.0038605315843155325,
+            "hazard_ratio": 0.9961469106876191,
+            "credible_lower": 0.6609089644927291,
+            "credible_upper": 1.48468535349827,
+            "prob_direction": 0.010999999999999899,
+            "excludes_null": false
+          }
+        ],
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 2407.0,
+          "ess_tail_min": 2239.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "sparsity_signal": [
+          {
+            "feature": "age_at_diagnosis",
+            "shrinkage_factor": 0.13939022072178872
+          },
+          {
+            "feature": "inferred_menopausal_state_Pre",
+            "shrinkage_factor": 0.28870405398435134
+          },
+          {
+            "feature": "log_lymph_nodes",
+            "shrinkage_factor": 0.2905185527374388
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumA",
+            "shrinkage_factor": 0.3154524759408244
+          },
+          {
+            "feature": "her2_status_Positive",
+            "shrinkage_factor": 0.4559730468330947
+          },
+          {
+            "feature": "radio_therapy_1",
+            "shrinkage_factor": 0.4598374024741969
+          },
+          {
+            "feature": "type_of_breast_surgery_MASTECTOMY",
+            "shrinkage_factor": 0.47001286310468876
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_claudin-low",
+            "shrinkage_factor": 0.5252257154558941
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_NC",
+            "shrinkage_factor": 0.5937595672026147
+          },
+          {
+            "feature": "cellularity_Moderate",
+            "shrinkage_factor": 0.603739396200448
+          },
+          {
+            "feature": "tumor_size",
+            "shrinkage_factor": 0.6074642828384161
+          },
+          {
+            "feature": "neoplasm_histologic_grade",
+            "shrinkage_factor": 0.6218986004961942
+          },
+          {
+            "feature": "age_x_stage",
+            "shrinkage_factor": 0.6225040782590553
+          },
+          {
+            "feature": "er_status_Positive",
+            "shrinkage_factor": 0.6240105815241209
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Normal",
+            "shrinkage_factor": 0.6382088715736385
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Her2",
+            "shrinkage_factor": 0.6568167612591093
+          },
+          {
+            "feature": "hormone_therapy_1",
+            "shrinkage_factor": 0.6646504789065598
+          },
+          {
+            "feature": "pr_status_Positive",
+            "shrinkage_factor": 0.6715655689447998
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumB",
+            "shrinkage_factor": 0.6717452817257472
+          },
+          {
+            "feature": "chemotherapy_1",
+            "shrinkage_factor": 0.6763361717917399
+          },
+          {
+            "feature": "cellularity_Low",
+            "shrinkage_factor": 0.678601104792796
+          },
+          {
+            "feature": "nottingham_prognostic_index",
+            "shrinkage_factor": 0.6971600066432697
+          },
+          {
+            "feature": "tumor_stage",
+            "shrinkage_factor": 0.7025244042778627
+          },
+          {
+            "feature": "lymph_nodes_examined_positive",
+            "shrinkage_factor": 0.7406664893103194
+          }
+        ]
+      },
+      "spike_slab": {
+        "importance": [
+          {
+            "feature": "age_at_diagnosis",
+            "posterior_mean": 0.5396001965142562,
+            "hazard_ratio": 1.7153209337872155,
+            "credible_lower": 1.4960900070304124,
+            "credible_upper": 1.9662348179227596,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "log_lymph_nodes",
+            "posterior_mean": 0.3349010678135731,
+            "hazard_ratio": 1.3978020907646618,
+            "credible_lower": 1.1564698074823676,
+            "credible_upper": 1.6912891439581046,
+            "prob_direction": 0.9990000000000001,
+            "excludes_null": true
+          },
+          {
+            "feature": "inferred_menopausal_state_Pre",
+            "posterior_mean": 0.44221210571739933,
+            "hazard_ratio": 1.5561457728475172,
+            "credible_lower": 1.16495978019564,
+            "credible_upper": 2.085974643783295,
+            "prob_direction": 0.99875,
+            "excludes_null": true
+          },
+          {
+            "feature": "tumor_size",
+            "posterior_mean": 0.0771878516665808,
+            "hazard_ratio": 1.080244983154218,
+            "credible_lower": 1.0103296946110316,
+            "credible_upper": 1.1535260464979995,
+            "prob_direction": 0.9730000000000001,
+            "excludes_null": true
+          },
+          {
+            "feature": "her2_status_Positive",
+            "posterior_mean": 0.25146014764075375,
+            "hazard_ratio": 1.2859016528281233,
+            "credible_lower": 1.0033390734011705,
+            "credible_upper": 1.6426378631256995,
+            "prob_direction": 0.9537500000000001,
+            "excludes_null": true
+          },
+          {
+            "feature": "radio_therapy_1",
+            "posterior_mean": -0.18154502751662271,
+            "hazard_ratio": 0.8339806923785393,
+            "credible_lower": 0.6911907239210567,
+            "credible_upper": 1.0067353460730382,
+            "prob_direction": 0.94075,
+            "excludes_null": false
+          },
+          {
+            "feature": "cellularity_Moderate",
+            "posterior_mean": 0.13098841372685857,
+            "hazard_ratio": 1.1399545734104188,
+            "credible_lower": 0.9790473343384312,
+            "credible_upper": 1.3299623764210775,
+            "prob_direction": 0.915,
+            "excludes_null": false
+          },
+          {
+            "feature": "type_of_breast_surgery_MASTECTOMY",
+            "posterior_mean": 0.16114021900561973,
+            "hazard_ratio": 1.1748496935206125,
+            "credible_lower": 0.9749368502757949,
+            "credible_upper": 1.4270701000209263,
+            "prob_direction": 0.91075,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumA",
+            "posterior_mean": -0.27810554086249883,
+            "hazard_ratio": 0.7572168999721938,
+            "credible_lower": 0.5467582278232495,
+            "credible_upper": 1.0477745260745783,
+            "prob_direction": 0.90525,
+            "excludes_null": false
+          },
+          {
+            "feature": "neoplasm_histologic_grade",
+            "posterior_mean": 0.07796532907470533,
+            "hazard_ratio": 1.0810851757969366,
+            "credible_lower": 0.9792240166415025,
+            "credible_upper": 1.1961403804035384,
+            "prob_direction": 0.8687499999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_claudin-low",
+            "posterior_mean": -0.24567799806391644,
+            "hazard_ratio": 0.7821740459370208,
+            "credible_lower": 0.5608133548882527,
+            "credible_upper": 1.0768834050382272,
+            "prob_direction": 0.8674999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "age_x_stage",
+            "posterior_mean": 0.1018940965415531,
+            "hazard_ratio": 1.1072662021981845,
+            "credible_lower": 0.9369731475658392,
+            "credible_upper": 1.3117705438070637,
+            "prob_direction": 0.7677499999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "hormone_therapy_1",
+            "posterior_mean": -0.09223606594125393,
+            "hazard_ratio": 0.9118898579969412,
+            "credible_lower": 0.7625998299076278,
+            "credible_upper": 1.0833067396309388,
+            "prob_direction": 0.6912499999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "er_status_Positive",
+            "posterior_mean": -0.13304708781195396,
+            "hazard_ratio": 0.8754238693436942,
+            "credible_lower": 0.6557740662505384,
+            "credible_upper": 1.16309232821049,
+            "prob_direction": 0.6427499999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "chemotherapy_1",
+            "posterior_mean": -0.1062354298158588,
+            "hazard_ratio": 0.8992129216209868,
+            "credible_lower": 0.6905487124264843,
+            "credible_upper": 1.164322777473493,
+            "prob_direction": 0.58525,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Normal",
+            "posterior_mean": 0.1260897294934979,
+            "hazard_ratio": 1.1343839514138747,
+            "credible_lower": 0.7734227915162032,
+            "credible_upper": 1.6673480149115607,
+            "prob_direction": 0.48950000000000005,
+            "excludes_null": false
+          },
+          {
+            "feature": "pr_status_Positive",
+            "posterior_mean": -0.049937886810564214,
+            "hazard_ratio": 0.9512885102291374,
+            "credible_lower": 0.8005925744785486,
+            "credible_upper": 1.1287507909186456,
+            "prob_direction": 0.43074999999999997,
+            "excludes_null": false
+          },
+          {
+            "feature": "lymph_nodes_examined_positive",
+            "posterior_mean": -0.03839319282003444,
+            "hazard_ratio": 0.9623344834833304,
+            "credible_lower": 0.841442007340489,
+            "credible_upper": 1.0900709746046606,
+            "prob_direction": 0.42974999999999997,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumB",
+            "posterior_mean": 0.05218436463896608,
+            "hazard_ratio": 1.0535699656552184,
+            "credible_lower": 0.7652442457012925,
+            "credible_upper": 1.4604393231773214,
+            "prob_direction": 0.25350000000000006,
+            "excludes_null": false
+          },
+          {
+            "feature": "nottingham_prognostic_index",
+            "posterior_mean": 0.02059434212690086,
+            "hazard_ratio": 1.0208078688860263,
+            "credible_lower": 0.8983622099358477,
+            "credible_upper": 1.1686698049939626,
+            "prob_direction": 0.2197499999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "cellularity_Low",
+            "posterior_mean": -0.021750779512736258,
+            "hazard_ratio": 0.9784840629414413,
+            "credible_lower": 0.7535701445489859,
+            "credible_upper": 1.2550352701716934,
+            "prob_direction": 0.11975000000000002,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Her2",
+            "posterior_mean": 0.018065963810491484,
+            "hazard_ratio": 1.0182301405145942,
+            "credible_lower": 0.755003278548806,
+            "credible_upper": 1.3709439694680947,
+            "prob_direction": 0.10224999999999995,
+            "excludes_null": false
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_NC",
+            "posterior_mean": -0.09052816244443886,
+            "hazard_ratio": 0.9134486085930236,
+            "credible_lower": 0.2911086877718662,
+            "credible_upper": 2.3998213289701713,
+            "prob_direction": 0.09999999999999998,
+            "excludes_null": false
+          },
+          {
+            "feature": "tumor_stage",
+            "posterior_mean": -0.01134063282043251,
+            "hazard_ratio": 0.9887234297572043,
+            "credible_lower": 0.8338188801282869,
+            "credible_upper": 1.1726486143602173,
+            "prob_direction": 0.09225000000000005,
+            "excludes_null": false
+          }
+        ],
+        "diagnostics": {
+          "r_hat_max": 1.0,
+          "ess_bulk_min": 5378.0,
+          "ess_tail_min": 5588.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": true,
+          "failures": [],
+          "method": "nuts",
+          "n_chains": 4,
+          "n_draws": 2000
+        },
+        "sparsity_signal": [
+          {
+            "feature": "age_at_diagnosis",
+            "inclusion_probability": 0.435741649763353
+          },
+          {
+            "feature": "inferred_menopausal_state_Pre",
+            "inclusion_probability": 0.4133566076954699
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_NC",
+            "inclusion_probability": 0.41054840105082896
+          },
+          {
+            "feature": "log_lymph_nodes",
+            "inclusion_probability": 0.39492315867811373
+          },
+          {
+            "feature": "her2_status_Positive",
+            "inclusion_probability": 0.3895385134351781
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumA",
+            "inclusion_probability": 0.3882332927466047
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_claudin-low",
+            "inclusion_probability": 0.38443252314237825
+          },
+          {
+            "feature": "er_status_Positive",
+            "inclusion_probability": 0.36986047261475763
+          },
+          {
+            "feature": "radio_therapy_1",
+            "inclusion_probability": 0.36901527131804135
+          },
+          {
+            "feature": "type_of_breast_surgery_MASTECTOMY",
+            "inclusion_probability": 0.3682673822134601
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Normal",
+            "inclusion_probability": 0.36802690376264013
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_Her2",
+            "inclusion_probability": 0.36357852357088
+          },
+          {
+            "feature": "pr_status_Positive",
+            "inclusion_probability": 0.3617717720066285
+          },
+          {
+            "feature": "chemotherapy_1",
+            "inclusion_probability": 0.35997283575855926
+          },
+          {
+            "feature": "pam50_+_claudin-low_subtype_LumB",
+            "inclusion_probability": 0.3596113751998273
+          },
+          {
+            "feature": "cellularity_Moderate",
+            "inclusion_probability": 0.35864225011505996
+          },
+          {
+            "feature": "age_x_stage",
+            "inclusion_probability": 0.35735608473822
+          },
+          {
+            "feature": "cellularity_Low",
+            "inclusion_probability": 0.356809086203647
+          },
+          {
+            "feature": "neoplasm_histologic_grade",
+            "inclusion_probability": 0.35468116477268874
+          },
+          {
+            "feature": "hormone_therapy_1",
+            "inclusion_probability": 0.35361844343185167
+          },
+          {
+            "feature": "lymph_nodes_examined_positive",
+            "inclusion_probability": 0.3483666022191873
+          },
+          {
+            "feature": "tumor_size",
+            "inclusion_probability": 0.34819755080354664
+          },
+          {
+            "feature": "nottingham_prognostic_index",
+            "inclusion_probability": 0.34643691547565597
+          },
+          {
+            "feature": "tumor_stage",
+            "inclusion_probability": 0.344111508712196
+          }
+        ]
+      }
+    },
+    "agreement": {
+      "normal vs Cox PH": {
+        "n_features": 24,
+        "spearman_rho": 0.9181900779465597,
+        "spearman_p": 2.583602257802951e-10,
+        "kendall_tau": 0.7832539529367871,
+        "kendall_p": 9.347493981867841e-08,
+        "top_k": 5,
+        "top_k_overlap": 4,
+        "top_k_jaccard": 0.6666666666666666,
+        "built_in_top_k": [
+          "age_at_diagnosis",
+          "her2_status_Positive",
+          "inferred_menopausal_state_Pre",
+          "log_lymph_nodes",
+          "tumor_size"
+        ],
+        "post_hoc_top_k": [
+          "age_at_diagnosis",
+          "her2_status_Positive",
+          "inferred_menopausal_state_Pre",
+          "log_lymph_nodes",
+          "pam50_+_claudin-low_subtype_LumA"
+        ]
+      },
+      "normal vs Random Survival Forest": {
+        "n_features": 24,
+        "spearman_rho": 0.40818118157055583,
+        "spearman_p": 0.047688209385856294,
+        "kendall_tau": 0.3096585395331484,
+        "kendall_p": 0.034793248766127625,
+        "top_k": 5,
+        "top_k_overlap": 2,
+        "top_k_jaccard": 0.25,
+        "built_in_top_k": [
+          "age_at_diagnosis",
+          "her2_status_Positive",
+          "inferred_menopausal_state_Pre",
+          "log_lymph_nodes",
+          "tumor_size"
+        ],
+        "post_hoc_top_k": [
+          "age_at_diagnosis",
+          "age_x_stage",
+          "lymph_nodes_examined_positive",
+          "nottingham_prognostic_index",
+          "tumor_size"
+        ]
+      },
+      "horseshoe vs Cox PH": {
+        "n_features": 24,
+        "spearman_rho": 0.9016539533200338,
+        "spearman_p": 1.809056324486851e-09,
+        "kendall_tau": 0.7686817863705213,
+        "kendall_p": 1.6088792592353535e-07,
+        "top_k": 5,
+        "top_k_overlap": 4,
+        "top_k_jaccard": 0.6666666666666666,
+        "built_in_top_k": [
+          "age_at_diagnosis",
+          "inferred_menopausal_state_Pre",
+          "log_lymph_nodes",
+          "pam50_+_claudin-low_subtype_LumA",
+          "tumor_size"
+        ],
+        "post_hoc_top_k": [
+          "age_at_diagnosis",
+          "her2_status_Positive",
+          "inferred_menopausal_state_Pre",
+          "log_lymph_nodes",
+          "pam50_+_claudin-low_subtype_LumA"
+        ]
+      },
+      "horseshoe vs Random Survival Forest": {
+        "n_features": 24,
+        "spearman_rho": 0.5178417975148843,
+        "spearman_p": 0.009544328620539558,
+        "kendall_tau": 0.41894978878014194,
+        "kendall_p": 0.0042938098120209765,
+        "top_k": 5,
+        "top_k_overlap": 2,
+        "top_k_jaccard": 0.25,
+        "built_in_top_k": [
+          "age_at_diagnosis",
+          "inferred_menopausal_state_Pre",
+          "log_lymph_nodes",
+          "pam50_+_claudin-low_subtype_LumA",
+          "tumor_size"
+        ],
+        "post_hoc_top_k": [
+          "age_at_diagnosis",
+          "age_x_stage",
+          "lymph_nodes_examined_positive",
+          "nottingham_prognostic_index",
+          "tumor_size"
+        ]
+      },
+      "spike_slab vs Cox PH": {
+        "n_features": 24,
+        "spearman_rho": 0.9242823343879112,
+        "spearman_p": 1.1352168077747123e-10,
+        "kendall_tau": 0.8123982860693187,
+        "kendall_p": 3.0658913314367986e-08,
+        "top_k": 5,
+        "top_k_overlap": 4,
+        "top_k_jaccard": 0.6666666666666666,
+        "built_in_top_k": [
+          "age_at_diagnosis",
+          "her2_status_Positive",
+          "inferred_menopausal_state_Pre",
+          "log_lymph_nodes",
+          "tumor_size"
+        ],
+        "post_hoc_top_k": [
+          "age_at_diagnosis",
+          "her2_status_Positive",
+          "inferred_menopausal_state_Pre",
+          "log_lymph_nodes",
+          "pam50_+_claudin-low_subtype_LumA"
+        ]
+      },
+      "spike_slab vs Random Survival Forest": {
+        "n_features": 24,
+        "spearman_rho": 0.3872934452002076,
+        "spearman_p": 0.06151339613673094,
+        "kendall_tau": 0.2878002896837497,
+        "kendall_p": 0.04979021103663009,
+        "top_k": 5,
+        "top_k_overlap": 2,
+        "top_k_jaccard": 0.25,
+        "built_in_top_k": [
+          "age_at_diagnosis",
+          "her2_status_Positive",
+          "inferred_menopausal_state_Pre",
+          "log_lymph_nodes",
+          "tumor_size"
+        ],
+        "post_hoc_top_k": [
+          "age_at_diagnosis",
+          "age_x_stage",
+          "lymph_nodes_examined_positive",
+          "nottingham_prognostic_index",
+          "tumor_size"
         ]
       }
     }

@@ -54,6 +54,47 @@ term bounds the local scales, reduced this to one divergence with R-hat
 1.0000 and bulk effective sample size 1155. Concordance was unchanged at
 0.702.
 
+## 2026-08-14 — Full benchmark completed on real data
+
+Fifteen model-cohort fits. Test-set concordance:
+
+| Model | GBSG2 | WHAS500 | METABRIC |
+|---|---|---|---|
+| Cox PH | 0.7021 | 0.7215 | 0.6649 |
+| Random survival forest | 0.6865 | 0.7504 | 0.6747 |
+| Bayesian Cox, Normal | 0.6995 | 0.7310 | 0.6663 |
+| Bayesian Cox, horseshoe | 0.7018 | 0.7454 | 0.6639 |
+| Bayesian Cox, spike-and-slab | 0.6943 | 0.7293 | 0.6662 |
+
+Every Bayesian fit converged: R-hat 1.0000 throughout, minimum bulk effective
+sample size 1155, and one divergent transition in 8000 draws across the whole
+run.
+
+Two observations worth carrying into the analysis. The horseshoe is the
+strongest Bayesian arm on the two smaller cohorts and gives the best
+calibration on WHAS500 (IBS 0.1313 against 0.1445 for Cox PH), which is what
+a shrinkage prior should do when the sample is small relative to the number
+of covariates. On METABRIC, the largest cohort, the three priors are
+indistinguishable — the likelihood dominates and the prior stops mattering.
+That is the Bernstein-von Mises behaviour the panel asked to see addressed,
+and it is now something the results demonstrate rather than assert.
+
+Cost scales sharply with the horseshoe: 424 seconds on METABRIC against 88
+for the Normal prior, from the smaller step sizes its geometry requires.
+
+## 2026-08-14 — Kernel SHAP sampling capped after checking stability
+
+Kernel SHAP's default coalition count scales with the feature count, which on
+METABRIC against a 300-tree forest made the explainability run take hours.
+Capping it at 256 coalitions per explained row brings one cohort-model pair to
+31 seconds.
+
+The cap was checked rather than assumed: two runs at different seeds on the
+METABRIC forest agree at Spearman 0.989 with an identical top-five set, the
+fourth and fifth features merely swapping places. That is well inside what a
+rank comparison needs, which is all the built-in-versus-post-hoc analysis
+uses the SHAP values for.
+
 ## 2026-08-14 — Censoring weights require a bounded test horizon
 
 Time-dependent AUC and the integrated Brier score estimate censoring weights
@@ -65,11 +106,29 @@ metrics are computed; concordance still uses the untruncated data. GBSG2 and
 WHAS500 results are unchanged by this, since it only affects the case that
 previously failed.
 
-## 2026-08-14 — Built-in and post-hoc explainability diverge by baseline
+## 2026-08-14 — Built-in explainability tracks the model family, not the data
 
-On GBSG2 the posterior ranking agrees closely with SHAP computed on Cox PH
-(Spearman 0.60 to 0.97 depending on prior, top-5 overlap 3 to 4 of 5) and
-shows almost no agreement with SHAP computed on the random survival forest
-(Spearman -0.20 to +0.05). Both the Bayesian model and Cox PH are linear in
-the log hazard, so the divergence is expected and separates attribution that
-reflects the model family from attribution that reflects the data.
+Eighteen comparisons across three cohorts. Spearman correlation between the
+posterior ranking and SHAP:
+
+| Cohort | vs Cox PH | vs random survival forest |
+|---|---|---|
+| GBSG2 | +0.57 to +0.95 | -0.19 to +0.13 |
+| WHAS500 | +0.46 to +0.68 | +0.17 to +0.40 |
+| METABRIC | +0.90 to +0.92 | +0.39 to +0.52 |
+
+The posterior signal agrees strongly with attribution computed on Cox PH and
+much less with attribution computed on the forest. Both the Bayesian model
+and Cox PH are linear in the log hazard, so what the agreement measures is
+shared model structure rather than a shared reading of the data. Any claim
+that a built-in signal and a post-hoc one "agree" therefore has to name which
+model the post-hoc signal was computed on.
+
+The horseshoe is the exception worth noting: it is the only prior whose
+ranking moves toward the forest on every cohort, which fits a prior that lets
+a few coefficients escape shrinkage rather than spreading weight evenly.
+
+The features the sparsity priors retain are the clinically expected ones —
+positive lymph nodes on GBSG2, cardiogenic shock and age on WHAS500, age and
+nodal status on METABRIC — so the signal is recovering known prognostic
+structure rather than arbitrary directions.

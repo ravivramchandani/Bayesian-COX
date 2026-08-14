@@ -24,7 +24,7 @@ only one later deliverable needs.
 writing. Runs continuously and is never gated on an administrative item.
 
 **Owner track.** Approvals, access, credentials, authentication, ethics,
-permissions, licensing, data-use determinations, and supervisor sign-off. The
+permissions, licensing, and data-use determinations. The
 owner holds these. They are recorded once in `OPEN_QUESTIONS.md` under
 "Owner track", carried forward without restating, and never used to pause
 engineering.

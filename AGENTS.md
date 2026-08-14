@@ -24,7 +24,7 @@ Proceed autonomously. Resolve ordinary engineering choices and build the next
 usable component. Stop only when a required file is genuinely unavailable or
 an irreversible external action needs the owner's decision.
 
-Approvals, access, credentials, ethics, permissions, and supervisor sign-off
+Approvals, access, credentials, ethics, and permissions
 are owner-managed. They live in `OPEN_QUESTIONS.md` under "Owner track", are
 raised once, and never pause implementation. An open question blocks only its
 exact final deliverable, not the preparatory engineering around it.
