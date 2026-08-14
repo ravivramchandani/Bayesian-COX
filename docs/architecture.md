@@ -1,59 +1,77 @@
 # Architecture
 
+The repository has two separate evidence lanes. The current confirmatory lane
+is content-addressed, fold-local and checkpointed. The legacy lane is retained
+only for the inspected pilot artefacts and cannot supply confirmatory evidence.
+
+## Current confirmatory lane
+
+```text
+data/manifest.yaml + data/raw/*.csv
+              |
+config/datasets.yaml + config/confirmatory.yaml
+              |
+      result-blind rehearsal
+              |
+config/protocol_freeze.json
+              |
+src/pipelines/confirmatory.py
+              |
+reports/confirmatory/<run>/
+          /                 \
+robustness pipeline        frozen-cell explanation
+          \                 /
+       pure confirmatory renderer
+              |
+reports/rendered/<run>/
 ```
-config/         dataset schemas and model hyperparameters
-coordination/   decisions, invariants, glossary, protocol, task list
-data/
-  external/     source files not produced by this repository
-  raw/          exported cohorts, one CSV per dataset
-  processed/    train/val/test splits, CV folds, preprocessing metadata
-scripts/        entry points, one per stage
-src/
-  data/         loading, validation, feature engineering, preprocessing, EDA
-  datasets/     per-cohort schema definitions
-  models/       Cox PH, random survival forest, DeepSurv
-    bayesian/   Bayesian Cox model and convergence diagnostics
-  evaluation/   metrics, calibration, cross-validation, ranking
-  explainability/ posterior signals and SHAP attribution
-  statistics/   bootstrap, hypothesis tests, confidence intervals
-  visualization/ EDA plots and thesis figures
-  losses/       Cox partial likelihood for the neural model
-  utils/        configuration loading and seeding
-tests/          test suite
-reports/
-  tables/       result files written by the scripts
-  figures/      generated figures
-```
 
-## Stage responsibilities
+- `scripts/download_datasets.py` retrieves or derives the authoritative
+  cohorts. `data/manifest.yaml` records upstream and derived hashes, and
+  `data/raw/` contains the exact CSVs consumed by confirmatory analysis.
+- `src/data/fold_preprocessing.py` and `src/data/survival_folds.py` create
+  paired event/time-stratified folds and fit every transformation inside its
+  analysis-training fold. Production does not consume pilot processed splits.
+- `scripts/run_confirmatory.py` delegates to
+  `src/pipelines/confirmatory.py`. Rehearsal output is `rehearsal_only`.
+  Confirmatory mode refuses overrides, requires `frozen_after_rehearsal`,
+  verifies the content-addressed freeze, and stores immutable cells and
+  out-of-fold predictions.
+- The comparator layer wraps lifelines Cox PH, scikit-survival forest and
+  pinned pycox DeepSurv. `src/models/bayesian/model.py` implements the full
+  subject-interval Poisson likelihood for a Bayesian piecewise-exponential
+  proportional-hazards model; it is not a Cox partial-likelihood model.
+- `scripts/run_robustness.py` and `src/pipelines/robustness.py` reuse frozen
+  fold identities for prespecified RQ2, design, feature/missingness and
+  proportional-hazards checks. They introduce no time interactions.
+- `scripts/run_confirmatory_explainability.py` reads immutable fitted-cell
+  state. It compares full-posterior grouped Bayesian contribution with exact
+  linear SHAP for the same Bayesian score, with frozen Cox secondary.
+  Confirmatory forest SHAP and DeepSurv explanation are absent; no model is
+  refitted.
+- `scripts/render_confirmatory.py` validates hashes and purely renders tables,
+  figures, CSV and LaTeX fragments. Rehearsals can produce only labelled
+  runtime/diagnostic packages; scientific outputs require production data.
 
-**`scripts/download_datasets.py`** exports GBSG2 and WHAS500 from
-scikit-survival and derives the METABRIC clinical cohort from
-`data/external/`. A missing source raises; no code path generates data.
+`src/evaluation/` contains survival metrics and calibration estimators.
+`src/statistics/` contains paired repeated-CV and bootstrap estimators.
+`src/utils/reproducibility.py` supplies hashes, manifests and runtime metadata.
+Exact dependency identity comes from `conda-lock.yml` and its SHA-256 file,
+not from an environment name.
 
-**`scripts/prepare_dataset.py`** reads schemas from `config/datasets.yaml`,
-then imputes, encodes, scales, splits, and writes CV folds. Transformers are
-fitted on the development training split only. The exploratory CV then reuses
-that processed matrix, so its validation folds still informed preprocessing;
-T-120 replaces it with transformers fitted inside every outer/inner training
-fold.
+## Legacy pilot lane
 
-**`scripts/run_benchmark.py`** fits every model on every cohort and writes
-`reports/tables/benchmark.json`.
+- `scripts/prepare_dataset.py` and `data/processed/` create historical
+  train/validation/test inputs. Their exploratory internal CV is not fold-
+  local confirmatory evidence.
+- `scripts/run_benchmark.py`, `scripts/run_explainability.py`,
+  `scripts/make_reports.py` and `scripts/make_figures.py` produce inspected
+  pilot results, Kernel-SHAP comparisons and figures. The figure script may
+  refit and is exposed only through `pilot-figures`.
+- `reports/tables/benchmark.json`, `reports/tables/explainability.json`, the
+  top-level pilot reports and existing `reports/figures/` are hypothesis-
+  generating artefacts only.
 
-**`scripts/run_explainability.py`** compares the Bayesian posterior signal
-against SHAP attributions on the baselines, writing
-`reports/tables/explainability.json`.
-
-**`scripts/make_reports.py`** renders markdown from result files.
-`scripts/make_figures.py` currently refits Bayesian models for some figures,
-which breaks immutable figure lineage; T-126 converts it to a pure renderer of
-frozen artefacts.
-
-## Model layer
-
-Cox PH wraps lifelines and the random survival forest wraps scikit-survival,
-so the baselines match published implementations. The Bayesian Cox model is
-implemented directly in PyMC as a piecewise-exponential baseline hazard
-expressed as Poisson regression over subject-interval exposures, and is the
-project's own contribution.
+No pilot or rehearsal metric may enter confirmatory results, the abstract or
+conclusions. A current pipeline or passing test establishes implementation
+readiness, not a scientific result.

@@ -1,0 +1,288 @@
+schema_version: "1.0.0"
+manifest_date: "2026-08-15"
+hash_algorithm: "SHA-256"
+rebuild_command: "python scripts/download_datasets.py"
+feature_config: "config/datasets.yaml"
+release_policy:
+  software_license: "MIT (project code only)"
+  patient_level_data: >-
+    The public release defaults to source metadata, hashes, citations and
+    retrieval scripts. Upstream data terms remain controlling; the project
+    MIT licence does not relicense source or derived patient-level data.
+  synthetic_fallback: false
+scope_decision:
+  fourth_core_dataset_required: false
+  rationale: >-
+    The repaired three-cohort core has 3,166 records and 1,658 events; within
+    a six-month master's thesis, confirmatory inference, calibration,
+    robustness and writing take priority over another heterogeneous refit.
+  optional_transport_status: "permanently dropped before protocol freeze"
+  optional_simulation_status: "permanently dropped before protocol freeze"
+  scope_boundary: >-
+    No fourth cohort, Rotterdam transport analysis or simulation is part of
+    the frozen six-month study. These are future extensions, not missing core
+    evidence.
+
+datasets:
+  gbsg2:
+    role: "confirmatory core cohort"
+    source:
+      provider: "scikit-survival"
+      repository: "https://github.com/sebp/scikit-survival"
+      release: "v0.24.1"
+      commit: "3e887ed7307a60c08f3fafec8b00d57f7a2d4982"
+      retrieval_date: "2026-08-15"
+      files:
+        - name: "GBSG2.arff"
+          url: "https://raw.githubusercontent.com/sebp/scikit-survival/3e887ed7307a60c08f3fafec8b00d57f7a2d4982/sksurv/datasets/data/GBSG2.arff"
+          sha256: "8c1ba1df4d80216b58695d6bbc9f51284664ab37124e101d56df089851645b04"
+      data_notice:
+        url: "https://raw.githubusercontent.com/sebp/scikit-survival/3e887ed7307a60c08f3fafec8b00d57f7a2d4982/sksurv/datasets/data/README.md"
+        sha256: "cd0075dd3740642002c5086091fd7998cfff2d9af61286f8353b3771c6107e33"
+        statement: "The pinned README describes the bundled datasets as freely available."
+      license:
+        identifier: "GPL-3.0-or-later"
+        scope: "scikit-survival repository distribution"
+        url: "https://raw.githubusercontent.com/sebp/scikit-survival/3e887ed7307a60c08f3fafec8b00d57f7a2d4982/COPYING"
+        sha256: "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+        metadata_url: "https://raw.githubusercontent.com/sebp/scikit-survival/3e887ed7307a60c08f3fafec8b00d57f7a2d4982/pyproject.toml"
+        metadata_sha256: "466b0061a00e2cb2718f841906e50b3078be36779b954c56d1503a21db7d6bc7"
+        limitation: >-
+          No separate dataset-specific licence file was identified in the
+          pinned data directory, so this manifest does not infer additional
+          original-data redistribution rights.
+      citations:
+        - type: "primary trial report"
+          doi: "10.1200/JCO.1994.12.10.2086"
+          url: "https://doi.org/10.1200/JCO.1994.12.10.2086"
+        - type: "software data interface"
+          url: "https://scikit-survival.readthedocs.io/en/v0.24.1/api/generated/sksurv.datasets.load_gbsg2.html"
+    derivation:
+      script: "scripts/download_datasets.py"
+      raw_file: "data/raw/gbsg2.csv"
+      sha256: "2158b777d27ecfb69b187d3cbcad13fd1eb92d626935c528a4465fea6490ae5f"
+      transformation: "Parse the pinned ARFF, preserve source values, cast cens to integer."
+    cohort:
+      source_records: 686
+      eligibility_rule: "All supplied records; require positive time and a binary event indicator."
+      analysis_records: 686
+      events: 299
+      exclusions: 0
+      id_column: null
+      id_note: "The distributed ARFF supplies no patient identifier."
+      endpoint:
+        name: "recurrence-free survival event"
+        time_column: "time"
+        event_column: "cens"
+        event_value: 1
+        censored_value: 0
+        time_unit: "days"
+        time_origin: >-
+          Trial-defined recurrence-free-survival origin; the exact clinical
+          anchor is not stated in the pinned ARFF/README and must not be
+          specified more narrowly without the primary report.
+    prediction_time: "trial prognostic baseline"
+    primary_feature_set: "primary_baseline"
+    missingness:
+      denominator: 686
+      all_columns_missing_count: 0
+
+  whas500:
+    role: "confirmatory core cohort"
+    source:
+      provider: "scikit-survival"
+      repository: "https://github.com/sebp/scikit-survival"
+      release: "v0.24.1"
+      commit: "3e887ed7307a60c08f3fafec8b00d57f7a2d4982"
+      retrieval_date: "2026-08-15"
+      files:
+        - name: "whas500.arff"
+          url: "https://raw.githubusercontent.com/sebp/scikit-survival/3e887ed7307a60c08f3fafec8b00d57f7a2d4982/sksurv/datasets/data/whas500.arff"
+          sha256: "f64040c91398875137822eca306a927208df6896808cd9764af7065722fa53d6"
+      data_notice:
+        url: "https://raw.githubusercontent.com/sebp/scikit-survival/3e887ed7307a60c08f3fafec8b00d57f7a2d4982/sksurv/datasets/data/README.md"
+        sha256: "cd0075dd3740642002c5086091fd7998cfff2d9af61286f8353b3771c6107e33"
+        statement: "The pinned README describes the bundled datasets as freely available."
+      license:
+        identifier: "GPL-3.0-or-later"
+        scope: "scikit-survival repository distribution"
+        url: "https://raw.githubusercontent.com/sebp/scikit-survival/3e887ed7307a60c08f3fafec8b00d57f7a2d4982/COPYING"
+        sha256: "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+        metadata_url: "https://raw.githubusercontent.com/sebp/scikit-survival/3e887ed7307a60c08f3fafec8b00d57f7a2d4982/pyproject.toml"
+        metadata_sha256: "466b0061a00e2cb2718f841906e50b3078be36779b954c56d1503a21db7d6bc7"
+        limitation: >-
+          No separate dataset-specific licence file was identified in the
+          pinned data directory, so this manifest does not infer additional
+          original-data redistribution rights.
+      citations:
+        - type: "source book"
+          doi: "10.1002/9780470258019"
+          url: "https://doi.org/10.1002/9780470258019"
+        - type: "software data interface"
+          url: "https://scikit-survival.readthedocs.io/en/v0.24.1/api/generated/sksurv.datasets.load_whas500.html"
+    derivation:
+      script: "scripts/download_datasets.py"
+      raw_file: "data/raw/whas500.csv"
+      sha256: "4bb01775c04eca11d7f06d6e5dfebd0a5cce75aa7e73fe4261732385be106fcc"
+      transformation: "Parse the pinned ARFF, preserve source values, cast fstat to integer."
+    cohort:
+      source_records: 500
+      eligibility_rule: "All supplied records; require positive follow-up and a binary death indicator."
+      analysis_records: 500
+      events: 215
+      exclusions: 0
+      id_column: null
+      id_note: "The distributed ARFF supplies no patient identifier."
+      endpoint:
+        name: "all-cause mortality"
+        time_column: "lenfol"
+        event_column: "fstat"
+        event_value: 1
+        censored_value: 0
+        time_unit: "days"
+        time_origin: "acute-myocardial-infarction admission"
+    prediction_time: "hospital admission"
+    primary_feature_set: "primary_admission"
+    predictor_timing_limitations:
+      excluded_as_post_baseline: ["los"]
+      excluded_until_onset_is_verified: ["afb", "sho", "chf", "av3"]
+      sensitivity_set: "published_full"
+    missingness:
+      denominator: 500
+      all_columns_missing_count: 0
+
+  metabric:
+    role: "confirmatory core cohort"
+    source:
+      provider: "cBioPortal DataHub"
+      study_id: "brca_metabric"
+      repository: "https://github.com/cBioPortal/datahub"
+      commit: "165bd77077b03038f9c2ee104959eb474770b2a9"
+      retrieval_date: "2026-08-15"
+      files:
+        - name: "data_clinical_patient.txt"
+          url: "https://media.githubusercontent.com/media/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/data_clinical_patient.txt"
+          sha256: "2a6bbadc6e4b2b07c0505559d438da959fc5c9aba55c7194abc394e2d6454995"
+        - name: "data_clinical_sample.txt"
+          url: "https://media.githubusercontent.com/media/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/data_clinical_sample.txt"
+          sha256: "9a2291e065e2a0a5337b4eaeb09836e70b1bc3e1ed17714a013b53515697e6dc"
+      study_metadata:
+        url: "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_study.txt"
+        sha256: "e3520792252f2910c10cb9361f48a66beeaded678616173db9f455d9af1aa06b"
+      license:
+        identifier: "ODbL-1.0"
+        url: "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/LICENSE"
+        sha256: "aa607179437132751f7c8fcd9f2b4ed97677ded9812ad97b99abd380ae77aec2"
+        obligations: "Attribution, keep adapted databases open, and ODbL share-alike."
+      citations:
+        - type: "METABRIC discovery study"
+          doi: "10.1038/nature10983"
+          url: "https://doi.org/10.1038/nature10983"
+        - type: "METABRIC sequencing study"
+          doi: "10.1038/ncomms11479"
+          url: "https://doi.org/10.1038/ncomms11479"
+        - type: "cBioPortal study"
+          url: "https://www.cbioportal.org/study/summary?id=brca_metabric"
+    independent_local_crosscheck:
+      file: "../proposal/Proposal/1Breast Cancer METABRIC.csv"
+      sha256: "d6f1b79d73958f2692e7df734f9e6fde955ced8e8e76c3e5d96ed6a4041ea4a0"
+      result: >-
+        All 2,509 patient identifiers, OS statuses, missingness patterns and
+        mapped clinical values matched the pinned DataHub files; OS months
+        differed only by decimal rounding below 3.4e-8 months.
+      required_for_rebuild: false
+    derivation:
+      script: "scripts/download_datasets.py"
+      raw_file: "data/raw/metabric.csv"
+      sha256: "731ea80ce0240cb6aa96ffb0f4a3bb379615202966c954512664bef02b29545c"
+      transformation: >-
+        One-to-one merge patient/sample tables by PATIENT_ID; map
+        0:LIVING to event=0 and 1:DECEASED to event=1; require both OS fields
+        and duration > 0; rename mapped clinical columns without changing values.
+    cohort:
+      source_patient_records: 2509
+      source_sample_records: 2509
+      complete_os_records: 1981
+      eligibility_rule: "Complete OS_MONTHS and OS_STATUS, with OS_MONTHS > 0."
+      exclusions_missing_os: 528
+      exclusions_non_positive_time: 1
+      analysis_records: 1980
+      events: 1144
+      id_column: "patient_id"
+      unique_ids: 1980
+      endpoint:
+        name: "overall survival"
+        time_column: "duration"
+        event_column: "event"
+        event_value: 1
+        censored_value: 0
+        time_unit: "months"
+        time_origin: "initial diagnosis"
+        source_evidence: >-
+          The pinned patient-file metadata defines OS_MONTHS as overall
+          survival in months since initial diagnosis.
+    prediction_time: "diagnosis/pathology before surgery or adjuvant treatment"
+    primary_feature_set: "primary_diagnosis_npi"
+    primary_representation: >-
+      NPI is used without its tumour-size, node-count and grade components;
+      stage, surgery and treatment fields are excluded from the primary set.
+    missingness:
+      denominator: 1980
+      columns:
+        patient_id: {count: 0, proportion: 0.0}
+        age_at_diagnosis: {count: 0, proportion: 0.0}
+        type_of_breast_surgery: {count: 25, proportion: 0.0126262626}
+        cellularity: {count: 64, proportion: 0.0323232323}
+        chemotherapy: {count: 1, proportion: 0.0005050505}
+        hormone_therapy: {count: 1, proportion: 0.0005050505}
+        radio_therapy: {count: 1, proportion: 0.0005050505}
+        tumor_size: {count: 25, proportion: 0.0126262626}
+        tumor_stage: {count: 514, proportion: 0.2595959596}
+        lymph_nodes_examined_positive: {count: 76, proportion: 0.0383838384}
+        neoplasm_histologic_grade: {count: 87, proportion: 0.0439393939}
+        nottingham_prognostic_index: {count: 1, proportion: 0.0005050505}
+        er_status: {count: 0, proportion: 0.0}
+        pr_status: {count: 1, proportion: 0.0005050505}
+        her2_status: {count: 1, proportion: 0.0005050505}
+        inferred_menopausal_state: {count: 1, proportion: 0.0005050505}
+        pam50_+_claudin-low_subtype: {count: 1, proportion: 0.0005050505}
+        duration: {count: 0, proportion: 0.0}
+        event: {count: 0, proportion: 0.0}
+
+exploratory_sources:
+  metabric_kaggle_v1:
+    role: "pilot reproduction only; prohibited as confirmatory input"
+    provider: "Kaggle"
+    dataset: "raghadalharbi/breast-cancer-gene-expression-profiles-metabric"
+    version: 1
+    published: "2020-05-26"
+    metadata_url: "https://www.kaggle.com/api/v1/datasets/view/raghadalharbi/breast-cancer-gene-expression-profiles-metabric"
+    download_url: "https://www.kaggle.com/api/v1/datasets/download/raghadalharbi/breast-cancer-gene-expression-profiles-metabric?datasetVersionNumber=1"
+    licence_label: "Database: Open Database, Contents: Database Contents"
+    source_file: "data/external/METABRIC_RNA_Mutation.csv"
+    source_shape: {rows: 1904, columns: 693}
+    source_sha256: "d4802594827667a71a75b5ae5c3cad1eb4346222052fcc792361c64abc7e43bc"
+    historical_derived_raw_sha256: "c1be84993d376d49502005cf6f817149cae263a2d77bf2d0a84b39db44b02790"
+    historical_derived_feature_columns:
+      - "age_at_diagnosis"
+      - "type_of_breast_surgery"
+      - "cellularity"
+      - "chemotherapy"
+      - "hormone_therapy"
+      - "radio_therapy"
+      - "tumor_size"
+      - "tumor_stage"
+      - "lymph_nodes_examined_positive"
+      - "neoplasm_histologic_grade"
+      - "nottingham_prognostic_index"
+      - "er_status"
+      - "pr_status"
+      - "her2_status"
+      - "inferred_menopausal_state"
+      - "pam50_+_claudin-low_subtype"
+    historical_eligibility:
+      rule: "Complete outcome and positive overall_survival_months."
+      analysis_records: 1903
+      events: 1103
+      exclusions_non_positive_time: 1
+    event_coding: "event = 1 - overall_survival, where overall_survival=1 denotes living"

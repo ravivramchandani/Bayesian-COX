@@ -14,6 +14,7 @@ import pytest
 from src.evaluation.metrics import concordance_index
 from src.models.bayesian.model import SUPPORTED_PRIORS, BayesianCoxModel
 from src.models.cox import CoxPHModel
+from src.models.deepsurv import DeepSurvModel
 from src.models.random_survival_forest import RandomSurvivalForestModel
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -74,7 +75,7 @@ def test_cox_hazard_ratios_have_expected_direction():
     model = CoxPHModel().fit(train[features], train["time"], train["event"])
 
     summary = model.summary().set_index("feature")
-    assert summary.loc["log_pnodes", "coef"] > 0
+    assert summary.loc["pnodes", "coef"] > 0
 
 
 def test_cox_proportional_hazards_test_runs():
@@ -99,6 +100,45 @@ def test_rsf_permutation_importance_ranks_known_predictor():
     assert {"log_pnodes", "pnodes"} & top
 
 
+def test_deepsurv_reference_fit_is_deterministic_and_predictive():
+    rng = np.random.default_rng(17)
+    x = rng.normal(size=(100, 3))
+    linear_predictor = 1.5 * x[:, 0] - 0.8 * x[:, 1]
+    event_time = rng.exponential(scale=np.exp(-linear_predictor)) + 0.01
+    censor_time = rng.exponential(scale=2.0, size=len(x)) + 0.01
+    time = np.minimum(event_time, censor_time)
+    event = (event_time <= censor_time).astype(int)
+    frame = pd.DataFrame(x, columns=["x1", "x2", "x3"])
+
+    kwargs = {
+        "hidden_dims": [8],
+        "dropout": 0.0,
+        "batch_norm": False,
+        "epochs": 40,
+        "patience": 8,
+        "random_state": 23,
+    }
+    model = DeepSurvModel(**kwargs).fit(frame, time, event)
+    risk = model.predict_risk(frame)
+    c_index, _ = concordance_index(time, event, risk)
+    assert c_index > 0.65
+
+    horizons = np.quantile(time, [0.25, 0.5, 0.75])
+    survival = model.predict_survival(frame.iloc[:10], horizons)
+    assert survival.shape == (10, 3)
+    assert np.all((survival >= 0.0) & (survival <= 1.0))
+    assert np.all(np.diff(survival, axis=1) <= 1e-9)
+    assert model.model.__class__.__module__.startswith("pycox.models")
+
+    repeated = DeepSurvModel(**kwargs).fit(frame, time, event)
+    np.testing.assert_allclose(
+        risk,
+        repeated.predict_risk(frame),
+        rtol=1e-5,
+        atol=1e-5,
+    )
+
+
 @pytest.mark.parametrize("prior", SUPPORTED_PRIORS)
 def test_bayesian_cox_priors_fit_and_report_diagnostics(prior):
     train, test, features = load("gbsg2")
@@ -121,6 +161,18 @@ def test_bayesian_cox_priors_fit_and_report_diagnostics(prior):
     assert 0.9 < diagnostics["r_hat_max"] < 2.0
     assert diagnostics["ess_bulk_min"] > 0
     assert isinstance(diagnostics["converged"], bool)
+    assert "log_lambda" in diagnostics["variables_checked"]
+    assert diagnostics["n_parameters_checked"] > len(features)
+    assert np.isfinite(diagnostics["bfmi_min"])
+    assert model.prior_predictive_summary["finite"]
+    assert model.prior_predictive_summary["n_covariate_rows"] == min(512, len(train))
+    assert len(model.prior_predictive_summary["covariate_population_survival"]) == 4
+    assert len(model.posterior_predictive_summary["survival_check"]) == 3
+    replication = model.posterior_predictive_summary["replicated_event_counts"]
+    assert replication["n_posterior_draws"] == 200
+    assert replication["total"]["observed"] == train["event"].sum()
+    assert np.isfinite(replication["total"]["replicated_mean"])
+    assert len(replication["by_baseline_interval"]) == model.n_intervals
 
 
 def test_bayesian_cox_rejects_unknown_prior():
@@ -128,6 +180,27 @@ def test_bayesian_cox_rejects_unknown_prior():
     model = BayesianCoxModel(coefficient_prior="laplace", draws=10, tune=10, chains=1)
     with pytest.raises(ValueError, match="Unknown coefficient prior"):
         model.fit(train[features], train["time"], train["event"])
+
+
+def test_bayesian_noncentered_baseline_remedy_preserves_predictions():
+    train, test, features = load("gbsg2")
+    model = BayesianCoxModel(
+        coefficient_prior="normal",
+        noncentered_baseline=True,
+        draws=100,
+        tune=100,
+        chains=2,
+        random_state=91,
+    ).fit(train[features], train["time"], train["event"])
+
+    assert "log_lambda_offset" in model.idata.posterior
+    assert "log_lambda" in model.idata.posterior
+    survival = model.predict_survival(
+        test[features].iloc[:5], np.quantile(train["time"], [0.25, 0.5, 0.75])
+    )
+    assert survival.shape == (5, 3)
+    assert np.isfinite(survival).all()
+    assert np.all(np.diff(survival, axis=1) <= 1e-9)
 
 
 def test_sparsity_priors_expose_an_inclusion_signal():
@@ -145,3 +218,19 @@ def test_sparsity_priors_expose_an_inclusion_signal():
         coefficient_prior="normal", draws=200, tune=200, chains=2
     ).fit(train[features], train["time"], train["event"])
     assert normal.inclusion_signal() is None
+
+    contribution = normal.posterior_expected_absolute_contribution(train[features])
+    assert list(contribution.columns) == ["feature", "expected_abs_contribution"]
+    assert len(contribution) == len(features)
+
+    selected = train[features].iloc[:4]
+    feature_groups = {feature: "first_two" if index < 2 else feature for index, feature in enumerate(features)}
+    grouped = normal.posterior_expected_absolute_group_contribution(
+        selected, feature_groups
+    )
+    first_two = [0, 1]
+    expected = np.abs(
+        normal.beta_samples[:, first_two]
+        @ selected.iloc[:, first_two].to_numpy(dtype=float).T
+    ).mean(axis=0)
+    np.testing.assert_allclose(grouped["first_two"], expected)

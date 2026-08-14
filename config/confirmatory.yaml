@@ -1,0 +1,132 @@
+# Approved confirmatory design. This file becomes immutable at the protocol
+# freeze only after the result-blind rehearsal and clean-environment gates pass.
+
+schema_version: "1.0.0"
+analysis_id: "confirmatory_v1"
+design_status: "frozen_after_rehearsal"
+
+datasets: ["gbsg2", "whas500", "metabric"]
+feature_set: "primary"
+
+validation:
+  outer_splits: 5
+  outer_repeats: 5
+  permitted_reduction_repeats: 3
+  maximum_projected_hours: 72
+  inner_splits: 3
+  followup_time_bins: 4
+  base_seed: 260817
+
+evaluation:
+  horizon_event_quantiles: [0.25, 0.50, 0.75]
+  minimum_censoring_survival: 0.10
+  ibs_grid_points: 25
+  calibration_bins: 5
+  calibration_bootstraps: 500
+  confidence_level: 0.95
+
+models:
+  cox_ph:
+    l2_reg: 0.0001
+
+  random_survival_forest:
+    fixed:
+      n_estimators: 300
+      min_samples_split: 10
+      max_depth: null
+      n_jobs: 1
+    inner_grid:
+      - {min_samples_leaf: 5, max_features: "sqrt"}
+      - {min_samples_leaf: 15, max_features: "sqrt"}
+      - {min_samples_leaf: 5, max_features: 1.0}
+      - {min_samples_leaf: 15, max_features: 1.0}
+
+  deepsurv:
+    fixed:
+      activation: "relu"
+      batch_norm: true
+      learning_rate: 0.001
+      batch_size: 64
+      epochs: 100
+      patience: 15
+      min_delta: 0.0001
+      validation_fraction: 0.20
+    inner_grid:
+      - {hidden_dims: [32], dropout: 0.0, l2_reg: 0.0001}
+      - {hidden_dims: [32], dropout: 0.2, l2_reg: 0.001}
+      - {hidden_dims: [32, 16], dropout: 0.0, l2_reg: 0.0001}
+      - {hidden_dims: [32, 16], dropout: 0.2, l2_reg: 0.001}
+
+  bayesian_cox:
+    n_intervals: 6
+    draws: 2000
+    tune: 2000
+    chains: 4
+    cores: 1
+    priors:
+      normal:
+        prior_params: {mu: 0.0, sigma: 1.0}
+        target_accept: 0.95
+      horseshoe:
+        prior_params: {tau0: 0.1, slab_df: 4.0, slab_scale: 2.0}
+        target_accept: 0.99
+      spike_slab:
+        prior_params: {spike_sd: 0.05, slab_sd: 2.0, alpha: 1.0, beta_conc: 1.0}
+        target_accept: 0.95
+    failed_fit_rule:
+      maximum_refits: 2
+      refit_target_accept: 0.99
+      refit_tune_multiplier: 2
+      second_refit: "noncentered_baseline_hazards"
+
+robustness:
+  outer_fold_numbers_per_repeat: [1, 2]
+  minimum_training_events: 20
+  training_fractions: [0.25, 0.50, 0.75, 1.00]
+  cross_fraction_by_censoring: false
+  administrative_censoring:
+    - {name: "observed_followup", training_followup_quantile: null}
+    - {name: "truncate_at_training_q75", training_followup_quantile: 0.75}
+    - {name: "truncate_at_training_q50", training_followup_quantile: 0.50}
+  baseline_intervals: [4, 6, 10]
+  missing_data_sensitivity:
+    dataset: "metabric"
+    feature_set: "npi_plus_stage"
+    imputations: 5
+    method: "fold_local_iterative_posterior_numeric"
+    numeric_imputation_features:
+      - "age_at_diagnosis"
+      - "nottingham_prognostic_index"
+      - "tumor_stage"
+    prediction_combination: "arithmetic_mean_across_imputations"
+    posterior_uncertainty_integration_claim: false
+  proportional_hazards_response:
+    test: "lifelines_schoenfeld_rank"
+    multiplicity: "holm_within_cohort_fold"
+    alpha: 0.05
+    response: "report_as_design_limitation_without_model_adaptation"
+  prior_sensitivity_scenarios:
+    tighter:
+      normal: {mu: 0.0, sigma: 0.5}
+      horseshoe: {tau0: 0.05, slab_df: 4.0, slab_scale: 1.0}
+      spike_slab: {spike_sd: 0.025, slab_sd: 1.0, alpha: 1.0, beta_conc: 1.0}
+    primary:
+      normal: {mu: 0.0, sigma: 1.0}
+      horseshoe: {tau0: 0.1, slab_df: 4.0, slab_scale: 2.0}
+      spike_slab: {spike_sd: 0.05, slab_sd: 2.0, alpha: 1.0, beta_conc: 1.0}
+    wider:
+      normal: {mu: 0.0, sigma: 2.0}
+      horseshoe: {tau0: 0.2, slab_df: 4.0, slab_scale: 4.0}
+      spike_slab: {spike_sd: 0.1, slab_sd: 4.0, alpha: 1.0, beta_conc: 1.0}
+
+inference:
+  primary_metric: "ibs"
+  key_secondary_metrics: ["uno_c_index", "harrell_c_index", "mean_auc"]
+  primary_models:
+    - "Bayesian Cox (normal)"
+    - "Bayesian Cox (horseshoe)"
+    - "Bayesian Cox (spike_slab)"
+  multiplicity: "holm_nine_within_family"
+  repeated_cv_interval: "nadeau_bengio"
+  sensitivity_interval: "paired_event_stratified_bootstrap"
+  paired_oof_bootstraps: 1000

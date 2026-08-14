@@ -1,0 +1,209 @@
+{
+  "analysis_id": "confirmatory_v1",
+  "freeze_content_sha256": "3b5e1042d592ebb6fade0a4a76c1f0d31ce9c0c1cfc08357be46f163f037d2ca",
+  "frozen_at_utc": "2026-08-14T15:54:23.525089+00:00",
+  "frozen_input_sha256": {
+    "Makefile": "592cf82be4d3393dc8557bd765bb9f348980bb7be5bb49968cb3179bd614dab4",
+    "conda-lock-virtual-packages.yml": "a1b67214cd8c17a14d057dc4e3b9f38b2c2c3b8997b84a968352f67a9d835851",
+    "conda-lock.yml": "1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57",
+    "conda-lock.yml.sha256": "340dda76f5a122f75e83575a208ff3c340bf798123bf476cc25c6d6ed629cad4",
+    "config/confirmatory.yaml": "cb17c55bc3a0a06c147ec8831cb2ff4c12401bc1bbb06ed0a080acf39ce4fc4b",
+    "config/datasets.yaml": "4839aa8f234fbf754105daf2305843ad5f9e7de52d42300f3bf20684e4fa5d3a",
+    "coordination/DECISIONS.md": "4efc9cfe5402f4ea2ebcc8ec133617a8136d73608ec24966cba44810211b3e3e",
+    "data/manifest.yaml": "89e3f33b7d264105f31cc125971fbd30ff1cd6a29c3d22dea7112119036cffef",
+    "data/raw/gbsg2.csv": "2158b777d27ecfb69b187d3cbcad13fd1eb92d626935c528a4465fea6490ae5f",
+    "data/raw/metabric.csv": "731ea80ce0240cb6aa96ffb0f4a3bb379615202966c954512664bef02b29545c",
+    "data/raw/whas500.csv": "4bb01775c04eca11d7f06d6e5dfebd0a5cce75aa7e73fe4261732385be106fcc",
+    "docs/claim_evidence_register.md": "e2663e9ef6b2e24a78690a3ecb841cae6901c551082b15e83d43a0ae9e0937f2",
+    "docs/study_protocol.md": "0384ac2f04a948df62fd0771677e5464915e6872402a449e532f2748256c9c59",
+    "environment.yml": "a309fd93efff98ee0cbe8103db3066397b12d0860f0dad0f10e96768e6d37f97",
+    "pyproject.toml": "06f47f6ae69e4bcab222d8823eca63aa666b383e2499b281d59512ed7414794f",
+    "scripts/freeze_protocol.py": "4bc5e2924881ba139c432dc9458011fb5d918cedabc206bc29581e3f724061d8",
+    "scripts/render_confirmatory.py": "011b759754308dc14db3241c3bf8596fa71d1d4add18df648bc75c66f037fa93",
+    "scripts/run_confirmatory.py": "5f82a09cebc603c0ba80057c637177a704d9ba0806a8edb397e2bd752eeaa052",
+    "scripts/run_confirmatory_explainability.py": "c87fd12bb62ec71d9a1de06bb90efd98f93a085f2c95157587519c79c41afdd1",
+    "scripts/run_robustness.py": "9a65191aa2316c18ac8e15fa87918c92e9fe636985125d71d56d9e02261b2316",
+    "scripts/verify_environment.py": "b3c287f4d1498e486486c77753c69938361dc761b974f3fe64dcdf73a332870d",
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data/eda.py": "79ecd49dd9eca0d5d3ed7b004caba0cfd0f9bc3086c0dbdd491dcee26e48ad37",
+    "src/data/feature_engineering.py": "6f7321c1522e798caf21051879274fca450d397a76350015440335b0282defc1",
+    "src/data/fold_preprocessing.py": "499006f731c5f26ed13ba69385dae29b21b510e3c64a550015487283a587f7fa",
+    "src/data/loader.py": "469070aa23df096481b3fa2236ad4e10bd9832d6a9681f9b8eb35e55d84768cf",
+    "src/data/preprocessing.py": "ee9bedd974156e8973de94b79c89a7b7596023bf5efd0187ba690c2262b5e325",
+    "src/data/split.py": "483e016d2ef1acb7cf8d8f82ad3dae977671e3d663abb49ec0146b71760f7466",
+    "src/data/survival_folds.py": "d97b1ae8a033b4cdfd07dac4a215b74dc1538f4f5368e9cf9d366ebf9753e60e",
+    "src/data/validators.py": "a38baeacc9ef8951ae9a07fc9395b0484f7323715e5d0dab1a5afb439f7e3ce4",
+    "src/datasets/__init__.py": "b05b34f34a702cacaf9b467fb886af1a4f2028730abeaf52ea952959b7dd0550",
+    "src/datasets/base.py": "c3949f07481e7654a8243e865820801de98e3d54bfb5d193bb9502230984596b",
+    "src/datasets/gbsg2.py": "e80e668aaffa387e00ea97d027b0e64c5b69db60e80c067fd23cf2ebd855fd3b",
+    "src/datasets/metabric.py": "4c066fa74d5c6999ce3e68851404bb7383c8967f10435a9d4d93261288ce28f9",
+    "src/datasets/whas500.py": "9272488c7ed1ac41ef1ba0e3b689cc9d1e09cd212eb52666f24d62256d5e928a",
+    "src/evaluation/__init__.py": "823d2702c05c8e82853f6b78708352aa87e788339047ec4ea64357b6f1ab89f2",
+    "src/evaluation/calibration.py": "8b040e3e4817cad2741e4c48b96c6f8c26c7bb70243cacadc25296bd7952224d",
+    "src/evaluation/cross_validation.py": "00c3ddb24c8c86d4b2f88d0a4e574157bb28c4050e48a550e6efe69acc1e79d7",
+    "src/evaluation/metrics.py": "6ce1b43997d8a7ff7a950428a67a6d688f73980df54142128bfd3b5d7c1918fa",
+    "src/evaluation/ranking.py": "140b1fddd78db044ccdd2fa2d21fbfd4953e6a2aad2664d051ae8c5a9dea788f",
+    "src/explainability/__init__.py": "8689e5e8f73a870b2c940ea17ca9ab50c60784711e0006aaab10840a2d3078c8",
+    "src/explainability/frozen_cells.py": "30a5cb65ffb8636f20555206b63084bf470da3fb8d10548a226d290d6507307f",
+    "src/explainability/posterior_analysis.py": "3421fbabffd95ea37a5c32a502c9423730367e58350762a48cd7bc0b1a1fbf4b",
+    "src/explainability/shap_analysis.py": "5ac1c90549c898fd362d6752533566510364b93a6389d84df25a13abfe50e431",
+    "src/losses/__init__.py": "16408efe8b52d92cff05a551803f7399596c0e82cfcd674643316f5a3d435699",
+    "src/losses/cox_loss.py": "317a6150f5ff94dc3b2aa24b5b3d10eb105546a88a69b6f951350aea7a6b60fe",
+    "src/losses/ranking_loss.py": "a1a81e0905eda722c5769d670d3a5764fb6a8746c0a9d33ab41ef2b254b4265b",
+    "src/models/__init__.py": "7983aabd5d70ad3074441fab9486a85fa05a6da3d93a34e80780b6585ea4ce59",
+    "src/models/base.py": "46a9e2aa4f38c152c62895294b0920fe142971e87739ce32d40e5135fdc058ce",
+    "src/models/bayesian/__init__.py": "bdd70f87cf868953ab2c9d8b601f478fce8410f6eb2191f51c2410826cc8ffc5",
+    "src/models/bayesian/diagnostics.py": "b215083522075468c65e0b9c3894c350cb68959b17b06849666d9690ed4b0355",
+    "src/models/bayesian/likelihood.py": "a32cde87203ec50e8cca2b15985b3cceec2e72c2dd1c6d218db48a57e025de98",
+    "src/models/bayesian/model.py": "4e30ff0e6476964cb14e973eddaffff82315b08f81cca9e72e374d5a6ea9133a",
+    "src/models/cox.py": "13579d3cf2619509c0a86052dd0bd6fef9c17e576df8f5aaf6aeba50937ca1c1",
+    "src/models/deepsurv.py": "3975d0c8bd3dd549935e43bdda050dc1ddd9da1f3fd4a7ff5c378e5248219ced",
+    "src/models/random_survival_forest.py": "3e90b726c5d27726c5207478d7a9ea3657386db742fff0a78397f61a4db9f62f",
+    "src/pipelines/__init__.py": "07a7bf79ed8d72d028b7d19a0a7567ca2dcca919dd5f494a943857945468ff93",
+    "src/pipelines/confirmatory.py": "a03998eb625965ba841784f133269d0f623d7ace812cd728f78471cf684c2571",
+    "src/pipelines/evaluation_pipeline.py": "55c925c7eebfa432be45cb2adccefe9a1a14b7037407a53239a359e0b502fa32",
+    "src/pipelines/inference_pipeline.py": "caa33053ebb45160bfb8f467feeb6e186dfb3b6d82b34e793095d513d6101a67",
+    "src/pipelines/preprocessing_pipeline.py": "d9aba0d9ef9da9cad5093ad811734c37bbba4d5a57d280bf3c788e828b96c4d5",
+    "src/pipelines/robustness.py": "0a6a03689a265f8a7b9baf3ff41149c3947a6d72b124a17a6ac47b65dd33710f",
+    "src/pipelines/training_pipeline.py": "90c32ce5891a62ec6ab0043003babe18f9b354a2326be17a9c33ac2c718e4a25",
+    "src/statistics/__init__.py": "d28e07284ce71d60a93a0c8edde107d5852c3c13b6b8744bdd117a1d00182b98",
+    "src/statistics/bootstrap.py": "97a25639bb50bc93e44257246520e43fd60591cde4ac2b9dceda2cfa65543ca2",
+    "src/statistics/confidence_intervals.py": "a98e6603709a84ecf0e6899b632a45dcb5f62d65d6090827ca87e5889d814d99",
+    "src/statistics/hypothesis_tests.py": "7d82ef5c98ae32c919984f070ad8941e94f689b8d2f1d5e56869a9529cb18fdd",
+    "src/statistics/permutation.py": "dd1d7b248731817bc2014590c36a3c5c810b43eb408dbebfec57ced3f9f49b48",
+    "src/statistics/repeated_cv.py": "2cc04e2af5f3685c07cee5e79ce83fe5fd7df2f772dba3d84f43562236ab8004",
+    "src/utils/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/utils/config.py": "c0788a281dd5a2949c29309a1a6b6c82e63347c35f263f0a2eb85797b946929a",
+    "src/utils/constants.py": "5855810041e6c55958c61c99458b648ecac010384e08b59c6511644dabeaf38b",
+    "src/utils/helpers.py": "0c334532c6251db4b8a2a8cb8cf4c928ba01bbba22d92dd2575e110091882233",
+    "src/utils/logger.py": "8e77716fc346fb1a02f7499eb863c07bf5ddfc6cd9f663dfdf863e315c75b01b",
+    "src/utils/reproducibility.py": "6cd0c57ffe823f85945bdf365b346b3183d38697fc25ee1781e06dc8e699f676",
+    "src/utils/seed.py": "004021afd40cd95d2797ab9c4a5b1de89bde6dfd0e7f330cdda149139c742c52",
+    "src/visualization/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/visualization/eda_plots.py": "c01329da250132dfa395fbcf56a407baa5262252e51c980ebb5f767f2d8b0ff6",
+    "src/visualization/figures.py": "1b5488a25cc6ccb4289a99c7af334f138b482954b64e121dd0a3e3a7fb816937"
+  },
+  "no_comparative_effects_inspected_before_freeze": true,
+  "outer_repeats": 5,
+  "result_blind_runtime_gate": {
+    "cell_timings": [
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_horseshoe",
+        "status": "complete",
+        "total_seconds": 7.620786084007705
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_normal",
+        "status": "complete",
+        "total_seconds": 4.150263999996241
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_spike_slab",
+        "status": "complete",
+        "total_seconds": 6.356288792012492
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "cox_ph",
+        "status": "complete",
+        "total_seconds": 0.28519558400148526
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "deepsurv",
+        "status": "complete",
+        "total_seconds": 3.3597432500100695
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "random_survival_forest",
+        "status": "complete",
+        "total_seconds": 8.199662165978225
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_horseshoe",
+        "status": "complete",
+        "total_seconds": 42.51372766698478
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_normal",
+        "status": "complete",
+        "total_seconds": 10.668515166005818
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_spike_slab",
+        "status": "complete",
+        "total_seconds": 33.506178916984936
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "cox_ph",
+        "status": "complete",
+        "total_seconds": 0.46759083299548365
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "deepsurv",
+        "status": "complete",
+        "total_seconds": 3.9351592500170227
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "random_survival_forest",
+        "status": "complete",
+        "total_seconds": 47.90528199999244
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_horseshoe",
+        "status": "complete",
+        "total_seconds": 10.29395508300513
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_normal",
+        "status": "complete",
+        "total_seconds": 2.0514224999933504
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_spike_slab",
+        "status": "complete",
+        "total_seconds": 6.798517000017455
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "cox_ph",
+        "status": "complete",
+        "total_seconds": 0.2553466249955818
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "deepsurv",
+        "status": "complete",
+        "total_seconds": 1.9407677080016583
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "random_survival_forest",
+        "status": "complete",
+        "total_seconds": 5.679618249996565
+      }
+    ],
+    "conservative_scale": 16.666666666666668,
+    "maximum_hours": 72.0,
+    "observed_rehearsal_seconds": 195.98802087499644,
+    "planned_five_repeat_projected_hours": 22.68379871238385,
+    "rehearsal_completion_sha256": "6c6bf4bbccc15652d681b538f374db6a2cef403c014e8756791568dd0fa6a69a",
+    "rehearsal_manifest_sha256": "b5bee6a32e17a30da5fc64ca26b7875c8995d5baeac215b267b7b8776cfe0d35",
+    "selected_projected_hours": 22.68379871238385
+  },
+  "schema_version": "1.0.0"
+}

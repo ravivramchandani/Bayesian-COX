@@ -3,17 +3,13 @@
   "random_state": 42,
   "target_time_col": "time",
   "target_event_col": "event",
-  "num_features": 12,
+  "num_features": 8,
   "feature_names": [
     "age",
-    "estrec",
+    "tsize",
     "pnodes",
     "progrec",
-    "tsize",
-    "log_pnodes",
-    "log_progrec",
-    "log_estrec",
-    "age_x_horTh",
+    "estrec",
     "tgrade",
     "horTh_yes",
     "menostat_Pre"
@@ -29,9 +25,9 @@
       "mean": 52.81419624217119,
       "std": 10.322261707010693
     },
-    "estrec": {
-      "mean": 103.17118997912317,
-      "std": 167.92119317714798
+    "tsize": {
+      "mean": 29.396659707724424,
+      "std": 13.547269997455537
     },
     "pnodes": {
       "mean": 5.075156576200418,
@@ -41,25 +37,9 @@
       "mean": 111.54488517745303,
       "std": 217.5306778007491
     },
-    "tsize": {
-      "mean": 29.396659707724424,
-      "std": 13.547269997455537
-    },
-    "log_pnodes": {
-      "mean": 1.5105316013011878,
-      "std": 0.7307403928727699
-    },
-    "log_progrec": {
-      "mean": 3.343355593861744,
-      "std": 1.9380841125586754
-    },
-    "log_estrec": {
-      "mean": 3.3891553097476663,
-      "std": 1.8558445365058278
-    },
-    "age_x_horTh": {
-      "mean": 20.613778705636744,
-      "std": 27.89240943896312
+    "estrec": {
+      "mean": 103.17118997912317,
+      "std": 167.92119317714798
     },
     "tgrade": {
       "mean": 1.129436325678497,

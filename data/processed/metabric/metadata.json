@@ -3,22 +3,12 @@
   "random_state": 42,
   "target_time_col": "time",
   "target_event_col": "event",
-  "num_features": 24,
+  "num_features": 14,
   "feature_names": [
     "age_at_diagnosis",
-    "tumor_size",
-    "tumor_stage",
-    "lymph_nodes_examined_positive",
-    "neoplasm_histologic_grade",
     "nottingham_prognostic_index",
-    "log_lymph_nodes",
-    "age_x_stage",
-    "type_of_breast_surgery_MASTECTOMY",
     "cellularity_Low",
     "cellularity_Moderate",
-    "chemotherapy_1",
-    "hormone_therapy_1",
-    "radio_therapy_1",
     "er_status_Positive",
     "pr_status_Positive",
     "her2_status_Positive",
@@ -30,62 +20,26 @@
     "pam50_+_claudin-low_subtype_Normal",
     "pam50_+_claudin-low_subtype_claudin-low"
   ],
-  "train_samples": 1332,
-  "val_samples": 285,
-  "test_samples": 286,
-  "train_censoring_rate": 42.04,
-  "val_censoring_rate": 42.11,
-  "test_censoring_rate": 41.96,
+  "train_samples": 1385,
+  "val_samples": 296,
+  "test_samples": 299,
+  "train_censoring_rate": 42.24,
+  "val_censoring_rate": 42.23,
+  "test_censoring_rate": 42.14,
   "scaling_params": {
     "age_at_diagnosis": {
-      "mean": 61.147710210210214,
-      "std": 13.023144793507173
-    },
-    "tumor_size": {
-      "mean": 26.11494744744745,
-      "std": 14.63611975815302
-    },
-    "tumor_stage": {
-      "mean": 1.8205705705705706,
-      "std": 0.5577918566514138
-    },
-    "lymph_nodes_examined_positive": {
-      "mean": 2.0232732732732734,
-      "std": 4.148834939023376
-    },
-    "neoplasm_histologic_grade": {
-      "mean": 2.439189189189189,
-      "std": 0.6463643479232198
+      "mean": 61.33057761732852,
+      "std": 12.878728354549567
     },
     "nottingham_prognostic_index": {
-      "mean": 4.042791456456457,
-      "std": 1.130091678767885
-    },
-    "log_lymph_nodes": {
-      "mean": 0.6528119616258298,
-      "std": 0.832158572058816
-    },
-    "age_x_stage": {
-      "mean": 106.33412912912912,
-      "std": 41.06798211122682
+      "mean": 4.0247194079422375,
+      "std": 1.1551513423584545
     }
   },
   "encoding_maps": {
-    "type_of_breast_surgery": [
-      "MASTECTOMY"
-    ],
     "cellularity": [
       "Low",
       "Moderate"
-    ],
-    "chemotherapy": [
-      "1"
-    ],
-    "hormone_therapy": [
-      "1"
-    ],
-    "radio_therapy": [
-      "1"
     ],
     "er_status": [
       "Positive"
@@ -114,12 +68,12 @@
     "errors": [],
     "warnings": [],
     "checks": {
-      "total_rows": 1903,
-      "total_cols": 18,
-      "valid_rows": 1903,
-      "event_count": 1103,
-      "censored_count": 800,
-      "censoring_rate": 42.04
+      "total_rows": 1980,
+      "total_cols": 10,
+      "valid_rows": 1980,
+      "event_count": 1144,
+      "censored_count": 836,
+      "censoring_rate": 42.22
     }
   }
 }

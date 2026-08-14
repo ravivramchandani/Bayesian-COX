@@ -1,7 +1,9 @@
 """
 Exploratory Data Analysis (EDA) Module for Bayesian Survival Models.
 Calculates dataset integrity, descriptive statistics, survival analysis (Kaplan-Meier with CIs),
-correlations, outlier detection, distribution classification, and clinical insights.
+correlations, outlier detection, and distribution classification. Automated
+clinical-effect narratives are deliberately disabled because descriptive EDA
+cannot establish adjusted prediction, significance, causality, or utility.
 """
 
 import csv
@@ -610,31 +612,20 @@ class EDAAnalyzer:
         return dist_info
 
     def clinical_insights(self):
-        """Step 3.12: Clinical Q&A for the dataset."""
-        insights = {}
-        if self.dataset_name == "GBSG2":
-            # Stratify by horTh
-            km_horTh = self.kaplan_meier_analysis("horTh")
-            self.kaplan_meier_analysis("menostat")
-            insights = {
-                "q1_age_survival": "Age has a slight protective effect in postmenopausal women with hormone therapy, but high recurrence risk is concentrated in younger patients with low progesterone receptors.",
-                "q2_hormone_therapy": f"Hormone therapy (Tamoxifen) significantly improves recurrence-free survival. Final survival probability for horTh=yes is higher ({km_horTh.get('yes', {}).get('final_survival_prob', 'N/A')}) than horTh=no ({km_horTh.get('no', {}).get('final_survival_prob', 'N/A')}).",
-                "q3_tumor_size": "Larger tumor size (>30mm) and positive lymph node counts (>3 nodes) correlate strongly with decreased recurrence-free survival time.",
-            }
-        elif self.dataset_name == "WHAS500":
-            self.kaplan_meier_analysis("gender")
-            self.kaplan_meier_analysis("chf")
-            insights = {
-                "q1_mortality_factors": "Congestive Heart Failure (chf=1) and Cardiogenic Shock (sho=1) are the strongest predictors of mortality post-MI. Patients with CHF have significantly lower survival probability.",
-                "q2_highest_risk_age": "Elderly patients (age > 75) exhibit dramatically higher mortality rates, lower baseline blood pressure, and higher prevalence of comorbidities (CVD/AFB).",
-            }
-        elif self.dataset_name == "METABRIC":
-            self.kaplan_meier_analysis("PAM50Subtype")
-            insights = {
-                "q1_gene_expression_features": "PAM50 Subtypes dictate distinct survival trajectories: Luminal A exhibits the best overall survival, while Basal-like and Her2-enriched subtypes display steep early mortality.",
-                "q2_dominant_clinical_variables": "Tumour stage, lymph node status, and PAM50 molecular subtyping dominate prognosis over individual clinical demographics alone.",
-            }
-        return insights
+        """Return the claim-control notice used by legacy exploratory reports.
+
+        Earlier versions emitted hard-coded clinical assertions that were not
+        calculated or statistically tested by this class. Retaining the public
+        method avoids breaking the pilot report API while preventing those
+        assertions from being regenerated or mistaken for study evidence.
+        """
+        return {
+            "claim_control": (
+                "Automated clinical-effect claims are disabled. Interpret only "
+                "the separately labelled descriptive summaries; confirmatory "
+                "claims require frozen out-of-sample artifacts and claim review."
+            )
+        }
 
     # Helper methods
     def _percentile(self, s_vals, p):

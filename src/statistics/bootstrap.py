@@ -5,12 +5,133 @@ Allows estimating uncertainty (SD, SE, 95% Confidence Intervals) for C-index, IB
 
 import logging
 from collections.abc import Callable
+from dataclasses import asdict, dataclass
 
 import numpy as np
 
 from src.evaluation.metrics import evaluate_survival_model
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True)
+class PairedBootstrapResult:
+    """Paired metric difference from an event-stratified subject bootstrap."""
+
+    observed_difference: float
+    bootstrap_mean_difference: float
+    bootstrap_standard_error: float
+    confidence_lower: float
+    confidence_upper: float
+    confidence_level: float
+    n_bootstraps: int
+    n_successful: int
+
+    def to_dict(self) -> dict[str, float | int]:
+        """Return a JSON-serialisable representation."""
+        return asdict(self)
+
+
+def _validate_paired_predictions(
+    predictions_a: np.ndarray, predictions_b: np.ndarray, n_samples: int
+) -> tuple[np.ndarray, np.ndarray]:
+    a = np.asarray(predictions_a, dtype=float)
+    b = np.asarray(predictions_b, dtype=float)
+    if a.shape != b.shape or a.ndim not in (1, 2) or a.shape[0] != n_samples:
+        raise ValueError(
+            "Predictions must have identical one- or two-dimensional shapes "
+            f"with first dimension {n_samples}."
+        )
+    if not np.isfinite(a).all() or not np.isfinite(b).all():
+        raise ValueError("Predictions must contain only finite values.")
+    return a, b
+
+
+def _event_stratified_sample(
+    event: np.ndarray, rng: np.random.Generator
+) -> np.ndarray:
+    sampled_groups = []
+    for value in (0, 1):
+        indices = np.flatnonzero(event == value)
+        if len(indices):
+            sampled_groups.append(rng.choice(indices, size=len(indices), replace=True))
+    sampled = np.concatenate(sampled_groups)
+    rng.shuffle(sampled)
+    return sampled
+
+
+def paired_event_stratified_bootstrap(
+    y_time: np.ndarray,
+    y_event: np.ndarray,
+    predictions_a: np.ndarray,
+    predictions_b: np.ndarray,
+    metric: Callable[[np.ndarray, np.ndarray, np.ndarray], float],
+    *,
+    n_bootstraps: int = 2000,
+    confidence_level: float = 0.95,
+    random_state: int = 42,
+) -> PairedBootstrapResult:
+    """Bootstrap a paired metric difference while preserving event counts.
+
+    Subjects are sampled with replacement separately within observed-event and
+    censored strata. Outcomes and both models' predictions use the same sampled
+    indices. ``metric`` receives ``(time, event, predictions)`` and may capture
+    a fixed training censoring distribution in a closure.
+    """
+    time = np.asarray(y_time, dtype=float)
+    event = np.asarray(y_event)
+    if time.ndim != 1 or event.ndim != 1 or len(time) == 0 or len(time) != len(event):
+        raise ValueError("y_time and y_event must be equal-length one-dimensional arrays.")
+    if not np.isfinite(time).all() or np.any(time < 0):
+        raise ValueError("y_time must contain finite non-negative values.")
+    if not np.isin(event, (0, 1, False, True)).all():
+        raise ValueError("y_event must contain only 0/1 values.")
+    event = event.astype(int)
+    if np.sum(event) < 2:
+        raise ValueError("At least two observed events are required for bootstrapping.")
+    if n_bootstraps < 20:
+        raise ValueError("n_bootstraps must be at least 20.")
+    if not 0 < confidence_level < 1:
+        raise ValueError("confidence_level must lie strictly between 0 and 1.")
+    a, b = _validate_paired_predictions(predictions_a, predictions_b, len(time))
+
+    observed = float(metric(time, event, a) - metric(time, event, b))
+    if not np.isfinite(observed):
+        raise ValueError("Observed paired metric difference is not finite.")
+
+    rng = np.random.default_rng(random_state)
+    differences: list[float] = []
+    for _ in range(n_bootstraps):
+        indices = _event_stratified_sample(event, rng)
+        try:
+            difference = float(
+                metric(time[indices], event[indices], a[indices])
+                - metric(time[indices], event[indices], b[indices])
+            )
+        except (RuntimeError, ValueError, ZeroDivisionError):
+            continue
+        if np.isfinite(difference):
+            differences.append(difference)
+
+    required = max(20, int(np.ceil(0.8 * n_bootstraps)))
+    if len(differences) < required:
+        raise RuntimeError(
+            f"Only {len(differences)} of {n_bootstraps} paired bootstrap "
+            f"replicates were estimable; at least {required} are required."
+        )
+    samples = np.asarray(differences, dtype=float)
+    alpha = 1 - confidence_level
+    lower, upper = np.quantile(samples, [alpha / 2, 1 - alpha / 2])
+    return PairedBootstrapResult(
+        observed_difference=observed,
+        bootstrap_mean_difference=float(np.mean(samples)),
+        bootstrap_standard_error=float(np.std(samples, ddof=1)),
+        confidence_lower=float(lower),
+        confidence_upper=float(upper),
+        confidence_level=float(confidence_level),
+        n_bootstraps=n_bootstraps,
+        n_successful=len(samples),
+    )
 
 
 class BootstrapResampler:

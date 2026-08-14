@@ -50,7 +50,7 @@ Format:
 
 ## ADR-003 — Runtime and environment
 
-- Status: ACCEPTED
+- Status: SUPERSEDED-BY-ADR-026
 - Date: 2026-08-14
 - Context: Reproducibility requires a fixed runtime. PyMC, scikit-survival and
   lifelines constrain the usable Python version.
@@ -69,9 +69,10 @@ Format:
   lung-cancer extract holds 80 rows.
 - Decision: Use METABRIC (primary), WHAS500, and GBSG2, following the
   agreed methodology. WHAS500 supplies the cardiology cohort the
-  heart-attack file was intended to cover; GBSG2 supplies a properly powered
-  second cohort. All three have published baselines that make replication
-  checkable.
+  heart-attack file was intended to cover; GBSG2 adds a second breast-cancer
+  cohort with 686 records and 299 events. All three have documented public
+  samples and published source descriptions, making provenance and benchmark
+  comparisons auditable without asserting a power calculation.
 - Consequences: Every cohort carries genuine time-to-event data with
   censoring. The proposal text differs; ADR-011 records how that is carried.
 
@@ -106,7 +107,7 @@ Format:
 
 ## ADR-007 — Bayesian inference: NUTS with reported diagnostics
 
-- Status: ACCEPTED
+- Status: SUPERSEDED-BY-ADR-027
 - Date: 2026-08-14
 - Context: The model defaulted to variational inference, and the convergence
   diagnostics were stubs returning fixed passing values regardless of the
@@ -155,7 +156,7 @@ Format:
 
 ## ADR-010 — Scope is healthcare survival analysis
 
-- Status: ACCEPTED
+- Status: SUPERSEDED-BY-ADR-028
 - Date: 2026-08-14
 - Context: A broader framing spanning other domains was considered. All
   implemented work, every cohort, and every evaluation choice is clinical.
@@ -181,7 +182,7 @@ Format:
 
 ## ADR-012 — Length of stay retained in the WHAS500 covariates
 
-- Status: ACCEPTED
+- Status: SUPERSEDED-BY-ADR-015
 - Date: 2026-08-14
 - Context: `los` is recorded at the index admission but resolves after
   follow-up begins, so it could carry outcome information. It is part of the
@@ -195,7 +196,7 @@ Format:
 
 ## ADR-013 — Explainability comparison
 
-- Status: ACCEPTED
+- Status: SUPERSEDED-BY-ADR-024
 - Date: 2026-08-14
 - Context: The explainability module was empty although a report describing
   its findings existed.
@@ -276,7 +277,8 @@ Format:
 - Context: Harrell's C-index is optimistic under heavy censoring, IBS is
   incorrectly labelled calibration, actual calibration is unwired, and a
   statistics stub returns a constant p-value. An unrestricted all-pairs test
-  family would be underpowered and difficult to interpret.
+  family would fragment the limited fold-level information into a large,
+  difficult-to-interpret multiplicity family.
 - Decision: IPCW IBS is the primary probabilistic-error estimand and Uno's
   IPCW C-index the primary discrimination estimand. Calibration requires
   curves plus calibration intercept/calibration-in-the-large and slope at
@@ -292,7 +294,7 @@ Format:
 
 ## ADR-018 — Explanation target is model-conditional stability
 
-- Status: ACCEPTED
+- Status: SUPERSEDED-BY-ADR-024
 - Date: 2026-08-14
 - Context: Current agreement compares posterior probability-of-direction
   rankings with SHAP from other model families on the first 40 test rows.
@@ -328,3 +330,196 @@ Format:
   ranking or acceptance. When a gate slips, optional transport, simulation and
   non-primary explanation work are dropped before any integrity, thesis or
   reproducibility requirement.
+
+## ADR-020 — Owner approvals are recorded without invented identifiers
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: The owner approved the ethics/data-use, licensing and supervisor-
+  decision tracks and directed that these matters not be raised again. No
+  institutional ethics reference number or approval-letter identifier was
+  supplied.
+- Decision: Treat Q-002, Q-003 and Q-004 as answered. State the approved
+  secondary, public/de-identified data-use position and conservative source-
+  licence handling, but never invent an ethics number, letter, reviewer or
+  signature. Exact source limitations remain reportable scientific facts.
+- Consequences: Administrative work does not block engineering or writing.
+  The thesis can accurately state owner-confirmed approval, but cannot cite a
+  nonexistent institutional reference.
+
+## ADR-021 — Parsimonious baseline feature sets are primary
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: Post-baseline predictors, NPI/component redundancy, raw/log copies
+  and interactions could inflate apparent prediction and confound prior and
+  feature-ranking comparisons.
+- Decision: Use eight documented raw GBSG2 variables; nine admission-available
+  WHAS500 variables excluding `los`, `afb`, `sho`, `chf` and `av3`; and a
+  METABRIC baseline-pathology set containing age, NPI and six categorical
+  pathology/receptor/subtype variables. No engineered feature is primary.
+  Published-full, engineered, NPI-component, stage and treatment-augmented
+  sets are named sensitivities. METABRIC confirmatory input is the pinned
+  1,980-person/1,144-death cBioPortal derivation, never the pilot subset.
+- Consequences: Primary prediction and explanation claims no longer depend on
+  readily avoidable timing leakage or duplicate representations. Published-
+  feature comparability moves to transparent sensitivity analyses.
+
+## ADR-022 — Exact lock and content-addressed protocol freeze
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: A dirty working tree can still be made exactly reproducible when
+  every executed input is content-addressed; requiring an unrequested git
+  commit would mix implementation delivery with repository-history policy.
+  The previous conda solve also paired h5py built for HDF5 2.1 with runtime
+  HDF5 2.2.
+- Decision: Pin every direct dependency, HDF5 2.1.0 and h5py 3.16.0; use the
+  hashed osx-arm64 conda lock and a fresh verified environment. After the
+  result-blind rehearsal, freeze hashes of every executed code, config,
+  protocol, lock, manifest and data input in `config/protocol_freeze.json`.
+  Confirmatory execution refuses any hash mismatch. Git commit/dirty state is
+  still recorded but is not a substitute for the content check.
+- Consequences: Confirmatory cells cannot silently combine different inputs,
+  even before the owner chooses how to commit the work. Re-freezing after
+  seeing comparative effects is prohibited.
+
+## ADR-023 — Prespecified Bayesian remedies and lean information analysis
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: Full robustness over every fold, fraction and censoring factorial
+  would exceed a master's-thesis compute budget, while vague remedies permit
+  result-dependent sampler changes.
+- Decision: A failed Bayesian cell receives at most two refits: target
+  acceptance 0.99 with doubled tuning, then the same settings plus an
+  equivalent non-centred baseline log-hazard parameterisation. RQ2 uses outer
+  folds 1 and 2 from each repeat, paired 25/50/75/100-percent training subsets,
+  and two training-derived administrative truncations at full size; sample-
+  size and censoring conditions are not crossed. Prior scales use frozen
+  half/default/double scenarios and baseline hazards use 4/6/10 intervals.
+- Consequences: Failure handling and sensitivity scope are executable before
+  results exist. The lean RQ2 estimates information-regime interaction with
+  explicit uncertainty but is not presented as a universal asymptotic law.
+
+## ADR-024 — Frozen-cell linear SHAP; forest SHAP dropped
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: The primary explanation target is a posterior-mean linear risk
+  function, for which interventional linear SHAP is exact. Confirmatory cells
+  retain Bayesian and Cox coefficients but deliberately do not pickle forest
+  objects; refitting in a reporting script would break immutable lineage.
+- Decision: Compare posterior expected absolute contribution with exact SHAP
+  on the same Bayesian model using three paired random seeds and nested
+  subject/background budgets. Retain exact Cox linear SHAP as a secondary
+  no-refit comparison. Formally drop confirmatory forest SHAP and make no
+  DeepSurv explanation claim. The earlier pilot forest Kernel-SHAP artefact
+  remains exploratory only.
+- Consequences: RQ3 measures model-conditional rank agreement and stability
+  with reproducible frozen state. It does not make a broader cross-model-
+  explanation claim that the stored evidence cannot support.
+
+## ADR-025 — Optional transport and simulation are permanently dropped
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: Rotterdam-to-GBSG2 transport and a lean ADEMP simulation were
+  publication-enhancing options, not requirements for the approved research
+  questions. The retained confirmatory analysis already includes three
+  cohorts, 450 primary model-fold cells at five repeats, and a prespecified
+  robustness plan of 825 checkpoint cells/885 Bayesian fits before any
+  diagnostic refits. Either optional branch would consume the contingency
+  needed for a six-month master's thesis without repairing a gap in a retained
+  claim.
+- Decision: Permanently exclude Rotterdam transport and the ADEMP simulation
+  from this study before protocol freeze. Do not acquire, harmonise or analyse
+  a fourth cohort and do not generate simulation results for the thesis or
+  paper. This supersedes only the optional-branch provisions of ADR-016 and
+  ADR-019; their three-cohort core and six-month controls remain binding.
+  Treat transport validation and coefficient-recovery simulation as future
+  work only; they cannot be reopened after comparative results are observed.
+- Consequences: The study remains a three-cohort internal, repeated-CV
+  methodological benchmark and makes no external-validation or coefficient-
+  recovery claim. Compute and writing capacity remain available for required
+  calibration, diagnostics, robustness, explanation, reproducibility and
+  thesis review.
+
+## ADR-026 — Exact locked runtime and result-reproduction boundary
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: ADR-003 named the mutable `bayes-cox` environment and claimed that
+  a clean clone reproduced results. The named environment is not equivalent to
+  the resolved lock because its PyTorch installation route differs, and no
+  frozen confirmatory result yet exists to reproduce.
+- Decision: Execute official verification and analysis with the environment
+  created from the hashed osx-arm64 lock, currently
+  `bayes-cox-lock-verify-20260815-b`, and verify all 259 locked records before
+  use. A clean checkout plus pinned inputs establishes a reproducible workflow;
+  a result-reproduction claim is permitted only after the frozen production
+  artefacts have been independently regenerated and checksum-verified. This
+  supersedes ADR-003 and complements the content-addressed freeze in ADR-022.
+- Consequences: The mutable environment name is never treated as evidence of
+  dependency identity. Current claims are limited to environment and workflow
+  verification, not reproduction of confirmatory results that do not yet
+  exist.
+
+## ADR-027 — Zero-divergence confirmatory interpretation gate
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: ADR-007 allowed divergent transitions below 0.5% while calling a
+  fit converged. That tolerance is inconsistent with the implemented
+  confirmatory quality gate and would permit an avoidable sampler warning to
+  enter interpreted evidence.
+- Decision: Retain NUTS as the confirmatory sampler and compute diagnostics
+  from every sampled variable with ArviZ. An interpreted Bayesian cell must
+  have zero divergent transitions, maximum rank-normalised R-hat below 1.01,
+  minimum bulk ESS above 400, BFMI at least 0.30 in every chain, and no maximum
+  tree-depth hit. Apply only the two prespecified remedies in ADR-023; preserve
+  a failed-cell record if the gate still fails. Historical pilot divergences
+  remain historical observations, not acceptable confirmatory fits. This
+  supersedes ADR-007.
+- Consequences: “Converged” has a stricter executable meaning. A cell may be
+  unavailable for interpretation even when its point prediction was produced,
+  and no post-result sampler tuning is allowed.
+
+## ADR-028 — No cross-domain generalisation claim
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: ADR-010 proposed one generalisation statement beyond healthcare
+  even though every cohort, endpoint and empirical evaluation is clinical.
+  Mathematical applicability alone is not evidence of predictive performance,
+  robustness or transportability in another domain.
+- Decision: Restrict all empirical and methodological claims to the evaluated
+  healthcare survival-analysis setting and the three named cohorts. Do not
+  claim cross-domain generalisability, performance or transportability. Work
+  outside healthcare requires new data, validation and a separately frozen
+  protocol. This supersedes ADR-010.
+- Consequences: The thesis may describe the proportional-hazards equations,
+  but it cannot convert their abstract form into evidence about another
+  application domain.
+
+## ADR-029 — Retain five outer repeats after the result-blind compute rehearsal
+
+- Status: ACCEPTED
+- Date: 2026-08-15
+- Context: The approved design permits reducing five outer repeats to three
+  only when the conservative planned-five serial-runtime projection exceeds
+  72 hours. The fresh predecision rehearsal completed all 18 cohort/model cells
+  with the exact 300/300/two-chain/30-bootstrap workload. Only console status
+  and timing were inspected. The rounded cell times sum to 196.1 seconds; even
+  assigning every value its maximum rounding error yields a planned-five
+  projection below 22.81 hours.
+- Decision: Retain the approved five repeats and set
+  `design_status: frozen_after_rehearsal`. Run a second exact rehearsal under
+  the final inputs and require the freezer to recompute the decision from the
+  unrounded archived timings before creating the write-once content freeze.
+  No performance, calibration, inference, prediction, or explanation value is
+  inspected before that freeze.
+- Consequences: Three repeats are not permitted on the observed timing
+  evidence. If the final exact rehearsal unexpectedly changes the gate result,
+  no freeze is created until the configuration and a fresh final rehearsal
+  agree with the deterministic rule.

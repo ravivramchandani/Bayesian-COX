@@ -103,3 +103,6 @@ def test_cross_validation_evaluator_runs():
     result = evaluator.evaluate_model(trainer)
     assert result["n_splits"] == 5
     assert 0.5 < result["mean_c_index"] < 0.85
+    assert 0 < result["mean_integrated_brier_score"] < 0.3
+    assert len(result["fold_details"]) == 5
+    assert all("integrated_brier_score" in fold for fold in result["fold_details"])

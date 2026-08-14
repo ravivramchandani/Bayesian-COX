@@ -60,8 +60,10 @@ class SurvivalDataPipeline:
             )
 
         # Step 4.2: Data Cleaning & Column Standardization
-        clean_df = raw_df.copy()
-        clean_df = clean_df.drop_duplicates().reset_index(drop=True)
+        # Eligibility and subject uniqueness are source-level invariants. Do
+        # not delete valid subjects merely because a reduced feature set makes
+        # two rows identical after projection.
+        clean_df = raw_df.copy().reset_index(drop=True)
 
         # Standardize target names to 'time' and 'event'
         rename_map = {self.time_col: "time", self.event_col: "event"}
@@ -265,19 +267,31 @@ class SurvivalDataPipeline:
                 col_name = f"{cat_col}_{d_cat}"
                 encoded_train_parts.append(
                     pd.DataFrame(
-                        {col_name: train_dummies.get(col_name, 0).astype(float)},
+                        {
+                            col_name: train_dummies.reindex(
+                                columns=[col_name], fill_value=False
+                            )[col_name].astype(float)
+                        },
                         index=X_train.index,
                     )
                 )
                 encoded_val_parts.append(
                     pd.DataFrame(
-                        {col_name: val_dummies.get(col_name, 0).astype(float)},
+                        {
+                            col_name: val_dummies.reindex(
+                                columns=[col_name], fill_value=False
+                            )[col_name].astype(float)
+                        },
                         index=X_val.index,
                     )
                 )
                 encoded_test_parts.append(
                     pd.DataFrame(
-                        {col_name: test_dummies.get(col_name, 0).astype(float)},
+                        {
+                            col_name: test_dummies.reindex(
+                                columns=[col_name], fill_value=False
+                            )[col_name].astype(float)
+                        },
                         index=X_test.index,
                     )
                 )

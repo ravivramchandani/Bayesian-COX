@@ -176,3 +176,126 @@ The literature review is about 25,700 words, while the introduction,
 methodology, results, conclusion, abstract and appendices are template or
 effectively empty. Writing and bibliography repair therefore start in Week 1
 in parallel with confirmatory engineering.
+
+## 2026-08-15 — Confirmatory cohorts are pinned and rebuilt
+
+The raw confirmatory inputs now reproduce from immutable upstream snapshots:
+
+| Cohort | Records | Events | Derived SHA-256 |
+|---|---:|---:|---|
+| GBSG2 | 686 | 299 | `2158b777d27ecfb69b187d3cbcad13fd1eb92d626935c528a4465fea6490ae5f` |
+| WHAS500 | 500 | 215 | `4bb01775c04eca11d7f06d6e5dfebd0a5cce75aa7e73fe4261732385be106fcc` |
+| METABRIC | 1,980 | 1,144 | `731ea80ce0240cb6aa96ffb0f4a3bb379615202966c954512664bef02b29545c` |
+
+GBSG2 and WHAS500 use the pinned scikit-survival v0.24.1 repository
+snapshot. METABRIC uses cBioPortal DataHub commit
+`165bd77077b03038f9c2ee104959eb474770b2a9`; its patient metadata defines
+overall survival in months since initial diagnosis. The 1,904-row Kaggle file
+is pilot input only.
+
+## 2026-08-15 — Exact environment and implementation verification pass
+
+The clean environment `bayes-cox-lock-verify-20260815-b` contains all 259
+locked package records and matching HDF5 2.1.0 build/runtime libraries. The
+lock SHA-256 is
+`1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57`.
+The complete current suite passed 150 tests and Ruff reported no violations in
+that environment.
+
+The passing suite covers fold-local preprocessing, paired repeated folds,
+reference survival metrics, explicit calibration, corrected paired inference,
+DeepSurv, all-parameter Bayesian diagnostics and predictive checks,
+content-addressed cell/checkpoint schemas, frozen-cell explanation,
+robustness and pure result rendering. A passing implementation test is not a
+confirmatory effect estimate.
+
+## 2026-08-15 — Existing rehearsal is not the protocol-freeze rehearsal
+
+The stored result-blind rehearsal contains 18 cells: 14 complete and four
+failed. The failed cells are the WHAS500 and METABRIC random-forest and
+DeepSurv arms under the earlier IPCW support implementation. Focused post-fix
+smoke checks pass, but methodological inputs changed afterward. The stored run
+therefore cannot set the repeat count or protocol freeze and supplies no
+scientific result. A new exact 18-cell result-blind rehearsal remains required.
+
+## 2026-08-15 — Pilot interpretations are withdrawn from the claim pool
+
+The 2026-08-14 pilot point estimates remain useful engineering evidence, but
+their earlier interpretations as Bernstein–von Mises behaviour, expected
+small-sample shrinkage benefit or recovery of clinically established features
+are not verified findings. The inspected holdout and leakage defects already
+recorded above prevent those statements from entering the thesis or paper.
+Only a frozen paired analysis and source-backed clinical facts may support
+replacement wording.
+
+## 2026-08-15 — Optional transport and simulation are permanently excluded
+
+The retained three-cohort study contains 3,166 subjects and 1,658 events and
+already requires 450 primary model-fold cells at five repeats. The lean
+robustness plan adds 825 checkpoint cells and 885 Bayesian fits before any
+diagnostic refits. Rotterdam transport and the ADEMP simulation were therefore
+dropped before protocol freeze to protect the six-month thesis schedule.
+Neither branch is needed for a retained claim; the study makes no external-
+validation or simulated coefficient-recovery claim.
+
+## 2026-08-15 — Thesis foundation and prospective methods package build cleanly
+
+The prior 25,700-word literature review and broken bibliography were replaced
+by a focused 6,281-word review, a 1,919-word introduction and 36 cited
+references: 30 with DOI records and six authoritative web records. A
+substantive prospective methodology chapter plus
+reproducibility/governance and diagnostic appendices now describes the
+implemented design without inserting results.
+
+LaTeX/BibTeX produced a 70-page A4 PDF with embedded fonts and no undefined
+citations/references, LaTeX warnings, or overfull/underfull boxes. The internal-
+identifier audit passed and the methodology/appendix pages were visually
+inspected. Results, conclusion and the numerical abstract remain deliberately
+unwritten until frozen evidence exists.
+
+## 2026-08-15 — Confirmatory interpretation boundaries are explicit
+
+The primary WHAS500 prediction set contains nine admission-available
+predictors and excludes length of stay and the four admission-course
+complications `afb`, `sho`, `chf` and `av3`. The published-full representation
+is a named sensitivity, not the primary analysis.
+
+Every interpreted confirmatory Bayesian cell must record zero divergent
+transitions in addition to passing the R-hat, bulk-ESS, BFMI and tree-depth
+gates. The one-divergence regularised-horseshoe fit recorded in the pilot
+history remains pilot evidence and does not satisfy this production gate.
+
+Confirmatory RQ3 uses exact no-refit linear SHAP for the frozen Bayesian risk
+score and, secondarily, frozen Cox. Forest SHAP and any DeepSurv explanation
+are excluded; the earlier forest Kernel-SHAP comparisons remain exploratory.
+No empirical result is generalised beyond the evaluated healthcare setting or
+presented as cross-domain transport evidence.
+
+## 2026-08-15 — Result-blind predecision rehearsal retains five repeats
+
+The fresh exact-environment rehearsal completed all 18 planned cohort/model
+cells. Inspection was restricted to console cell status and elapsed time plus
+manifest controls and completion counts; no metric, prediction, calibration,
+inference or explanation output was opened. Rounded cell runtimes summed to
+196.1 seconds. Even their maximum rounding bound projected the planned five-
+repeat workload below 22.81 serial hours, so the deterministic 72-hour rule
+requires retaining five repeats. `confirmatory.yaml` now records
+`frozen_after_rehearsal`; a fresh final-input rehearsal and the write-once
+content freeze remain required before confirmatory evidence is generated.
+
+## 2026-08-15 — Frozen confirmatory run checkpointed without effect inspection
+
+The final-input rehearsal completed all 18 planned cohort/model cells. Only
+completion, controls, hashes and runtime were inspected. The deterministic
+resource rule retained five repeats. The write-once protocol freeze records 80
+inputs, all of which independently rehash correctly, under freeze content
+SHA-256
+`3b5e1042d592ebb6fade0a4a76c1f0d31ce9c0c1cfc08357be46f163f037d2ca`.
+
+The frozen production run is active. At this checkpoint all 150 GBSG2 cells
+and all 150 WHAS500 cells were stored; METABRIC was still running. No completed
+aggregate, inference table or final comparative claim exists at this point,
+and no partial metric or effect was admitted as evidence. The owner requested
+a local checkpoint commit now, followed by completion and verification of this
+confirmatory run. Robustness, confirmatory explanation and post-confirmatory
+thesis result writing are paused until a later owner instruction.

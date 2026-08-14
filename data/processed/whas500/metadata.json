@@ -3,22 +3,15 @@
   "random_state": 42,
   "target_time_col": "time",
   "target_event_col": "event",
-  "num_features": 16,
+  "num_features": 9,
   "feature_names": [
     "age",
-    "bmi",
-    "diasbp",
     "hr",
-    "los",
     "sysbp",
-    "age_x_chf",
-    "bmi_low",
+    "diasbp",
+    "bmi",
     "gender_1",
     "cvd_1",
-    "afb_1",
-    "sho_1",
-    "chf_1",
-    "av3_1",
     "miord_1",
     "mitype_1"
   ],
@@ -33,29 +26,21 @@
       "mean": 70.53581661891117,
       "std": 14.310072239737456
     },
-    "bmi": {
-      "mean": 26.376927908309458,
-      "std": 5.3327323877392905
-    },
-    "diasbp": {
-      "mean": 77.0515759312321,
-      "std": 21.257255126140105
-    },
     "hr": {
       "mean": 85.7593123209169,
       "std": 24.0951050398636
-    },
-    "los": {
-      "mean": 6.0573065902578795,
-      "std": 4.151877385972049
     },
     "sysbp": {
       "mean": 144.4269340974212,
       "std": 33.0389611009593
     },
-    "age_x_chf": {
-      "mean": 23.363896848137536,
-      "std": 35.987896476689436
+    "diasbp": {
+      "mean": 77.0515759312321,
+      "std": 21.257255126140105
+    },
+    "bmi": {
+      "mean": 26.376927908309458,
+      "std": 5.3327323877392905
     }
   },
   "encoding_maps": {
@@ -63,18 +48,6 @@
       "1"
     ],
     "cvd": [
-      "1"
-    ],
-    "afb": [
-      "1"
-    ],
-    "sho": [
-      "1"
-    ],
-    "chf": [
-      "1"
-    ],
-    "av3": [
       "1"
     ],
     "miord": [
@@ -91,7 +64,7 @@
     "warnings": [],
     "checks": {
       "total_rows": 500,
-      "total_cols": 16,
+      "total_cols": 11,
       "valid_rows": 500,
       "event_count": 215,
       "censored_count": 285,

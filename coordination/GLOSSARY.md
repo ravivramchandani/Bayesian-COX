@@ -71,13 +71,25 @@ Format:
 - Definition: A semi-parametric model in which covariates act multiplicatively
   on an unspecified baseline hazard, so hazard ratios are constant over time.
 - Formula: $\lambda(t \mid x) = \lambda_0(t) \exp(x^\top \beta)$
-- Used in: `src/models/cox.py`, `src/models/bayesian/model.py`.
+- Used in: `src/models/cox.py`; proportional-hazards comparator and theory.
+
+## Bayesian piecewise-exponential proportional-hazards model
+- Symbol: $Y_{im}, E_{im}, \lambda_m, \beta$
+- Definition: The project's Bayesian model uses the full right-censored
+  piecewise-exponential likelihood, represented as Poisson event counts over
+  subject-interval exposures. It is a proportional-hazards model with an
+  explicitly estimated piecewise-constant baseline, not a Cox partial-
+  likelihood model.
+- Formula: $Y_{im} \sim \operatorname{Poisson}\!\left(E_{im}\lambda_m
+  \exp(x_i^\top\beta)\right)$
+- Used in: `src/models/bayesian/model.py`, methodology and diagnostic appendix.
 
 ## Piecewise-exponential baseline hazard
 - Symbol: $\lambda_0(t)$
 - Definition: The baseline hazard held constant within each of a fixed number
-  of intervals partitioning follow-up. It makes the Cox likelihood tractable
-  as a Poisson regression over subject-interval exposures.
+  of intervals partitioning follow-up. Together with the subject-interval
+  exposures and event counts, it defines the full likelihood through an exact
+  Poisson representation of the piecewise-exponential survival model.
 - Formula: $\lambda_0(t) = \lambda_m \text{ for } t \in (c_{m-1}, c_m]$
 - Used in: `src/models/bayesian/model.py`.
 
@@ -85,8 +97,9 @@ Format:
 - Symbol: $\tau, \lambda_j, c$
 - Definition: A global-local shrinkage prior in which a global scale pulls all
   coefficients toward zero while heavy-tailed local scales let genuinely
-  non-zero coefficients escape. The slab term $c$ bounds the local scales and
-  removes the funnel geometry that causes divergent transitions.
+  non-zero coefficients escape. The slab term $c$ bounds the local-scale tails
+  and can improve posterior geometry; only the recorded diagnostics determine
+  whether a fitted cell passes the interpretation gate.
 - Formula: $\tilde{\lambda}_j^2 = \frac{c^2 \lambda_j^2}{c^2 + \tau^2 \lambda_j^2}, \quad \beta_j \sim \mathcal{N}(0, \tau^2 \tilde{\lambda}_j^2)$
 - Used in: `src/models/bayesian/model.py`.
 
@@ -96,23 +109,30 @@ Format:
   its variance from a narrow spike or a wide slab according to a continuous
   inclusion weight on $[0, 1]$. The discrete indicator of the classical
   formulation cannot be sampled by NUTS, so the weight is continuous and its
-  posterior mean serves as the inclusion signal.
-- Formula: $\beta_j \sim \mathcal{N}\!\left(0, (1-\gamma_j)\sigma_0^2 + \gamma_j \sigma_1^2\right)$
+  posterior mean is a prior-specific auxiliary mixing signal, not the
+  posterior probability of a discrete inclusion event.
+- Formula: $\sigma_j^2=(1-\gamma_j)\sigma_0^2+\gamma_j\sigma_1^2$,
+  $\beta_j\sim\mathcal{N}(0,\sigma_j^2)$, where the second Normal parameter is
+  the variance.
 - Used in: `src/models/bayesian/model.py`.
 
-## Inclusion signal
-- Symbol: $\mathbb{E}[\gamma_j]$
-- Definition: The built-in explainability output of a sparsity prior. For the
-  spike-and-slab it is the posterior mean inclusion weight; for the horseshoe
-  it is the shrinkage factor $1/(1+\lambda_j^2)$, where values near zero mark
-  coefficients that escaped shrinkage.
-- Formula: —
-- Used in: `src/models/bayesian/model.py`, `src/explainability/`.
+## Prior-specific auxiliary signal
+- Symbol: $\mathbb{E}[\gamma_j]$, $\kappa^{\mathrm{proxy}}_j$
+- Definition: For continuous spike-and-slab, the auxiliary signal is the
+  posterior mean continuous mixing weight. For the regularised horseshoe,
+  $1/(1+\lambda_j^2)$ is stored only as a local-scale shrinkage proxy: it omits
+  the global scale and regularising slab and is neither the full shrinkage
+  factor nor an inclusion probability. These signals are secondary; the
+  primary intrinsic importance is the full-posterior expected absolute grouped
+  contribution.
+- Formula: $\kappa^{\mathrm{proxy}}_j=1/(1+\lambda_j^2)$
+- Used in: `src/models/bayesian/model.py`, `src/explainability/frozen_cells.py`.
 
 ## R-hat
 - Symbol: $\hat{R}$
 - Definition: The Gelman-Rubin statistic comparing between-chain and
-  within-chain variance. Values below 1.01 indicate chains have mixed.
+  within-chain variance. A maximum rank-normalised value below 1.01 passes this
+  prespecified diagnostic component; it is not by itself proof of convergence.
 - Formula: —
 - Used in: `src/models/bayesian/diagnostics.py`.
 
@@ -131,11 +151,15 @@ Format:
 - Formula: —
 - Used in: `src/models/bayesian/diagnostics.py`.
 
-## SHAP value
+## Exact interventional linear SHAP value
 - Symbol: $\phi_j$
-- Definition: The Shapley attribution of a single prediction to feature $j$,
-  averaged over feature orderings. Post-hoc and model-agnostic; here computed
-  over each model's risk prediction so attributions are comparable across
-  models.
-- Formula: —
-- Used in: `src/explainability/shap_analysis.py`.
+- Definition: The feature attribution for a frozen linear risk score relative
+  to the mean of its supplied outer-training background. The confirmatory
+  implementation uses `shap.LinearExplainer` and verifies its output against
+  the analytic identity; it does not fit or refit a model. Encoded-term values
+  are summed by source-variable group before mean absolute importance is
+  computed. The same-Bayesian-model comparison is primary and frozen Cox is
+  secondary; forest and DeepSurv explanations are not confirmatory targets.
+- Formula: $\phi_j(x)=\beta_j\left(x_j-\mathbb{E}_{B}[X_j]\right)$
+- Used in: `src/explainability/shap_analysis.py`,
+  `src/explainability/frozen_cells.py`.

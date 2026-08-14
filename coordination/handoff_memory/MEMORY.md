@@ -23,6 +23,14 @@ Repository content stays clear, simple and professional. No decorative
 headers, no comments restating code, no process narration, no status chatter.
 Write the minimum a competent reader needs.
 
+## Human authorship only
+
+The thesis, journal manuscript, reports, document metadata and acknowledgements
+must never attribute drafting, implementation, review or verification to an AI
+tool, vendor or model, and must not contain AI-assistance disclosures or similar
+process statements. The work is the student's responsibility and authorship.
+Do not add such language unless the owner explicitly reverses this instruction.
+
 ## Environment
 
 Conda environment `bayes-cox`. PyMC chains run sequentially because the

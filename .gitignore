@@ -38,3 +38,10 @@ data/external/METABRIC_RNA_Mutation.csv
 
 # Runtime logs
 logs/
+
+# Generated analysis runs. These are content-addressed local artefacts and can
+# be hundreds of megabytes; commit their manifests only through an explicit
+# evidence-release step, never through a blanket project checkpoint.
+reports/confirmatory/
+reports/confirmatory_rehearsal*/
+reports/smoke_*/

@@ -2,17 +2,24 @@ name: bayes-cox
 channels:
   - conda-forge
 dependencies:
-  - python=3.11
-  - numpy>=2.0
-  - scipy>=1.14
-  - pandas>=2.2
-  - pyyaml>=6.0
-  - pymc>=5.25
-  - arviz>=0.20
-  - scikit-survival>=0.24
-  - lifelines>=0.30
-  - shap>=0.46
-  - matplotlib>=3.9
-  - seaborn>=0.13
-  - pytest>=8.0
-  - ruff>=0.6
+  - python=3.11.15
+  - numpy=2.4.6
+  - scipy=1.17.1
+  - pandas=2.3.3
+  - pyyaml=6.0.3
+  - hdf5=2.1.0
+  - h5py=3.16.0
+  - pymc=5.28.5
+  - arviz=0.23.4
+  - scikit-survival=0.28.0
+  - lifelines=0.30.3
+  - shap=0.51.0
+  - matplotlib=3.11.1
+  - seaborn=0.13.2
+  - pytest=9.1.1
+  - ruff=0.16.2
+  - pytorch=2.13.0
+  - pip
+  - pip:
+      - pycox==0.3.0
+      - torchtuples==0.2.2
