@@ -67,7 +67,7 @@ class DeepSurvModel(BaseSurvivalModel):
 
     def _pack_params(self) -> np.ndarray:
         params = []
-        for W, b in zip(self.weights, self.biases):
+        for W, b in zip(self.weights, self.biases, strict=False):
             params.append(W.ravel())
             params.append(b.ravel())
         return np.concatenate(params)
@@ -202,7 +202,7 @@ class DeepSurvModel(BaseSurvivalModel):
 
             # Pack gradients
             grad_vec = []
-            for dW, db in zip(dW_list, db_list):
+            for dW, db in zip(dW_list, db_list, strict=False):
                 grad_vec.append(dW.ravel())
                 grad_vec.append(db.ravel())
 

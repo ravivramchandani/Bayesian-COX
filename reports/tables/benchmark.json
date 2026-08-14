@@ -1,0 +1,155 @@
+{
+  "gbsg2": {
+    "n_train": 479,
+    "n_test": 105,
+    "n_features": 12,
+    "event_rate_train": 0.4363256784968685,
+    "models": {
+      "Cox PH": {
+        "c_index": 0.702120717781403,
+        "c_index_se": 0.008260584992527475,
+        "eval_times": [
+          233.0,
+          906.5,
+          1580.0
+        ],
+        "auc_at_times": [
+          0.8936079972170452,
+          0.729231594530239,
+          0.7052235094169013
+        ],
+        "mean_auc": 0.7369197950356579,
+        "ibs": 0.15840038475523344,
+        "fit_seconds": 0.03,
+        "cv_c_index_mean": 0.6746539389500655,
+        "cv_c_index_std": 0.02258143822802795,
+        "cv_folds": 3
+      },
+      "Random Survival Forest": {
+        "c_index": 0.6910277324632953,
+        "c_index_se": 0.008346266524843894,
+        "eval_times": [
+          233.0,
+          906.5,
+          1580.0
+        ],
+        "auc_at_times": [
+          0.887407868001503,
+          0.6836922389914308,
+          0.7162308381575503
+        ],
+        "mean_auc": 0.7196436537390782,
+        "ibs": 0.16468362443203874,
+        "fit_seconds": 0.09,
+        "cv_c_index_mean": 0.6789934000109671,
+        "cv_c_index_std": 0.008839303654483061,
+        "cv_folds": 3
+      },
+      "Bayesian Cox (normal)": {
+        "c_index": 0.700815660685155,
+        "c_index_se": 0.008270963191315714,
+        "eval_times": [
+          233.0,
+          906.5,
+          1580.0
+        ],
+        "auc_at_times": [
+          0.89566720431923,
+          0.7260155289542969,
+          0.6995073506190169
+        ],
+        "mean_auc": 0.7332167964655005,
+        "ibs": 0.1593069523316645,
+        "fit_seconds": 9.31,
+        "diagnostics": {
+          "r_hat_max": 1.01,
+          "ess_bulk_min": 266.0,
+          "ess_tail_min": 379.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": false,
+          "failures": [
+            "R-hat 1.0100 >= 1.01",
+            "bulk ESS 266 <= 400"
+          ],
+          "method": "nuts",
+          "n_chains": 2,
+          "n_draws": 500
+        },
+        "cv_c_index_mean": 0.6772012213854118,
+        "cv_c_index_std": 0.023257783574587063,
+        "cv_folds": 3
+      },
+      "Bayesian Cox (horseshoe)": {
+        "c_index": 0.700489396411093,
+        "c_index_se": 0.008273545212538593,
+        "eval_times": [
+          233.0,
+          906.5,
+          1580.0
+        ],
+        "auc_at_times": [
+          0.8831868828505341,
+          0.7230195693964054,
+          0.7090221855077726
+        ],
+        "mean_auc": 0.7344964808851067,
+        "ibs": 0.15879437408305272,
+        "fit_seconds": 23.66,
+        "diagnostics": {
+          "r_hat_max": 1.02,
+          "ess_bulk_min": 227.0,
+          "ess_tail_min": 312.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": false,
+          "failures": [
+            "R-hat 1.0200 >= 1.01",
+            "bulk ESS 227 <= 400"
+          ],
+          "method": "nuts",
+          "n_chains": 2,
+          "n_draws": 500
+        },
+        "cv_c_index_mean": 0.6810404338527523,
+        "cv_c_index_std": 0.02947218508153279,
+        "cv_folds": 3
+      },
+      "Bayesian Cox (spike_slab)": {
+        "c_index": 0.6949429037520392,
+        "c_index_se": 0.008316678034670634,
+        "eval_times": [
+          233.0,
+          906.5,
+          1580.0
+        ],
+        "auc_at_times": [
+          0.8977487278463725,
+          0.7225875626280667,
+          0.6955900457391927
+        ],
+        "mean_auc": 0.7301802862825763,
+        "ibs": 0.1597908306814556,
+        "fit_seconds": 18.82,
+        "diagnostics": {
+          "r_hat_max": 1.01,
+          "ess_bulk_min": 389.0,
+          "ess_tail_min": 506.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": false,
+          "failures": [
+            "R-hat 1.0100 >= 1.01",
+            "bulk ESS 389 <= 400"
+          ],
+          "method": "nuts",
+          "n_chains": 2,
+          "n_draws": 500
+        },
+        "cv_c_index_mean": 0.6742009087771628,
+        "cv_c_index_std": 0.02175520603773217,
+        "cv_folds": 3
+      }
+    }
+  }
+}

@@ -1,275 +1,228 @@
-"""
-Survival Model Evaluation Metrics Engine for Bayesian Survival Models.
-Provides publication-grade vectorized implementations for:
-- Harrell's Concordance Index (C-index) with standard error
-- Kaplan-Meier IPCW (Inverse Probability of Censoring Weighting) Estimator
-- Time-Dependent Brier Score BS(t)
-- Integrated Brier Score (IBS)
-- Comprehensive Model Evaluation Suite
+"""Survival evaluation metrics.
+
+Harrell's concordance index, the integrated Brier score, and time-dependent
+AUC are delegated to scikit-survival so that results match the reference
+implementations used in the published benchmarks.
 """
 
-from collections.abc import Callable
 from typing import Any
 
 import numpy as np
+from sksurv.metrics import (
+    concordance_index_censored,
+    cumulative_dynamic_auc,
+    integrated_brier_score,
+)
+from sksurv.util import Surv
+
+
+def _as_structured(time: np.ndarray, event: np.ndarray) -> np.ndarray:
+    return Surv.from_arrays(
+        event=np.asarray(event).astype(bool), time=np.asarray(time, dtype=float)
+    )
 
 
 def concordance_index(
     y_time: np.ndarray, y_event: np.ndarray, risk_scores: np.ndarray
 ) -> tuple[float, float]:
-    """
-    Computes Harrell's Concordance Index (C-index) for right-censored survival data.
+    """Harrell's C-index and its standard error.
 
-    Parameters:
-        y_time (np.ndarray): Survival/follow-up times (N,)
-        y_event (np.ndarray): Event status indicators (1=event, 0=censored) (N,)
-        risk_scores (np.ndarray): Predicted risk scores (higher value = higher risk / shorter survival) (N,)
+    Args:
+        y_time: Follow-up time.
+        y_event: 1 if the event was observed, 0 if censored.
+        risk_scores: Predicted risk; higher means shorter expected survival.
 
     Returns:
-        c_index (float): Harrell's C-index in [0, 1]
-        se (float): Asymptotic standard error approximation
+        The C-index and an asymptotic standard error based on the number of
+        comparable pairs.
     """
     y_time = np.asarray(y_time, dtype=float)
-    y_event = np.asarray(y_event, dtype=int)
+    y_event = np.asarray(y_event).astype(bool)
     risk_scores = np.asarray(risk_scores, dtype=float)
 
-    n = len(y_time)
-    if n == 0:
-        return 0.5, 0.0
+    c_index, concordant, discordant, tied_risk, _ = concordance_index_censored(
+        y_event, y_time, risk_scores
+    )
 
-    concordant = 0.0
-    tied_risk = 0.0
-    total_pairs = 0.0
-
-    # Identify all valid comparable pairs (i, j) where event_i == 1 and time_i < time_j
-    # Or both event_i == 1 and event_j == 1 and time_i != time_j
-    event_indices = np.where(y_event == 1)[0]
-
-    for i in event_indices:
-        t_i = y_time[i]
-        r_i = risk_scores[i]
-
-        for j in range(n):
-            if i == j:
-                continue
-
-            t_j = y_time[j]
-            e_j = y_event[j]
-
-            # Pair is comparable if t_i < t_j, or if t_i == t_j and e_j == 0
-            if t_i < t_j:
-                r_j = risk_scores[j]
-                total_pairs += 1.0
-
-                if r_i > r_j:
-                    concordant += 1.0
-                elif r_i == r_j:
-                    tied_risk += 1.0
-            elif t_i == t_j and e_j == 1 and i < j:
-                # Both experienced event at exact same time
-                r_j = risk_scores[j]
-                total_pairs += 1.0
-
-                if r_i > r_j:
-                    concordant += 1.0
-                elif r_i == r_j:
-                    tied_risk += 1.0
-
-    if total_pairs == 0:
-        return 0.5, 0.0
-
-    c_idx = (concordant + 0.5 * tied_risk) / total_pairs
-
-    # Asymptotic standard error estimation
-    se = np.sqrt((c_idx * (1.0 - c_idx)) / max(total_pairs, 1.0))
-
-    return float(c_idx), float(se)
+    n_pairs = concordant + discordant + tied_risk
+    se = float(np.sqrt(c_index * (1 - c_index) / n_pairs)) if n_pairs > 0 else 0.0
+    return float(c_index), se
 
 
-class KaplanMeierCensoringEstimator:
-    """Computes Kaplan-Meier survival curve for censoring distribution G(t) = P(C > t)."""
-
-    def __init__(self):
-        self.times = np.array([])
-        self.survival_probs = np.array([])
-
-    def fit(self, y_time: np.ndarray, y_event: np.ndarray):
-        """Fits censoring distribution where event indicator is inverted (1 - event)."""
-        y_time = np.asarray(y_time, dtype=float)
-        y_cens = 1 - np.asarray(y_event, dtype=int)
-
-        order = np.argsort(y_time)
-        times = y_time[order]
-        cens = y_cens[order]
-
-        unique_times, _counts = np.unique(times, return_counts=True)
-        n_at_risk = len(times)
-
-        surv_probs = []
-        current_surv = 1.0
-
-        for t in unique_times:
-            idx = times == t
-            d_i = cens[idx].sum()  # number of censings at time t
-            n_i = n_at_risk
-
-            if n_i > 0:
-                current_surv *= 1.0 - d_i / n_i
-            surv_probs.append(current_surv)
-            n_at_risk -= len(idx)
-
-        self.times = unique_times
-        self.survival_probs = np.array(surv_probs)
-        return self
-
-    def predict(self, eval_times: np.ndarray) -> np.ndarray:
-        """Predicts G(t) for given evaluation times."""
-        eval_times = np.asarray(eval_times, dtype=float)
-        if len(self.times) == 0:
-            return np.ones_like(eval_times)
-
-        # Step function interpolation (left-continuous or step-right)
-        indices = np.searchsorted(self.times, eval_times, side="right") - 1
-        g_vals = np.ones_like(eval_times, dtype=float)
-
-        valid_mask = indices >= 0
-        g_vals[valid_mask] = self.survival_probs[
-            np.minimum(indices[valid_mask], len(self.survival_probs) - 1)
-        ]
-        # Clip to avoid division by zero in IPCW
-        return np.maximum(g_vals, 1e-4)
-
-
-def brier_score_at_time(
-    y_time: np.ndarray,
-    y_event: np.ndarray,
-    surv_probs: np.ndarray,
-    eval_time: float,
-    km_cens: KaplanMeierCensoringEstimator,
-) -> float:
-    """
-    Computes Inverse Probability of Censoring Weighted (IPCW) Brier Score at time t.
-
-    Parameters:
-        y_time: Observed survival times (N,)
-        y_event: Event indicators (N,)
-        surv_probs: Predicted survival probabilities S(eval_time | X_i) for each subject i
-        eval_time: Evaluation time milestone t
-        km_cens: Fitted KaplanMeierCensoringEstimator
-    """
-    y_time = np.asarray(y_time, dtype=float)
-    y_event = np.asarray(y_event, dtype=int)
-    surv_probs = np.asarray(surv_probs, dtype=float)
-
-    n = len(y_time)
-    if n == 0:
-        return 0.0
-
-    g_t = km_cens.predict(np.array([eval_time]))[0]
-    g_ti = km_cens.predict(y_time)
-
-    weights = np.zeros(n, dtype=float)
-    bs_terms = np.zeros(n, dtype=float)
-
-    # Term 1: Subject experienced event prior to eval_time (T_i <= t and E_i == 1)
-    mask1 = (y_time <= eval_time) & (y_event == 1)
-    weights[mask1] = 1.0 / g_ti[mask1]
-    bs_terms[mask1] = (0.0 - surv_probs[mask1]) ** 2
-
-    # Term 2: Subject survived past eval_time (T_i > t)
-    mask2 = y_time > eval_time
-    weights[mask2] = 1.0 / g_t
-    bs_terms[mask2] = (1.0 - surv_probs[mask2]) ** 2
-
-    # Term 3: Subject censored before eval_time (T_i <= t and E_i == 0) -> weight = 0
-
-    valid_mask = mask1 | mask2
-    if not np.any(valid_mask):
-        return 0.0
-
-    bs = float(np.sum(weights[valid_mask] * bs_terms[valid_mask]) / n)
-    return bs
-
-
-def integrated_brier_score(
-    y_time: np.ndarray,
-    y_event: np.ndarray,
-    surv_prob_fn: Callable[[np.ndarray], np.ndarray],
+def integrated_brier(
+    train_time: np.ndarray,
+    train_event: np.ndarray,
+    test_time: np.ndarray,
+    test_event: np.ndarray,
+    survival_probs: np.ndarray,
     eval_times: np.ndarray,
 ) -> float:
+    """Integrated Brier score over `eval_times`.
+
+    Args:
+        survival_probs: Predicted survival probabilities, shape
+            (n_test_samples, n_eval_times).
     """
-    Computes Integrated Brier Score (IBS) by integrating BS(t) across time range.
+    return float(
+        integrated_brier_score(
+            _as_structured(train_time, train_event),
+            _as_structured(test_time, test_event),
+            np.asarray(survival_probs, dtype=float),
+            np.asarray(eval_times, dtype=float),
+        )
+    )
 
-    Parameters:
-        y_time: Survival times
-        y_event: Event indicators
-        surv_prob_fn: Callable function taking eval_times (M,) and returning (N, M) matrix of S(t_j | X_i)
-        eval_times: Grid of evaluation times (M,)
+
+def time_dependent_auc(
+    train_time: np.ndarray,
+    train_event: np.ndarray,
+    test_time: np.ndarray,
+    test_event: np.ndarray,
+    risk_scores: np.ndarray,
+    eval_times: np.ndarray,
+) -> tuple[np.ndarray, float]:
+    """Cumulative/dynamic AUC at each evaluation time and its mean."""
+    auc, mean_auc = cumulative_dynamic_auc(
+        _as_structured(train_time, train_event),
+        _as_structured(test_time, test_event),
+        np.asarray(risk_scores, dtype=float),
+        np.asarray(eval_times, dtype=float),
+    )
+    return np.asarray(auc, dtype=float), float(mean_auc)
+
+
+def evaluation_times(
+    time: np.ndarray, event: np.ndarray, n_times: int = 3
+) -> np.ndarray:
+    """Evaluation time grid inside the follow-up range.
+
+    Times are quantiles of the observed event times, clipped away from the
+    boundaries so that the censoring distribution remains estimable.
     """
-    y_time = np.asarray(y_time, dtype=float)
-    y_event = np.asarray(y_event, dtype=int)
-    eval_times = np.sort(np.asarray(eval_times, dtype=float))
+    time = np.asarray(time, dtype=float)
+    event = np.asarray(event).astype(bool)
 
-    km_cens = KaplanMeierCensoringEstimator().fit(y_time, y_event)
+    event_times = time[event]
+    if event_times.size == 0:
+        event_times = time
 
-    # Predict survival probability matrix: shape (N, M)
-    S_mat = surv_prob_fn(eval_times)
-
-    bs_list = []
-    for idx, t in enumerate(eval_times):
-        probs_t = S_mat[:, idx]
-        bs_t = brier_score_at_time(y_time, y_event, probs_t, t, km_cens)
-        bs_list.append(bs_t)
-
-    bs_arr = np.array(bs_list)
-
-    # Integrate using trapezoidal rule
-    t_min, t_max = eval_times[0], eval_times[-1]
-    if t_max == t_min:
-        return float(bs_arr[0])
-
-    ibs = float(np.trapz(bs_arr, eval_times) / (t_max - t_min))
-    return ibs
+    lower, upper = np.percentile(event_times, [10, 90])
+    grid = np.linspace(lower, upper, n_times)
+    return np.unique(np.clip(grid, time.min() + 1e-6, time.max() - 1e-6))
 
 
 def evaluate_survival_model(
     y_time: np.ndarray,
     y_event: np.ndarray,
     risk_scores: np.ndarray,
-    surv_prob_fn: Callable[[np.ndarray], np.ndarray] | None = None,
+    surv_prob_fn: Any = None,
     eval_times: np.ndarray | None = None,
 ) -> dict[str, Any]:
-    """
-    Master Evaluation Suite for any survival model.
-    Returns C-index, SE, Brier scores, Integrated Brier Score (IBS), and time-dependent AUC.
-    """
-    c_idx, se = concordance_index(y_time, y_event, risk_scores)
+    """Evaluate a model on a single sample.
 
-    results = {
-        "c_index": float(round(c_idx, 4)),
-        "c_index_se": float(round(se, 4)),
+    Censoring weights are estimated from the same sample being scored, which
+    is the correct choice for bootstrap resampling and cross-validation folds
+    where no separate reference set exists.
+
+    Args:
+        surv_prob_fn: Callable taking evaluation times and returning a
+            (n_samples, n_times) survival probability matrix.
+    """
+    if eval_times is None:
+        eval_times = evaluation_times(y_time, y_event)
+
+    survival_probs = None
+    if surv_prob_fn is not None:
+        survival_probs = np.asarray(surv_prob_fn(eval_times), dtype=float)
+
+    result = evaluate_model(
+        y_time,
+        y_event,
+        y_time,
+        y_event,
+        risk_scores,
+        survival_probs=survival_probs,
+        eval_times=eval_times,
+    )
+
+    out: dict[str, Any] = {
+        "c_index": result["c_index"],
+        "c_index_se": result["c_index_se"],
+        "time_dependent_auc": dict(
+            zip(result["eval_times"], result["auc_at_times"], strict=True)
+        ),
+        "mean_auc": result["mean_auc"],
     }
+    if "ibs" in result:
+        out["integrated_brier_score"] = result["ibs"]
+    return out
 
-    if surv_prob_fn is not None and eval_times is not None and len(eval_times) > 0:
-        km_cens = KaplanMeierCensoringEstimator().fit(y_time, y_event)
 
-        S_mat = surv_prob_fn(eval_times)
-        brier_scores = {}
-        td_aucs = {}
+def evaluate_model(
+    train_time: np.ndarray,
+    train_event: np.ndarray,
+    test_time: np.ndarray,
+    test_event: np.ndarray,
+    risk_scores: np.ndarray,
+    survival_probs: np.ndarray | None = None,
+    eval_times: np.ndarray | None = None,
+) -> dict[str, Any]:
+    """Compute the full metric set for one fitted model.
 
-        from src.evaluation.ranking import time_dependent_auc
+    Concordance uses the test data as given. The censoring-weighted metrics
+    additionally require every test event time to fall inside the training
+    follow-up, because the censoring distribution is estimated there. Test
+    observations beyond the training horizon are therefore administratively
+    censored at that horizon before the AUC and Brier score are computed.
+    """
+    train_time = np.asarray(train_time, dtype=float)
+    test_time = np.asarray(test_time, dtype=float)
+    train_event = np.asarray(train_event).astype(int)
+    test_event = np.asarray(test_event).astype(int)
 
-        for idx, t in enumerate(eval_times):
-            bs_t = brier_score_at_time(y_time, y_event, S_mat[:, idx], t, km_cens)
-            brier_scores[f"bs_time_{round(t, 1)}"] = float(round(bs_t, 4))
+    if eval_times is None:
+        eval_times = evaluation_times(test_time, test_event)
+    eval_times = np.asarray(eval_times, dtype=float)
 
-            auc_t = time_dependent_auc(y_time, y_event, risk_scores, t, km_cens)
-            td_aucs[f"auc_time_{round(t, 1)}"] = float(round(auc_t, 4))
+    c_index, se = concordance_index(test_time, test_event, risk_scores)
+    results: dict[str, Any] = {"c_index": c_index, "c_index_se": se}
 
-        ibs = integrated_brier_score(y_time, y_event, surv_prob_fn, eval_times)
+    # Administrative censoring at the training horizon.
+    horizon = float(np.max(train_time))
+    beyond = test_time > horizon
+    ipcw_time = np.where(beyond, horizon, test_time)
+    ipcw_event = np.where(beyond, 0, test_event)
 
-        results["brier_scores"] = brier_scores
-        results["integrated_brier_score"] = float(round(ibs, 4))
-        results["time_dependent_auc"] = td_aucs
+    # Evaluation times must sit strictly inside the retained follow-up.
+    upper = min(horizon, float(np.max(ipcw_time)))
+    lower = max(float(np.min(train_time)), float(np.min(ipcw_time)))
+    keep = (eval_times > lower) & (eval_times < upper)
+    if not keep.any():
+        raise ValueError(
+            "No evaluation time lies inside both the training and test follow-up."
+        )
+
+    eval_times = eval_times[keep]
+    if survival_probs is not None:
+        survival_probs = np.asarray(survival_probs, dtype=float)[:, keep]
+
+    results["eval_times"] = eval_times.tolist()
+    results["n_administratively_censored"] = int(beyond.sum())
+
+    auc, mean_auc = time_dependent_auc(
+        train_time, train_event, ipcw_time, ipcw_event, risk_scores, eval_times
+    )
+    results["auc_at_times"] = auc.tolist()
+    results["mean_auc"] = mean_auc
+
+    if survival_probs is not None:
+        results["ibs"] = integrated_brier(
+            train_time,
+            train_event,
+            ipcw_time,
+            ipcw_event,
+            survival_probs,
+            eval_times,
+        )
 
     return results

@@ -1,37 +1,23 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
 *.so
+*.egg-info/
 
-# Virtual Environment
+# Environments
 .venv/
-env/
 venv/
+env/
 ENV/
 
-# Notebook
+# Notebooks
 .ipynb_checkpoints/
 
-# IDE
+# Editors
 .vscode/
 .idea/
 
-# Outputs
-outputs/
-artifacts/
-results/
-
-# Data
-# data/raw/*
-# data/processed/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-
-# Logs
-*.log
-
-# Cache
+# Caches
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -39,7 +25,13 @@ results/
 # OS
 .DS_Store
 Thumbs.db
-.kilo/*
-.local
-progress.txt
-PRD.md
+
+# Logs
+*.log
+
+# Data and results are committed so the benchmark is reproducible from a
+# clean clone. The METABRIC source is large and licensed separately.
+data/external/METABRIC_RNA_Mutation.csv
+
+# Runtime logs
+logs/

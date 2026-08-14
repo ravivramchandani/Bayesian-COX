@@ -5,14 +5,14 @@ Supports ADVI (Automatic Differentiation Variational Inference) and MCMC (NUTS/M
 Provides posterior distributions of Hazard Ratios, epistemic parameter uncertainty, and credible interval survival predictions.
 """
 
+import arviz as az
 import numpy as np
 import pandas as pd
 import pymc as pm
-import pytensor
-
-pytensor.config.cxx = ""  # Ensure pure Python execution without C++ compiler errors
 
 from src.models.base import BaseSurvivalModel
+
+SUPPORTED_PRIORS = ("normal", "horseshoe", "spike_slab")
 
 
 class BayesianCoxModel(BaseSurvivalModel):
@@ -21,11 +21,16 @@ class BayesianCoxModel(BaseSurvivalModel):
     def __init__(
         self,
         n_intervals: int = 6,
-        inference_method: str = "advi",  # 'advi' or 'mcmc'
+        inference_method: str = "nuts",
         n_advi_iterations: int = 10000,
         draws: int = 2000,
         tune: int = 1000,
         chains: int = 4,
+        # Chains run sequentially. PyMC's parallel sampler is unreliable on
+        # macOS/Apple silicon here, and each chain takes seconds at this model
+        # size, so the parallel path is not worth the flakiness.
+        cores: int = 1,
+        target_accept: float = 0.95,
         random_state: int = 42,
         coefficient_prior: str = "normal",
         prior_params: dict | None = None,
@@ -36,6 +41,8 @@ class BayesianCoxModel(BaseSurvivalModel):
         self.draws = draws
         self.tune = tune
         self.chains = chains
+        self.cores = cores
+        self.target_accept = target_accept
         self.random_state = random_state
         self.coefficient_prior = coefficient_prior.lower()
         self.prior_params = prior_params if prior_params is not None else {}
@@ -43,8 +50,9 @@ class BayesianCoxModel(BaseSurvivalModel):
         self.feature_names = []
         self.cutoffs = np.array([])
         self.pymc_model = None
-        self.idata = None  # InferenceData object
+        self.idata = None
         self.summary_df = None
+        self.diagnostics: dict = {}
 
         self.beta_samples = None  # (S_draws, p_features)
         self.lambda_samples = None  # (S_draws, M_intervals)
@@ -111,30 +119,64 @@ class BayesianCoxModel(BaseSurvivalModel):
         log_exposure = np.log(obs_exposures)
 
         with pm.Model() as model:
-            # Priors for Regression Coefficients (Normal, Student-t, or Laplace/Lasso)
             if self.coefficient_prior == "normal":
-                prior_mu = self.prior_params.get("mu", 0.0)
-                prior_sigma = self.prior_params.get("sigma", 1.0)
+                # Weakly-informative baseline.
                 beta = pm.Normal(
-                    "beta", mu=prior_mu, sigma=prior_sigma, shape=n_features
-                )
-            elif self.coefficient_prior == "student-t":
-                prior_nu = self.prior_params.get("nu", 3.0)
-                prior_mu = self.prior_params.get("mu", 0.0)
-                prior_sigma = self.prior_params.get("sigma", 1.0)
-                beta = pm.StudentT(
                     "beta",
-                    nu=prior_nu,
-                    mu=prior_mu,
-                    sigma=prior_sigma,
+                    mu=self.prior_params.get("mu", 0.0),
+                    sigma=self.prior_params.get("sigma", 1.0),
                     shape=n_features,
                 )
-            elif self.coefficient_prior == "laplace":
-                prior_mu = self.prior_params.get("mu", 0.0)
-                prior_b = self.prior_params.get("b", 1.0)
-                beta = pm.Laplace("beta", mu=prior_mu, b=prior_b, shape=n_features)
+
+            elif self.coefficient_prior == "horseshoe":
+                # Regularised horseshoe (Piironen and Vehtari, 2017) in
+                # non-centred form. The plain horseshoe funnels badly under
+                # NUTS; the slab term c2 bounds the tails of the local scales
+                # and removes the divergent transitions.
+                tau0 = self.prior_params.get("tau0", 0.1)
+                slab_df = self.prior_params.get("slab_df", 4.0)
+                slab_scale = self.prior_params.get("slab_scale", 2.0)
+
+                tau = pm.HalfStudentT("tau", nu=2, sigma=tau0)
+                lam = pm.HalfStudentT("lam", nu=2, sigma=1.0, shape=n_features)
+                c2 = pm.InverseGamma(
+                    "c2",
+                    alpha=slab_df / 2.0,
+                    beta=slab_df * slab_scale**2 / 2.0,
+                )
+
+                lam_sq = lam**2
+                lam_tilde = pm.math.sqrt(
+                    c2 * lam_sq / (c2 + tau**2 * lam_sq)
+                )
+                z = pm.Normal("z", mu=0.0, sigma=1.0, shape=n_features)
+                beta = pm.Deterministic("beta", z * tau * lam_tilde)
+
+            elif self.coefficient_prior == "spike_slab":
+                # Continuous relaxation of spike-and-slab: a discrete inclusion
+                # indicator cannot be sampled by NUTS, so the indicator is
+                # replaced by a continuous weight on [0, 1] mixing a narrow
+                # spike variance with a wide slab variance. The posterior mean
+                # of `gamma` is the inclusion signal.
+                spike_sd = self.prior_params.get("spike_sd", 0.05)
+                slab_sd = self.prior_params.get("slab_sd", 2.0)
+                gamma = pm.Beta(
+                    "gamma",
+                    alpha=self.prior_params.get("alpha", 1.0),
+                    beta=self.prior_params.get("beta_conc", 1.0),
+                    shape=n_features,
+                )
+                sd = pm.math.sqrt(
+                    (1.0 - gamma) * spike_sd**2 + gamma * slab_sd**2
+                )
+                z = pm.Normal("z", mu=0.0, sigma=1.0, shape=n_features)
+                beta = pm.Deterministic("beta", z * sd)
+
             else:
-                raise ValueError(f"Unknown coefficient prior: {self.coefficient_prior}")
+                raise ValueError(
+                    f"Unknown coefficient prior: {self.coefficient_prior}. "
+                    f"Supported: {SUPPORTED_PRIORS}"
+                )
 
             # Log-Normal Priors for Baseline Hazards
             log_lambda = pm.Normal("log_lambda", mu=-2.0, sigma=2.0, shape=M)
@@ -162,13 +204,15 @@ class BayesianCoxModel(BaseSurvivalModel):
                     draws=self.draws,
                     tune=self.tune,
                     chains=self.chains,
-                    cores=1,
+                    cores=self.cores,
+                    target_accept=self.target_accept,
                     random_seed=self.random_state,
                     progressbar=False,
                     return_inferencedata=True,
                 )
 
         self.pymc_model = model
+        self.diagnostics = self._compute_diagnostics()
 
         # Extract posterior samples
         posterior = self.idata.posterior
@@ -203,6 +247,65 @@ class BayesianCoxModel(BaseSurvivalModel):
             .reset_index(drop=True)
         )
         return self
+
+    def _compute_diagnostics(self) -> dict:
+        """Convergence diagnostics for the fitted posterior.
+
+        Returns R-hat and effective sample size for the coefficients, the
+        divergent-transition count, and a `converged` flag using the usual
+        thresholds (R-hat < 1.01, bulk ESS > 400, no divergences). Variational
+        inference produces independent draws, so sampler diagnostics do not
+        apply and are reported as None.
+        """
+        if self.inference_method == "advi":
+            return {"method": "advi", "converged": None}
+
+        from src.models.bayesian.diagnostics import check_convergence
+
+        result = check_convergence(self.idata, var_names=["beta"])
+        result.update(
+            {
+                "method": "nuts",
+                "n_chains": int(self.chains),
+                "n_draws": int(self.draws),
+            }
+        )
+        return result
+
+    def inclusion_signal(self) -> pd.DataFrame | None:
+        """Per-feature posterior signal used as the built-in explainability output.
+
+        For the spike-and-slab prior this is the posterior mean of the
+        continuous inclusion weight. For the horseshoe it is the shrinkage
+        factor 1 / (1 + lam^2), where values near zero indicate a coefficient
+        that escaped shrinkage. Returns None for the Normal prior, which has
+        no sparsity signal.
+        """
+        if self.idata is None:
+            raise RuntimeError("Model is not fitted. Call fit() first.")
+
+        posterior = self.idata.posterior
+
+        if self.coefficient_prior == "spike_slab":
+            gamma = posterior["gamma"].values.reshape(-1, len(self.feature_names))
+            return pd.DataFrame(
+                {
+                    "feature": self.feature_names,
+                    "inclusion_probability": gamma.mean(axis=0),
+                }
+            ).sort_values("inclusion_probability", ascending=False).reset_index(drop=True)
+
+        if self.coefficient_prior == "horseshoe":
+            lam = posterior["lam"].values.reshape(-1, len(self.feature_names))
+            shrinkage = 1.0 / (1.0 + lam**2)
+            return pd.DataFrame(
+                {
+                    "feature": self.feature_names,
+                    "shrinkage_factor": shrinkage.mean(axis=0),
+                }
+            ).sort_values("shrinkage_factor").reset_index(drop=True)
+
+        return None
 
     def predict_risk(self, X: pd.DataFrame) -> np.ndarray:
         """Predicts posterior mean linear risk score eta = X * mean(beta)."""
@@ -277,7 +380,6 @@ class BayesianCoxModel(BaseSurvivalModel):
         """
         import re
 
-        import arviz as az
 
         if self.idata is None:
             return pd.DataFrame()

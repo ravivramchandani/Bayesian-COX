@@ -1,0 +1,736 @@
+{
+  "gbsg2": {
+    "n_features": 12,
+    "shap": {
+      "Cox PH": [
+        {
+          "feature": "horTh_yes",
+          "mean_abs_shap": 0.8126281262319417
+        },
+        {
+          "feature": "age_x_horTh",
+          "mean_abs_shap": 0.6562082552411904
+        },
+        {
+          "feature": "log_pnodes",
+          "mean_abs_shap": 0.4729490264024409
+        },
+        {
+          "feature": "log_progrec",
+          "mean_abs_shap": 0.29090734354999276
+        },
+        {
+          "feature": "age",
+          "mean_abs_shap": 0.2272258135833577
+        },
+        {
+          "feature": "menostat_Pre",
+          "mean_abs_shap": 0.19208382481769082
+        },
+        {
+          "feature": "progrec",
+          "mean_abs_shap": 0.14242000952403347
+        },
+        {
+          "feature": "pnodes",
+          "mean_abs_shap": 0.08046894215986007
+        },
+        {
+          "feature": "tgrade",
+          "mean_abs_shap": 0.07507051101036427
+        },
+        {
+          "feature": "estrec",
+          "mean_abs_shap": 0.05618416058131118
+        },
+        {
+          "feature": "log_estrec",
+          "mean_abs_shap": 0.03144721356374327
+        },
+        {
+          "feature": "tsize",
+          "mean_abs_shap": 0.0
+        }
+      ],
+      "Random Survival Forest": [
+        {
+          "feature": "pnodes",
+          "mean_abs_shap": 11.06339420639105
+        },
+        {
+          "feature": "log_progrec",
+          "mean_abs_shap": 10.905193184387935
+        },
+        {
+          "feature": "log_pnodes",
+          "mean_abs_shap": 10.66631763521838
+        },
+        {
+          "feature": "progrec",
+          "mean_abs_shap": 7.365226667244021
+        },
+        {
+          "feature": "log_estrec",
+          "mean_abs_shap": 3.3680097761209535
+        },
+        {
+          "feature": "estrec",
+          "mean_abs_shap": 3.04669045018351
+        },
+        {
+          "feature": "age",
+          "mean_abs_shap": 2.415547669693284
+        },
+        {
+          "feature": "tsize",
+          "mean_abs_shap": 2.043193218230654
+        },
+        {
+          "feature": "age_x_horTh",
+          "mean_abs_shap": 1.4742520056241228
+        },
+        {
+          "feature": "horTh_yes",
+          "mean_abs_shap": 1.3426533610734097
+        },
+        {
+          "feature": "tgrade",
+          "mean_abs_shap": 0.46563008943108325
+        },
+        {
+          "feature": "menostat_Pre",
+          "mean_abs_shap": 0.002733698313303279
+        }
+      ]
+    },
+    "posterior": {
+      "normal": {
+        "importance": [
+          {
+            "feature": "log_pnodes",
+            "posterior_mean": 0.5728397131335015,
+            "hazard_ratio": 1.7732955589835506,
+            "credible_lower": 1.2644258360011604,
+            "credible_upper": 2.436375058060924,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "horTh_yes",
+            "posterior_mean": -1.757202369252434,
+            "hazard_ratio": 0.17252685572735985,
+            "credible_lower": 0.04765001030880367,
+            "credible_upper": 0.5878965425700198,
+            "prob_direction": 0.9975,
+            "excludes_null": true
+          },
+          {
+            "feature": "age",
+            "posterior_mean": -0.24792433954999943,
+            "hazard_ratio": 0.7804189878961482,
+            "credible_lower": 0.6267267604724273,
+            "credible_upper": 0.9570165932872206,
+            "prob_direction": 0.98,
+            "excludes_null": true
+          },
+          {
+            "feature": "menostat_Pre",
+            "posterior_mean": -0.4402684686764989,
+            "hazard_ratio": 0.6438635406850803,
+            "credible_lower": 0.4284030541161421,
+            "credible_upper": 0.9322434495881629,
+            "prob_direction": 0.9725,
+            "excludes_null": true
+          },
+          {
+            "feature": "age_x_horTh",
+            "posterior_mean": 0.7141661000577122,
+            "hazard_ratio": 2.0424827456572543,
+            "credible_lower": 1.1103021271608358,
+            "credible_upper": 3.8858977061126287,
+            "prob_direction": 0.97,
+            "excludes_null": true
+          },
+          {
+            "feature": "log_progrec",
+            "posterior_mean": -0.23811287159713404,
+            "hazard_ratio": 0.7881137304178225,
+            "credible_lower": 0.6314307261343324,
+            "credible_upper": 1.0076831026653732,
+            "prob_direction": 0.9299999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "progrec",
+            "posterior_mean": -0.2810444589497631,
+            "hazard_ratio": 0.7549947684595539,
+            "credible_lower": 0.5072104667051834,
+            "credible_upper": 1.0344285451151545,
+            "prob_direction": 0.8925,
+            "excludes_null": false
+          },
+          {
+            "feature": "tgrade",
+            "posterior_mean": 0.07889310643323591,
+            "hazard_ratio": 1.082088647572901,
+            "credible_lower": 0.9285771603710008,
+            "credible_upper": 1.252422627541997,
+            "prob_direction": 0.72,
+            "excludes_null": false
+          },
+          {
+            "feature": "pnodes",
+            "posterior_mean": -0.10411796420340727,
+            "hazard_ratio": 0.9011189913671818,
+            "credible_lower": 0.6950183581052649,
+            "credible_upper": 1.1894796717536185,
+            "prob_direction": 0.5475,
+            "excludes_null": false
+          },
+          {
+            "feature": "estrec",
+            "posterior_mean": 0.054095487339371334,
+            "hazard_ratio": 1.0555853923835061,
+            "credible_lower": 0.8385938299971838,
+            "credible_upper": 1.301608515785457,
+            "prob_direction": 0.375,
+            "excludes_null": false
+          },
+          {
+            "feature": "log_estrec",
+            "posterior_mean": 0.027110744308816246,
+            "hazard_ratio": 1.0274815842009135,
+            "credible_lower": 0.8056924948791621,
+            "credible_upper": 1.2962102007389076,
+            "prob_direction": 0.1625000000000001,
+            "excludes_null": false
+          },
+          {
+            "feature": "tsize",
+            "posterior_mean": 0.008924840689049087,
+            "hazard_ratio": 1.0089647858259383,
+            "credible_lower": 0.8855701673146636,
+            "credible_upper": 1.13991086985767,
+            "prob_direction": 0.11749999999999994,
+            "excludes_null": false
+          }
+        ],
+        "diagnostics": {
+          "r_hat_max": 1.01,
+          "ess_bulk_min": 249.0,
+          "ess_tail_min": 272.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": false,
+          "failures": [
+            "R-hat 1.0100 >= 1.01",
+            "bulk ESS 249 <= 400"
+          ],
+          "method": "nuts",
+          "n_chains": 2,
+          "n_draws": 400
+        }
+      },
+      "horseshoe": {
+        "importance": [
+          {
+            "feature": "log_pnodes",
+            "posterior_mean": 0.43198415664336176,
+            "hazard_ratio": 1.5403107112758754,
+            "credible_lower": 1.199387037892891,
+            "credible_upper": 1.9251963927049762,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "log_progrec",
+            "posterior_mean": -0.23403332618226863,
+            "hazard_ratio": 0.7913354432669188,
+            "credible_lower": 0.6493540299470179,
+            "credible_upper": 0.9979693757201185,
+            "prob_direction": 0.955,
+            "excludes_null": true
+          },
+          {
+            "feature": "progrec",
+            "posterior_mean": -0.1593016381834809,
+            "hazard_ratio": 0.8527391014981849,
+            "credible_lower": 0.5763288534118702,
+            "credible_upper": 1.0355068054569712,
+            "prob_direction": 0.745,
+            "excludes_null": false
+          },
+          {
+            "feature": "horTh_yes",
+            "posterior_mean": -0.22548260184513802,
+            "hazard_ratio": 0.7981309463329007,
+            "credible_lower": 0.3665522124410067,
+            "credible_upper": 1.0789529843566634,
+            "prob_direction": 0.6875,
+            "excludes_null": false
+          },
+          {
+            "feature": "menostat_Pre",
+            "posterior_mean": -0.13186352604045432,
+            "hazard_ratio": 0.8764606009662428,
+            "credible_lower": 0.5820565552495205,
+            "credible_upper": 1.0721190646022545,
+            "prob_direction": 0.6,
+            "excludes_null": false
+          },
+          {
+            "feature": "tgrade",
+            "posterior_mean": 0.050949003206308546,
+            "hazard_ratio": 1.052269229558069,
+            "credible_lower": 0.9519584751731999,
+            "credible_upper": 1.2154654203395026,
+            "prob_direction": 0.5674999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "age",
+            "posterior_mean": -0.03725032848857816,
+            "hazard_ratio": 0.9634349299501638,
+            "credible_lower": 0.809981123186739,
+            "credible_upper": 1.0794815420740747,
+            "prob_direction": 0.35,
+            "excludes_null": false
+          },
+          {
+            "feature": "estrec",
+            "posterior_mean": 0.022510294269113724,
+            "hazard_ratio": 1.022765562734197,
+            "credible_lower": 0.912516794626042,
+            "credible_upper": 1.1835389709821094,
+            "prob_direction": 0.29499999999999993,
+            "excludes_null": false
+          },
+          {
+            "feature": "age_x_horTh",
+            "posterior_mean": -0.0003982492283828497,
+            "hazard_ratio": 0.999601830062315,
+            "credible_lower": 0.8192746705566433,
+            "credible_upper": 1.391395824380126,
+            "prob_direction": 0.16000000000000003,
+            "excludes_null": false
+          },
+          {
+            "feature": "tsize",
+            "posterior_mean": 0.003255637075499123,
+            "hazard_ratio": 1.0032609424177434,
+            "credible_lower": 0.9173175626491367,
+            "credible_upper": 1.0990875428000497,
+            "prob_direction": 0.08499999999999996,
+            "excludes_null": false
+          },
+          {
+            "feature": "pnodes",
+            "posterior_mean": 0.011734030674176821,
+            "hazard_ratio": 1.0118031444753863,
+            "credible_lower": 0.845632361061119,
+            "credible_upper": 1.2104512023314025,
+            "prob_direction": 0.08250000000000002,
+            "excludes_null": false
+          },
+          {
+            "feature": "log_estrec",
+            "posterior_mean": 0.003313838827892032,
+            "hazard_ratio": 1.0033193356619776,
+            "credible_lower": 0.8668405875415143,
+            "credible_upper": 1.1642306934230435,
+            "prob_direction": 0.0475000000000001,
+            "excludes_null": false
+          }
+        ],
+        "diagnostics": {
+          "r_hat_max": 1.01,
+          "ess_bulk_min": 274.0,
+          "ess_tail_min": 424.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": false,
+          "failures": [
+            "R-hat 1.0100 >= 1.01",
+            "bulk ESS 274 <= 400"
+          ],
+          "method": "nuts",
+          "n_chains": 2,
+          "n_draws": 400
+        },
+        "sparsity_signal": [
+          {
+            "feature": "log_pnodes",
+            "shrinkage_factor": 0.1747792090620681
+          },
+          {
+            "feature": "log_progrec",
+            "shrinkage_factor": 0.3415650892980954
+          },
+          {
+            "feature": "horTh_yes",
+            "shrinkage_factor": 0.4314890348202898
+          },
+          {
+            "feature": "progrec",
+            "shrinkage_factor": 0.49376565226307517
+          },
+          {
+            "feature": "menostat_Pre",
+            "shrinkage_factor": 0.5257968668786163
+          },
+          {
+            "feature": "age_x_horTh",
+            "shrinkage_factor": 0.6226295371423959
+          },
+          {
+            "feature": "pnodes",
+            "shrinkage_factor": 0.6600445292543156
+          },
+          {
+            "feature": "tgrade",
+            "shrinkage_factor": 0.66189496906634
+          },
+          {
+            "feature": "age",
+            "shrinkage_factor": 0.6664136522400712
+          },
+          {
+            "feature": "estrec",
+            "shrinkage_factor": 0.6776006424620256
+          },
+          {
+            "feature": "log_estrec",
+            "shrinkage_factor": 0.6928072032617059
+          },
+          {
+            "feature": "tsize",
+            "shrinkage_factor": 0.7341572467040457
+          }
+        ]
+      },
+      "spike_slab": {
+        "importance": [
+          {
+            "feature": "horTh_yes",
+            "posterior_mean": -2.4184943651392414,
+            "hazard_ratio": 0.08905560178693424,
+            "credible_lower": 0.019133501314756773,
+            "credible_upper": 0.4282781354105002,
+            "prob_direction": 1.0,
+            "excludes_null": true
+          },
+          {
+            "feature": "log_pnodes",
+            "posterior_mean": 0.5658259757652951,
+            "hazard_ratio": 1.7609016442952021,
+            "credible_lower": 1.2808252499503208,
+            "credible_upper": 2.3828141460848253,
+            "prob_direction": 0.9975,
+            "excludes_null": true
+          },
+          {
+            "feature": "age_x_horTh",
+            "posterior_mean": 1.035897662601912,
+            "hazard_ratio": 2.8176343857553405,
+            "credible_lower": 1.3197694570712455,
+            "credible_upper": 6.046460848585978,
+            "prob_direction": 0.9950000000000001,
+            "excludes_null": true
+          },
+          {
+            "feature": "age",
+            "posterior_mean": -0.27136440347758556,
+            "hazard_ratio": 0.7623386469294435,
+            "credible_lower": 0.6082671876574663,
+            "credible_upper": 0.948050008241436,
+            "prob_direction": 0.9825,
+            "excludes_null": true
+          },
+          {
+            "feature": "menostat_Pre",
+            "posterior_mean": -0.44754816018664945,
+            "hazard_ratio": 0.639193431834062,
+            "credible_lower": 0.41709652867404157,
+            "credible_upper": 0.9581810620188054,
+            "prob_direction": 0.975,
+            "excludes_null": true
+          },
+          {
+            "feature": "log_progrec",
+            "posterior_mean": -0.24415340450294007,
+            "hazard_ratio": 0.7833674529501817,
+            "credible_lower": 0.621275855363078,
+            "credible_upper": 0.9837739191837076,
+            "prob_direction": 0.9625,
+            "excludes_null": true
+          },
+          {
+            "feature": "progrec",
+            "posterior_mean": -0.25442765883498986,
+            "hazard_ratio": 0.7753601415179341,
+            "credible_lower": 0.5440657941708854,
+            "credible_upper": 1.0206916772089267,
+            "prob_direction": 0.92,
+            "excludes_null": false
+          },
+          {
+            "feature": "tgrade",
+            "posterior_mean": 0.07056559307058037,
+            "hazard_ratio": 1.0731149560273028,
+            "credible_lower": 0.9293804934539113,
+            "credible_upper": 1.242384279027155,
+            "prob_direction": 0.6599999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "pnodes",
+            "posterior_mean": -0.09557467911693973,
+            "hazard_ratio": 0.9088504869674949,
+            "credible_lower": 0.6934516893155224,
+            "credible_upper": 1.175889380863083,
+            "prob_direction": 0.5349999999999999,
+            "excludes_null": false
+          },
+          {
+            "feature": "estrec",
+            "posterior_mean": 0.04467962189364523,
+            "hazard_ratio": 1.0456927891612968,
+            "credible_lower": 0.8276045047333095,
+            "credible_upper": 1.2856270132509355,
+            "prob_direction": 0.33499999999999996,
+            "excludes_null": false
+          },
+          {
+            "feature": "log_estrec",
+            "posterior_mean": 0.021270883539650808,
+            "hazard_ratio": 1.0214987213525897,
+            "credible_lower": 0.7942620558879053,
+            "credible_upper": 1.31123621080672,
+            "prob_direction": 0.135,
+            "excludes_null": false
+          },
+          {
+            "feature": "tsize",
+            "posterior_mean": 0.009968446304982441,
+            "hazard_ratio": 1.0100182967720592,
+            "credible_lower": 0.8778161800596437,
+            "credible_upper": 1.1546047455835515,
+            "prob_direction": 0.125,
+            "excludes_null": false
+          }
+        ],
+        "diagnostics": {
+          "r_hat_max": 1.01,
+          "ess_bulk_min": 289.0,
+          "ess_tail_min": 445.0,
+          "n_divergent": 0,
+          "divergence_rate": 0.0,
+          "converged": false,
+          "failures": [
+            "R-hat 1.0100 >= 1.01",
+            "bulk ESS 289 <= 400"
+          ],
+          "method": "nuts",
+          "n_chains": 2,
+          "n_draws": 400
+        },
+        "sparsity_signal": [
+          {
+            "feature": "horTh_yes",
+            "inclusion_probability": 0.6701626305630077
+          },
+          {
+            "feature": "age_x_horTh",
+            "inclusion_probability": 0.49715872711571846
+          },
+          {
+            "feature": "log_pnodes",
+            "inclusion_probability": 0.4585493627045875
+          },
+          {
+            "feature": "menostat_Pre",
+            "inclusion_probability": 0.4028468025201647
+          },
+          {
+            "feature": "progrec",
+            "inclusion_probability": 0.3956456361668152
+          },
+          {
+            "feature": "age",
+            "inclusion_probability": 0.3918888955327542
+          },
+          {
+            "feature": "log_progrec",
+            "inclusion_probability": 0.3886845681163112
+          },
+          {
+            "feature": "log_estrec",
+            "inclusion_probability": 0.36834327042203113
+          },
+          {
+            "feature": "tgrade",
+            "inclusion_probability": 0.3665723657408611
+          },
+          {
+            "feature": "estrec",
+            "inclusion_probability": 0.36447021825984893
+          },
+          {
+            "feature": "pnodes",
+            "inclusion_probability": 0.36396615267265614
+          },
+          {
+            "feature": "tsize",
+            "inclusion_probability": 0.32887680891696774
+          }
+        ]
+      }
+    },
+    "agreement": {
+      "normal vs Cox PH": {
+        "n_features": 12,
+        "spearman_rho": 0.9020979020979022,
+        "spearman_p": 5.997857446537692e-05,
+        "kendall_tau": 0.7878787878787877,
+        "kendall_p": 0.00010742344075677409,
+        "top_k": 5,
+        "top_k_overlap": 4,
+        "top_k_jaccard": 0.6666666666666666,
+        "built_in_top_k": [
+          "age",
+          "age_x_horTh",
+          "horTh_yes",
+          "log_pnodes",
+          "menostat_Pre"
+        ],
+        "post_hoc_top_k": [
+          "age",
+          "age_x_horTh",
+          "horTh_yes",
+          "log_pnodes",
+          "log_progrec"
+        ]
+      },
+      "normal vs Random Survival Forest": {
+        "n_features": 12,
+        "spearman_rho": -0.15384615384615385,
+        "spearman_p": 0.6330906812462617,
+        "kendall_tau": -0.0909090909090909,
+        "kendall_p": 0.7373055246579552,
+        "top_k": 5,
+        "top_k_overlap": 1,
+        "top_k_jaccard": 0.1111111111111111,
+        "built_in_top_k": [
+          "age",
+          "age_x_horTh",
+          "horTh_yes",
+          "log_pnodes",
+          "menostat_Pre"
+        ],
+        "post_hoc_top_k": [
+          "log_estrec",
+          "log_pnodes",
+          "log_progrec",
+          "pnodes",
+          "progrec"
+        ]
+      },
+      "horseshoe vs Cox PH": {
+        "n_features": 12,
+        "spearman_rho": 0.6013986013986015,
+        "spearman_p": 0.03858845292201946,
+        "kendall_tau": 0.4545454545454545,
+        "kendall_p": 0.04473689858238469,
+        "top_k": 5,
+        "top_k_overlap": 3,
+        "top_k_jaccard": 0.42857142857142855,
+        "built_in_top_k": [
+          "horTh_yes",
+          "log_pnodes",
+          "log_progrec",
+          "menostat_Pre",
+          "progrec"
+        ],
+        "post_hoc_top_k": [
+          "age",
+          "age_x_horTh",
+          "horTh_yes",
+          "log_pnodes",
+          "log_progrec"
+        ]
+      },
+      "horseshoe vs Random Survival Forest": {
+        "n_features": 12,
+        "spearman_rho": 0.04895104895104895,
+        "spearman_p": 0.8799185788786748,
+        "kendall_tau": 0.0,
+        "kendall_p": 1.0,
+        "top_k": 5,
+        "top_k_overlap": 3,
+        "top_k_jaccard": 0.42857142857142855,
+        "built_in_top_k": [
+          "horTh_yes",
+          "log_pnodes",
+          "log_progrec",
+          "menostat_Pre",
+          "progrec"
+        ],
+        "post_hoc_top_k": [
+          "log_estrec",
+          "log_pnodes",
+          "log_progrec",
+          "pnodes",
+          "progrec"
+        ]
+      },
+      "spike_slab vs Cox PH": {
+        "n_features": 12,
+        "spearman_rho": 0.965034965034965,
+        "spearman_p": 3.880985299627467e-07,
+        "kendall_tau": 0.8787878787878787,
+        "kendall_p": 5.319397680508792e-06,
+        "top_k": 5,
+        "top_k_overlap": 4,
+        "top_k_jaccard": 0.6666666666666666,
+        "built_in_top_k": [
+          "age",
+          "age_x_horTh",
+          "horTh_yes",
+          "log_pnodes",
+          "menostat_Pre"
+        ],
+        "post_hoc_top_k": [
+          "age",
+          "age_x_horTh",
+          "horTh_yes",
+          "log_pnodes",
+          "log_progrec"
+        ]
+      },
+      "spike_slab vs Random Survival Forest": {
+        "n_features": 12,
+        "spearman_rho": -0.1958041958041958,
+        "spearman_p": 0.5419358857313173,
+        "kendall_tau": -0.1212121212121212,
+        "kendall_p": 0.6383612539081289,
+        "top_k": 5,
+        "top_k_overlap": 1,
+        "top_k_jaccard": 0.1111111111111111,
+        "built_in_top_k": [
+          "age",
+          "age_x_horTh",
+          "horTh_yes",
+          "log_pnodes",
+          "menostat_Pre"
+        ],
+        "post_hoc_top_k": [
+          "log_estrec",
+          "log_pnodes",
+          "log_progrec",
+          "pnodes",
+          "progrec"
+        ]
+      }
+    }
+  }
+}

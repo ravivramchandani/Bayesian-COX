@@ -31,7 +31,7 @@ class CrossValidationEvaluator:
         if not os.path.exists(self.train_csv_path):
             raise FileNotFoundError(f"Train CSV not found at {self.train_csv_path}")
 
-        with open(self.cv_folds_path, "r", encoding="utf-8") as f:
+        with open(self.cv_folds_path, encoding="utf-8") as f:
             self.cv_folds = json.load(f)
 
         self.full_train_df = pd.read_csv(self.train_csv_path)

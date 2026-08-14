@@ -1,25 +1,28 @@
-# Dataset Specifications and Schema Registry
+# Dataset specifications.
+#
+# Column names match the real sources: scikit-survival for GBSG2 and WHAS500,
+# and the METABRIC clinical export produced by scripts/download_datasets.py.
 
 gbsg2:
   name: "GBSG2"
   raw_file: "data/raw/gbsg2.csv"
-  processed_file: "data/processed/gbsg2_processed.csv"
   duration_col: "time"
   event_col: "cens"
   categorical_features:
     - "horTh"
     - "menostat"
+  ordinal_features:
+    tgrade: ["I", "II", "III"]
   numeric_features:
     - "age"
     - "tsize"
-    - "pnode"
+    - "pnodes"
     - "progrec"
     - "estrec"
 
 whas500:
   name: "WHAS500"
   raw_file: "data/raw/whas500.csv"
-  processed_file: "data/processed/whas500_processed.csv"
   duration_col: "lenfol"
   event_col: "fstat"
   categorical_features:
@@ -28,24 +31,39 @@ whas500:
     - "afb"
     - "sho"
     - "chf"
+    - "av3"
+    - "miord"
+    - "mitype"
+  ordinal_features: {}
   numeric_features:
     - "age"
     - "hr"
     - "sysbp"
     - "diasbp"
     - "bmi"
+    - "los"
 
 metabric:
   name: "METABRIC"
   raw_file: "data/raw/metabric.csv"
-  processed_file: "data/processed/metabric_processed.csv"
   duration_col: "duration"
   event_col: "event"
   categorical_features:
-    - "tumour_stage"
+    - "type_of_breast_surgery"
+    - "cellularity"
     - "chemotherapy"
     - "hormone_therapy"
-    - "PAM50Subtype"
+    - "radio_therapy"
+    - "er_status"
+    - "pr_status"
+    - "her2_status"
+    - "inferred_menopausal_state"
+    - "pam50_+_claudin-low_subtype"
+  ordinal_features: {}
   numeric_features:
-    - "age"
-    - "lymph_nodes_positive"
+    - "age_at_diagnosis"
+    - "tumor_size"
+    - "tumor_stage"
+    - "lymph_nodes_examined_positive"
+    - "neoplasm_histologic_grade"
+    - "nottingham_prognostic_index"

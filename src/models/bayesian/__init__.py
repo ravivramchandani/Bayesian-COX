@@ -1,17 +1,14 @@
-"""
-Bayesian Survival Models Package (PyMC MCMC).
-"""
+"""Bayesian Cox proportional hazards model and convergence diagnostics."""
 
-from .diagnostics import MCMCDiagnostics
+from .diagnostics import check_convergence, divergences, summarise
 from .likelihood import CoxPartialLikelihood
-from .model import BayesianCoxModel
-from .priors import PriorSpecification
-from .sampler import MCMCSampler
+from .model import SUPPORTED_PRIORS, BayesianCoxModel
 
 __all__ = [
+    "SUPPORTED_PRIORS",
     "BayesianCoxModel",
     "CoxPartialLikelihood",
-    "MCMCDiagnostics",
-    "MCMCSampler",
-    "PriorSpecification",
+    "check_convergence",
+    "divergences",
+    "summarise",
 ]

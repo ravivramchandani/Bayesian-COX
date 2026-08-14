@@ -189,7 +189,18 @@ class SurvivalDataPipeline:
                 X_test[col] = X_test[col].fillna(mode_val)
 
         # 2. Categorical One-Hot Encoding
-        cat_cols = [c for c in self.categorical_cols if c in X_train.columns]
+        #
+        # Categorical columns are detected from dtype and unioned with the
+        # configured list. Relying on configuration alone lets an undeclared
+        # non-numeric column reach the numeric path, where scaling fails.
+        declared = [c for c in self.categorical_cols if c in X_train.columns]
+        inferred = [
+            c
+            for c in X_train.columns
+            if not pd.api.types.is_numeric_dtype(X_train[c])
+            and c not in self.ordinal_cols
+        ]
+        cat_cols = list(dict.fromkeys(declared + inferred))
 
         encoded_train_parts = []
         encoded_val_parts = []
@@ -200,6 +211,13 @@ class SurvivalDataPipeline:
             for c in X_train.columns
             if c not in cat_cols and c not in self.ordinal_cols
         ]
+
+        non_numeric = [c for c in num_cols if not pd.api.types.is_numeric_dtype(X_train[c])]
+        if non_numeric:
+            raise ValueError(
+                f"Columns {non_numeric} are not numeric and were not routed to "
+                "categorical or ordinal encoding."
+            )
 
         # Pass numericals through
         encoded_train_parts.append(X_train[num_cols].copy())

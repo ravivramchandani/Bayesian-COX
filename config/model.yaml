@@ -1,18 +1,14 @@
-# Model Hyperparameters and Defaults
-# These are the canonical source of truth for all model scripts.
-# CLI arguments override these values when explicitly passed.
+# Model hyperparameters. Script arguments override these when passed.
 
 cox_ph:
-  # Matches CoxPHModel.__init__(l2_reg=) — L2 ridge penalty on coefficients
   l2_reg: 0.0001
 
 random_survival_forest:
-  n_estimators: 100
+  n_estimators: 300
   min_samples_split: 10
-  min_samples_leaf: 5
-  max_depth: 8
+  min_samples_leaf: 15
+  max_depth: null
   max_features: "sqrt"
-  bootstrap: true
   random_state: 42
 
 deepsurv:
@@ -25,16 +21,42 @@ deepsurv:
   max_iter: 300
 
 bayesian_cox:
-  beta_prior_mean: 0.0
-  # Prior width for regression coefficients — sigma parameter passed to Normal/StudentT/Laplace
-  beta_prior_sd: 10.0
-  baseline_prior: "gamma"
-  coefficient_prior: "normal"
   n_intervals: 6
-  mcmc:
+  inference_method: "nuts"
+  sampler:
     draws: 2000
-    tune: 1000
+    tune: 2000
     chains: 4
-    target_accept: 0.95
-  advi:
-    n_iterations: 10000
+    cores: 1
+    random_state: 42
+
+  priors:
+    normal:
+      mu: 0.0
+      sigma: 1.0
+      target_accept: 0.95
+
+    # Regularised horseshoe. tau0 sets the global scale; slab_df and
+    # slab_scale bound the local scales and prevent the funnel that causes
+    # divergent transitions.
+    horseshoe:
+      tau0: 0.1
+      slab_df: 4.0
+      slab_scale: 2.0
+      target_accept: 0.99
+
+    # Continuous relaxation of spike-and-slab. spike_sd and slab_sd are the
+    # two mixture component widths; alpha and beta_conc parameterise the Beta
+    # prior on the inclusion weight.
+    spike_slab:
+      spike_sd: 0.05
+      slab_sd: 2.0
+      alpha: 1.0
+      beta_conc: 1.0
+      target_accept: 0.95
+
+  # Convergence thresholds. A fit is reported as converged only when all hold.
+  convergence:
+    r_hat_max: 1.01
+    ess_bulk_min: 400
+    divergence_rate_max: 0.005

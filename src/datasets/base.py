@@ -23,7 +23,7 @@ class BaseDataset(ABC):
         if not self.data_path or not os.path.exists(self.data_path):
             raise FileNotFoundError(f"Dataset file not found at '{self.data_path}'")
 
-        with open(self.data_path, "r", encoding="utf-8") as f:
+        with open(self.data_path, encoding="utf-8") as f:
             reader = csv.DictReader(f)
             self._data = list(reader)
 

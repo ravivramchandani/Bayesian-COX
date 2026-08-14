@@ -1,12 +1,39 @@
 [project]
 name = "bayesian-cox"
 version = "0.1.0"
-description = "Add your description here"
+description = "Bayesian survival models for explainable prediction of diseases"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
-    "pandas>=2.3.3",
-    "pymc>=5.25.1",
-    "pyyaml>=6.0.3",
-    "ruff>=0.16.0",
+    "numpy>=2.0",
+    "scipy>=1.14",
+    "pandas>=2.2",
+    "pyyaml>=6.0",
+    "pymc>=5.25",
+    "arviz>=0.20",
+    "scikit-survival>=0.24",
+    "lifelines>=0.30",
+    "shap>=0.46",
+    "matplotlib>=3.9",
+    "seaborn>=0.13",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+# Entry points prepend the project root to sys.path before importing src.
+"scripts/*.py" = ["E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

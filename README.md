@@ -1,174 +1,95 @@
-# Comparative Bayesian Survival Analysis: Benchmark of Cox PH, RSF, DeepSurv, and Bayesian Cox Models
+# Bayesian Survival Models for Explainable Prediction of Diseases
 
-This repository contains a publication-grade research framework for benchmarking, validating, and explaining four major paradigms of survival analysis:
+Codebase for a Master of Applied Technologies thesis at the School of
+Computing, Unitec.
 
-1. **Frequentist Baseline**: Cox Proportional Hazards (Cox PH) model.
-2. **Non-parametric Ensemble**: Random Survival Forest (RSF).
-3. **Deep Learning**: DeepSurv neural network (diffe			rentiable Cox partial likelihood).
-4. **Bayesian Primary Contribution**: Bayesian Cox model with piecewise constant baseline hazards and Normal, Student-t, and Laplace prior parameterizations.
+Four model families are benchmarked on three clinical cohorts, and the
+explainability signal built into the Bayesian posterior is compared against
+post-hoc SHAP attribution on the baselines.
 
-We benchmark all models on three classic clinical cohorts: **GBSG2** (breast cancer), **WHAS500** (heart attack), and **METABRIC** (breast cancer genomics).
+## Models
 
----
+| Family | Implementation |
+| :--- | :--- |
+| Cox proportional hazards | lifelines |
+| Random survival forest | scikit-survival |
+| Bayesian Cox, weakly-informative Normal prior | PyMC, NUTS |
+| Bayesian Cox, regularised horseshoe prior | PyMC, NUTS |
+| Bayesian Cox, continuous spike-and-slab prior | PyMC, NUTS |
 
-## 🚀 Quick Start & Environment Setup
+The Bayesian Cox model uses a piecewise-exponential baseline hazard expressed
+as a Poisson regression over subject-interval exposures. The two sparsity
+priors expose a per-feature inclusion signal that serves as built-in
+explainability.
 
-### Prerequisites
+## Cohorts
 
-- **Operating System**: Linux (developed and tested on Linux)
-- **Python Version**: `3.10` or higher (recommended: `3.10` or `3.11` for compatibility with `pymc` and `torchtuples`)
+| Cohort | Subjects | Events | Source |
+| :--- | ---: | ---: | :--- |
+| GBSG2 | 686 | 299 | scikit-survival |
+| WHAS500 | 500 | 215 | scikit-survival |
+| METABRIC | 1903 | 1103 | `data/external/METABRIC_RNA_Mutation.csv` |
 
-### Installation via Conda / Mamba (Recommended)
+All three carry time-to-event data with right censoring. In the METABRIC
+source `overall_survival` encodes *alive*, so the event indicator is its
+complement.
 
-Create the isolated environment containing all dependencies (including PyTorch, PyMC, Scikit-Survival, and Torchtuples):
+## Setup
 
-```bash
-# Clone the repository
-git clone https://github.com/heisenberg-meth/Bayesian-Survival-Models.git
-cd Bayesian-Survival-Models
-
-# Create the conda environment
-conda env create -f environment.yml
-conda activate survival-benchmark
-```
-
-Alternatively, you can install via `pip` and the `requirements.txt`:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
----
-
-## 📊 Ingestion & Preprocessing
-
-To download and preprocess the benchmark datasets:
+Requires conda and Python 3.11.
 
 ```bash
-# 1. Download datasets (GBSG2, WHAS500, METABRIC)
-python scripts/download_datasets.py
-
-# 2. Preprocess, scale, and partition datasets (train/val/test splits, cross-validation folds)
-python scripts/prepare_dataset.py
+make env
+conda activate bayes-cox
 ```
 
-This generates the standardized survival format in `data/processed/`.
-
----
-
-## 🏃 Run Experiments & Training
-
-All models can be trained individually using the pre-configured hyperparameter search scripts.
-
-### 1. Cox PH Baseline
+## Running
 
 ```bash
-python scripts/run_cox_ph.py
+make data        # download cohorts and build train/val/test splits
+make eda         # exploratory analysis, figures and tables
+make benchmark   # fit every model on every cohort
+make explain     # posterior versus SHAP comparison
+make figures     # thesis figures
+make reports     # markdown reports from the result files
+make test        # test suite
 ```
 
-*Fits standard semi-parametric Cox PH models and logs C-index and Integrated Brier Score.*
-
-### 2. Random Survival Forest
+The thesis document lives in a separate Overleaf-backed repository beside
+this one:
 
 ```bash
-python scripts/run_rsf.py
+make thesis      # compile ../thesis-overleaf/Main.tex
+make jargon      # check no internal identifiers reached the chapters
 ```
 
-*Executes randomized grid search over tree depth, split criteria, and min samples leaf.*
+Override the location with `THESIS_DIR=/path/to/thesis`.
 
-### 3. DeepSurv
+`make all` runs data, eda, benchmark and explain in order. The benchmark takes
+roughly an hour; the Bayesian fits dominate. Reduce `--draws`, `--tune` and
+`--cv-splits` for a faster pass.
 
-```bash
-python scripts/run_deepsurv.py
+Results are written to `reports/tables/` as JSON. `python
+scripts/make_reports.py` renders the markdown reports from those files.
+
+## Layout
+
+```
+config/         dataset schemas and model hyperparameters
+coordination/   decisions, invariants, glossary, protocol, task list
+data/           raw, processed and external data
+scripts/        entry points for each stage
+src/            data, models, evaluation, explainability, statistics
+tests/          test suite
+reports/        generated reports, tables and figures
 ```
 
-*Trains feedforward survival neural networks using the PyCox framework, with hyperparameter tuning for learning rate, dropout, and batch size.*
+## Reproducibility
 
-### 4. Bayesian Cox Model (Primary Contribution)
+Every stochastic step takes an explicit seed. Cohort sizes and event counts
+are asserted against their published values, preprocessing is checked to
+preserve prognostic signal, metrics are checked against scikit-survival, and
+baselines are checked against their published concordance range. Sampler
+diagnostics are computed from the posterior trace rather than asserted.
 
-```bash
-python scripts/run_bayesian_cox.py
-```
-
-*Estimates full posteriors using PyMC and Variational Inference (ADVI) / NUTS MCMC sampling.*
-
----
-
-## 📈 Unified Evaluation & Statistical Validation
-
-To run the unified evaluation pipeline, generate model comparison tables, and produce summary figures:
-
-```bash
-# Run comprehensive evaluation
-python scripts/evaluate.py
-```
-
-This will compile metrics across 5-fold cross-validation and output comparative charts to `reports/figures/model_performance_comparison.png`.
-
-To validate whether differences are statistically meaningful, run the bootstrap validation and hypothesis testing suite:
-
-```bash
-python scripts/run_statistical_validation.py
-```
-
-This performs:
-
-- **100 Bootstrap Replicates** per model and dataset for 95% Confidence Interval calculations.
-- **Pairwise Wilcoxon Signed-Rank Tests** with multiple comparison corrections (**Bonferroni, Holm, FDR-BH**).
-- **Stability Analysis** (3 independent random seeds).
-- **Sensitivity Analysis** under varying training sizes (50%, 75%, 100%).
-- **Computational Complexity Profiling** (training vs. inference rurtimes).
-
----
-
-## 📂 Repository Structure
-
-```text
-Bayesian-Survival-Models/
-├── config/            # Yaml files defining hyperparameters and experimental setups
-├── data/              # Datasets raw and processed splits
-├── docs/              # System architecture, datasets description, and references
-├── reports/           # Markdown report templates, generated figures, and JSON tables
-│   ├── figures/       # Forest plots, survival curves, and model comparison charts
-│   ├── paper/         # Draft manuscript for publication
-│   └── tables/        # Metric summary results in JSON/CSV
-├── scripts/           # Standalone execution pipelines (download, train, stats, explain)
-├── src/               # Reusable core modules
-│   ├── datasets/      # Data loaders and standardization logic
-│   ├── evaluation/    # Metrics implementation (C-Index, IBS)
-│   ├── models/        # Cox PH, RSF, DeepSurv, and Bayesian PyMC structures
-│   ├── statistics/    # Wilcoxon testing, Holm corrections, bootstrap CI logic
-│   └── visualization/ # Visual styling and plotting functions
-└── tests/             # Pytest unit and integration test suite
-```
-
----
-
-## 📄 Publications & Reports
-
-- **Manuscript**: The detailed comparative paper draft can be viewed at:`reports/paper/comparative_survival_analysis_paper.md`
-- **Statistical Validation Report**: The automated statistical verification summary is available at:`reports/statistical_validation_report.md`
-- **Explainability & SHAP Analysis**: SHAP and posterior hazard ratio analyses are compiled under:
-  `reports/explainability_report.md`
-
----
-
-## 🛠️ Reproducibility and Hardware Log
-
-All experiments are fully deterministic, pinning the random seed to `42`.
-
-> **Hyperparameter Source of Truth:** All model hyperparameters are loaded from `config/*.yaml` files
-> (specifically `config/model.yaml` and `config/training.yaml`) via `src/utils/config.get_project_config()`.
-> CLI arguments act only as overrides when explicitly passed — they are never the default source.
-> To understand what hyperparameters produced a given result, check the `resolved_config` field
-> in the JSON output under `reports/tables/` or the printed run header in stdout.
-
-- **Python version**: `3.10.12`
-- **PyMC version**: `5.10.3`
-- **PyTorch version**: `2.1.2`
-- **Operating System**: Linux kernel 6.x
-- **Hardware Profile**: x86_64, minimum 8GB RAM, CPU execution default (due to missing `g++` compilation fallback in PyTensor, ADVI variational parameters are optimized in pure Python space).
-
-# Bayesian-COX
+Run `make test` to verify all of the above.

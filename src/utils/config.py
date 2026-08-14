@@ -21,8 +21,8 @@ class ConfigDict(dict):
     def __getattr__(self, key: str) -> Any:
         try:
             return self[key]
-        except KeyError:
-            raise AttributeError(f"Configuration has no attribute '{key}'")
+        except KeyError as err:
+            raise AttributeError(f"Configuration has no attribute '{key}'") from err
 
     def __setattr__(self, key: str, value: Any) -> None:
         self[key] = ConfigDict(value) if isinstance(value, dict) else value
@@ -30,8 +30,8 @@ class ConfigDict(dict):
     def __delattr__(self, key: str) -> None:
         try:
             del self[key]
-        except KeyError:
-            raise AttributeError(f"Configuration has no attribute '{key}'")
+        except KeyError as err:
+            raise AttributeError(f"Configuration has no attribute '{key}'") from err
 
 
 def load_yaml(file_path: str) -> ConfigDict:
@@ -39,7 +39,7 @@ def load_yaml(file_path: str) -> ConfigDict:
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Config file not found at '{file_path}'")
 
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         data = yaml.safe_load(f) or {}
 
     return ConfigDict(data)

@@ -29,7 +29,7 @@ class EDAAnalyzer:
         self.load_data()
 
     def load_data(self):
-        with open(self.filepath, "r", encoding="utf-8") as f:
+        with open(self.filepath, encoding="utf-8") as f:
             reader = csv.reader(f)
             self.headers = next(reader)
             raw_rows = list(reader)
@@ -442,7 +442,7 @@ class EDAAnalyzer:
 
     def _compute_km_curve(self, times, events):
         # Group by unique event times
-        records = sorted(zip(times, events), key=lambda x: x[0])
+        records = sorted(zip(times, events, strict=False), key=lambda x: x[0])
 
         # Unique times
         unique_t = sorted(set(times))
