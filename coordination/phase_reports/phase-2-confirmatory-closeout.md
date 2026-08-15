@@ -34,11 +34,19 @@ The release is attached to checkpoint commit `44b6085` and contains one
 archive plus its checksum file. The archive SHA-256 is
 `0dbb745b82e5998b5aabc4bb3f05b28f87e00ba2851101a8accb83d447ddf34b`.
 
-Downloading both assets, verifying the checksum and extracting the archive
-from the root of a clone restores
+From a current `main` clone with the exact environment installed, the single
+command
+
+```bash
+conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
+```
+
+downloads both assets and verifies the checksum, safe archive structure,
+exact 455-file run inventory, run hashes and all 80 local frozen inputs before
+restoring
 `reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/`. A fresh
-download and extraction reproduced all 455 files and passed the exhaustive
-frozen-run verifier before this handoff was recorded.
+private-Release download and a repeated in-place verification both passed
+before this handoff was recorded.
 
 ## Prespecified diagnostic outcome
 
@@ -76,6 +84,6 @@ controlled claim is accepted by this phase.
 
 The live 15-week programme still ends on 2026-11-30. The owner has paused
 robustness, confirmatory explanation, primary claim review and
-post-confirmatory thesis result writing. This checkpoint ends after the local
-source commit; no downstream production stage starts without a new
-instruction. The 80 frozen methodological inputs remain unchanged.
+post-confirmatory thesis result writing. The source checkpoint and private
+evidence Release are published; no downstream production stage starts without
+a new instruction. The 80 frozen methodological inputs remain unchanged.

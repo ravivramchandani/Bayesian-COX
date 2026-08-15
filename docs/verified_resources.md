@@ -1,6 +1,6 @@
 # Verified resource ledger
 
-Checked: 2026-08-15. This ledger records resources that were actually
+Checked: 2026-08-16. This ledger records resources that were actually
 inspected. It distinguishes availability and implementation from completed
 scientific results. External journal policies, fees and rankings can change
 and must be rechecked at manuscript freeze and submission.
@@ -25,8 +25,8 @@ PyTorch through a different package route.
 | PyTorch / pycox / torchtuples | 2.13.0 / 0.3.0 / 0.2.2 |
 | SHAP | 0.51.0 |
 | h5py / HDF5 build / HDF5 runtime | 3.16.0 / 2.1.0 / 2.1.0 |
-| Project suite | 150 tests passed without warnings in the exact environment on 2026-08-15 |
-| Ruff | Clean in the exact environment on 2026-08-15 |
+| Project suite | 170 tests passed without warnings in the exact environment on 2026-08-16 |
+| Ruff | Clean in the exact environment on 2026-08-16 |
 | LaTeX toolchain | Clean LaTeX/BibTeX build produced a 70-page A4 PDF; no undefined item, LaTeX warning or box warning on 2026-08-15 |
 
 The environment verifier checks the lock digest, all locked records, direct
@@ -97,13 +97,24 @@ mapped to tested implementation controls:
   [PROBAST+AI](https://www.bmj.com/content/388/bmj-2024-082505) for structured
   quality/risk-of-bias assessment.
 
-The code now implements fold-local transformations, deterministic paired
-repeated folds, training-defined horizons, IPCW metrics, calibration
-parameters and curves, corrected paired inference, full Bayesian diagnostics,
-predictive checks, frozen-cell explanation analysis and prespecified
-robustness. This establishes implementation availability, not a completed
-confirmatory result. Production effects remain unavailable until the frozen
-runs finish.
+The code implements fold-local transformations, deterministic paired repeated
+folds, training-defined horizons, IPCW metrics, calibration parameters and
+curves, corrected paired inference, full Bayesian diagnostics, predictive
+checks, frozen-cell explanation analysis and prespecified robustness. The
+frozen confirmatory run is complete: all 450 planned cells are stored, 430
+passed the diagnostic gate and 20 horseshoe cells retain prespecified
+`failed_diagnostics` records. Five of nine primary contrasts are estimable, so
+the Holm family is incomplete and no complete-family superiority claim is
+available.
+
+The exact 552 MB result directory is preserved for authorised collaborators in
+the private GitHub Release
+[`confirmatory-v1-44b6085`](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085).
+Its archive SHA-256 is
+`0dbb745b82e5998b5aabc4bb3f05b28f87e00ba2851101a8accb83d447ddf34b`.
+`scripts/restore_confirmatory_release.py` restores and verifies it without
+overwriting an existing run. Robustness and confirmatory explanation remain
+implemented but unexecuted and are not scientific results.
 
 ## Publication resources
 

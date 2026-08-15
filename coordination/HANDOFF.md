@@ -2,7 +2,7 @@
 
 State needed to resume work in a new session or on another machine.
 
-Updated: 2026-08-15
+Updated: 2026-08-16
 
 Administrative deadline: the live programme in `TODO.md` runs from 2026-08-17
 to 2026-11-30. This 15-week schedule supersedes the earlier 26-week dates for
@@ -11,8 +11,11 @@ gate.
 
 ## Exact runtime
 
-Use the verified locked environment directly. The older environment named
-`bayes-cox` is not lock-equivalent because its PyTorch package route differs.
+On the original machine, use the verified locked environment directly. The
+absolute path below is machine-specific; on another machine, install
+`conda-lock.yml` as `bayes-cox-clean` using the README instructions. The older
+environment named `bayes-cox` is not lock-equivalent because its PyTorch
+package route differs.
 
 ```bash
 EXACT_PY=/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python
@@ -21,7 +24,7 @@ $EXACT_PY -m pytest -q
 $EXACT_PY -m ruff check .
 ```
 
-Verified 2026-08-15: 150 tests pass and Ruff is clean. The exact macOS arm64
+Verified 2026-08-16: 170 tests pass and Ruff is clean. The exact macOS arm64
 lock contains 259 packages and has SHA-256
 `1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57`.
 Python is 3.11.15; h5py 3.16.0 uses matching HDF5 2.1.0 build/runtime
@@ -118,9 +121,16 @@ collaborators as the private GitHub Release `confirmatory-v1-44b6085`:
 <https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085>.
 Its archive SHA-256 is
 `0dbb745b82e5998b5aabc4bb3f05b28f87e00ba2851101a8accb83d447ddf34b`.
-Download both release assets, verify the supplied `.sha256` file, and extract
-the archive from the root of a clone. It restores the exact run beneath
-`reports/confirmatory/`; run the frozen-run verifier before downstream use.
+From the root of a clone with the exact environment installed, run:
+
+```bash
+conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
+```
+
+The helper downloads both assets, checks the supplied SHA-256, rejects unsafe
+archive paths, verifies every frozen artefact and confirms all 80 local frozen
+inputs before installing the run beneath `reports/confirmatory/`. It never
+overwrites an existing run and instead verifies it in place.
 
 The available complete contrasts and descriptive aggregates are frozen
 production evidence, but the primary family is not complete. They may be used
@@ -160,14 +170,17 @@ transcribed values.
 
 ## Next action sequence
 
-1. Create the agreed local confirmatory close-out checkpoint from the updated
-   tracker and report files. Do not push unless the owner separately requests
-   a push; generated run artefacts remain content-addressed and ignored by the
-   source repository.
-2. Stop and wait for owner instructions. Robustness, confirmatory explanation,
+1. On a new machine, use the README restoration command and require the
+   reported 450-cell, completion-hash and 80-input checks to pass. The source
+   checkpoint and private evidence Release are already published; do not rerun
+   or selectively reconstruct the confirmatory analysis.
+2. The prospective `docs/study_protocol.md` is an immutable pre-execution
+   record. Read it as the frozen analysis plan together with this close-out,
+   which records the observed diagnostic attrition and inferential boundary.
+3. Stop and wait for owner instructions. Robustness, confirmatory explanation,
    primary claim review and post-confirmatory thesis result writing are
    explicitly outside this checkpoint and must not start automatically.
-3. On resumption, retain the prespecified failed-fit outcome and incomplete
+4. On resumption, retain the prespecified failed-fit outcome and incomplete
    primary-family status in every downstream table and claim. A methodological
    change requires a new result-blind rehearsal and freeze; it cannot be folded
    into this run.

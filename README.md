@@ -7,10 +7,50 @@ The approved study is a three-cohort comparison of coefficient priors in a
 Bayesian piecewise-exponential proportional-hazards model. It evaluates
 prediction error, discrimination, explicit survival calibration, posterior
 quality, design robustness and model-conditional explanation stability. The
-confirmatory infrastructure is implemented; the production confirmatory,
-robustness and explanation runs have not yet been executed. Existing benchmark
-tables and figures are exploratory pilot artefacts and cannot support headline
-inference.
+frozen confirmatory execution is complete: all 450 planned cells are stored,
+430 passed the diagnostic gate and 20 horseshoe cells retain prespecified
+`failed_diagnostics` records. Five of nine primary contrasts are estimable,
+so the Holm family is incomplete and no complete-family superiority claim is
+available. Robustness, confirmatory explanation and thesis-results writing are
+paused. Existing legacy benchmark tables and figures remain exploratory pilot
+artefacts.
+
+## Start here — continue from another machine
+
+Do not rerun the completed confirmatory analysis. Its exact 552 MB evidence
+directory is preserved in the private GitHub Release
+[`confirmatory-v1-44b6085`](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085).
+The repository contains a fail-closed restoration helper that downloads both
+release assets, verifies SHA-256, rejects unexpected archive paths, validates
+all run/cell/aggregate hashes and checks the clone's 80 frozen inputs before
+installing the run.
+
+From the root of a fresh clone:
+
+```bash
+# Confirm that GitHub CLI can access the private repository.
+gh auth status
+
+# Build the exact macOS arm64 environment.
+conda-lock install -n bayes-cox-clean conda-lock.yml
+
+# Download, verify and restore the released evidence.
+conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
+```
+
+A successful restoration ends with:
+
+```text
+cells=450 complete=430 failed_diagnostics=20
+completion_content_sha256=03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1
+frozen_inputs=80 unchanged
+```
+
+The restored directory is
+`reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/`. The helper
+never overwrites an existing directory; when the run is already present it
+verifies it in place. After restoration, read `coordination/HANDOFF.md` for the
+current evidence boundary and `coordination/TODO.md` for the paused next tasks.
 
 ## Models
 
@@ -73,34 +113,23 @@ lock-equivalent because its PyTorch provenance differs. See
 
 ## Confirmatory workflow
 
-The analysis is deliberately gated. Rehearsal output is always labelled
-`rehearsal_only` and is not scientific evidence.
+The completed analysis was deliberately gated. Rehearsal output is labelled
+`rehearsal_only` and is not scientific evidence. The write-once freeze records
+five repeats and 80 content-addressed inputs. The current production evidence
+must be restored from the Release above, not regenerated or selectively
+rerun.
 
 ```bash
-# Rebuild and verify the pinned cohorts.
-python scripts/download_datasets.py
-python scripts/prepare_dataset.py
-
-# Run the result-blind, one-fold-per-cohort/model compute rehearsal.
-python scripts/run_confirmatory.py --mode rehearsal
-
-# After the recorded repeat decision and content-addressed protocol freeze,
-# start a new run without --resume. Add --resume only after interruption.
-python scripts/run_confirmatory.py --mode confirmatory
-
-# Then run frozen sensitivities and explanation analysis from that run.
-python scripts/run_robustness.py --mode robustness \
-  --confirmatory-run reports/confirmatory/<completed-run>
-python scripts/run_confirmatory_explainability.py \
-  --run-dir reports/confirmatory/<completed-run>
-python scripts/render_confirmatory.py \
-  --run-dir reports/confirmatory/<completed-run>
+# Correct continuation path for this checkpoint:
+conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
 ```
 
 Production execution refuses methodological overrides and hash mismatches.
 Each cell is checkpointed with data, dependency, configuration, code, seed,
 runtime, diagnostic and prediction lineage. Figures and tables are rendered
-from frozen artefacts without refitting.
+from frozen artefacts without refitting. Do not invoke the confirmatory,
+robustness, explanation or rendering entry points without the next instruction
+recorded in `coordination/HANDOFF.md` and `coordination/TODO.md`.
 
 ## Current evidence boundary
 
@@ -108,13 +137,20 @@ from frozen artefacts without refitting.
   repeated folds, metrics, calibration, paired inference, DeepSurv, Bayesian
   checks, exact explanation analysis, robustness runners and immutable result
   schemas are implemented and tested.
-- The current result-blind rehearsal predates the final support fixes and
-  completed 14 of 18 cells; its four failed cells and every rehearsal effect
-  are non-evidence. Focused post-fix smoke checks pass, but a new exact
-  18-cell rehearsal is still required.
-- The repeat count and protocol content hashes are not frozen yet.
-- No confirmatory effect, robustness estimate or explanation-stability result
-  may be claimed until the frozen production runs complete.
+- The final result-blind rehearsal completed 18 of 18 cells. The deterministic
+  runtime gate retained five repeats, and the write-once protocol freeze has
+  SHA-256
+  `3b5e1042d592ebb6fade0a4a76c1f0d31ce9c0c1cfc08357be46f163f037d2ca`.
+- The frozen production run stored all 450 planned cells: 430 complete and 20
+  rejected by the prespecified diagnostic gate. Every rejected cell is a
+  horseshoe fit and remains excluded from metrics and inference.
+- `inference.json` is explicitly incomplete. Five of nine primary contrasts
+  have all 25 paired folds; the four GBSG2/METABRIC horseshoe contrasts have
+  no confirmatory inference. The Holm family is therefore incomplete.
+- Robustness, confirmatory explanation, primary claim review and
+  post-confirmatory thesis-results writing remain paused pending the next
+  instruction. No complete-family superiority, equivalence or
+  multiplicity-controlled claim is accepted.
 
 The claim rules are in `docs/claim_evidence_register.md`; the live execution
 state is in `coordination/TODO.md` and `coordination/HANDOFF.md`.

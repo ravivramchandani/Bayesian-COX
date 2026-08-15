@@ -51,6 +51,12 @@ this freeze.
 Robustness, confirmatory explanation, claim review and post-confirmatory thesis
 result writing are paused until the owner gives a new instruction.
 
+The complete confirmatory directory is transferred through the private GitHub
+Release `confirmatory-v1-44b6085`. From a current `main` clone, use
+`scripts/restore_confirmatory_release.py`; it must report 450 cells, completion
+SHA-256 `03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1`
+and 80 unchanged frozen inputs before downstream use.
+
 ## Environment
 
 Use the exact verified environment
