@@ -25,6 +25,21 @@ and prediction lineages and the unchanged 80-input protocol freeze.
 | Prediction aggregate SHA-256 | `6e1b03fd60759ef7e6c22e0a64dd5d08f040abd12e9250de566211fbd7fe3c42` |
 | Inference aggregate SHA-256 | `54f53ff0e2e23be2e52e9365716693d9f6b35a11e0d5750644640b38e26edf0e` |
 
+## Private evidence transfer
+
+The complete evidence directory is preserved for authorised collaborators in
+the private GitHub Release
+[`confirmatory-v1-44b6085`](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085).
+The release is attached to checkpoint commit `44b6085` and contains one
+archive plus its checksum file. The archive SHA-256 is
+`0dbb745b82e5998b5aabc4bb3f05b28f87e00ba2851101a8accb83d447ddf34b`.
+
+Downloading both assets, verifying the checksum and extracting the archive
+from the root of a clone restores
+`reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/`. A fresh
+download and extraction reproduced all 455 files and passed the exhaustive
+frozen-run verifier before this handoff was recorded.
+
 ## Prespecified diagnostic outcome
 
 All 20 failed cells are Bayesian horseshoe fits. Each records three attempts:

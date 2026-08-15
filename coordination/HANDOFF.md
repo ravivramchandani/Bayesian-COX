@@ -113,6 +113,15 @@ attempts and are excluded from `fold_metrics.csv` and inference. Preserve this
 failure outcome; do not add a remedy or selectively rerun a cell within the
 current freeze.
 
+The complete 552 MB evidence directory is available to authorised repository
+collaborators as the private GitHub Release `confirmatory-v1-44b6085`:
+<https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085>.
+Its archive SHA-256 is
+`0dbb745b82e5998b5aabc4bb3f05b28f87e00ba2851101a8accb83d447ddf34b`.
+Download both release assets, verify the supplied `.sha256` file, and extract
+the archive from the root of a clone. It restores the exact run beneath
+`reports/confirmatory/`; run the frozen-run verifier before downstream use.
+
 The available complete contrasts and descriptive aggregates are frozen
 production evidence, but the primary family is not complete. They may be used
 only with wording that makes the diagnostic attrition and incomplete family
