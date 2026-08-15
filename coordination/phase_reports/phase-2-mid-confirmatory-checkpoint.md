@@ -2,6 +2,10 @@
 
 Date: 2026-08-15
 
+Historical midpoint record. The execution subsequently completed and is
+closed out in `phase-2-confirmatory-closeout.md`; use that report for current
+status and evidence boundaries.
+
 Status: procedural gates complete; confirmatory computation active; no final
 scientific result accepted
 

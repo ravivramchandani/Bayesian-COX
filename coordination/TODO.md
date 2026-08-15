@@ -169,29 +169,43 @@ artefacts satisfy the stated gate.
   immutable analysis tag (no Git tag is claimed), with 80 verified input hashes
   and freeze content SHA-256
   `3b5e1042d592ebb6fade0a4a76c1f0d31ce9c0c1cfc08357be46f163f037d2ca`.
-- [ ] T-132 (T, W5–7, owner R; depends T-131) — Run confirmatory GBSG2,
+- [x] T-132 (T, W5–7, owner R; depends T-131) — Run confirmatory GBSG2,
   WHAS500 and METABRIC repeated nested CV. Acceptance: all planned cells and
   out-of-fold predictions exist or a prespecified failed-cell record explains
-  the failure; rerun checksums match. Checkpoint 2026-08-15: the frozen run is
-  active; all GBSG2 and WHAS500 cells are stored and METABRIC is in progress.
-  The full 450-cell completion and aggregate inference gates are not yet met.
-- [ ] T-133 (T, W5–7, owner R; depends T-132 progressively) — Triage MCMC and
+  the failure; rerun checksums match. Evidence: the verified frozen run at
+  `reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/` stores the
+  exact 450-cell grid; 430 cells completed and 20 have prespecified
+  `failed_diagnostics` records. Manifest, completion, aggregate and cell
+  hashes, the complete-cell metric and prediction lineages and the unchanged
+  80-input freeze passed the frozen-run checks.
+- [x] T-133 (T, W5–7, owner R; depends T-132 progressively) — Triage MCMC and
   neural failures using only frozen remedies. Acceptance: no interpreted fit
-  breaches the diagnostic gate and all interventions are logged.
+  breaches the diagnostic gate and all interventions are logged. Evidence:
+  all 20 failed cells are horseshoe fits and each records all three permitted
+  attempts; the failed cells are excluded from aggregate metrics and
+  inference. GBSG2 has 18 failed horseshoe folds, METABRIC has two and
+  WHAS500 has none. No neural or other model cell failed.
 - [ ] T-134 (T, W7–8, owners R/SS; depends T-132) — Produce the RQ1 primary
   and secondary estimates. Acceptance: paired effects, corrected 95%
   intervals, adjusted primary tests, calibration and compute costs trace to
-  immutable results; all null/negative findings are retained.
+  immutable results; all null/negative findings are retained. The aggregate
+  artefacts exist, but this gate remains open: `inference.json` is explicitly
+  `incomplete`, only five of nine primary contrasts have all 25 paired folds,
+  and the nine-contrast Holm family is not complete. The two GBSG2 and two
+  METABRIC contrasts involving the horseshoe have no confirmatory inference.
+  Partial-family results must not be promoted as a complete primary analysis.
 - [ ] T-135 (T, W7–8, owners R/PS/SS; depends T-134) — Complete the primary
   claim review. Acceptance: RQ1 wording is approved, unsupported superiority,
   equivalence and calibration claims are absent, and the results chapter
-  skeleton is populated from generated tables.
+  skeleton is populated from generated tables. Owner checkpoint 2026-08-15:
+  this review and all post-confirmatory thesis result writing are paused until
+  a new instruction.
 
 ## Weeks 7–10 — Robustness and explanation
 
-Owner checkpoint 2026-08-15: T-140 through T-144 are deliberately paused
-until T-132 is complete, verified and committed. Do not start these production
-stages without a new owner instruction.
+Owner checkpoint 2026-08-15: T-132 is complete and verified. T-140 through
+T-144 remain deliberately paused and must not start without a new owner
+instruction.
 
 - [ ] T-140 (T, W7–8, owners R/SS; depends T-131) — Run the frozen prior
   hyperparameter and baseline-interval sensitivity. Acceptance: performance,
@@ -251,6 +265,8 @@ stages without a new owner instruction.
   Draft results from generated artefacts. Acceptance: exploratory and
   confirmatory evidence are separated; diagnostics, calibration, negative
   results and sensitivities are included without manual number transcription.
+  Owner checkpoint 2026-08-15: paused; no post-confirmatory results drafting
+  begins from the incomplete primary family without a new instruction.
 - [ ] T-154 (T, W9–10, owners R/PS/SS; depends T-147) — Draft discussion and
   conclusion. Acceptance: each RQ is answered at its supported strength;
   limitations cover internal evaluation, endpoint heterogeneity, predictor

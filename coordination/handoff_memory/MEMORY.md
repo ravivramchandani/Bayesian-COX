@@ -37,9 +37,24 @@ The owner requires the thesis and paper package to be finished by 2026-11-30.
 Use the compressed 15-week schedule in `coordination/TODO.md`; do not restore
 the earlier 2027 deadline.
 
+## Confirmatory close-out boundary
+
+The frozen confirmatory execution at
+`reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/` is complete
+and verified: 450 cells are stored, 430 completed and 20 horseshoe cells failed
+the diagnostic gate after all three permitted attempts. The primary inference
+file is explicitly incomplete and the nine-contrast Holm family is not
+complete. Never describe the partial family as a complete primary analysis,
+never admit a failed fit into an estimate and never add a post hoc remedy to
+this freeze.
+
+Robustness, confirmatory explanation, claim review and post-confirmatory thesis
+result writing are paused until the owner gives a new instruction.
+
 ## Environment
 
-Conda environment `bayes-cox`. PyMC chains run sequentially because the
+Use the exact verified environment
+`bayes-cox-lock-verify-20260815-b`. PyMC chains run sequentially because the
 parallel sampler is unreliable on this machine.
 
 ## Trust nothing that was not verified

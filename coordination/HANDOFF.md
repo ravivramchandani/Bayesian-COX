@@ -47,10 +47,22 @@ deterministic resource rule retained five repeats. The write-once protocol
 freeze now exists at `config/protocol_freeze.json`; all 80 recorded inputs
 rehash exactly to freeze content SHA-256
 `3b5e1042d592ebb6fade0a4a76c1f0d31ce9c0c1cfc08357be46f163f037d2ca`.
-The frozen confirmatory run is active. At the 2026-08-15 checkpoint all GBSG2
-and WHAS500 cells were stored and METABRIC was in progress. Partial cell
-artefacts are not a completed aggregate result. Robustness and confirmatory
-explanation production have not started.
+
+The frozen confirmatory execution is complete at
+`reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/`. The frozen-
+run verifier accepted the exact 450-cell grid, content hashes, aggregate
+hashes, complete-cell metric and prediction lineages and unchanged protocol
+freeze. Of the 450 cells, 430 completed and 20 exhausted the prespecified
+diagnostic remedies.
+All failures are horseshoe fits: 18 in GBSG2 and two in METABRIC. WHAS500 and
+every non-horseshoe arm completed all 25 folds.
+
+The inferential evidence is deliberately incomplete. `inference.json` records
+`status: incomplete` and `holm_family_complete: false`: five of nine primary
+contrasts have all 25 paired folds, while the two GBSG2 and two METABRIC
+horseshoe contrasts have no confirmatory inference. No complete-family
+superiority, equivalence or multiplicity-controlled claim is accepted.
+Robustness and confirmatory explanation production have not started.
 
 ## Data state
 
@@ -73,7 +85,7 @@ admission-time WHAS500 predictors and the baseline/pathology METABRIC set with
 age, NPI and six categorical variables. Published-full, engineered,
 NPI-component/stage and treatment-augmented representations are sensitivities.
 
-## Evidence boundary and rehearsal state
+## Evidence boundary and frozen-run state
 
 The 15 legacy model/cohort fits and 18 legacy explanation comparisons are
 exploratory pilot evidence only. They cannot support confirmatory superiority,
@@ -90,6 +102,22 @@ The subsequent final-input rehearsal at
 also completed 18/18 and is the timing evidence named by the write-once freeze.
 No comparative rehearsal effect was inspected or admitted. Do not inspect or
 report any rehearsal performance effect.
+
+The production completion record has content SHA-256
+`03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1`;
+the manifest content SHA-256 is
+`9ec040841b4751ee3064c93d21d5069ed27bf3bfd6641f0dfffff76557bbf9f7`.
+The aggregate artefacts and all 450 cell files are covered by the completion
+inventory. The 20 failed-diagnostic cells each contain all three frozen fit
+attempts and are excluded from `fold_metrics.csv` and inference. Preserve this
+failure outcome; do not add a remedy or selectively rerun a cell within the
+current freeze.
+
+The available complete contrasts and descriptive aggregates are frozen
+production evidence, but the primary family is not complete. They may be used
+only with wording that makes the diagnostic attrition and incomplete family
+explicit. They must not be presented as though all nine primary contrasts or
+their Holm adjustment were available.
 
 The robustness runner is intentionally large even after scope control: at
 five repeats it plans 825 checkpoint cells and 885 Bayesian fits, with RQ2 on
@@ -108,8 +136,11 @@ The adjacent Overleaf repository now has a focused introduction and
 literature review plus a substantial pre-freeze methodology and reproducibility/
 diagnostic appendices. Its bibliography has 36 retained, cited entries: 30
 with DOI records and six authoritative web records. The results, conclusion
-and abstract remain intentionally unwritten because no confirmatory evidence
-exists. Do not populate them from pilot or rehearsal effects.
+and abstract remain intentionally unwritten. Frozen production evidence now
+exists, but the primary inferential family is incomplete and the owner has
+paused post-confirmatory thesis writing. Do not populate these chapters from
+pilot or rehearsal effects, or start the production-results rewrite without a
+new instruction.
 
 After the methods package was added, a LaTeX/BibTeX build produced a 70-page
 A4 PDF with no undefined citations/references, LaTeX warnings, or overfull/
@@ -120,16 +151,17 @@ transcribed values.
 
 ## Next action sequence
 
-1. Preserve or resume the active frozen confirmatory run without methodological
-   overrides. Do not edit any of its 80 frozen inputs.
-2. After the runner exits, verify 450 stored cells, manifest/completion hashes,
-   frozen-input revalidation, every failed-fit diagnostic record and all
-   completeness gates before accepting aggregate evidence.
-3. Update the tracker and create the agreed local confirmatory checkpoint
-   commit. Do not push it unless the owner separately requests a push.
-4. Stop and wait for owner instructions. Robustness, confirmatory explanation
-   and post-confirmatory thesis result writing are explicitly outside this
-   checkpoint and must not start automatically.
+1. Create the agreed local confirmatory close-out checkpoint from the updated
+   tracker and report files. Do not push unless the owner separately requests
+   a push; generated run artefacts remain content-addressed and ignored by the
+   source repository.
+2. Stop and wait for owner instructions. Robustness, confirmatory explanation,
+   primary claim review and post-confirmatory thesis result writing are
+   explicitly outside this checkpoint and must not start automatically.
+3. On resumption, retain the prespecified failed-fit outcome and incomplete
+   primary-family status in every downstream table and claim. A methodological
+   change requires a new result-blind rehearsal and freeze; it cannot be folded
+   into this run.
 
 Do not edit a frozen methodological input. A change requires a
 new result-blind rehearsal/freeze before any comparative effect is viewed.

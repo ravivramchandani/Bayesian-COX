@@ -312,3 +312,32 @@ remain as the administrative schedule recorded at analysis freeze. They are
 superseded for current project management by `coordination/TODO.md` and this
 entry. Their bytes cannot be changed while the confirmatory run and its
 downstream frozen analyses rely on the recorded 80-input hash set.
+
+## 2026-08-15 — Frozen confirmatory execution closes with an incomplete primary family
+
+The production run at
+`reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/` stored the
+exact planned grid of 450 cells. The exhaustive frozen-run check accepted the
+manifest, completion record, aggregate hashes, all stored-cell hashes, the
+complete-cell metric and prediction lineages and the unchanged 80-input
+protocol freeze. The completion record contains 430 complete cells and 20
+`failed_diagnostics` cells.
+
+All 20 failures are horseshoe fits that exhausted the three prespecified
+attempts. Eighteen occur in GBSG2 and two in METABRIC; WHAS500 has no failed
+cell. Every non-horseshoe model completed all 25 folds in every cohort. The
+failed fits do not enter the aggregate metric table or inferential estimates.
+
+This is a completed frozen execution, not a complete primary inferential
+family. The generated `inference.json` reports `status: incomplete` and
+`holm_family_complete: false`. Five of the nine primary prior contrasts have
+all 25 paired folds. The two GBSG2 and two METABRIC contrasts involving the
+horseshoe are recorded as `incomplete_no_confirmatory_inference`; no corrected
+effect or test is supplied for them. Consequently, the partial primary family
+cannot support a complete-family superiority, equivalence or multiplicity-
+controlled claim.
+
+No new sampler remedy, selective rerun or methodological override is permitted
+inside this frozen analysis. Robustness, confirmatory explanation, claim
+review and post-confirmatory thesis result writing remain paused at the
+owner's checkpoint. The live delivery programme still ends on 2026-11-30.
