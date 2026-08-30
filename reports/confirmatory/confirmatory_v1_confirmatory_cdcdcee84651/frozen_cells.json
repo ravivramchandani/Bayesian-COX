@@ -1,0 +1,4892 @@
+[
+  {
+    "cell_id": "4d985a2a-d3ae-443b-986b-1ee5e2b5a412",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6279855920350564,
+      "integrated_brier_score": 0.18995724134801167
+    }
+  },
+  {
+    "cell_id": "78162cd5-2b7f-4d35-9846-83b9d2a610e6",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5425865102078212,
+      "integrated_brier_score": 0.10123778171406381
+    }
+  },
+  {
+    "cell_id": "0ea0badd-46a5-472e-a76e-aca319276173",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6206791858288255,
+      "integrated_brier_score": 0.1795531560771559
+    }
+  },
+  {
+    "cell_id": "c02bdf50-fdbe-44c5-80bc-a21a208d2796",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6895609441170766,
+      "integrated_brier_score": 0.11308711479486436
+    }
+  },
+  {
+    "cell_id": "2e788fa8-04d9-4a08-9ccc-e7265eaf75a7",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5108568503134427,
+      "integrated_brier_score": 0.17634188365203163
+    }
+  },
+  {
+    "cell_id": "35bbd591-dc45-4f82-a72c-f2a0a0c35869",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.675551991755668,
+      "integrated_brier_score": 0.17178842411628004
+    }
+  },
+  {
+    "cell_id": "be7e293e-3f28-4b14-a176-cbcb2ab1e95a",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6520828358228261,
+      "integrated_brier_score": 0.1309944251507238
+    }
+  },
+  {
+    "cell_id": "e331cd54-a7ed-4a33-99e9-cda5382c8e61",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5093828810424312,
+      "integrated_brier_score": 0.10465333656977224
+    }
+  },
+  {
+    "cell_id": "9591037c-d789-429b-96bb-0f741ff27b38",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5571438877425388,
+      "integrated_brier_score": 0.15781442841412624
+    }
+  },
+  {
+    "cell_id": "e8f21fc5-20ad-4896-9a9a-7db21d791f1f",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5084349189926314,
+      "integrated_brier_score": 0.16985081790172135
+    }
+  },
+  {
+    "cell_id": "54b27da4-0c03-4099-adc4-429b4e2d16e8",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6713358994502915,
+      "integrated_brier_score": 0.11338758753279354
+    }
+  },
+  {
+    "cell_id": "000cad95-8874-4700-bee4-b4f887f3fd14",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5988347960711605,
+      "integrated_brier_score": 0.176068388938098
+    }
+  },
+  {
+    "cell_id": "4ab5009b-e540-4908-adce-9d326bb985bc",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6638893350654846,
+      "integrated_brier_score": 0.164340187309939
+    }
+  },
+  {
+    "cell_id": "3e3f4b5c-c9c7-4b99-bdc2-5cd06429de8c",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5862124468335661,
+      "integrated_brier_score": 0.16623090423680403
+    }
+  },
+  {
+    "cell_id": "5c15fce8-8d97-422f-af83-7251294302d7",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6793386893393988,
+      "integrated_brier_score": 0.16954601465449076
+    }
+  },
+  {
+    "cell_id": "242b0f1a-208b-400f-9c1f-98dc8991b898",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6563935076350873,
+      "integrated_brier_score": 0.1427026495172805
+    }
+  },
+  {
+    "cell_id": "ff69ae4f-2f0d-49ef-b1c7-37b91f7ace66",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5062756416667242,
+      "integrated_brier_score": 0.1265422939642151
+    }
+  },
+  {
+    "cell_id": "133b1dfe-f577-40cc-93e9-92757cd25405",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5526050995603528,
+      "integrated_brier_score": 0.19259760325815922
+    }
+  },
+  {
+    "cell_id": "483de034-92ab-41d1-9726-ca7b97cdb7ab",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5360195321188064,
+      "integrated_brier_score": 0.10053564042583218
+    }
+  },
+  {
+    "cell_id": "26da4677-50ea-455a-8852-1a0a4b7d8aac",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.589554588979371,
+      "integrated_brier_score": 0.18537180841530915
+    }
+  },
+  {
+    "cell_id": "bd6cf071-fe52-4e50-b5eb-c64549891980",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6665685620661118,
+      "integrated_brier_score": 0.16365920142867163
+    }
+  },
+  {
+    "cell_id": "1cc64aad-ae29-4294-b7bb-73c0a2589697",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5462296272306382,
+      "integrated_brier_score": 0.1341215286695837
+    }
+  },
+  {
+    "cell_id": "a11f7cac-8447-4f45-92ea-a208f6457b6a",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5985941780353696,
+      "integrated_brier_score": 0.1382709915493338
+    }
+  },
+  {
+    "cell_id": "a0a81947-0282-442e-8121-9eb2bd1b7187",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.65189327340466,
+      "integrated_brier_score": 0.1538333853597186
+    }
+  },
+  {
+    "cell_id": "defa6202-97bb-4d1a-a2e2-b1e1e39e9385",
+    "cohort": "GBSG2",
+    "model": "Cox PH Baseline",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6803192480022692,
+      "integrated_brier_score": 0.11046850196860944
+    }
+  },
+  {
+    "cell_id": "cbcde661-b8e9-413d-913a-a03cbf50bd5f",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5393812562615697,
+      "integrated_brier_score": 0.139453249069788
+    }
+  },
+  {
+    "cell_id": "6824c213-9590-4503-8c2e-4cd99b9e338b",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5479102345652693,
+      "integrated_brier_score": 0.18667811143946691
+    }
+  },
+  {
+    "cell_id": "6ef59cc7-b59d-4eff-a08f-242859a09e8e",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6508720024070025,
+      "integrated_brier_score": 0.17521131582645455
+    }
+  },
+  {
+    "cell_id": "3bdbdc09-9127-4dd0-9189-75478fee9fd7",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5433527655664223,
+      "integrated_brier_score": 0.16431011844019625
+    }
+  },
+  {
+    "cell_id": "2e7342f4-1456-41af-a36f-67055c486c8e",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.511717696014798,
+      "integrated_brier_score": 0.17502866361976505
+    }
+  },
+  {
+    "cell_id": "bbc9a03d-6570-4e9a-8805-f5169b1abaf2",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.505569492312673,
+      "integrated_brier_score": 0.1198479771713596
+    }
+  },
+  {
+    "cell_id": "2c5336ac-76b1-4bc0-93a0-b9a11869a8ad",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5520155149472081,
+      "integrated_brier_score": 0.1821825120844234
+    }
+  },
+  {
+    "cell_id": "871b6d33-a570-4774-bb7d-8e13ad3748b0",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5302442288945788,
+      "integrated_brier_score": 0.12342901262446697
+    }
+  },
+  {
+    "cell_id": "fc77cf2a-ad8b-46f0-a05e-ef84f883df4d",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5217081349196071,
+      "integrated_brier_score": 0.19979393167924747
+    }
+  },
+  {
+    "cell_id": "6b331e34-1e06-4db3-a9c4-70bc8248ce28",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6203720363405049,
+      "integrated_brier_score": 0.11029929984925319
+    }
+  },
+  {
+    "cell_id": "1feb5fa4-81c0-4cb9-bdb9-bd69ca669496",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5389185528401921,
+      "integrated_brier_score": 0.14830041166743474
+    }
+  },
+  {
+    "cell_id": "11c0095d-83cc-4648-a6f5-56142e2ae965",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5427886308425997,
+      "integrated_brier_score": 0.1740302476380859
+    }
+  },
+  {
+    "cell_id": "e268d673-c769-40b8-8ddc-d2abad8fab59",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5384895096311284,
+      "integrated_brier_score": 0.14624962580311615
+    }
+  },
+  {
+    "cell_id": "00c30f45-c038-430e-aa7f-997e01bb7f3a",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5099321521584631,
+      "integrated_brier_score": 0.10840532485404931
+    }
+  },
+  {
+    "cell_id": "6ed63e19-7734-497c-8987-472fc55a5d40",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6077510244158486,
+      "integrated_brier_score": 0.14588393937835678
+    }
+  },
+  {
+    "cell_id": "65306fff-b981-4441-b68f-625be4cb4f43",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5384434024518504,
+      "integrated_brier_score": 0.19372703920388507
+    }
+  },
+  {
+    "cell_id": "04ae6b40-f4e8-4957-af4c-c4397d527c12",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5897143095534572,
+      "integrated_brier_score": 0.10009420402116467
+    }
+  },
+  {
+    "cell_id": "4a64f5d0-1c30-421a-8ee3-cb6715ccce1c",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6203178126528366,
+      "integrated_brier_score": 0.11566120459015387
+    }
+  },
+  {
+    "cell_id": "9a69f9f5-9439-4708-9e59-2ca8ff07bec8",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5808442488180879,
+      "integrated_brier_score": 0.13550547517139344
+    }
+  },
+  {
+    "cell_id": "dd026ea1-ccce-4734-b3d3-4d073c7b0d6e",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6703015391154419,
+      "integrated_brier_score": 0.19539353598035503
+    }
+  },
+  {
+    "cell_id": "6be7c388-c910-431f-9b50-1dd1849ae1e1",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6002190325024754,
+      "integrated_brier_score": 0.15981435803445315
+    }
+  },
+  {
+    "cell_id": "ea0ddbfd-e326-49e0-a20b-542b1f18c146",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6711491408312344,
+      "integrated_brier_score": 0.15185348872614052
+    }
+  },
+  {
+    "cell_id": "e7999d61-9d6b-427f-b760-bc412f258799",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6068299853609336,
+      "integrated_brier_score": 0.12620923124156752
+    }
+  },
+  {
+    "cell_id": "723f9691-1eec-4bb4-a839-214fca5c67a9",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5325462385117735,
+      "integrated_brier_score": 0.19876861528758935
+    }
+  },
+  {
+    "cell_id": "37c5c6ef-d471-4066-b99b-d4ff4ec4f61d",
+    "cohort": "GBSG2",
+    "model": "Random Survival Forest",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5302141716296883,
+      "integrated_brier_score": 0.12359779826334227
+    }
+  },
+  {
+    "cell_id": "ecdade6e-5cc3-45f6-a492-bd77553e67ca",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6211013777400581,
+      "integrated_brier_score": 0.11407591851434658
+    }
+  },
+  {
+    "cell_id": "0c4f94bb-3478-4c0e-bb34-5fc0f5da4e00",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5255305905560649,
+      "integrated_brier_score": 0.11469273507682923
+    }
+  },
+  {
+    "cell_id": "bf3b7b42-6566-427f-8418-a9247caaae8c",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6452086579101856,
+      "integrated_brier_score": 0.13704080701275723
+    }
+  },
+  {
+    "cell_id": "a0b64997-9a86-4f78-997b-691485a7fe1c",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6008985127247904,
+      "integrated_brier_score": 0.11574839504613971
+    }
+  },
+  {
+    "cell_id": "a0ec03bf-0547-4249-aa6c-120afe135d97",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5516951441965853,
+      "integrated_brier_score": 0.11137751481329727
+    }
+  },
+  {
+    "cell_id": "a12fe611-1275-466e-a483-9623127fcd24",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5763625786905443,
+      "integrated_brier_score": 0.19307117361873138
+    }
+  },
+  {
+    "cell_id": "228e18f0-0bf8-49e9-93cd-ed4c66e57b61",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6321378633078865,
+      "integrated_brier_score": 0.17325541415008033
+    }
+  },
+  {
+    "cell_id": "9fea61d9-7c16-46fd-baa1-cb0a6676ad8b",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5513308491814193,
+      "integrated_brier_score": 0.19801918007594196
+    }
+  },
+  {
+    "cell_id": "cc4650ed-2c48-4739-8494-d66e24574fb1",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5237027427119307,
+      "integrated_brier_score": 0.18412124421296894
+    }
+  },
+  {
+    "cell_id": "59a57541-02ab-4d57-8391-40018f6daa19",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5971229065682139,
+      "integrated_brier_score": 0.1311811436722282
+    }
+  },
+  {
+    "cell_id": "bd1ecbcd-1f81-472f-a1de-3f5b974966d3",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5527017828621363,
+      "integrated_brier_score": 0.18117565588792883
+    }
+  },
+  {
+    "cell_id": "fefa349c-ff4c-49ae-a40c-207398178c0a",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5178008231602133,
+      "integrated_brier_score": 0.11795258128914987
+    }
+  },
+  {
+    "cell_id": "72d7ef96-6347-4091-a053-255c62aa904f",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5195193047182038,
+      "integrated_brier_score": 0.14345292183387126
+    }
+  },
+  {
+    "cell_id": "572ffea1-2cbb-4f1c-b3c9-37ac1ea1befe",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5475749254093748,
+      "integrated_brier_score": 0.10340031708128064
+    }
+  },
+  {
+    "cell_id": "863c6c2f-575a-48f6-b829-a2c10a39e247",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5651551393769509,
+      "integrated_brier_score": 0.15877028751178507
+    }
+  },
+  {
+    "cell_id": "b4cea27b-4f2c-4aaa-8cc2-b34f430594f4",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6028889894301941,
+      "integrated_brier_score": 0.11480998387474152
+    }
+  },
+  {
+    "cell_id": "c3cdc923-46a7-46f2-9d28-eca030be9bba",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6559938588919814,
+      "integrated_brier_score": 0.15159016165607478
+    }
+  },
+  {
+    "cell_id": "c5ef28b1-e89a-4f2a-a92e-39ee92dfba50",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6123710073112222,
+      "integrated_brier_score": 0.16964437581183506
+    }
+  },
+  {
+    "cell_id": "0524e43d-507b-4736-9110-4c9d5eaa73bf",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6373257719281495,
+      "integrated_brier_score": 0.14973990881203764
+    }
+  },
+  {
+    "cell_id": "8d415a01-0a8f-483c-bf98-86d060cde3c2",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5488969051894179,
+      "integrated_brier_score": 0.1970401387252567
+    }
+  },
+  {
+    "cell_id": "fbb63af1-6555-4fce-976f-cce31439e9cf",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6498861279218406,
+      "integrated_brier_score": 0.10126416294023355
+    }
+  },
+  {
+    "cell_id": "8eefff02-7a77-481d-9c7d-1e082b56bf91",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5296890120619431,
+      "integrated_brier_score": 0.16328022956850824
+    }
+  },
+  {
+    "cell_id": "3b14163f-540a-4fc8-a53a-760ab191cff6",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.519784906293696,
+      "integrated_brier_score": 0.15394749099373553
+    }
+  },
+  {
+    "cell_id": "9af1d09d-9c7c-419a-8ade-383f5861cbbe",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6576104808623674,
+      "integrated_brier_score": 0.10062252477197017
+    }
+  },
+  {
+    "cell_id": "569012a2-cb1c-414b-8a39-be27d94c021a",
+    "cohort": "GBSG2",
+    "model": "DeepSurv Neural Net",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6742132520133448,
+      "integrated_brier_score": 0.14971691395318645
+    }
+  },
+  {
+    "cell_id": "6a9794e2-d914-4bf5-a802-c7a58ba209e3",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6500551003033619,
+      "integrated_brier_score": 0.12062957973259907
+    }
+  },
+  {
+    "cell_id": "d4dadb13-a7bb-45fd-a7cd-444fdb14a707",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6465752746272054,
+      "integrated_brier_score": 0.17187212617028141
+    }
+  },
+  {
+    "cell_id": "57548e7f-4a3a-4366-ab74-c9d047905e04",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5512055048382575,
+      "integrated_brier_score": 0.11639323533143003
+    }
+  },
+  {
+    "cell_id": "ce327273-4ed2-42b7-bb9b-4531ee038c7f",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5468034650353177,
+      "integrated_brier_score": 0.11926884653204367
+    }
+  },
+  {
+    "cell_id": "1136fa3b-8b34-44a7-8271-f8fc803f5c75",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.627544319257116,
+      "integrated_brier_score": 0.19943473442562715
+    }
+  },
+  {
+    "cell_id": "ef18de4f-0da0-49e1-bc2b-8b84855d36d0",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5975506303495,
+      "integrated_brier_score": 0.16417347230929286
+    }
+  },
+  {
+    "cell_id": "1a6663f9-33c7-4a6c-937b-9c4b54792cbb",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5961959051258684,
+      "integrated_brier_score": 0.17283190067521745
+    }
+  },
+  {
+    "cell_id": "bd0e6b38-8cd2-46e3-927c-b9d67c10e627",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6765654595254634,
+      "integrated_brier_score": 0.18738415319637758
+    }
+  },
+  {
+    "cell_id": "bb457e2b-6f1e-4ce1-9f86-756308682205",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6144690545988566,
+      "integrated_brier_score": 0.14572023657942895
+    }
+  },
+  {
+    "cell_id": "47dcc764-eb82-4fa8-8042-5e7815f60ae9",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5779144245601043,
+      "integrated_brier_score": 0.12169845169513573
+    }
+  },
+  {
+    "cell_id": "312214e7-65a4-49c9-b5f3-a23d1d6d49c4",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5222696753668914,
+      "integrated_brier_score": 0.18467480373923323
+    }
+  },
+  {
+    "cell_id": "88b8298e-bdf5-40c8-b9a7-e9140ed00f28",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5213678215704325,
+      "integrated_brier_score": 0.12179741771870897
+    }
+  },
+  {
+    "cell_id": "2219746b-6b07-41ee-9c2d-848c09aba586",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6432258584723214,
+      "integrated_brier_score": 0.19670270075348673
+    }
+  },
+  {
+    "cell_id": "d82f9844-841f-4420-bc39-cf430bb5097e",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6978952993666009,
+      "integrated_brier_score": 0.18398702132960446
+    }
+  },
+  {
+    "cell_id": "72eb16e2-6e77-4f2a-9425-65f5c89c554c",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5481232374807419,
+      "integrated_brier_score": 0.16077294247104598
+    }
+  },
+  {
+    "cell_id": "f2f78b3e-da8e-48b1-9866-275d4b3000be",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5271128207877351,
+      "integrated_brier_score": 0.1187090356196524
+    }
+  },
+  {
+    "cell_id": "8af7f9fd-b066-4995-8d90-691d48d32bb9",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6197882419169942,
+      "integrated_brier_score": 0.1600509182824026
+    }
+  },
+  {
+    "cell_id": "b0ecb973-1f8a-496e-a267-fce49cc63917",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5913368430502107,
+      "integrated_brier_score": 0.193621128829327
+    }
+  },
+  {
+    "cell_id": "c6ba4ce6-a7b0-400b-bfc6-f4bcb9e80abf",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5495608543535265,
+      "integrated_brier_score": 0.11657619154939575
+    }
+  },
+  {
+    "cell_id": "b840a9c2-afdf-46b9-9ce1-e6c8a8154e57",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5389586271777115,
+      "integrated_brier_score": 0.11987977647208756
+    }
+  },
+  {
+    "cell_id": "970026a0-9fb0-444a-b1b9-b3a819779f9b",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5074620754411739,
+      "integrated_brier_score": 0.12451515393135248
+    }
+  },
+  {
+    "cell_id": "7f8a5936-a63e-4147-8284-ea9396ea1f8b",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5111498150757974,
+      "integrated_brier_score": 0.10741342809108245
+    }
+  },
+  {
+    "cell_id": "c42e4388-1880-48de-8f19-99932638cee7",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6119689980888705,
+      "integrated_brier_score": 0.18536520405527745
+    }
+  },
+  {
+    "cell_id": "ac662fc2-e886-477d-ad43-2ef7b72a68e5",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5322384362015459,
+      "integrated_brier_score": 0.16373125519429926
+    }
+  },
+  {
+    "cell_id": "e1ba72d2-6e5f-414f-99aa-adfbb1ca7831",
+    "cohort": "GBSG2",
+    "model": "Normal",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5028736348014212,
+      "integrated_brier_score": 0.14066340625034723
+    }
+  },
+  {
+    "cell_id": "adaaa121-75c4-4d74-89c3-a777374f9e52",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 0,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "adae2e8e-8773-4f50-b90c-c13c3647a5f5",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 1,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "34e86551-924d-4500-a57f-f9ebdfdff150",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 2,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "0fb774aa-9dd2-43c0-8c54-4798fc062a16",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 3,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "5c3b424f-74e1-4a92-9a00-261475730793",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 4,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "16530c3f-9824-4dd0-a7a2-392a0c561571",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 5,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "f0813a2f-c75e-4844-953b-72c0d52357d1",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 6,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "02b35f5a-f147-444e-b6ae-f4b6934d53b1",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 7,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "3ee7f0ca-7962-4062-9737-28f765f53d2a",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 8,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "23b21042-a515-4478-95b2-d8a632b5ef60",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 9,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "5a84b2b0-d2e2-4d4e-9de8-30cfa8007958",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 10,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "db5e0c1b-e2c7-4197-b1b3-0997f0943370",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 11,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "db10311a-f0c5-4172-9859-8d4925e1d79d",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 12,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "2e98616f-1da8-4b11-88a2-1c045e830186",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 13,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "96c31f2a-6529-4218-ab93-34ed001e2850",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 14,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "872e1703-0ae8-44b2-b4d0-c889e19a1dde",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 15,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "255a1523-8257-43f7-8535-2ffbd1244bc2",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 16,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "13a78082-ba92-4a55-a192-691407938505",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 17,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "f5836144-2f0e-4aad-917b-01fd0d6b3dda",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6323881079428231,
+      "integrated_brier_score": 0.10783068340737176
+    }
+  },
+  {
+    "cell_id": "72dc6285-5e53-4efb-bef2-287020a929d5",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.613341867986229,
+      "integrated_brier_score": 0.1518309286370742
+    }
+  },
+  {
+    "cell_id": "e5ba48eb-8837-4ff0-9c3f-70eab568d5c7",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.621673985909445,
+      "integrated_brier_score": 0.14998224408946492
+    }
+  },
+  {
+    "cell_id": "74542cd4-1b48-470a-9b4b-c7b2484e6b6f",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5861959306210636,
+      "integrated_brier_score": 0.1375775678506173
+    }
+  },
+  {
+    "cell_id": "707ab371-73ab-4182-aab6-ec77533f4187",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.690260480184531,
+      "integrated_brier_score": 0.12289918245113662
+    }
+  },
+  {
+    "cell_id": "9075db69-7c8a-4f15-8a88-90be1cc3643f",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6716290824729046,
+      "integrated_brier_score": 0.10624169503305472
+    }
+  },
+  {
+    "cell_id": "cb17d724-2143-41b9-aa57-3530afef53d2",
+    "cohort": "GBSG2",
+    "model": "Regularised Horseshoe",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.61810609344441,
+      "integrated_brier_score": 0.14103891391732742
+    }
+  },
+  {
+    "cell_id": "b4448010-e1f1-4af8-ad84-4df8b696a862",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5182348779039587,
+      "integrated_brier_score": 0.1873460832609561
+    }
+  },
+  {
+    "cell_id": "34ccd2b9-22d9-4fbd-a1d7-71471e50a057",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5879137804347064,
+      "integrated_brier_score": 0.13322777613154094
+    }
+  },
+  {
+    "cell_id": "c6ff897f-d506-46d7-8813-e5f1d395f6b7",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6069009329147215,
+      "integrated_brier_score": 0.13240349281214522
+    }
+  },
+  {
+    "cell_id": "3fa77b73-75b9-4ceb-8e9d-2b5153ad9ecc",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6082374636589136,
+      "integrated_brier_score": 0.10634194538432745
+    }
+  },
+  {
+    "cell_id": "03ee348e-1112-41a4-b3f3-c5fe80ea55c8",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5744040757220445,
+      "integrated_brier_score": 0.10533653930440312
+    }
+  },
+  {
+    "cell_id": "6de0f874-aa41-478e-ba0b-4fd583f6d7d0",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6705521744215001,
+      "integrated_brier_score": 0.11530758046008106
+    }
+  },
+  {
+    "cell_id": "a0cb2807-ca75-4c2f-9d3d-3ba75abf13e7",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5825125703467748,
+      "integrated_brier_score": 0.1932404849196919
+    }
+  },
+  {
+    "cell_id": "4608f60b-17d3-4ebf-b255-7aab5e460e33",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5170739985869985,
+      "integrated_brier_score": 0.16353856907588604
+    }
+  },
+  {
+    "cell_id": "0741e173-09d1-4e31-90f6-942199f32902",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6157823818316657,
+      "integrated_brier_score": 0.1641231597600452
+    }
+  },
+  {
+    "cell_id": "2d20dd87-f2e6-43bb-ae83-194e7903a49c",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6365787293694194,
+      "integrated_brier_score": 0.10813877537090079
+    }
+  },
+  {
+    "cell_id": "02e11464-e3b8-4189-aad4-6f6ca741a111",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5888302807328888,
+      "integrated_brier_score": 0.126455670855859
+    }
+  },
+  {
+    "cell_id": "e50d37ae-5bc1-49a2-a077-1f21d6780d86",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5395363539567632,
+      "integrated_brier_score": 0.19482062488163288
+    }
+  },
+  {
+    "cell_id": "27e9dbbf-ede5-47ac-898c-ff6843831d19",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5607405431252953,
+      "integrated_brier_score": 0.1462801457212973
+    }
+  },
+  {
+    "cell_id": "585dd995-df31-4f71-a6be-8cc4dedc3d64",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6243634952868398,
+      "integrated_brier_score": 0.10323118899116462
+    }
+  },
+  {
+    "cell_id": "d6fa4c55-d3a8-4507-9e85-14221115e3d7",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.699383121659199,
+      "integrated_brier_score": 0.11971507467424365
+    }
+  },
+  {
+    "cell_id": "eab1d230-2768-47c7-9450-eec241189174",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5893079918458072,
+      "integrated_brier_score": 0.1990120312702547
+    }
+  },
+  {
+    "cell_id": "8648b46d-521b-4457-a0c9-48dcc0c36586",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5196105333241429,
+      "integrated_brier_score": 0.16478907631443523
+    }
+  },
+  {
+    "cell_id": "62ba0b5c-b9b8-4c1c-ba94-427503b71a27",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5233464916911754,
+      "integrated_brier_score": 0.19073509072398026
+    }
+  },
+  {
+    "cell_id": "66abb15a-02b2-4569-bf01-ead25e010c83",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6333907485246603,
+      "integrated_brier_score": 0.19527666188163284
+    }
+  },
+  {
+    "cell_id": "72e265dc-2965-47ee-95f9-03bbacadcd48",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.620092123883258,
+      "integrated_brier_score": 0.19476503356139857
+    }
+  },
+  {
+    "cell_id": "b435beca-253b-49a6-9500-e6f515a60a81",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5156683825051013,
+      "integrated_brier_score": 0.15753876563611577
+    }
+  },
+  {
+    "cell_id": "dd0ff9ad-99f0-4dda-80b8-5ac7c6ff0fcd",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6818713452576451,
+      "integrated_brier_score": 0.14804822824690947
+    }
+  },
+  {
+    "cell_id": "0b77bb4f-4594-4035-9fef-5361070aa74a",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.503584415857714,
+      "integrated_brier_score": 0.19484220925408735
+    }
+  },
+  {
+    "cell_id": "d66a9428-b0ec-4c45-8e12-ff37f66cb04d",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5587639865275729,
+      "integrated_brier_score": 0.17594166109916465
+    }
+  },
+  {
+    "cell_id": "1508e7a3-5361-4c30-a931-551c2754627f",
+    "cohort": "GBSG2",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5328312785857223,
+      "integrated_brier_score": 0.1742630136427017
+    }
+  },
+  {
+    "cell_id": "3924e04b-e84d-4ac2-a065-6bf81da304f7",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6749948009214288,
+      "integrated_brier_score": 0.13972710613515393
+    }
+  },
+  {
+    "cell_id": "57383c9f-d843-448d-9725-8826baf66b16",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6662298957986148,
+      "integrated_brier_score": 0.1327058338251724
+    }
+  },
+  {
+    "cell_id": "df81d00e-ab05-4799-90de-af2109c51153",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6618728002065583,
+      "integrated_brier_score": 0.15276245319499576
+    }
+  },
+  {
+    "cell_id": "34a4b693-9dae-43a2-84a9-97a30002ba69",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.563255414967878,
+      "integrated_brier_score": 0.14275669903470764
+    }
+  },
+  {
+    "cell_id": "a38c66d3-7930-495f-b82b-6c4de2ad85a4",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6824059395580371,
+      "integrated_brier_score": 0.16487329318668512
+    }
+  },
+  {
+    "cell_id": "01624388-6011-4900-811d-58aee7e8272c",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5359726903566995,
+      "integrated_brier_score": 0.13892916685062748
+    }
+  },
+  {
+    "cell_id": "03b517bc-53b0-4c96-ad7f-60cc261ec6dd",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5145267836614488,
+      "integrated_brier_score": 0.1564092221998363
+    }
+  },
+  {
+    "cell_id": "da0d1762-21c3-4420-b890-f390f3eb4bfc",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6866331571837068,
+      "integrated_brier_score": 0.1865513670015912
+    }
+  },
+  {
+    "cell_id": "852ee305-4c09-49c7-b4a2-9c2ce408c427",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5817713235023321,
+      "integrated_brier_score": 0.17346325273854962
+    }
+  },
+  {
+    "cell_id": "d9449f93-43a4-49c0-b7c7-9db202ad5241",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5812350607891119,
+      "integrated_brier_score": 0.17562332883619847
+    }
+  },
+  {
+    "cell_id": "88dfc5e6-e473-4005-b603-d4df39fad2fa",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6633043017970225,
+      "integrated_brier_score": 0.11894661768637786
+    }
+  },
+  {
+    "cell_id": "761b5849-7f1f-4a99-a059-a1ba75291149",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.646971481017574,
+      "integrated_brier_score": 0.19044930864106213
+    }
+  },
+  {
+    "cell_id": "41d0a871-856b-4ea1-bffb-55cd50a0a67c",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5061139576354471,
+      "integrated_brier_score": 0.1267000712139183
+    }
+  },
+  {
+    "cell_id": "9c4b3456-e2ff-4a23-89a7-088642f56103",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.618480000904637,
+      "integrated_brier_score": 0.19820232604919583
+    }
+  },
+  {
+    "cell_id": "f092422d-c700-478e-8c3a-2c1195cc57f8",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5877705365336255,
+      "integrated_brier_score": 0.19668455984674188
+    }
+  },
+  {
+    "cell_id": "ab6d9c25-36cc-4f48-99b7-1840619bc7dc",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5933027663423553,
+      "integrated_brier_score": 0.13261922531573087
+    }
+  },
+  {
+    "cell_id": "50e42c61-e348-4499-9a3f-a0d6ba2bc774",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5470879592385768,
+      "integrated_brier_score": 0.19837793191946607
+    }
+  },
+  {
+    "cell_id": "92202214-f895-4843-9ba7-50f2b1bddfb2",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6804846051053177,
+      "integrated_brier_score": 0.12428144840537804
+    }
+  },
+  {
+    "cell_id": "d7c6f420-d910-4307-ae02-0ad6a042196b",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6434231544235665,
+      "integrated_brier_score": 0.12056985602859782
+    }
+  },
+  {
+    "cell_id": "ad7de0de-906d-4707-965f-f37aa2926879",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6357075510560287,
+      "integrated_brier_score": 0.18092083732692496
+    }
+  },
+  {
+    "cell_id": "ebaf9283-4cd4-46cd-8eb1-e2f886eb428b",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5938743451189928,
+      "integrated_brier_score": 0.12633265370275462
+    }
+  },
+  {
+    "cell_id": "f606f895-8fbc-457b-907d-8a9418b5a1ae",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.631089504098908,
+      "integrated_brier_score": 0.14307027200281405
+    }
+  },
+  {
+    "cell_id": "97d99bcf-a432-45e8-b8d3-c39502b27b76",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6239371760388749,
+      "integrated_brier_score": 0.19459244175326562
+    }
+  },
+  {
+    "cell_id": "4e0e78aa-b543-4970-8fb7-a952d76f1a41",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5804957790569947,
+      "integrated_brier_score": 0.17366283003304422
+    }
+  },
+  {
+    "cell_id": "0c07746a-0be6-4c9a-bd23-3d3ac4e47738",
+    "cohort": "WHAS500",
+    "model": "Cox PH Baseline",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6425630500307042,
+      "integrated_brier_score": 0.14474625907732502
+    }
+  },
+  {
+    "cell_id": "a0170fc9-2655-47f3-b680-07e4a1205b49",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6846938902575003,
+      "integrated_brier_score": 0.1393490341937918
+    }
+  },
+  {
+    "cell_id": "82e104c9-133d-4834-9788-89ce251ec736",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6916935931229465,
+      "integrated_brier_score": 0.16343987109380767
+    }
+  },
+  {
+    "cell_id": "c8baaaee-5eb9-411f-89c7-3761d4a26be3",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5985520593582859,
+      "integrated_brier_score": 0.17222631963276672
+    }
+  },
+  {
+    "cell_id": "89032fad-4599-4cfc-8c05-1d2b0b091dc0",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6078169053575683,
+      "integrated_brier_score": 0.14815957180960676
+    }
+  },
+  {
+    "cell_id": "1fcf6c56-7059-4627-9ff4-934c2aa10625",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6689649221826333,
+      "integrated_brier_score": 0.18576581869428144
+    }
+  },
+  {
+    "cell_id": "938f2c8c-0437-4e8e-b54e-b47ebe6dbf79",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6965376918419548,
+      "integrated_brier_score": 0.13862337966018023
+    }
+  },
+  {
+    "cell_id": "8a206d52-692c-4a1f-b11e-5c0a6053bca5",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5995424991532192,
+      "integrated_brier_score": 0.12116666893015615
+    }
+  },
+  {
+    "cell_id": "ce57dcb4-0703-4e74-8995-13f4a67cf06d",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5953368289558874,
+      "integrated_brier_score": 0.1038325657364455
+    }
+  },
+  {
+    "cell_id": "aba4600a-8c2d-4872-97cb-7e2f713240fb",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6684448074424978,
+      "integrated_brier_score": 0.18697191708900635
+    }
+  },
+  {
+    "cell_id": "4ab8a075-4e2a-441d-92d2-b2004d6abc9a",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5638428625070269,
+      "integrated_brier_score": 0.15509773049937872
+    }
+  },
+  {
+    "cell_id": "d45510b9-affd-4a82-86b0-091cd9587446",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6824630039445602,
+      "integrated_brier_score": 0.13187960154390246
+    }
+  },
+  {
+    "cell_id": "3870d9e3-4022-48f8-a9bc-1f53b6c1c3e9",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5654334315278569,
+      "integrated_brier_score": 0.1929951772782944
+    }
+  },
+  {
+    "cell_id": "cdd9804d-962c-48e4-814e-0ebf16207dc2",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5921405175917802,
+      "integrated_brier_score": 0.15088543124513532
+    }
+  },
+  {
+    "cell_id": "61caae9e-ea5d-414d-9000-cd04e9941baf",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5334106063039308,
+      "integrated_brier_score": 0.19019954695724822
+    }
+  },
+  {
+    "cell_id": "7f376810-a6c7-4e2c-a551-c92290af29bb",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6789441053032323,
+      "integrated_brier_score": 0.1596130024496244
+    }
+  },
+  {
+    "cell_id": "bd38af06-102c-4ab0-8699-b69937a63bff",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5679003499989475,
+      "integrated_brier_score": 0.16198647686754009
+    }
+  },
+  {
+    "cell_id": "e990ffaa-42d3-470e-9d66-c261cbfa3320",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6179045784974126,
+      "integrated_brier_score": 0.1417060038884333
+    }
+  },
+  {
+    "cell_id": "b712312f-b891-4eeb-929c-7d3a975608d1",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6546023080315213,
+      "integrated_brier_score": 0.12296272148451137
+    }
+  },
+  {
+    "cell_id": "a802d05c-9016-4898-8044-687dc1cb38d8",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5130815653942372,
+      "integrated_brier_score": 0.13564722421125402
+    }
+  },
+  {
+    "cell_id": "abc120d3-c80a-485c-a416-143804c085c0",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5580102813577535,
+      "integrated_brier_score": 0.10447156788383646
+    }
+  },
+  {
+    "cell_id": "d28ac92a-8f59-406f-b6e3-bb063a2bab68",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5324613255549788,
+      "integrated_brier_score": 0.12401546668691854
+    }
+  },
+  {
+    "cell_id": "47acf225-a1c3-4c00-8f5b-57645951cfed",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5987492360382698,
+      "integrated_brier_score": 0.14859707350817492
+    }
+  },
+  {
+    "cell_id": "372d03c1-2df3-4ea5-84ea-784543f972cb",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6286456919526098,
+      "integrated_brier_score": 0.11171382437679075
+    }
+  },
+  {
+    "cell_id": "8dd493b7-8883-42c2-9904-88fe576e06b7",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6278789419429622,
+      "integrated_brier_score": 0.13168321621540915
+    }
+  },
+  {
+    "cell_id": "09856e24-9dd3-473c-91d8-adb4db7c0250",
+    "cohort": "WHAS500",
+    "model": "Random Survival Forest",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5727456688330442,
+      "integrated_brier_score": 0.15026957939970975
+    }
+  },
+  {
+    "cell_id": "260f9922-1d64-49da-bdd6-e79fab45f80a",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5517009816934157,
+      "integrated_brier_score": 0.15761738166248887
+    }
+  },
+  {
+    "cell_id": "3c56d946-8cfb-4373-97ba-fb9227ae35a2",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6249613331444047,
+      "integrated_brier_score": 0.16001195457733308
+    }
+  },
+  {
+    "cell_id": "932ba8f7-cefa-49ad-83a5-0e49db1afec7",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.579050180472986,
+      "integrated_brier_score": 0.13352915357365774
+    }
+  },
+  {
+    "cell_id": "47cf9307-a968-4a1a-b72a-fd8c155563b7",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5371763625018988,
+      "integrated_brier_score": 0.10849904504629149
+    }
+  },
+  {
+    "cell_id": "f538be62-473c-40a6-8a0e-a779c1f9f663",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6916079711817665,
+      "integrated_brier_score": 0.19758470863414745
+    }
+  },
+  {
+    "cell_id": "da280245-93ee-40c3-94d6-7b8f54384676",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6341412754333559,
+      "integrated_brier_score": 0.17081723291653267
+    }
+  },
+  {
+    "cell_id": "b32c6156-16c4-4f30-b26b-7887d1ed74b8",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5466177089525205,
+      "integrated_brier_score": 0.1252068767037993
+    }
+  },
+  {
+    "cell_id": "fe2ff787-b00e-4154-92b6-c089980b1884",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.689425709291776,
+      "integrated_brier_score": 0.15028335493109177
+    }
+  },
+  {
+    "cell_id": "1c995475-8860-4e6e-8eee-91ecb4bb980e",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5692199075939203,
+      "integrated_brier_score": 0.16690058337450006
+    }
+  },
+  {
+    "cell_id": "2e8f9434-9364-4ef5-b896-e46ef1a5b979",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6960981426912811,
+      "integrated_brier_score": 0.17861074835966656
+    }
+  },
+  {
+    "cell_id": "7d7de3f6-1dfe-43db-bf60-0383e09a66c7",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5604919183270629,
+      "integrated_brier_score": 0.11616667762071511
+    }
+  },
+  {
+    "cell_id": "94fad65d-ffc6-4d75-a3fd-d33bde178f63",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6969807790376877,
+      "integrated_brier_score": 0.18679196193147063
+    }
+  },
+  {
+    "cell_id": "150099d0-dcd7-4cda-985a-6730577c230e",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5630739156081592,
+      "integrated_brier_score": 0.12627590842415046
+    }
+  },
+  {
+    "cell_id": "f8410a08-ec92-4013-8d5f-22634ca8db50",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5697705209511904,
+      "integrated_brier_score": 0.17490289803074108
+    }
+  },
+  {
+    "cell_id": "8dca36dd-409a-4633-825c-51ae4a955487",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.688987559038813,
+      "integrated_brier_score": 0.16110636188291277
+    }
+  },
+  {
+    "cell_id": "2f5716c4-954e-4b3b-8ae9-d17105018673",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5142846379894379,
+      "integrated_brier_score": 0.10076052971772373
+    }
+  },
+  {
+    "cell_id": "cf7fc2af-4044-420b-b5fc-b99661772d72",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.674892421067798,
+      "integrated_brier_score": 0.1432058034724778
+    }
+  },
+  {
+    "cell_id": "9c8176b0-5821-42e5-b22a-3620dd3d132c",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5247538746501732,
+      "integrated_brier_score": 0.1522003608601994
+    }
+  },
+  {
+    "cell_id": "6a7f0f60-6a61-4aac-9a08-91e1dda20f4a",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5035806077579266,
+      "integrated_brier_score": 0.1822212658314344
+    }
+  },
+  {
+    "cell_id": "0619ef11-5c1d-410e-8801-53cc34895e9f",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6848537120927377,
+      "integrated_brier_score": 0.11680082321992796
+    }
+  },
+  {
+    "cell_id": "db65c1a6-2b89-4bfa-bd84-7348925f80ae",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6694425302222093,
+      "integrated_brier_score": 0.10181012906714085
+    }
+  },
+  {
+    "cell_id": "3f50192c-7b5a-40ca-ae21-83172a0f4fbe",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6317884086625976,
+      "integrated_brier_score": 0.16409022572376453
+    }
+  },
+  {
+    "cell_id": "9afbd59f-f40a-4bba-b2cf-eda01a5d2a0c",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5055016615769976,
+      "integrated_brier_score": 0.1176561959518733
+    }
+  },
+  {
+    "cell_id": "4a1336f3-9db1-4d57-a280-fc66d043dfd0",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5213678759342921,
+      "integrated_brier_score": 0.11693564858463182
+    }
+  },
+  {
+    "cell_id": "55ba7047-8e92-4ecf-8ad0-2c06fae163ab",
+    "cohort": "WHAS500",
+    "model": "DeepSurv Neural Net",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6914805623093495,
+      "integrated_brier_score": 0.12892929609260828
+    }
+  },
+  {
+    "cell_id": "9b4fe728-a8fc-47ff-9c54-bd83ffdc9dcd",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6203516781277005,
+      "integrated_brier_score": 0.11304063339854149
+    }
+  },
+  {
+    "cell_id": "173be41f-af17-4e32-b8d9-b021aeabaef9",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6994562983215764,
+      "integrated_brier_score": 0.1843862612182782
+    }
+  },
+  {
+    "cell_id": "8bebe439-5702-4488-b9bd-26012abd02e9",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.571491735874204,
+      "integrated_brier_score": 0.19472154445954593
+    }
+  },
+  {
+    "cell_id": "6a0a47f7-2a00-44be-b999-84680cf20519",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.679473066773874,
+      "integrated_brier_score": 0.1252757097457465
+    }
+  },
+  {
+    "cell_id": "b1c5af02-ed43-4279-a368-e34e299e2113",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6753094663295542,
+      "integrated_brier_score": 0.10381757134586794
+    }
+  },
+  {
+    "cell_id": "efbe4343-dc12-4cc4-bc58-58b3204963a8",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5553613558294278,
+      "integrated_brier_score": 0.11174435091301677
+    }
+  },
+  {
+    "cell_id": "c1abc53c-e01e-40ed-b803-4a056ceebd8b",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5075834820752932,
+      "integrated_brier_score": 0.158589430510358
+    }
+  },
+  {
+    "cell_id": "3d66d330-5eba-4b99-bc5d-f3514fca093c",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6742845607095305,
+      "integrated_brier_score": 0.1950840318357102
+    }
+  },
+  {
+    "cell_id": "f60c741f-e27c-4ec9-90ce-860c6843de3a",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5182821957025125,
+      "integrated_brier_score": 0.15609263001754448
+    }
+  },
+  {
+    "cell_id": "cc600744-8c3f-48ef-83de-2086d6ed0c5c",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6173759825942912,
+      "integrated_brier_score": 0.11937471819078213
+    }
+  },
+  {
+    "cell_id": "848df4c6-e4a7-4ca8-864e-906e00de9259",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6447177033224988,
+      "integrated_brier_score": 0.18860543517050443
+    }
+  },
+  {
+    "cell_id": "8497d536-3954-48af-8d54-76589ab36ecc",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5326108866594016,
+      "integrated_brier_score": 0.10599115985871885
+    }
+  },
+  {
+    "cell_id": "dcd027da-f4d5-4f41-b162-5eba2243ee7c",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6273093571827121,
+      "integrated_brier_score": 0.13879016256594562
+    }
+  },
+  {
+    "cell_id": "8b9223a7-68e7-4634-a8a2-8eff3f538681",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6999580454950339,
+      "integrated_brier_score": 0.13960651906180288
+    }
+  },
+  {
+    "cell_id": "2230ff8c-a4ea-4a0a-9d69-bcdc758c3b93",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6997215486238071,
+      "integrated_brier_score": 0.16084823427763412
+    }
+  },
+  {
+    "cell_id": "3db39f32-e885-4be8-9179-8f40cc5a8572",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5055955147326615,
+      "integrated_brier_score": 0.18304608918683568
+    }
+  },
+  {
+    "cell_id": "c8e4c6cd-b3e0-4291-955a-f100f9e4a3e0",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6720260151743813,
+      "integrated_brier_score": 0.12559240451332135
+    }
+  },
+  {
+    "cell_id": "0457c320-1686-463c-ab48-f2722709b64e",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5276784094080582,
+      "integrated_brier_score": 0.18453841448089847
+    }
+  },
+  {
+    "cell_id": "59a5fcc0-d679-4358-99c5-f3906fb7a5e7",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5100334512690368,
+      "integrated_brier_score": 0.16008626505896828
+    }
+  },
+  {
+    "cell_id": "ceb603bf-c325-49bd-a5e5-66f21433c6fb",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6578405587973011,
+      "integrated_brier_score": 0.10194504988113154
+    }
+  },
+  {
+    "cell_id": "af3cfcd1-7bee-479e-8096-421cb8cbbef2",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6695362571478787,
+      "integrated_brier_score": 0.1785839880790785
+    }
+  },
+  {
+    "cell_id": "0255ea36-1ad0-4255-9592-59f574b93210",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5533193289236569,
+      "integrated_brier_score": 0.10316089046419975
+    }
+  },
+  {
+    "cell_id": "63f2199a-a3b1-4b3f-a1c2-c4d2ea60a51b",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6075737832663711,
+      "integrated_brier_score": 0.12101272249208123
+    }
+  },
+  {
+    "cell_id": "2fdb78eb-dd90-4950-942a-0c2a1e2fdd97",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5555232626512744,
+      "integrated_brier_score": 0.16031256764987195
+    }
+  },
+  {
+    "cell_id": "31d3d660-dd32-4970-98d9-52aa7573d618",
+    "cohort": "WHAS500",
+    "model": "Normal",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.567623429384638,
+      "integrated_brier_score": 0.1885273477899153
+    }
+  },
+  {
+    "cell_id": "e0becbbf-bb1f-4d44-ba8c-81d851570729",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5894860381199266,
+      "integrated_brier_score": 0.15579799341845119
+    }
+  },
+  {
+    "cell_id": "a99220a5-9175-4903-b1a8-ae899e97ba80",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.672316430523792,
+      "integrated_brier_score": 0.12213539708197245
+    }
+  },
+  {
+    "cell_id": "c437face-b14b-4f4b-9906-73c2b80bfb26",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5000722410086534,
+      "integrated_brier_score": 0.17703913498704515
+    }
+  },
+  {
+    "cell_id": "eced13e5-202a-4b58-9dd9-fe81c914e362",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5616203101310437,
+      "integrated_brier_score": 0.19817137962799458
+    }
+  },
+  {
+    "cell_id": "768b09c6-470f-4967-95ac-e894e78e3096",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.669978612221555,
+      "integrated_brier_score": 0.19900296853186988
+    }
+  },
+  {
+    "cell_id": "061e8eb9-41dc-46d6-bad8-d02864178597",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6593657555765712,
+      "integrated_brier_score": 0.1555368151245869
+    }
+  },
+  {
+    "cell_id": "bc7d752b-a0ca-4de4-b690-0190bf0c38cf",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6101710168434927,
+      "integrated_brier_score": 0.11855338671421284
+    }
+  },
+  {
+    "cell_id": "431fb6d6-7e1d-4f55-a9e8-c3f4e6d2b33d",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6908692907620999,
+      "integrated_brier_score": 0.10610512795411337
+    }
+  },
+  {
+    "cell_id": "aa4ff5b0-147e-4580-b263-7326e8b0a03c",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6009535462654724,
+      "integrated_brier_score": 0.10538466284851912
+    }
+  },
+  {
+    "cell_id": "eba533c8-9434-46e3-b50d-04557543cc36",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6679806678480095,
+      "integrated_brier_score": 0.13891190149151839
+    }
+  },
+  {
+    "cell_id": "2137ad2e-2f2a-4857-b25f-3903f6fe8957",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6077037546522541,
+      "integrated_brier_score": 0.15151363665882445
+    }
+  },
+  {
+    "cell_id": "9d85a748-4c92-4834-b4e4-0c0d2eab694c",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6158996161771938,
+      "integrated_brier_score": 0.12955909892403628
+    }
+  },
+  {
+    "cell_id": "e2bacd4c-d030-4015-a333-bc09e9813036",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5106960630408399,
+      "integrated_brier_score": 0.1672980273648884
+    }
+  },
+  {
+    "cell_id": "aa18c81a-1e14-4b84-bbc0-fb643cd8d0bf",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5648967430396611,
+      "integrated_brier_score": 0.13563776688407705
+    }
+  },
+  {
+    "cell_id": "91facaaf-ed33-4220-9e50-a99a18b0eee7",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5524296270165834,
+      "integrated_brier_score": 0.13306875202933702
+    }
+  },
+  {
+    "cell_id": "f4e28bf3-1d65-4677-96bf-1587995e4b0d",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6214683938657292,
+      "integrated_brier_score": 0.1660231348168151
+    }
+  },
+  {
+    "cell_id": "48d7159c-643e-471f-98da-7ba829c9e8b7",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6363207511073016,
+      "integrated_brier_score": 0.15979686348309102
+    }
+  },
+  {
+    "cell_id": "be3e023f-6f9a-438b-83dd-39630b957145",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5769359951178815,
+      "integrated_brier_score": 0.1566634886167591
+    }
+  },
+  {
+    "cell_id": "5a458b84-cacd-4c98-be23-7f0eb392a1fa",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5153828403845405,
+      "integrated_brier_score": 0.11322228852202973
+    }
+  },
+  {
+    "cell_id": "e79bc18f-6ac5-4cfc-8bba-be3298394d2b",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5521763716087553,
+      "integrated_brier_score": 0.18854358048428116
+    }
+  },
+  {
+    "cell_id": "33f439ec-02e5-4f9b-8eef-b54d9caa3e3d",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5921288154397212,
+      "integrated_brier_score": 0.16303907771564674
+    }
+  },
+  {
+    "cell_id": "c28aaf8b-dd1c-45b3-9d30-ea4646bcecdf",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.599490187630743,
+      "integrated_brier_score": 0.19461112965105098
+    }
+  },
+  {
+    "cell_id": "d2888b5b-8883-41c0-90d9-c6a4e09f39f3",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5892290063156475,
+      "integrated_brier_score": 0.1252205274913953
+    }
+  },
+  {
+    "cell_id": "030afabd-80ee-48aa-9d5d-7673e0e5e632",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6347411948342746,
+      "integrated_brier_score": 0.19083524286712805
+    }
+  },
+  {
+    "cell_id": "a6b74ae9-43da-491f-99b3-a3258f3d832b",
+    "cohort": "WHAS500",
+    "model": "Regularised Horseshoe",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.584207422292909,
+      "integrated_brier_score": 0.16788388864561576
+    }
+  },
+  {
+    "cell_id": "ee575cb9-d29c-460f-b70d-0ff46d132568",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6123577002777186,
+      "integrated_brier_score": 0.19815826307188233
+    }
+  },
+  {
+    "cell_id": "a72823c9-f512-4e3a-b0a5-95e6dae2f21c",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6348959378198095,
+      "integrated_brier_score": 0.16493101358678655
+    }
+  },
+  {
+    "cell_id": "bb5c86d1-ecfa-42a4-84fe-07b826678e67",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5770284547619845,
+      "integrated_brier_score": 0.11451839877156442
+    }
+  },
+  {
+    "cell_id": "d4865778-8397-42b9-ad4e-1e623609d511",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5974212052083346,
+      "integrated_brier_score": 0.12458256960959257
+    }
+  },
+  {
+    "cell_id": "eacbdde3-6f49-4aa2-a09d-28f744bb6940",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5984683936280453,
+      "integrated_brier_score": 0.19629436920164728
+    }
+  },
+  {
+    "cell_id": "bac8614c-f319-4615-ac57-e0789c53b6ce",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6518240900699379,
+      "integrated_brier_score": 0.10738042401810655
+    }
+  },
+  {
+    "cell_id": "6bcc069c-7f65-4e19-bb08-65977705cca3",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6682145226972569,
+      "integrated_brier_score": 0.19312388667998404
+    }
+  },
+  {
+    "cell_id": "be478996-2d99-4e37-b45a-d765ca666092",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6418687416054484,
+      "integrated_brier_score": 0.15237344173890843
+    }
+  },
+  {
+    "cell_id": "d43343d7-afd8-42a2-879c-cf64e5506035",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.638334140593001,
+      "integrated_brier_score": 0.1527545755069745
+    }
+  },
+  {
+    "cell_id": "14071a23-4266-4d21-9039-e0a6570e8dec",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6073186544179592,
+      "integrated_brier_score": 0.19359363465724894
+    }
+  },
+  {
+    "cell_id": "3cf17d06-b4da-4248-ab85-43d9200bbb0a",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5026616529651212,
+      "integrated_brier_score": 0.19498385955692077
+    }
+  },
+  {
+    "cell_id": "81a5971c-c7ee-4387-b9f8-07c67482d280",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5637191633212733,
+      "integrated_brier_score": 0.1707499011685904
+    }
+  },
+  {
+    "cell_id": "50aeb830-d641-4191-92ee-7658c85a9e42",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5191239014343234,
+      "integrated_brier_score": 0.18538609324615385
+    }
+  },
+  {
+    "cell_id": "43942c70-c8c4-4c13-8afd-50250b6ee05c",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6568731247680606,
+      "integrated_brier_score": 0.17320627310601294
+    }
+  },
+  {
+    "cell_id": "8dfdabbf-da04-4e30-9094-b2e9fa2f80b7",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5040613512110979,
+      "integrated_brier_score": 0.18463708109764304
+    }
+  },
+  {
+    "cell_id": "6d38239a-9c3d-47d0-9649-70e779905ff0",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6305311705313216,
+      "integrated_brier_score": 0.16810683001564647
+    }
+  },
+  {
+    "cell_id": "7f8fb7e7-a0fd-418f-8fab-837c28ccea72",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.508786964627462,
+      "integrated_brier_score": 0.11334480591871754
+    }
+  },
+  {
+    "cell_id": "0e776650-b75a-430c-bf40-9e6bc03b80f6",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5221366474796121,
+      "integrated_brier_score": 0.1194050907323971
+    }
+  },
+  {
+    "cell_id": "90253195-241e-475f-8833-6ec1319e9ce0",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6392349805075052,
+      "integrated_brier_score": 0.13583188141557045
+    }
+  },
+  {
+    "cell_id": "7f15d386-f5b2-4512-bcf5-824ff3a74ba7",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6888995949064999,
+      "integrated_brier_score": 0.1411129152469866
+    }
+  },
+  {
+    "cell_id": "0942092f-9be8-4773-9223-d8ca9a0a588c",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6446461232687346,
+      "integrated_brier_score": 0.17448412019041296
+    }
+  },
+  {
+    "cell_id": "2ed77842-6d0f-40d2-8083-45ea24387e16",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5334598358165824,
+      "integrated_brier_score": 0.16574280351491288
+    }
+  },
+  {
+    "cell_id": "6988c6cf-0d98-4885-9fd0-f4e670f014d7",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5787125689278986,
+      "integrated_brier_score": 0.14190363970572578
+    }
+  },
+  {
+    "cell_id": "4cc2ad39-f872-4305-bf36-4b1cbd32a1f9",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6749981848922965,
+      "integrated_brier_score": 0.10991833243344691
+    }
+  },
+  {
+    "cell_id": "043429fb-9179-4e0d-b642-c4277c5fa9a0",
+    "cohort": "WHAS500",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5224600512435328,
+      "integrated_brier_score": 0.10211805693694692
+    }
+  },
+  {
+    "cell_id": "7248d2d6-6bee-43db-9b20-b7d825880a58",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6568239554632396,
+      "integrated_brier_score": 0.12445479184276814
+    }
+  },
+  {
+    "cell_id": "b0e1587f-389e-43da-b367-f3f22b1da2fd",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5572253764665367,
+      "integrated_brier_score": 0.19187436908255173
+    }
+  },
+  {
+    "cell_id": "afd91c29-351b-4605-b171-89f391ed16a7",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6648324537618946,
+      "integrated_brier_score": 0.15968935283485308
+    }
+  },
+  {
+    "cell_id": "0e6ca930-807e-439d-ac22-2d50acb75f4f",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6302747034742527,
+      "integrated_brier_score": 0.14083588514063997
+    }
+  },
+  {
+    "cell_id": "dcaeb575-3071-4399-b31d-93470a70c507",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5657553449185562,
+      "integrated_brier_score": 0.10324445954950748
+    }
+  },
+  {
+    "cell_id": "4d08b242-8189-4a0e-8833-58681ae54972",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5751436924821566,
+      "integrated_brier_score": 0.1312807748108989
+    }
+  },
+  {
+    "cell_id": "f39e36d0-ec48-4d61-aa3d-de9a8aef471a",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5066307868938656,
+      "integrated_brier_score": 0.17936539114212627
+    }
+  },
+  {
+    "cell_id": "3c932850-18f9-45c7-acd8-8ac9bfd31be0",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6745252364845427,
+      "integrated_brier_score": 0.1491826243982432
+    }
+  },
+  {
+    "cell_id": "33df9a71-29d7-4098-9295-fe259af8b1d5",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5209117484514905,
+      "integrated_brier_score": 0.14418818914440207
+    }
+  },
+  {
+    "cell_id": "de05827a-94f7-4476-ac97-4d30bce1dd35",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6899126538874991,
+      "integrated_brier_score": 0.1307493744038563
+    }
+  },
+  {
+    "cell_id": "4954b796-c119-4ad1-bb37-5293434e95a1",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6196435809222621,
+      "integrated_brier_score": 0.14492012640374768
+    }
+  },
+  {
+    "cell_id": "6bd78f5a-e54e-4a06-8524-9c13bdf4974c",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6312688559386745,
+      "integrated_brier_score": 0.11918048541512587
+    }
+  },
+  {
+    "cell_id": "de2b464c-a2e2-4be2-9236-d63078af55f7",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5605674986638941,
+      "integrated_brier_score": 0.19604456194129405
+    }
+  },
+  {
+    "cell_id": "ee79d59f-be86-4882-a09d-f603d71dab62",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5877025158163477,
+      "integrated_brier_score": 0.1918897438151002
+    }
+  },
+  {
+    "cell_id": "6ae996e9-0f77-45fd-862e-feec205a8b08",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6750436695288363,
+      "integrated_brier_score": 0.13650445949435674
+    }
+  },
+  {
+    "cell_id": "f900e221-885f-45fe-9426-c7a889962abd",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5525930505929458,
+      "integrated_brier_score": 0.19704778983115454
+    }
+  },
+  {
+    "cell_id": "b61a8d3b-828f-48ed-8c9d-8e2c15216cce",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6202575473113663,
+      "integrated_brier_score": 0.14332949910942477
+    }
+  },
+  {
+    "cell_id": "6770b222-d93d-44ad-8428-0a3aabb7d262",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5177086481900275,
+      "integrated_brier_score": 0.11311612713733638
+    }
+  },
+  {
+    "cell_id": "b215eae0-d2a8-4f87-bc0a-0513737ab21b",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6852649523513994,
+      "integrated_brier_score": 0.17867497733479384
+    }
+  },
+  {
+    "cell_id": "072dfc16-1875-4a14-9fdc-e6cbf1f65751",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5021867225433847,
+      "integrated_brier_score": 0.19398231398086807
+    }
+  },
+  {
+    "cell_id": "1057f137-ffee-48a4-b105-8f450d40bd91",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5144908315357469,
+      "integrated_brier_score": 0.14903036312147616
+    }
+  },
+  {
+    "cell_id": "d2c91d06-04a1-4bd6-aa65-46d0a8c47362",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5607899889483052,
+      "integrated_brier_score": 0.16206898563552563
+    }
+  },
+  {
+    "cell_id": "7736f205-b441-4aee-be82-adc1c078c4c2",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6262086934760043,
+      "integrated_brier_score": 0.1579868133320677
+    }
+  },
+  {
+    "cell_id": "c9b26188-08f6-4edb-9356-240917d26843",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5967232620799728,
+      "integrated_brier_score": 0.1777264533314019
+    }
+  },
+  {
+    "cell_id": "2b980684-badf-456f-ba42-18744b8cdabf",
+    "cohort": "METABRIC",
+    "model": "Cox PH Baseline",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6983426241377895,
+      "integrated_brier_score": 0.12529295378956726
+    }
+  },
+  {
+    "cell_id": "77e7cadf-7e5b-4415-9c4c-1bb6269e5dff",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5426701237145377,
+      "integrated_brier_score": 0.19868071847070679
+    }
+  },
+  {
+    "cell_id": "de59b0e8-f4ee-4ee5-a10c-257566b25104",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6429139209920475,
+      "integrated_brier_score": 0.12798547320466752
+    }
+  },
+  {
+    "cell_id": "66eb21d9-8b41-4936-b083-aef76b51856d",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5610681183265264,
+      "integrated_brier_score": 0.15657480547595837
+    }
+  },
+  {
+    "cell_id": "68f93f19-6258-44c0-9190-36442f1ab52e",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5368664294655662,
+      "integrated_brier_score": 0.13246046164270592
+    }
+  },
+  {
+    "cell_id": "2c86400d-7cfa-4763-bfe9-04b208a70571",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6149690919940043,
+      "integrated_brier_score": 0.1352932153560625
+    }
+  },
+  {
+    "cell_id": "a9f28255-5734-40f0-bdec-1b918e914f1f",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.544069749824564,
+      "integrated_brier_score": 0.10952885656372227
+    }
+  },
+  {
+    "cell_id": "a1a0c1fe-a557-4560-bf9e-575cc000faad",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5871486063793645,
+      "integrated_brier_score": 0.14262872360439643
+    }
+  },
+  {
+    "cell_id": "f2526f76-03f4-4c9f-a695-b8d7c7f3664c",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.540686511799959,
+      "integrated_brier_score": 0.1202339847507817
+    }
+  },
+  {
+    "cell_id": "e33f3c41-a6c4-4840-b921-4133d251fa9a",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6918623743831352,
+      "integrated_brier_score": 0.1437848742802753
+    }
+  },
+  {
+    "cell_id": "28777434-b079-4cd6-be4f-e04d4c8eedef",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6362824428596269,
+      "integrated_brier_score": 0.13250661455827897
+    }
+  },
+  {
+    "cell_id": "1a1c924f-4527-453c-9782-4922d431a4ff",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6148007957275717,
+      "integrated_brier_score": 0.127726770202949
+    }
+  },
+  {
+    "cell_id": "b52f31e1-eba4-497b-bc27-7f85182e07f4",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5265935948117527,
+      "integrated_brier_score": 0.127295891994625
+    }
+  },
+  {
+    "cell_id": "4c4780e1-7c99-4639-ac7f-bbd974979789",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5890860941991561,
+      "integrated_brier_score": 0.11967458254624386
+    }
+  },
+  {
+    "cell_id": "042f0670-01af-45c5-a3d7-9dfb8b980898",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6444226102425326,
+      "integrated_brier_score": 0.1519457367772981
+    }
+  },
+  {
+    "cell_id": "4aa6c73a-0f72-4b1d-b24d-e19854d3ad1c",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.660966847721763,
+      "integrated_brier_score": 0.1839518536817873
+    }
+  },
+  {
+    "cell_id": "77240b92-47c8-4830-801f-c73bdf770653",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5981395905227043,
+      "integrated_brier_score": 0.11712793945653074
+    }
+  },
+  {
+    "cell_id": "b04f5e98-3878-4f2d-acf5-85ee5841acfb",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5206836276789824,
+      "integrated_brier_score": 0.12693133311388333
+    }
+  },
+  {
+    "cell_id": "89716813-cfcd-4c57-aa2e-59ab458eeee9",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5820404126296341,
+      "integrated_brier_score": 0.13461620255340775
+    }
+  },
+  {
+    "cell_id": "8d4cf95f-4c76-4943-b5ea-0d2e3a4c2a85",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5610066119032736,
+      "integrated_brier_score": 0.1521690837477075
+    }
+  },
+  {
+    "cell_id": "2782cce5-a787-48af-b1f4-487281cd17ce",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5411261448544196,
+      "integrated_brier_score": 0.1777757945245258
+    }
+  },
+  {
+    "cell_id": "44431ce5-eed9-4eef-8488-da258aecf268",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5521224818274397,
+      "integrated_brier_score": 0.17225114071519793
+    }
+  },
+  {
+    "cell_id": "d6efc476-a49c-4dd2-a50b-0b8f33160c0a",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5905888472050121,
+      "integrated_brier_score": 0.16528019956669912
+    }
+  },
+  {
+    "cell_id": "999f0364-33d2-486c-b872-71c1fc2506f7",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5564298970562264,
+      "integrated_brier_score": 0.11564239243148974
+    }
+  },
+  {
+    "cell_id": "d85a4e47-944d-4976-831f-bad9664b2a30",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5811648350711275,
+      "integrated_brier_score": 0.19182332800428223
+    }
+  },
+  {
+    "cell_id": "1b7df339-4710-4929-a779-f0fda3ed1dbf",
+    "cohort": "METABRIC",
+    "model": "Random Survival Forest",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6307755228938863,
+      "integrated_brier_score": 0.19585086384005734
+    }
+  },
+  {
+    "cell_id": "bc748639-8a30-48e7-ba58-8e800426ce36",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6288625999946167,
+      "integrated_brier_score": 0.1127451813281828
+    }
+  },
+  {
+    "cell_id": "f7cd0af7-144d-4a73-95fc-231cefa23dd0",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6726704705979887,
+      "integrated_brier_score": 0.13699447605334852
+    }
+  },
+  {
+    "cell_id": "7c06da9b-d2b5-4b10-b463-440afd0ddd3f",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.507559736943248,
+      "integrated_brier_score": 0.15243711298618562
+    }
+  },
+  {
+    "cell_id": "122e93ee-7ccd-4364-8e4a-aea333e46c28",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6073024380809496,
+      "integrated_brier_score": 0.14182050728850493
+    }
+  },
+  {
+    "cell_id": "daf08ebd-a552-4579-a7ce-3365619eeadb",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.631403820125604,
+      "integrated_brier_score": 0.18309511138939247
+    }
+  },
+  {
+    "cell_id": "1255b676-485c-405d-b808-974e469cb00f",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6961512300016011,
+      "integrated_brier_score": 0.11973173210764848
+    }
+  },
+  {
+    "cell_id": "43e11ebc-766e-44df-a72e-40aa8fbae664",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6122045073843319,
+      "integrated_brier_score": 0.15714008625247256
+    }
+  },
+  {
+    "cell_id": "1fb2c6eb-4895-41c1-94b4-ff9f4abd0853",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5265717961155247,
+      "integrated_brier_score": 0.12837868357414114
+    }
+  },
+  {
+    "cell_id": "3b2c28c9-a18f-41ec-988e-3b6301ee1739",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.511465097926356,
+      "integrated_brier_score": 0.12738878309188856
+    }
+  },
+  {
+    "cell_id": "be156c55-f732-4801-bd14-50efbded0253",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5217553150483112,
+      "integrated_brier_score": 0.19436603356219956
+    }
+  },
+  {
+    "cell_id": "01a468c9-2d58-4d2b-916a-f71236902db3",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5050787526454861,
+      "integrated_brier_score": 0.11581668224071834
+    }
+  },
+  {
+    "cell_id": "6f037482-713d-4475-85ef-bd4823180f28",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.643591882879037,
+      "integrated_brier_score": 0.15905841218177935
+    }
+  },
+  {
+    "cell_id": "95c4843f-e3e6-4109-9846-ee6b8f5db0cd",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5494212346380135,
+      "integrated_brier_score": 0.1479400918657272
+    }
+  },
+  {
+    "cell_id": "2124fb8d-49fa-4255-93a7-78fcb753a011",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5546902324576704,
+      "integrated_brier_score": 0.10032209942182396
+    }
+  },
+  {
+    "cell_id": "dd1712b4-1cf2-483f-88a0-0b9f6cf3628e",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5442947114167579,
+      "integrated_brier_score": 0.14548311067614145
+    }
+  },
+  {
+    "cell_id": "c519f0c9-e2fc-45d4-b8dc-3e4fb9257c10",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5262338056152934,
+      "integrated_brier_score": 0.14148620100845244
+    }
+  },
+  {
+    "cell_id": "2fe4690b-0411-4501-855a-c206db0a686b",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6161651669811709,
+      "integrated_brier_score": 0.18801799794172203
+    }
+  },
+  {
+    "cell_id": "094f2caa-5a6d-4679-bf6c-d4200535d2b7",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5894897231361541,
+      "integrated_brier_score": 0.17099831502826002
+    }
+  },
+  {
+    "cell_id": "4e0859d0-49e2-4641-b9da-81c92d8b4b49",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6800721186427188,
+      "integrated_brier_score": 0.17853083407178486
+    }
+  },
+  {
+    "cell_id": "283b6312-e5ac-49ea-b583-0d00f374d988",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6564503785292775,
+      "integrated_brier_score": 0.16447278311528224
+    }
+  },
+  {
+    "cell_id": "0250e531-a4c0-4f72-a7fc-d1fc17b8fbb2",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6763375563511782,
+      "integrated_brier_score": 0.1753209259154838
+    }
+  },
+  {
+    "cell_id": "dceebc15-06a0-4b02-8abb-5c2c94aa8489",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6977517009435829,
+      "integrated_brier_score": 0.10375758606725868
+    }
+  },
+  {
+    "cell_id": "d491adcc-c27c-429c-b17d-f720bce3f1d8",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5941678351484957,
+      "integrated_brier_score": 0.134990420850388
+    }
+  },
+  {
+    "cell_id": "803df288-075b-4a97-aa53-9bb5fcb0c06b",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5959061978596262,
+      "integrated_brier_score": 0.14348182839541757
+    }
+  },
+  {
+    "cell_id": "27b5f222-3085-4c91-a4fd-1561b2d489ba",
+    "cohort": "METABRIC",
+    "model": "DeepSurv Neural Net",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.552355676790457,
+      "integrated_brier_score": 0.1790322044421816
+    }
+  },
+  {
+    "cell_id": "5097ef1d-06b9-40f6-ab12-cac3bbbfb434",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5211165246321741,
+      "integrated_brier_score": 0.10417729657454233
+    }
+  },
+  {
+    "cell_id": "c351b2f5-254c-47ed-8fc7-67fcb594bab6",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5277527497849259,
+      "integrated_brier_score": 0.18395151361207784
+    }
+  },
+  {
+    "cell_id": "bea4a8d3-40e8-4285-b4a0-e0132c90c93a",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6975647239720529,
+      "integrated_brier_score": 0.10886099553414104
+    }
+  },
+  {
+    "cell_id": "2d7554ed-24b1-48c7-aae3-8ab86ffacc8d",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6332000223116546,
+      "integrated_brier_score": 0.1330846008019952
+    }
+  },
+  {
+    "cell_id": "a2b7860c-b965-4fc5-a804-8312b44af6b2",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.541236341548272,
+      "integrated_brier_score": 0.11760972320886762
+    }
+  },
+  {
+    "cell_id": "ee47389b-5db6-49d1-b26d-08ebb74ea8bf",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6306685685237933,
+      "integrated_brier_score": 0.18434115133386797
+    }
+  },
+  {
+    "cell_id": "a0c5e6ff-aae4-47a1-9408-836bae50dfb6",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6471989884176617,
+      "integrated_brier_score": 0.1467191748626755
+    }
+  },
+  {
+    "cell_id": "c0533645-d4ae-4e57-b24d-33df60033ee5",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6170679710354017,
+      "integrated_brier_score": 0.11647699216395205
+    }
+  },
+  {
+    "cell_id": "d33f3b7c-c7de-4253-aa91-8bc23bde1fc4",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5813790372915008,
+      "integrated_brier_score": 0.19160356289647595
+    }
+  },
+  {
+    "cell_id": "d647abf3-4a95-4adf-9206-0c2064a9409b",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6825340510342174,
+      "integrated_brier_score": 0.11070112847412514
+    }
+  },
+  {
+    "cell_id": "d6dac2c7-6965-4ce2-84be-81a5ec18fab2",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6583729122564393,
+      "integrated_brier_score": 0.13254124528366876
+    }
+  },
+  {
+    "cell_id": "0f64c548-382e-46fd-b3dc-38c94b615422",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6981411893819324,
+      "integrated_brier_score": 0.19344043289252114
+    }
+  },
+  {
+    "cell_id": "dc6c9bac-9961-4a7e-bd78-5dfb3ae4d410",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6112447176475255,
+      "integrated_brier_score": 0.17763190523441158
+    }
+  },
+  {
+    "cell_id": "02c18df0-ea59-4877-a1a9-3e5737373628",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6188846609398589,
+      "integrated_brier_score": 0.18677317559374473
+    }
+  },
+  {
+    "cell_id": "db625e0e-9f33-409f-946b-6489150074c0",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6091980578505541,
+      "integrated_brier_score": 0.10732754409205737
+    }
+  },
+  {
+    "cell_id": "c5e035e9-cfee-4c3e-9c10-4ee9d1ff86b4",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5057742128120573,
+      "integrated_brier_score": 0.18897624193814466
+    }
+  },
+  {
+    "cell_id": "ede27d6d-c4fe-4852-bff4-464ac99be2dd",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5660557006534769,
+      "integrated_brier_score": 0.1162461180760085
+    }
+  },
+  {
+    "cell_id": "7e8ef285-b259-4f9c-8a15-64796c54239a",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5066262447356846,
+      "integrated_brier_score": 0.11510599680250055
+    }
+  },
+  {
+    "cell_id": "5ce8257a-6c2c-4050-93df-9fda9a632434",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5469354690688496,
+      "integrated_brier_score": 0.18513250993724908
+    }
+  },
+  {
+    "cell_id": "3d77087b-73ed-42d3-a72b-629eb598d9db",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6127494761199358,
+      "integrated_brier_score": 0.14657936082886075
+    }
+  },
+  {
+    "cell_id": "e8bcf46c-d730-416e-9ecd-d40f89bbef99",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6258456546991845,
+      "integrated_brier_score": 0.10096529713928867
+    }
+  },
+  {
+    "cell_id": "5b76d777-a276-40c5-ab74-d8b1aa432936",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5353006108675076,
+      "integrated_brier_score": 0.12501012342030726
+    }
+  },
+  {
+    "cell_id": "a4bdc14d-341b-4646-8021-4654603f9a0d",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6471367635697037,
+      "integrated_brier_score": 0.16941485831661762
+    }
+  },
+  {
+    "cell_id": "c1b6e1fb-3f79-4833-9635-b38f797e122a",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6210141675126749,
+      "integrated_brier_score": 0.1046735057913395
+    }
+  },
+  {
+    "cell_id": "c79fae8f-e813-47f8-bb4f-592b1baa9cb3",
+    "cohort": "METABRIC",
+    "model": "Normal",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5626208899916096,
+      "integrated_brier_score": 0.1349896982584707
+    }
+  },
+  {
+    "cell_id": "e8484438-c9f1-4d3c-9b5e-a9188b28f1e0",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 0,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "beaf1be3-b7be-4ac8-98d4-0ac4d8bb4558",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 1,
+    "status": "failed_diagnostics",
+    "metrics": {}
+  },
+  {
+    "cell_id": "901d84c7-dbc7-43d5-9f39-f5ffe26b8567",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6122799034555378,
+      "integrated_brier_score": 0.13673402203498902
+    }
+  },
+  {
+    "cell_id": "74a8d406-31e3-4b81-aa6f-26226bf82014",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6900838542809667,
+      "integrated_brier_score": 0.14238055986464365
+    }
+  },
+  {
+    "cell_id": "1730a6b0-cd42-4b3d-a187-7b58c927dbc0",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5705340732626061,
+      "integrated_brier_score": 0.19365013330927056
+    }
+  },
+  {
+    "cell_id": "f3bfdbbe-d939-40de-883e-533cd3c603bf",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6184893921513321,
+      "integrated_brier_score": 0.1955789278414696
+    }
+  },
+  {
+    "cell_id": "31a01528-c723-47fe-ace7-b420b395e3f5",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5916285048544879,
+      "integrated_brier_score": 0.13975427319042782
+    }
+  },
+  {
+    "cell_id": "8c986d39-a4df-471f-9d71-b2e15e496d01",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5112672377129969,
+      "integrated_brier_score": 0.15550386271628283
+    }
+  },
+  {
+    "cell_id": "89c45fa3-9b61-406b-b71e-036f06ec4b22",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5436741898243898,
+      "integrated_brier_score": 0.11120327572257288
+    }
+  },
+  {
+    "cell_id": "d8434aaf-ea61-4d4d-9c3c-87e142e789d2",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5987206301841976,
+      "integrated_brier_score": 0.1566645447083055
+    }
+  },
+  {
+    "cell_id": "6c0cd4dc-9bff-4b3e-b620-3ee829ede5ad",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6080505557495773,
+      "integrated_brier_score": 0.19373512144118193
+    }
+  },
+  {
+    "cell_id": "1aee932b-7090-4bcb-bf4a-da9ccb51841c",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.559523429856964,
+      "integrated_brier_score": 0.10349534122582868
+    }
+  },
+  {
+    "cell_id": "03f7a438-6b67-44e9-b51c-91a53e7a0eb9",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.504632081378199,
+      "integrated_brier_score": 0.1934311170067532
+    }
+  },
+  {
+    "cell_id": "6c43674f-1e09-4663-8bc2-e571fd347691",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6706843819983359,
+      "integrated_brier_score": 0.16619711074607246
+    }
+  },
+  {
+    "cell_id": "5fb4a98e-a8bb-45f4-b89b-b4e431297c8b",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.545649476927485,
+      "integrated_brier_score": 0.14740101607913522
+    }
+  },
+  {
+    "cell_id": "a03ee9dc-12e8-4920-b624-e1d7be06fea6",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6076393035100176,
+      "integrated_brier_score": 0.11151905027404968
+    }
+  },
+  {
+    "cell_id": "421f0d3c-2498-4748-8137-2e047a53c791",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6091492892712133,
+      "integrated_brier_score": 0.19326609984980853
+    }
+  },
+  {
+    "cell_id": "bbdbf72f-0ab5-4d09-82e6-5df0ed8ac185",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6647256347623738,
+      "integrated_brier_score": 0.1867911168125289
+    }
+  },
+  {
+    "cell_id": "a7e212c8-4605-4756-928b-bef55a9e6e82",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6148722718869365,
+      "integrated_brier_score": 0.17151601989037668
+    }
+  },
+  {
+    "cell_id": "ddc74b3e-35d1-4d19-b9a3-e5e32517ee41",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5377830414043797,
+      "integrated_brier_score": 0.18956216653715036
+    }
+  },
+  {
+    "cell_id": "6bc04211-a057-4c37-89bb-e810416c92bb",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5751114570641546,
+      "integrated_brier_score": 0.13891827559342745
+    }
+  },
+  {
+    "cell_id": "dd09bee6-1939-4981-96d8-01282759ffd1",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5222558575713533,
+      "integrated_brier_score": 0.13547008276261613
+    }
+  },
+  {
+    "cell_id": "b1e7547b-f7ab-4865-89c7-9680c9a1e3e7",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6891543537261724,
+      "integrated_brier_score": 0.10423695149904244
+    }
+  },
+  {
+    "cell_id": "81406ed8-1ac2-45f6-b7f6-9f78fd64dece",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6893469815274944,
+      "integrated_brier_score": 0.12774886480129027
+    }
+  },
+  {
+    "cell_id": "f3dc8219-14ee-44e8-92c7-2684ada70160",
+    "cohort": "METABRIC",
+    "model": "Regularised Horseshoe",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5463875707087118,
+      "integrated_brier_score": 0.17515195962229696
+    }
+  },
+  {
+    "cell_id": "32396142-5400-448f-8fc7-9a2e152125cc",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 0,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5927943479219886,
+      "integrated_brier_score": 0.13697293559586599
+    }
+  },
+  {
+    "cell_id": "f104bb7e-4c8e-4ef8-ba97-3cfdab5e9c06",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 1,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5526034153620658,
+      "integrated_brier_score": 0.18543736722452953
+    }
+  },
+  {
+    "cell_id": "814d7267-9363-491c-af9b-630785389f47",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 2,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.550546399597103,
+      "integrated_brier_score": 0.18774014727897126
+    }
+  },
+  {
+    "cell_id": "ed612c73-9e15-4431-b31e-fb0f8c48d3be",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 3,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5383042306046157,
+      "integrated_brier_score": 0.17901929287943358
+    }
+  },
+  {
+    "cell_id": "5afd2eaf-699f-4236-b62b-723ea8e47fef",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 4,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6951435427731398,
+      "integrated_brier_score": 0.11549348830724382
+    }
+  },
+  {
+    "cell_id": "395fe071-8763-4ed9-b9de-a6f1b6ca23c9",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 5,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5458773338674157,
+      "integrated_brier_score": 0.17542904503451773
+    }
+  },
+  {
+    "cell_id": "22caf9e4-0f5b-4a8a-9dc5-2ad9f0a597ce",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 6,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6035872659223429,
+      "integrated_brier_score": 0.13532015776631515
+    }
+  },
+  {
+    "cell_id": "f0cacbeb-7a7a-4370-a288-30aa8268d8bc",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 7,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5669155102374465,
+      "integrated_brier_score": 0.19017598872328284
+    }
+  },
+  {
+    "cell_id": "1b051152-b03e-4cb3-b596-a477203ea6d7",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 8,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.513837350488445,
+      "integrated_brier_score": 0.11456387884119201
+    }
+  },
+  {
+    "cell_id": "52e187ec-def6-432a-a66b-0fd649a3a6d0",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 9,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5447028985187246,
+      "integrated_brier_score": 0.10223717338678612
+    }
+  },
+  {
+    "cell_id": "3256a7d6-a9ad-4176-9701-c19d4b412054",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 10,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6581587919368537,
+      "integrated_brier_score": 0.1936411663332744
+    }
+  },
+  {
+    "cell_id": "4a1395f7-637b-45fe-889a-aae33a3f5682",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 11,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5432413100895677,
+      "integrated_brier_score": 0.11332651934640031
+    }
+  },
+  {
+    "cell_id": "0e192a36-9cfd-4568-b6c4-fac658cb4b2c",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 12,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5062933395409348,
+      "integrated_brier_score": 0.11358997982211375
+    }
+  },
+  {
+    "cell_id": "baeb6a04-d194-476a-b75f-6fadc7dd6514",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 13,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.685627809048518,
+      "integrated_brier_score": 0.10483654985988144
+    }
+  },
+  {
+    "cell_id": "9ff63e20-5d49-4427-9f6c-cc6f42e4bcdd",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 14,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5130336146662117,
+      "integrated_brier_score": 0.1149785287390282
+    }
+  },
+  {
+    "cell_id": "d3cbfe91-228e-4823-979a-999c00cbfaab",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 15,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.560356474434079,
+      "integrated_brier_score": 0.19749915832889897
+    }
+  },
+  {
+    "cell_id": "f74a1d72-4651-43ac-94ac-40c4c2ea42bf",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 16,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5800545117588252,
+      "integrated_brier_score": 0.17548745514336095
+    }
+  },
+  {
+    "cell_id": "42a929a1-06d4-40ce-bcca-eb2fb855aee2",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 17,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6068707249484421,
+      "integrated_brier_score": 0.1652792003950176
+    }
+  },
+  {
+    "cell_id": "40090db0-8cf2-4d80-bf5a-fab30eecec11",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 18,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5742852900667714,
+      "integrated_brier_score": 0.17724550518505092
+    }
+  },
+  {
+    "cell_id": "da7950c6-d24c-4d16-a092-bfd3aa345a24",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 19,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6924596105951316,
+      "integrated_brier_score": 0.10907478199422935
+    }
+  },
+  {
+    "cell_id": "bbe1e35f-7b5d-4633-8730-80526d5ce8d9",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 20,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5186496073637429,
+      "integrated_brier_score": 0.1556407237865184
+    }
+  },
+  {
+    "cell_id": "9bb25872-3f8a-48b2-837d-095c5af7e9ad",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 21,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6667950459152097,
+      "integrated_brier_score": 0.13841294853078903
+    }
+  },
+  {
+    "cell_id": "0f520614-9db1-46f4-9533-a59297560fac",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 22,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6098181661491938,
+      "integrated_brier_score": 0.1924807029051403
+    }
+  },
+  {
+    "cell_id": "e28d53a9-aab1-4c7b-8b7f-c24ade33210e",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 23,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.5552660204326296,
+      "integrated_brier_score": 0.1393804393979216
+    }
+  },
+  {
+    "cell_id": "83685be8-8a68-4462-8c9a-cf7629644016",
+    "cohort": "METABRIC",
+    "model": "Continuous Spike-and-Slab",
+    "fold": 24,
+    "status": "complete",
+    "metrics": {
+      "c_index": 0.6204084695839569,
+      "integrated_brier_score": 0.16059303580467865
+    }
+  }
+]

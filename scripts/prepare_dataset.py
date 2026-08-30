@@ -1,119 +1,91 @@
-"""Build processed train/val/test splits and CV folds for every dataset.
-
-Dataset schemas are read from config/datasets.yaml.
+"""
+Data Preparation & Preprocessing Script for Phase 4.
+Executes the master SurvivalDataPipeline across GBSG2, WHAS500, and METABRIC raw datasets.
+Generates processed train/val/test splits, 5-fold CV indices, and metadata artifacts.
 """
 
 import os
 import sys
-from typing import Any
 
-import pandas as pd
-import yaml
-
+# Ensure project root is in sys.path
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from src.data.feature_engineering import FeatureEngineer
 from src.data.loader import DatasetLoader
 from src.data.preprocessing import SurvivalDataPipeline
 
 DATA_DIR = os.path.join(PROJECT_ROOT, "data")
-CONFIG_PATH = os.path.join(PROJECT_ROOT, "config", "datasets.yaml")
+
+pipeline_configs = {
+    "gbsg2": {
+        "dataset_name": "gbsg2",
+        "time_col": "time",
+        "event_col": "cens",
+        "categorical_cols": ["horTh", "menostat"],
+        "ordinal_cols": None,
+    },
+    "whas500": {
+        "dataset_name": "whas500",
+        "time_col": "lenfol",
+        "event_col": "fstat",
+        "categorical_cols": ["gender", "cvd", "afb", "sho", "chf"],
+        "ordinal_cols": None,
+    },
+    "metabric": {
+        "dataset_name": "metabric",
+        "time_col": "duration",
+        "event_col": "event",
+        "categorical_cols": ["chemotherapy", "hormone_therapy", "PAM50Subtype"],
+        "ordinal_cols": {"tumour_stage": [1, 2, 3, 4]},
+    },
+}
 
 
-class DeclaredFeatureEngineer:
-    """Expose only engineered columns named in the selected feature specification."""
+def main():
+    print("=" * 60)
+    print("STARTING PHASE 4 — DATA PREPROCESSING & DATASET PREPARATION")
+    print("=" * 60)
 
-    def __init__(self, dataset_name: str, declared: list[dict[str, Any]]):
-        self._delegate = FeatureEngineer(dataset_name)
-        self._declared_names = [item["name"] for item in declared]
+    summary_results = {}
 
-    def transform(self, frame: pd.DataFrame) -> pd.DataFrame:
-        transformed = self._delegate.transform(frame)
-        missing = [name for name in self._declared_names if name not in transformed.columns]
-        if missing:
-            raise ValueError(f"Configured engineered features were not produced: {missing}")
-        return transformed[[*frame.columns, *self._declared_names]].copy()
+    for name, cfg in pipeline_configs.items():
+        print(f"\n[+] Processing dataset: '{name.upper()}'...")
 
-
-def primary_feature_columns(cfg: dict[str, Any]) -> list[str]:
-    """Return the unique raw predictors declared for the primary feature set."""
-    feature_spec = cfg["primary_features"]
-    columns = [
-        *(feature_spec.get("numeric") or []),
-        *(feature_spec.get("categorical") or []),
-        *(feature_spec.get("ordinal") or {}).keys(),
-    ]
-
-    duplicates = sorted({column for column in columns if columns.count(column) > 1})
-    if duplicates:
-        raise ValueError(f"Primary feature specification contains duplicates: {duplicates}")
-
-    reserved = {cfg["duration_col"], cfg["event_col"]}
-    if cfg.get("id_col"):
-        reserved.add(cfg["id_col"])
-    invalid = sorted(set(columns) & reserved)
-    if invalid:
-        raise ValueError(f"Outcome/identifier columns cannot be model features: {invalid}")
-    return columns
-
-
-def select_primary_columns(
-    raw_df: pd.DataFrame, cfg: dict[str, Any]
-) -> tuple[pd.DataFrame, pd.Series | None]:
-    """Select primary predictors/outcomes and keep identifiers out of the model.
-
-    The returned identifier series preserves subject identity for audit and
-    future fold manifests. It is intentionally separate so it cannot be
-    encoded as a predictor by the legacy preprocessing pipeline.
-    """
-    features = primary_feature_columns(cfg)
-    outcomes = [cfg["duration_col"], cfg["event_col"]]
-    id_col = cfg.get("id_col")
-    required = [*features, *outcomes, *([id_col] if id_col else [])]
-    missing = [column for column in required if column not in raw_df.columns]
-    if missing:
-        raise ValueError(f"Raw dataset is missing configured columns: {missing}")
-
-    identifiers = raw_df[id_col].copy() if id_col else None
-    return raw_df[[*features, *outcomes]].copy(), identifiers
-
-
-def main() -> int:
-    with open(CONFIG_PATH, encoding="utf-8") as f:
-        datasets = yaml.safe_load(f)
-
-    for name, cfg in datasets.items():
+        # 1. Load raw dataset
         raw_df = DatasetLoader.load_raw(DATA_DIR, name)
-        model_df, _identifiers = select_primary_columns(raw_df, cfg)
-        feature_spec = cfg["primary_features"]
+        print(f"    Raw Shape: {raw_df.shape[0]} rows, {raw_df.shape[1]} columns")
 
+        # 2. Instantiate and run pipeline
         pipeline = SurvivalDataPipeline(
-            dataset_name=name,
-            time_col=cfg["duration_col"],
+            dataset_name=cfg["dataset_name"],
+            time_col=cfg["time_col"],
             event_col=cfg["event_col"],
-            categorical_cols=feature_spec.get("categorical") or [],
-            ordinal_cols=feature_spec.get("ordinal") or {},
+            categorical_cols=cfg["categorical_cols"],
+            ordinal_cols=cfg["ordinal_cols"],
             random_state=42,
         )
-        pipeline.feature_engineer = DeclaredFeatureEngineer(
-            name, feature_spec.get("engineered") or []
-        )
 
-        metadata = pipeline.run(model_df, output_dir=DATA_DIR)
+        metadata = pipeline.run(raw_df, output_dir=DATA_DIR)
+        summary_results[name] = metadata
 
         print(
-            f"{name}: {raw_df.shape[0]} raw rows -> "
-            f"train {metadata['train_samples']} / "
-            f"val {metadata['val_samples']} / "
-            f"test {metadata['test_samples']}, "
-            f"{metadata['num_features']} features, "
-            f"{metadata['train_censoring_rate']}% censored in train"
+            f"    ✓ Processed Train Split: {metadata['train_samples']} samples (Censoring: {metadata['train_censoring_rate']}%)"
+        )
+        print(
+            f"    ✓ Processed Val Split:   {metadata['val_samples']} samples (Censoring: {metadata['val_censoring_rate']}%)"
+        )
+        print(
+            f"    ✓ Processed Test Split:  {metadata['test_samples']} samples (Censoring: {metadata['test_censoring_rate']}%)"
+        )
+        print(
+            f"    ✓ Processed Features:    {metadata['num_features']} columns: {metadata['feature_names']}"
         )
 
-    return 0
+    print("\n" + "=" * 60)
+    print("ALL DATASETS SUCCESSFULLY PREPROCESSED AND STORED IN data/processed/")
+    print("=" * 60)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

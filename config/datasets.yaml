@@ -1,213 +1,51 @@
-# Frozen dataset schemas for confirmatory analysis.
-#
-# Every feature set is explicit: sensitivity sets are complete specifications,
-# not deltas from the primary set. scripts/prepare_dataset.py consumes only
-# `primary_features`. Immutable source and eligibility details live in
-# data/manifest.yaml.
+# Dataset Specifications and Schema Registry
 
 gbsg2:
   name: "GBSG2"
   raw_file: "data/raw/gbsg2.csv"
+  processed_file: "data/processed/gbsg2_processed.csv"
   duration_col: "time"
   event_col: "cens"
-  primary_feature_set: "primary_baseline"
-  primary_features:
-    numeric:
-      - "age"
-      - "tsize"
-      - "pnodes"
-      - "progrec"
-      - "estrec"
-    categorical:
-      - "horTh"
-      - "menostat"
-    ordinal:
-      tgrade: ["I", "II", "III"]
-    engineered: []
-  primary_exclusions: []
-  sensitivity_feature_sets:
-    engineered_augmented:
-      purpose: "Assess the legacy log transforms and treatment-by-age interaction separately."
-      numeric:
-        - "age"
-        - "tsize"
-        - "pnodes"
-        - "progrec"
-        - "estrec"
-      categorical:
-        - "horTh"
-        - "menostat"
-      ordinal:
-        tgrade: ["I", "II", "III"]
-      engineered:
-        - name: "log_pnodes"
-          expression: "log1p(pnodes)"
-          source_features: ["pnodes"]
-        - name: "log_progrec"
-          expression: "log1p(progrec)"
-          source_features: ["progrec"]
-        - name: "log_estrec"
-          expression: "log1p(estrec)"
-          source_features: ["estrec"]
-        - name: "age_x_horTh"
-          expression: "age * indicator(lower(horTh) in {'yes', '1'})"
-          source_features: ["age", "horTh"]
+  categorical_features:
+    - "horTh"
+    - "menostat"
+  numeric_features:
+    - "age"
+    - "tsize"
+    - "pnode"
+    - "progrec"
+    - "estrec"
 
 whas500:
   name: "WHAS500"
   raw_file: "data/raw/whas500.csv"
+  processed_file: "data/processed/whas500_processed.csv"
   duration_col: "lenfol"
   event_col: "fstat"
-  primary_feature_set: "primary_admission"
-  primary_features:
-    numeric:
-      - "age"
-      - "hr"
-      - "sysbp"
-      - "diasbp"
-      - "bmi"
-    categorical:
-      - "gender"
-      - "cvd"
-      - "miord"
-      - "mitype"
-    ordinal: {}
-    engineered: []
-  primary_exclusions:
-    - column: "los"
-      reason: "Length of stay occurs after admission, the prediction time."
-    - column: "afb"
-      reason: "Onset before or at admission is not established by the source metadata."
-    - column: "sho"
-      reason: "Onset before or at admission is not established by the source metadata."
-    - column: "chf"
-      reason: "Onset before or at admission is not established by the source metadata."
-    - column: "av3"
-      reason: "Onset before or at admission is not established by the source metadata."
-  sensitivity_feature_sets:
-    published_full:
-      purpose: "Comparability with analyses using every supplied WHAS500 predictor."
-      numeric:
-        - "age"
-        - "hr"
-        - "sysbp"
-        - "diasbp"
-        - "bmi"
-        - "los"
-      categorical:
-        - "gender"
-        - "cvd"
-        - "afb"
-        - "sho"
-        - "chf"
-        - "av3"
-        - "miord"
-        - "mitype"
-      ordinal: {}
-      engineered: []
-    engineered_augmented:
-      purpose: "Assess the legacy low-BMI threshold separately from the raw admission set."
-      numeric:
-        - "age"
-        - "hr"
-        - "sysbp"
-        - "diasbp"
-        - "bmi"
-      categorical:
-        - "gender"
-        - "cvd"
-        - "miord"
-        - "mitype"
-      ordinal: {}
-      engineered:
-        - name: "bmi_low"
-          expression: "indicator(bmi < 18.5)"
-          source_features: ["bmi"]
+  categorical_features:
+    - "gender"
+    - "cvd"
+    - "afb"
+    - "sho"
+    - "chf"
+  numeric_features:
+    - "age"
+    - "hr"
+    - "sysbp"
+    - "diasbp"
+    - "bmi"
 
 metabric:
   name: "METABRIC"
   raw_file: "data/raw/metabric.csv"
-  id_col: "patient_id"
+  processed_file: "data/processed/metabric_processed.csv"
   duration_col: "duration"
   event_col: "event"
-  primary_feature_set: "primary_diagnosis_npi"
-  primary_features:
-    numeric:
-      - "age_at_diagnosis"
-      - "nottingham_prognostic_index"
-    categorical:
-      - "cellularity"
-      - "er_status"
-      - "pr_status"
-      - "her2_status"
-      - "inferred_menopausal_state"
-      - "pam50_+_claudin-low_subtype"
-    ordinal: {}
-    engineered: []
-  primary_exclusions:
-    - column: "tumor_size"
-      reason: "Represented through NPI in the primary model; included directly only in npi_components."
-    - column: "lymph_nodes_examined_positive"
-      reason: "Represented through NPI in the primary model; included directly only in npi_components."
-    - column: "neoplasm_histologic_grade"
-      reason: "Represented through NPI in the primary model; included directly only in npi_components."
-    - column: "tumor_stage"
-      reason: "Missing for 514/1,980 (26.0%); evaluated only in a prespecified sensitivity."
-    - column: "type_of_breast_surgery"
-      reason: "Surgery received is not available at the diagnosis/pathology prediction time."
-    - column: "chemotherapy"
-      reason: "Treatment received is post-baseline for the primary prediction target."
-    - column: "hormone_therapy"
-      reason: "Treatment received is post-baseline for the primary prediction target."
-    - column: "radio_therapy"
-      reason: "Treatment received is post-baseline for the primary prediction target."
-  sensitivity_feature_sets:
-    npi_components:
-      purpose: "Replace NPI with its tumour-size, positive-node and histologic-grade components."
-      numeric:
-        - "age_at_diagnosis"
-        - "tumor_size"
-        - "lymph_nodes_examined_positive"
-        - "neoplasm_histologic_grade"
-      categorical:
-        - "cellularity"
-        - "er_status"
-        - "pr_status"
-        - "her2_status"
-        - "inferred_menopausal_state"
-        - "pam50_+_claudin-low_subtype"
-      ordinal: {}
-      engineered: []
-    npi_plus_stage:
-      purpose: "Assess the effect of adding stage with fold-local missing-data handling."
-      numeric:
-        - "age_at_diagnosis"
-        - "nottingham_prognostic_index"
-        - "tumor_stage"
-      categorical:
-        - "cellularity"
-        - "er_status"
-        - "pr_status"
-        - "her2_status"
-        - "inferred_menopausal_state"
-        - "pam50_+_claudin-low_subtype"
-      ordinal: {}
-      engineered: []
-    treatment_augmented:
-      purpose: "Comparability analysis adding observed surgery and adjuvant-treatment fields."
-      numeric:
-        - "age_at_diagnosis"
-        - "nottingham_prognostic_index"
-      categorical:
-        - "cellularity"
-        - "er_status"
-        - "pr_status"
-        - "her2_status"
-        - "inferred_menopausal_state"
-        - "pam50_+_claudin-low_subtype"
-        - "type_of_breast_surgery"
-        - "chemotherapy"
-        - "hormone_therapy"
-        - "radio_therapy"
-      ordinal: {}
-      engineered: []
+  categorical_features:
+    - "tumour_stage"
+    - "chemotherapy"
+    - "hormone_therapy"
+    - "PAM50Subtype"
+  numeric_features:
+    - "age"
+    - "lymph_nodes_positive"

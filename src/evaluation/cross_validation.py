@@ -1,4 +1,8 @@
-"""Evaluation over pre-generated survival cross-validation folds."""
+"""
+Cross-Validation Evaluator for Survival Models.
+Executes 5-fold cross-validation on pre-generated stratified splits.
+Computes cross-validation mean and standard deviation for C-index and Integrated Brier Score.
+"""
 
 import json
 import os
@@ -8,7 +12,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
-from src.evaluation.metrics import evaluate_model, training_event_time_horizons
+from src.evaluation.metrics import evaluate_survival_model
 
 
 class CrossValidationEvaluator:
@@ -27,7 +31,7 @@ class CrossValidationEvaluator:
         if not os.path.exists(self.train_csv_path):
             raise FileNotFoundError(f"Train CSV not found at {self.train_csv_path}")
 
-        with open(self.cv_folds_path, encoding="utf-8") as f:
+        with open(self.cv_folds_path, "r", encoding="utf-8") as f:
             self.cv_folds = json.load(f)
 
         self.full_train_df = pd.read_csv(self.train_csv_path)
@@ -49,10 +53,9 @@ class CrossValidationEvaluator:
         Returns:
             cv_results (dict): Dictionary with per-fold metrics, mean C-index, std C-index, etc.
         """
-        fold_c_indices: list[float] = []
-        fold_uno_indices: list[float] = []
-        fold_ibses: list[float] = []
-        fold_details: list[dict[str, Any]] = []
+        fold_c_indices = []
+        fold_ibses = []
+        fold_details = []
 
         for fold_info in self.cv_folds:
             fold_num = fold_info["fold"]
@@ -63,8 +66,6 @@ class CrossValidationEvaluator:
             df_val_fold = self.full_train_df.iloc[val_idx].reset_index(drop=True)
 
             X_val = df_val_fold.drop(columns=["time", "event"])
-            y_train_time = df_train_fold["time"].to_numpy()
-            y_train_event = df_train_fold["event"].to_numpy()
             y_val_time = df_val_fold["time"].values
             y_val_event = df_val_fold["event"].values
 
@@ -74,40 +75,32 @@ class CrossValidationEvaluator:
             # Predict risk
             val_risk = fitted_model.predict_risk(X_val)
 
-            fold_times = (
-                training_event_time_horizons(y_train_time, y_train_event)
-                if eval_times is None
-                else np.asarray(eval_times, dtype=float)
-            )
-            survival_probs = None
-            if hasattr(fitted_model, "predict_survival"):
-                survival_probs = fitted_model.predict_survival(X_val, fold_times)
+            # Predict survival curves if supported
+            surv_prob_fn = None
+            if hasattr(fitted_model, "predict_survival") and eval_times is not None:
 
-            fold_eval = evaluate_model(
-                train_time=y_train_time,
-                train_event=y_train_event,
-                test_time=y_val_time,
-                test_event=y_val_event,
+                def surv_prob_fn(times, fitted_model=fitted_model, X_val=X_val):
+                    return fitted_model.predict_survival(X_val, times)
+
+            fold_eval = evaluate_survival_model(
+                y_time=y_val_time,
+                y_event=y_val_event,
                 risk_scores=val_risk,
-                survival_probs=survival_probs,
-                eval_times=fold_times,
+                surv_prob_fn=surv_prob_fn,
+                eval_times=eval_times,
             )
 
             c_idx = fold_eval["c_index"]
             fold_c_indices.append(c_idx)
-            fold_uno_indices.append(fold_eval["uno_c_index"])
 
             fold_res = {
                 "fold": fold_num,
                 "c_index": c_idx,
-                "uno_c_index": fold_eval["uno_c_index"],
-                "uno_tau": fold_eval["uno_tau"],
-                "mean_auc": fold_eval["mean_auc"],
-                "eval_times": fold_eval["eval_times"],
+                "c_index_se": fold_eval["c_index_se"],
             }
 
-            if "ibs" in fold_eval:
-                ibs_val = fold_eval["ibs"]
+            if "integrated_brier_score" in fold_eval:
+                ibs_val = fold_eval["integrated_brier_score"]
                 fold_ibses.append(ibs_val)
                 fold_res["integrated_brier_score"] = ibs_val
 
@@ -126,9 +119,6 @@ class CrossValidationEvaluator:
             "mean_c_index": c_mean,
             "std_c_index": c_std,
             "fold_c_indices": fold_c_indices,
-            "mean_uno_c_index": float(np.mean(fold_uno_indices)),
-            "std_uno_c_index": float(np.std(fold_uno_indices, ddof=1)),
-            "fold_uno_c_indices": fold_uno_indices,
             "fold_details": fold_details,
         }
 

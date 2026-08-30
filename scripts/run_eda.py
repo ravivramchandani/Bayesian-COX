@@ -41,18 +41,12 @@ datasets_config = {
         "time": "duration",
         "event": "event",
         "categorical": [
+            "tumour_stage",
             "chemotherapy",
             "hormone_therapy",
-            "radio_therapy",
-            "er_status",
-            "her2_status",
-            "pam50_+_claudin-low_subtype",
+            "PAM50Subtype",
         ],
-        "stratify_cols": [
-            "pam50_+_claudin-low_subtype",
-            "er_status",
-            "hormone_therapy",
-        ],
+        "stratify_cols": ["PAM50Subtype", "tumour_stage", "hormone_therapy"],
     },
 }
 
