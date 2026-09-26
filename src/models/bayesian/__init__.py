@@ -1,4 +1,4 @@
-"""Bayesian Cox proportional hazards model and convergence diagnostics."""
+"""Bayesian piecewise-exponential proportional-hazards model and its MCMC diagnostics."""
 
 from .diagnostics import check_convergence, divergences, summarise
 from .likelihood import CoxPartialLikelihood
