@@ -2,7 +2,71 @@
 
 State needed to resume work in a new session or on another machine.
 
-Updated: 2026-08-16
+Updated: 2026-09-27
+
+## Active programme — refactor, completion and reproduction
+
+Owner instruction of 2026-09-27, which supersedes the "stop and wait" step
+in the 2026-08-16 sequence below:
+
+- make this repository the single script-based pipeline; the external
+  notebook is not ported;
+- simplify and document the code so a new reader can follow it, without
+  losing any function;
+- correct errors and inconsistencies, run the paused downstream stages, and
+  update the coordination files;
+- do not edit the Overleaf thesis in this programme; record thesis
+  corrections in `TODO.md` for later;
+- commit and push at the end, with no AI co-author trailer.
+
+Findings behind each step are in
+`coordination/reviews/2026-09-27-codebase-audit.md`.
+
+### Established facts
+
+- Commit `e824c1b` (2026-08-31) replaced the raw cohorts with output of the
+  former synthetic fallback, restored pre-2026-08-14 files and wrote random
+  cells into the frozen run directory. Revert `2e55c0b` restored the
+  `4eeb1ac` tree. The frozen run verifies there and 170 tests pass in the
+  lock environment.
+- All 80 frozen inputs are stored byte-for-byte in commits `95af081`,
+  `44b6085`, `4eeb1ac` and `2e55c0b`. This lets the frozen evidence be
+  verified against a checkpoint commit instead of the working tree.
+- The live-tree check `verify_run_inputs_unchanged` is called by robustness
+  production, confirmatory resume and the release restore. The freeze scope
+  includes every `src/**/*.py`, so any source edit or addition blocks all
+  three until verification is checkpoint-bound.
+- Primary results: the five estimable contrasts have |ΔIBS| ≤ 0.00034 and
+  p ≥ 0.49. The smallest available p exceeds 0.05/5. Under Holm's
+  step-down procedure, no estimable contrast can therefore be rejected,
+  whatever the four missing p-values are.
+- The external notebook (2026-09-26) builds Phase 2 on the synthetic CSVs.
+  Phase 3 uses the real cohorts, but it evaluates one outer fold and 7 of 18
+  model–cohort pairs, using metric values carried over in the session. The
+  repository pipeline supersedes it.
+
+### Plan and status
+
+1. [ ] Run robustness (T-140–T-143) and explanation (T-144) production with
+   the frozen code, from a detached worktree of `2e55c0b` outside iCloud
+   (`~/bayes-cox-runs/frozen`), in the lock environment.
+2. [ ] Build a reproduction harness that reruns one cell and compares it
+   with the frozen record.
+3. [ ] Bind frozen-evidence verification to the checkpoint commit (new ADR).
+4. [ ] Refactor for readability, module by module. After each step, run the
+   tests and the reproduction harness.
+5. [ ] Retire the legacy pilot lane (new ADR; see the audit note).
+6. [ ] Regenerate the 450-cell run with the refactored code and compare it
+   with the frozen artefacts (the ADR-026 reproduction claim).
+7. [ ] Render the results tables and figures, including the Holm
+   family-completion bound.
+8. [ ] Investigate the horseshoe failures as a labelled post-hoc,
+   non-confirmatory analysis.
+9. [ ] Update README, `docs/architecture.md`, TODO, JOURNAL, DECISIONS and
+   INVARIANTS, and record the thesis corrections in TODO.
+10. [ ] Commit and push.
+
+Tick each box when its step is complete, and record where its outputs are.
 
 Administrative deadline: the live programme in `TODO.md` runs from 2026-08-17
 to 2026-11-30. This 15-week schedule supersedes the earlier 26-week dates for
