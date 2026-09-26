@@ -19,7 +19,7 @@ handlers:
     class: logging.FileHandler
     level: DEBUG
     formatter: detailed
-    filename: artifacts/logs/experiment.log
+    filename: logs/experiment.log
     encoding: utf8
 
 loggers:

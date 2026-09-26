@@ -1,174 +1,172 @@
-# Comparative Bayesian Survival Analysis: Benchmark of Cox PH, RSF, DeepSurv, and Bayesian Cox Models
+# Bayesian Survival Models for Explainable Prediction of Diseases
 
-This repository contains a publication-grade research framework for benchmarking, validating, and explaining four major paradigms of survival analysis:
+Code and reproducibility materials for a Master of Applied Technologies
+thesis at the School of Computing, Unitec.
 
-1. **Frequentist Baseline**: Cox Proportional Hazards (Cox PH) model.
-2. **Non-parametric Ensemble**: Random Survival Forest (RSF).
-3. **Deep Learning**: DeepSurv neural network (diffe			rentiable Cox partial likelihood).
-4. **Bayesian Primary Contribution**: Bayesian Cox model with piecewise constant baseline hazards and Normal, Student-t, and Laplace prior parameterizations.
+The approved study is a three-cohort comparison of coefficient priors in a
+Bayesian piecewise-exponential proportional-hazards model. It evaluates
+prediction error, discrimination, explicit survival calibration, posterior
+quality, design robustness and model-conditional explanation stability. The
+frozen confirmatory execution is complete: all 450 planned cells are stored,
+430 passed the diagnostic gate and 20 horseshoe cells retain prespecified
+`failed_diagnostics` records. Five of nine primary contrasts are estimable,
+so the Holm family is incomplete and no complete-family superiority claim is
+available. Robustness, confirmatory explanation and thesis-results writing are
+paused. Existing legacy benchmark tables and figures remain exploratory pilot
+artefacts.
 
-We benchmark all models on three classic clinical cohorts: **GBSG2** (breast cancer), **WHAS500** (heart attack), and **METABRIC** (breast cancer genomics).
+## Start here — continue from another machine
 
----
+Do not rerun the completed confirmatory analysis. Its exact 552 MB evidence
+directory is preserved in the private GitHub Release
+[`confirmatory-v1-44b6085`](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085).
+The repository contains a fail-closed restoration helper that downloads both
+release assets, verifies SHA-256, rejects unexpected archive paths, validates
+all run/cell/aggregate hashes and checks the clone's 80 frozen inputs before
+installing the run.
 
-## 🚀 Quick Start & Environment Setup
-
-### Prerequisites
-
-- **Operating System**: Linux (developed and tested on Linux)
-- **Python Version**: `3.10` or higher (recommended: `3.10` or `3.11` for compatibility with `pymc` and `torchtuples`)
-
-### Installation via Conda / Mamba (Recommended)
-
-Create the isolated environment containing all dependencies (including PyTorch, PyMC, Scikit-Survival, and Torchtuples):
-
-```bash
-# Clone the repository
-git clone https://github.com/heisenberg-meth/Bayesian-Survival-Models.git
-cd Bayesian-Survival-Models
-
-# Create the conda environment
-conda env create -f environment.yml
-conda activate survival-benchmark
-```
-
-Alternatively, you can install via `pip` and the `requirements.txt`:
+From the root of a fresh clone:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+# Confirm that GitHub CLI can access the private repository.
+gh auth status
+
+# Build the exact macOS arm64 environment.
+conda-lock install -n bayes-cox-clean conda-lock.yml
+
+# Download, verify and restore the released evidence.
+conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
 ```
 
----
-
-## 📊 Ingestion & Preprocessing
-
-To download and preprocess the benchmark datasets:
-
-```bash
-# 1. Download datasets (GBSG2, WHAS500, METABRIC)
-python scripts/download_datasets.py
-
-# 2. Preprocess, scale, and partition datasets (train/val/test splits, cross-validation folds)
-python scripts/prepare_dataset.py
-```
-
-This generates the standardized survival format in `data/processed/`.
-
----
-
-## 🏃 Run Experiments & Training
-
-All models can be trained individually using the pre-configured hyperparameter search scripts.
-
-### 1. Cox PH Baseline
-
-```bash
-python scripts/run_cox_ph.py
-```
-
-*Fits standard semi-parametric Cox PH models and logs C-index and Integrated Brier Score.*
-
-### 2. Random Survival Forest
-
-```bash
-python scripts/run_rsf.py
-```
-
-*Executes randomized grid search over tree depth, split criteria, and min samples leaf.*
-
-### 3. DeepSurv
-
-```bash
-python scripts/run_deepsurv.py
-```
-
-*Trains feedforward survival neural networks using the PyCox framework, with hyperparameter tuning for learning rate, dropout, and batch size.*
-
-### 4. Bayesian Cox Model (Primary Contribution)
-
-```bash
-python scripts/run_bayesian_cox.py
-```
-
-*Estimates full posteriors using PyMC and Variational Inference (ADVI) / NUTS MCMC sampling.*
-
----
-
-## 📈 Unified Evaluation & Statistical Validation
-
-To run the unified evaluation pipeline, generate model comparison tables, and produce summary figures:
-
-```bash
-# Run comprehensive evaluation
-python scripts/evaluate.py
-```
-
-This will compile metrics across 5-fold cross-validation and output comparative charts to `reports/figures/model_performance_comparison.png`.
-
-To validate whether differences are statistically meaningful, run the bootstrap validation and hypothesis testing suite:
-
-```bash
-python scripts/run_statistical_validation.py
-```
-
-This performs:
-
-- **100 Bootstrap Replicates** per model and dataset for 95% Confidence Interval calculations.
-- **Pairwise Wilcoxon Signed-Rank Tests** with multiple comparison corrections (**Bonferroni, Holm, FDR-BH**).
-- **Stability Analysis** (3 independent random seeds).
-- **Sensitivity Analysis** under varying training sizes (50%, 75%, 100%).
-- **Computational Complexity Profiling** (training vs. inference rurtimes).
-
----
-
-## 📂 Repository Structure
+A successful restoration ends with:
 
 ```text
-Bayesian-Survival-Models/
-├── config/            # Yaml files defining hyperparameters and experimental setups
-├── data/              # Datasets raw and processed splits
-├── docs/              # System architecture, datasets description, and references
-├── reports/           # Markdown report templates, generated figures, and JSON tables
-│   ├── figures/       # Forest plots, survival curves, and model comparison charts
-│   ├── paper/         # Draft manuscript for publication
-│   └── tables/        # Metric summary results in JSON/CSV
-├── scripts/           # Standalone execution pipelines (download, train, stats, explain)
-├── src/               # Reusable core modules
-│   ├── datasets/      # Data loaders and standardization logic
-│   ├── evaluation/    # Metrics implementation (C-Index, IBS)
-│   ├── models/        # Cox PH, RSF, DeepSurv, and Bayesian PyMC structures
-│   ├── statistics/    # Wilcoxon testing, Holm corrections, bootstrap CI logic
-│   └── visualization/ # Visual styling and plotting functions
-└── tests/             # Pytest unit and integration test suite
+cells=450 complete=430 failed_diagnostics=20
+completion_content_sha256=03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1
+frozen_inputs=80 unchanged
 ```
 
----
+The restored directory is
+`reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/`. The helper
+never overwrites an existing directory; when the run is already present it
+verifies it in place. After restoration, read `coordination/HANDOFF.md` for the
+current evidence boundary and `coordination/TODO.md` for the paused next tasks.
 
-## 📄 Publications & Reports
+## Models
 
-- **Manuscript**: The detailed comparative paper draft can be viewed at:`reports/paper/comparative_survival_analysis_paper.md`
-- **Statistical Validation Report**: The automated statistical verification summary is available at:`reports/statistical_validation_report.md`
-- **Explainability & SHAP Analysis**: SHAP and posterior hazard ratio analyses are compiled under:
-  `reports/explainability_report.md`
+| Family | Implementation |
+| :--- | :--- |
+| Cox proportional hazards | lifelines |
+| Random survival forest | scikit-survival |
+| DeepSurv | pinned pycox `CoxPH` with PyTorch/torchtuples |
+| Bayesian PH, weakly informative Normal prior | project PyMC implementation, NUTS |
+| Bayesian PH, regularised horseshoe prior | project PyMC implementation, NUTS |
+| Bayesian PH, continuous spike-and-slab prior | project PyMC implementation, NUTS |
 
----
+The Bayesian model uses a piecewise-exponential full likelihood, not the Cox
+partial likelihood. Its confirmatory diagnostics cover every sampled
+parameter and include prior- and posterior-predictive checks. The continuous
+spike-and-slab weight is an inclusion signal, not a discrete posterior
+inclusion probability.
 
-## 🛠️ Reproducibility and Hardware Log
+## Cohorts
 
-All experiments are fully deterministic, pinning the random seed to `42`.
+| Cohort | Subjects | Events | Pinned source |
+| :--- | ---: | ---: | :--- |
+| GBSG2 | 686 | 299 | scikit-survival v0.24.1 source snapshot |
+| WHAS500 | 500 | 215 | scikit-survival v0.24.1 source snapshot |
+| METABRIC | 1,980 | 1,144 | cBioPortal DataHub commit `165bd77077b03038f9c2ee104959eb474770b2a9` |
 
-> **Hyperparameter Source of Truth:** All model hyperparameters are loaded from `config/*.yaml` files
-> (specifically `config/model.yaml` and `config/training.yaml`) via `src/utils/config.get_project_config()`.
-> CLI arguments act only as overrides when explicitly passed — they are never the default source.
-> To understand what hyperparameters produced a given result, check the `resolved_config` field
-> in the JSON output under `reports/tables/` or the printed run header in stdout.
+All three contain right-censored time-to-event outcomes. METABRIC is rebuilt
+from the pinned patient and sample files; `DECEASED` is the event and the
+pinned metadata defines overall survival in months since initial diagnosis.
+The earlier 1,904-row Kaggle/cBioPortal-derived file is retained only for
+pilot reproduction. Exact source, eligibility, endpoint, licence and hash
+records are in `data/manifest.yaml`.
 
-- **Python version**: `3.10.12`
-- **PyMC version**: `5.10.3`
-- **PyTorch version**: `2.1.2`
-- **Operating System**: Linux kernel 6.x
-- **Hardware Profile**: x86_64, minimum 8GB RAM, CPU execution default (due to missing `g++` compilation fallback in PyTensor, ADVI variational parameters are optimized in pure Python space).
+No fourth real cohort is required. The optional Rotterdam transport analysis
+and optional ADEMP simulation were permanently dropped before protocol freeze
+to preserve the six-month master's-thesis scope.
 
-# Bayesian-COX
+## Exact environment
+
+The official runtime is the content-addressed macOS arm64 conda lock, not an
+arbitrary environment with the same name. The lock SHA-256 is:
+
+```text
+1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57
+```
+
+Install and verify it with conda-lock:
+
+```bash
+conda-lock install -n bayes-cox-clean conda-lock.yml
+conda run -n bayes-cox-clean python scripts/verify_environment.py
+conda run -n bayes-cox-clean python -m pytest -q
+conda run -n bayes-cox-clean python -m ruff check .
+```
+
+The independently verified local environment is
+`bayes-cox-lock-verify-20260815-b`. The older `bayes-cox` environment is not
+lock-equivalent because its PyTorch provenance differs. See
+`docs/environment_lock.md` for the clean-build procedure and platform limits.
+
+## Confirmatory workflow
+
+The completed analysis was deliberately gated. Rehearsal output is labelled
+`rehearsal_only` and is not scientific evidence. The write-once freeze records
+five repeats and 80 content-addressed inputs. The current production evidence
+must be restored from the Release above, not regenerated or selectively
+rerun.
+
+```bash
+# Correct continuation path for this checkpoint:
+conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
+```
+
+Production execution refuses methodological overrides and hash mismatches.
+Each cell is checkpointed with data, dependency, configuration, code, seed,
+runtime, diagnostic and prediction lineage. Figures and tables are rendered
+from frozen artefacts without refitting. Do not invoke the confirmatory,
+robustness, explanation or rendering entry points without the next instruction
+recorded in `coordination/HANDOFF.md` and `coordination/TODO.md`.
+
+## Current evidence boundary
+
+- Data rebuilding, feature specifications, fold-local preprocessing,
+  repeated folds, metrics, calibration, paired inference, DeepSurv, Bayesian
+  checks, exact explanation analysis, robustness runners and immutable result
+  schemas are implemented and tested.
+- The final result-blind rehearsal completed 18 of 18 cells. The deterministic
+  runtime gate retained five repeats, and the write-once protocol freeze has
+  SHA-256
+  `3b5e1042d592ebb6fade0a4a76c1f0d31ce9c0c1cfc08357be46f163f037d2ca`.
+- The frozen production run stored all 450 planned cells: 430 complete and 20
+  rejected by the prespecified diagnostic gate. Every rejected cell is a
+  horseshoe fit and remains excluded from metrics and inference.
+- `inference.json` is explicitly incomplete. Five of nine primary contrasts
+  have all 25 paired folds; the four GBSG2/METABRIC horseshoe contrasts have
+  no confirmatory inference. The Holm family is therefore incomplete.
+- Robustness, confirmatory explanation, primary claim review and
+  post-confirmatory thesis-results writing remain paused pending the next
+  instruction. No complete-family superiority, equivalence or
+  multiplicity-controlled claim is accepted.
+
+The claim rules are in `docs/claim_evidence_register.md`; the live execution
+state is in `coordination/TODO.md` and `coordination/HANDOFF.md`.
+
+## Layout
+
+```text
+config/         approved design, dataset and model specifications
+coordination/   decisions, invariants, protocol, tasks and handoff state
+data/           pinned-source manifests plus local raw/processed data
+docs/           study protocol, resource ledger and evidence rules
+scripts/        rehearsal, freeze, confirmatory, robustness and render entry points
+src/            data, models, evaluation, explainability and statistics
+tests/          reference, leakage, lineage, schema and reproducibility tests
+reports/        exploratory artefacts and content-addressed run directories
+```
+
+The thesis source is in the adjacent `thesis-overleaf` repository. Compile it
+with `make thesis` and audit internal project identifiers with `make jargon`.

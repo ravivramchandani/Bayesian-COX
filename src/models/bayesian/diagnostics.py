@@ -1,6 +1,4 @@
-"""
-MCMC convergence diagnostics computed from an ArviZ InferenceData trace.
-"""
+"""MCMC diagnostics derived from every fitted posterior parameter."""
 
 from __future__ import annotations
 
@@ -8,192 +6,104 @@ from typing import Any
 
 import arviz as az
 import numpy as np
+import pandas as pd
+
+R_HAT_THRESHOLD = 1.01
+ESS_BULK_THRESHOLD = 400.0
+BFMI_THRESHOLD = 0.30
 
 
-class MCMCDiagnostics:
-    """Computes convergence and sampling-quality diagnostics."""
+def summarise(idata: Any, var_names: list[str] | None = None) -> pd.DataFrame:
+    """Return rank-normalised diagnostics for selected or all parameters."""
+    return az.summary(
+        idata,
+        var_names=var_names,
+        kind="diagnostics",
+        round_to=None,
+    )
 
-    @staticmethod
-    def _validate_trace(trace: Any) -> None:
-        """Validate that the supplied object contains posterior samples."""
-        if trace is None:
-            raise ValueError("Inference trace cannot be None.")
 
-        if not hasattr(trace, "posterior"):
-            raise TypeError("Trace must provide an ArviZ posterior group.")
+def divergences(idata: Any) -> int:
+    """Return divergent transitions across post-warmup chains."""
+    if "diverging" not in idata.sample_stats:
+        return 0
+    return int(idata.sample_stats["diverging"].values.sum())
 
-    @staticmethod
-    def compute_rhat(trace: Any) -> dict[str, float]:
-        """
-        Compute maximum rank-normalised R-hat across posterior parameters.
-        """
-        MCMCDiagnostics._validate_trace(trace)
 
-        summary = az.rhat(trace, method="rank")
+def _tree_depth_summary(idata: Any) -> tuple[int | None, int]:
+    stats = idata.sample_stats
+    if "reached_max_treedepth" in stats:
+        reached = np.asarray(stats["reached_max_treedepth"].values, dtype=bool)
+        depth = np.asarray(stats.get("tree_depth", []))
+        return (int(depth.max()) if depth.size else None, int(reached.sum()))
+    if "tree_depth" not in stats:
+        return None, 0
+    depth = np.asarray(stats["tree_depth"].values)
+    max_depth = int(depth.max())
+    # PyMC's default NUTS maximum is 10. Hitting a lower observed maximum is
+    # not itself a failure, so only count the configured default boundary.
+    return max_depth, int((depth >= 10).sum())
 
-        values = np.asarray(summary.to_array().values, dtype=float)
 
-        if values.size == 0:
-            raise ValueError("No posterior parameters available for R-hat.")
+def check_convergence(
+    idata: Any, var_names: list[str] | None = None
+) -> dict[str, Any]:
+    """Evaluate convergence for all requested stochastic and derived values.
 
-        if not np.all(np.isfinite(values)):
-            raise ValueError("R-hat contains non-finite values.")
+    A confirmatory fit passes only with rank-normalised R-hat below 1.01,
+    bulk ESS above 400, no divergences, BFMI above 0.30 and no maximum-tree-
+    depth hits. The returned values are computed from the trace and are safe to
+    serialize in result manifests.
+    """
+    summary = summarise(idata, var_names=var_names)
+    required = {"r_hat", "ess_bulk", "ess_tail", "mcse_mean", "mcse_sd"}
+    missing = required.difference(summary.columns)
+    if missing:
+        raise ValueError(f"ArviZ summary is missing diagnostics: {sorted(missing)}")
 
-        return {
-            "rhat_max": float(np.max(values)),
-        }
+    n_divergent = divergences(idata)
+    n_samples = int(idata.posterior.sizes["chain"] * idata.posterior.sizes["draw"])
+    divergence_rate = n_divergent / n_samples if n_samples else 0.0
+    r_hat_max = float(summary["r_hat"].max())
+    ess_bulk_min = float(summary["ess_bulk"].min())
+    ess_tail_min = float(summary["ess_tail"].min())
+    mcse_mean_max = float(summary["mcse_mean"].abs().max())
+    mcse_sd_max = float(summary["mcse_sd"].abs().max())
 
-    @staticmethod
-    def compute_ess(trace: Any) -> dict[str, float]:
-        """
-        Compute minimum bulk and tail effective sample sizes.
-        """
-        MCMCDiagnostics._validate_trace(trace)
+    bfmi_values = np.asarray(az.bfmi(idata), dtype=float)
+    bfmi_min = float(np.nanmin(bfmi_values)) if bfmi_values.size else float("nan")
+    max_tree_depth, n_max_tree_depth = _tree_depth_summary(idata)
 
-        ess_bulk = az.ess(trace, method="bulk")
-        ess_tail = az.ess(trace, method="tail")
-
-        bulk_values = np.asarray(
-            ess_bulk.to_array().values,
-            dtype=float,
+    failures: list[str] = []
+    if not np.isfinite(r_hat_max) or r_hat_max >= R_HAT_THRESHOLD:
+        failures.append(f"R-hat {r_hat_max:.4f} >= {R_HAT_THRESHOLD}")
+    if not np.isfinite(ess_bulk_min) or ess_bulk_min <= ESS_BULK_THRESHOLD:
+        failures.append(
+            f"bulk ESS {ess_bulk_min:.0f} <= {ESS_BULK_THRESHOLD:.0f}"
         )
-        tail_values = np.asarray(
-            ess_tail.to_array().values,
-            dtype=float,
+    if n_divergent:
+        failures.append(
+            f"{n_divergent} divergent transitions ({divergence_rate:.2%} of draws)"
         )
+    if not np.isfinite(bfmi_min) or bfmi_min < BFMI_THRESHOLD:
+        failures.append(f"minimum BFMI {bfmi_min:.3f} < {BFMI_THRESHOLD:.2f}")
+    if n_max_tree_depth:
+        failures.append(f"{n_max_tree_depth} maximum-tree-depth hits")
 
-        if bulk_values.size == 0:
-            raise ValueError("No posterior parameters available for ESS.")
-
-        if not np.all(np.isfinite(bulk_values)):
-            raise ValueError("Bulk ESS contains non-finite values.")
-
-        if not np.all(np.isfinite(tail_values)):
-            raise ValueError("Tail ESS contains non-finite values.")
-
-        return {
-            "ess_bulk_min": float(np.min(bulk_values)),
-            "ess_tail_min": float(np.min(tail_values)),
-        }
-
-    @staticmethod
-    def compute_divergences(trace: Any) -> dict[str, int]:
-        """
-        Count divergent NUTS transitions from sampler statistics.
-        """
-        MCMCDiagnostics._validate_trace(trace)
-
-        if "sample_stats" not in trace:
-            raise ValueError("Trace does not contain sampler statistics.")
-
-        sample_stats = trace.sample_stats
-
-        if "diverging" not in sample_stats:
-            raise ValueError("Sampler statistics do not contain 'diverging'.")
-
-        divergent = np.asarray(
-            sample_stats["diverging"].values,
-            dtype=bool,
-        )
-
-        return {
-            "divergences": int(np.sum(divergent)),
-        }
-
-    @staticmethod
-    def compute_bfmi(trace: Any) -> dict[str, float]:
-        """
-        Compute the minimum Bayesian fraction of missing information.
-        """
-        MCMCDiagnostics._validate_trace(trace)
-
-        if "sample_stats" not in trace:
-            raise ValueError("Trace does not contain sampler statistics.")
-
-        values = np.asarray(
-            az.bfmi(trace),
-            dtype=float,
-        )
-
-        if values.size == 0:
-            raise ValueError("BFMI could not be computed.")
-
-        if not np.all(np.isfinite(values)):
-            raise ValueError("BFMI contains non-finite values.")
-
-        return {
-            "bfmi_min": float(np.min(values)),
-        }
-
-    @staticmethod
-    def compute_tree_depth(trace: Any) -> dict[str, int]:
-        """
-        Report the maximum observed NUTS tree depth.
-        """
-        MCMCDiagnostics._validate_trace(trace)
-
-        if "sample_stats" not in trace:
-            raise ValueError("Trace does not contain sampler statistics.")
-
-        sample_stats = trace.sample_stats
-
-        if "tree_depth" not in sample_stats:
-            raise ValueError("Sampler statistics do not contain 'tree_depth'.")
-
-        tree_depth = np.asarray(
-            sample_stats["tree_depth"].values,
-            dtype=int,
-        )
-
-        if tree_depth.size == 0:
-            raise ValueError("No tree-depth samples available.")
-
-        return {
-            "tree_depth_max": int(np.max(tree_depth)),
-        }
-
-    @staticmethod
-    def compute_all(
-        trace: Any,
-        max_tree_depth: int = 10,
-    ) -> dict[str, Any]:
-        """
-        Compute all mandatory Bayesian sampling diagnostics.
-
-        The returned status is PASS only when all mandatory quality gates pass.
-        """
-        rhat = MCMCDiagnostics.compute_rhat(trace)
-        ess = MCMCDiagnostics.compute_ess(trace)
-        divergences = MCMCDiagnostics.compute_divergences(trace)
-        bfmi = MCMCDiagnostics.compute_bfmi(trace)
-        tree_depth = MCMCDiagnostics.compute_tree_depth(trace)
-
-        rhat_pass = rhat["rhat_max"] < 1.01
-        ess_pass = ess["ess_bulk_min"] > 400
-        divergences_pass = divergences["divergences"] == 0
-        bfmi_pass = bfmi["bfmi_min"] >= 0.3
-        tree_depth_pass = tree_depth["tree_depth_max"] < max_tree_depth
-
-        passed = (
-            rhat_pass
-            and ess_pass
-            and divergences_pass
-            and bfmi_pass
-            and tree_depth_pass
-        )
-
-        return {
-            **rhat,
-            **ess,
-            **divergences,
-            **bfmi,
-            **tree_depth,
-            "gates": {
-                "rhat": rhat_pass,
-                "ess": ess_pass,
-                "divergences": divergences_pass,
-                "bfmi": bfmi_pass,
-                "tree_depth": tree_depth_pass,
-            },
-            "status": "PASS" if passed else "FAIL",
-        }
+    checked = list(var_names or idata.posterior.data_vars)
+    return {
+        "variables_checked": checked,
+        "n_parameters_checked": int(len(summary)),
+        "r_hat_max": r_hat_max,
+        "ess_bulk_min": ess_bulk_min,
+        "ess_tail_min": ess_tail_min,
+        "mcse_mean_max": mcse_mean_max,
+        "mcse_sd_max": mcse_sd_max,
+        "n_divergent": n_divergent,
+        "divergence_rate": divergence_rate,
+        "bfmi_min": bfmi_min,
+        "max_tree_depth": max_tree_depth,
+        "n_max_tree_depth": n_max_tree_depth,
+        "converged": not failures,
+        "failures": failures,
+    }

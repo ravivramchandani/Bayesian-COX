@@ -1,336 +1,257 @@
-"""
-DeepSurv Model Implementation for Bayesian Survival Models Project.
-Deep Feedforward Neural Network parameterizing non-linear Cox proportional hazards risk functions.
-Optimizes negative Cox partial log-likelihood with SELU/ReLU activations, L2 regularization,
-and Breslow baseline hazard estimation.
-"""
+"""DeepSurv comparator implemented with the reference pycox CoxPH model."""
+
+from __future__ import annotations
+
+from typing import Any
 
 import numpy as np
 import pandas as pd
-import scipy.optimize as opt
 
 from src.models.base import BaseSurvivalModel
 
 
-def _selu(x: np.ndarray) -> np.ndarray:
-    """Scaled Exponential Linear Unit (SELU) activation function."""
-    alpha = 1.6732632423543772848170429916717
-    scale = 1.0507009873554804934193349852946
-    return scale * np.where(x > 0, x, alpha * (np.exp(x) - 1.0))
-
-
-def _selu_grad(x: np.ndarray) -> np.ndarray:
-    """Derivative of SELU activation function."""
-    alpha = 1.6732632423543772848170429916717
-    scale = 1.0507009873554804934193349852946
-    return scale * np.where(x > 0, 1.0, alpha * np.exp(x))
-
-
 class DeepSurvModel(BaseSurvivalModel):
-    """DeepSurv (Deep Learning Cox Survival Model)."""
+    """Neural proportional-hazards model backed by ``pycox.models.CoxPH``.
+
+    The validation subset is drawn only from the data passed to :meth:`fit`.
+    Outer validation/test observations therefore cannot influence early
+    stopping. Inputs are expected to have been imputed, encoded and scaled by
+    the enclosing training-fold preprocessor.
+    """
 
     def __init__(
         self,
         hidden_dims: list[int] | None = None,
+        dropout: float = 0.2,
+        activation: str = "relu",
+        batch_norm: bool = True,
+        learning_rate: float = 1e-3,
         l2_reg: float = 1e-3,
+        batch_size: int = 64,
+        epochs: int = 100,
+        patience: int = 15,
+        min_delta: float = 1e-4,
+        validation_fraction: float = 0.2,
         random_state: int = 42,
-        max_iter: int = 300,
-    ):
-        if hidden_dims is None:
-            hidden_dims = [32, 16]
-        self.hidden_dims = hidden_dims
-        self.l2_reg = l2_reg
-        self.random_state = random_state
-        self.max_iter = max_iter
+    ) -> None:
+        self.hidden_dims = list(hidden_dims or [32, 16])
+        self.dropout = float(dropout)
+        self.activation = activation.lower()
+        self.batch_norm = bool(batch_norm)
+        self.learning_rate = float(learning_rate)
+        self.l2_reg = float(l2_reg)
+        self.batch_size = int(batch_size)
+        self.epochs = int(epochs)
+        self.patience = int(patience)
+        self.min_delta = float(min_delta)
+        self.validation_fraction = float(validation_fraction)
+        self.random_state = int(random_state)
 
-        self.weights: list[np.ndarray] = []
-        self.biases: list[np.ndarray] = []
-        self.feature_names = []
+        self.feature_names: list[str] = []
+        self.model: Any | None = None
+        self.training_log: pd.DataFrame = pd.DataFrame()
+        self.feature_importances_: dict[str, float] | None = None
 
-        self.unique_event_times = np.array([])
-        self.baseline_cum_hazard = np.array([])
-        self.training_loss_history = []
-        self.feature_importances_ = None
+    @staticmethod
+    def _dependencies() -> tuple[Any, Any, Any]:
+        try:
+            import torch
+            import torchtuples as tt
+            from pycox.models import CoxPH
+        except ImportError as exc:  # pragma: no cover - exercised in clean-env checks
+            raise ImportError(
+                "DeepSurv requires pinned torch, torchtuples and pycox dependencies"
+            ) from exc
+        return torch, tt, CoxPH
 
-    def _init_weights(self, in_dim: int, rng: np.random.RandomState):
-        """Initializes network weights using LeCun normal initialization for SELU."""
-        dims = [in_dim] + self.hidden_dims + [1]
-        self.weights = []
-        self.biases = []
+    def _split_training_validation(
+        self, events: np.ndarray
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """Return deterministic event-stratified train/validation indices."""
+        n = len(events)
+        if n < 20 or not 0.0 < self.validation_fraction < 0.5:
+            return np.arange(n), np.array([], dtype=int)
 
-        for i in range(len(dims) - 1):
-            std = np.sqrt(1.0 / dims[i])
-            W = rng.normal(loc=0.0, scale=std, size=(dims[i], dims[i + 1]))
-            b = np.zeros(dims[i + 1])
-            self.weights.append(W)
-            self.biases.append(b)
+        rng = np.random.default_rng(self.random_state)
+        validation: list[int] = []
+        training: list[int] = []
+        for label in np.unique(events):
+            indices = np.flatnonzero(events == label)
+            rng.shuffle(indices)
+            n_val = max(1, int(round(len(indices) * self.validation_fraction)))
+            n_val = min(n_val, max(0, len(indices) - 2))
+            validation.extend(indices[:n_val].tolist())
+            training.extend(indices[n_val:].tolist())
 
-    def _pack_params(self) -> np.ndarray:
-        params = []
-        for W, b in zip(self.weights, self.biases):
-            params.append(W.ravel())
-            params.append(b.ravel())
-        return np.concatenate(params)
-
-    def _unpack_params(self, param_vec: np.ndarray, in_dim: int):
-        dims = [in_dim] + self.hidden_dims + [1]
-        idx = 0
-        self.weights = []
-        self.biases = []
-
-        for i in range(len(dims) - 1):
-            w_shape = (dims[i], dims[i + 1])
-            w_size = dims[i] * dims[i + 1]
-            W = param_vec[idx : idx + w_size].reshape(w_shape)
-            idx += w_size
-
-            b_shape = (dims[i + 1],)
-            b_size = dims[i + 1]
-            b = param_vec[idx : idx + b_size].reshape(b_shape)
-            idx += b_size
-
-            self.weights.append(W)
-            self.biases.append(b)
-
-    def _forward(
-        self, X: np.ndarray
-    ) -> tuple[np.ndarray, list[np.ndarray], list[np.ndarray]]:
-        """Forward pass through deep neural network."""
-        activations = [X]
-        linear_outputs = []
-
-        curr = X
-        for i in range(len(self.weights) - 1):
-            z = np.dot(curr, self.weights[i]) + self.biases[i]
-            linear_outputs.append(z)
-            curr = _selu(z)
-            activations.append(curr)
-
-        # Output layer (linear log-risk)
-        g_risk = np.dot(curr, self.weights[-1]) + self.biases[-1]  # (N, 1)
-        linear_outputs.append(g_risk)
-        activations.append(g_risk)
-
-        return g_risk.ravel(), activations, linear_outputs
+        if not validation or len(training) < 4:
+            return np.arange(n), np.array([], dtype=int)
+        return np.asarray(training, dtype=int), np.asarray(validation, dtype=int)
 
     def fit(
         self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray
-    ) -> "DeepSurvModel":
-        """Fits DeepSurv neural network parameters by minimizing Cox partial log-likelihood."""
+    ) -> DeepSurvModel:
+        """Fit the neural Cox partial-likelihood model and Breslow baseline."""
+        torch, tt, CoxPH = self._dependencies()
+        if len(X) == 0:
+            raise ValueError("DeepSurv requires at least one training observation")
+
         self.feature_names = list(X.columns)
-        X_mat = X.values.astype(float)
-        y_time = np.asarray(y_time, dtype=float)
-        y_event = np.asarray(y_event, dtype=int)
+        x_all = X[self.feature_names].to_numpy(dtype="float32", copy=True)
+        durations = np.asarray(y_time, dtype="float32")
+        events = np.asarray(y_event, dtype="float32")
+        if len(x_all) != len(durations) or len(durations) != len(events):
+            raise ValueError("X, y_time and y_event must contain the same rows")
+        if not np.isfinite(x_all).all() or not np.isfinite(durations).all():
+            raise ValueError("DeepSurv inputs must be finite after fold preprocessing")
+        if np.any(durations <= 0):
+            raise ValueError("Survival durations must be strictly positive")
+        if int(events.sum()) < 2:
+            raise ValueError("DeepSurv requires at least two observed events")
 
-        n_samples, in_dim = X_mat.shape
+        np.random.seed(self.random_state)
+        torch.manual_seed(self.random_state)
+        torch.use_deterministic_algorithms(True, warn_only=True)
+        torch.set_num_threads(1)
 
-        # Sort by survival time ascending
-        order = np.argsort(y_time)
-        X_mat = X_mat[order]
-        y_time = y_time[order]
-        y_event = y_event[order]
-
-        rng = np.random.RandomState(self.random_state)
-        self._init_weights(in_dim, rng)
-
-        self.training_loss_history = []
-
-        def _objective_and_grad(param_vec):
-            self._unpack_params(param_vec, in_dim)
-            g_risk, activations, linear_outputs = self._forward(X_mat)
-
-            # Cox Partial Log-Likelihood
-            exp_risk = np.exp(g_risk - np.max(g_risk))
-            risk_sums = np.cumsum(exp_risk[::-1])[::-1]
-            event_mask = y_event == 1
-
-            log_lik = np.sum(
-                g_risk[event_mask] - (np.max(g_risk) + np.log(risk_sums[event_mask]))
+        activation_map = {
+            "relu": torch.nn.ReLU,
+            "selu": torch.nn.SELU,
+            "tanh": torch.nn.Tanh,
+        }
+        if self.activation not in activation_map:
+            raise ValueError(
+                f"Unsupported activation {self.activation!r}; use one of "
+                f"{sorted(activation_map)}"
             )
 
-            # L2 weight regularization
-            l2_loss = 0.5 * self.l2_reg * sum(np.sum(W**2) for W in self.weights)
-            neg_loss = -(log_lik - l2_loss)
-
-            self.training_loss_history.append(float(neg_loss))
-
-            # Derivative wrt risk scores g_risk
-            dL_dg = np.zeros(n_samples)
-
-            for i in range(n_samples):
-                if y_event[i] == 1:
-                    dL_dg[i] -= 1.0
-
-            for k in range(n_samples):
-                if y_event[k] == 1:
-                    at_risk_mask = y_time >= y_time[k]
-                    denom = np.sum(exp_risk[at_risk_mask])
-                    if denom > 0:
-                        dL_dg[at_risk_mask] += exp_risk[at_risk_mask] / denom
-
-            dL_dg += self.l2_reg * 0.0  # regularize weights only
-
-            # Backpropagation
-            d_out = dL_dg[:, None]  # (N, 1)
-
-            dW_list = []
-            db_list = []
-
-            # Output layer gradients
-            dW_out = np.dot(activations[-2].T, d_out) + self.l2_reg * self.weights[-1]
-            db_out = np.sum(d_out, axis=0)
-
-            dW_list.insert(0, dW_out)
-            db_list.insert(0, db_out)
-
-            curr_delta = np.dot(d_out, self.weights[-1].T)
-
-            # Hidden layers backwards
-            for layer_idx in range(len(self.weights) - 2, -1, -1):
-                curr_delta = curr_delta * _selu_grad(linear_outputs[layer_idx])
-                dW = (
-                    np.dot(activations[layer_idx].T, curr_delta)
-                    + self.l2_reg * self.weights[layer_idx]
-                )
-                db = np.sum(curr_delta, axis=0)
-
-                dW_list.insert(0, dW)
-                db_list.insert(0, db)
-
-                if layer_idx > 0:
-                    curr_delta = np.dot(curr_delta, self.weights[layer_idx].T)
-
-            # Pack gradients
-            grad_vec = []
-            for dW, db in zip(dW_list, db_list):
-                grad_vec.append(dW.ravel())
-                grad_vec.append(db.ravel())
-
-            return neg_loss, np.concatenate(grad_vec)
-
-        # Initial param vector
-        init_vec = self._pack_params()
-
-        res = opt.minimize(
-            _objective_and_grad,
-            init_vec,
-            jac=True,
-            method="L-BFGS-B",
-            options={"maxiter": self.max_iter, "ftol": 1e-7},
+        net = tt.practical.MLPVanilla(
+            in_features=x_all.shape[1],
+            num_nodes=self.hidden_dims,
+            out_features=1,
+            batch_norm=self.batch_norm,
+            dropout=self.dropout,
+            activation=activation_map[self.activation],
+            output_bias=False,
         )
+        optimizer = tt.optim.Adam(
+            lr=self.learning_rate,
+            weight_decay=self.l2_reg,
+        )
+        model = CoxPH(net, optimizer, device="cpu")
 
-        self._unpack_params(res.x, in_dim)
+        train_idx, val_idx = self._split_training_validation(events)
+        train_input = x_all[train_idx]
+        train_target = (durations[train_idx], events[train_idx])
+        val_data = None
+        callbacks: list[Any] = []
+        if len(val_idx):
+            val_data = (x_all[val_idx], (durations[val_idx], events[val_idx]))
+            callbacks.append(
+                tt.callbacks.EarlyStopping(
+                    patience=self.patience,
+                    min_delta=self.min_delta,
+                    checkpoint_model=True,
+                    load_best=True,
+                )
+            )
 
-        # Fit Breslow baseline cumulative hazard on trained neural risk predictions
-        g_risk_fit, _, _ = self._forward(X_mat)
-        exp_risk_fit = np.exp(g_risk_fit)
+        log = model.fit(
+            train_input,
+            train_target,
+            batch_size=min(self.batch_size, len(train_idx)),
+            epochs=self.epochs,
+            callbacks=callbacks,
+            verbose=False,
+            val_data=val_data,
+            shuffle=True,
+        )
+        model.compute_baseline_hazards(x_all, (durations, events))
 
-        event_times = y_time[y_event == 1]
-        unique_event_times = np.unique(event_times)
-
-        cum_hazard = []
-        h0_cum = 0.0
-
-        for t in unique_event_times:
-            d_t = np.sum((y_time == t) & (y_event == 1))
-            at_risk_mask = y_time >= t
-            sum_risk = np.sum(exp_risk_fit[at_risk_mask])
-            if sum_risk > 0:
-                h0_cum += d_t / sum_risk
-            cum_hazard.append(h0_cum)
-
-        self.unique_event_times = unique_event_times
-        self.baseline_cum_hazard = np.array(cum_hazard)
-
-        # Compute feature importances
-        self._compute_feature_importance(X, y_time, y_event)
-
+        self.model = model
+        try:
+            self.training_log = log.to_pandas()
+        except (AttributeError, TypeError):
+            self.training_log = pd.DataFrame()
         return self
 
-    def _compute_feature_importance(
-        self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray
-    ):
-        """Computes Permutation Feature Importance (VIMP) based on drop in C-index."""
-        from src.evaluation.metrics import concordance_index
-
-        baseline_risk = self.predict_risk(X)
-        baseline_c, _ = concordance_index(y_time, y_event, baseline_risk)
-
-        importances = {}
-        rng = np.random.RandomState(self.random_state)
-
-        for col in self.feature_names:
-            X_perm = X.copy()
-            X_perm[col] = rng.permutation(X_perm[col].values)
-            perm_risk = self.predict_risk(X_perm)
-            perm_c, _ = concordance_index(y_time, y_event, perm_risk)
-            importances[col] = float(max(0.0, baseline_c - perm_c))
-
-        self.feature_importances_ = importances
-
-    def get_feature_importances(self) -> pd.DataFrame:
-        """Returns feature importances dataframe."""
-        if self.feature_importances_ is None:
-            return pd.DataFrame()
-
-        df_imp = (
-            pd.DataFrame(
-                [
-                    {"feature": k, "importance (VIMP)": v}
-                    for k, v in self.feature_importances_.items()
-                ]
-            )
-            .sort_values(by="importance (VIMP)", ascending=False)
-            .reset_index(drop=True)
-        )
-        return df_imp
-
     def predict_risk(self, X: pd.DataFrame) -> np.ndarray:
-        """Predicts log-risk score g_theta(X)."""
-        if len(self.weights) == 0:
-            raise ValueError("Model must be fitted before calling predict_risk().")
-        X_mat = X[self.feature_names].values.astype(float)
-        g_risk, _, _ = self._forward(X_mat)
-        return g_risk
+        """Return neural log-risk; larger values imply higher hazard."""
+        self._check_fitted()
+        x = X[self.feature_names].to_numpy(dtype="float32", copy=True)
+        return np.asarray(self.model.predict(x), dtype=float).reshape(-1)
 
     def predict_survival(self, X: pd.DataFrame, eval_times: np.ndarray) -> np.ndarray:
-        """Predicts survival matrix S(t | X_i) = exp(-H0(t) * exp(g_theta(X_i)))."""
-        if len(self.weights) == 0 or len(self.unique_event_times) == 0:
-            raise ValueError("Model must be fitted before calling predict_survival().")
+        """Return right-continuous Breslow survival estimates at given times."""
+        self._check_fitted()
+        times = np.asarray(eval_times, dtype=float)
+        if times.ndim != 1 or len(times) == 0 or np.any(np.diff(times) < 0):
+            raise ValueError("eval_times must be a non-empty sorted vector")
 
-        risk_scores = self.predict_risk(X)
-        exp_risk = np.exp(risk_scores)
+        x = X[self.feature_names].to_numpy(dtype="float32", copy=True)
+        surv_df = self.model.predict_surv_df(x)
+        grid = surv_df.index.to_numpy(dtype=float)
+        grid_surv = surv_df.to_numpy(dtype=float).T
+        result = np.ones((len(x), len(times)), dtype=float)
+        indices = np.searchsorted(grid, times, side="right") - 1
+        valid = indices >= 0
+        if np.any(valid):
+            bounded = np.minimum(indices[valid], len(grid) - 1)
+            result[:, valid] = grid_surv[:, bounded]
+        return np.clip(result, 1e-8, 1.0)
 
-        indices = np.searchsorted(self.unique_event_times, eval_times, side="right") - 1
-        h0_eval = np.zeros_like(eval_times, dtype=float)
+    def permutation_importance(
+        self,
+        X: pd.DataFrame,
+        y_time: np.ndarray,
+        y_event: np.ndarray,
+        n_repeats: int = 5,
+    ) -> pd.DataFrame:
+        """Estimate validation-set concordance loss after feature permutation."""
+        from src.evaluation.metrics import concordance_index
 
-        valid_mask = indices >= 0
-        h0_eval[valid_mask] = self.baseline_cum_hazard[
-            np.minimum(indices[valid_mask], len(self.baseline_cum_hazard) - 1)
-        ]
-
-        cum_haz_matrix = np.outer(exp_risk, h0_eval)
-        surv_matrix = np.exp(-cum_haz_matrix)
-        return np.clip(surv_matrix, 1e-6, 1.0)
+        baseline, _ = concordance_index(y_time, y_event, self.predict_risk(X))
+        rng = np.random.default_rng(self.random_state)
+        rows = []
+        for feature in self.feature_names:
+            drops = []
+            for _ in range(n_repeats):
+                permuted = X.copy()
+                permuted[feature] = rng.permutation(permuted[feature].to_numpy())
+                score, _ = concordance_index(
+                    y_time, y_event, self.predict_risk(permuted)
+                )
+                drops.append(baseline - score)
+            rows.append(
+                {
+                    "feature": feature,
+                    "importance_mean": float(np.mean(drops)),
+                    "importance_std": float(np.std(drops, ddof=1))
+                    if n_repeats > 1
+                    else 0.0,
+                }
+            )
+        self.feature_importances_ = {
+            row["feature"]: row["importance_mean"] for row in rows
+        }
+        return pd.DataFrame(rows).sort_values(
+            "importance_mean", ascending=False
+        ).reset_index(drop=True)
 
     def get_summary(self) -> pd.DataFrame:
-        """Returns neural network architecture summary."""
-        records = [
-            {
-                "layer": "Input Layer",
-                "shape": f"({len(self.feature_names)}, {self.hidden_dims[0]})",
-            },
-            {
-                "layer": "Hidden Layer 1 (SELU)",
-                "shape": f"({self.hidden_dims[0]}, {self.hidden_dims[1]})",
-            },
-            {
-                "layer": "Output Layer (Log-Risk)",
-                "shape": f"({self.hidden_dims[1]}, 1)",
-            },
-            {
-                "layer": "Total Loss Iterations",
-                "shape": str(len(self.training_loss_history)),
-            },
+        """Return the fitted architecture and training configuration."""
+        rows = [
+            {"component": "input_features", "value": len(self.feature_names)},
+            {"component": "hidden_dims", "value": str(self.hidden_dims)},
+            {"component": "activation", "value": self.activation},
+            {"component": "dropout", "value": self.dropout},
+            {"component": "batch_norm", "value": self.batch_norm},
+            {"component": "learning_rate", "value": self.learning_rate},
+            {"component": "weight_decay", "value": self.l2_reg},
+            {"component": "epochs_requested", "value": self.epochs},
+            {"component": "epochs_completed", "value": len(self.training_log)},
         ]
-        return pd.DataFrame(records)
+        return pd.DataFrame(rows)
+
+    def _check_fitted(self) -> None:
+        if self.model is None:
+            raise RuntimeError("Model is not fitted. Call fit() first.")

@@ -1,37 +1,23 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
 *.so
+*.egg-info/
 
-# Virtual Environment
+# Environments
 .venv/
-env/
 venv/
+env/
 ENV/
 
-# Notebook
+# Notebooks
 .ipynb_checkpoints/
 
-# IDE
+# Editors
 .vscode/
 .idea/
 
-# Outputs
-outputs/
-artifacts/
-results/
-
-# Data
-# data/raw/*
-# data/processed/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-
-# Logs
-*.log
-
-# Cache
+# Caches
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -39,6 +25,23 @@ results/
 # OS
 .DS_Store
 Thumbs.db
-.kilo/*
-.local
-progress.txt
+
+# Logs
+*.log
+
+# The external METABRIC source is excluded from new commits. Historical raw
+# and derived data already tracked in the private repository require the
+# owner-approved licence matrix before any public release; reproducibility is
+# provided through manifests and access scripts where redistribution is not
+# permitted.
+data/external/METABRIC_RNA_Mutation.csv
+
+# Runtime logs
+logs/
+
+# Generated analysis runs. These are content-addressed local artefacts and can
+# be hundreds of megabytes; commit their manifests only through an explicit
+# evidence-release step, never through a blanket project checkpoint.
+reports/confirmatory/
+reports/confirmatory_rehearsal*/
+reports/smoke_*/

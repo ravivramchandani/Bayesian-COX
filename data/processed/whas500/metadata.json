@@ -1,58 +1,46 @@
 {
   "dataset_name": "whas500",
   "random_state": 42,
-  "cv_n_splits": 25,
   "target_time_col": "time",
   "target_event_col": "event",
-  "num_features": 12,
+  "num_features": 9,
   "feature_names": [
     "age",
     "hr",
     "sysbp",
     "diasbp",
     "bmi",
-    "age_x_chf",
-    "age_x_gender",
     "gender_1",
     "cvd_1",
-    "afb_1",
-    "sho_1",
-    "chf_1"
+    "miord_1",
+    "mitype_1"
   ],
   "train_samples": 349,
   "val_samples": 74,
   "test_samples": 77,
-  "train_censoring_rate": 57.31,
-  "val_censoring_rate": 58.11,
+  "train_censoring_rate": 57.02,
+  "val_censoring_rate": 56.76,
   "test_censoring_rate": 57.14,
   "scaling_params": {
     "age": {
-      "mean": 64.57306590257879,
-      "std": 19.46581049473432
+      "mean": 70.53581661891117,
+      "std": 14.310072239737456
     },
     "hr": {
-      "mean": 107.36103151862464,
-      "std": 42.90963875149133
+      "mean": 85.7593123209169,
+      "std": 24.0951050398636
     },
     "sysbp": {
-      "mean": 148.93123209169053,
-      "std": 39.87719473188258
+      "mean": 144.4269340974212,
+      "std": 33.0389611009593
     },
     "diasbp": {
-      "mean": 85.50143266475645,
-      "std": 25.737247108930887
+      "mean": 77.0515759312321,
+      "std": 21.257255126140105
     },
     "bmi": {
-      "mean": 26.95100286532951,
-      "std": 4.921099350648926
-    },
-    "age_x_chf": {
-      "mean": 11.166189111747851,
-      "std": 25.929743773503358
-    },
-    "age_x_gender": {
-      "mean": 24.088825214899714,
-      "std": 33.468729890936494
+      "mean": 26.376927908309458,
+      "std": 5.3327323877392905
     }
   },
   "encoding_maps": {
@@ -62,13 +50,10 @@
     "cvd": [
       "1"
     ],
-    "afb": [
+    "miord": [
       "1"
     ],
-    "sho": [
-      "1"
-    ],
-    "chf": [
+    "mitype": [
       "1"
     ]
   },
@@ -79,11 +64,11 @@
     "warnings": [],
     "checks": {
       "total_rows": 500,
-      "total_cols": 12,
+      "total_cols": 11,
       "valid_rows": 500,
-      "event_count": 213,
-      "censored_count": 287,
-      "censoring_rate": 57.4
+      "event_count": 215,
+      "censored_count": 285,
+      "censoring_rate": 57.0
     }
   }
 }

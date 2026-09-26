@@ -1,0 +1,71 @@
+# Working memory
+
+Durable context about how work proceeds on this project, beyond what the
+other coordination files record.
+
+---
+
+## Execution is autonomous
+
+Implementation does not wait on approvals. Ordinary engineering choices are
+resolved and recorded, not escalated. Work stops only for a genuinely missing
+file or an irreversible external action. See `PROTOCOL.md`.
+
+## Administrative matters are owner-managed
+
+Approvals, access, credentials, ethics and permissions are owner-held. They are recorded once in `OPEN_QUESTIONS.md` under "Owner
+track" and never restated or used as a gate. Each names the single
+deliverable it blocks; everything around it gets built.
+
+## Writing style
+
+Repository content stays clear, simple and professional. No decorative
+headers, no comments restating code, no process narration, no status chatter.
+Write the minimum a competent reader needs.
+
+## Human authorship only
+
+The thesis, journal manuscript, reports, document metadata and acknowledgements
+must never attribute drafting, implementation, review or verification to an AI
+tool, vendor or model, and must not contain AI-assistance disclosures or similar
+process statements. The work is the student's responsibility and authorship.
+Do not add such language unless the owner explicitly reverses this instruction.
+
+## Delivery deadline
+
+The owner requires the thesis and paper package to be finished by 2026-11-30.
+Use the compressed 15-week schedule in `coordination/TODO.md`; do not restore
+the earlier 2027 deadline.
+
+## Confirmatory close-out boundary
+
+The frozen confirmatory execution at
+`reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/` is complete
+and verified: 450 cells are stored, 430 completed and 20 horseshoe cells failed
+the diagnostic gate after all three permitted attempts. The primary inference
+file is explicitly incomplete and the nine-contrast Holm family is not
+complete. Never describe the partial family as a complete primary analysis,
+never admit a failed fit into an estimate and never add a post hoc remedy to
+this freeze.
+
+Robustness, confirmatory explanation, claim review and post-confirmatory thesis
+result writing are paused until the owner gives a new instruction.
+
+The complete confirmatory directory is transferred through the private GitHub
+Release `confirmatory-v1-44b6085`. From a current `main` clone, use
+`scripts/restore_confirmatory_release.py`; it must report 450 cells, completion
+SHA-256 `03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1`
+and 80 unchanged frozen inputs before downstream use.
+
+## Environment
+
+Use the exact verified environment
+`bayes-cox-lock-verify-20260815-b`. PyMC chains run sequentially because the
+parallel sampler is unreliable on this machine.
+
+## Trust nothing that was not verified
+
+The project previously carried a full set of results, figures and reports
+that were entirely produced from synthetic data, with convergence diagnostics
+that returned fixed passing values. Every claim now has a test behind it. When
+adding a result, add the check that would catch it being wrong.

@@ -22,5 +22,5 @@ def save_json(data: dict[str, Any], file_path: str) -> None:
 
 def load_json(file_path: str) -> dict[str, Any]:
     """Loads JSON file."""
-    with open(file_path, "r", encoding="utf-8") as f:
+    with open(file_path, encoding="utf-8") as f:
         return json.load(f)

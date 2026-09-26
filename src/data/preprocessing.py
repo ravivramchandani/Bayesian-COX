@@ -45,12 +45,7 @@ class SurvivalDataPipeline:
         self.encoding_maps = {}
         self.feature_names = []
 
-    def run(
-        self,
-        raw_df: pd.DataFrame,
-        output_dir: str,
-        n_cv_splits: int = 25,
-    ) -> dict[str, Any]:
+    def run(self, raw_df: pd.DataFrame, output_dir: str) -> dict[str, Any]:
         """Runs the complete preprocessing workflow."""
 
         # Step 4.1: Data Validation
@@ -65,17 +60,14 @@ class SurvivalDataPipeline:
             )
 
         # Step 4.2: Data Cleaning & Column Standardization
-        clean_df = raw_df.copy()
-        clean_df = clean_df.drop_duplicates().reset_index(drop=True)
+        # Eligibility and subject uniqueness are source-level invariants. Do
+        # not delete valid subjects merely because a reduced feature set makes
+        # two rows identical after projection.
+        clean_df = raw_df.copy().reset_index(drop=True)
 
         # Standardize target names to 'time' and 'event'
         rename_map = {self.time_col: "time", self.event_col: "event"}
         clean_df = clean_df.rename(columns=rename_map)
-
-        if "subject_id" not in clean_df.columns:
-            clean_df["subject_id"] = [
-                f"{self.dataset_name}_subj_{i}" for i in range(len(clean_df))
-            ]
 
         time_target = "time"
         event_target = "event"
@@ -92,21 +84,18 @@ class SurvivalDataPipeline:
             test_ratio=0.15,
         )
 
-        # Separate targets and IDs from features
-        X_train_raw = train_raw.drop(columns=[time_target, event_target, "subject_id"])
+        # Separate targets from features
+        X_train_raw = train_raw.drop(columns=[time_target, event_target])
         y_train_time = train_raw[time_target]
         y_train_event = train_raw[event_target]
-        train_subj = train_raw["subject_id"]
 
-        X_val_raw = val_raw.drop(columns=[time_target, event_target, "subject_id"])
+        X_val_raw = val_raw.drop(columns=[time_target, event_target])
         y_val_time = val_raw[time_target]
         y_val_event = val_raw[event_target]
-        val_subj = val_raw["subject_id"]
 
-        X_test_raw = test_raw.drop(columns=[time_target, event_target, "subject_id"])
+        X_test_raw = test_raw.drop(columns=[time_target, event_target])
         y_test_time = test_raw[time_target]
         y_test_event = test_raw[event_target]
-        test_subj = test_raw["subject_id"]
 
         # Step 4.3 & 4.4 & 4.5: Fit Imputation, Encoding, and Scaling on Train ONLY
         X_train_proc, X_val_proc, X_test_proc = self._fit_transform_features(
@@ -117,26 +106,18 @@ class SurvivalDataPipeline:
         train_processed = X_train_proc.copy()
         train_processed["time"] = y_train_time.values
         train_processed["event"] = y_train_event.values
-        train_processed["subject_id"] = train_subj.values
 
         val_processed = X_val_proc.copy()
         val_processed["time"] = y_val_time.values
         val_processed["event"] = y_val_event.values
-        val_processed["subject_id"] = val_subj.values
 
         test_processed = X_test_proc.copy()
         test_processed["time"] = y_test_time.values
         test_processed["event"] = y_test_event.values
-        test_processed["subject_id"] = test_subj.values
 
         # Step 4.11: Generate 5-Fold Stratified Cross-Validation Folds on Train set
-        if n_cv_splits < 2:
-            raise ValueError("n_cv_splits must be at least 2")
-
         cv_folds = self.splitter.create_cv_folds(
-            train_processed,
-            event_col="event",
-            n_splits=n_cv_splits,
+            train_processed, event_col="event", n_splits=5
         )
 
         # Step 4.12: Export Processed Datasets & Metadata
@@ -159,7 +140,6 @@ class SurvivalDataPipeline:
         metadata = {
             "dataset_name": self.dataset_name,
             "random_state": self.random_state,
-            "cv_n_splits": n_cv_splits,
             "target_time_col": "time",
             "target_event_col": "event",
             "num_features": len(self.feature_names),
@@ -211,7 +191,18 @@ class SurvivalDataPipeline:
                 X_test[col] = X_test[col].fillna(mode_val)
 
         # 2. Categorical One-Hot Encoding
-        cat_cols = [c for c in self.categorical_cols if c in X_train.columns]
+        #
+        # Categorical columns are detected from dtype and unioned with the
+        # configured list. Relying on configuration alone lets an undeclared
+        # non-numeric column reach the numeric path, where scaling fails.
+        declared = [c for c in self.categorical_cols if c in X_train.columns]
+        inferred = [
+            c
+            for c in X_train.columns
+            if not pd.api.types.is_numeric_dtype(X_train[c])
+            and c not in self.ordinal_cols
+        ]
+        cat_cols = list(dict.fromkeys(declared + inferred))
 
         encoded_train_parts = []
         encoded_val_parts = []
@@ -222,6 +213,13 @@ class SurvivalDataPipeline:
             for c in X_train.columns
             if c not in cat_cols and c not in self.ordinal_cols
         ]
+
+        non_numeric = [c for c in num_cols if not pd.api.types.is_numeric_dtype(X_train[c])]
+        if non_numeric:
+            raise ValueError(
+                f"Columns {non_numeric} are not numeric and were not routed to "
+                "categorical or ordinal encoding."
+            )
 
         # Pass numericals through
         encoded_train_parts.append(X_train[num_cols].copy())
@@ -269,19 +267,31 @@ class SurvivalDataPipeline:
                 col_name = f"{cat_col}_{d_cat}"
                 encoded_train_parts.append(
                     pd.DataFrame(
-                        {col_name: train_dummies.get(col_name, 0).astype(float)},
+                        {
+                            col_name: train_dummies.reindex(
+                                columns=[col_name], fill_value=False
+                            )[col_name].astype(float)
+                        },
                         index=X_train.index,
                     )
                 )
                 encoded_val_parts.append(
                     pd.DataFrame(
-                        {col_name: val_dummies.get(col_name, 0).astype(float)},
+                        {
+                            col_name: val_dummies.reindex(
+                                columns=[col_name], fill_value=False
+                            )[col_name].astype(float)
+                        },
                         index=X_val.index,
                     )
                 )
                 encoded_test_parts.append(
                     pd.DataFrame(
-                        {col_name: test_dummies.get(col_name, 0).astype(float)},
+                        {
+                            col_name: test_dummies.reindex(
+                                columns=[col_name], fill_value=False
+                            )[col_name].astype(float)
+                        },
                         index=X_test.index,
                     )
                 )

@@ -1,69 +1,65 @@
 {
   "dataset_name": "metabric",
   "random_state": 42,
-  "cv_n_splits": 25,
   "target_time_col": "time",
   "target_event_col": "event",
-  "num_features": 11,
+  "num_features": 14,
   "feature_names": [
-    "age",
-    "lymph_nodes_positive",
-    "log_lymph_nodes",
-    "age_x_stage",
-    "tumour_stage",
-    "chemotherapy_1",
-    "hormone_therapy_1",
-    "PAM50Subtype_Her2",
-    "PAM50Subtype_LumA",
-    "PAM50Subtype_LumB",
-    "PAM50Subtype_Normal"
+    "age_at_diagnosis",
+    "nottingham_prognostic_index",
+    "cellularity_Low",
+    "cellularity_Moderate",
+    "er_status_Positive",
+    "pr_status_Positive",
+    "her2_status_Positive",
+    "inferred_menopausal_state_Pre",
+    "pam50_+_claudin-low_subtype_Her2",
+    "pam50_+_claudin-low_subtype_LumA",
+    "pam50_+_claudin-low_subtype_LumB",
+    "pam50_+_claudin-low_subtype_NC",
+    "pam50_+_claudin-low_subtype_Normal",
+    "pam50_+_claudin-low_subtype_claudin-low"
   ],
-  "train_samples": 1332,
-  "val_samples": 285,
-  "test_samples": 287,
-  "train_censoring_rate": 42.04,
-  "val_censoring_rate": 42.11,
-  "test_censoring_rate": 41.81,
+  "train_samples": 1385,
+  "val_samples": 296,
+  "test_samples": 299,
+  "train_censoring_rate": 42.24,
+  "val_censoring_rate": 42.23,
+  "test_censoring_rate": 42.14,
   "scaling_params": {
-    "age": {
-      "mean": 54.926426426426424,
-      "std": 20.457369681788585
+    "age_at_diagnosis": {
+      "mean": 61.33057761732852,
+      "std": 12.878728354549567
     },
-    "lymph_nodes_positive": {
-      "mean": 1.9594594594594594,
-      "std": 2.43900972792252
-    },
-    "log_lymph_nodes": {
-      "mean": 0.8185905081674443,
-      "std": 0.7137382889698444
-    },
-    "age_x_stage": {
-      "mean": 119.23573573573573,
-      "std": 67.77221305035187
-    },
-    "tumour_stage": {
-      "mean": 1.1486486486486487,
-      "std": 0.8003415722566019
+    "nottingham_prognostic_index": {
+      "mean": 4.0247194079422375,
+      "std": 1.1551513423584545
     }
   },
   "encoding_maps": {
-    "tumour_stage": {
-      "1": 0,
-      "2": 1,
-      "3": 2,
-      "4": 3
-    },
-    "chemotherapy": [
-      "1"
+    "cellularity": [
+      "Low",
+      "Moderate"
     ],
-    "hormone_therapy": [
-      "1"
+    "er_status": [
+      "Positive"
     ],
-    "PAM50Subtype": [
+    "pr_status": [
+      "Positive"
+    ],
+    "her2_status": [
+      "Positive"
+    ],
+    "inferred_menopausal_state": [
+      "Pre"
+    ],
+    "pam50_+_claudin-low_subtype": [
       "Her2",
       "LumA",
       "LumB",
-      "Normal"
+      "NC",
+      "Normal",
+      "claudin-low"
     ]
   },
   "validation_report": {
@@ -72,12 +68,12 @@
     "errors": [],
     "warnings": [],
     "checks": {
-      "total_rows": 1904,
-      "total_cols": 8,
-      "valid_rows": 1904,
-      "event_count": 1104,
-      "censored_count": 800,
-      "censoring_rate": 42.02
+      "total_rows": 1980,
+      "total_cols": 10,
+      "valid_rows": 1980,
+      "event_count": 1144,
+      "censored_count": 836,
+      "censoring_rate": 42.22
     }
   }
 }

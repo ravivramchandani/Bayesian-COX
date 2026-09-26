@@ -17,7 +17,7 @@ def setup_logger(
     """Configures project logger using YAML config file."""
     path = os.getenv(env_key, default_path)
     if os.path.exists(path):
-        with open(path, "rt", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             config = yaml.safe_load(f.read())
 
         # Ensure log directory exists

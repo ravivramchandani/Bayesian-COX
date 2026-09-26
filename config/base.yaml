@@ -1,5 +1,6 @@
-# Base Project Configuration
-project_name: "Bayesian-Survival-Models"
+# Project-wide settings.
+
+project_name: "bayesian-cox"
 version: "0.1.0"
 seed: 42
 
@@ -7,13 +8,13 @@ paths:
   data_dir: "data"
   raw_dir: "data/raw"
   processed_dir: "data/processed"
-  artifacts_dir: "artifacts"
-  results_dir: "results"
+  external_dir: "data/external"
+  reports_dir: "reports"
+  tables_dir: "reports/tables"
+  figures_dir: "reports/figures"
   docs_dir: "docs"
-  experiments_dir: "experiments"
 
 defaults:
   dataset: "gbsg2"
   model: "bayesian_cox"
-  training: "default"
   logging: "config/logging.yaml"
