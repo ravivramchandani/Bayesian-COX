@@ -1,10 +1,7 @@
-"""Frozen settings of the confirmatory explanation protocol.
+"""Frozen settings and seed derivation for the confirmatory explanation stage.
 
-The confirmatory explanation stage (see :mod:`src.explainability.frozen_cells`)
-reads these settings, derives every random seed from them with
-:func:`_stable_seed`, and copies a plain-language description of them into the
-result through :func:`protocol_record`.
-"""
+The protocol records the sampling budgets, convergence thresholds and descriptive
+bootstrap controls copied into every explanation result."""
 
 from __future__ import annotations
 

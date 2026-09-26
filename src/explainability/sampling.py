@@ -1,12 +1,7 @@
-"""Seeded, paired choice of the subjects that each explanation uses.
+"""Seeded, paired subject and background selection for frozen-cell explanations.
 
-For every outer fold and explanation seed, the validation subjects and the
-outer-training subjects are each shuffled once. Each budget then takes the
-first subjects of those two orders, so a larger budget always contains the
-subjects of a smaller one. The seeds depend on the dataset, repeat, fold and
-explanation seed but not on the model, so every Bayesian prior and the paired
-Cox model are explained on exactly the same subjects and background.
-"""
+Each fold uses seeded permutations shared by every prior and its Cox partner;
+larger budgets extend the same permutations without drawing another sample."""
 
 from __future__ import annotations
 
@@ -88,17 +83,13 @@ def paired_selections(
     return selections
 
 
-def register_selection(
-    registry: dict[str, dict[str, Any]], selection: dict[str, Any]
-) -> None:
+def register_selection(registry: dict[str, dict[str, Any]], selection: dict[str, Any]) -> None:
     """Record a selection under its hash, failing if another selection has that hash.
 
     Every prior of a fold registers the same selections, so a repeated hash
     is expected; only a repeated hash with different content is an error.
     """
-    registry_record = {
-        key: value for key, value in selection.items() if key not in POSITION_KEYS
-    }
+    registry_record = {key: value for key, value in selection.items() if key not in POSITION_KEYS}
     prior_selection = registry.setdefault(selection["selection_sha256"], registry_record)
     if prior_selection != registry_record:
         raise RuntimeError("selection hash collision detected")

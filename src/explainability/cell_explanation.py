@@ -1,27 +1,12 @@
-"""Exact linear SHAP and grouped posterior contribution for one frozen Bayesian cell.
+"""Compute exact linear SHAP and read grouped posterior contributions for frozen cells.
 
-For each interpretable Bayesian cell, this module rebuilds the cell's
-features from the raw cohort and the stored preprocessing state. Then, for
-every paired selection of subjects and background, it
-
-1. computes exact interventional SHAP values for the posterior-mean linear
-   risk score and sums them within each source-variable group;
-2. reads the stored grouped posterior expected absolute contribution of the
-   selected subjects;
-3. compares the two group rankings; and
-4. when the fold has a complete Cox cell, repeats steps 1 and 3 with the Cox
-   coefficients in place of the posterior mean.
-
-The two group scores answer different questions. For subject ``i`` and group
-``g``, the stored intrinsic score is ``E_s|sum_{j in g} x_ij beta_j^(s)|``:
-the size of the group's part of the log-hazard, averaged over posterior draws
-``s``. The SHAP score is ``|sum_{j in g} beta_bar_j (x_ij - mean_B x_j)|``: how
-far the group moves the posterior-mean risk score away from the average of the
-training background ``B``. Both are averaged over the selected subjects.
-"""
+Features come from raw cohorts and stored preprocessing. Selected subjects share
+a training background across Bayesian and Cox scores; signed contributions are
+grouped before their absolute magnitude is averaged."""
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -144,9 +129,7 @@ def prepare_cell_features(
     train_positions = [cohort.positions[value] for value in lineage.train_ids]
     validation_positions = [cohort.positions[value] for value in lineage.validation_ids]
     x_train = processor.transform(cohort.raw.iloc[train_positions]).reset_index(drop=True)
-    x_validation = processor.transform(cohort.raw.iloc[validation_positions]).reset_index(
-        drop=True
-    )
+    x_validation = processor.transform(cohort.raw.iloc[validation_positions]).reset_index(drop=True)
     beta_mean = _posterior_mean_beta(cell, list(processor.feature_names))
     beta_abs, unidentified = _legacy_beta_abs(source, cell, x_validation)
     return CellFeatures(
@@ -258,6 +241,10 @@ def explain_selection(
     selection: dict[str, Any],
     protocol_top_k: int,
     paired_cox: PairedCox | None,
+    *,
+    linear_shap: Callable[[np.ndarray, pd.DataFrame, pd.DataFrame], pd.DataFrame] = (
+        exact_linear_shap_values
+    ),
 ) -> tuple[dict[str, Any], dict[str, Any] | None]:
     """Explain one selection with the posterior mean and, if available, with Cox.
 
@@ -267,6 +254,7 @@ def explain_selection(
         selection: One record from :func:`~src.explainability.sampling.paired_selections`.
         protocol_top_k: Size of the top-ranked group set.
         paired_cox: The fold's Cox cell, or ``None`` when it has none.
+        linear_shap: Exact linear-attribution function used for both models.
 
     Returns:
         The Bayesian comparison row and the Cox comparison row, which is
@@ -275,7 +263,7 @@ def explain_selection(
     x_explain = features.x_validation.iloc[selection["validation_positions"]]
     x_background = features.x_train.iloc[selection["background_positions"]]
     feature_groups = features.processor.feature_groups
-    shap_values = exact_linear_shap_values(features.posterior_mean_beta, x_background, x_explain)
+    shap_values = linear_shap(features.posterior_mean_beta, x_background, x_explain)
     grouped_intrinsic, intrinsic_source = _grouped_intrinsic(cell, features, selection, x_explain)
     grouped_shap = grouped_shap_importance(shap_values, feature_groups)
     agreement = compare_group_rankings(grouped_intrinsic, grouped_shap, top_k=protocol_top_k)
@@ -291,7 +279,7 @@ def explain_selection(
     if paired_cox is None:
         return comparison, None
 
-    cox_shap_values = exact_linear_shap_values(paired_cox.coefficients, x_background, x_explain)
+    cox_shap_values = linear_shap(paired_cox.coefficients, x_background, x_explain)
     grouped_cox_shap = grouped_shap_importance(cox_shap_values, feature_groups)
     cox_comparison = {
         **shared,

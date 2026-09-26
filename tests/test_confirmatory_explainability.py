@@ -129,28 +129,17 @@ def _frozen_fixture(tmp_path: Path) -> tuple[Path, Path, list[str]]:
                         "feature": feature,
                         "expected_abs_contribution": float(score),
                     }
-                    for feature, score in zip(
-                        processor.feature_names, stored, strict=True
-                    )
+                    for feature, score in zip(processor.feature_names, stored, strict=True)
                 ],
                 "posterior_expected_absolute_group_contribution_by_subject": {
                     "definition": "test exact posterior group contribution",
                     "group_names": processor.feature_names,
-                    "values": (
-                        x_validation.abs().to_numpy()
-                        * beta_abs[None, :]
-                    ).tolist(),
+                    "values": (x_validation.abs().to_numpy() * beta_abs[None, :]).tolist(),
                 },
             },
         }
         cell = _hashed(cell, "cell_content_sha256")
-        cell_path = (
-            run_dir
-            / "cells"
-            / "toy"
-            / "repeat_01_fold_01"
-            / f"{model_key}.json"
-        )
+        cell_path = run_dir / "cells" / "toy" / "repeat_01_fold_01" / f"{model_key}.json"
         _write_json(cell_path, cell)
         relative_cells[str(cell_path.relative_to(run_dir))] = sha256_file(cell_path)
 
@@ -176,21 +165,13 @@ def _frozen_fixture(tmp_path: Path) -> tuple[Path, Path, list[str]]:
             "model_details": {
                 "coefficient_summary": [
                     {"feature": feature, "coef": float(coefficient)}
-                    for feature, coefficient in zip(
-                        processor.feature_names, cox_beta, strict=True
-                    )
+                    for feature, coefficient in zip(processor.feature_names, cox_beta, strict=True)
                 ]
             },
         },
         "cell_content_sha256",
     )
-    cox_path = (
-        run_dir
-        / "cells"
-        / "toy"
-        / "repeat_01_fold_01"
-        / "cox_ph.json"
-    )
+    cox_path = run_dir / "cells" / "toy" / "repeat_01_fold_01" / "cox_ph.json"
     _write_json(cox_path, cox_cell)
     relative_cells[str(cox_path.relative_to(run_dir))] = sha256_file(cox_path)
 
@@ -251,17 +232,13 @@ def test_linear_explainer_is_exact_and_grouped_before_absolute_value():
     background = pd.DataFrame(
         {"x=a": [0.0, 1.0, 2.0], "x=b": [1.0, 0.0, 1.0], "z": [2.0, 4.0, 6.0]}
     )
-    explained = pd.DataFrame(
-        {"x=a": [3.0, 4.0], "x=b": [0.0, 1.0], "z": [1.0, 3.0]}
-    )
+    explained = pd.DataFrame({"x=a": [3.0, 4.0], "x=b": [0.0, 1.0], "z": [1.0, 3.0]})
     beta = np.asarray([2.0, -1.0, -0.5])
     values = exact_linear_shap_values(beta, background, explained)
     expected = (explained - background.mean(axis=0)) * beta
     np.testing.assert_allclose(values, expected, rtol=0, atol=1e-12)
 
-    grouped = grouped_shap_importance(
-        values, {"x=a": "x", "x=b": "x", "z": "z"}
-    ).set_index("group")
+    grouped = grouped_shap_importance(values, {"x=a": "x", "x=b": "x", "z": "z"}).set_index("group")
     expected_x = np.abs(expected["x=a"] + expected["x=b"]).mean()
     assert grouped.loc["x", "mean_abs_shap"] == pytest.approx(expected_x)
 
@@ -291,9 +268,7 @@ def test_frozen_posterior_contribution_is_recovered_for_random_subsets():
 
 def test_frozen_run_uses_paired_random_samples_and_records_uncertainty(tmp_path):
     project_root, run_dir, validation_ids = _frozen_fixture(tmp_path)
-    result = analyze_frozen_run(
-        run_dir, project_root, protocol=_small_protocol()
-    )
+    result = analyze_frozen_run(run_dir, project_root, protocol=_small_protocol())
 
     assert result["evidence_status"] == "rehearsal_only"
     assert len(result["comparisons"]) == 18
@@ -317,18 +292,14 @@ def test_frozen_run_uses_paired_random_samples_and_records_uncertainty(tmp_path)
     )
     assert all("same_model_sampling_stability_gate" in row for row in paired_differences)
     assert all("cox_sampling_stability_gate" in row for row in paired_differences)
-    assert secondary["random_survival_forest"]["status"] == (
-        "formally_dropped_unavailable"
-    )
+    assert secondary["random_survival_forest"]["status"] == ("formally_dropped_unavailable")
     assert secondary["random_survival_forest"]["frozen_cells_present"] is False
     assert "prob_direction" not in json.dumps(result)
-    assert {
-        row["grouped_intrinsic_source"] for row in result["comparisons"]
-    } == {"stored_exact_full_posterior_group_contribution"}
+    assert {row["grouped_intrinsic_source"] for row in result["comparisons"]} == {
+        "stored_exact_full_posterior_group_contribution"
+    }
 
-    first_budget = [
-        row for row in result["selection_registry"] if row["budget_index"] == 1
-    ]
+    first_budget = [row for row in result["selection_registry"] if row["budget_index"] == 1]
     assert all(row["validation_subject_ids"] != validation_ids[:2] for row in first_budget)
     for row in first_budget:
         assert set(row["validation_subject_ids"]).issubset(validation_ids)
@@ -369,3 +340,30 @@ def test_result_writer_never_overwrites(tmp_path):
     write_explainability_result(output, {"status": "first"})
     with pytest.raises(FileExistsError, match="already exists"):
         write_explainability_result(output, {"status": "second"})
+
+
+def test_established_module_dependencies_remain_patchable(tmp_path, monkeypatch):
+    """The orchestration path uses patched loaders and attributions for both models."""
+    from src.explainability import frozen_cells
+    from src.explainability.protocol import ExplanationProtocol as Protocol
+
+    project_root, run_dir, _validation_ids = _frozen_fixture(tmp_path)
+    original_loader = frozen_cells._load_raw_cohort
+    original_shap = frozen_cells.exact_linear_shap_values
+    calls = {"cohort_loads": 0, "attributions": 0}
+
+    def counted_loader(*args, **kwargs):
+        calls["cohort_loads"] += 1
+        return original_loader(*args, **kwargs)
+
+    def counted_shap(*args, **kwargs):
+        calls["attributions"] += 1
+        return original_shap(*args, **kwargs)
+
+    monkeypatch.setattr(frozen_cells, "_load_raw_cohort", counted_loader)
+    monkeypatch.setattr(frozen_cells, "exact_linear_shap_values", counted_shap)
+    result = frozen_cells.analyze_frozen_run(run_dir, project_root, protocol=_small_protocol())
+
+    assert frozen_cells.ExplanationProtocol is Protocol
+    assert calls["cohort_loads"] == 1
+    assert calls["attributions"] == 2 * len(result["comparisons"])

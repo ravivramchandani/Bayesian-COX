@@ -1,24 +1,8 @@
-"""Descriptive uncertainty for explanation agreement, the H3b difference and group ranks.
+"""Summarise descriptive uncertainty in frozen explanation agreement and group ranks.
 
-Every outer cell (one repeat and fold of the confirmatory cross-validation)
-gives one estimate per explanation seed at the largest budget. These
-estimates are not independent: folds of one repeat share training subjects,
-and the three seeds reuse one fitted model. The three-stage bootstrap follows
-that structure. It resamples outer repeats, then folds within each chosen
-repeat, then one seed estimate within each chosen fold. Its 95% percentile
-intervals are descriptive stability summaries, not confidence intervals from
-independent samples.
-
-Three analyses use it:
-
-- agreement uncertainty (H3a): Spearman, Kendall and top-five Jaccard
-  agreement between each Bayesian model's grouped posterior contribution and
-  its own grouped SHAP ranking;
-- the H3b paired difference: that same-model agreement minus the agreement
-  with the paired Cox PH SHAP ranking on identical subjects and background;
-- group stability: the rank and top-five selection frequency of each
-  source-variable group.
-"""
+The bootstrap resamples repeats, folds within each repeat and one seed within
+each fold, preserving the frozen generator-consumption order. Its percentile
+intervals describe stability rather than independent-sample inference."""
 
 from __future__ import annotations
 
@@ -50,9 +34,7 @@ def _values_by_cell(
     """Group values by ``(repeat, fold)`` and list each repeat's folds in sorted order."""
     by_cell: dict[OuterCell, list[float]] = {}
     for row in rows:
-        by_cell.setdefault((int(row["repeat"]), int(row["fold"])), []).append(
-            float(row[value_key])
-        )
+        by_cell.setdefault((int(row["repeat"]), int(row["fold"])), []).append(float(row[value_key]))
     repeat_to_cells: dict[int, list[OuterCell]] = {}
     for cell_key in sorted(by_cell):
         repeat_to_cells.setdefault(cell_key[0], []).append(cell_key)

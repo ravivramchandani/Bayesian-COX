@@ -1,15 +1,11 @@
-"""Verification and loading of the frozen run that the explanation stage reads.
+"""Verify and load the immutable run read by the explanation stage.
 
-This is the first step of the confirmatory explanation stage. It checks the
-run's manifest, completion record and every stored cell against their recorded
-hashes, sorts the cells into interpretable Bayesian cells, exclusions and Cox
-partners, reloads each cohort from its raw file, checks that cells from the
-same outer fold share subjects and preprocessing, and reads the frozen Cox
-coefficients used by the secondary comparison. No model is fitted or refitted.
-"""
+This module checks source hashes, classifies interpretable cells, restores raw
+cohorts, validates outer-fold lineage and reads the paired Cox coefficients."""
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -346,12 +342,28 @@ def _load_raw_cohort(
     return frame, subject_ids
 
 
-def load_cohort(source: SourceRun, dataset: str, cache: dict[str, Cohort]) -> Cohort:
-    """Return a dataset's cohort, reading the raw file only on first use."""
+def load_cohort(
+    source: SourceRun,
+    dataset: str,
+    cache: dict[str, Cohort],
+    *,
+    loader: Callable[
+        [Path, str, dict[str, Any]], tuple[pd.DataFrame, np.ndarray]
+    ] = _load_raw_cohort,
+) -> Cohort:
+    """Return a dataset's cohort, reading the raw file only on first use.
+
+    Args:
+        source: Verified run and its dataset configuration.
+        dataset: Dataset key.
+        cache: Previously loaded cohorts, updated on first use.
+        loader: Raw-cohort loader, shared with the established import path.
+
+    Returns:
+        The raw cohort and its subject identifiers and row positions.
+    """
     if dataset not in cache:
-        raw, subject_ids = _load_raw_cohort(
-            source.project_root, dataset, source.dataset_configs[dataset]
-        )
+        raw, subject_ids = loader(source.project_root, dataset, source.dataset_configs[dataset])
         cache[dataset] = Cohort(
             raw=raw,
             subject_ids=subject_ids,

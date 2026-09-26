@@ -1,19 +1,7 @@
-"""Sampling-stability gates for the grouped SHAP ranking.
+"""Apply sampling-stability gates to grouped SHAP rankings.
 
-A SHAP ranking computed from a random sample of subjects is worth interpreting
-only if a larger or different sample gives nearly the same ranking of
-source-variable groups. For every fold and model, this module compares the
-grouped SHAP ranking
-
-- at each budget with the next larger budget, under the same seed; and
-- at the largest budget between successive seeds (first with second, second
-  with third).
-
-A comparison passes when the two rankings have a Spearman correlation of at
-least 0.95 and share at least four of their top-five groups. Failures are
-reported, not hidden, and they block the agreement claims built on them in
-:mod:`src.explainability.uncertainty`.
-"""
+Successive budgets and successive seeds must meet the frozen Spearman and
+top-five overlap thresholds; failed comparisons block agreement claims."""
 
 from __future__ import annotations
 
