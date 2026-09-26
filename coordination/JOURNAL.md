@@ -341,3 +341,134 @@ No new sampler remedy, selective rerun or methodological override is permitted
 inside this frozen analysis. Robustness, confirmatory explanation, claim
 review and post-confirmatory thesis result writing remain paused at the
 owner's checkpoint. The live delivery programme still ends on 2026-11-30.
+
+## 2026-09-27 — Commit e824c1b reverted
+
+Commit `e824c1b` (2026-08-31, "Refactor code structure for improved
+readability and maintainability") changed 243 files:
+
+- It re-added 124 files removed in `3321115` and returned 46 files to their
+  pre-2026-08-14 versions.
+- Among those, the three raw cohorts were replaced with the output of the
+  former synthetic fallback. For example, GBSG2 row 1 changed from age 70,
+  1,814 days to age 22, 98 days. The `pnode` column and missing `tgrade` are
+  the fallback's signature.
+- `scripts/mock_frozen_data.py` wrote randomly generated cells
+  (C-index 0.6 ± 0.1) and predictions into the frozen run directory.
+- 37 of the 80 frozen inputs changed, and `src/pipelines/confirmatory.py` no
+  longer imported.
+
+Revert `2e55c0b` restored the `4eeb1ac` tree. At the revert, the frozen run
+verifies (450 cells, 80 inputs unchanged) and 170 tests pass in the lock
+environment.
+
+## 2026-09-27 — External notebook not adopted
+
+A separately developed notebook (`Bayesian_Ravi Ramchandani.ipynb`,
+2026-09-26) re-implements the study in 110 code cells.
+
+- Its Phase 2 reads CSV files that are identical to the synthetic files
+  above.
+- Its Phase 3 acquires the real cohorts, but it evaluates only the first
+  outer fold. Its final evaluation covers 7 of 18 model–cohort pairs, using
+  metric values carried over from the notebook session. The cell that runs
+  the confirmatory sampling was not executed in the saved copy.
+- Its seven C-index values fall inside the frozen run's per-fold ranges.
+
+The repository pipeline supersedes it; nothing from it enters the evidence.
+
+## 2026-09-27 — The five estimable primary contrasts show no prior effect
+
+From `inference.json` of the frozen run (ΔIBS = model A minus model B):
+
+| Cohort | Contrast | ΔIBS | 95% NB interval | p |
+|---|---|---:|---|---:|
+| GBSG2 | normal − spike-and-slab | +0.00002 | −0.00010, +0.00015 | 0.693 |
+| WHAS500 | normal − horseshoe | +0.00034 | −0.00171, +0.00240 | 0.732 |
+| WHAS500 | normal − spike-and-slab | +0.00006 | −0.00012, +0.00024 | 0.493 |
+| WHAS500 | horseshoe − spike-and-slab | −0.00028 | −0.00217, +0.00161 | 0.760 |
+| METABRIC | normal − spike-and-slab | −0.00001 | −0.00009, +0.00007 | 0.833 |
+
+The smallest available p-value, 0.493, exceeds 0.05/5. In Holm's step-down
+procedure, an estimable contrast is tested at best at 0.05/5, and only if
+all four missing hypotheses were rejected first. So no estimable contrast can
+be rejected at family-wise level 0.05, whatever the four missing p-values
+are.
+
+## 2026-09-27 — Horseshoe failures are rare divergences under a zero-tolerance gate
+
+All 83 failing horseshoe attempts failed on divergent transitions alone:
+
+- GBSG2: 1–11 divergences per 8,000 draws.
+- METABRIC: 1–2 per 8,000 draws.
+- Every attempt: maximum R-hat 1.00, minimum bulk ESS 1,528, minimum BFMI
+  0.72, and no tree-depth limit hits.
+
+The per-attempt probability of zero divergences was 0.10 in GBSG2, 0.58 in
+METABRIC and 0.83 in WHAS500. With three independent attempts, these
+predict 18.0, 1.9 and 0.1 failed cells; observed: 18, 2 and 0.
+
+The first prespecified remedy changed nothing for the horseshoe, which
+already used target acceptance 0.99, and the second re-parameterises only
+the baseline hazard.
+
+On the frozen seeds, target acceptance 0.999 cleared 6 of 7 failed GBSG2
+cells. Runtime rose 1.2–1.3 times, and posterior means moved by at most 0.07
+posterior SD.
+
+The implementation matches Piironen and Vehtari (2017,
+doi:10.1214/17-EJS1337SI) Appendix C.1, with half-t(2) local scales and a
+fixed τ0 = 0.1. ArviZ 0.23 rounds R-hat to two decimals even with
+`round_to=None`, so the R-hat gate fires from a true value of about 1.005.
+Evidence: `~/bayes-cox-runs/horseshoe-investigation-20260927/`.
+
+## 2026-09-27 — Confirmatory explanation produced; convergence gate not met
+
+`scripts/run_confirmatory_explainability.py`, run with the frozen code on the
+frozen run, wrote
+`reports/explainability/confirmatory_v1_confirmatory_cdcdcee84651_explainability_v1.json`
+(SHA-256 `120984c7edfac468f471b9f500470623689b2647e4bde56d271cc9623346ecd5`).
+
+- It made 1,845 comparisons from 205 Bayesian cells; the 20 failed
+  horseshoe cells were excluded.
+- 1,538 of 1,640 evaluable convergence comparisons pass, so the prespecified
+  summary is `failed` and no RQ3 claim is permitted.
+- Every failure is a Spearman ρ below 0.95; the top-five overlap condition
+  never fails.
+- Failures concentrate in GBSG2 normal and spike-and-slab: 33 of 150 budget
+  comparisons each, median ρ 0.976, minimum 0.738.
+- With eight feature groups, three adjacent rank swaps are enough to fall
+  below 0.95.
+
+## 2026-09-27 — Frozen robustness production started
+
+Robustness production started with the frozen code at `2e55c0b`, from
+`~/bayes-cox-runs/frozen`: 825 cells and 885 Bayesian fits, with a projected
+69.6 serial hours against the 72-hour limit.
+
+The cells are fitted by six worker processes that share the plan through
+lock files (ADR-031). A sharded cell refitted in a fresh unsharded process
+was identical in every field except timings.
+
+## 2026-09-27 — Interrupted work preserved and continuation state audited
+
+The five existing main commits through `6c037a8` were pushed. Thirteen
+unfinished source files were committed and pushed on three WIP branches:
+models `6b41431`, confirmatory `d6bd723`, and explanation `089efc1`. None is
+integrated or has passed its frozen-output equivalence gate. The rendering
+worktree contained no changes. The external harness, initial horseshoe
+investigation and baseline reproduction report were archived with per-file
+hashes under `coordination/recovery/`.
+
+Main passed environment verification, 170 tests, Ruff and coordination
+schemas. The model worktree passed 44 focused tests; all 13 unfinished files
+passed syntax and lint checks. All 450 frozen cell hashes and three aggregate
+hashes match their completion record. At 12:23:48 Auckland, robustness had
+75/825 recorded cells and six live workers. Explanation production's failed
+convergence gate was confirmed. The full 75-cell ADR-032 sensitivity and
+checkpoint-bound verification remain unimplemented.
+
+README, TODO and HANDOFF were reconciled with these facts. The separate
+Overleaf repository is clean and matches its remote at `a5f026a`; no thesis
+file was changed. Details and the remaining sequence are in
+`coordination/reviews/2026-09-27-recovery-audit.md`.

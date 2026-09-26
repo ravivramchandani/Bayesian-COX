@@ -5,6 +5,11 @@ the code, configuration and frozen run at commit `2e55c0b`. The thesis is not
 edited in the current programme; these items are carried in `TODO.md` under
 T-152 to T-156.
 
+Recovery update: explanation production subsequently completed but failed its
+convergence gate; robustness production is running. See
+`2026-09-27-recovery-audit.md` for the later verified snapshot. Neither stage
+yet permits the missing thesis claims.
+
 ## Status
 
 | Chapter | Approx. words | State |
@@ -59,15 +64,17 @@ The methodology matches the code and configuration on:
 - `Main.tex:61-69` and `introduction.tex:152-156, 171-175` imply every prior
   is compared on every cohort. The horseshoe is estimable only in WHAS500.
 - The title and abstract promise explanation stability and "when prior choice
-  changes" results. RQ2 and RQ3 have not run.
+  changes" results. RQ2 has no verified final aggregate and RQ3 failed its
+  convergence gate.
 - H3b is likely to be near zero, because the posterior means are close to Cox.
   Discuss its power openly.
 
 ## Observed outcome to report
 
 - Five of nine primary contrasts are estimable: all three in WHAS500, and
-  normal versus spike-and-slab in GBSG2 and METABRIC. Each has |ΔIBS| ≤ 0.00034
-  and p ≥ 0.49. No Holm-adjusted rejection is possible, whatever the four
+  normal versus spike-and-slab in GBSG2 and METABRIC. The largest |ΔIBS| is
+  approximately 0.00034; all available p-values are at least 0.49. No
+  Holm-adjusted rejection is possible, whatever the four
   missing contrasts are.
 - The 20 horseshoe failures come from 1 to 11 divergent transitions each, with
   R-hat near 1.00 and bulk ESS in the thousands. The seven surviving GBSG2

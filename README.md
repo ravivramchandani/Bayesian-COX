@@ -11,9 +11,12 @@ frozen confirmatory execution is complete: all 450 planned cells are stored,
 430 passed the diagnostic gate and 20 horseshoe cells retain prespecified
 `failed_diagnostics` records. Five of nine primary contrasts are estimable,
 so the Holm family is incomplete and no complete-family superiority claim is
-available. Robustness, confirmatory explanation and thesis-results writing are
-paused. Existing legacy benchmark tables and figures remain exploratory pilot
-artefacts.
+available. Robustness production is running in the frozen worktree.
+Confirmatory explanation production completed but failed its convergence
+gate, so it permits no explanation-stability claim. The readability refactor
+is unfinished; its checkpoints are preserved on three `wip/*-20260927`
+branches. Thesis edits remain outside the current code programme. Existing
+legacy benchmark tables and figures remain exploratory pilot artefacts.
 
 ## Start here — continue from another machine
 
@@ -30,6 +33,10 @@ From the root of a fresh clone:
 ```bash
 # Confirm that GitHub CLI can access the private repository.
 gh auth status
+
+# Restore using unchanged checkpoint inputs until ADR-030 is implemented.
+git worktree add --detach ../bayes-cox-frozen 44b6085
+cd ../bayes-cox-frozen
 
 # Build the exact macOS arm64 environment.
 conda-lock install -n bayes-cox-clean conda-lock.yml
@@ -49,8 +56,9 @@ frozen_inputs=80 unchanged
 The restored directory is
 `reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/`. The helper
 never overwrites an existing directory; when the run is already present it
-verifies it in place. After restoration, read `coordination/HANDOFF.md` for the
-current evidence boundary and `coordination/TODO.md` for the paused next tasks.
+verifies it in place. After restoration, read `coordination/HANDOFF.md` and
+`coordination/TODO.md` in the current main checkout for the evidence boundary
+and next tasks; the checkpoint worktree contains historical coordination notes.
 
 ## Models
 
@@ -124,6 +132,14 @@ rerun.
 conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
 ```
 
+The current restore helper still compares frozen inputs with the live tree.
+It therefore rejects the added source file and changed decision log on current
+`main`.
+Until checkpoint-bound verification under ADR-030 is implemented, use the
+unchanged checkpoint worktree above for restoration and frozen downstream
+production. The recovery audit in
+`coordination/reviews/2026-09-27-recovery-audit.md` records this remaining work.
+
 Production execution refuses methodological overrides and hash mismatches.
 Each cell is checkpointed with data, dependency, configuration, code, seed,
 runtime, diagnostic and prediction lineage. Figures and tables are rendered
@@ -147,10 +163,13 @@ recorded in `coordination/HANDOFF.md` and `coordination/TODO.md`.
 - `inference.json` is explicitly incomplete. Five of nine primary contrasts
   have all 25 paired folds; the four GBSG2/METABRIC horseshoe contrasts have
   no confirmatory inference. The Holm family is therefore incomplete.
-- Robustness, confirmatory explanation, primary claim review and
-  post-confirmatory thesis-results writing remain paused pending the next
-  instruction. No complete-family superiority, equivalence or
-  multiplicity-controlled claim is accepted.
+- Robustness production is running under the frozen code; final aggregation
+  and verification remain outstanding. Confirmatory explanation production
+  stored 1,845 comparisons, but 102 of 1,640 evaluable convergence comparisons
+  failed, so no RQ3 claim is permitted. Primary claim review and thesis writing
+  remain unfinished; Overleaf edits are excluded from the current programme.
+  No complete-family superiority or equivalence claim is accepted. ADR-033
+  permits a separately labelled post-hoc bound on the incomplete Holm family.
 
 The claim rules are in `docs/claim_evidence_register.md`; the live execution
 state is in `coordination/TODO.md` and `coordination/HANDOFF.md`.

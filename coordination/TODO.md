@@ -15,6 +15,22 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
+## Current programme — 2026-09-27
+
+The September programme in `HANDOFF.md` supersedes the earlier downstream
+pause. Robustness is running, explanation production completed with a failed
+convergence gate, and the readability refactor is incomplete. Its three WIP
+checkpoints are pushed; none has passed its frozen-output integration gate.
+The recovery audit records the exact files, validation and remaining sequence:
+`coordination/reviews/2026-09-27-recovery-audit.md`.
+
+Immediate engineering work is checkpoint-bound verification (ADR-030),
+completion and equivalence checks for the three refactors, rendering, the
+remaining robustness/pilot cleanup, full reproduction, the separate 75-cell
+horseshoe sensitivity (ADR-032), and final evidence packaging. Overleaf edits
+remain excluded from the current code programme; the 19 recorded thesis
+corrections belong to T-152 through T-156 when thesis work resumes.
+
 ## Completed foundation
 
 - [x] T-000 (T) — Phase 0 repair and verification. Evidence:
@@ -197,42 +213,49 @@ artefacts satisfy the stated gate.
 - [ ] T-135 (T, W7–8, owners R/PS/SS; depends T-134) — Complete the primary
   claim review. Acceptance: RQ1 wording is approved, unsupported superiority,
   equivalence and calibration claims are absent, and the results chapter
-  skeleton is populated from generated tables. Owner checkpoint 2026-08-15:
-  this review and all post-confirmatory thesis result writing are paused until
-  a new instruction.
+  skeleton is populated from generated tables. The September programme
+  permits evidence review and rendering, while Overleaf edits remain outside
+  that programme.
 
 ## Weeks 7–10 — Robustness and explanation
 
-Owner checkpoint 2026-08-15: T-132 is complete and verified. T-140 through
-T-144 remain deliberately paused and must not start without a new owner
-instruction.
+T-132 is complete and verified. The 2026-09-27 instruction resumed downstream
+production: T-140 through T-143 are running from the frozen code, and T-144
+has a production artefact with a failed convergence gate.
 
 - [ ] T-140 (T, W7–8, owners R/SS; depends T-131) — Run the frozen prior
   hyperparameter and baseline-interval sensitivity. Acceptance: performance,
   uncertainty and diagnostics are compared without selecting a favourable
-  configuration post hoc. Runner/schema/tests are complete; production
-  artefacts are absent.
+  configuration post hoc. Runner/schema/tests are complete; production is
+  running. Final aggregates and verification remain outstanding.
 - [ ] T-141 (T, W7–9, owners R/SS; depends T-132) — Run RQ2 sample-size and
   administrative-censoring analyses. Acceptance: identical subsamples across
   priors, difference-in-differences estimates and uncertainty answer H2.
-  Runner/schema/tests are complete; production artefacts are absent.
+  Runner/schema/tests are complete; production is running. Final aggregates
+  and verification remain outstanding.
 - [ ] T-142 (T, W7–9, owners R/SS; depends T-132) — Run feature-timing and
   missing-data sensitivities. Acceptance: WHAS500 with/without `los`,
   METABRIC baseline/treatment-augmented, NPI/components and missingness
   analyses all trace to frozen specifications. The five-imputation fold-local
-  sensitivity is implemented; no robustness result exists yet.
+  sensitivity is implemented; production is running and no verified final
+  robustness aggregate exists yet.
 - [ ] T-143 (T, W7–9, owners R/SS; depends T-132) — Check proportional-
   hazards assumptions and the frozen response. Acceptance: global/covariate
   tests and within-fit multiplicity control are reported; supported violations
   become limitations. No time interaction or time-varying coefficient is
   fitted or introduced in response to the assessment, and no silent model
   change is permitted.
-  Aggregation and Holm logic are implemented; production assessment is absent.
+  Aggregation and Holm logic are implemented; the final production assessment
+  remains outstanding while the robustness workers run.
 - [ ] T-144 (T, W8–9, owners R/SS; depends T-132/T-113) — Run the revised
   RQ3 explanation protocol. Acceptance: random paired subjects, training-fold
   backgrounds, same-Bayesian-model SHAP, three-seed convergence, grouped
   features and fold/resample uncertainty are stored. The pure frozen-cell
-  analysis is implemented and tested; the production artefact is absent.
+  analysis produced 1,845 comparisons from 205 accepted Bayesian cells at
+  `~/bayes-cox-runs/frozen/reports/explainability/confirmatory_v1_confirmatory_cdcdcee84651_explainability_v1.json`.
+  Of 1,640 evaluable convergence comparisons, 102 failed. The prespecified
+  summary is `failed`; no RQ3 claim is permitted. Preserve and report this
+  outcome without changing the frozen gate.
 - [x] T-145 (P, decision W7; owners R/SS) — Permanently drop the lean ADEMP
   simulation before freeze. Acceptance: ADR-025 records that no simulated
   result enters this study and coefficient-recovery simulation is future work.
@@ -260,13 +283,14 @@ instruction.
   eligibility, missingness, predictors, validation, equations, priors,
   diagnostics, metrics, explainability, ethics and deviations are complete.
   The substantive pre-freeze chapter and diagnostic appendix are complete;
-  final frozen repeat/hash details remain dependent on T-131.
+  final frozen repeat/hash details and the corrections in
+  `coordination/reviews/2026-09-27-thesis-review.md` remain to be applied.
 - [ ] T-153 (T, W7–10, owners R/SS; depends progressively T-134–T-147) —
   Draft results from generated artefacts. Acceptance: exploratory and
   confirmatory evidence are separated; diagnostics, calibration, negative
   results and sensitivities are included without manual number transcription.
-  Owner checkpoint 2026-08-15: paused; no post-confirmatory results drafting
-  begins from the incomplete primary family without a new instruction.
+  The 2026-09-27 code programme prepares generated artefacts and recorded
+  corrections; editing the Overleaf results chapter remains outside its scope.
 - [ ] T-154 (T, W9–10, owners R/PS/SS; depends T-147) — Draft discussion and
   conclusion. Acceptance: each RQ is answered at its supported strength;
   limitations cover internal evaluation, endpoint heterogeneity, predictor

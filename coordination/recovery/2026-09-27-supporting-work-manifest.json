@@ -1,0 +1,118 @@
+{
+  "source_root": "/Users/macuser/bayes-cox-runs",
+  "archive": "2026-09-27-supporting-work.tar.gz",
+  "archive_sha256": "a364065bcbe9e02f6f135d6efe84cf4684d2848f88f57ced58c64217c88a2318",
+  "purpose": "Unmodified supporting source and completed diagnostic summaries; not confirmatory production evidence.",
+  "files": [
+    {
+      "path": "harness/check_robustness_cell.py",
+      "bytes": 4099,
+      "sha256": "97f346092966c90a7d572efe82358e84aa9c0b26e8a345e3da32860a17cf0769"
+    },
+    {
+      "path": "harness/finish_robustness.sh",
+      "bytes": 451,
+      "sha256": "d2097d1bee3a43fbc65223bcffd3bd13eb7ae132b6c7e2f4f3b3505c01f0bf49"
+    },
+    {
+      "path": "harness/launch_robustness.sh",
+      "bytes": 1096,
+      "sha256": "62038665fbcd39f9ec36aac981abc5c76433ca310a18be6638b45606a24316bd"
+    },
+    {
+      "path": "harness/shard_worker.py",
+      "bytes": 2299,
+      "sha256": "6c6e9c6ab5b749fcfbfd837c9a53b75303ee43bde92c2fb8c3fcae49b38a26ea"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/repro.py",
+      "bytes": 7424,
+      "sha256": "ef03652ae78caf7e3a5ad944c6fa7bbd38be7feb4a0ed77791f41868aa6d6b0c"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/extract.py",
+      "bytes": 1862,
+      "sha256": "2cb5734f52ffe66921f2d034435a416e00a2dbde6bfd4ebd4f73e32045699a84"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/features.py",
+      "bytes": 1513,
+      "sha256": "bdcbc5cd332223473a7cba8149583603a5677647aa58fc3d44f1f4a6f6288e56"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/attempts.csv",
+      "bytes": 30684,
+      "sha256": "cd6c78b18af0bbea4c35421c80f7b03e0eebdbe3352f98b46be5d053372d3cda"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/cells.csv",
+      "bytes": 5021,
+      "sha256": "83b066fa25d691499cee46320bf814ac5fc8bde5515db14eba9d030c8076fe12"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r01f01_decomp_a1.json",
+      "bytes": 1766,
+      "sha256": "491ce1263663381c9fe2eebc1f85d4013d4e0709375a9fb45d8197f1104a3422"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r01f01_frozen_a1.json",
+      "bytes": 2000,
+      "sha256": "4dd136e80b6e20170fff06b05cf584c7e501bcc80aa49330595aa1206cbec7df"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r01f01_log1p_a1.json",
+      "bytes": 1639,
+      "sha256": "66b467a61c5e2a37795ff0533c8c291c74fefcf450bfc1500586989de71b51ae"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r01f01_mirror_a1.json",
+      "bytes": 2000,
+      "sha256": "5e7e3c9ee972f5f66b8892caa310c0bf39a44a6a636ec4332f9caf288b063a27"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r01f01_pvtau0_a1.json",
+      "bytes": 1775,
+      "sha256": "1708c50296103546ecdf256511f3a91c877396711baa2e15d53b72909e197962"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r01f01_ta999_a1.json",
+      "bytes": 1014,
+      "sha256": "174b8c21fbd08111debf82cfcc5bfa4ac08dae0fe259cf070c5fc613dfdb8c4f"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r02f04_ta999_a1.json",
+      "bytes": 1025,
+      "sha256": "d1faa672c2917af3c575ba0ea810c68f1b7dcfe7f0b316c697eacc62b16ab502"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r03f02_ta999_a1.json",
+      "bytes": 1029,
+      "sha256": "3498504e53548369e2aeaa7e5bbd8d25009dda99527e0ad7d4b8e563ad0c38ff"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r04f01_ta999_a1.json",
+      "bytes": 1024,
+      "sha256": "3fe61589acc32f4c19bbc4c69fca722bf5e8b496c223608a4affd2bcf310749a"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r04f04_ta999_a1.json",
+      "bytes": 1026,
+      "sha256": "c4a6379bd803e7b98e704055578e8c259de8c88e31f38171616e6162d61c3bba"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r05f03_ta999_a1.json",
+      "bytes": 1764,
+      "sha256": "8da9fa283b6987a9fe2d2444f6c7b5842d53d0f361f4d77d13a197a92b74d6cd"
+    },
+    {
+      "path": "horseshoe-investigation-20260927/results/r05f04_ta999_a1.json",
+      "bytes": 1027,
+      "sha256": "6eb9d1b8f44214c2a6ee2010836997e7abec7a8784100c33873284c7fb1bf9bd"
+    },
+    {
+      "path": "logs/repro_baseline_quick.json",
+      "bytes": 1373,
+      "sha256": "c791b5da992f457d0459a89f55e3d5781197161c37a817a29e82055db0b03c4f"
+    }
+  ]
+}
