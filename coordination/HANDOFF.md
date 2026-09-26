@@ -50,6 +50,22 @@ Findings behind each step are in
 1. [ ] Run robustness (T-140–T-143) and explanation (T-144) production with
    the frozen code, from a detached worktree of `2e55c0b` outside iCloud
    (`~/bayes-cox-runs/frozen`), in the lock environment.
+   - Explanation: done 2026-09-27. Output:
+     `~/bayes-cox-runs/frozen/reports/explainability/confirmatory_v1_confirmatory_cdcdcee84651_explainability_v1.json`
+     (SHA-256 `120984c7…6ecd5`). It made 1,845 comparisons; the convergence
+     summary is `failed`, so no claim is permitted.
+   - Robustness: started 2026-09-27 in
+     `~/bayes-cox-runs/frozen/reports/robustness/confirmatory_v1_robustness_robustness_702d93af33bf/`.
+     Six workers run `~/bayes-cox-runs/harness/shard_worker.py`, which runs
+     the unmodified `run_robustness.py`. The worker claims each cell with a
+     lock file in `~/bayes-cox-runs/robustness-claims/` and stops before
+     aggregation. Logs and PIDs are in `~/bayes-cox-runs/logs/`.
+   - When no `shard_worker` process remains, run
+     `~/bayes-cox-runs/harness/finish_robustness.sh`. It is the unsharded
+     official `--resume` pass: it verifies the freeze, fits any missing cell,
+     and writes the aggregates and `completion.json`.
+   - If a worker died, delete its claim files for cells without a JSON
+     before finishing.
 2. [ ] Build a reproduction harness that reruns one cell and compares it
    with the frozen record.
 3. [ ] Bind frozen-evidence verification to the checkpoint commit (new ADR).

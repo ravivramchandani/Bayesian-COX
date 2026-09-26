@@ -1,0 +1,249 @@
+"""Refit stored confirmatory cells with the current code and compare them.
+
+A cell is one (dataset, model, repeat, fold) fit from the frozen confirmatory
+run. This script refits the selected cells with the code in the working tree,
+using the protocol and data recorded in the run's manifest, and checks that
+every stored field is reproduced exactly.
+
+Only wall-clock fields differ between two executions of the same cell:
+``total_seconds``, each attempt's ``fit_seconds`` and ``cell_content_sha256``
+(which is computed over those timings). They are excluded from the check.
+
+Examples::
+
+    # Six quick cells: every model on GBSG2 repeat 1 fold 1.
+    python scripts/reproduce_confirmatory_cells.py --selection quick
+
+    # Every stored cell, four processes, with the refitted cells kept.
+    python scripts/reproduce_confirmatory_cells.py --selection all --workers 4 \
+        --keep-cells reports/reproduction/cells
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import subprocess
+import sys
+import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+DEFAULT_RUN = PROJECT_ROOT / "reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651"
+CHECKPOINT_COMMIT = "44b6085"
+TIMING_FIELDS = {"total_seconds", "fit_seconds", "cell_content_sha256"}
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--run-dir", type=Path, default=DEFAULT_RUN)
+    parser.add_argument(
+        "--selection",
+        default="quick",
+        help="'quick', 'all', or comma-separated dataset:model:repeat:fold keys",
+    )
+    parser.add_argument("--workers", type=int, default=1)
+    parser.add_argument(
+        "--keep-cells",
+        type=Path,
+        default=None,
+        help="directory in which to save each refitted cell as JSON",
+    )
+    parser.add_argument(
+        "--report",
+        type=Path,
+        default=None,
+        help="JSON report path; defaults to reports/reproduction/<timestamp>.json",
+    )
+    return parser.parse_args()
+
+
+def load_run_inputs(run_dir: Path) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    """Return the run manifest, frozen protocol and dataset configuration.
+
+    The protocol is read from the manifest, so later edits to
+    ``config/confirmatory.yaml`` cannot change what is reproduced. The
+    dataset configuration is read from the working tree when its hash matches
+    the manifest, otherwise from the checkpoint commit.
+    """
+    manifest = json.loads((run_dir / "manifest.json").read_text(encoding="utf-8"))
+    protocol = manifest["run_config"]["protocol"]
+    recorded = manifest["input_sha256"]["config/datasets.yaml"]
+    live = PROJECT_ROOT / "config/datasets.yaml"
+    text = live.read_bytes()
+    if hashlib.sha256(text).hexdigest() != recorded:
+        text = subprocess.run(
+            ["git", "show", f"{CHECKPOINT_COMMIT}:config/datasets.yaml"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            capture_output=True,
+        ).stdout
+        if hashlib.sha256(text).hexdigest() != recorded:
+            raise RuntimeError("no copy of config/datasets.yaml matches the run manifest")
+    return manifest, protocol, yaml.safe_load(text)
+
+
+def select_cells(run_dir: Path, selection: str) -> list[tuple[str, str, int, int]]:
+    """Translate a selection string into (dataset, model, repeat, fold) keys."""
+    if selection == "quick":
+        models = json.loads((run_dir / "manifest.json").read_text())["run_config"]["models"]
+        return [("gbsg2", model, 1, 1) for model in models]
+    if selection == "all":
+        keys = []
+        for path in sorted((run_dir / "cells").glob("*/repeat_*_fold_*/*.json")):
+            repeat, fold = path.parent.name.split("_")[1::2]
+            keys.append((path.parent.parent.name, path.stem, int(repeat), int(fold)))
+        return keys
+    keys = []
+    for item in selection.split(","):
+        dataset, model, repeat, fold = item.split(":")
+        keys.append((dataset, model, int(repeat), int(fold)))
+    return keys
+
+
+def stored_cell_path(run_dir: Path, dataset: str, model: str, repeat: int, fold: int) -> Path:
+    return run_dir / "cells" / dataset / f"repeat_{repeat:02d}_fold_{fold:02d}" / f"{model}.json"
+
+
+def differences(new: Any, old: Any, path: str = "") -> list[str]:
+    """List every leaf where two JSON values differ, ignoring timing fields."""
+    if isinstance(new, dict) and isinstance(old, dict):
+        found = []
+        for key in sorted(set(new) | set(old)):
+            if key in TIMING_FIELDS:
+                continue
+            if key not in new or key not in old:
+                found.append(f"{path}.{key}: present in only one cell")
+            else:
+                found += differences(new[key], old[key], f"{path}.{key}")
+        return found
+    if isinstance(new, list) and isinstance(old, list):
+        if len(new) != len(old):
+            return [f"{path}: length {len(new)} != {len(old)}"]
+        found = []
+        for index, (left, right) in enumerate(zip(new, old, strict=True)):
+            found += differences(left, right, f"{path}[{index}]")
+        return found
+    return [] if new == old else [f"{path}: {str(new)[:80]} != {str(old)[:80]}"]
+
+
+def refit_cell(run_dir: Path, key: tuple[str, str, int, int]) -> dict[str, Any]:
+    """Refit one cell with the current code and return it as stored JSON."""
+    import src.pipelines.confirmatory as confirmatory
+    from src.data.survival_folds import repeated_survival_folds
+    from src.utils.reproducibility import sha256_file
+
+    dataset, model, repeat, fold_number = key
+    manifest, protocol, dataset_config = load_run_inputs(run_dir)
+    settings = manifest["run_config"]
+    options = confirmatory.RunOptions(
+        mode=settings["mode"],
+        datasets=tuple(settings["datasets"]),
+        models=tuple(settings["models"]),
+        outer_splits=settings["outer_splits"],
+        outer_repeats=settings["outer_repeats"],
+        fold_limit_per_dataset=settings["fold_limit_per_dataset"],
+        bayes_draws=settings["bayes_draws"],
+        bayes_tune=settings["bayes_tune"],
+        bayes_chains=settings["bayes_chains"],
+        calibration_bootstraps=settings["calibration_bootstraps"],
+        resume=True,
+        output_root=run_dir.parent,
+    )
+    cohort = dataset_config[dataset]
+    data_path = PROJECT_ROOT / cohort["raw_file"]
+    if sha256_file(data_path) != manifest["input_sha256"][cohort["raw_file"]]:
+        raise RuntimeError(f"{cohort['raw_file']} differs from the run manifest")
+    raw, times, events, subject_ids = confirmatory.load_analysis_dataset(
+        PROJECT_ROOT, dataset, cohort
+    )
+    folds = repeated_survival_folds(
+        times,
+        events,
+        n_splits=options.outer_splits,
+        n_repeats=options.outer_repeats,
+        base_seed=int(protocol["validation"]["base_seed"]),
+        max_time_bins=int(protocol["validation"]["followup_time_bins"]),
+    )
+    fold = next(item for item in folds if item.repeat == repeat and item.fold == fold_number)
+    cell = confirmatory.run_cell(
+        dataset,
+        model,
+        fold,
+        raw,
+        times,
+        events,
+        subject_ids,
+        confirmatory._feature_spec(cohort, protocol["feature_set"]),
+        config=protocol,
+        options=options,
+        data_sha256=sha256_file(data_path),
+    )
+    return json.loads(json.dumps(confirmatory._json_safe(cell), sort_keys=True))
+
+
+def check_cell(run_dir: Path, key: tuple[str, str, int, int], keep: Path | None) -> dict[str, Any]:
+    """Refit one cell, compare it with the stored cell and summarise."""
+    started = time.perf_counter()
+    new = refit_cell(run_dir, key)
+    old = json.loads(stored_cell_path(run_dir, *key).read_text(encoding="utf-8"))
+    found = differences(new, old)
+    if keep is not None:
+        dataset, model, repeat, fold = key
+        target = keep / dataset / f"repeat_{repeat:02d}_fold_{fold:02d}" / f"{model}.json"
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(new, indent=2, sort_keys=True), encoding="utf-8")
+    return {
+        "cell": ":".join(map(str, key)),
+        "status": new["status"],
+        "identical": not found,
+        "n_differences": len(found),
+        "first_differences": found[:10],
+        "seconds": round(time.perf_counter() - started, 1),
+    }
+
+
+def main() -> int:
+    args = parse_args()
+    run_dir = args.run_dir.resolve()
+    keys = select_cells(run_dir, args.selection)
+    keep = args.keep_cells.resolve() if args.keep_cells else None
+    results = []
+    with ProcessPoolExecutor(max_workers=args.workers) as pool:
+        futures = {pool.submit(check_cell, run_dir, key, keep): key for key in keys}
+        for future in as_completed(futures):
+            result = future.result()
+            results.append(result)
+            print(
+                f"{result['cell']:<40} identical={result['identical']} "
+                f"status={result['status']} seconds={result['seconds']}",
+                flush=True,
+            )
+    results.sort(key=lambda item: item["cell"])
+    report = {
+        "run": run_dir.name,
+        "selection": args.selection,
+        "cells_checked": len(results),
+        "cells_identical": sum(item["identical"] for item in results),
+        "ignored_fields": sorted(TIMING_FIELDS),
+        "cells": results,
+    }
+    path = args.report or (
+        PROJECT_ROOT / "reports/reproduction" / f"cells_{time.strftime('%Y%m%dT%H%M%S')}.json"
+    )
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    print(f"{report['cells_identical']}/{report['cells_checked']} cells identical; report={path}")
+    return 0 if report["cells_identical"] == report["cells_checked"] else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
