@@ -73,9 +73,7 @@ def _survival_outcome(
     return time_values, events
 
 
-def _subject_identifiers(
-    frame: pd.DataFrame, dataset_key: str, id_col: str | None
-) -> np.ndarray:
+def _subject_identifiers(frame: pd.DataFrame, dataset_key: str, id_col: str | None) -> np.ndarray:
     """Return one unique string identifier per row, generated when ``id_col`` is unset."""
     if id_col:
         if id_col not in frame:

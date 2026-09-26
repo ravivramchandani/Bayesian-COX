@@ -241,9 +241,7 @@ def _discrimination_and_brier_metrics(
     )
     return {
         "harrell_c_index": harrell_c_index(validation_time, validation_event, risk),
-        "uno_c_index": uno_c_index(
-            train_time, train_event, ipcw_time, ipcw_event, risk, tau=tau
-        ),
+        "uno_c_index": uno_c_index(train_time, train_event, ipcw_time, ipcw_event, risk, tau=tau),
         "uno_tau": tau,
         "ipcw_administrative_truncation_tau": tau,
         "ibs": integrated_brier(
