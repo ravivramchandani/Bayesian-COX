@@ -64,9 +64,7 @@ class DeepSurvModel(BaseSurvivalModel):
             ) from exc
         return torch, tt, CoxPH
 
-    def _split_training_validation(
-        self, events: np.ndarray
-    ) -> tuple[np.ndarray, np.ndarray]:
+    def _split_training_validation(self, events: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
         """Return deterministic event-stratified train/validation indices."""
         n = len(events)
         if n < 20 or not 0.0 < self.validation_fraction < 0.5:
@@ -87,10 +85,66 @@ class DeepSurvModel(BaseSurvivalModel):
             return np.arange(n), np.array([], dtype=int)
         return np.asarray(training, dtype=int), np.asarray(validation, dtype=int)
 
-    def fit(
-        self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray
-    ) -> DeepSurvModel:
-        """Fit the neural Cox partial-likelihood model and Breslow baseline."""
+    def _reference_model(self, x_all: np.ndarray, torch: Any, tt: Any, CoxPH: Any) -> Any:
+        """Construct the reference network and Adam optimiser after seeds are set."""
+        activation_map = {
+            "relu": torch.nn.ReLU,
+            "selu": torch.nn.SELU,
+            "tanh": torch.nn.Tanh,
+        }
+        if self.activation not in activation_map:
+            raise ValueError(
+                f"Unsupported activation {self.activation!r}; use one of {sorted(activation_map)}"
+            )
+
+        net = tt.practical.MLPVanilla(
+            in_features=x_all.shape[1],
+            num_nodes=self.hidden_dims,
+            out_features=1,
+            batch_norm=self.batch_norm,
+            dropout=self.dropout,
+            activation=activation_map[self.activation],
+            output_bias=False,
+        )
+        optimizer = tt.optim.Adam(
+            lr=self.learning_rate,
+            weight_decay=self.l2_reg,
+        )
+        return CoxPH(net, optimizer, device="cpu")
+
+    def _early_stopping_data(
+        self, x_all: np.ndarray, durations: np.ndarray, events: np.ndarray, tt: Any
+    ) -> tuple[np.ndarray, np.ndarray, tuple[np.ndarray, np.ndarray], Any, list[Any]]:
+        """Build training inputs and an inner-training validation subset for early stopping."""
+        train_idx, val_idx = self._split_training_validation(events)
+        train_input = x_all[train_idx]
+        train_target = (durations[train_idx], events[train_idx])
+        val_data = None
+        callbacks: list[Any] = []
+        if len(val_idx):
+            val_data = (x_all[val_idx], (durations[val_idx], events[val_idx]))
+            callbacks.append(
+                tt.callbacks.EarlyStopping(
+                    patience=self.patience,
+                    min_delta=self.min_delta,
+                    checkpoint_model=True,
+                    load_best=True,
+                )
+            )
+
+        return train_idx, train_input, train_target, val_data, callbacks
+
+    def fit(self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray) -> DeepSurvModel:
+        """Fit the neural Cox partial likelihood and Breslow baseline.
+
+        Args:
+            X: Preprocessed training covariates.
+            y_time: Strictly positive follow-up times in the cohort's original units.
+            y_event: Binary event indicators, 1 for an observed event.
+
+        Returns:
+            The fitted model; its training log records early-stopping epochs.
+        """
         torch, tt, CoxPH = self._dependencies()
         if len(X) == 0:
             raise ValueError("DeepSurv requires at least one training observation")
@@ -113,47 +167,10 @@ class DeepSurvModel(BaseSurvivalModel):
         torch.use_deterministic_algorithms(True, warn_only=True)
         torch.set_num_threads(1)
 
-        activation_map = {
-            "relu": torch.nn.ReLU,
-            "selu": torch.nn.SELU,
-            "tanh": torch.nn.Tanh,
-        }
-        if self.activation not in activation_map:
-            raise ValueError(
-                f"Unsupported activation {self.activation!r}; use one of "
-                f"{sorted(activation_map)}"
-            )
-
-        net = tt.practical.MLPVanilla(
-            in_features=x_all.shape[1],
-            num_nodes=self.hidden_dims,
-            out_features=1,
-            batch_norm=self.batch_norm,
-            dropout=self.dropout,
-            activation=activation_map[self.activation],
-            output_bias=False,
+        model = self._reference_model(x_all, torch, tt, CoxPH)
+        train_idx, train_input, train_target, val_data, callbacks = self._early_stopping_data(
+            x_all, durations, events, tt
         )
-        optimizer = tt.optim.Adam(
-            lr=self.learning_rate,
-            weight_decay=self.l2_reg,
-        )
-        model = CoxPH(net, optimizer, device="cpu")
-
-        train_idx, val_idx = self._split_training_validation(events)
-        train_input = x_all[train_idx]
-        train_target = (durations[train_idx], events[train_idx])
-        val_data = None
-        callbacks: list[Any] = []
-        if len(val_idx):
-            val_data = (x_all[val_idx], (durations[val_idx], events[val_idx]))
-            callbacks.append(
-                tt.callbacks.EarlyStopping(
-                    patience=self.patience,
-                    min_delta=self.min_delta,
-                    checkpoint_model=True,
-                    load_best=True,
-                )
-            )
 
         log = model.fit(
             train_input,
@@ -217,25 +234,21 @@ class DeepSurvModel(BaseSurvivalModel):
             for _ in range(n_repeats):
                 permuted = X.copy()
                 permuted[feature] = rng.permutation(permuted[feature].to_numpy())
-                score, _ = concordance_index(
-                    y_time, y_event, self.predict_risk(permuted)
-                )
+                score, _ = concordance_index(y_time, y_event, self.predict_risk(permuted))
                 drops.append(baseline - score)
             rows.append(
                 {
                     "feature": feature,
                     "importance_mean": float(np.mean(drops)),
-                    "importance_std": float(np.std(drops, ddof=1))
-                    if n_repeats > 1
-                    else 0.0,
+                    "importance_std": float(np.std(drops, ddof=1)) if n_repeats > 1 else 0.0,
                 }
             )
-        self.feature_importances_ = {
-            row["feature"]: row["importance_mean"] for row in rows
-        }
-        return pd.DataFrame(rows).sort_values(
-            "importance_mean", ascending=False
-        ).reset_index(drop=True)
+        self.feature_importances_ = {row["feature"]: row["importance_mean"] for row in rows}
+        return (
+            pd.DataFrame(rows)
+            .sort_values("importance_mean", ascending=False)
+            .reset_index(drop=True)
+        )
 
     def get_summary(self) -> pd.DataFrame:
         """Return the fitted architecture and training configuration."""

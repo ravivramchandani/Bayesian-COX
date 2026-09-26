@@ -12,49 +12,22 @@ The class keeps the name ``BayesianCoxModel`` because ``beta`` has the Cox
 meaning of log hazard ratios.
 """
 
-from typing import NamedTuple
-
 import numpy as np
 import pandas as pd
 import pymc as pm
-from sksurv.nonparametric import kaplan_meier_estimator
 
 from src.models.base import BaseSurvivalModel
 from src.models.bayesian.diagnostics import check_convergence
+from src.models.bayesian.piecewise import _add_poisson_likelihood, _poisson_rows
+from src.models.bayesian.predictive_checks import LINEAR_PREDICTOR_CLIP, _PredictiveChecksMixin
 
 SUPPORTED_PRIORS = ("normal", "horseshoe", "spike_slab")
-
-# Bound on x beta before exponentiation in predictive summaries and
-# predictions, so that extreme prior or posterior draws cannot overflow.
-LINEAR_PREDICTOR_CLIP = 30.0
-
-# Scaled times (multiples of the median training event time) at which the
-# prior predictive survival is summarised.
-PRIOR_PREDICTIVE_SCALED_TIMES = (0.25, 0.5, 1.0, 2.0)
-MAX_PRIOR_PREDICTIVE_ROWS = 512
-
-MAX_POSTERIOR_PREDICTIVE_DRAWS = 200
-# Offset from ``random_state`` for the posterior predictive replication, so it
-# never shares a stream with the sampler seed.
-POSTERIOR_PREDICTIVE_SEED_OFFSET = 104729
 
 # Posterior draws processed at once in the prediction loops, to bound memory.
 DRAW_CHUNK_SIZE = 256
 
 
-class _PoissonRows(NamedTuple):
-    """Subject-interval rows of the Poisson likelihood with positive exposure."""
-
-    covariates: np.ndarray
-    exposures: np.ndarray
-    log_exposure: np.ndarray
-    interval_index: np.ndarray
-    events: np.ndarray
-
-
-def _validate_training_data(
-    X_mat: np.ndarray, y_time: np.ndarray, y_event: np.ndarray
-) -> None:
+def _validate_training_data(X_mat: np.ndarray, y_time: np.ndarray, y_event: np.ndarray) -> None:
     """Raise ``ValueError`` unless the training arrays can be fitted."""
     if len(X_mat) != len(y_time) or len(y_time) != len(y_event):
         raise ValueError("X, y_time and y_event must contain the same rows")
@@ -66,82 +39,7 @@ def _validate_training_data(
         raise ValueError("Bayesian model requires at least two observed events")
 
 
-def _poisson_rows(
-    X_mat: np.ndarray,
-    y_time_scaled: np.ndarray,
-    y_event: np.ndarray,
-    cutoffs_scaled: np.ndarray,
-) -> _PoissonRows:
-    """Expand subjects into subject-interval exposures and event counts.
-
-    Subject i's exposure in interval m is ``max(0, min(t_i, end_m) -
-    start_m)``, and its count is 1 only in the interval that contains an
-    observed event time. Rows with zero exposure are dropped. Rows are kept
-    in subject-major order.
-    """
-    starts = cutoffs_scaled[:-1]
-    ends = cutoffs_scaled[1:]
-    times = y_time_scaled[:, None]
-    events = y_event[:, None]
-
-    exposures = np.clip(np.minimum(times, ends) - starts, 0, None)
-    events_matrix = ((events == 1) & (times > starts) & (times <= ends)).astype(float)
-
-    has_exposure = exposures > 0
-    subject_index, interval_index = np.where(has_exposure)
-    row_exposures = exposures[has_exposure]
-    return _PoissonRows(
-        covariates=X_mat[subject_index],
-        exposures=row_exposures,
-        log_exposure=np.log(row_exposures),
-        interval_index=interval_index,
-        events=events_matrix[has_exposure],
-    )
-
-
-def _add_poisson_likelihood(rows: _PoissonRows, beta, log_lambda) -> None:
-    """Add Poisson counts ``obs`` with log mean log(exposure) + log(lambda_m) + x beta."""
-    linear_predictor = pm.math.dot(rows.covariates, beta)
-    interval_log_hazard = log_lambda[rows.interval_index]
-    poisson_mean = pm.math.exp(
-        rows.log_exposure + interval_log_hazard + linear_predictor
-    )
-    pm.Poisson("obs", mu=poisson_mean, observed=rows.events)
-
-
-def _kaplan_meier_at(
-    y_time: np.ndarray, y_event: np.ndarray, horizons: np.ndarray
-) -> np.ndarray:
-    """Return right-continuous Kaplan-Meier survival at each horizon."""
-    km_time, km_survival = kaplan_meier_estimator(
-        y_event.astype(bool), y_time.astype(float)
-    )
-    km_indices = np.searchsorted(km_time, horizons, side="right") - 1
-    observed = np.ones(len(horizons), dtype=float)
-    valid = km_indices >= 0
-    observed[valid] = km_survival[km_indices[valid]]
-    return observed
-
-
-def _replication_summary(
-    replicated_values: np.ndarray, observed_value: float
-) -> dict:
-    """Compare an observed count with its posterior predictive replicates."""
-    lower, upper = np.percentile(replicated_values, [2.5, 97.5])
-    return {
-        "observed": float(observed_value),
-        "replicated_mean": float(np.mean(replicated_values)),
-        "replicated_median": float(np.median(replicated_values)),
-        "replicated_lower_95": float(lower),
-        "replicated_upper_95": float(upper),
-        "posterior_predictive_tail_probability": float(
-            np.mean(replicated_values >= observed_value)
-        ),
-        "observed_covered": bool(lower <= observed_value <= upper),
-    }
-
-
-class BayesianCoxModel(BaseSurvivalModel):
+class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
     """Bayesian piecewise-exponential proportional-hazards model.
 
     Times are divided by the median training event time before fitting, so the
@@ -172,7 +70,7 @@ class BayesianCoxModel(BaseSurvivalModel):
       variances, ``sd_j^2 = (1 - gamma_j) spike_sd^2 + gamma_j slab_sd^2``
       with spike_sd = 0.05 and slab_sd = 2, and ``beta_j = z_j * sd_j`` with
       ``z_j ~ Normal(0, 1)``. The posterior mean of ``gamma_j`` is the
-      inclusion signal.
+      auxiliary mixing signal; it is not a discrete inclusion probability.
 
     The priors define the PyMC variables ``beta``, ``tau``, ``lam``, ``c2``,
     ``gamma``, ``z``, ``log_lambda`` and ``log_lambda_offset``. Their names,
@@ -197,7 +95,7 @@ class BayesianCoxModel(BaseSurvivalModel):
         coefficient_prior: str = "normal",
         prior_params: dict | None = None,
         noncentered_baseline: bool = False,
-    ):
+    ) -> None:
         self.n_intervals = n_intervals
         self.inference_method = inference_method.lower()
         self.n_advi_iterations = n_advi_iterations
@@ -225,9 +123,7 @@ class BayesianCoxModel(BaseSurvivalModel):
         self.beta_samples = None  # (n_draws, n_features)
         self.lambda_samples = None  # (n_draws, n_intervals), scaled-time hazards
 
-    def fit(
-        self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray
-    ) -> "BayesianCoxModel":
+    def fit(self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray) -> "BayesianCoxModel":
         """Fit the model by NUTS (default) or ADVI and store posterior summaries.
 
         After fitting, ``diagnostics`` holds the convergence checks,
@@ -370,9 +266,7 @@ class BayesianCoxModel(BaseSurvivalModel):
     def _baseline_log_hazard(self, n_intervals: int):
         """Create ``log_lambda ~ Normal(-2, 2)``, centred or non-centred."""
         if self.noncentered_baseline:
-            log_lambda_offset = pm.Normal(
-                "log_lambda_offset", mu=0.0, sigma=1.0, shape=n_intervals
-            )
+            log_lambda_offset = pm.Normal("log_lambda_offset", mu=0.0, sigma=1.0, shape=n_intervals)
             return pm.Deterministic("log_lambda", -2.0 + 2.0 * log_lambda_offset)
         return pm.Normal("log_lambda", mu=-2.0, sigma=2.0, shape=n_intervals)
 
@@ -438,254 +332,6 @@ class BayesianCoxModel(BaseSurvivalModel):
             .reset_index(drop=True)
         )
 
-    @staticmethod
-    def _baseline_cumulative_hazard(
-        hazards: np.ndarray,
-        cutoffs: np.ndarray,
-        times: np.ndarray,
-    ) -> np.ndarray:
-        """Evaluate piecewise-constant cumulative hazards for many draws.
-
-        Returns an array of shape ``(n_draws, n_times)``. Beyond the last cut
-        point the last interval's hazard is extended.
-        """
-        hazards = np.asarray(hazards, dtype=float)
-        cutoffs = np.asarray(cutoffs, dtype=float)
-        times = np.asarray(times, dtype=float)
-        durations = np.diff(cutoffs)
-        completed = np.cumsum(hazards * durations[None, :], axis=1)
-        completed = np.column_stack([np.zeros(len(hazards)), completed])
-        result = np.zeros((len(hazards), len(times)), dtype=float)
-        n_intervals = hazards.shape[1]
-        for column, value in enumerate(times):
-            interval = int(np.searchsorted(cutoffs, value, side="right") - 1)
-            if interval < 0:
-                continue
-            if interval >= n_intervals:
-                result[:, column] = completed[:, -1] + hazards[:, -1] * (
-                    value - cutoffs[-1]
-                )
-            else:
-                result[:, column] = completed[:, interval] + hazards[:, interval] * (
-                    value - cutoffs[interval]
-                )
-        return result
-
-    def _summarise_prior_predictive(
-        self,
-        prior_idata,
-        cutoffs_scaled: np.ndarray,
-        X_mat: np.ndarray,
-    ) -> dict:
-        """Summarise the survival implied by the prior.
-
-        Baseline survival is kept for interpretation. The main check uses up
-        to 512 evenly spaced training rows, so that extreme coefficient-prior
-        predictions cannot hide behind a reasonable baseline hazard.
-        """
-        log_hazard = prior_idata.prior["log_lambda"].values
-        hazards = np.exp(log_hazard.reshape(-1, log_hazard.shape[-1]))
-        beta_raw = prior_idata.prior["beta"].values
-        beta = beta_raw.reshape(-1, beta_raw.shape[-1])
-        if len(beta) != len(hazards):
-            raise RuntimeError("prior coefficient and baseline draws are not aligned")
-        times = np.asarray(PRIOR_PREDICTIVE_SCALED_TIMES, dtype=float)
-        cumulative = self._baseline_cumulative_hazard(hazards, cutoffs_scaled, times)
-        baseline_survival = np.exp(-cumulative)
-
-        covariates = np.asarray(X_mat, dtype=float)
-        if covariates.ndim != 2 or covariates.shape[1] != beta.shape[1]:
-            raise ValueError("prior predictive covariates do not match beta")
-        selected_indices = np.linspace(
-            0,
-            len(covariates) - 1,
-            min(MAX_PRIOR_PREDICTIVE_ROWS, len(covariates)),
-            dtype=int,
-        )
-        selected = covariates[selected_indices]
-        linear = np.clip(
-            beta @ selected.T, -LINEAR_PREDICTOR_CLIP, LINEAR_PREDICTOR_CLIP
-        )
-        population_survival = np.exp(
-            -np.exp(linear)[:, :, None] * cumulative[:, None, :]
-        )
-        return {
-            "n_draws": int(len(hazards)),
-            "time_scale": float(self.time_scale),
-            "baseline_survival": [
-                self._prior_baseline_row(scaled_time, baseline_survival[:, column])
-                for column, scaled_time in enumerate(times)
-            ],
-            "covariate_population_survival": [
-                self._prior_population_row(
-                    scaled_time, population_survival[:, :, column]
-                )
-                for column, scaled_time in enumerate(times)
-            ],
-            "n_covariate_rows": int(len(selected)),
-            "covariate_row_selection": "deterministic_evenly_spaced_training_rows",
-            "finite": bool(
-                np.isfinite(baseline_survival).all()
-                and np.isfinite(population_survival).all()
-            ),
-        }
-
-    def _prior_baseline_row(self, scaled_time: float, values: np.ndarray) -> dict:
-        """Summarise prior baseline survival draws at one time."""
-        return {
-            "scaled_time": float(scaled_time),
-            "time": float(scaled_time * self.time_scale),
-            "median_survival": float(np.median(values)),
-            "lower_95": float(np.percentile(values, 2.5)),
-            "upper_95": float(np.percentile(values, 97.5)),
-        }
-
-    def _prior_population_row(self, scaled_time: float, survival: np.ndarray) -> dict:
-        """Summarise prior survival over (draw, subject) pairs at one time."""
-        subject_draw_values = survival.reshape(-1)
-        draw_means = survival.mean(axis=1)
-        return {
-            "scaled_time": float(scaled_time),
-            "time": float(scaled_time * self.time_scale),
-            "subject_draw_median_survival": float(np.median(subject_draw_values)),
-            "subject_draw_lower_95": float(np.percentile(subject_draw_values, 2.5)),
-            "subject_draw_upper_95": float(np.percentile(subject_draw_values, 97.5)),
-            "mean_survival_across_subjects_median": float(np.median(draw_means)),
-            "proportion_subject_draws_below_0_01": float(
-                np.mean(subject_draw_values < 0.01)
-            ),
-            "proportion_subject_draws_above_0_99": float(
-                np.mean(subject_draw_values > 0.99)
-            ),
-        }
-
-    def _summarise_posterior_predictive(
-        self,
-        X_mat: np.ndarray,
-        y_time: np.ndarray,
-        y_event: np.ndarray,
-        rows: _PoissonRows,
-    ) -> dict:
-        """Archive posterior predictive checks on the training data.
-
-        Uses up to 200 evenly spaced posterior draws for two checks:
-        replicated Poisson event counts (a check on the likelihood scale) and
-        mean fitted survival against Kaplan-Meier at the training event-time
-        quartiles.
-        """
-        n_available = len(self.beta_samples)
-        draw_indices = np.linspace(
-            0,
-            n_available - 1,
-            min(MAX_POSTERIOR_PREDICTIVE_DRAWS, n_available),
-            dtype=int,
-        )
-        beta = self.beta_samples[draw_indices]
-        hazards = self.lambda_samples[draw_indices]
-        replicated = self._replicated_event_counts(rows, beta, hazards)
-        survival_rows = self._fitted_survival_check(
-            X_mat, y_time, y_event, beta, hazards
-        )
-        return {
-            "n_draws": int(len(draw_indices)),
-            "replicated_event_counts": replicated,
-            "fitted_survival_check": survival_rows,
-            # Compatibility alias for pilot reporting code. This is a fitted-
-            # survival comparison, not a replicated-data check.
-            "survival_check": survival_rows,
-        }
-
-    def _replicated_event_counts(
-        self, rows: _PoissonRows, beta: np.ndarray, hazards: np.ndarray
-    ) -> dict:
-        """Replicate the Poisson counts per draw and compare with the data."""
-        n_intervals = hazards.shape[1]
-        rng = np.random.default_rng(self.random_state + POSTERIOR_PREDICTIVE_SEED_OFFSET)
-        replicated_interval_counts = np.zeros((len(beta), n_intervals), dtype=float)
-        for row, (beta_draw, hazard_draw) in enumerate(
-            zip(beta, hazards, strict=True)
-        ):
-            linear_predictor = np.clip(
-                rows.covariates @ beta_draw,
-                -LINEAR_PREDICTOR_CLIP,
-                LINEAR_PREDICTOR_CLIP,
-            )
-            poisson_mean = (
-                rows.exposures
-                * hazard_draw[rows.interval_index]
-                * np.exp(linear_predictor)
-            )
-            if not np.isfinite(poisson_mean).all():
-                raise RuntimeError("posterior predictive Poisson means must be finite")
-            replicated = rng.poisson(poisson_mean)
-            replicated_interval_counts[row] = np.bincount(
-                rows.interval_index,
-                weights=replicated,
-                minlength=n_intervals,
-            )
-
-        observed_interval_counts = np.bincount(
-            rows.interval_index,
-            weights=rows.events,
-            minlength=n_intervals,
-        )
-        return {
-            "likelihood": "expanded piecewise-Poisson event counts",
-            "n_posterior_draws": int(len(beta)),
-            "total": _replication_summary(
-                replicated_interval_counts.sum(axis=1), float(rows.events.sum())
-            ),
-            "by_baseline_interval": [
-                {
-                    "interval": interval + 1,
-                    **_replication_summary(
-                        replicated_interval_counts[:, interval],
-                        observed_interval_counts[interval],
-                    ),
-                }
-                for interval in range(n_intervals)
-            ],
-        }
-
-    def _fitted_survival_check(
-        self,
-        X_mat: np.ndarray,
-        y_time: np.ndarray,
-        y_event: np.ndarray,
-        beta: np.ndarray,
-        hazards: np.ndarray,
-    ) -> list[dict]:
-        """Compare mean fitted survival with Kaplan-Meier at event-time quartiles."""
-        event_times = y_time[y_event == 1]
-        horizons = np.quantile(event_times, [0.25, 0.5, 0.75]).astype(float)
-        observed = _kaplan_meier_at(y_time, y_event, horizons)
-
-        cumulative = self._baseline_cumulative_hazard(
-            hazards, self.cutoffs_scaled, horizons / self.time_scale
-        )
-        linear = beta @ X_mat.T
-        predicted = np.empty((len(beta), len(horizons)), dtype=float)
-        for column in range(len(horizons)):
-            survival = np.exp(-np.exp(linear) * cumulative[:, column][:, None])
-            predicted[:, column] = survival.mean(axis=1)
-
-        rows = []
-        for column, horizon in enumerate(horizons):
-            values = predicted[:, column]
-            lower = float(np.percentile(values, 2.5))
-            upper = float(np.percentile(values, 97.5))
-            rows.append(
-                {
-                    "time": float(horizon),
-                    "observed_km": float(observed[column]),
-                    "predicted_mean": float(values.mean()),
-                    "lower_95": lower,
-                    "upper_95": upper,
-                    "observed_covered": bool(lower <= observed[column] <= upper),
-                }
-            )
-        return rows
-
     def _compute_diagnostics(self) -> dict:
         """Return convergence diagnostics for every posterior variable.
 
@@ -723,24 +369,30 @@ class BayesianCoxModel(BaseSurvivalModel):
 
         if self.coefficient_prior == "spike_slab":
             gamma = posterior["gamma"].values.reshape(-1, len(self.feature_names))
-            return pd.DataFrame(
-                {
-                    "feature": self.feature_names,
-                    "continuous_inclusion_weight": gamma.mean(axis=0),
-                }
-            ).sort_values(
-                "continuous_inclusion_weight", ascending=False
-            ).reset_index(drop=True)
+            return (
+                pd.DataFrame(
+                    {
+                        "feature": self.feature_names,
+                        "continuous_inclusion_weight": gamma.mean(axis=0),
+                    }
+                )
+                .sort_values("continuous_inclusion_weight", ascending=False)
+                .reset_index(drop=True)
+            )
 
         if self.coefficient_prior == "horseshoe":
             lam = posterior["lam"].values.reshape(-1, len(self.feature_names))
             shrinkage = 1.0 / (1.0 + lam**2)
-            return pd.DataFrame(
-                {
-                    "feature": self.feature_names,
-                    "local_scale_shrinkage_proxy": shrinkage.mean(axis=0),
-                }
-            ).sort_values("local_scale_shrinkage_proxy").reset_index(drop=True)
+            return (
+                pd.DataFrame(
+                    {
+                        "feature": self.feature_names,
+                        "local_scale_shrinkage_proxy": shrinkage.mean(axis=0),
+                    }
+                )
+                .sort_values("local_scale_shrinkage_proxy")
+                .reset_index(drop=True)
+            )
 
         return None
 
@@ -788,20 +440,18 @@ class BayesianCoxModel(BaseSurvivalModel):
             total += survival.sum(axis=0)
         return np.clip(total / n_draws, 1e-6, 1.0)
 
-    def posterior_expected_absolute_contribution(
-        self, X: pd.DataFrame
-    ) -> pd.DataFrame:
+    def posterior_expected_absolute_contribution(self, X: pd.DataFrame) -> pd.DataFrame:
         """Return global feature importance ``mean_i |x_ij| * E|beta_j|``."""
         if self.beta_samples is None:
             raise ValueError("Model must be fitted before computing importance")
-        x_abs_mean = np.abs(
-            X[self.feature_names].to_numpy(dtype=float, copy=True)
-        ).mean(axis=0)
+        x_abs_mean = np.abs(X[self.feature_names].to_numpy(dtype=float, copy=True)).mean(axis=0)
         beta_abs_mean = np.abs(self.beta_samples).mean(axis=0)
         importance = x_abs_mean * beta_abs_mean
-        return pd.DataFrame(
-            {"feature": self.feature_names, "expected_abs_contribution": importance}
-        ).sort_values("expected_abs_contribution", ascending=False).reset_index(drop=True)
+        return (
+            pd.DataFrame({"feature": self.feature_names, "expected_abs_contribution": importance})
+            .sort_values("expected_abs_contribution", ascending=False)
+            .reset_index(drop=True)
+        )
 
     def posterior_expected_absolute_group_contribution(
         self,
@@ -825,9 +475,7 @@ class BayesianCoxModel(BaseSurvivalModel):
         if missing:
             raise ValueError(f"feature groups are missing model terms: {missing}")
         X_mat = X[self.feature_names].to_numpy(dtype=float, copy=True)
-        groups = list(
-            dict.fromkeys(str(feature_groups[name]) for name in self.feature_names)
-        )
+        groups = list(dict.fromkeys(str(feature_groups[name]) for name in self.feature_names))
         output = np.zeros((len(X_mat), len(groups)), dtype=float)
         for group_index, group in enumerate(groups):
             term_indices = np.asarray(
@@ -881,6 +529,36 @@ class BayesianCoxModel(BaseSurvivalModel):
         lower = np.clip(np.percentile(survival_draws, 2.5, axis=0), 1e-6, 1.0)
         upper = np.clip(np.percentile(survival_draws, 97.5, axis=0), 1e-6, 1.0)
         return mean, lower, upper
+
+    def get_mcmc_diagnostics(self) -> pd.DataFrame:
+        """Return the legacy all-parameter summary with readable feature names.
+
+        ``diagnostics`` is the confirmatory all-parameter gate. This method
+        retains the table interface used by older callers.
+        """
+        import re
+
+        import arviz as az
+
+        if self.idata is None:
+            return pd.DataFrame()
+        if "posterior" not in self.idata:
+            return pd.DataFrame()
+
+        summary = az.summary(self.idata)
+        summary = summary.reset_index()
+        summary.columns = ["parameter"] + list(summary.columns[1:])
+
+        def map_param_name(param_str):
+            match = re.search(r"beta\[(\d+)\]", param_str)
+            if match:
+                idx = int(match.group(1))
+                if 0 <= idx < len(self.feature_names):
+                    return self.feature_names[idx]
+            return param_str
+
+        summary["feature"] = summary["parameter"].apply(map_param_name)
+        return summary
 
     def get_summary(self) -> pd.DataFrame:
         """Return the posterior hazard-ratio summary, one row per feature."""

@@ -1,7 +1,4 @@
-"""
-Bootstrap Resampling Engine for Survival Models.
-Allows estimating uncertainty (SD, SE, 95% Confidence Intervals) for C-index, IBS, and AUC.
-"""
+"""Paired event-stratified inference and the legacy metric bootstrap interface."""
 
 import logging
 from collections.abc import Callable
@@ -10,6 +7,7 @@ from dataclasses import asdict, dataclass
 import numpy as np
 
 from src.evaluation.metrics import evaluate_survival_model
+from src.statistics.resampling import event_stratified_indices
 
 logger = logging.getLogger(__name__)
 
@@ -47,17 +45,7 @@ def _validate_paired_predictions(
     return a, b
 
 
-def _event_stratified_sample(
-    event: np.ndarray, rng: np.random.Generator
-) -> np.ndarray:
-    sampled_groups = []
-    for value in (0, 1):
-        indices = np.flatnonzero(event == value)
-        if len(indices):
-            sampled_groups.append(rng.choice(indices, size=len(indices), replace=True))
-    sampled = np.concatenate(sampled_groups)
-    rng.shuffle(sampled)
-    return sampled
+_event_stratified_sample = event_stratified_indices
 
 
 def paired_event_stratified_bootstrap(

@@ -68,9 +68,7 @@ def _tree_depth_summary(idata: Any) -> tuple[int | None, int]:
     return max_depth, int((depth >= DEFAULT_MAX_TREE_DEPTH).sum())
 
 
-def check_convergence(
-    idata: Any, var_names: list[str] | None = None
-) -> dict[str, Any]:
+def check_convergence(idata: Any, var_names: list[str] | None = None) -> dict[str, Any]:
     """Evaluate the convergence gates for all requested stochastic and derived values.
 
     A confirmatory fit passes only with rank-normalised R-hat below 1.01,
@@ -110,13 +108,9 @@ def check_convergence(
     if not np.isfinite(r_hat_max) or r_hat_max >= R_HAT_THRESHOLD:
         failures.append(f"R-hat {r_hat_max:.4f} >= {R_HAT_THRESHOLD}")
     if not np.isfinite(ess_bulk_min) or ess_bulk_min <= ESS_BULK_THRESHOLD:
-        failures.append(
-            f"bulk ESS {ess_bulk_min:.0f} <= {ESS_BULK_THRESHOLD:.0f}"
-        )
+        failures.append(f"bulk ESS {ess_bulk_min:.0f} <= {ESS_BULK_THRESHOLD:.0f}")
     if n_divergent > MAX_DIVERGENCES:
-        failures.append(
-            f"{n_divergent} divergent transitions ({divergence_rate:.2%} of draws)"
-        )
+        failures.append(f"{n_divergent} divergent transitions ({divergence_rate:.2%} of draws)")
     if not np.isfinite(bfmi_min) or bfmi_min < BFMI_THRESHOLD:
         failures.append(f"minimum BFMI {bfmi_min:.3f} < {BFMI_THRESHOLD:.2f}")
     if n_max_tree_depth:

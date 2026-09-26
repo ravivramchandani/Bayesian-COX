@@ -15,9 +15,7 @@ class BaseSurvivalModel(ABC):
     """Abstract base class for survival models with risk and survival predictions."""
 
     @abstractmethod
-    def fit(
-        self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray
-    ) -> "BaseSurvivalModel":
+    def fit(self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray) -> "BaseSurvivalModel":
         """Fit the model on training covariates, follow-up times and event indicators."""
 
     @abstractmethod

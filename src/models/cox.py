@@ -11,7 +11,7 @@ from src.models.base import BaseSurvivalModel
 class CoxPHModel(BaseSurvivalModel):
     """Cox PH baseline with hazard ratios and a Schoenfeld residual test."""
 
-    def __init__(self, l2_reg: float = 0.0001, random_state: int = 42):
+    def __init__(self, l2_reg: float = 0.0001, random_state: int = 42) -> None:
         self.l2_reg = l2_reg
         self.random_state = random_state
         self.fitter: CoxPHFitter | None = None
@@ -19,9 +19,17 @@ class CoxPHModel(BaseSurvivalModel):
         self._train_time: np.ndarray | None = None
         self._train_event: np.ndarray | None = None
 
-    def fit(
-        self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray
-    ) -> "CoxPHModel":
+    def fit(self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray) -> "CoxPHModel":
+        """Fit penalised Cox partial likelihood on the supplied training fold.
+
+        Args:
+            X: Preprocessed training covariates.
+            y_time: Follow-up times in the cohort's original units.
+            y_event: Binary event indicators, 1 for an observed event.
+
+        Returns:
+            The fitted model.
+        """
         self.feature_names = list(X.columns)
         self._train_time = np.asarray(y_time, dtype=float)
         self._train_event = np.asarray(y_event, dtype=int)
@@ -35,7 +43,7 @@ class CoxPHModel(BaseSurvivalModel):
         return self
 
     def predict_risk(self, X: pd.DataFrame) -> np.ndarray:
-        """Linear predictor; higher means higher hazard."""
+        """Return partial hazard ``exp(x beta)``; higher means higher hazard."""
         self._check_fitted()
         return self.fitter.predict_partial_hazard(X[self.feature_names]).to_numpy()
 
