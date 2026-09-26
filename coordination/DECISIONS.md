@@ -523,3 +523,101 @@ Format:
   evidence. If the final exact rehearsal unexpectedly changes the gate result,
   no freeze is created until the configuration and a fresh final rehearsal
   agree with the deterministic rule.
+
+## ADR-030 — Frozen evidence is verified against its checkpoint commit
+
+- Status: ACCEPTED
+- Date: 2026-09-27
+- Context: `verify_run_inputs_unchanged` compares the 80 frozen inputs with
+  the live working tree. The inputs include every `src/**/*.py`, the Makefile
+  and this decision log. Under that rule the code can never be simplified or
+  documented, and no decision can be recorded, without making the completed
+  evidence unverifiable. The student could not follow the code in its frozen
+  form. All 80 inputs are stored byte-for-byte in commits `95af081` and
+  `44b6085`; the evidence Release is attached to `44b6085`.
+- Decision:
+  - Verify frozen confirmatory and robustness evidence against the input
+    blobs stored in checkpoint commit `44b6085`, not the working tree.
+  - The protocol-defining inputs keep their frozen content in the live tree:
+    `config/confirmatory.yaml`, `config/datasets.yaml`,
+    `config/protocol_freeze.json`, `data/raw/*`, `data/manifest.yaml` and
+    the lock files.
+  - Code and documentation may change. Code changes must preserve behaviour,
+    demonstrated by regenerating frozen cells with
+    `scripts/reproduce_confirmatory_cells.py` and matching every stored field
+    except wall-clock timings.
+- Consequences:
+  - The evidence stays verifiable after the code changes.
+  - Confirmatory execution itself is closed. New analyses are post-hoc,
+    carry their own manifests and are labelled as such.
+  - A full regeneration of the 450 cells with the refactored code is also
+    the reproduction required by ADR-026.
+
+## ADR-031 — Sharded execution of the frozen robustness plan
+
+- Status: ACCEPTED
+- Date: 2026-09-27
+- Context: The frozen robustness runner is serial. Its plan (825 cells, 885
+  Bayesian fits) was projected at 69.6 hours, just under the 72-hour limit.
+  Each cell depends only on its own deterministic seeds, and the runner skips
+  cells whose files already exist.
+- Decision:
+  - Run the unmodified frozen runner in six worker processes
+    (`~/bayes-cox-runs/harness/shard_worker.py`). Each worker claims a cell
+    with an atomic lock file outside the run directory before fitting it, and
+    stops before aggregation.
+  - A final unsharded `--resume` invocation verifies the freeze, fits any
+    missing cell, and writes the aggregates and completion record.
+- Consequences:
+  - Wall time falls to roughly a sixth of the serial time.
+  - Cell content does not depend on which process fitted the cell: a sharded
+    cell refitted in a fresh process matched in every field except timings.
+  - The run manifest records the runner command. The worker harness is kept
+    beside the run and described here.
+
+## ADR-032 — Post-hoc horseshoe sampler sensitivity
+
+- Status: ACCEPTED
+- Date: 2026-09-27
+- Context:
+  - 20 of 75 confirmatory horseshoe cells failed the zero-divergence gate:
+    18 in GBSG2 and 2 in METABRIC, each with 1–11 divergences per 8,000 draws
+    and every other diagnostic passing. As a result, four of the nine primary
+    contrasts have no inference.
+  - The ADR-023 remedies do not alter the horseshoe's sampling: it already
+    used target acceptance 0.99, and the second remedy changes only the
+    baseline parameterisation.
+  - On the frozen seeds, target acceptance 0.999 cleared 6 of 7 failed GBSG2
+    cells.
+- Decision:
+  - Refit all 75 horseshoe cells with the frozen folds, seeds, model, priors
+    and gate, changing only target acceptance to 0.999 for every attempt.
+    Keep the same remedy ladder.
+  - Store the refits in a separate post-hoc run directory, and estimate all
+    nine prior contrasts against the unchanged frozen normal and
+    spike-and-slab cells.
+  - Label every result a post-hoc sampler sensitivity. It never replaces the
+    confirmatory outcome, which remains "five of nine contrasts estimable".
+- Consequences:
+  - The sensitivity shows whether the incomplete family hides a prior
+    effect, without selecting cells: all 75 are refitted, not only the
+    failures.
+  - Remaining failures are reported, not remedied further.
+
+## ADR-033 — Post-hoc bound on the incomplete Holm family
+
+- Status: ACCEPTED
+- Date: 2026-09-27
+- Context: The frozen inference applies Holm only when all nine primary
+  contrasts are estimable, so the confirmatory record gives no multiplicity
+  statement at all.
+- Decision:
+  - Report, for each estimable contrast, whether Holm rejection at
+    family-wise level 0.05 is possible in the most favourable case (every
+    missing hypothesis rejected first) and guaranteed in the least favourable
+    case (every missing p-value equal to 1).
+  - Label this a post-hoc bound on the incomplete family, not a Holm-adjusted
+    confirmatory result.
+- Consequences: With the observed p-values (smallest 0.493 against a best-case
+  threshold of 0.01), no estimable contrast can be rejected under any value of
+  the four missing p-values.
