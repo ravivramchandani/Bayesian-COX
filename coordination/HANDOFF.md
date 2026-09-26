@@ -50,7 +50,7 @@ Findings behind each step are in
   production, confirmatory resume and the release restore. The freeze scope
   includes every `src/**/*.py`, so any source edit or addition blocks all
   three until verification is checkpoint-bound.
-- Primary results: the five estimable contrasts have |ΔIBS| ≤ 0.00034 and
+- Primary results: the five estimable contrasts have maximum |ΔIBS| approximately 0.00034 and
   p ≥ 0.49. The smallest available p exceeds 0.05/5. Under Holm's
   step-down procedure, no estimable contrast can therefore be rejected,
   whatever the four missing p-values are.
@@ -88,7 +88,8 @@ Findings behind each step are in
 3. [ ] Implement checkpoint-bound frozen-evidence verification (accepted
    ADR-030). `src/utils/frozen_evidence.py` and release restoration now verify
    the checkpoint plus unchanged live study inputs. Closed-run confirmatory
-   resume and the robustness entry point remain to be integrated.
+   resume is now read-only and verified on the actual 450-cell run. The
+   robustness entry point remains to be integrated.
 4. [ ] Refactor for readability, module by module. After each step, run the
    tests and the reproduction harness. The rules and gates are in
    `coordination/briefs/2026-09-27-readability-refactor.md`.
@@ -101,15 +102,19 @@ Findings behind each step are in
 5. [ ] Retire the legacy pilot lane (new ADR; see the audit note).
 6. [ ] Regenerate the 450-cell run with the refactored code and compare it
    with the frozen artefacts (the ADR-026 reproduction claim).
-7. [ ] Render the results tables and figures, including the Holm
-   family-completion bound.
+7. [x] Render the frozen results tables and figures, including the Holm
+   family-completion bound. The full old/new comparison retained 874 identical
+   files, seven intended changes and five additions, with no missing output.
+   See `coordination/reviews/2026-09-27-rendering-refactor-verification.md`.
+   A final bundle incorporating completed robustness remains required.
 8. [ ] Complete the labelled post-hoc horseshoe sensitivity under ADR-032.
    Initial investigation and seven target-acceptance probes are complete;
    `scripts/run_horseshoe_sampler_sensitivity.py` implements the separate
    75-cell refit and nine-contrast analysis. Production has not started yet.
 9. [ ] Update README, `docs/architecture.md`, TODO, JOURNAL, DECISIONS and
    INVARIANTS, and record the thesis corrections in TODO.
-10. [ ] Commit and push.
+10. [ ] Commit and push all verified continuation work. Recovery and completed
+    code checkpoints have been pushed; final production close-out remains open.
 
 Tick each box when its step is complete, and record where its outputs are.
 
@@ -279,7 +284,7 @@ appendix pages were visually inspected. Later results, conclusion and final
 abstract writing must use renderer outputs and frozen result keys, not manually
 transcribed values.
 
-## Next action sequence
+## Historical close-out sequence — superseded by the active programme
 
 1. On a new machine, use the README restoration command and require the
    reported 450-cell, completion-hash and 80-input checks to pass. The source
@@ -288,13 +293,15 @@ transcribed values.
 2. The prospective `docs/study_protocol.md` is an immutable pre-execution
    record. Read it as the frozen analysis plan together with this close-out,
    which records the observed diagnostic attrition and inferential boundary.
-3. Stop and wait for owner instructions. Robustness, confirmatory explanation,
-   primary claim review and post-confirmatory thesis result writing are
-   explicitly outside this checkpoint and must not start automatically.
+3. The former downstream pause is superseded for code/results work by the
+   2026-09-27 instruction above. Continue robustness, reproduction, sensitivity
+   and evidence rendering. Overleaf chapter writing remains excluded.
 4. On resumption, retain the prespecified failed-fit outcome and incomplete
    primary-family status in every downstream table and claim. A methodological
    change requires a new result-blind rehearsal and freeze; it cannot be folded
    into this run.
 
-Do not edit a frozen methodological input. A change requires a
-new result-blind rehearsal/freeze before any comparative effect is viewed.
+Do not edit live frozen methodological inputs. ADR-030 permits code and
+ordinary-documentation changes while their original checkpoint blobs remain
+verifiable. A methodological change cannot enter the completed confirmatory
+analysis; the acceptance-only sensitivity is separate under ADR-032.

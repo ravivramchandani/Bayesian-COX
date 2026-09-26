@@ -13,9 +13,10 @@ frozen confirmatory execution is complete: all 450 planned cells are stored,
 so the Holm family is incomplete and no complete-family superiority claim is
 available. Robustness production is running in the frozen worktree.
 Confirmatory explanation production completed but failed its convergence
-gate, so it permits no explanation-stability claim. The readability refactor
-is unfinished; its checkpoints are preserved on three `wip/*-20260927`
-branches. Thesis edits remain outside the current code programme. Existing
+gate, so it permits no explanation-stability claim. The models and frozen explanation refactors have passed their exact-output
+gates. Confirmatory aggregation also reproduces all three frozen files exactly;
+its cell gates, renderer and robustness extraction are being completed.
+The original WIP checkpoints remain preserved on three `wip/*-20260927` branches. Thesis edits remain outside the current code programme. Existing
 legacy benchmark tables and figures remain exploratory pilot artefacts.
 
 ## Start here — continue from another machine
@@ -85,7 +86,7 @@ All three contain right-censored time-to-event outcomes. METABRIC is rebuilt
 from the pinned patient and sample files; `DECEASED` is the event and the
 pinned metadata defines overall survival in months since initial diagnosis.
 The earlier 1,904-row Kaggle/cBioPortal-derived file is retained only for
-pilot reproduction. Exact source, eligibility, endpoint, licence and hash
+historical pilot provenance. Exact source, eligibility, endpoint, licence and hash
 records are in `data/manifest.yaml`.
 
 No fourth real cohort is required. The optional Rotterdam transport analysis
@@ -134,12 +135,45 @@ rejects changes to the live study inputs. Frozen robustness production remains
 in its original unchanged worktree; refactored-code reproduction writes to
 separate output directories.
 
-Production execution refuses methodological overrides and hash mismatches.
+Completed confirmatory resume is now read-only verification and accepts the
+refactored code when historical evidence and live study inputs are intact.
+New confirmatory execution remains closed. Production execution refuses
+methodological overrides and hash mismatches.
 Each cell is checkpointed with data, dependency, configuration, code, seed,
 runtime, diagnostic and prediction lineage. Figures and tables are rendered
-from frozen artefacts without refitting. Do not invoke the confirmatory,
-robustness, explanation or rendering entry points without the next instruction
-recorded in `coordination/HANDOFF.md` and `coordination/TODO.md`.
+from frozen artefacts without refitting. The current instruction is to complete the code/results programme described
+in `coordination/HANDOFF.md` and `coordination/TODO.md`; Overleaf edits are excluded.
+
+## Refactor verification and separate sampler sensitivity
+
+Run long jobs from a detached checkout of the final integrated code so source
+edits cannot mix implementations. Refit verification records every source
+hash, checks saved-cell hashes on resume and never overwrites frozen evidence.
+Use new output directories; add `--resume` only for the same code and selection.
+
+```bash
+python scripts/reproduce_confirmatory_cells.py \
+  --run-dir reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651 \
+  --selection all --workers 2 \
+  --keep-cells reports/reproduction/full-refits \
+  --report reports/reproduction/full-refits-verification.json
+
+python scripts/run_horseshoe_sampler_sensitivity.py \
+  --run-dir reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651 \
+  --output-root reports/posthoc_sampler --workers 2
+```
+
+The first is a verification-only regeneration of all 450 cells. The second
+refits all 75 horseshoe cells under ADR-032, changing only target acceptance
+to 0.999 on every original attempt. Its labels, folds, seeds, diagnostic gate
+and separate nine-contrast inference are verified independently. It cannot
+replace the 20 confirmatory failures or complete the confirmatory Holm family.
+
+`render_horseshoe_sensitivity.py` requires `--run-dir`, `--source-dir` and a
+new `--output-dir`; it creates a separately labelled post-hoc bundle. The
+confirmatory renderer retains all nine primary contrasts and shows unavailable
+estimates explicitly. Its ADR-033 bound is a labelled mathematical consequence
+of the observed five p-values, without supplying the four missing tests.
 
 ## Current evidence boundary
 

@@ -19,8 +19,13 @@ artefacts satisfy the stated gate.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. Robustness is running, explanation production completed with a failed
-convergence gate, and the readability refactor is incomplete. Its three WIP
-checkpoints are pushed; none has passed its frozen-output integration gate.
+convergence gate, and the readability refactor is progressing. Models passed
+the six-cell exact-refit gate; explanation reproduces its original SHA-256.
+Confirmatory aggregation reproduces all three frozen files byte for byte;
+its cell checks and robustness integration remain in progress. Rendering passed
+the exhaustive old/new-file gate: 874 identical, seven intentional changes,
+five additions and no missing output; representative PDFs passed visual QA.
+The three original WIP checkpoints and verified main work are pushed.
 The recovery audit records the exact files, validation and remaining sequence:
 `coordination/reviews/2026-09-27-recovery-audit.md`.
 

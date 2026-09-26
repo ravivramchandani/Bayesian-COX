@@ -121,30 +121,36 @@ def _fit_one(project_root: Path, source_dir: Path, key: tuple[str, int, int]) ->
 
 
 def _verify_saved_cell(path: Path, source_dir: Path, key: tuple[str, int, int]) -> dict[str, Any]:
-    """Reject corrupt or incorrectly labelled resume cells."""
-    cell = json.loads(path.read_text())
-    content = dict(cell)
-    digest = content.pop("cell_content_sha256", None)
-    if digest != canonical_json_hash(content):
-        raise RuntimeError(f"post-hoc cell content hash is invalid: {path}")
-    if (
-        cell.get("analysis_mode") != EVIDENCE_STATUS
-        or cell.get("evidence_status") != EVIDENCE_STATUS
-    ):
-        raise RuntimeError(f"post-hoc cell evidence label is invalid: {path}")
-    if (cell.get("dataset"), cell.get("repeat"), cell.get("fold")) != key:
-        raise RuntimeError(f"post-hoc cell fold key is invalid: {path}")
-    if cell.get("model_key") != "bayesian_horseshoe":
-        raise RuntimeError(f"post-hoc cell model is invalid: {path}")
-    if cell.get("source_confirmatory_cell_sha256") != sha256_file(_cell_path(source_dir, key)):
-        raise RuntimeError(f"post-hoc source cell hash differs: {path}")
-    if cell.get("sampler_sensitivity", {}).get("target_accept") != TARGET_ACCEPT:
-        raise RuntimeError(f"post-hoc target acceptance differs: {path}")
-    if any(
-        attempt.get("target_accept") != TARGET_ACCEPT for attempt in cell.get("fit_attempts", [])
-    ):
-        raise RuntimeError(f"post-hoc attempt acceptance differs: {path}")
-    return cell
+    """Reject corrupt or incorrectly labelled cells before a resumed fit."""
+    from src.utils.posthoc_evidence import verify_posthoc_cell
+
+    return verify_posthoc_cell(path, source_dir, key)
+
+
+def _verify_execution_inputs(project_root: Path, manifest: dict[str, Any], source: Any) -> None:
+    """Reject code or original evidence changed during this sensitivity."""
+    actual_source = {
+        str(path.relative_to(project_root)) for path in project_root.glob("src/**/*.py")
+    }
+    recorded_source = {name for name in manifest["input_sha256"] if name.startswith("src/")}
+    if actual_source != recorded_source:
+        raise RuntimeError("post-hoc runtime source inventory changed")
+    for name, digest in manifest["input_sha256"].items():
+        if sha256_file(project_root / name) != digest:
+            raise RuntimeError(f"post-hoc runtime input changed: {name}")
+    for name, digest in source.source_hashes.items():
+        if sha256_file(source.run_dir / name) != digest:
+            raise RuntimeError(f"original confirmatory evidence changed: {name}")
+    verify_frozen_evidence(project_root, source.manifest["input_sha256"])
+
+
+def _write_or_verify(path: Path, record: dict[str, Any]) -> None:
+    """Resume an interrupted finalisation without overwriting an existing result."""
+    if path.exists():
+        if json.loads(path.read_text()) != record:
+            raise RuntimeError(f"existing post-hoc aggregate differs from recomputation: {path}")
+    else:
+        write_json_atomic(path, record, overwrite=False)
 
 
 def execute_sampler_sensitivity(
@@ -156,7 +162,8 @@ def execute_sampler_sensitivity(
     resume: bool = False,
 ) -> Path:
     """Run all 75 post-hoc refits and write explicitly labelled paired inference."""
-    from scripts.render_confirmatory import verify_frozen_run
+    from src.rendering.verification import verify_frozen_run
+    from src.utils.posthoc_evidence import verify_posthoc_run
 
     if workers < 1:
         raise ValueError("workers must be positive")
@@ -204,11 +211,18 @@ def execute_sampler_sensitivity(
         if not resume:
             raise FileExistsError(f"post-hoc run exists: {run_dir}; use --resume")
         recorded = json.loads(path.read_text())
+        content = dict(recorded)
+        claimed = content.pop("manifest_content_sha256", None)
+        if claimed != canonical_json_hash(content):
+            raise RuntimeError("post-hoc manifest content hash is invalid")
         if (
             recorded["config_sha256"] != manifest["config_sha256"]
             or recorded["input_sha256"] != manifest["input_sha256"]
         ):
             raise RuntimeError("post-hoc code or inputs changed after the first checkpoint")
+        if (run_dir / "completion.json").exists():
+            verify_posthoc_run(run_dir, source.run_dir)
+            return run_dir
     else:
         run_dir.mkdir(parents=True, exist_ok=False)
         write_json_atomic(path, manifest, overwrite=False)
@@ -229,10 +243,7 @@ def execute_sampler_sensitivity(
                 f"posthoc {key} status={cell['status']} seconds={cell['total_seconds']:.1f}",
                 flush=True,
             )
-    verify_frozen_evidence(project_root, source.manifest["input_sha256"])
-    for name, digest in manifest["input_sha256"].items():
-        if sha256_file(project_root / name) != digest:
-            raise RuntimeError(f"post-hoc runtime input changed: {name}")
+    _verify_execution_inputs(project_root, manifest, source)
     refits = [_verify_saved_cell(_cell_path(run_dir, key), source.run_dir, key) for key in keys]
     if {str(p.relative_to(run_dir)) for p in (run_dir / "cells").glob("*/*/*.json")} != {
         str(_cell_path(run_dir, key).relative_to(run_dir)) for key in keys
@@ -242,13 +253,14 @@ def execute_sampler_sensitivity(
     inference = confirmatory._repeated_cv_inference(
         mixed, _options(settings, output_root), settings["protocol"]
     )
+    _verify_execution_inputs(project_root, manifest, source)
     inference["evidence_status"] = EVIDENCE_STATUS
     inference["source_policy"] = (
         "all 75 horseshoe refits; all other cells unchanged from confirmatory source"
     )
     inference["confirmatory_outcome_replaced"] = False
     inference["result_content_sha256"] = canonical_json_hash(inference)
-    write_json_atomic(run_dir / "inference.json", inference)
+    _write_or_verify(run_dir / "inference.json", inference)
     completion = {
         "analysis_mode": EVIDENCE_STATUS,
         "planned_cells": 75,
@@ -264,5 +276,6 @@ def execute_sampler_sensitivity(
         "source_completion_sha256": sha256_file(source.run_dir / "completion.json"),
     }
     completion["completion_content_sha256"] = canonical_json_hash(completion)
-    write_json_atomic(run_dir / "completion.json", completion)
+    _write_or_verify(run_dir / "completion.json", completion)
+    verify_posthoc_run(run_dir, source.run_dir)
     return run_dir

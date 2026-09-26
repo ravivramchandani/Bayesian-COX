@@ -491,3 +491,33 @@ The main test suite passed 190 tests. Rendering extraction and its full
 old/new-output comparison remain in progress, as do the three parallel
 refactor gates and frozen robustness production. The owner selected
 completion of the code and results programme; Overleaf edits remain excluded.
+
+## 2026-09-27 — Integrated models, explanation, aggregation and rendering gates
+
+The model refactor reproduced all six reference cells exactly after excluding
+only timing fields and their containing hash. The horseshoe cell retained
+its three failed attempts and `failed_diagnostics` status. Frozen explanation
+reproduction retained SHA-256 `120984c7edfac468f471b9f500470623689b2647e4bde56d271cc9623346ecd5`.
+Rebuilding all 450 stored cells' three aggregate files reproduced every byte.
+The confirmatory package's additional cell gates remain in progress.
+
+Completed confirmatory resume verified the actual 450-cell run read-only
+after extraction. The separate full-refit driver now records source identity,
+supports verified checkpoint reuse, and rejects writes inside frozen evidence.
+Ten focused tests cover closed resume and refit checkpoint integrity.
+
+The original and extracted renderers produced 881 and 886 files respectively:
+874 identical, seven documented intentional changes, five additions and no
+missing output. The comparison inventory and report are committed under
+`coordination/recovery/` and `coordination/reviews/`. Representative PDFs
+passed Poppler visual inspection; fonts are embedded.
+
+The separate sampler sensitivity now has exhaustive 75-cell lineage and
+nine-contrast verification, read-only completed resume and a pure post-hoc
+renderer. Fifteen sampler/evidence tests passed, including rehashed corruption
+and interrupted aggregate finalisation. These checks validate implementation;
+75-cell production has not yet started. Main passed 217 tests and Ruff.
+
+ADR-034 records retirement of the pilot execution lane, preservation of its
+historical data/results/source history and migration of tests to active
+fold-local cohort inputs. Implementation and robustness gates remain open.

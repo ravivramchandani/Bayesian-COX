@@ -621,3 +621,29 @@ Format:
 - Consequences: With the observed p-values (smallest 0.493 against a best-case
   threshold of 0.01), no estimable contrast can be rejected under any value of
   the four missing p-values.
+
+## ADR-034 — Retire the pilot execution lane and preserve its evidence
+
+- Status: ACCEPTED
+- Date: 2026-09-27
+- Context: The six pilot scripts and pre-generated processed splits form a
+  second execution path. Default Make targets can overwrite tracked historical
+  pilot results. Several model and integration tests still depend on those
+  splits, although the active study uses paired, fold-local raw-cohort inputs.
+  The code/results continuation programme explicitly includes pilot retirement.
+- Decision:
+  - Remove the pilot entry points and their exclusively used modules, unused
+    pipeline/loss/likelihood stubs and unused utility shells from active code.
+  - Preserve historical raw/processed data, reports and figures in place and
+    preserve the retired source through Git history, including checkpoint
+    `44b6085`. No historical number is recalculated or overwritten.
+  - Migrate data, model and integration tests to authoritative raw cohorts,
+    paired survival folds and training-fitted preprocessing. Retain functional
+    statistical and metric utilities with real callers and meaningful tests.
+  - Make the default workflow verify the environment, tests and lint. Dataset
+    preparation only acquires/verifies the authoritative raw cohorts. Analysis
+    and rendering require explicit current entry points and output locations.
+- Consequences: There is one active study pipeline. Historical pilot evidence
+  stays accessible but cannot accidentally be regenerated as current evidence.
+  INV-002, INV-003, INV-006 and INV-007 are restated around active fold-local
+  tests and hashed result lineage; their integrity requirements are retained.
