@@ -134,16 +134,12 @@ def _verify_exact_inventory(run_path: Path, expected_files: set[str]) -> None:
 
 
 def _verify_run(project_root: Path, run_path: Path) -> None:
-    """Verify exact release lineage and the clone's live frozen-input scope."""
+    """Verify exact release lineage, checkpoint blobs and live study inputs."""
     if str(project_root) not in sys.path:
         sys.path.insert(0, str(project_root))
 
     from scripts.render_confirmatory import verify_frozen_run
-    from src.pipelines.confirmatory import (
-        relevant_input_files,
-        verify_protocol_freeze,
-        verify_run_inputs_unchanged,
-    )
+    from src.utils.frozen_evidence import verify_frozen_evidence
 
     if sha256_file(run_path / "manifest.json") != MANIFEST_FILE_SHA256:
         raise RuntimeError("manifest file differs from the released checkpoint")
@@ -173,21 +169,10 @@ def _verify_run(project_root: Path, run_path: Path) -> None:
     run_config = run.manifest.get("run_config")
     if not isinstance(run_config, dict):
         raise RuntimeError("released manifest has no run configuration")
-    datasets = tuple(str(value) for value in run_config.get("datasets", []))
-    live_inputs = relevant_input_files(project_root, datasets)
     manifest_inputs = run.manifest.get("input_sha256")
     if not isinstance(manifest_inputs, dict):
         raise RuntimeError("released manifest has no input hash map")
-    if set(live_inputs) != set(manifest_inputs):
-        differences = sorted(set(live_inputs) ^ set(manifest_inputs))
-        raise RuntimeError(f"live frozen-input scope differs from release: {differences}")
-    verify_run_inputs_unchanged(
-        project_root,
-        manifest_inputs,
-        live_inputs,
-        label="released run manifest",
-    )
-    freeze = verify_protocol_freeze(project_root, live_inputs)
+    freeze = verify_frozen_evidence(project_root, manifest_inputs)
     if freeze.get("frozen_input_sha256") != manifest_inputs:
         raise RuntimeError("released manifest inputs differ from protocol freeze")
     if run.manifest.get("protocol_freeze_sha256") != freeze.get("freeze_content_sha256"):
@@ -197,7 +182,7 @@ def _verify_run(project_root: Path, run_path: Path) -> None:
     print(f"run={run_path.resolve()}")
     print("cells=450 complete=430 failed_diagnostics=20")
     print(f"completion_content_sha256={COMPLETION_CONTENT_SHA256}")
-    print(f"frozen_inputs={len(live_inputs)} unchanged")
+    print(f"frozen_inputs={len(manifest_inputs)} checkpoint verified; live study inputs unchanged")
 
 
 def _verify_checksum(checksum_path: Path, archive_path: Path) -> None:

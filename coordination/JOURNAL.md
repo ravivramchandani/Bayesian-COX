@@ -472,3 +472,22 @@ README, TODO and HANDOFF were reconciled with these facts. The separate
 Overleaf repository is clean and matches its remote at `a5f026a`; no thesis
 file was changed. Details and the remaining sequence are in
 `coordination/reviews/2026-09-27-recovery-audit.md`.
+
+## 2026-09-27 — Checkpoint restoration and separate sampler runner implemented
+
+`src/utils/frozen_evidence.py` verifies the original Git blobs and unchanged
+live protocol, raw data, manifest and lock files under ADR-030. The release
+restorer accepted the existing 450-cell run from current main: all 80 input
+blobs match the checkpoint and live study inputs are unchanged. The focused
+verification/restoration tests passed 27 cases.
+
+The ADR-032 runner changes only target acceptance to 0.999 on every horseshoe
+attempt, preserves the original remedy ladder and seeds, and writes all
+75 refits and their inference to a separate, explicitly post-hoc directory.
+Six tests checked the acceptance-only change, remedy order and resume labels
+and hashes. Production execution awaits integration of the refactored code.
+
+The main test suite passed 190 tests. Rendering extraction and its full
+old/new-output comparison remain in progress, as do the three parallel
+refactor gates and frozen robustness production. The owner selected
+completion of the code and results programme; Overleaf edits remain excluded.

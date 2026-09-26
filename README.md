@@ -25,18 +25,15 @@ directory is preserved in the private GitHub Release
 [`confirmatory-v1-44b6085`](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085).
 The repository contains a fail-closed restoration helper that downloads both
 release assets, verifies SHA-256, rejects unexpected archive paths, validates
-all run/cell/aggregate hashes and checks the clone's 80 frozen inputs before
-installing the run.
+all run/cell/aggregate hashes and checks all 80 frozen input blobs against
+the release checkpoint. Live protocol, raw data, manifest and lock files must
+also remain unchanged.
 
 From the root of a fresh clone:
 
 ```bash
 # Confirm that GitHub CLI can access the private repository.
 gh auth status
-
-# Restore using unchanged checkpoint inputs until ADR-030 is implemented.
-git worktree add --detach ../bayes-cox-frozen 44b6085
-cd ../bayes-cox-frozen
 
 # Build the exact macOS arm64 environment.
 conda-lock install -n bayes-cox-clean conda-lock.yml
@@ -50,15 +47,14 @@ A successful restoration ends with:
 ```text
 cells=450 complete=430 failed_diagnostics=20
 completion_content_sha256=03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1
-frozen_inputs=80 unchanged
+frozen_inputs=80 checkpoint verified; live study inputs unchanged
 ```
 
 The restored directory is
 `reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/`. The helper
 never overwrites an existing directory; when the run is already present it
 verifies it in place. After restoration, read `coordination/HANDOFF.md` and
-`coordination/TODO.md` in the current main checkout for the evidence boundary
-and next tasks; the checkpoint worktree contains historical coordination notes.
+`coordination/TODO.md` for the evidence boundary and next tasks.
 
 ## Models
 
@@ -132,13 +128,11 @@ rerun.
 conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
 ```
 
-The current restore helper still compares frozen inputs with the live tree.
-It therefore rejects the added source file and changed decision log on current
-`main`.
-Until checkpoint-bound verification under ADR-030 is implemented, use the
-unchanged checkpoint worktree above for restoration and frozen downstream
-production. The recovery audit in
-`coordination/reviews/2026-09-27-recovery-audit.md` records this remaining work.
+The restore helper verifies historical code against checkpoint `44b6085`
+under ADR-030, so refactoring does not invalidate preserved evidence. It still
+rejects changes to the live study inputs. Frozen robustness production remains
+in its original unchanged worktree; refactored-code reproduction writes to
+separate output directories.
 
 Production execution refuses methodological overrides and hash mismatches.
 Each cell is checkpointed with data, dependency, configuration, code, seed,

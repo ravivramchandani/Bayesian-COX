@@ -1,0 +1,117 @@
+"""Verify historical evidence against its Git checkpoint and live study inputs.
+
+The frozen analysis records its original code, including retired modules.
+Those blobs stay verifiable after refactoring. Protocol, data and lock files
+must also retain their recorded bytes in the working tree.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import subprocess
+from collections.abc import Mapping
+from pathlib import Path, PurePosixPath
+from typing import Any
+
+from src.utils.reproducibility import canonical_json_hash, sha256_file
+
+CHECKPOINT_COMMIT = "44b608572a5e1006a05ed5e3c4985471b2ba594d"
+LIVE_STUDY_INPUTS = frozenset(
+    {
+        "config/confirmatory.yaml",
+        "config/datasets.yaml",
+        "data/manifest.yaml",
+        "conda-lock.yml",
+        "conda-lock.yml.sha256",
+        "conda-lock-virtual-packages.yml",
+    }
+)
+
+
+def checkpoint_blob(
+    project_root: Path, relative: str, *, checkpoint: str = CHECKPOINT_COMMIT
+) -> bytes:
+    """Read a required file from a checkpoint without checking out its code."""
+    path = PurePosixPath(relative)
+    if path.is_absolute() or ".." in path.parts or not path.parts:
+        raise ValueError(f"invalid checkpoint input path: {relative!r}")
+    try:
+        result = subprocess.run(
+            ["git", "show", f"{checkpoint}:{relative}"],
+            cwd=project_root,
+            check=True,
+            capture_output=True,
+        )
+    except (OSError, subprocess.CalledProcessError) as exc:
+        raise RuntimeError(
+            f"required checkpoint input unavailable: {checkpoint}:{relative}"
+        ) from exc
+    return result.stdout
+
+
+def verify_checkpoint_inputs(
+    project_root: Path,
+    expected: Mapping[str, str],
+    *,
+    checkpoint: str = CHECKPOINT_COMMIT,
+) -> None:
+    """Reject missing or altered checkpoint blobs in a recorded input map."""
+    if not expected:
+        raise RuntimeError("frozen evidence has no recorded inputs")
+    changed = []
+    for relative, digest in sorted(expected.items()):
+        data = checkpoint_blob(project_root, relative, checkpoint=checkpoint)
+        if hashlib.sha256(data).hexdigest() != digest:
+            changed.append(relative)
+    if changed:
+        raise RuntimeError("frozen checkpoint inputs differ: " + ", ".join(changed))
+
+
+def verify_frozen_evidence(
+    project_root: Path,
+    expected: Mapping[str, str] | None = None,
+    *,
+    checkpoint: str = CHECKPOINT_COMMIT,
+) -> dict[str, Any]:
+    """Verify the historical freeze and the live protocol, raw data and lock.
+
+    Args:
+        project_root: Checkout containing both the checkpoint history and live inputs.
+        expected: A source run's recorded input map, when checking that run.
+        checkpoint: Historical Git commit; production uses the pinned release commit.
+
+    Returns:
+        The original freeze record, whose content hash remains unchanged.
+    """
+    freeze_bytes = checkpoint_blob(
+        project_root, "config/protocol_freeze.json", checkpoint=checkpoint
+    )
+    freeze = json.loads(freeze_bytes)
+    unhashed = dict(freeze)
+    claimed = unhashed.pop("freeze_content_sha256", None)
+    if claimed != canonical_json_hash(unhashed):
+        raise RuntimeError("checkpoint protocol freeze content hash is invalid")
+    if not freeze.get("no_comparative_effects_inspected_before_freeze", False):
+        raise RuntimeError("checkpoint freeze lacks the result-blind rehearsal attestation")
+    recorded = freeze.get("frozen_input_sha256")
+    if not isinstance(recorded, dict) or not recorded:
+        raise RuntimeError("checkpoint freeze has no recorded input map")
+    if expected is not None and dict(expected) != recorded:
+        raise RuntimeError("run manifest inputs differ from checkpoint protocol freeze")
+    verify_checkpoint_inputs(project_root, recorded, checkpoint=checkpoint)
+
+    live_freeze = project_root / "config/protocol_freeze.json"
+    if not live_freeze.is_file() or live_freeze.read_bytes() != freeze_bytes:
+        raise RuntimeError("live config/protocol_freeze.json differs from checkpoint")
+    protected = {
+        name for name in recorded if name in LIVE_STUDY_INPUTS or name.startswith("data/raw/")
+    }
+    changed = [
+        name
+        for name in sorted(protected)
+        if not (project_root / name).is_file() or sha256_file(project_root / name) != recorded[name]
+    ]
+    if changed:
+        raise RuntimeError("live frozen study inputs differ: " + ", ".join(changed))
+    return freeze

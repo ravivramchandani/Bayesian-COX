@@ -86,7 +86,9 @@ Findings behind each step are in
    Robustness equivalent: `~/bayes-cox-runs/harness/check_robustness_cell.py`.
    A sharded production cell matched a fresh unsharded refit exactly.
 3. [ ] Implement checkpoint-bound frozen-evidence verification (accepted
-   ADR-030). The current verifier still compares against the live tree.
+   ADR-030). `src/utils/frozen_evidence.py` and release restoration now verify
+   the checkpoint plus unchanged live study inputs. Closed-run confirmatory
+   resume and the robustness entry point remain to be integrated.
 4. [ ] Refactor for readability, module by module. After each step, run the
    tests and the reproduction harness. The rules and gates are in
    `coordination/briefs/2026-09-27-readability-refactor.md`.
@@ -103,7 +105,8 @@ Findings behind each step are in
    family-completion bound.
 8. [ ] Complete the labelled post-hoc horseshoe sensitivity under ADR-032.
    Initial investigation and seven target-acceptance probes are complete;
-   the separate 75-cell refit and nine-contrast analysis are not implemented.
+   `scripts/run_horseshoe_sampler_sensitivity.py` implements the separate
+   75-cell refit and nine-contrast analysis. Production has not started yet.
 9. [ ] Update README, `docs/architecture.md`, TODO, JOURNAL, DECISIONS and
    INVARIANTS, and record the thesis corrections in TODO.
 10. [ ] Commit and push.
