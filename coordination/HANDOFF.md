@@ -66,11 +66,21 @@ Findings behind each step are in
      and writes the aggregates and `completion.json`.
    - If a worker died, delete its claim files for cells without a JSON
      before finishing.
-2. [ ] Build a reproduction harness that reruns one cell and compares it
-   with the frozen record.
+2. [x] Build a reproduction harness that reruns one cell and compares it
+   with the frozen record: `scripts/reproduce_confirmatory_cells.py`. The
+   baseline on unchanged code reproduced the quick selection exactly.
+   Robustness equivalent: `~/bayes-cox-runs/harness/check_robustness_cell.py`.
+   A sharded production cell matched a fresh unsharded refit exactly.
 3. [ ] Bind frozen-evidence verification to the checkpoint commit (new ADR).
 4. [ ] Refactor for readability, module by module. After each step, run the
-   tests and the reproduction harness.
+   tests and the reproduction harness. The rules and gates are in
+   `coordination/briefs/2026-09-27-readability-refactor.md`.
+   - Wave 1, dispatched 2026-09-27 to parallel worktree branches:
+     confirmatory package; models, evaluation and statistics; explanation;
+     rendering. Rendering also shows all nine primary contrasts and the
+     post-hoc Holm bound, and produces thesis-ready LaTeX.
+   - Wave 2, after the confirmatory merge: robustness package, then pilot
+     retirement and checkpoint-bound provenance.
 5. [ ] Retire the legacy pilot lane (new ADR; see the audit note).
 6. [ ] Regenerate the 450-cell run with the refactored code and compare it
    with the frozen artefacts (the ADR-026 reproduction claim).
