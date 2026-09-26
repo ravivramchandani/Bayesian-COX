@@ -52,6 +52,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument(
+        "--resume", action="store_true", help="reuse verified refits from --keep-cells"
+    )
+    parser.add_argument(
         "--keep-cells",
         type=Path,
         default=None,
@@ -197,10 +200,11 @@ def check_cell(run_dir: Path, key: tuple[str, str, int, int], keep: Path | None)
     old = json.loads(stored_cell_path(run_dir, *key).read_text(encoding="utf-8"))
     found = differences(new, old)
     if keep is not None:
+        from src.utils.io import write_json_atomic
+
         dataset, model, repeat, fold = key
         target = keep / dataset / f"repeat_{repeat:02d}_fold_{fold:02d}" / f"{model}.json"
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(json.dumps(new, indent=2, sort_keys=True), encoding="utf-8")
+        write_json_atomic(target, new, overwrite=False)
     return {
         "cell": ":".join(map(str, key)),
         "status": new["status"],
@@ -216,9 +220,26 @@ def main() -> int:
     run_dir = args.run_dir.resolve()
     keys = select_cells(run_dir, args.selection)
     keep = args.keep_cells.resolve() if args.keep_cells else None
+    report_path = args.report.resolve() if args.report else None
+    if args.workers < 1:
+        raise ValueError("workers must be positive")
+    if args.resume and keep is None:
+        raise ValueError("--resume requires --keep-cells")
+    if keep is not None and (keep == run_dir or run_dir in keep.parents):
+        raise ValueError("reproduction output must be outside the immutable source run")
+    if report_path is not None and (report_path == run_dir or run_dir in report_path.parents):
+        raise ValueError("reproduction report must be outside the immutable source run")
+    checkpoint = prepare_reproduction_checkpoint(run_dir, keys, keep, resume=args.resume)
     results = []
+    pending = []
+    for key in keys:
+        target = stored_cell_path(keep, *key) if keep is not None else None
+        if args.resume and target is not None and target.exists():
+            results.append(check_saved_refit(run_dir, target, key))
+        else:
+            pending.append(key)
     with ProcessPoolExecutor(max_workers=args.workers) as pool:
-        futures = {pool.submit(check_cell, run_dir, key, keep): key for key in keys}
+        futures = {pool.submit(check_cell, run_dir, key, keep): key for key in pending}
         for future in as_completed(futures):
             result = future.result()
             results.append(result)
@@ -227,22 +248,117 @@ def main() -> int:
                 f"status={result['status']} seconds={result['seconds']}",
                 flush=True,
             )
+    verify_reproduction_inputs(checkpoint, run_dir)
     results.sort(key=lambda item: item["cell"])
     report = {
+        "analysis": "confirmatory_refit_reproduction",
+        "evidence_status": "verification_only",
         "run": run_dir.name,
         "selection": args.selection,
         "cells_checked": len(results),
         "cells_identical": sum(item["identical"] for item in results),
         "ignored_fields": sorted(TIMING_FIELDS),
         "cells": results,
+        "provenance": checkpoint,
     }
-    path = args.report or (
+    path = report_path or (
         PROJECT_ROOT / "reports/reproduction" / f"cells_{time.strftime('%Y%m%dT%H%M%S')}.json"
     )
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    from src.utils.io import write_json_atomic
+    from src.utils.reproducibility import canonical_json_hash
+
+    report["report_content_sha256"] = canonical_json_hash(report)
+    write_json_atomic(path, report, overwrite=False)
     print(f"{report['cells_identical']}/{report['cells_checked']} cells identical; report={path}")
     return 0 if report["cells_identical"] == report["cells_checked"] else 1
+
+
+def prepare_reproduction_checkpoint(
+    run_dir: Path,
+    keys: list[tuple[str, str, int, int]],
+    keep: Path | None,
+    *,
+    resume: bool,
+) -> dict[str, Any]:
+    """Record actual code identity before fitting and validate resumable outputs."""
+    from src.rendering.verification import verify_frozen_run
+    from src.utils.frozen_evidence import verify_frozen_evidence
+    from src.utils.reproducibility import sha256_file
+
+    source = verify_frozen_run(run_dir)
+    if source.mode != "confirmatory":
+        raise ValueError("reproduction requires a completed confirmatory source")
+    if not keys or len(keys) != len(set(keys)):
+        raise ValueError("reproduction selection must contain unique cell keys")
+    if any(not stored_cell_path(run_dir, *key).is_file() for key in keys):
+        raise ValueError("reproduction selection includes a cell outside the source inventory")
+    manifest = source.manifest
+    verify_frozen_evidence(PROJECT_ROOT, manifest["input_sha256"])
+    files = sorted(PROJECT_ROOT.glob("src/**/*.py")) + [Path(__file__).resolve()]
+    record = {
+        "source_manifest_sha256": sha256_file(run_dir / "manifest.json"),
+        "source_completion_sha256": sha256_file(run_dir / "completion.json"),
+        "source_file_sha256": source.source_hashes,
+        "planned_keys": [list(key) for key in keys],
+        "actual_code_sha256": {
+            str(path.relative_to(PROJECT_ROOT)): sha256_file(path) for path in files
+        },
+    }
+    if keep is not None:
+        checkpoint_path = keep / "reproduction_checkpoint.json"
+        if checkpoint_path.exists():
+            if not resume:
+                raise FileExistsError(f"reproduction checkpoint exists: {keep}; use --resume")
+            if json.loads(checkpoint_path.read_text()) != record:
+                raise RuntimeError("reproduction code, source evidence or selection changed")
+        else:
+            if resume:
+                raise RuntimeError("reproduction resume requires its original checkpoint manifest")
+            if keep.exists() and any(keep.iterdir()):
+                raise FileExistsError("new reproduction output directory must be empty")
+            keep.mkdir(parents=True, exist_ok=True)
+            from src.utils.io import write_json_atomic
+
+            write_json_atomic(checkpoint_path, record, overwrite=False)
+    return record
+
+
+def verify_reproduction_inputs(checkpoint: dict[str, Any], run_dir: Path) -> None:
+    """Reject source edits made while an otherwise valid refit was running."""
+    from src.utils.frozen_evidence import verify_frozen_evidence
+    from src.utils.reproducibility import sha256_file
+
+    actual_paths = sorted(PROJECT_ROOT.glob("src/**/*.py")) + [Path(__file__).resolve()]
+    current = {str(path.relative_to(PROJECT_ROOT)): sha256_file(path) for path in actual_paths}
+    if current != checkpoint["actual_code_sha256"]:
+        raise RuntimeError("reproduction source code changed during execution")
+    for relative, digest in checkpoint["source_file_sha256"].items():
+        if sha256_file(run_dir / relative) != digest:
+            raise RuntimeError(f"original evidence changed during reproduction: {relative}")
+    manifest = json.loads((run_dir / "manifest.json").read_text())
+    verify_frozen_evidence(PROJECT_ROOT, manifest["input_sha256"])
+
+
+def check_saved_refit(run_dir: Path, path: Path, key: tuple[str, str, int, int]) -> dict[str, Any]:
+    """Verify a resumed cell's own hash and compare it with the original cell."""
+    from src.utils.reproducibility import canonical_json_hash
+
+    new = json.loads(path.read_text())
+    content = dict(new)
+    claimed = content.pop("cell_content_sha256", None)
+    if claimed != canonical_json_hash(content):
+        raise RuntimeError(f"saved reproduction cell hash is invalid: {path}")
+    old = json.loads(stored_cell_path(run_dir, *key).read_text())
+    found = differences(new, old)
+    return {
+        "cell": ":".join(map(str, key)),
+        "status": new["status"],
+        "identical": not found,
+        "n_differences": len(found),
+        "first_differences": found[:10],
+        "seconds": 0.0,
+        "resumed_verified_refit": True,
+    }
 
 
 if __name__ == "__main__":

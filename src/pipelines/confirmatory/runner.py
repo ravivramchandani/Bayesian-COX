@@ -10,6 +10,7 @@ from typing import Any
 from src.data.cohorts import load_analysis_dataset
 from src.data.cohorts import select_feature_spec as _feature_spec
 from src.data.survival_folds import repeated_survival_folds
+from src.utils.io import read_mapping
 from src.utils.io import write_json_atomic as _atomic_json
 from src.utils.reproducibility import build_run_manifest, canonical_json_hash, sha256_file
 
@@ -28,9 +29,9 @@ def execute_confirmatory_run(
 ) -> Path:
     """Execute or resume deterministic model cells and return the run directory.
 
-    A resume requires unchanged run inputs. Confirmatory execution additionally
-    checks the original live protocol freeze before fitting and around final
-    aggregation; this function never relaxes that execution gate.
+    A completed confirmatory resume verifies the checkpoint and every stored
+    artefact without rewriting them. An unfinished run requires unchanged live
+    inputs and the original protocol freeze before any fitting or aggregation.
 
     Args:
         project_root: Repository containing code, configuration and cohort CSVs.
@@ -46,6 +47,10 @@ def execute_confirmatory_run(
     if not set(options.models).issubset(MODEL_KEYS):
         raise ValueError("models contain an unknown model key")
 
+    closed_run = _verified_closed_run(project_root, config, dataset_config, options)
+    if closed_run is not None:
+        return closed_run
+
     run_dir, manifest_path, inputs = _prepare_run(project_root, config, options)
     total_planned = 0
     for dataset_key in options.datasets:
@@ -56,13 +61,9 @@ def execute_confirmatory_run(
     return run_dir
 
 
-def _prepare_run(
-    project_root: Path,
-    config: dict[str, Any],
-    options: RunOptions,
-) -> tuple[Path, Path, list[str]]:
-    """Create or verify a run manifest before the first cell is fitted."""
-    actual_config = {
+def _actual_run_config(config: dict[str, Any], options: RunOptions) -> dict[str, Any]:
+    """Construct the unchanged content-addressed execution settings."""
+    return {
         "protocol": config,
         "mode": options.mode,
         "datasets": options.datasets,
@@ -75,6 +76,43 @@ def _prepare_run(
         "bayes_chains": options.bayes_chains,
         "calibration_bootstraps": options.calibration_bootstraps,
     }
+
+
+def _verified_closed_run(
+    project_root: Path,
+    config: dict[str, Any],
+    dataset_config: dict[str, Any],
+    options: RunOptions,
+) -> Path | None:
+    """Verify an already completed frozen run without fitting or rewriting it."""
+    if options.mode != "confirmatory" or not options.resume:
+        return None
+    actual_config = _actual_run_config(config, options)
+    digest = canonical_json_hash(actual_config)
+    run_dir = options.output_root / f"{config['analysis_id']}_{options.mode}_{digest[:12]}"
+    if not (run_dir / "completion.json").is_file():
+        return None
+    from src.rendering.verification import verify_frozen_run
+    from src.utils.frozen_evidence import verify_frozen_evidence
+
+    verified = verify_frozen_run(run_dir)
+    if verified.manifest["config_sha256"] != digest:
+        raise RuntimeError("completed run configuration differs from the requested settings")
+    if dataset_config != read_mapping(project_root / "config/datasets.yaml"):
+        raise RuntimeError("dataset settings differ from the frozen study inputs")
+    freeze = verify_frozen_evidence(project_root, verified.manifest["input_sha256"])
+    if verified.manifest["protocol_freeze_sha256"] != freeze["freeze_content_sha256"]:
+        raise RuntimeError("completed run refers to a different protocol freeze")
+    return run_dir
+
+
+def _prepare_run(
+    project_root: Path,
+    config: dict[str, Any],
+    options: RunOptions,
+) -> tuple[Path, Path, list[str]]:
+    """Create or verify a run manifest before the first cell is fitted."""
+    actual_config = _actual_run_config(config, options)
     run_hash = canonical_json_hash(actual_config)[:12]
     run_dir = options.output_root / f"{config['analysis_id']}_{options.mode}_{run_hash}"
     manifest_path = run_dir / "manifest.json"
