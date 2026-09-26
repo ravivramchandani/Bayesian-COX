@@ -20,7 +20,7 @@ class RandomSurvivalForestModel(BaseSurvivalModel):
         max_features: str = "sqrt",
         random_state: int = 42,
         n_jobs: int = -1,
-    ):
+    ) -> None:
         self.n_estimators = n_estimators
         self.min_samples_split = min_samples_split
         self.min_samples_leaf = min_samples_leaf
@@ -35,6 +35,16 @@ class RandomSurvivalForestModel(BaseSurvivalModel):
     def fit(
         self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray
     ) -> "RandomSurvivalForestModel":
+        """Fit log-rank survival trees on the supplied training fold.
+
+        Args:
+            X: Preprocessed training covariates.
+            y_time: Follow-up times in the cohort's original units.
+            y_event: Binary event indicators, 1 for an observed event.
+
+        Returns:
+            The fitted forest.
+        """
         self.feature_names = list(X.columns)
         y = Surv.from_arrays(
             event=np.asarray(y_event).astype(bool),
@@ -86,9 +96,7 @@ class RandomSurvivalForestModel(BaseSurvivalModel):
             for _ in range(n_repeats):
                 permuted = X.copy()
                 permuted[feature] = rng.permutation(permuted[feature].to_numpy())
-                score, _ = concordance_index(
-                    y_time, y_event, self.predict_risk(permuted)
-                )
+                score, _ = concordance_index(y_time, y_event, self.predict_risk(permuted))
                 drops.append(baseline - score)
             rows.append(
                 {

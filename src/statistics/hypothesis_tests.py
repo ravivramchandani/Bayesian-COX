@@ -1,6 +1,8 @@
-"""
-Statistical hypothesis testing and multiple comparison correction engine.
-Includes Wilcoxon, Friedman, and pure-Python correction algorithms (Bonferroni, Holm, BH).
+"""Holm correction for paired inference and legacy rank-test interfaces.
+
+The confirmatory analysis calls ``holm_adjust`` on its prespecified family.
+The class retains Wilcoxon, Friedman, Bonferroni and Benjamini-Hochberg
+interfaces for older callers; they do not replace corrected repeated-CV tests.
 """
 
 import numpy as np
@@ -10,7 +12,15 @@ from scipy.stats import friedmanchisquare, wilcoxon
 def holm_adjust(
     p_values: list[float] | np.ndarray, *, alpha: float = 0.05
 ) -> tuple[list[float], list[bool]]:
-    """Holm step-down adjusted p-values and family-wise rejection decisions."""
+    """Return Holm-adjusted p-values and family-wise rejection decisions.
+
+    Args:
+        p_values: Finite p-values for one complete prespecified family.
+        alpha: Family-wise significance level.
+
+    Returns:
+        Adjusted p-values and rejection flags in the original input order.
+    """
     values = np.asarray(p_values, dtype=float)
     if values.ndim != 1 or len(values) == 0:
         raise ValueError("p_values must be a non-empty one-dimensional sequence.")
@@ -22,9 +32,7 @@ def holm_adjust(
     count = len(values)
     order = np.argsort(values, kind="stable")
     ordered = values[order]
-    adjusted_ordered = np.maximum.accumulate(
-        ordered * np.arange(count, 0, -1, dtype=float)
-    )
+    adjusted_ordered = np.maximum.accumulate(ordered * np.arange(count, 0, -1, dtype=float))
     adjusted_ordered = np.minimum(adjusted_ordered, 1.0)
     adjusted = np.empty(count, dtype=float)
     adjusted[order] = adjusted_ordered
@@ -35,9 +43,7 @@ class SurvivalHypothesisTests:
     """Hypothesis testing for survival group differences and model benchmark validation."""
 
     @staticmethod
-    def wilcoxon_signed_rank(
-        scores_a: np.ndarray, scores_b: np.ndarray
-    ) -> tuple[float, float]:
+    def wilcoxon_signed_rank(scores_a: np.ndarray, scores_b: np.ndarray) -> tuple[float, float]:
         """Perform a paired Wilcoxon signed-rank test."""
         stat, p_val = wilcoxon(scores_a, scores_b)
         return float(stat), float(p_val)

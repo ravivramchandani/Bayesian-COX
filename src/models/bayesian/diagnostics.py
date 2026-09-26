@@ -1,4 +1,15 @@
-"""MCMC diagnostics derived from every fitted posterior parameter."""
+"""MCMC convergence diagnostics for fitted Bayesian survival models.
+
+``BayesianCoxModel`` calls :func:`check_convergence` after every NUTS fit.
+The confirmatory pipeline admits a fit only when every gate below passes,
+and otherwise refits under its frozen diagnostic rule.
+
+ArviZ 0.23 rounds its summary even with ``round_to=None``: R-hat to two
+decimals, bulk and tail ESS to whole numbers, and MCSE to three decimals.
+The gates are applied to these rounded values, which is part of the frozen
+protocol. The R-hat gate therefore fails from a true R-hat of about 1.005,
+not 1.01.
+"""
 
 from __future__ import annotations
 
@@ -8,13 +19,24 @@ import arviz as az
 import numpy as np
 import pandas as pd
 
+# A fit fails when rounded R-hat >= R_HAT_THRESHOLD, rounded bulk ESS <=
+# ESS_BULK_THRESHOLD, divergences > MAX_DIVERGENCES, minimum BFMI <
+# BFMI_THRESHOLD, or any draw reaches the maximum tree depth.
 R_HAT_THRESHOLD = 1.01
 ESS_BULK_THRESHOLD = 400.0
+MAX_DIVERGENCES = 0
 BFMI_THRESHOLD = 0.30
+# PyMC's default NUTS maximum tree depth, used when the trace records only
+# the depth reached and not whether the limit was hit.
+DEFAULT_MAX_TREE_DEPTH = 10
 
 
 def summarise(idata: Any, var_names: list[str] | None = None) -> pd.DataFrame:
-    """Return rank-normalised diagnostics for selected or all parameters."""
+    """Return rank-normalised diagnostics for selected or all parameters.
+
+    ``round_to=None`` keeps ArviZ's default rounding (see the module
+    docstring); it does not return unrounded values.
+    """
     return az.summary(
         idata,
         var_names=var_names,
@@ -24,13 +46,14 @@ def summarise(idata: Any, var_names: list[str] | None = None) -> pd.DataFrame:
 
 
 def divergences(idata: Any) -> int:
-    """Return divergent transitions across post-warmup chains."""
+    """Return the number of divergent transitions across post-warmup chains."""
     if "diverging" not in idata.sample_stats:
         return 0
     return int(idata.sample_stats["diverging"].values.sum())
 
 
 def _tree_depth_summary(idata: Any) -> tuple[int | None, int]:
+    """Return the maximum tree depth reached and the number of limit hits."""
     stats = idata.sample_stats
     if "reached_max_treedepth" in stats:
         reached = np.asarray(stats["reached_max_treedepth"].values, dtype=bool)
@@ -40,20 +63,27 @@ def _tree_depth_summary(idata: Any) -> tuple[int | None, int]:
         return None, 0
     depth = np.asarray(stats["tree_depth"].values)
     max_depth = int(depth.max())
-    # PyMC's default NUTS maximum is 10. Hitting a lower observed maximum is
-    # not itself a failure, so only count the configured default boundary.
-    return max_depth, int((depth >= 10).sum())
+    # A lower observed maximum is not a failure, so only draws at the default
+    # limit count as hits.
+    return max_depth, int((depth >= DEFAULT_MAX_TREE_DEPTH).sum())
 
 
-def check_convergence(
-    idata: Any, var_names: list[str] | None = None
-) -> dict[str, Any]:
-    """Evaluate convergence for all requested stochastic and derived values.
+def check_convergence(idata: Any, var_names: list[str] | None = None) -> dict[str, Any]:
+    """Evaluate the convergence gates for all requested stochastic and derived values.
 
     A confirmatory fit passes only with rank-normalised R-hat below 1.01,
-    bulk ESS above 400, no divergences, BFMI above 0.30 and no maximum-tree-
-    depth hits. The returned values are computed from the trace and are safe to
-    serialize in result manifests.
+    bulk ESS above 400, no divergences, BFMI of at least 0.30 and no
+    maximum-tree-depth hits. R-hat and ESS are compared after ArviZ rounding.
+    Every value is computed from the trace and can be written to result
+    files.
+
+    Args:
+        idata: ArviZ ``InferenceData`` with ``posterior`` and ``sample_stats``.
+        var_names: Variables to check; ``None`` checks every posterior
+            variable, including deterministics such as ``beta``.
+
+    Returns:
+        The diagnostic values, ``converged`` and the list of failed gates.
     """
     summary = summarise(idata, var_names=var_names)
     required = {"r_hat", "ess_bulk", "ess_tail", "mcse_mean", "mcse_sd"}
@@ -78,13 +108,9 @@ def check_convergence(
     if not np.isfinite(r_hat_max) or r_hat_max >= R_HAT_THRESHOLD:
         failures.append(f"R-hat {r_hat_max:.4f} >= {R_HAT_THRESHOLD}")
     if not np.isfinite(ess_bulk_min) or ess_bulk_min <= ESS_BULK_THRESHOLD:
-        failures.append(
-            f"bulk ESS {ess_bulk_min:.0f} <= {ESS_BULK_THRESHOLD:.0f}"
-        )
-    if n_divergent:
-        failures.append(
-            f"{n_divergent} divergent transitions ({divergence_rate:.2%} of draws)"
-        )
+        failures.append(f"bulk ESS {ess_bulk_min:.0f} <= {ESS_BULK_THRESHOLD:.0f}")
+    if n_divergent > MAX_DIVERGENCES:
+        failures.append(f"{n_divergent} divergent transitions ({divergence_rate:.2%} of draws)")
     if not np.isfinite(bfmi_min) or bfmi_min < BFMI_THRESHOLD:
         failures.append(f"minimum BFMI {bfmi_min:.3f} < {BFMI_THRESHOLD:.2f}")
     if n_max_tree_depth:

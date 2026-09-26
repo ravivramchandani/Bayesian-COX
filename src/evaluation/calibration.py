@@ -1,13 +1,22 @@
-"""Calibration estimators for fixed-horizon survival probabilities."""
+"""Fixed-horizon survival calibration for the outer-validation predictions.
+
+Descriptive curves compare predicted survival with Kaplan-Meier estimates.
+IPCW complementary-log-log models estimate calibration-in-the-large,
+intercept and slope, with event-stratified bootstrap intervals.
+"""
 
 from typing import Any
 
 import numpy as np
-from scipy.optimize import minimize
 from sksurv.nonparametric import CensoringDistributionEstimator, kaplan_meier_estimator
 from sksurv.util import Surv
 
+from src.evaluation.calibration_model import (
+    _cloglog_probability,  # noqa: F401 - retained for callers of the original helper
+    _fit_weighted_calibration,
+)
 from src.evaluation.metrics import UnsupportedCensoringError, validate_ipcw_horizons
+from src.statistics.resampling import event_stratified_indices
 
 
 def _survival_array(
@@ -29,19 +38,13 @@ def _survival_array(
 def _prediction_array(pred_survival: np.ndarray, n_samples: int) -> np.ndarray:
     predictions = np.asarray(pred_survival, dtype=float)
     if predictions.ndim != 1 or len(predictions) != n_samples:
-        raise ValueError(
-            f"pred_survival must be one-dimensional with length {n_samples}."
-        )
-    if not np.isfinite(predictions).all() or np.any(
-        (predictions < 0) | (predictions > 1)
-    ):
+        raise ValueError(f"pred_survival must be one-dimensional with length {n_samples}.")
+    if not np.isfinite(predictions).all() or np.any((predictions < 0) | (predictions > 1)):
         raise ValueError("pred_survival must contain finite probabilities in [0, 1].")
     return predictions
 
 
-def _step_value(
-    times: np.ndarray, values: np.ndarray, horizon: float, *, initial: float
-) -> float:
+def _step_value(times: np.ndarray, values: np.ndarray, horizon: float, *, initial: float) -> float:
     index = int(np.searchsorted(times, horizon, side="right") - 1)
     return initial if index < 0 else float(values[index])
 
@@ -53,9 +56,7 @@ class KaplanMeierSurvivalEstimator:
         self.times = np.array([], dtype=float)
         self.survival_probs = np.array([], dtype=float)
 
-    def fit(
-        self, y_time: np.ndarray, y_event: np.ndarray
-    ) -> "KaplanMeierSurvivalEstimator":
+    def fit(self, y_time: np.ndarray, y_event: np.ndarray) -> "KaplanMeierSurvivalEstimator":
         time, event = _survival_array(y_time, y_event, name="Evaluation")
         self.times, self.survival_probs = kaplan_meier_estimator(event, time)
         return self
@@ -151,12 +152,8 @@ def compute_calibration_curve(
         n_bins=n_bins,
         min_bin_size=2,
     )
-    predicted = np.asarray(
-        [row["mean_predicted_survival"] for row in result["bins"]], dtype=float
-    )
-    observed = np.asarray(
-        [row["observed_survival"] for row in result["bins"]], dtype=float
-    )
+    predicted = np.asarray([row["mean_predicted_survival"] for row in result["bins"]], dtype=float)
+    observed = np.asarray([row["observed_survival"] for row in result["bins"]], dtype=float)
     return predicted, observed
 
 
@@ -206,65 +203,7 @@ def _ipcw_binary_outcome(
     return y, weights
 
 
-def _cloglog_probability(eta: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    cumulative_hazard = np.exp(np.clip(eta, -30.0, 30.0))
-    probability = -np.expm1(-cumulative_hazard)
-    return np.clip(probability, 1e-12, 1 - 1e-12), cumulative_hazard
-
-
-def _fit_weighted_calibration(
-    x: np.ndarray, y: np.ndarray, weights: np.ndarray
-) -> dict[str, float]:
-    known = weights > 0
-    if known.sum() < 10 or len(np.unique(y[known])) < 2:
-        raise ValueError(
-            "Calibration requires at least ten known horizon outcomes and both classes."
-        )
-    x_known = x[known]
-    y_known = y[known]
-    weight_known = weights[known]
-    weight_known = weight_known / np.mean(weight_known)
-
-    def negative_log_likelihood(parameters: np.ndarray, *, offset: bool) -> float:
-        eta = parameters[0] + x_known if offset else parameters[0] + parameters[1] * x_known
-        probability, cumulative_hazard = _cloglog_probability(eta)
-        log_likelihood = y_known * np.log(probability) - (1 - y_known) * cumulative_hazard
-        return float(-np.sum(weight_known * log_likelihood))
-
-    offset_fit = minimize(
-        lambda value: negative_log_likelihood(value, offset=True),
-        x0=np.asarray([0.0]),
-        method="L-BFGS-B",
-        bounds=[(-20.0, 20.0)],
-        options={"ftol": 1e-12, "maxiter": 1000},
-    )
-    joint_fit = minimize(
-        lambda value: negative_log_likelihood(value, offset=False),
-        x0=np.asarray([float(offset_fit.x[0]), 1.0]),
-        method="L-BFGS-B",
-        bounds=[(-20.0, 20.0), (-10.0, 10.0)],
-        options={"ftol": 1e-12, "maxiter": 1000},
-    )
-    if not offset_fit.success or not joint_fit.success:
-        raise RuntimeError("Fixed-horizon calibration model did not converge.")
-    return {
-        "calibration_in_the_large": float(offset_fit.x[0]),
-        "intercept": float(joint_fit.x[0]),
-        "slope": float(joint_fit.x[1]),
-        "n_known": int(known.sum()),
-        "effective_weight": float(np.sum(weights)),
-    }
-
-
-def _event_stratified_indices(event: np.ndarray, rng: np.random.Generator) -> np.ndarray:
-    groups = []
-    for value in (False, True):
-        indices = np.flatnonzero(event == value)
-        if len(indices):
-            groups.append(rng.choice(indices, size=len(indices), replace=True))
-    sampled = np.concatenate(groups)
-    rng.shuffle(sampled)
-    return sampled
+_event_stratified_indices = event_stratified_indices
 
 
 def _calibration_point_estimate(
@@ -275,9 +214,7 @@ def _calibration_point_estimate(
     pred_survival: np.ndarray,
     horizon: float,
 ) -> dict[str, float]:
-    y, weights = _ipcw_binary_outcome(
-        train_time, train_event, test_time, test_event, horizon
-    )
+    y, weights = _ipcw_binary_outcome(train_time, train_event, test_time, test_event, horizon)
     clipped_survival = np.clip(pred_survival, 1e-12, 1 - 1e-12)
     log_cumulative_hazard = np.log(-np.log(clipped_survival))
     return _fit_weighted_calibration(log_cumulative_hazard, y, weights)
@@ -316,9 +253,7 @@ def survival_calibration_summary(
     if n_bootstraps < 20:
         raise ValueError("n_bootstraps must be at least 20.")
 
-    point = _calibration_point_estimate(
-        train_t, train_e, test_t, test_e, predictions, horizon
-    )
+    point = _calibration_point_estimate(train_t, train_e, test_t, test_e, predictions, horizon)
     rng = np.random.default_rng(random_state)
     samples: dict[str, list[float]] = {
         "calibration_in_the_large": [],
