@@ -16,6 +16,7 @@ ENV/
 # Editors
 .vscode/
 .idea/
+.claude/worktrees/
 
 # Caches
 .pytest_cache/
