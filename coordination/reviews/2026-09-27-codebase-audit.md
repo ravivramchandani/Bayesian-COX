@@ -89,3 +89,92 @@ code cells, about 59,000 source lines, no text cells.
   labelled `*_existing`.
 - The cell that runs the confirmatory NUTS sampling was never executed.
 - Its seven C-index values fall inside the frozen run's per-fold ranges.
+
+## Confirmatory pipeline map
+
+- Entry point: `scripts/run_confirmatory.py` calls `execute_confirmatory_run`
+  (`src/pipelines/confirmatory.py:1361`). For each dataset, fold and model,
+  it runs `run_cell` (line 681), writes the cell JSON, then aggregates
+  (`_aggregate_tables`), runs inference (`_repeated_cv_inference`) and writes
+  the completion record.
+- Every top-level symbol in `confirmatory.py` is used; there is no dead code
+  there. `robustness.py:37-49` imports 12 names from it, including the
+  private `_fit_with_diagnostic_rule`, `_ibs_times` and `_feature_spec`.
+  These must keep working after a split.
+- A test monkeypatches `confirmatory._model_from_parameters` and
+  `_posterior_trace_snapshot` on the module object.
+- Untested: `run_cell`, `execute_confirmatory_run`, `tune_candidate`,
+  `_evaluate_predictions`, `_model_details`, `_aggregate_tables`,
+  `_load_cells`, `load_analysis_dataset`, `_feature_spec`, `_ibs_times`,
+  `deterministic_seed`, `_json_safe` and `_atomic_json`.
+- Determinism: rerunning seven stored cells in memory reproduced every field
+  except `total_seconds`, `fit_seconds` and `cell_content_sha256`. The cells
+  were Cox, RSF, DeepSurv, normal and spike-and-slab on GBSG2 r1f1, a
+  WHAS500 horseshoe cell, and a failed GBSG2 horseshoe cell. The cell hash
+  covers the timings, so cell files can never match byte-for-byte. Compare
+  them with the timing fields and the hash removed.
+- Largest functions:
+  - `_repeated_cv_inference`: 238 lines, nesting depth 6;
+  - `execute_confirmatory_run`: 155 lines;
+  - `BayesianCoxModel.fit`: 201 lines;
+  - `run_cell`: 128 lines;
+  - `freeze_protocol.main`: 204 lines.
+- Duplicated helpers:
+  - the event-stratified resampler, three times (proved RNG-equivalent);
+  - `_json_safe` and `_atomic_json`, in robustness and frozen_cells;
+  - live-hash maps, built three ways.
+- Dead code:
+  - `KaplanMeierSurvivalEstimator`;
+  - `BayesianCoxModel.get_mcmc_diagnostics`;
+  - `CoxPartialLikelihood`;
+  - the four stub pipelines (`EvaluationPipeline.run` returns a fixed
+    `c_index` of 0.75).
+- Inaccurate names and docstrings:
+  - `CoxPHModel.predict_risk` says "linear predictor" but returns exp(xβ).
+  - `predictions.risk` uses a different scale per model: Cox exp(lp), RSF
+    cumulative hazard, DeepSurv log-risk, Bayesian lp.
+  - `BayesianCoxModel` is a piecewise-exponential Poisson model.
+- Config keys that are never read: `inference.{primary_metric,
+  key_secondary_metrics, primary_models, multiplicity, repeated_cv_interval,
+  sensitivity_interval}` and `failed_fit_rule.second_refit`. The
+  non-centred remedy is hardcoded as `attempt >= 2`.
+- `run_confirmatory.py` records package versions but does not verify the
+  environment.
+
+## Horseshoe failures
+
+Evidence files: `~/bayes-cox-runs/horseshoe-investigation-20260927/`
+(`attempts.csv`, `cells.csv`, `repro.py`, `results/`).
+
+- Every horseshoe attempt used 4 sequential chains, 2,000 draws and
+  `jitter+adapt_diag`. The attempts ran at 0.99/2,000 tune, then 0.99/4,000,
+  then 0.99/4,000 with a non-centred baseline. The first remedy therefore
+  changed nothing for the horseshoe, which already used target acceptance
+  0.99. The second remedy re-parameterises only the baseline hazard.
+- All 83 failing attempts failed on divergences alone: 1–11 per 8,000 draws
+  in GBSG2 and 1–2 in METABRIC. R-hat (1.00), bulk ESS (≥1,528), BFMI (≥0.72)
+  and tree depth (no limit hits) passed with wide margins.
+
+  | Cohort | Failed cells | Zero-divergence rate per attempt | Mean divergences per attempt |
+  |---|---:|---:|---:|
+  | GBSG2 | 18/25 | 0.10 | 2.53 |
+  | METABRIC | 2/25 | 0.58 | 0.52 |
+  | WHAS500 | 0/25 | 0.83 | 0.17 |
+
+- There is no implementation error. The prior matches Piironen and Vehtari
+  (2017, doi:10.1214/17-EJS1337SI) Appendix C.1, apart from two documented
+  choices:
+  - half-t(2) local scales, which that paper calls hierarchical shrinkage;
+  - a fixed τ0 = 0.1, instead of the Eq. 3.12 rule (about 0.04 for GBSG2).
+- GBSG2 differs from the other cohorts in the heavy right skew of its
+  standardised covariates (progrec up to 10.4 SD, pnodes 8.0), not in its
+  events per coefficient.
+- Reproduction check: the frozen specification reproduces the archived
+  divergence count exactly. On the frozen seeds, target acceptance 0.999
+  cleared 6 of 7 failed GBSG2 cells (the remaining one: 11 to 2 divergences).
+  Runtime rose 1.2–1.3 times. Posterior means moved by at most 0.07
+  posterior SD.
+- `diagnostics.py:18-23` passes `round_to=None`, which in ArviZ 0.23 still
+  rounds R-hat to two decimals. The gate `r_hat >= 1.01` therefore fires
+  from a true R-hat of about 1.005, which is stricter than documented. Keep
+  this behaviour for the frozen protocol and document it.
