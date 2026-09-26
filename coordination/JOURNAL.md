@@ -449,3 +449,26 @@ Robustness production started with the frozen code at `2e55c0b`, from
 The cells are fitted by six worker processes that share the plan through
 lock files (ADR-031). A sharded cell refitted in a fresh unsharded process
 was identical in every field except timings.
+
+## 2026-09-27 — Interrupted work preserved and continuation state audited
+
+The five existing main commits through `6c037a8` were pushed. Thirteen
+unfinished source files were committed and pushed on three WIP branches:
+models `6b41431`, confirmatory `d6bd723`, and explanation `089efc1`. None is
+integrated or has passed its frozen-output equivalence gate. The rendering
+worktree contained no changes. The external harness, initial horseshoe
+investigation and baseline reproduction report were archived with per-file
+hashes under `coordination/recovery/`.
+
+Main passed environment verification, 170 tests, Ruff and coordination
+schemas. The model worktree passed 44 focused tests; all 13 unfinished files
+passed syntax and lint checks. All 450 frozen cell hashes and three aggregate
+hashes match their completion record. At 12:23:48 Auckland, robustness had
+75/825 recorded cells and six live workers. Explanation production's failed
+convergence gate was confirmed. The full 75-cell ADR-032 sensitivity and
+checkpoint-bound verification remain unimplemented.
+
+README, TODO and HANDOFF were reconciled with these facts. The separate
+Overleaf repository is clean and matches its remote at `a5f026a`; no thesis
+file was changed. Details and the remaining sequence are in
+`coordination/reviews/2026-09-27-recovery-audit.md`.

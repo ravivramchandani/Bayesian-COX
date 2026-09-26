@@ -4,6 +4,20 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-09-27
 
+## Recovery checkpoint
+
+The interrupted work was inspected and preserved on 2026-09-27. The five
+existing main commits through `6c037a8` were pushed, and the unfinished model,
+confirmatory and explanation changes were committed to three remote WIP
+branches. They have not been integrated. The exact branches, validation,
+runtime snapshot and next steps are in
+`coordination/reviews/2026-09-27-recovery-audit.md`.
+
+An archive and per-file hashes under `coordination/recovery/` preserve the
+external runtime harness, initial horseshoe investigation and six-cell
+baseline reproduction report. Running production outputs remain in the
+frozen worktree. The Overleaf repository is clean and matches its remote.
+
 ## Active programme — refactor, completion and reproduction
 
 Owner instruction of 2026-09-27, which supersedes the "stop and wait" step
@@ -71,7 +85,8 @@ Findings behind each step are in
    baseline on unchanged code reproduced the quick selection exactly.
    Robustness equivalent: `~/bayes-cox-runs/harness/check_robustness_cell.py`.
    A sharded production cell matched a fresh unsharded refit exactly.
-3. [ ] Bind frozen-evidence verification to the checkpoint commit (new ADR).
+3. [ ] Implement checkpoint-bound frozen-evidence verification (accepted
+   ADR-030). The current verifier still compares against the live tree.
 4. [ ] Refactor for readability, module by module. After each step, run the
    tests and the reproduction harness. The rules and gates are in
    `coordination/briefs/2026-09-27-readability-refactor.md`.
@@ -86,8 +101,9 @@ Findings behind each step are in
    with the frozen artefacts (the ADR-026 reproduction claim).
 7. [ ] Render the results tables and figures, including the Holm
    family-completion bound.
-8. [ ] Investigate the horseshoe failures as a labelled post-hoc,
-   non-confirmatory analysis.
+8. [ ] Complete the labelled post-hoc horseshoe sensitivity under ADR-032.
+   Initial investigation and seven target-acceptance probes are complete;
+   the separate 75-cell refit and nine-contrast analysis are not implemented.
 9. [ ] Update README, `docs/architecture.md`, TODO, JOURNAL, DECISIONS and
    INVARIANTS, and record the thesis corrections in TODO.
 10. [ ] Commit and push.
@@ -155,7 +171,9 @@ The inferential evidence is deliberately incomplete. `inference.json` records
 contrasts have all 25 paired folds, while the two GBSG2 and two METABRIC
 horseshoe contrasts have no confirmatory inference. No complete-family
 superiority, equivalence or multiplicity-controlled claim is accepted.
-Robustness and confirmatory explanation production have not started.
+Robustness production is running from the unchanged frozen worktree.
+Confirmatory explanation production completed, but its convergence gate
+failed and it permits no RQ3 claim. See the recovery checkpoint above.
 
 ## Data state
 
