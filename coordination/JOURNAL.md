@@ -658,3 +658,27 @@ remain separate from visual defects. The hashed per-file record is preserved
 in `coordination/recovery/2026-09-27-final-pdf-qa.json`. This base render does
 not include unfinished robustness or post-hoc sampler outputs; their final
 bundle still requires actual verification and visual QA.
+
+## 2026-09-27 — Interactive session wrapped; numerical jobs continue
+
+The owner requested a session wrap-up and explicitly chose to leave detached
+numerical jobs running. At 03:18 UTC (16:18 Auckland), robustness had 549/825
+stored cells: all 255 GBSG2 cells, all 270 WHAS500 cells and 24/300 METABRIC
+cells. The full reproduction had 149/450 saved GBSG2 refits with no reported
+mismatch. The 75-cell sensitivity remained queued. These counts do not
+certify completed production or scientific acceptance.
+
+All eight fitting workers, the finishing supervisor, programme coordinator
+and its idle-sleep inhibitor were active. The 90 sealed source/script hashes
+still matched `11f86ced8735b32767debb58f3cbbefbb5a7b8e6`. The dated process,
+code and progress snapshot is preserved in
+`coordination/recovery/2026-09-27-wrapup-checkpoint.json`. Interactive monitoring
+was stopped without signalling any numerical process. The final QA,
+evidence-summary and progress helpers are preserved in the deterministic
+resume-tools archive with per-file hashes. `HANDOFF.md` records the remaining
+verification, actual visual review, packaging, restore and private-release
+steps. No Overleaf file was changed.
+
+The handoff changes passed all 270 tests in 250.54 seconds while background
+fits continued. Coordination schemas and the four-file resume archive's
+hashes and deterministic metadata also passed verification.

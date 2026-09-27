@@ -1,0 +1,27 @@
+{
+  "archive": "2026-09-27-resume-tools.tar.gz",
+  "archive_bytes": 10771,
+  "archive_metadata": {
+    "gid": 0,
+    "gzip_mtime": 0,
+    "mode": "0644",
+    "mtime": 0,
+    "regular_files_only": true,
+    "uid": 0
+  },
+  "archive_sha256": "f49bc96592df31fc22050b48bd3203f9773de3f15402127254cd19a4eb83caac",
+  "file_bytes": {
+    "final-pdf-qa-preparation-20260927/README.md": 5027,
+    "final-pdf-qa-preparation-20260927/final_pdf_qa.py": 13258,
+    "harness/monitor_programme_once.py": 1429,
+    "harness/summarize_programme_evidence.py": 16811
+  },
+  "file_sha256": {
+    "final-pdf-qa-preparation-20260927/README.md": "f9b6819ff1f14d0715623a92efedf3ff002a5237ef377cfac6a9857cf20969c1",
+    "final-pdf-qa-preparation-20260927/final_pdf_qa.py": "fd241575c5bdd7ba19780166fd6fcad4426a712d595d3cd26761b4921bbe2b67",
+    "harness/monitor_programme_once.py": "42d9b790dd16430b533d3e6d074b486b090af57a590f61d99171d941ef01213b",
+    "harness/summarize_programme_evidence.py": "aa7a420e380d5d69b1f35ec6423285e697f1b0ca347da66beadd07bbde7db950"
+  },
+  "schema_version": "1.0.0",
+  "scope": "Resume tooling only; excludes QA fixtures, images and empirical results."
+}

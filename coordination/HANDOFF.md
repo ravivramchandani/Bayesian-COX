@@ -4,6 +4,66 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-09-27
 
+## Session checkpoint — numerical jobs left running
+
+The owner wrapped up the interactive session on 2026-09-27 and explicitly
+requested that the detached numerical jobs keep running. This pauses
+interactive work; it does not stop or restart any fit. The checkpoint at
+03:18 UTC (16:18 Auckland) is preserved in
+`coordination/recovery/2026-09-27-wrapup-checkpoint.json`.
+
+- Robustness: 549/825 stored cells. GBSG2 has 255/255, WHAS500 has 270/270,
+  and METABRIC has 24/300. These are file counts, not diagnostic pass counts;
+  final aggregation and strict completion verification remain pending.
+- Full reproduction: 149/450 saved refits, all currently in GBSG2. No
+  mismatch is reported; the complete 450-cell equality report is pending.
+- Post-hoc sensitivity: 0/75; queued after completed robustness verifies.
+- All six robustness workers, both reproduction workers, supervisor PID
+  40646, coordinator PID 57940 and its `caffeinate` PID 57941 were active.
+  All 90 sealed source/script hashes still matched commit `11f86ce`.
+- Integrated code, 270-test validation and the passed 426-PDF base review
+  are complete. Final numerical evidence, rendering, visual QA, claim review,
+  packaging, restore verification and private release remain unfinished.
+
+Resume by reading this checkpoint and inspecting the actual live state:
+
+```bash
+/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -B \
+  /Users/macuser/bayes-cox-runs/harness/monitor_programme_once.py
+```
+
+Do not launch another coordinator or manually finish robustness while the
+existing processes remain active. The coordinator proceeds automatically
+through the numerical stages and final rendering. Its final
+`~/bayes-cox-runs/continuation-20260927/programme_analysis_verified.json`
+means analysis/rendering verification is complete and actual final visual QA
+is still required. If `programme_failure.json` exists instead, inspect its
+stage log before deciding how to resume; retain all existing evidence.
+
+The next interactive steps are:
+
+1. Strictly verify completed 450/825/75 evidence using the coordinator gates
+   and external `~/bayes-cox-runs/harness/summarize_programme_evidence.py`.
+   The helper refuses incomplete evidence and preserves scientific failures.
+2. Follow `~/bayes-cox-runs/final-pdf-qa-preparation-20260927/README.md`.
+   `final_pdf_qa.py` compares both final bundles with the passed V3 inventory,
+   checks their actual PDF hashes, boxes and fonts, and rasterizes every new
+   or changed page. Reuse only exact passed PDF hashes; actually inspect all
+   remaining pages before producing a passed record.
+3. Create the actual visual-QA-backed release seal for all seven evidence
+   roots, package it with `scripts/package_programme_release.py`, verify an
+   isolated restore, and upload a new private supplementary release. Leave
+   the original confirmatory release unchanged; download and hash-check the
+   new assets before closing the programme.
+4. Update the final factual claims and task status, run the required checks,
+   and commit/push the close-out. Overleaf edits remain outside this scope.
+
+The four external resume helpers are preserved in
+`coordination/recovery/2026-09-27-resume-tools.tar.gz` with per-file hashes in
+the matching manifest. If a helper is missing, extract it to an external
+directory. Preserve the frozen checkout, sealed programme checkout, original
+results, V3 render and full V3 QA records; they are required source evidence.
+
 ## Recovery checkpoint
 
 The interrupted work was inspected and preserved on 2026-09-27. The five

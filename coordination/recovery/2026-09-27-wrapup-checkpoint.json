@@ -1,0 +1,59 @@
+{
+  "background_execution_left_running": true,
+  "code_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+  "completed_engineering": {
+    "base_pdfs_reviewed_and_passed": 426,
+    "qa_source": "coordination/recovery/2026-09-27-final-pdf-qa.json",
+    "source": "coordination/recovery/2026-09-27-final-code-check.log",
+    "tests_passed": 270
+  },
+  "evidence_role": "session_progress_only_not_completion_or_scientific_claim",
+  "final_qa_commands": "/Users/macuser/bayes-cox-runs/final-pdf-qa-preparation-20260927/README.md",
+  "final_qa_helper": "/Users/macuser/bayes-cox-runs/final-pdf-qa-preparation-20260927/final_pdf_qa.py",
+  "locked_python": "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+  "main_commit_before_handoff": "5aa6f61e9f5a4ed4e1310ee9743c530444b24b5f",
+  "numerical_summary_helper": "/Users/macuser/bayes-cox-runs/harness/summarize_programme_evidence.py",
+  "owner_instruction": "Wrap up the interactive session; leave detached numerical jobs running and continue later.",
+  "process_health_snapshot": "  PID  PPID STAT COMM\n31501     1 RN   /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n31527     1 RN   /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n31565     1 RN   /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n31572     1 RN   /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n31608     1 RN   /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n31652     1 RN   /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n40646     1 Ss   /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n57940     1 Ss   /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n57941     1 Ss   /usr/bin/caffeinate\n58114 57940 S    /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n58207 58114 R    /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n58208 58114 R    /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n",
+  "programme_manifest": {
+    "path": "/Users/macuser/bayes-cox-runs/continuation-20260927/programme_manifest.json",
+    "sha256": "a26bcb3c6e8da343b8576085c0d8a05f60c7b54d59d959fe159acd15310c2582"
+  },
+  "progress": {
+    "analysis_verified": false,
+    "coordinator_alive": true,
+    "failure": false,
+    "mismatches": 0,
+    "reproduction": 149,
+    "reproduction_complete": false,
+    "reproduction_parent_alive": true,
+    "robustness": 549,
+    "robustness_complete": false,
+    "sampler": 0,
+    "utc": "2026-09-27T03:18:09.239210+00:00"
+  },
+  "progress_helper": "/Users/macuser/bayes-cox-runs/harness/monitor_programme_once.py",
+  "recorded_at_utc": "2026-09-27T03:18:09.239210+00:00",
+  "remaining": [
+    "full_450_cell_reproduction_verification",
+    "complete_and_verify_825_cell_robustness",
+    "75_cell_posthoc_sampler_sensitivity",
+    "final_rendering_and_actual_visual_qa",
+    "claim_review_release_seal_packaging_and_isolated_restore_verification",
+    "private_release_upload_download_hash_verification_and_final_documentation_push"
+  ],
+  "schema_version": "1.0.0",
+  "scope": "existing_code_and_results_programme; Overleaf edits excluded",
+  "sealed_code_files_verified": 90,
+  "status": "in_progress",
+  "stored_cells_by_cohort": {
+    "reproduction": {
+      "gbsg2": 149
+    },
+    "robustness": {
+      "gbsg2": 255,
+      "metabric": 24,
+      "whas500": 270
+    }
+  }
+}

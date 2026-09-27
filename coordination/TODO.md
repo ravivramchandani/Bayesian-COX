@@ -54,6 +54,12 @@ and production close-out remain. Selected refit gates do not satisfy the full
 reproduction requirement. Overleaf edits remain excluded; the 19 recorded
 thesis corrections belong to T-152 through T-156 when thesis work resumes.
 
+The owner wrapped up interactive work on 2026-09-27 and explicitly left the
+detached numerical jobs running. The dated progress-only checkpoint and
+resumption steps are in `HANDOFF.md` and
+`coordination/recovery/2026-09-27-wrapup-checkpoint.json`. Production tasks
+remain unchecked until their actual completed evidence satisfies the gates.
+
 ## Completed foundation
 
 - [x] T-000 (T) — Phase 0 repair and verification. Evidence:
