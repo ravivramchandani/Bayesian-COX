@@ -877,3 +877,8 @@ production cells, 92 selected reproduction receipts, 32 PDF/PNG pairs, six
 tables, the matched-data/source-license hashes and an actual passed visual-QA
 receipt before it assembles the private transfer tree. It has not yet been
 run on a completed programme.
+An independently developed PDF-QA helper is included in the repository. It
+passed a synthetic 1,625-cell/32-figure/six-table fixture, rejected partial
+and altered evidence, and requires a separate named review of every actual
+PDF page before issuing a write-once passed receipt. This synthetic success
+does not constitute final visual QA.

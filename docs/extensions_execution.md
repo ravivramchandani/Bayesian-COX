@@ -95,6 +95,12 @@ decision-curve uncertainty, inherited clinical METABRIC duplicate-pair
 exposure and upstream expression normalization. The original negative and
 missing primary findings remain visible.
 
+Use [the visual-QA procedure](../scripts/extension_release/PDF_QA.md) on the
+final 32 PDF pages and six lineaged CSVs. Its automated checks prepare full-
+size page images and contact sheets but leave the verdict pending. A named
+reviewer must inspect every PDF page and record each pass/fail finding before
+the write-once visual-QA receipt can pass.
+
 Package code, inputs/source metadata, all attempted cells/traces, aggregates,
 92 reproduction receipts/traces, plots/tables and actual QA in a new private
 GitHub release. `scripts/extension_release/stage_extensions.py` checks the
