@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -26,6 +27,7 @@ LABELS = {"cox_ph": "Cox PH", "random_survival_forest": "Random survival forest"
           "ridge": "Ridge Cox", "lasso": "Lasso Cox", "elastic_net": "Elastic-net Cox",
           "pv_horseshoe": "Calibrated horseshoe", "catalytic_fixed": "Catalytic fixed",
           "catalytic_adaptive": "Catalytic adaptive", "catalytic_wme": "Catalytic weighted mixture",
+          "ADR032_horseshoe": "ADR-032 horseshoe",
           "all": "Assess all", "none": "Assess none"}
 
 
@@ -37,6 +39,13 @@ def save_figure(fig: plt.Figure, output: Path, name: str, sources: list[str]) ->
     plt.close(fig)
     return {"name": name, "source_files": sources, "pdf_sha256": sha256_file(output / f"{name}.pdf"),
             "png_sha256": sha256_file(output / f"{name}.png"), "visual_review": "pending"}
+
+
+def save_table(rows: list[dict], output: Path, name: str, sources: list[str]) -> dict:
+    """Preserve the table bytes and source lineage alongside the figures."""
+    path = output / f"{name}.csv"
+    pd.DataFrame(rows).to_csv(path, index=False)
+    return {"name": name, "source_files": sources, "csv_sha256": sha256_file(path)}
 
 
 def main() -> None:
@@ -60,7 +69,7 @@ def main() -> None:
                             | {k: c.get("metrics", {}).get(k) for k in ("ibs", "harrell_c_index", "uno_c_index", "mean_auc")})
         if c["condition"] == "full":
             groups[(c["dataset"], c["setting"])].append(c)
-    pd.DataFrame(metrics_rows).to_csv(args.output / "fold_metrics.csv", index=False)
+    tables = [save_table(metrics_rows, args.output, "fold_metrics", ["cells/*.json"])]
     figures = []
     for (dataset, setting), records in sorted(groups.items()):
         models = sorted({c["model_key"] for c in records})
@@ -97,7 +106,23 @@ def main() -> None:
         fig.tight_layout(rect=[0, 0.04, 1, 0.95])
         figures.append(save_figure(fig, args.output, f"{dataset}_{setting}_calibration", sources))
     curves = read_mapping(args.run / "decision_curves.json")
+    point_rows, support_rows, unavailable_rows = [], [], []
     for key, result in sorted(curves.items()):
+        for model, reason in result["unavailable"].items():
+            unavailable_rows.append({"group": key, "model_key": model, "reason": reason})
+        for model, supports in result["support"].items():
+            support_rows.extend({"group": key, "model_key": model, **support} for support in supports)
+        for model, row in result.get("curves", {}).get("models", {}).items():
+            for i, threshold in enumerate(result["thresholds"]):
+                point = {"group": key, "model_key": model, "threshold": threshold,
+                         "net_benefit": row["net_benefit"][i],
+                         "pointwise_lower": row["pointwise_lower"][i],
+                         "pointwise_upper": row["pointwise_upper"][i]}
+                for default in ("all", "none"):
+                    difference = row.get("differences", {}).get(default)
+                    for field in ("estimate", "pointwise_lower", "pointwise_upper"):
+                        point[f"minus_{default}_{field}"] = difference[field][i] if difference else None
+                point_rows.append(point)
         fig, ax = plt.subplots(figsize=(12, 6.5))
         for model, row in result.get("curves", {}).get("models", {}).items():
             ax.plot(result["thresholds"], row["net_benefit"], label=LABELS[model],
@@ -108,9 +133,12 @@ def main() -> None:
             ax.legend(loc="center left", bbox_to_anchor=(1.01,0.5), fontsize=8)
         ax.set_xlabel("Exploratory assessment threshold probability")
         ax.set_ylabel("IPCW net benefit per patient")
-        ax.set_title(f"{key.replace('__',' | ')}\nAdaptive training-horizon procedure; conditional exploratory uncertainty")
+        ax.set_title(f"{key.replace('__',' | ')}\nAdaptive training-horizon estimates; pointwise intervals in accompanying table")
         fig.tight_layout(rect=[0, 0.04, 0.82, 1])
         figures.append(save_figure(fig, args.output, f"decision_{key}", ["decision_curves.json"]))
+    for name, rows in (("decision_curve_points", point_rows), ("decision_curve_support", support_rows),
+                       ("decision_curve_unavailable", unavailable_rows)):
+        tables.append(save_table(rows, args.output, name, ["decision_curves.json"]))
     families = read_mapping(args.run / "paired_families.json")
     family_rows = []
     for name, family in families.items():
@@ -118,7 +146,11 @@ def main() -> None:
         fig, ax = plt.subplots(figsize=(11, max(5, 0.33*len(rows))))
         labels = []
         for i, row in enumerate(rows):
-            labels.append(f"{row['dataset']}: {row.get('model',row['left'])} - {row['right']}")
+            dataset = "METABRIC matched" if row["dataset"] == "metabric_matched" else row["dataset"].upper()
+            if "model" in row:
+                labels.append(f"{dataset}: {LABELS[row['model']]} (clinical+expression - clinical)")
+            else:
+                labels.append(f"{dataset}: {LABELS[row['left']]} - {LABELS[row['right']]}")
             effect = row.get("effect")
             if effect:
                 mid, lo, hi = effect["mean_difference"], effect["confidence_lower"], effect["confidence_upper"]
@@ -131,11 +163,11 @@ def main() -> None:
         ax.set_title(f"{name.replace('_',' ')}\nHolm family complete: {family['family_complete']}; unavailable contrasts have no point")
         fig.tight_layout(rect=[0, 0.03, 1, 1])
         figures.append(save_figure(fig, args.output, f"paired_{name}", ["paired_families.json"]))
-    pd.DataFrame(family_rows).to_csv(args.output / "paired_families.csv", index=False)
-    import json
+    tables.append(save_table(family_rows, args.output, "paired_families", ["paired_families.json"]))
     rq2 = json.loads((args.run / "rq2_effects.json").read_text())
-    pd.DataFrame([{k:v for k,v in row.items() if k != "corrected_descriptive_interval"}
-                  | row.get("corrected_descriptive_interval", {}) for row in rq2]).to_csv(args.output / "rq2_effects.csv", index=False)
+    rq2_rows = [{k:v for k,v in row.items() if k != "corrected_descriptive_interval"}
+                | row.get("corrected_descriptive_interval", {}) for row in rq2]
+    tables.append(save_table(rq2_rows, args.output, "rq2_effects", ["rq2_effects.json"]))
     conditions = ["fraction_0.25", "fraction_0.50", "fraction_0.75", "admin_q0.75", "admin_q0.50"]
     for dataset in ("gbsg2", "whas500", "metabric"):
         fig, axes = plt.subplots(1, 3, figsize=(14, 5))
@@ -154,7 +186,7 @@ def main() -> None:
         figures.append(save_figure(fig, args.output, f"rq2_{dataset}", ["rq2_effects.json"]))
     lineage = {"evidence_status": "post_hoc_extension", "source_manifest_sha256": sha256_file(args.run / "manifest.json"),
                "source_completion_sha256": sha256_file(args.run / "completion.json"),
-               "renderer_sha256": sha256_file(Path(__file__)), "figures": figures,
+               "renderer_sha256": sha256_file(Path(__file__)), "figures": figures, "tables": tables,
                "actual_visual_review": "pending; creation does not constitute QA"}
     write_json_atomic(args.output / "lineage.json", lineage, overwrite=False)
     print(len(figures), "figure pairs written; actual visual review remains required")

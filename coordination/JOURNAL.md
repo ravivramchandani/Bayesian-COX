@@ -856,3 +856,13 @@ Two detached pre-stage workers use the unchanged sealed fitting code to
 refit selected extension cells as their source cells arrive. They write only
 candidate refit cells/traces, and the official 92-cell reproduction comparison
 will issue receipts after the full source grid verifies.
+
+An explicitly non-evidence partial snapshot rendered 18 PDF/PNG figure pairs
+without errors. Visual inspection of representative plots found raw machine
+labels and a decision-curve title that implied displayed uncertainty without
+showing intervals. The separate analysis renderer now uses readable model
+labels, labels the plots as point estimates, and writes lineaged decision-
+curve pointwise-interval, support and unavailable-model CSVs. The three
+analysis-only source hashes are recorded separately; production inputs and
+the result-blind freeze remain unchanged. Final 32-figure visual QA is still
+required after the complete grid.

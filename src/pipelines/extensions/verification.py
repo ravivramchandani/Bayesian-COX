@@ -87,7 +87,8 @@ def verify_extension_run(root: Path, matched: Path, run: Path, *, deep: bool = T
     for name, digest in manifest["input_sha256"].items():
         if sha256_file(production_root / name) != digest:
             raise ValueError(f"extension code/input changed: {name}")
-    analysis_only = {"src/pipelines/extensions/verification.py", "scripts/finalize_extensions.py"}
+    analysis_only = {"src/pipelines/extensions/verification.py", "scripts/finalize_extensions.py",
+                     "scripts/render_extensions.py"}
     analysis_sha256 = {}
     for name, digest in manifest["input_sha256"].items():
         current = sha256_file(root / name)

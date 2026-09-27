@@ -57,8 +57,8 @@ and robustness directories from Ravi's baseline handoff. The production
 manifest pins every fitted source and input file. Finalization can use a
 later clean analysis checkout with an independently corrected verifier,
 provided `--production-code` identifies the original sealed checkout.
-The verifier checks every production hash and allows only its own file and
-the finalization script to differ in the analysis checkout; it records
+The verifier checks every production hash and allows only its own file,
+the finalization script and the renderer to differ in the analysis checkout; it records
 their hashes with the original production commit. Run finalization and
 rendering from that analysis checkout. Run selected numerical refits from
 the original production checkout so their fitting code matches exactly:
@@ -86,7 +86,9 @@ Repeat reproduction worker indices 1 through 5. Require all 92 receipts,
 actual trace-array comparison, independent all-cell rescoring/diagnostics,
 and complete grid accounting. The numerical completion file explicitly
 leaves reproduction and rendering pending; separate receipts close those
-gates. Rendering creates PDF/PNG pairs and tables, but does not constitute
+gates. Rendering creates PDF/PNG pairs and lineaged tables, including the
+conditional decision-curve pointwise intervals and support/exclusion rows,
+but does not constitute
 visual QA. Inspect each final rendered PDF page and preserve the QA evidence.
 Reports must state diagnostic exclusions, incomplete families, conditional
 decision-curve uncertainty, inherited clinical METABRIC duplicate-pair
