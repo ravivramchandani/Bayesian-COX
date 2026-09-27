@@ -4,18 +4,38 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-09-28
 
-## Active extension implementation — authorised 2026-09-28
+## Active post-hoc extension production — authorised 2026-09-28
 
 The owner requested plan corrections and full verified code/results
-implementation. ADR-039 refines ADR-038. One repository integration owner
-implements separate modules; reference research uses external files only.
-Preparation has verified actual author/CRAN R fixtures and pinned measured
-METABRIC inputs. No new outer-validation scores have been computed.
+implementation. ADR-039 refines ADR-038. Implementation, real author/CRAN R
+fixture parity, pinned METABRIC preparation, 297 tests, coordination schemas
+and Ruff have passed. The implementation is remotely pushed. Six disjoint
+numerical workers are actively filling the 1,625-fit grid on this Mac from
+clean detached production commit `119476f`, with outputs outside Git at
+`~/bayes-cox-runs/extensions-20260928/run`. First completed cell scores and
+one saved posterior/prior diagnostic pair were independently checked. Do not
+start duplicate workers or alter that sealed checkout. Inspect live PIDs,
+claims, logs and cell hashes before resuming a stopped process. The manifest
+pins every production input; its status is incomplete until all 1,625 cells
+exist and downstream gates pass.
+
+The verifier-only correction at `ce8d6f5` is pushed on main. Finalization
+uses that analysis checkout with `--production-code` pointing at the original
+`119476f` checkout, and confirms all production hashes. Selected 92 numerical
+refits must use the original production checkout. See
+[execution instructions](../docs/extensions_execution.md). Both code
+versions and the actual result directories must be included in the final
+private evidence release and fresh restoration check.
+
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
 No extension outer-validation result existed before the freeze. All
-extension outputs will use a new sealed code checkout and separate run root.
-Original results remain available below. Overleaf and paper/DOI work are deferred.
+extension outputs are post-hoc and remain separate from the closed primary
+record. The remaining gates are complete 1,625-cell accounting, deep
+diagnostic/score verification, separate RQ2/four-family/DCA aggregates,
+92 exact refits, rendering and actual PDF QA, private release, fresh download
+and restore, and factual plan/handoff close-out. Original results remain
+available below. Overleaf and paper/DOI work are deferred.
 
 ## Completed baseline programme — Ravi can restore it
 
@@ -47,8 +67,9 @@ on this Apple Silicon Mac with the existing verified lock, not on a second
 physical laptop. The receiving Mac must verify its environment.
 
 Original 20 horseshoe failures, incomplete primary inference and the failed
-explanation gate remain findings. T-180 and extension implementation are active under ADR-039;
-production awaits the recorded addendum freeze. The separate documentation-only pass is tracked in step 12.
+explanation gate remain findings. The frozen extension production above is
+active under ADR-039. The separate documentation-only pass is tracked in
+step 12.
 Overleaf edits and paper/DOI work remain excluded.
 
 ## Earlier numerical checkpoint — before final close-out

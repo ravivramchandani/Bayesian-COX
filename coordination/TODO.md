@@ -411,9 +411,13 @@ for a Q1 journal paper, and the paper is drafted later. This is a quality
 target, not an acceptance guarantee. Every result below is post-hoc and
 labelled as such; the frozen confirmatory record stays primary. ADR-033's
 Holm bound is already computed and rendered; ADR-032 has seven existing
-probes and a separately specified 75-cell production stage. Implementation preparation is active under ADR-039; no new outer-validation
-result has been computed. Unmeasured two-hour and ten-hour runtime estimates
-are withdrawn; estimate compute from blind profiling of the specified design.
+probes and a separately specified 75-cell production stage. The extension
+implementation and result-blind addendum are frozen; the 1,625-fit numerical
+grid is active from sealed commit `119476f`. Its early cells are post-hoc
+results, not a complete programme or grounds to check T-182–T-189 yet.
+The analysis-only verifier correction is `ce8d6f5` and cannot alter fitted
+cells. Unmeasured two-hour and ten-hour runtime estimates are withdrawn;
+estimate compute from actual monitored fits and resource use.
 
 - [x] T-180 (T; no dependency) — Write and freeze
   `docs/protocol_addendum_extensions.md` before results of the four new
