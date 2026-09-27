@@ -156,6 +156,7 @@ def initialize_extension_run(root: Path, matched: Path, output: Path) -> tuple[d
     manifest.update({"matched_sha256": sha256_file(matched), "freeze_sha256": freeze["content_sha256"],
                      "planned_fits": len(jobs), "plan": plan, "evidence_status": "post_hoc_extension"})
     manifest["manifest_content_sha256"] = canonical_json_hash({k: v for k, v in manifest.items() if k != "manifest_content_sha256"})
+    output.mkdir(parents=True, exist_ok=True)
     path = output / "manifest.json"
     if path.exists():
         old = read_mapping(path)

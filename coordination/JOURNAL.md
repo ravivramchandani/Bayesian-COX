@@ -826,3 +826,9 @@ METABRIC CSV; the matched cohort contains no overlapping known pair.
 External snapshot review found warning-category, lost-attempt and pairing
 verification defects. Implementation corrected them before production and
 added focused negative tests; the review did not certify revised code.
+
+The implementation was committed and pushed as `93431e4`. Its first sealed
+launch check rejected a missing output parent directory before a manifest or
+any fit existed. A directory-initialization fix and focused regression test
+follow; no frozen settings or scientific results changed. Production will
+start from the corrected clean commit, retaining the initial checkout.

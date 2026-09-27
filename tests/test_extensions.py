@@ -331,3 +331,28 @@ def test_biological_aliases_are_bootstrapped_together() -> None:
                                       n_bootstraps=100, seed=61, cluster_ids=["same", "same", "other", "other"])
     assert result["n_biological_clusters"] == 2
     assert_allclose(result["models"]["model"]["differences"]["all"]["estimate"], [0])
+
+
+def test_initializer_creates_nested_output_before_exclusive_manifest_claim(tmp_path: Path, monkeypatch) -> None:
+    import src.pipelines.extensions.runner as runner
+    from src.pipelines.extensions.runner import initialize_extension_run
+    freeze = {"sha256": {}}
+    freeze["content_sha256"] = canonical_json_hash(freeze)
+    config = {"base_seed": 260817}
+    def mappings(path):
+        if path.name == "extension_protocol_freeze.json":
+            return freeze
+        if path.name == "extensions.yaml":
+            return config
+        if path.name == "datasets.yaml":
+            return {k: {"raw_file": f"{k}.csv"} for k in ("gbsg2", "whas500", "metabric")}
+        return read_mapping(path)
+    monkeypatch.setattr(runner, "read_mapping", mappings)
+    monkeypatch.setattr(runner, "load_extension_cohorts", lambda *a: {})
+    monkeypatch.setattr(runner, "build_extension_jobs", lambda *a: [])
+    monkeypatch.setattr(runner, "build_run_manifest", lambda *a, **k: {"code": {"git_dirty": False}})
+    matched = tmp_path / "fixture_input"
+    matched.write_bytes(b"unit fixture")
+    output = tmp_path / "new" / "nested" / "run"
+    initialize_extension_run(tmp_path, matched, output)
+    assert (output / "manifest.json").exists() and not (output / "manifest.claim").exists()
