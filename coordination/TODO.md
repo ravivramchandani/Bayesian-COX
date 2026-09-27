@@ -415,7 +415,7 @@ probes and a separately specified 75-cell production stage. The extension
 implementation and result-blind addendum are frozen; the 1,625-fit numerical
 grid is active from sealed commit `119476f`. Its early cells are post-hoc
 results, not a complete programme or grounds to check T-182–T-189 yet.
-The analysis-only verifier correction is `ce8d6f5` and cannot alter fitted
+The strengthened analysis-only verifier is separately sealed at `8551d32` and cannot alter fitted
 cells. Unmeasured two-hour and ten-hour runtime estimates are withdrawn;
 estimate compute from actual monitored fits and resource use.
 
