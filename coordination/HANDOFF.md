@@ -125,7 +125,7 @@ Completed integration gates and their evidence locations are in
    files, seven intended changes and five additions, with no missing output.
    See `coordination/reviews/2026-09-27-rendering-refactor-verification.md`.
    The subsequent full 426-page review found 30 legacy layout defects.
-   Corrected previews passed visual QA; full replacement review is pending in
+   The complete replacement bundle passed all 426 PDF pages, recorded in
    `coordination/reviews/2026-09-27-full-pdf-review.md`.
    A final bundle incorporating completed robustness remains required.
 8. [ ] Complete the labelled post-hoc horseshoe sensitivity under ADR-032.

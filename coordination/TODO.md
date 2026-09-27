@@ -22,9 +22,9 @@ pause. All modular refactors are integrated and passed their required gates:
 six exact model refits; the original explanation SHA-256; three byte-identical
 confirmatory aggregate files rebuilt from all 450 cells; the six quick-selection
 and four specified additional confirmatory refits; and three exact robustness
-refits. Rendering passed the exhaustive old/new-file gate: 874 identical,
-seven intentional changes, five additions and no missing output; representative
-PDFs passed visual QA. ADR-030 checkpoint verification is integrated, and
+refits. Rendering retains all original output paths with documented
+presentation changes and five additions. Its complete 426-PDF review passed.
+ADR-030 checkpoint verification is integrated, and
 ADR-034 pilot retirement is complete. Historical data, results and retired
 source history remain preserved. The recovery audit records the original
 interruption state, which the completed engineering checkpoints supersede.
@@ -32,8 +32,8 @@ Current gate evidence is in
 `coordination/reviews/2026-09-27-integrated-code-verification.md`.
 
 The complete 426-page PDF review subsequently identified 30 presentation
-defects in the legacy layouts. Corrected overview and trace previews passed
-visual inspection; full replacement rendering and review are pending. See
+defects in the legacy layouts. Full replacement rendering and review passed
+all 426 PDFs, resolving every observed defect. See
 `coordination/reviews/2026-09-27-full-pdf-review.md`.
 
 Frozen robustness production remains active under its original six workers.

@@ -13,12 +13,15 @@ unchanged. New reproduction and post-hoc outputs have separate directories.
 | Confirmatory fitting | Six GBSG2 cells and four specified WHAS500/METABRIC cells refitted | 10/10 identical except timing fields |
 | Explanation package | Original production artifact recreated through the public CLI | Original SHA-256 reproduced exactly |
 | Robustness package | Normal sample-fraction, spike-and-slab administrative-censoring and horseshoe tighter-prior cells refitted | 3/3 identical except timing fields |
-| Renderer | Exhaustive original/refactored file comparison | 874 identical, seven documented changes, five additions, no missing files |
+| Initial renderer extraction | Exhaustive original/refactored file comparison | 874 identical, seven documented changes, five additions, no missing files |
+| Publication layout corrections | Exhaustive final-base-render comparison and all 426 PDF pages reviewed | 36 identical, 845 documented differences, five additions, no missing files; all 426 PDFs visually passed |
 
 The render comparison and visual inspection are documented in
 `2026-09-27-rendering-refactor-verification.md`; its exhaustive inventory is
 `../recovery/2026-09-27-render-equivalence.json`. The final render incorporating
 completed robustness and the separate sampler sensitivity remains pending.
+The corrected base bundle and its complete visual/hash proof are documented
+in `2026-09-27-full-pdf-review.md`.
 
 The original explanation SHA-256 is
 `120984c7edfac468f471b9f500470623689b2647e4bde56d271cc9623346ecd5`.

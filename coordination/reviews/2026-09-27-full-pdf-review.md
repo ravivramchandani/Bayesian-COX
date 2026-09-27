@@ -36,6 +36,15 @@ change or missing output exists. Every numerical CSV/LaTeX table retains its
 original bytes except the previously documented primary-contrast tables.
 The bundle verifier accepted all 885 registered outputs, their exact original
 source hashes, explanation reference and unchanged current renderer code.
-The full replacement visual review remains pending. The final
-programme bundle will additionally include completed robustness and separate
+The full replacement review passed all 426 single-page PDFs. All 419 changed
+pages (416 traces and three overviews) were actually visually reviewed;
+seven unchanged overview pages reused their exact previously passed hashes.
+All 30 baseline layout defects are resolved, with no observed clipping,
+overlap, truncated feature labels or broken glyphs. All 850 font records are
+embedded with Unicode mappings, and all page boxes pass. Conservative
+font-metric bounds warnings remain separate from actual visual defects;
+the visible glyphs were reviewed. The final per-file record is
+`../recovery/2026-09-27-final-pdf-qa.json` (SHA-256
+`d1ee0d502d26a28c2ee3e3681a779aafd251cdcb8d2a1e7004b28e2e68cd6dd5`).
+The final programme bundle will additionally include completed robustness and separate
 post-hoc sampler evidence, and will require its own hash-bound visual QA.

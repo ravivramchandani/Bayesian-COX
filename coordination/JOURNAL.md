@@ -641,3 +641,20 @@ matched every original non-timing field. The partial check is preserved in
 `coordination/recovery/2026-09-27-programme-launch-check.json`; it explicitly
 does not certify the full 450-cell reproduction. Both reproduction workers,
 all six original robustness workers and their finishing supervisor are alive.
+
+The full replacement render passed source/code/output-lineage verification
+for all 885 registered outputs. Its exhaustive old/new comparison retains
+36 identical original files and documents 845 intended differences: the
+seven initial extraction changes plus 838 presentation fixes. All numerical
+tables remain byte-identical apart from the previously documented primary
+contrast-table improvements; no original path is missing. The comparison is
+preserved in `coordination/recovery/2026-09-27-final-layout-equivalence.json`.
+
+Full replacement visual QA passed all 426 single-page PDFs. The 419 changed
+pages were actually reviewed, and seven unchanged overview pages reused exact
+passed hashes. All 30 baseline defects are resolved. All fonts are embedded
+with Unicode maps, and page boxes pass; conservative font-metric warnings
+remain separate from visual defects. The hashed per-file record is preserved
+in `coordination/recovery/2026-09-27-final-pdf-qa.json`. This base render does
+not include unfinished robustness or post-hoc sampler outputs; their final
+bundle still requires actual verification and visual QA.
