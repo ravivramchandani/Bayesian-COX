@@ -43,6 +43,8 @@ preparation writes `analysis_prepared.json`. Neither file constitutes final
 visual approval or remote release. Inspect actual commands/PIDs and the
 current cell/receipt files before any restart; the dated counts above are a
 checkpoint, not a live progress claim.
+`caffeinate -dimsu -w 68914` is active as PID 69894, bound to the
+coordinator lifetime so idle sleep does not interrupt this Mac's computation.
 
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
