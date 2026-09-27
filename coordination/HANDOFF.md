@@ -2,9 +2,38 @@
 
 State needed to resume work in a new session or on another machine.
 
-Updated: 2026-09-27
+Updated: 2026-09-28
 
-## Current checkpoint — resumed after reboot
+## Current checkpoint — numerical cells complete; final close-out pending
+
+The dated checkpoint is
+`coordination/recovery/2026-09-28-numerical-checkpoint.json`. Independent
+read-only verification accepted all 450 reproduced cells as exact matches
+outside recorded timing/hash fields, the completed frozen 825-cell robustness
+run and all 75 saved ADR-032 sampler cells. All 90 sealed source/script
+hashes still match `11f86ced8735b32767debb58f3cbbefbb5a7b8e6`.
+
+- Reproduction: 450/450 checked and identical; the report is
+  `~/bayes-cox-runs/continuation-20260927/reproduction/verification.json`.
+- Robustness: all 825 cells and completed aggregates verify. There are 770
+  cells with passing diagnostic status and 55 recorded diagnostic failures.
+  The six workers and finishing supervisor have exited.
+- Sampler sensitivity: all 75 saved cells verify and have passing diagnostic
+  status. Its inference/completion records were still pending at checkpoint.
+- Coordinator PID 3374 remains responsible for sampler inference, strict
+  final verification and both rendered bundles. No duplicate run is needed.
+- New results remain local under `~/bayes-cox-runs/continuation-20260927/`
+  and the original robustness directory below. They have not yet been
+  packaged into the private supplementary release.
+
+Final inference, completed render lineages, actual visual QA, claim review,
+packaging, isolated restore and private-release verification remain required.
+Stored cell counts do not complete these gates. The original failed cells,
+incomplete primary family and failed explanation gate remain unchanged.
+The new ADR-035 and ADR-038 extension experiments have not started. Overleaf
+remains outside this programme.
+
+## Earlier checkpoint — resumed after reboot
 
 The owner requested completion of all remaining code/results tasks. At
 07:51:46 UTC (20:51 Auckland) on 2026-09-27, execution resumed on this Mac
@@ -141,12 +170,14 @@ in the 2026-08-16 sequence below:
 - **Current state: core programme running; planning updates authorised.**
   - The owner's latest instruction requests plan and coordination updates
     following the scientific review. ADR-037 and T-180–T-186 record them.
-  - The existing coordinator continues frozen robustness, full 450-cell
-    regeneration and the queued 75-cell ADR-032 sensitivity, then rendering.
+  - The existing coordinator has completed reproduction and robustness;
+    all 75 ADR-032 sensitivity cells are stored. It is finishing sensitivity
+    inference and final verification, then rendering.
     Final visual QA, claim review, packaging, restore and private code/evidence
     release remain in the existing authorised programme.
-  - The four new ADR-035 analyses are planned, not launched or queued by
-    this coordinator. T-180's actual addendum and freeze remain unfinished.
+  - The four new ADR-035 analyses and ADR-038 catalytic arm are planned,
+    not launched or queued by this coordinator. T-180's actual addendum
+    and freeze remain unfinished.
     This planning update does not start their experiments.
   - Do not run `finish_robustness.sh`, restart active workers or launch a
     duplicate coordinator/sensitivity. The supervisor owns robustness finish.
@@ -190,24 +221,22 @@ Completed integration gates and their evidence locations are in
 
 ### Plan and status
 
-1. [ ] Run robustness (T-140–T-143) and explanation (T-144) production with
+1. [x] Run robustness (T-140–T-143) and explanation (T-144) production with
    the frozen code, from a detached worktree of `2e55c0b` outside iCloud
    (`~/bayes-cox-runs/frozen`), in the lock environment.
    - Explanation: done 2026-09-27. Output:
      `~/bayes-cox-runs/frozen/reports/explainability/confirmatory_v1_confirmatory_cdcdcee84651_explainability_v1.json`
      (SHA-256 `120984c7…6ecd5`). It made 1,845 comparisons; the convergence
      summary is `failed`, so no claim is permitted.
-   - Robustness: started 2026-09-27 in
+   - Robustness: completed and independently verified 2026-09-28 in
      `~/bayes-cox-runs/frozen/reports/robustness/confirmatory_v1_robustness_robustness_702d93af33bf/`.
-     Six workers run `~/bayes-cox-runs/harness/shard_worker.py`, which runs
-     the unmodified `run_robustness.py`. The worker claims each cell with a
-     lock file in `~/bayes-cox-runs/robustness-claims/` and stops before
-     aggregation. Logs and PIDs are in `~/bayes-cox-runs/logs/`.
-   - Resumed supervisor PID 3372 runs `scripts/wait_for_robustness.py` and manages
-     the final unsharded official `--resume` pass automatically after the
-     workers finish. That pass verifies the original freeze, completes any
-     missing cells and writes aggregates and `completion.json`. Do not launch
-     a duplicate manual finish. Logs are in `~/bayes-cox-runs/logs/`.
+     The six workers used the unmodified frozen runner. Supervisor PID 3372
+     finished the official unsharded resume and aggregation; workers and
+     supervisor have now exited. All 825 cells verify, including 55 recorded
+     diagnostic failures. Logs remain in `~/bayes-cox-runs/logs/`.
+   - Computational production is complete; task acceptance and scientific
+     claims still require the coverage/interpretation review in T-140–T-144.
+     Do not relaunch workers or the robustness finisher.
 2. [x] Build a reproduction harness that reruns one cell and compares it
    with the frozen record: `scripts/reproduce_confirmatory_cells.py`. The
    baseline on unchanged code reproduced the quick selection exactly.
@@ -237,12 +266,12 @@ Completed integration gates and their evidence locations are in
 5. [x] Retire the legacy pilot execution lane under ADR-034. Historical data
    and results remain in place, retired source remains in Git history, and
    active tests use real raw cohorts with fold-local preprocessing.
-6. [ ] Regenerate the 450-cell run with the refactored code and compare it
-   with the frozen artefacts (the ADR-026 reproduction claim). The full
-   450-cell regeneration launched at 13:41 Auckland time on 2026-09-27 from
-   sealed commit `11f86ced8735b32767debb58f3cbbefbb5a7b8e6` with two workers.
-   Its complete 450/450 equality report remains pending; selected module
-   gates and pure aggregate reproduction do not complete this task.
+6. [x] Regenerate the 450-cell run with the refactored code and compare it
+   with the frozen artefacts (the ADR-026 reproduction claim). All 450 refits
+   matched every non-timing field from sealed commit
+   `11f86ced8735b32767debb58f3cbbefbb5a7b8e6`. Independent verification of
+   the complete saved-refit inventory, report, source and code checkpoint
+   passed on 2026-09-28; see the numerical checkpoint above.
 7. [x] Render the frozen results tables and figures, including the Holm
    family-completion bound. The full old/new comparison retained 874 identical
    files, seven intended changes and five additions, with no missing output.
@@ -254,8 +283,9 @@ Completed integration gates and their evidence locations are in
 8. [ ] Complete the labelled post-hoc horseshoe sensitivity under ADR-032.
    Initial investigation and seven target-acceptance probes are complete;
    `scripts/run_horseshoe_sampler_sensitivity.py` implements the separate
-   75-cell refit and nine-contrast analysis. Production has not started; the
-   coordinator queues six workers after frozen robustness is complete.
+   75-cell refit and nine-contrast analysis. All 75 refits are saved and pass
+   diagnostics; aggregate inference, completion verification and final
+   rendering were still pending at the numerical checkpoint.
 9. [ ] Finalise documentation and evidence packaging. Engineering status,
    architecture, decisions, invariants and recorded thesis corrections are
    updated. Final run identifiers, claims, rendered bundles and visual QA
@@ -305,8 +335,9 @@ verified the frozen run, unchanged study inputs and locked runtime before
 starting the reproduction stage. The log is
 `~/bayes-cox-runs/logs/resume_20260927T075146Z/programme.log` and its PID file
 is alongside it. Do not edit that checkout or launch a second coordinator.
-Full reproduction, robustness aggregation, sampler results, final visual QA
-and packaging remain pending until their actual completed evidence verifies.
+Full reproduction and robustness aggregation have verified completion.
+Sampler inference, final render verification, visual QA and packaging remain
+pending until their actual completed evidence verifies.
 
 Administrative deadline: the live programme in `TODO.md` runs from 2026-08-17
 to 2026-11-30. This 15-week schedule supersedes the earlier 26-week dates for

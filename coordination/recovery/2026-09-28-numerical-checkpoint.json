@@ -1,0 +1,57 @@
+{
+  "checked_at_utc": "2026-09-27T19:30:11.673905+00:00",
+  "checkpoint_content_sha256": "a1ce49bece920deb52d251a4a55b13cd4a22c71d8056352c454d6341a53ab4e5",
+  "code_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+  "final_analysis_record_present": false,
+  "final_visual_qa": "pending",
+  "original_results_unchanged": true,
+  "overleaf_edited": false,
+  "posthoc_sampler_sensitivity": {
+    "completion_present": false,
+    "inference_present": false,
+    "manifest": {
+      "content_sha256": "00f9c10f62bf118a5285c912b223e6dd8dd66722f6d4a8a999c67a94db879460",
+      "path": "/Users/macuser/bayes-cox-runs/continuation-20260927/posthoc_sampler/horseshoe_ta0999_posthoc_62f4f08bf76d/manifest.json",
+      "sha256": "76acf071cf41f5456538799625979775ad00a5ab699b55b88987fee7ed6c5d00"
+    },
+    "run_dir": "/Users/macuser/bayes-cox-runs/continuation-20260927/posthoc_sampler/horseshoe_ta0999_posthoc_62f4f08bf76d",
+    "status": "all_75_saved_cells_verified_pending_inference_and_completion",
+    "status_counts": {
+      "complete": 75
+    },
+    "stored_cells": 75
+  },
+  "private_programme_release": "pending",
+  "programme_failure_present": false,
+  "reproduction": {
+    "cells_checked": 450,
+    "cells_identical": 450,
+    "ignored_fields": [
+      "cell_content_sha256",
+      "fit_seconds",
+      "total_seconds"
+    ],
+    "report": {
+      "content_sha256": "1ed7cb783c9364e59172923e82f4eca0c85159627f98e1888d56988577fc0723",
+      "path": "/Users/macuser/bayes-cox-runs/continuation-20260927/reproduction/verification.json",
+      "sha256": "5ee67afad696efe1848f3b697c45ed995127ec5cefbefac21291b4753af1ec28"
+    },
+    "status": "all_450_exact_non_timing_matches_independently_verified"
+  },
+  "robustness": {
+    "completion": {
+      "content_sha256": "22339353f3d3c3add8610970e9be91659d6a54c1a45dcf13072a62fd65e0ae0c",
+      "path": "/Users/macuser/bayes-cox-runs/frozen/reports/robustness/confirmatory_v1_robustness_robustness_702d93af33bf/completion.json",
+      "sha256": "8f136a6b2f9cf0a18308db71d63a69b1b145b0c767548cc7465d4af73e781152"
+    },
+    "status": "completed_run_strictly_verified",
+    "status_counts": {
+      "complete": 770,
+      "failed_diagnostics": 55
+    },
+    "stored_cells": 825
+  },
+  "sealed_source_files_checked": 90,
+  "sealed_source_hashes_match": true,
+  "status": "numerical_checkpoint_pending_final_programme_closeout"
+}

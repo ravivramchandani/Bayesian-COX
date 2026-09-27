@@ -738,3 +738,25 @@ the existing private code/evidence release remains part of core close-out.
 The five-file planning update passed all 270 tests in 92.22 seconds, separate
 coordination schema validation and `git diff --check` in the exact lock
 environment while the numerical jobs continued.
+
+## 2026-09-28 — Completed numerical cells verified; final bundle still local
+
+Read-only independent verification accepted all 450 saved reproduced cells
+as exact non-timing matches, the completed frozen 825-cell robustness run
+and all 75 saved ADR-032 sensitivity cells. All 90 sealed source/script hashes
+match `11f86ced8735b32767debb58f3cbbefbb5a7b8e6`. Robustness contains 770
+passing cells and 55 diagnostic failures; all 75 sensitivity cells have
+passing status. These findings do not alter the original failed cells,
+incomplete primary inference family or failed explanation-convergence gate.
+
+The compact, content-hashed checkpoint is
+`coordination/recovery/2026-09-28-numerical-checkpoint.json`. It preserves
+actual report paths, byte/content hashes, verification counts and the
+unfinished sampler inference/completion, rendering, visual QA and release
+gates. The main repository was clean and matched its remote before this
+status refresh. The existing coordinator remains active; no worker was
+restarted. New numerical files are still local, and no supplementary release
+has been created. Overleaf remains unchanged.
+
+The checkpoint refresh passed all 270 tests in 55.52 seconds, separate
+coordination schema validation and `git diff --check` in the exact runtime.

@@ -15,7 +15,7 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
-## Current programme — 2026-09-27
+## Current programme — 2026-09-28
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:
@@ -36,23 +36,22 @@ defects in the legacy layouts. Full replacement rendering and review passed
 all 426 PDFs, resolving every observed defect. See
 `coordination/reviews/2026-09-27-full-pdf-review.md`.
 
-Frozen robustness production resumed after reboot under six new workers,
-without changing its original code or saved cells. Supervisor PID 3372
-automatically performs the final unsharded resume and
-aggregation; no duplicate manual finish is required. Explanation production
-retains its failed convergence gate and permits no RQ3 stability claim.
+Frozen robustness production and final aggregation have finished without
+changing the original code or saved cells. Independent strict verification
+accepted all 825 cells: 770 pass diagnostics and 55 fail. The six workers
+and supervisor have exited; no manual finish or restart is needed.
 
-The full 450-cell reproduction launched on 2026-09-27 from sealed commit
-`11f86ced8735b32767debb58f3cbbefbb5a7b8e6`; its complete equality report is
-pending. The separate 75-cell ADR-032 horseshoe sensitivity has not launched.
-`scripts/complete_results_programme.py` runs from the clean detached checkout,
-records sealed source/code hashes, uses two reproduction workers while the
-six frozen robustness workers continue, then starts the 75-cell sensitivity
-with six workers after robustness is complete.
-It strictly verifies completed evidence and renders both final bundles.
-Final rendering with robustness, visual QA, claim review, evidence packaging
-and production close-out remain. Selected refit gates do not satisfy the full
-reproduction requirement. Overleaf edits remain excluded; the 19 recorded
+Full reproduction from sealed commit
+`11f86ced8735b32767debb58f3cbbefbb5a7b8e6` passed exhaustive independent
+verification: 450/450 saved refits match every non-timing field. All 90 sealed
+code hashes still match. All 75 separate ADR-032 sensitivity cells are saved
+and pass diagnostics; their inference and completion records were still
+pending at `coordination/recovery/2026-09-28-numerical-checkpoint.json`.
+The existing coordinator finishes those records, verifies final evidence
+and renders both bundles. Final rendering, actual visual QA, claim review,
+packaging, isolated restore and private supplementary release remain.
+Original explanation production retains its failed convergence gate and
+permits no RQ3 stability claim. Overleaf edits remain excluded; the 19 recorded
 thesis corrections belong to T-152 through T-156 when thesis work resumes.
 
 The earlier wrap-up checkpoint is preserved unchanged. After the Mac rebooted,
@@ -252,35 +251,36 @@ remain unchecked until their actual completed evidence satisfies the gates.
 ## Weeks 7–10 — Robustness and explanation
 
 T-132 is complete and verified. The 2026-09-27 instruction resumed downstream
-production: T-140 through T-143 are running from the frozen code, and T-144
+production: T-140 through T-143 have completed frozen-code aggregates awaiting
+acceptance review, and T-144
 has a production artefact with a failed convergence gate.
-The final robustness aggregates are managed by the existing automatic
-supervisor; the results coordinator waits for and verifies that completion.
+The supervisor completed the final robustness aggregates, and the coordinator
+strictly verified that completion. Coverage and claim review remain pending.
 
 - [ ] T-140 (T, W7–8, owners R/SS; depends T-131) — Run the frozen prior
   hyperparameter and baseline-interval sensitivity. Acceptance: performance,
   uncertainty and diagnostics are compared without selecting a favourable
-  configuration post hoc. Runner/schema/tests are complete; production is
-  running. Final aggregates and verification remain outstanding.
+  configuration post hoc. The completed 825-cell run and aggregate hashes
+  verify; comparison coverage and claim review remain outstanding.
 - [ ] T-141 (T, W7–9, owners R/SS; depends T-132) — Run RQ2 sample-size and
   administrative-censoring analyses. Acceptance: identical subsamples across
   priors, difference-in-differences estimates and uncertainty answer H2.
-  Runner/schema/tests are complete; production is running. Final aggregates
-  and verification remain outstanding.
+  The completed frozen run and aggregates verify; accepted/expected paired
+  coverage, intervals and H2 interpretation still require claim review.
 - [ ] T-142 (T, W7–9, owners R/SS; depends T-132) — Run feature-timing and
   missing-data sensitivities. Acceptance: WHAS500 with/without `los`,
   METABRIC baseline/treatment-augmented, NPI/components and missingness
   analyses all trace to frozen specifications. The five-imputation fold-local
-  sensitivity is implemented; production is running and no verified final
-  robustness aggregate exists yet.
+  sensitivity is complete in the verified final robustness aggregates;
+  exclusion/coverage and interpretation review remain outstanding.
 - [ ] T-143 (T, W7–9, owners R/SS; depends T-132) — Check proportional-
   hazards assumptions and the frozen response. Acceptance: global/covariate
   tests and within-fit multiplicity control are reported; supported violations
   become limitations. No time interaction or time-varying coefficient is
   fitted or introduced in response to the assessment, and no silent model
   change is permitted.
-  Aggregation and Holm logic are implemented; the final production assessment
-  remains outstanding while the robustness workers run.
+  The completed assessment and aggregate hashes verify; PH findings and
+  their permitted interpretation remain to be reviewed.
 - [ ] T-144 (T, W8–9, owners R/SS; depends T-132/T-113) — Run the revised
   RQ3 explanation protocol. Acceptance: random paired subjects, training-fold
   backgrounds, same-Bayesian-model SHAP, three-seed convergence, grouped
@@ -425,8 +425,9 @@ are withdrawn; estimate compute from blind profiling of the specified design.
   Acceptance: all 75 cells and their attempts are accounted for, with pass
   rate, paired coverage and the separate nine-contrast Holm family, including explicitly
   unavailable contrasts, rendered next to the frozen five-of-nine result.
-  Already queued by the current coordinator after robustness; independent
-  of T-180. Do not launch a duplicate sensitivity or robustness finisher.
+  All 75 cells are stored, independently verified and pass diagnostics.
+  Inference/completion and rendering were pending at the numerical checkpoint.
+  Independent of T-180; do not launch a duplicate sensitivity or finisher.
 - [ ] T-182 (T; depends T-180) — Fit ridge, lasso and elastic-net Cox on the
   frozen outer folds of all three cohorts. Acceptance: same patients and
   evaluation rules as the Bayesian comparison; penalties selected by inner
