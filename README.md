@@ -266,5 +266,8 @@ tests/          reference, leakage, lineage, schema and reproducibility tests
 reports/        exploratory artefacts and content-addressed run directories
 ```
 
+New to the code? Start with [docs/code_guide.md](docs/code_guide.md), a guided tour
+from raw data to stored results.
+
 The thesis source is in the adjacent `thesis-overleaf` repository. Compile it
 with `make thesis` and audit internal project identifiers with `make jargon`.

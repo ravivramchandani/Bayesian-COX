@@ -5,6 +5,8 @@ fits preprocessing on each training fold, and stores a separate result for
 each model/fold. Historical pilot artefacts remain evidence of earlier work;
 their execution lane is retired under ADR-034.
 
+For a guided first read, see `docs/code_guide.md`.
+
 ```text
 data/manifest.yaml + data/raw/*.csv
 config/datasets.yaml + config/confirmatory.yaml

@@ -313,6 +313,14 @@ Completed integration gates and their evidence locations are in
 
     Paper drafting and submission are deferred until after the thesis.
 
+12. [ ] Documentation pass (owner instruction 2026-09-28). Brief:
+    `coordination/briefs/2026-09-28-documentation-pass.md`. Four worktree
+    branches, one per package: pipelines; models, evaluation, statistics,
+    data and utils; explanation and rendering; scripts and tests.
+    - Gate: `~/bayes-cox-runs/harness/ast_equivalence.py` proves each edit
+      is documentation-only against base `f0cce64`.
+    - The reading guide `docs/code_guide.md` is added.
+
 Tick each box when its step is complete, and record where its outputs are.
 
 `scripts/complete_results_programme.py` is the automatic continuation entry
