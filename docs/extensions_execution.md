@@ -21,7 +21,8 @@ The commands below use shell variables `extension_python`, `extension_code`,
 and `extension_home` chosen for the receiving machine. Do not copy absolute
 paths from another computer. Point `extension_python` to its verified lock
 interpreter, `extension_code` to the sealed checkout and `extension_home`
-to a new external directory. Run these inside the sealed checkout.
+to a new external directory. Run preparation and fitting inside the sealed
+checkout.
 
 ```bash
 "$extension_python" scripts/prepare_extensions.py \
@@ -42,20 +43,31 @@ is dead before archiving the claim/unfinished trace directory and retrying
 the same cell. Never delete a completed failed outcome to obtain another fit.
 
 After all workers finish, use separately restored original, ADR-032 sampler
-and robustness directories from Ravi's baseline handoff:
+and robustness directories from Ravi's baseline handoff. The production
+manifest pins every fitted source and input file. Finalization can use a
+later clean analysis checkout with an independently corrected verifier,
+provided `--production-code` identifies the original sealed checkout.
+The verifier checks every production hash and allows only its own file and
+the finalization script to differ in the analysis checkout; it records
+their hashes with the original production commit. Run finalization and
+rendering from that analysis checkout. Run selected numerical refits from
+the original production checkout so their fitting code matches exactly:
 
 ```bash
 "$extension_python" scripts/finalize_extensions.py \
   --matched "$extension_home/prepared/matched_metabric.parquet" \
   --run "$extension_home/run" \
+  --production-code "$extension_code" \
   --primary "$primary_run" --sampler "$sampler_run" --robustness "$robustness_run"
 
+# Change to the sealed production checkout before this command.
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 \
   "$extension_python" scripts/reproduce_extensions.py \
   --matched "$extension_home/prepared/matched_metabric.parquet" \
   --source "$extension_home/run" --output "$extension_home/reproduction" \
   --workers 6 --worker 0
 
+# Change back to the verified analysis checkout before this command.
 "$extension_python" scripts/render_extensions.py \
   --run "$extension_home/run" --output "$extension_home/rendered_v1"
 ```

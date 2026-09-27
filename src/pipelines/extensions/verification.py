@@ -62,16 +62,39 @@ def assert_scientific_equal(left: Any, right: Any, path: str = "", *, tolerance:
         raise ValueError(f"scientific value differs at {path}")
 
 
-def verify_extension_run(root: Path, matched: Path, run: Path, *, deep: bool = True) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def verify_trace_diagnostics(expected: dict[str, Any], observed: dict[str, Any], idata: az.InferenceData,
+                             label: str, identity: str) -> None:
+    """Check sampler metadata against the trace, then compare every diagnostic."""
+    if label == "posterior":
+        metadata = {"method": "nuts", "n_chains": int(idata.posterior.sizes["chain"]),
+                    "n_draws": int(idata.posterior.sizes["draw"])}
+        for name, value in metadata.items():
+            if expected.get(name) != value:
+                raise ValueError(f"sampler metadata differs at {identity}/{name}")
+        expected = {key: value for key, value in expected.items() if key not in metadata}
+    assert_scientific_equal(expected, observed, f"{identity}/{label}_diagnostics")
+
+
+def verify_extension_run(root: Path, matched: Path, run: Path, *, deep: bool = True,
+                         production_root: Path | None = None) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Require the exact grid and independently rescore every accepted cell."""
+    production_root = production_root or root
     manifest = read_mapping(run / "manifest.json")
     if canonical_json_hash({k: v for k, v in manifest.items() if k != "manifest_content_sha256"}) != manifest["manifest_content_sha256"]:
         raise ValueError("extension manifest content changed")
     if sha256_file(matched) != manifest["matched_sha256"]:
         raise ValueError("extension matched input changed")
     for name, digest in manifest["input_sha256"].items():
-        if sha256_file(root / name) != digest:
+        if sha256_file(production_root / name) != digest:
             raise ValueError(f"extension code/input changed: {name}")
+    analysis_only = {"src/pipelines/extensions/verification.py", "scripts/finalize_extensions.py"}
+    analysis_sha256 = {}
+    for name, digest in manifest["input_sha256"].items():
+        current = sha256_file(root / name)
+        if current != digest and name not in analysis_only:
+            raise ValueError(f"analysis checkout differs in a production input: {name}")
+        if name in analysis_only:
+            analysis_sha256[name] = current
     config = read_mapping(root / "config/extensions.yaml")
     if manifest["run_config"] != config:
         raise ValueError("manifest does not use the frozen extension configuration")
@@ -107,10 +130,10 @@ def verify_extension_run(root: Path, matched: Path, run: Path, *, deep: bool = T
                     idata = az.from_netcdf(str(run / "traces" / identity / trace["filename"]))
                     try:
                         observed = json_safe(check_convergence(idata))
+                        expected = attempt["diagnostics" if label == "posterior" else "prior_diagnostics"]
+                        verify_trace_diagnostics(expected, observed, idata, label, identity)
                     finally:
                         idata.close()
-                    expected = attempt["diagnostics" if label == "posterior" else "prior_diagnostics"]
-                    assert_scientific_equal(expected, observed, f"{identity}/{label}_diagnostics")
                     diagnostic_traces += 1
         if cell["status"] == "complete":
             if job.model in BAYESIAN_MODELS:
@@ -137,4 +160,6 @@ def verify_extension_run(root: Path, matched: Path, run: Path, *, deep: bool = T
         cells.append(cell)
     return cells, {"planned": len(jobs), "stored": len(cells), "status_counts": dict(Counter(c["status"] for c in cells)),
                     "independently_rescored": rescored, "independently_checked_traces": diagnostic_traces,
-                    "verification": "deep" if deep else "hash_membership_gate_only"}
+                    "verification": "deep" if deep else "hash_membership_gate_only",
+                    "production_code_commit": manifest["code"]["git_commit"],
+                    "analysis_only_sha256": analysis_sha256}

@@ -832,3 +832,19 @@ launch check rejected a missing output parent directory before a manifest or
 any fit existed. A directory-initialization fix and focused regression test
 follow; no frozen settings or scientific results changed. Production will
 start from the corrected clean commit, retaining the initial checkout.
+
+## 2026-09-28 — Sealed extension fitting and separate verification correction
+
+Production began from the clean detached `119476f` checkout under the frozen
+1,625-fit manifest, with six disjoint workers and outputs outside the Git
+tree. Early completed cells and their saved scores were independently checked.
+The first actual Bayesian trace exposed a verifier-only mismatch: stored NUTS
+diagnostics include `method`, `n_chains` and `n_draws`, while recomputed raw
+convergence diagnostics do not. These three fields must be verified against
+the saved trace dimensions before comparing every convergence statistic.
+The fitting checkout, manifest, frozen addendum and saved cells stay intact.
+A later analysis checkout may differ only in the verifier and finalization
+script, and must check every production input hash before aggregating results.
+Finalization can be safely resumed only when existing aggregate content is
+identical. Numerical results, reproduction, figures and remote restoration
+remain open until their separate evidence gates pass.

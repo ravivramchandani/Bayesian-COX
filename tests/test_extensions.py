@@ -41,11 +41,27 @@ from src.pipelines.extensions.genomics import collapse_expression
 from src.pipelines.extensions.planning import build_extension_jobs
 from src.pipelines.extensions.preprocessing import ExtensionPreprocessor, generate_catalytic_data
 from src.pipelines.extensions.runner import verified_cell
-from src.pipelines.extensions.verification import SavedForecast, assert_scientific_equal
+from src.pipelines.extensions.verification import (
+    SavedForecast,
+    assert_scientific_equal,
+    verify_trace_diagnostics,
+)
 from src.utils.io import read_mapping, write_json_atomic
 from src.utils.reproducibility import canonical_json_hash
 
 FIXTURE = json.loads((Path(__file__).parent / "fixtures/extensions/catalytic_r_reference.json").read_text())
+
+
+def test_trace_verifier_accepts_recorded_nuts_metadata_but_rejects_alterations() -> None:
+    trace = SimpleNamespace(posterior=SimpleNamespace(sizes={"chain": 4, "draw": 2000}))
+    observed = {"converged": True, "max_rhat": 1.001}
+    recorded = {**observed, "method": "nuts", "n_chains": 4, "n_draws": 2000}
+    verify_trace_diagnostics(recorded, observed, trace, "posterior", "cell")
+    verify_trace_diagnostics(observed, observed, trace, "prior", "cell")
+    for changed in ({**recorded, "n_draws": 1999}, {**recorded, "max_rhat": 1.05},
+                    {**recorded, "method": "advi"}):
+        with pytest.raises(ValueError):
+            verify_trace_diagnostics(changed, observed, trace, "posterior", "cell")
 
 
 def prior_data() -> CatalyticData:
