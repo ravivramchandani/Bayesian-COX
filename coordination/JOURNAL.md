@@ -848,3 +848,11 @@ script, and must check every production input hash before aggregating results.
 Finalization can be safely resumed only when existing aggregate content is
 identical. Numerical results, reproduction, figures and remote restoration
 remain open until their separate evidence gates pass.
+
+The completed baseline and sampler cells were loaded for read-only early
+aggregation checks: all four family layouts, RQ2 pairing and nine available
+baseline decision-curve groups constructed from the partial extension grid.
+Two detached pre-stage workers use the unchanged sealed fitting code to
+refit selected extension cells as their source cells arrive. They write only
+candidate refit cells/traces, and the official 92-cell reproduction comparison
+will issue receipts after the full source grid verifies.

@@ -42,6 +42,16 @@ An interrupted claim or trace is preserved; check that its named process
 is dead before archiving the claim/unfinished trace directory and retrying
 the same cell. Never delete a completed failed outcome to obtain another fit.
 
+For this long grid, `scripts/prestage_extension_refits.py` can use spare
+cores while production continues. It imports the sealed checkout, verifies
+the manifest and source hashes, and refits selected cells only after their
+source checkpoints exist. It writes no final reproduction receipts. Use a
+separate external reproduction directory and disjoint worker indices. The
+official `reproduce_extensions.py` command below still runs after all 1,625
+source cells exist; it rechecks scientific content and actual trace arrays
+before issuing the 92 receipts. Avoid running the two drivers concurrently
+against the same selected cell.
+
 After all workers finish, use separately restored original, ADR-032 sampler
 and robustness directories from Ravi's baseline handoff. The production
 manifest pins every fitted source and input file. Finalization can use a
