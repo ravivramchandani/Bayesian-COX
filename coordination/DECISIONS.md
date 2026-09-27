@@ -652,9 +652,11 @@ Format:
 
 - Status: SUPERSEDED-BY-ADR-036
 - Date: 2026-09-27
-- Context: The owner's target is a Q1 journal paper. The frozen analysis finds
-  no prior effect wherever a contrast is estimable, which is the expected
-  result with 8–19 clinical predictors. A Q1 reviewer will ask three things:
+- Context: The owner's target is a Q1 journal paper. The frozen analysis
+  detects no statistically significant IBS difference among the five
+  estimable primary prior contrasts; four contrasts are unavailable. This
+  does not establish equivalence or absence of a prior effect. The proposed
+  extension addresses three scientific questions:
   - whether Bayesian shrinkage beats frequentist penalised Cox;
   - whether the result changes in the high-dimensional setting that
     shrinkage priors are designed for;
@@ -673,8 +675,9 @@ Format:
     4. a METABRIC clinical-plus-gene-expression setting from the pinned
        cBioPortal study.
   - Before any extension result is computed, specify every setting,
-    hypothesis, metric and inference rule in `docs/protocol_addendum_paper.md`
-    and freeze its hash.
+    hypothesis, metric and inference rule and freeze the addendum's hash.
+    ADR-036 sets the current path to `docs/protocol_addendum_extensions.md`;
+    ADR-037 refines its design and chronology.
   - This supersedes the first hard scope control for these four named
     analyses only. Rotterdam transport and the simulation study remain
     dropped under ADR-025.
@@ -700,9 +703,12 @@ Format:
     4. the METABRIC clinical-plus-expression setting.
   - So are the ADR-032 horseshoe sampler sensitivity and the ADR-033 Holm
     bound.
-  - Every rule of ADR-035 still applies:
-    - each analysis is specified in a frozen addendum before its results
-      exist (`docs/protocol_addendum_extensions.md`);
+  - The separation rules of ADR-035 still apply:
+    - the four new analyses are specified in a frozen addendum before their
+      own results exist (`docs/protocol_addendum_extensions.md`);
+    - ADR-032 and ADR-033 retain their actual earlier specification and
+      result chronology; the new addendum cannot retrospectively make
+      existing probes or the computed Holm bound result-blind;
     - each is labelled post-hoc;
     - each is stored in its own run directory;
     - the frozen confirmatory record stays primary.
@@ -711,6 +717,71 @@ Format:
 - Consequences:
   - The results chapter covers the confirmatory analysis, robustness,
     explanation and the extension experiments.
-  - The later paper needs no new analysis.
+  - The thesis provides the planned evidence base for the later paper.
+    Journal review may require further separately documented analyses;
+    this plan does not guarantee Q1 acceptance.
   - Thesis text in the Overleaf repository is still edited only on the
     owner's instruction.
+
+## ADR-037 — Refine the thesis extension design and preserve its chronology
+
+- Status: ACCEPTED
+- Date: 2026-09-27
+- Context: The owner requested planning and coordination updates following
+  the scientific review of ADR-036. The four new analyses are not running.
+  The ADR-033 bound is already computed and rendered, and seven ADR-032
+  sampler probes already exist. Their chronology must remain explicit.
+- Decision:
+  - Frame the extension around when Bayesian shrinkage improves survival
+    prediction or decision value beyond tuned penalised Cox, and how this
+    depends on dimensionality, prior specification and sampling reliability.
+    The contribution is the systematic comparison, not a claim of a new
+    shrinkage algorithm or a universal Q1 experiment checklist.
+  - Freeze settings, comparison families, multiplicity, dependency-aware
+    inference, exclusions and claim rules for the four new analyses in
+    T-180 before producing their own results. Reference ADR-032/ADR-033 and
+    existing evidence with their actual dates. The current core programme
+    and its ADR-032 sensitivity do not depend on this new addendum.
+  - Compare penalised Cox and Bayesian models on the same eligible patients,
+    frozen outer folds and evaluation rules. Tune penalties by inner CV;
+    fit imputation, scaling and feature selection inside the relevant
+    training split, including inner CV. Freeze the comparison family and
+    report effects, uncertainty, diagnostic attrition and paired coverage.
+    Outer-test performance cannot select a favourable configuration.
+  - Specify the Piironen–Vehtari variant precisely. The existing model uses
+    half-Student-t scales with two degrees of freedom and fixed global
+    scale 0.1, rather than canonical half-Cauchy scales. The new variant is
+    a joint prior-specification sensitivity: fix local/global/slab priors,
+    expected relevant predictors and a scale calibration justified for the
+    survival likelihood. Do not import the Gaussian regression scale rule
+    without justification. Use comparable ADR-032 sampler settings and
+    unchanged diagnostic gates to separate prior and sampler effects.
+  - In the METABRIC extension, compare clinical-only and clinical-plus-
+    expression models on the same expression-eligible patients and outer
+    folds, with common endpoint and evaluation times. Refit matched clinical
+    controls when eligibility differs from the original primary cohort.
+    Audit pinned expression provenance, patient/sample alignment, duplicate
+    handling and predictor timing; freeze the gene-filter/selection rule and
+    feature budget. Selection and preprocessing stay inside training splits.
+    Include penalised Cox, the three original priors and the new variant in
+    both matched settings; report predictors and events as well as results.
+  - Specify survival decision curves with a clinical action, threshold range,
+    censoring estimator and support/exclusion rules. Preserve the actual
+    training-defined horizons; do not present varying fold horizons as a
+    fixed clinical time point. Handle repeated predictions from the same
+    patient in the uncertainty procedure. Use stored out-of-fold predictions
+    without refitting and report all specified available curves and coverage.
+    Net benefit under these assumptions is not a clinical impact finding.
+  - Preserve the incomplete original primary family and the failed original
+    explanation-convergence gate. Neither a non-significant contrast nor a
+    new extension permits equivalence, superiority or stable-explanation
+    claims beyond its evidence. Runtime estimates require measured evidence;
+    blind computational profiling must not select on outer-test performance.
+- Consequences: T-180–T-186 implement these refinements without changing the
+  frozen protocol, data, code or original results. Planning updates do not
+  launch the four new experiments. Overleaf remains outside the authorised
+  scope; journal drafting, submission and DOI minting remain deferred.
+  Method references: [Piironen and Vehtari (2017)](https://arxiv.org/abs/1707.01694)
+  for the regularised horseshoe and non-Gaussian calibration, and
+  [Vickers et al. (2008)](https://link.springer.com/article/10.1186/1472-6947-8-53)
+  for survival decision curves and uncertainty.

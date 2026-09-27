@@ -377,7 +377,7 @@ A separately developed notebook (`Bayesian_Ravi Ramchandani.ipynb`,
 
 The repository pipeline supersedes it; nothing from it enters the evidence.
 
-## 2026-09-27 — The five estimable primary contrasts show no prior effect
+## 2026-09-27 — No significant difference detected in five estimable primary contrasts
 
 From `inference.json` of the frozen run (ΔIBS = model A minus model B):
 
@@ -394,6 +394,10 @@ procedure, an estimable contrast is tested at best at 0.05/5, and only if
 all four missing hypotheses were rejected first. So no estimable contrast can
 be rejected at family-wise level 0.05, whatever the four missing p-values
 are.
+
+Interpretation corrected under ADR-037: these results do not establish
+equivalence or absence of a prior effect. Four primary contrasts remain
+unavailable; the numerical table and Holm bound above are unchanged.
 
 ## 2026-09-27 — Horseshoe failures are rare divergences under a zero-tolerance gate
 
@@ -704,3 +708,33 @@ under `coordination/recovery/`. Overleaf remains outside this scope.
 The restart checkpoint passed all 270 tests in 72.06 seconds and separate
 coordination schema validation. Independent verification accepted the
 deterministic two-file restart archive and checkpoint hashes.
+
+## 2026-09-27 — Thesis extension plan refined after scientific review
+
+The owner requested updates to the plans and coordination files. ADR-037
+refines ADR-036 without changing the four named new analyses: inner-CV
+penalised Cox, a precisely specified Piironen–Vehtari variant, survival
+decision curves and matched METABRIC clinical/expression comparisons. The
+variant is explicitly included in both genomic comparison arms. T-180–T-186
+now require matched patients/folds, training-only preprocessing and selection,
+survival-scale calibration, censoring-aware decision curves, dependency-aware
+uncertainty, multiplicity, diagnostic coverage and separate result lineage.
+
+The addendum must freeze the four new analyses before their own results.
+The already computed ADR-033 bound and seven ADR-032 probes retain their
+actual chronology; the current 75-cell sampler stage is independent of the
+new addendum. Unsupported runtime estimates and the promise that a later
+paper needs no further analysis were removed. The original five estimable
+contrasts do not establish equivalence, and the failed explanation gate
+remains unchanged.
+
+At 10:01 UTC, the existing coordinator and six robustness workers were live,
+with 603/825 robustness cells, 205/450 reproduction cells, no reported
+reproduction mismatch and 0/75 sampler cells. The four new analyses were
+not launched. No frozen evidence, source code or Overleaf file was changed.
+Paper drafting, submission and DOI minting remain deferred after the thesis;
+the existing private code/evidence release remains part of core close-out.
+
+The five-file planning update passed all 270 tests in 92.22 seconds, separate
+coordination schema validation and `git diff --check` in the exact lock
+environment while the numerical jobs continued.

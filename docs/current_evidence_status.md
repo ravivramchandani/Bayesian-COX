@@ -25,6 +25,14 @@ target acceptance to 0.999 on every original attempt is post-hoc. Its findings
 cannot replace the 20 confirmatory failures, complete the original Holm
 family or change the explanation artifact's failed gate.
 
+ADR-036/ADR-037 make the four new post-hoc analyses planned thesis evidence:
+tuned penalised Cox, a precisely specified Piironen–Vehtari variant, survival
+decision curves and matched METABRIC clinical/expression comparisons. They
+have not produced results and are not queued by the current core coordinator.
+T-180's actual addendum and hash freeze remain pending. It must precede their
+own results and preserve the actual earlier ADR-032/ADR-033 chronology.
+The new plan does not change any permitted primary or explanation claim.
+
 The authoritative production evidence is
 `confirmatory_v1_confirmatory_cdcdcee84651`, with completion content hash
 `03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1`.

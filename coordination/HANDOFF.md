@@ -133,14 +133,29 @@ in the 2026-08-16 sequence below:
 ### Standing owner instructions (2026-09-27)
 
 - The thesis must contain every experiment a Q1 journal paper needs
-  (ADR-036). The paper is drafted later.
+  (ADR-036), with the scientific design refined by ADR-037. The paper is
+  drafted later; the thesis is its planned evidence base, not a guarantee
+  of acceptance or of no further reviewer-requested analysis.
 - Do not edit the Overleaf thesis until the owner instructs.
 - Only one agent works on the repository at a time.
-- **Current state: waiting for the owner's next instruction.**
-  - Background jobs already running continue on their own: the six
-    frozen-robustness workers and the 450-cell regeneration.
-  - Do not start a new step, run `finish_robustness.sh` or begin T-180
-    until the owner instructs.
+- **Current state: core programme running; planning updates authorised.**
+  - The owner's latest instruction requests plan and coordination updates
+    following the scientific review. ADR-037 and T-180–T-186 record them.
+  - The existing coordinator continues frozen robustness, full 450-cell
+    regeneration and the queued 75-cell ADR-032 sensitivity, then rendering.
+    Final visual QA, claim review, packaging, restore and private code/evidence
+    release remain in the existing authorised programme.
+  - The four new ADR-035 analyses are planned, not launched or queued by
+    this coordinator. T-180's actual addendum and freeze remain unfinished.
+    This planning update does not start their experiments.
+  - Do not run `finish_robustness.sh`, restart active workers or launch a
+    duplicate coordinator/sensitivity. The supervisor owns robustness finish.
+
+At 10:01 UTC on 2026-09-27, the read-only monitor reported 603/825 robustness
+cells and 205/450 reproduction cells, no reported reproduction mismatch,
+0/75 sampler cells and a live coordinator. These counts are a dated progress
+snapshot, not completion or diagnostic acceptance. Read the current monitor
+for live state; do not use this snapshot to decide whether to restart.
 
 Findings behind each step are in
 `coordination/reviews/2026-09-27-codebase-audit.md`.
@@ -248,17 +263,20 @@ Completed integration gates and their evidence locations are in
 10. [ ] Commit and push all verified continuation work. Recovery and completed
     code checkpoints have been pushed; final production close-out remains open.
 
-11. [ ] Thesis extension experiments under ADR-036; tasks T-180–T-186 in
-    `TODO.md`. Order:
-    - freeze `docs/protocol_addendum_extensions.md` (T-180) before any
-      extension result;
-    - once frozen robustness finishes, run the horseshoe sampler sensitivity
-      (T-181);
-    - run the penalised-Cox comparators (T-182) and decision curve analysis
-      (T-184);
-    - run the Piironen–Vehtari variant (T-183);
-    - build and run the METABRIC clinical-plus-expression setting (T-185);
-    - render the extension bundle (T-186).
+11. [ ] Thesis extension experiments under ADR-036/ADR-037; T-180–T-186 in
+    `TODO.md`. The four new analyses are not part of the running coordinator.
+    Dependencies:
+    - freeze the actual new-analysis addendum (T-180) before their own results;
+      reference existing ADR-032/ADR-033 evidence with its actual chronology;
+    - T-181 is the same sensitivity as step 8, already queued after robustness
+      and independent of T-180; do not run it twice;
+    - after T-180, run fair inner-CV penalised-Cox comparators (T-182) and
+      censoring-aware decision curves from stored predictions (T-184);
+    - after T-180/T-181, run the precisely specified Piironen–Vehtari clinical
+      variant (T-183), with comparable sampler settings and unchanged gates;
+    - after T-180/T-182/T-183, run matched METABRIC clinical-only and clinical-
+      plus-expression arms (T-185), explicitly including the new variant;
+    - render and actually review the separate extension bundle (T-186).
 
     Paper drafting and submission are deferred until after the thesis.
 
