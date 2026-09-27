@@ -890,3 +890,12 @@ It will run deep finalization, the official 92-cell exact comparison,
 rendering and automated 32-PDF QA preparation only after all source/refit
 cells exist. It stops with a failure record on an unmet gate, and never
 issues a visual verdict or publishes a release.
+
+The independent verifier now reconstructs the complete manifest plan and
+checks every cell's condition, gene budget, censoring cutoff, counts, seed,
+post-hoc label and membership hash, in addition to its patient identities.
+The actual 1,625-job plan and all 335 then-stored cells passed these checks.
+A focused negative test rejects a changed seed/condition and a missing nullable
+cutoff field. This is an analysis-only verification extension; no fitting
+process, frozen setting or saved outcome is altered.
+The full 298-test suite, coordination schemas and Ruff pass.

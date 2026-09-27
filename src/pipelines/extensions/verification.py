@@ -12,8 +12,9 @@ import pandas as pd
 
 from src.models.bayesian.diagnostics import check_convergence
 from src.pipelines.confirmatory.evaluation import evaluate_predictions
+from src.pipelines.confirmatory.options import deterministic_seed
 from src.pipelines.extensions.fitting import BAYESIAN_MODELS
-from src.pipelines.extensions.planning import build_extension_jobs
+from src.pipelines.extensions.planning import ExtensionJob, build_extension_jobs
 from src.pipelines.extensions.runner import load_extension_cohorts, verified_cell
 from src.pipelines.robustness.conditions import apply_administrative_censoring
 from src.utils.io import json_safe, read_mapping
@@ -75,6 +76,24 @@ def verify_trace_diagnostics(expected: dict[str, Any], observed: dict[str, Any],
     assert_scientific_equal(expected, observed, f"{identity}/{label}_diagnostics")
 
 
+def verify_cell_identity(cell: dict[str, Any], job: ExtensionJob, raw: pd.DataFrame, base_seed: int) -> None:
+    """Bind labels, counts, seed and memberships to the independently rebuilt job."""
+    train_ids = raw.subject_id.iloc[job.train].tolist()
+    validation_ids = raw.subject_id.iloc[job.validation].tolist()
+    expected = {"cell_id": job.cell_id, "dataset": job.dataset, "model_key": job.model,
+                "repeat": job.repeat, "fold": job.fold, "setting": job.setting,
+                "condition": job.condition, "gene_budget": job.gene_budget,
+                "censoring_cutoff": job.censoring_cutoff, "n_train": len(job.train),
+                "n_validation": len(job.validation), "train_subject_ids": train_ids,
+                "validation_subject_ids": validation_ids,
+                "training_membership_sha256": canonical_json_hash(train_ids),
+                "seed": deterministic_seed(base_seed, "extensions", job.cell_id),
+                "evidence_status": "post_hoc_extension"}
+    for name, value in expected.items():
+        if name not in cell or cell[name] != value:
+            raise ValueError(f"extension identity/membership differs at {job.cell_id}/{name}")
+
+
 def verify_extension_run(root: Path, matched: Path, run: Path, *, deep: bool = True,
                          production_root: Path | None = None) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Require the exact grid and independently rescore every accepted cell."""
@@ -101,6 +120,12 @@ def verify_extension_run(root: Path, matched: Path, run: Path, *, deep: bool = T
         raise ValueError("manifest does not use the frozen extension configuration")
     cohorts = load_extension_cohorts(root, matched)
     jobs = build_extension_jobs(cohorts, config)
+    rebuilt_plan = [{"cell_id": j.cell_id,
+                     "train_sha256": canonical_json_hash(cohorts[j.dataset].subject_id.iloc[j.train].tolist()),
+                     "validation_sha256": canonical_json_hash(cohorts[j.dataset].subject_id.iloc[j.validation].tolist()),
+                     "censoring_cutoff": j.censoring_cutoff} for j in jobs]
+    if manifest["plan"] != rebuilt_plan or manifest["planned_fits"] != len(jobs):
+        raise ValueError("extension manifest plan differs from independently rebuilt jobs")
     planned = {j.cell_id: j for j in jobs}
     actual = {p.stem: p for p in (run / "cells").glob("*.json")}
     if set(actual) != set(planned):
@@ -110,12 +135,7 @@ def verify_extension_run(root: Path, matched: Path, run: Path, *, deep: bool = T
     for identity, job in planned.items():
         cell = verified_cell(actual[identity])
         raw = cohorts[job.dataset]
-        for field, expected in (("cell_id", identity), ("dataset", job.dataset), ("model_key", job.model),
-                                ("repeat", job.repeat), ("fold", job.fold), ("setting", job.setting),
-                                ("train_subject_ids", raw.subject_id.iloc[job.train].tolist()),
-                                ("validation_subject_ids", raw.subject_id.iloc[job.validation].tolist())):
-            if cell[field] != expected:
-                raise ValueError(f"extension identity/membership differs at {identity}/{field}")
+        verify_cell_identity(cell, job, raw, config["base_seed"])
         if cell["status"] not in {"complete", "failed", "failed_diagnostics"}:
             raise ValueError("unrecognized extension outcome status")
         if job.model in BAYESIAN_MODELS and cell["status"] in {"complete", "failed_diagnostics"}:
@@ -147,6 +167,8 @@ def verify_extension_run(root: Path, matched: Path, run: Path, *, deep: bool = T
                     raise ValueError("accepted extension fit fails a posterior/prior diagnostic gate")
             tt, ee = apply_administrative_censoring(raw.duration.iloc[job.train].to_numpy(float), raw.event.iloc[job.train].to_numpy(int), job.censoring_cutoff)
             vt, ve = apply_administrative_censoring(raw.duration.iloc[job.validation].to_numpy(float), raw.event.iloc[job.validation].to_numpy(int), job.censoring_cutoff)
+            if cell["events_train"] != int(ee.sum()):
+                raise ValueError("stored training-event count differs from reconstructed outcomes")
             p = cell["predictions"]
             if p["subject_ids"] != cell["validation_subject_ids"]:
                 raise ValueError("forecast patient order differs from the planned validation order")

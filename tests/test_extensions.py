@@ -26,6 +26,7 @@ from src.models.catalytic import (
     catalytic_kernel,
 )
 from src.models.penalized_cox import PenalizedCox
+from src.pipelines.confirmatory.options import deterministic_seed
 from src.pipelines.extensions.analysis import extension_families, paired_effect
 from src.pipelines.extensions.decision_curves import (
     decision_contributions,
@@ -44,12 +45,31 @@ from src.pipelines.extensions.runner import verified_cell
 from src.pipelines.extensions.verification import (
     SavedForecast,
     assert_scientific_equal,
+    verify_cell_identity,
     verify_trace_diagnostics,
 )
 from src.utils.io import read_mapping, write_json_atomic
 from src.utils.reproducibility import canonical_json_hash
 
 FIXTURE = json.loads((Path(__file__).parent / "fixtures/extensions/catalytic_r_reference.json").read_text())
+
+
+def test_cell_identity_checks_condition_seed_and_missing_nullable_metadata() -> None:
+    raw = pd.DataFrame({"subject_id": ["a", "b", "c"]})
+    job = SimpleNamespace(cell_id="fixture", dataset="gbsg2", model="ridge", repeat=1, fold=1,
+                          setting="clinical", condition="full", gene_budget=0, censoring_cutoff=None,
+                          train=np.array([0, 1]), validation=np.array([2]))
+    cell = {"cell_id": "fixture", "dataset": "gbsg2", "model_key": "ridge", "repeat": 1, "fold": 1,
+            "setting": "clinical", "condition": "full", "gene_budget": 0, "censoring_cutoff": None,
+            "n_train": 2, "n_validation": 1, "train_subject_ids": ["a", "b"],
+            "validation_subject_ids": ["c"], "training_membership_sha256": canonical_json_hash(["a", "b"]),
+            "seed": deterministic_seed(123, "extensions", "fixture"), "evidence_status": "post_hoc_extension"}
+    verify_cell_identity(cell, job, raw, 123)
+    changed = [{**cell, "condition": "fraction_0.50"}, {**cell, "seed": cell["seed"] + 1},
+               {k: v for k, v in cell.items() if k != "censoring_cutoff"}]
+    for altered in changed:
+        with pytest.raises(ValueError, match="identity/membership"):
+            verify_cell_identity(altered, job, raw, 123)
 
 
 def test_trace_verifier_accepts_recorded_nuts_metadata_but_rejects_alterations() -> None:
