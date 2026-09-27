@@ -80,6 +80,7 @@ def _render_runtime(run: FrozenRun, registry: OutputRegistry, *, rehearsal: bool
     if data:
         axes[0].boxplot(data, tick_labels=[MODEL_LABELS.get(m, m) for m in models])
         axes[0].tick_params(axis="x", rotation=35)
+        plt.setp(axes[0].get_xticklabels(), ha="right")
         axes[0].set_yscale("log")
         axes[0].set_ylabel("Total cell runtime (seconds, log scale)")
     else:
@@ -292,6 +293,14 @@ def _render_fold_metrics(run: FrozenRun, registry: OutputRegistry) -> None:
     figure, axes = plt.subplots(2, 2, figsize=(13, 8.5))
     datasets = sorted(rows["dataset"].unique()) if not rows.empty else []
     models = sorted(rows["model_key"].unique()) if not rows.empty else []
+    compact_model_labels = {
+        "bayesian_normal": "Normal prior",
+        "bayesian_horseshoe": "Horseshoe prior",
+        "bayesian_spike_slab": "Spike/slab prior",
+        "cox_ph": "Cox PH",
+        "deepsurv": "DeepSurv",
+        "random_survival_forest": "Survival forest",
+    }
     for metric, axis in zip(metrics, axes.flat, strict=True):
         selected_metric = rows[rows["metric"] == metric]
         box_data: list[np.ndarray] = []
@@ -306,14 +315,14 @@ def _render_fold_metrics(run: FrozenRun, registry: OutputRegistry) -> None:
                 ].to_numpy()
                 if len(values):
                     box_data.append(values)
-                    labels.append(f"{dataset.upper()}\n{MODEL_LABELS.get(model, model)}")
+                    labels.append(f"{dataset.upper()}\n{compact_model_labels.get(model, model)}")
                     colors.append(COLORS[dataset_index % len(COLORS)])
         if box_data:
             boxes = axis.boxplot(box_data, patch_artist=True, tick_labels=labels)
             for patch, color in zip(boxes["boxes"], colors, strict=True):
                 patch.set_facecolor(color)
                 patch.set_alpha(0.5)
-            axis.tick_params(axis="x", rotation=65, labelsize=6)
+            axis.tick_params(axis="x", rotation=90, labelsize=7)
         else:
             axis.text(0.5, 0.5, "No complete metric cells", ha="center", va="center")
         axis.set_title(METRIC_LABELS[metric])

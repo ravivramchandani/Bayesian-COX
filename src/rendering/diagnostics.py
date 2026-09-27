@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import textwrap
 from pathlib import Path
 from typing import Any
 
@@ -334,8 +335,13 @@ def _render_ph(
         note="Descriptive stability of within-fit PH departures across outer folds",
     )
     datasets = sorted(summary["dataset"].unique()) if not summary.empty else []
+    panel_rows = [max(1, int((summary["dataset"] == dataset).sum())) for dataset in datasets]
     figure, axes = plt.subplots(
-        max(1, len(datasets)), 1, figsize=(9, max(3.5, 3.0 * len(datasets))), squeeze=False
+        max(1, len(datasets)),
+        1,
+        figsize=(9, max(3.5, 3.0 * len(datasets))),
+        gridspec_kw={"height_ratios": panel_rows or [1]},
+        squeeze=False,
     )
     if summary.empty:
         axes[0, 0].text(0.5, 0.5, "No available PH test records", ha="center", va="center")
@@ -449,6 +455,7 @@ def _render_trace_variable(
         raise ValueError("trace draw-index inventory does not match stored values")
     labels = _component_labels(variable_name, values.shape[2], record["cell"])
     n_components = values.shape[2]
+    horizontal_labels = any(len(label) > 24 for label in labels)
     figure, axes = plt.subplots(
         n_components,
         2,
@@ -473,7 +480,18 @@ def _render_trace_variable(
             color=COLORS[0],
             alpha=0.65,
         )
-        trace_axis.set_ylabel(labels[component])
+        if horizontal_labels:
+            trace_axis.set_ylabel(
+                textwrap.fill(
+                    labels[component].replace("=", " = "), width=28, break_long_words=False
+                ),
+                rotation=0,
+                ha="right",
+                va="center",
+                fontsize=8,
+            )
+        else:
+            trace_axis.set_ylabel(labels[component])
         trace_axis.set_xlabel("Original retained draw index")
         marginal_axis.set_xlabel("Stored thinned value")
         marginal_axis.set_ylabel("Density")
@@ -485,7 +503,7 @@ def _render_trace_variable(
         f"{cell['dataset'].upper()} {cell['model_key']} R{cell['repeat']} F{cell['fold']}"
         f"{attempt}: {variable_name}"
     )
-    figure.suptitle(title)
+    figure.suptitle(title, y=1.0)
     suffix = f"_attempt_{record['attempt']:02d}" if record["attempt"] is not None else ""
     base = (
         registry.output_dir

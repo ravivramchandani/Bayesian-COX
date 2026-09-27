@@ -90,6 +90,18 @@ original fold/seed identities, acceptance-only change, nine-contrast family,
 completion and inference. Both renderers record code and source hashes and
 reject source edits made during a render.
 
+`scripts/complete_results_programme.py` orchestrates the full reproduction,
+completed frozen robustness verification, separate sampler sensitivity and
+both renderers from sealed code. Its output lock is retained by child stages,
+so a crashed coordinator cannot overlap a surviving fit on restart.
+
+`scripts/package_programme_release.py` requires the final visual-QA-backed
+`release_ready` seal, verifies all seven evidence inventories against committed
+code and creates five deterministic private archives. The original confirmatory
+release is referenced unchanged. `scripts/restore_programme_release.py` verifies
+the package and its separately restored original run; optional extraction uses
+a new directory and rejects unsafe entries, collisions and overwrites.
+
 ## Historical artefacts
 
 `data/external/`, `data/processed/`, `reports/tables/benchmark.json`,

@@ -1,0 +1,49 @@
+/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python scripts/verify_environment.py --lock-file conda-lock.yml \
+		--hash-file conda-lock.yml.sha256
+{
+  "conda_package_count": 237,
+  "direct_import_versions": {
+    "arviz": "0.23.4",
+    "h5py": "3.16.0",
+    "lifelines": "0.30.3",
+    "matplotlib": "3.11.1",
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "pycox": "0.3.0",
+    "pymc": "5.28.5",
+    "scipy": "1.17.1",
+    "seaborn": "0.13.2",
+    "shap": "0.51.0",
+    "sksurv": "0.28.0",
+    "torch": "2.13.0",
+    "torchtuples": "0.2.2",
+    "yaml": "6.0.3"
+  },
+  "hdf5": {
+    "h5py": "3.16.0",
+    "hdf5_built": "2.1.0",
+    "hdf5_runtime": "2.1.0"
+  },
+  "lock_sha256": "1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57",
+  "package_count": 259,
+  "pip_package_count": 22,
+  "platform": {
+    "machine": "arm64",
+    "macos": "26.6",
+    "system": "Darwin"
+  },
+  "python": "3.11.15",
+  "status": "ok",
+  "verified_conda_packages": 237,
+  "verified_pip_packages": 22
+}
+/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python tests/test_coordination_schemas.py
+Coordination schema validation passed.
+/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -m pytest tests -q
+........................................................................ [ 26%]
+........................................................................ [ 53%]
+........................................................................ [ 80%]
+......................................................                   [100%]
+270 passed in 59.11s
+/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -m ruff check .
+All checks passed!

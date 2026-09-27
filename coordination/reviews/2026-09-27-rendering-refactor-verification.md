@@ -39,3 +39,9 @@ tests passed 15 cases; the integrated suite subsequently passed 204 tests
 before the separate sampler-reporting additions.
 
 No frozen source record, cell, aggregate or explanation value was changed.
+
+The later complete 426-page review found 30 legacy layout defects beyond
+the representative pages inspected here. Its hashed per-file findings,
+presentation fixes and replacement-review status are recorded in
+`2026-09-27-full-pdf-review.md`. This earlier exhaustive byte comparison
+remains preserved as evidence of the initial extraction.

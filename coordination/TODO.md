@@ -31,6 +31,11 @@ interruption state, which the completed engineering checkpoints supersede.
 Current gate evidence is in
 `coordination/reviews/2026-09-27-integrated-code-verification.md`.
 
+The complete 426-page PDF review subsequently identified 30 presentation
+defects in the legacy layouts. Corrected overview and trace previews passed
+visual inspection; full replacement rendering and review are pending. See
+`coordination/reviews/2026-09-27-full-pdf-review.md`.
+
 Frozen robustness production remains active under its original six workers.
 Supervisor PID 40646 automatically performs the final unsharded resume and
 aggregation; no duplicate manual finish is required. Explanation production

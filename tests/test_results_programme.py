@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import importlib.util
+import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -27,6 +29,99 @@ def test_failed_child_stage_is_not_accepted(programme, tmp_path, monkeypatch):
     )
     with pytest.raises(RuntimeError, match="stage failed with exit 2"):
         programme.run_logged(["failed-stage.py"], tmp_path / "stage.log")
+
+
+def test_duplicate_coordinator_cannot_reuse_an_active_output(programme, tmp_path):
+    first = programme.acquire_programme_lock(tmp_path)
+    try:
+        with pytest.raises(RuntimeError, match="already owns this output"):
+            programme.acquire_programme_lock(tmp_path)
+    finally:
+        first.close()
+    resumed = programme.acquire_programme_lock(tmp_path)
+    resumed.close()
+
+
+def test_duplicate_coordinator_rejects_before_manifest_access(programme, tmp_path, monkeypatch):
+    code = tmp_path / "code"
+    code.mkdir()
+    output = tmp_path / "output"
+    output.mkdir()
+    first = programme.acquire_programme_lock(output)
+    monkeypatch.setattr(programme, "PROJECT_ROOT", code)
+    monkeypatch.setattr(
+        programme.sys,
+        "argv",
+        [
+            "complete_results_programme.py",
+            "--source-dir",
+            str(tmp_path / "source"),
+            "--robustness-dir",
+            str(tmp_path / "robustness"),
+            "--explanation",
+            str(tmp_path / "missing-explanation.json"),
+            "--output-dir",
+            str(output),
+        ],
+    )
+    monkeypatch.setattr(
+        programme.subprocess,
+        "run",
+        lambda arguments, **kwargs: SimpleNamespace(
+            returncode=1 if "symbolic-ref" in arguments else 0, stdout=""
+        ),
+    )
+    try:
+        with pytest.raises(RuntimeError, match="already owns this output"):
+            programme.main()
+    finally:
+        first.close()
+    assert not (output / "programme_manifest.json").exists()
+    assert not (output / "programme_failure.json").exists()
+
+
+def test_surviving_stage_holds_lock_after_coordinator_handle_closes(programme, tmp_path):
+    first = programme.acquire_programme_lock(tmp_path)
+    ready = tmp_path / "child-ready"
+    release = tmp_path / "child-release"
+    child = """
+import os
+import sys
+import time
+from pathlib import Path
+os.fstat(int(sys.argv[1]))
+Path(sys.argv[2]).write_text('ready')
+deadline = time.monotonic() + 10
+while not Path(sys.argv[3]).exists():
+    if time.monotonic() >= deadline:
+        raise RuntimeError('test stage release timed out')
+    time.sleep(0.01)
+"""
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        stage = pool.submit(
+            programme.run_logged,
+            ["-c", child, str(first.fileno()), str(ready), str(release)],
+            tmp_path / "stage.log",
+            lock_fd=first.fileno(),
+        )
+        try:
+            deadline = time.monotonic() + 5
+            while not ready.exists():
+                if stage.done():
+                    stage.result()
+                    pytest.fail("stage exited before reporting its inherited descriptor")
+                if time.monotonic() >= deadline:
+                    pytest.fail("stage did not report its inherited descriptor")
+                time.sleep(0.01)
+            first.close()
+            with pytest.raises(RuntimeError, match="already owns this output"):
+                programme.acquire_programme_lock(tmp_path)
+        finally:
+            first.close()
+            release.write_text("exit")
+            stage.result(timeout=5)
+    resumed = programme.acquire_programme_lock(tmp_path)
+    resumed.close()
 
 
 def test_restarted_render_preserves_partial_files(programme, tmp_path):

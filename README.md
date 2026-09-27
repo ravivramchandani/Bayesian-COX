@@ -162,6 +162,9 @@ the frozen run's final unsharded resume and aggregation automatically. Once
 robustness is complete and verified, the coordinator starts the separate
 75-cell sampler sensitivity with six workers, then verifies and renders both
 result bundles. Final visual QA and packaging follow those generated outputs.
+One operating-system lock protects the programme output, including surviving
+child stages after a coordinator crash. Resume the same sealed checkout and
+output directory only after the previous stage processes have finished.
 
 On the original machine, run from that sealed detached checkout:
 
@@ -186,6 +189,37 @@ new `--output-dir`; it creates a separately labelled post-hoc bundle. The
 confirmatory renderer retains all nine primary contrasts and shows unavailable
 estimates explicitly. Its ADR-033 bound is a labelled mathematical consequence
 of the observed five p-values, without supplying the four missing tests.
+
+## Private evidence packaging and restoration
+
+After the generated bundles pass final visual QA, a `release_ready` seal
+records the verified analysis report, actual QA report, sealed code commit
+and exact inventories of the seven evidence directories. Analysis verification
+alone cannot satisfy this gate.
+
+```bash
+python scripts/package_programme_release.py \
+  --seal ~/bayes-cox-runs/results-programme/programme_release_ready.json \
+  --project-root ~/bayes-cox-runs/refactored-programme \
+  --output-dir ~/bayes-cox-runs/programme-release
+python scripts/restore_programme_release.py \
+  --release-dir ~/bayes-cox-runs/programme-release \
+  --original-run ~/bayes-cox-runs/frozen/reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651
+```
+
+Packaging creates five deterministic archives: committed code, full
+reproduction, robustness, confirmatory reports with the explanation artifact,
+and separate post-hoc sampler evidence. The original 450-cell release remains
+unchanged and is referenced by its hashes. Metadata and `SHA256SUMS` accompany
+the archives. Existing destinations are verified rather than overwritten.
+These archives are private evidence; the public redistribution rules remain
+those recorded in `OPEN_QUESTIONS.md`.
+
+Restoration verifies every archive, inventory and reference by default.
+Add `--output-dir <new-directory>` to restore into a fresh directory; the
+original run must already be restored at `--original-run`. Extraction rejects
+links, unsafe paths, duplicate entries and colliding destinations, and never
+overwrites existing files.
 
 ## Current evidence boundary
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import fcntl
 import importlib.util
 import json
 import os
@@ -11,6 +12,7 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from typing import TextIO
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
@@ -20,8 +22,23 @@ from src.utils.io import write_json_atomic
 from src.utils.reproducibility import canonical_json_hash, sha256_file
 
 
-def run_logged(arguments: list[str], log_path: Path) -> None:
-    """Require a child stage to finish successfully and preserve its full log."""
+def acquire_programme_lock(output: Path) -> TextIO:
+    """Reject duplicates until the coordinator and its inherited child handles close."""
+    handle = (output / "programme.lock").open("a+", encoding="utf-8")
+    try:
+        fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError as error:
+        handle.close()
+        raise RuntimeError("another results coordinator already owns this output") from error
+    handle.seek(0)
+    handle.truncate()
+    handle.write(f"pid={os.getpid()}\n")
+    handle.flush()
+    return handle
+
+
+def run_logged(arguments: list[str], log_path: Path, *, lock_fd: int | None = None) -> None:
+    """Require a child stage to succeed, preserving its log and any execution lock."""
     log_path.parent.mkdir(parents=True, exist_ok=True)
     with log_path.open("a", encoding="utf-8") as handle:
         completed = subprocess.run(
@@ -30,6 +47,7 @@ def run_logged(arguments: list[str], log_path: Path) -> None:
             stdout=handle,
             stderr=subprocess.STDOUT,
             check=False,
+            pass_fds=() if lock_fd is None else (lock_fd,),
         )
     if completed.returncode != 0:
         raise RuntimeError(
@@ -80,7 +98,7 @@ def verify_reproduction(source_dir: Path, cells_dir: Path, report_path: Path) ->
     return report
 
 
-def refit_all(source_dir: Path, output: Path, workers: int) -> dict:
+def refit_all(source_dir: Path, output: Path, workers: int, *, lock_fd: int | None = None) -> dict:
     """Run or verify the full 450-cell reproduction in its own output directory."""
     cells = output / "reproduction/cells"
     report = output / "reproduction/verification.json"
@@ -100,7 +118,7 @@ def refit_all(source_dir: Path, output: Path, workers: int) -> dict:
         ]
         if (cells / "reproduction_checkpoint.json").exists():
             arguments.append("--resume")
-        run_logged(arguments, output / "logs/full_reproduction.log")
+        run_logged(arguments, output / "logs/full_reproduction.log", lock_fd=lock_fd)
     return verify_reproduction(source_dir, cells, report)
 
 
@@ -214,7 +232,9 @@ def verify_rendered_bundle(
     return lineage
 
 
-def sampler_sensitivity(source_dir: Path, output: Path, workers: int) -> Path:
+def sampler_sensitivity(
+    source_dir: Path, output: Path, workers: int, *, lock_fd: int | None = None
+) -> Path:
     """Run all 75 post-hoc cells after the original six-worker production finishes."""
     root = output / "posthoc_sampler"
     arguments = [
@@ -228,7 +248,7 @@ def sampler_sensitivity(source_dir: Path, output: Path, workers: int) -> Path:
     ]
     if list(root.glob("*/manifest.json")):
         arguments.append("--resume")
-    run_logged(arguments, output / "logs/posthoc_sampler.log")
+    run_logged(arguments, output / "logs/posthoc_sampler.log", lock_fd=lock_fd)
     candidates = list(root.glob("*/completion.json"))
     if len(candidates) != 1:
         raise RuntimeError("sampler stage must produce exactly one completed sensitivity")
@@ -296,27 +316,34 @@ def main() -> int:
     ):
         raise ValueError("programme output must be outside original evidence directories")
     output.mkdir(parents=True, exist_ok=True)
-    initial_code = {
-        str(path.relative_to(PROJECT_ROOT)): sha256_file(path)
-        for folder in ("src", "scripts")
-        for path in sorted((PROJECT_ROOT / folder).rglob("*.py"))
-    }
-    manifest_path = output / "programme_manifest.json"
-    code_commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"], cwd=PROJECT_ROOT, capture_output=True, text=True, check=True
-    ).stdout.strip()
-    identity = {
-        "code_commit": code_commit,
-        "code_sha256": initial_code,
-        "source_dir": str(source),
-        "robustness_dir": str(robustness),
-        "explanation_sha256": sha256_file(explanation),
-    }
-    if manifest_path.exists() and json.loads(manifest_path.read_text()) != identity:
-        raise RuntimeError("programme checkpoint belongs to different source or code")
-    if not manifest_path.exists():
-        write_json_atomic(manifest_path, identity, overwrite=False)
+    execution_lock = acquire_programme_lock(output)
+    code_commit: str | None = None
     try:
+        lock_fd = execution_lock.fileno()
+        initial_code = {
+            str(path.relative_to(PROJECT_ROOT)): sha256_file(path)
+            for folder in ("src", "scripts")
+            for path in sorted((PROJECT_ROOT / folder).rglob("*.py"))
+        }
+        manifest_path = output / "programme_manifest.json"
+        code_commit = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout.strip()
+        identity = {
+            "code_commit": code_commit,
+            "code_sha256": initial_code,
+            "source_dir": str(source),
+            "robustness_dir": str(robustness),
+            "explanation_sha256": sha256_file(explanation),
+        }
+        if manifest_path.exists() and json.loads(manifest_path.read_text()) != identity:
+            raise RuntimeError("programme checkpoint belongs to different source or code")
+        if not manifest_path.exists():
+            write_json_atomic(manifest_path, identity, overwrite=False)
         from src.rendering.verification import (
             verify_explainability_artifact,
             verify_frozen_run,
@@ -325,20 +352,28 @@ def main() -> int:
         from src.utils.frozen_evidence import verify_frozen_evidence
         from src.utils.posthoc_evidence import verify_posthoc_run
 
-        run_logged(["scripts/verify_environment.py"], output / "logs/environment_verification.log")
+        run_logged(
+            ["scripts/verify_environment.py"],
+            output / "logs/environment_verification.log",
+            lock_fd=lock_fd,
+        )
         preflight = verify_frozen_run(source)
         verify_frozen_evidence(PROJECT_ROOT, preflight.manifest["input_sha256"])
         verify_explainability_artifact(explanation, preflight)
         del preflight
         with ThreadPoolExecutor(max_workers=1) as pool:
-            full_refits = pool.submit(refit_all, source, output, args.reproduction_workers)
+            full_refits = pool.submit(
+                refit_all, source, output, args.reproduction_workers, lock_fd=lock_fd
+            )
             wait_for_robustness(
                 robustness, source, output, full_refits, args.robustness_supervisor_pid
             )
             run_logged(
-                ["scripts/verify_environment.py"], output / "logs/environment_verification.log"
+                ["scripts/verify_environment.py"],
+                output / "logs/environment_verification.log",
+                lock_fd=lock_fd,
             )
-            sampler = sampler_sensitivity(source, output, args.sampler_workers)
+            sampler = sampler_sensitivity(source, output, args.sampler_workers, lock_fd=lock_fd)
             reproduction = full_refits.result()
         from src.rendering.verification import (
             verify_explainability_artifact,
@@ -367,6 +402,7 @@ def main() -> int:
                     str(rendered),
                 ],
                 output / "logs/render_confirmatory.log",
+                lock_fd=lock_fd,
             )
         posthoc_rendered = output / "rendered_posthoc_sampler"
         preserve_partial_render(posthoc_rendered)
@@ -382,6 +418,7 @@ def main() -> int:
                     str(posthoc_rendered),
                 ],
                 output / "logs/render_posthoc_sampler.log",
+                lock_fd=lock_fd,
             )
         source_hashes = {
             f"source_run/{name}": digest for name, digest in frozen.source_hashes.items()
@@ -444,6 +481,8 @@ def main() -> int:
             {"status": "incomplete", "error": str(error), "code_commit": code_commit},
         )
         raise
+    finally:
+        execution_lock.close()
 
 
 if __name__ == "__main__":

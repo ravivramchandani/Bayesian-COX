@@ -590,3 +590,33 @@ original cells and 80 frozen inputs unchanged. The current render-bundle
 checker accepted all 885 base outputs and their explanation-source lineage.
 Seven selected numerical gate reports/logs are preserved in the deterministic
 `coordination/recovery/2026-09-27-refactor-gates.tar.gz` with per-file hashes.
+
+## 2026-09-27 — Publication layouts and coordinator recovery
+
+The complete PDF review rasterized and inspected all 426 baseline pages at
+150 dpi. All 850 fonts were embedded; page boxes passed. The review found
+396 clean pages and 30 layout failures. Its exact per-file hashes and findings
+are preserved in `coordination/recovery/2026-09-27-baseline-pdf-qa.json`.
+The earlier representative-only inspection is superseded for layout coverage.
+Compact metric labels, aligned runtime labels, covariate-proportional PH
+panels and higher trace headings correct those defects without changing
+numerical results. Corrected overview and METABRIC coefficient-trace previews
+passed visual inspection; full replacement rendering/review remain pending.
+
+The programme coordinator now acquires its output lock before reading or
+writing the identity manifest. Every long child stage inherits the same
+locked descriptor, preventing a restarted coordinator from overlapping a
+surviving stage. A real child-process regression verifies that ownership
+survives parent-handle closure and releases when the child exits. Duplicate
+launches are rejected before manifest access.
+
+Private packaging/restoration is integrated. Packaging requires the actual
+final visual-QA-backed release seal and all seven evidence inventories;
+five deterministic archives preserve separate evidence scopes and leave the
+original 450-cell release unchanged. No final package has been created while
+production remains incomplete.
+
+The final execution checkpoint passed all 270 tests in 59.11 seconds,
+coordination schemas, Ruff and the exact 259-package runtime verification.
+The full check log is preserved in
+`coordination/recovery/2026-09-27-final-code-check.log`.

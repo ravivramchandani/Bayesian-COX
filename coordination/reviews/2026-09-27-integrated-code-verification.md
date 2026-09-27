@@ -33,9 +33,11 @@ inputs. The actual completed 450-cell resume was checked read-only: all 455
 original files retained their hashes, and no fit or aggregation was invoked.
 The locked runtime verifies all 259 packages.
 
-The integrated suite passed 244 tests, including final result idempotence and
-supplemental-render lineage. Coordination schemas, Ruff and the exact runtime
-verification passed. Packaging adds further checks before the release checkpoint.
+The integrated suite passed 270 tests after packaging and presentation fixes,
+including final result idempotence and supplemental-render lineage.
+Coordination schemas, Ruff and the exact runtime verification passed.
+Coordinator crash/restart checks also passed: duplicate launches are rejected
+before manifest access, and a surviving child stage retains the output lock.
 Retired pilot executables, duplicate loaders and placeholder pipelines no
 longer form an active path; historical data and results remain preserved.
 
