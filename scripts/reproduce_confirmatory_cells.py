@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import platform
 import subprocess
 import sys
 import time
@@ -116,6 +117,11 @@ def stored_cell_path(run_dir: Path, dataset: str, model: str, repeat: int, fold:
     return run_dir / "cells" / dataset / f"repeat_{repeat:02d}_fold_{fold:02d}" / f"{model}.json"
 
 
+def saved_refit_path(keep: Path, dataset: str, model: str, repeat: int, fold: int) -> Path:
+    """Locate a refit under the directory passed as --keep-cells."""
+    return keep / dataset / f"repeat_{repeat:02d}_fold_{fold:02d}" / f"{model}.json"
+
+
 def differences(new: Any, old: Any, path: str = "") -> list[str]:
     """List every leaf where two JSON values differ, ignoring timing fields."""
     if isinstance(new, dict) and isinstance(old, dict):
@@ -202,8 +208,7 @@ def check_cell(run_dir: Path, key: tuple[str, str, int, int], keep: Path | None)
     if keep is not None:
         from src.utils.io import write_json_atomic
 
-        dataset, model, repeat, fold = key
-        target = keep / dataset / f"repeat_{repeat:02d}_fold_{fold:02d}" / f"{model}.json"
+        target = saved_refit_path(keep, *key)
         write_json_atomic(target, new, overwrite=False)
     return {
         "cell": ":".join(map(str, key)),
@@ -233,7 +238,7 @@ def main() -> int:
     results = []
     pending = []
     for key in keys:
-        target = stored_cell_path(keep, *key) if keep is not None else None
+        target = saved_refit_path(keep, *key) if keep is not None else None
         if args.resume and target is not None and target.exists():
             results.append(check_saved_refit(run_dir, target, key))
         else:
@@ -283,7 +288,7 @@ def prepare_reproduction_checkpoint(
     """Record actual code identity before fitting and validate resumable outputs."""
     from src.rendering.verification import verify_frozen_run
     from src.utils.frozen_evidence import verify_frozen_evidence
-    from src.utils.reproducibility import sha256_file
+    from src.utils.reproducibility import dependency_versions, sha256_file
 
     source = verify_frozen_run(run_dir)
     if source.mode != "confirmatory":
@@ -294,8 +299,22 @@ def prepare_reproduction_checkpoint(
         raise ValueError("reproduction selection includes a cell outside the source inventory")
     manifest = source.manifest
     verify_frozen_evidence(PROJECT_ROOT, manifest["input_sha256"])
+    from src.utils.io import read_mapping
+
+    if manifest["run_config"]["protocol"] != read_mapping(
+        PROJECT_ROOT / "config/confirmatory.yaml"
+    ):
+        raise RuntimeError("reproduction source protocol differs from the frozen study")
+    environment = {"python": platform.python_version(), "dependencies": dependency_versions()}
+    original_environment = manifest["environment"]
+    if environment["dependencies"] != original_environment["dependencies"] or (
+        original_environment.get("python") is not None
+        and environment["python"] != original_environment["python"]
+    ):
+        raise RuntimeError("reproduction runtime differs from the frozen source environment")
     files = sorted(PROJECT_ROOT.glob("src/**/*.py")) + [Path(__file__).resolve()]
     record = {
+        "environment": environment,
         "source_manifest_sha256": sha256_file(run_dir / "manifest.json"),
         "source_completion_sha256": sha256_file(run_dir / "completion.json"),
         "source_file_sha256": source.source_hashes,

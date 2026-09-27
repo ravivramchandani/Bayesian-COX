@@ -9,8 +9,9 @@ Updated: 2026-09-27
 The interrupted work was inspected and preserved on 2026-09-27. The five
 existing main commits through `6c037a8` were pushed, and the unfinished model,
 confirmatory and explanation changes were committed to three remote WIP
-branches. They have not been integrated. The exact branches, validation,
-runtime snapshot and next steps are in
+branches. Their completed modular implementations are now integrated; the
+original checkpoints remain preserved. The initial branches, validation and
+runtime snapshot are in
 `coordination/reviews/2026-09-27-recovery-audit.md`.
 
 An archive and per-file hashes under `coordination/recovery/` preserve the
@@ -35,6 +36,8 @@ in the 2026-08-16 sequence below:
 
 Findings behind each step are in
 `coordination/reviews/2026-09-27-codebase-audit.md`.
+Completed integration gates and their evidence locations are in
+`coordination/reviews/2026-09-27-integrated-code-verification.md`.
 
 ### Established facts
 
@@ -46,10 +49,13 @@ Findings behind each step are in
 - All 80 frozen inputs are stored byte-for-byte in commits `95af081`,
   `44b6085`, `4eeb1ac` and `2e55c0b`. This lets the frozen evidence be
   verified against a checkpoint commit instead of the working tree.
-- The live-tree check `verify_run_inputs_unchanged` is called by robustness
-  production, confirmatory resume and the release restore. The freeze scope
-  includes every `src/**/*.py`, so any source edit or addition blocks all
-  three until verification is checkpoint-bound.
+- ADR-030 is integrated in release restoration, completed confirmatory
+  resume, robustness provenance and evidence verification. Original code is
+  verified against checkpoint `44b6085`; live protocol, raw data, manifest and
+  lock files retain their frozen bytes. New runs record every current source
+  and script file. Unfinished frozen robustness continues only in its
+  unchanged original checkout and runtime; current code cannot mix into its
+  cells.
 - Primary results: the five estimable contrasts have maximum |ΔIBS| approximately 0.00034 and
   p ≥ 0.49. The smallest available p exceeds 0.05/5. Under Holm's
   step-down procedure, no estimable contrast can therefore be rejected,
@@ -74,34 +80,44 @@ Findings behind each step are in
      the unmodified `run_robustness.py`. The worker claims each cell with a
      lock file in `~/bayes-cox-runs/robustness-claims/` and stops before
      aggregation. Logs and PIDs are in `~/bayes-cox-runs/logs/`.
-   - When no `shard_worker` process remains, run
-     `~/bayes-cox-runs/harness/finish_robustness.sh`. It is the unsharded
-     official `--resume` pass: it verifies the freeze, fits any missing cell,
-     and writes the aggregates and `completion.json`.
-   - If a worker died, delete its claim files for cells without a JSON
-     before finishing.
+   - Supervisor PID 40646 runs `scripts/wait_for_robustness.py` and manages
+     the final unsharded official `--resume` pass automatically after the
+     workers finish. That pass verifies the original freeze, completes any
+     missing cells and writes aggregates and `completion.json`. Do not launch
+     a duplicate manual finish. Logs are in `~/bayes-cox-runs/logs/`.
 2. [x] Build a reproduction harness that reruns one cell and compares it
    with the frozen record: `scripts/reproduce_confirmatory_cells.py`. The
    baseline on unchanged code reproduced the quick selection exactly.
    Robustness equivalent: `~/bayes-cox-runs/harness/check_robustness_cell.py`.
    A sharded production cell matched a fresh unsharded refit exactly.
-3. [ ] Implement checkpoint-bound frozen-evidence verification (accepted
-   ADR-030). `src/utils/frozen_evidence.py` and release restoration now verify
-   the checkpoint plus unchanged live study inputs. Closed-run confirmatory
-   resume is now read-only and verified on the actual 450-cell run. The
-   robustness entry point remains to be integrated.
-4. [ ] Refactor for readability, module by module. After each step, run the
-   tests and the reproduction harness. The rules and gates are in
+3. [x] Integrate checkpoint-bound frozen-evidence verification (ADR-030).
+   Release restoration and completed confirmatory resume verify the actual
+   450-cell run read-only. Robustness has current-code manifests, safe resume
+   separation and `verify_completed_robustness_run`, which checks the exact
+   frozen 825-cell/885-fit blueprint, source inputs, cell identities and all
+   recorded hashes without refitting.
+4. [x] Refactor for readability, module by module. Tests and required
+   equivalence gates passed. The rules and gates are in
    `coordination/briefs/2026-09-27-readability-refactor.md`.
-   - Wave 1, dispatched 2026-09-27 to parallel worktree branches:
-     confirmatory package; models, evaluation and statistics; explanation;
-     rendering. Rendering also shows all nine primary contrasts and the
-     post-hoc Holm bound, and produces thesis-ready LaTeX.
-   - Wave 2, after the confirmatory merge: robustness package, then pilot
-     retirement and checkpoint-bound provenance.
-5. [ ] Retire the legacy pilot lane (new ADR; see the audit note).
+   - Models: all six reference refits matched every non-timing field,
+     including the horseshoe's three failed diagnostic attempts.
+   - Explanation: the original SHA-256 `120984c7…6ecd5` reproduced exactly;
+     its negative convergence finding remains unchanged.
+   - Confirmatory: all 450 stored cells reproduced the three aggregate files
+     byte for byte; the six quick-selection cells and four specified
+     additional refits matched exactly.
+   - Robustness: three stored production cells covering all three priors
+     matched exactly. Rehashed wrong-cell identity, condition, raw-data hash
+     and status checks reject corruption.
+   - Rendering retains all nine primary contrasts, explicitly unavailable
+     tests and the separate ADR-033 bound, and produces thesis-ready LaTeX.
+5. [x] Retire the legacy pilot execution lane under ADR-034. Historical data
+   and results remain in place, retired source remains in Git history, and
+   active tests use real raw cohorts with fold-local preprocessing.
 6. [ ] Regenerate the 450-cell run with the refactored code and compare it
-   with the frozen artefacts (the ADR-026 reproduction claim).
+   with the frozen artefacts (the ADR-026 reproduction claim). The full
+   450-cell regeneration has not launched; selected module gates and pure
+   aggregate reproduction do not complete this task.
 7. [x] Render the frozen results tables and figures, including the Holm
    family-completion bound. The full old/new comparison retained 874 identical
    files, seven intended changes and five additions, with no missing output.
@@ -110,13 +126,27 @@ Findings behind each step are in
 8. [ ] Complete the labelled post-hoc horseshoe sensitivity under ADR-032.
    Initial investigation and seven target-acceptance probes are complete;
    `scripts/run_horseshoe_sampler_sensitivity.py` implements the separate
-   75-cell refit and nine-contrast analysis. Production has not started yet.
-9. [ ] Update README, `docs/architecture.md`, TODO, JOURNAL, DECISIONS and
-   INVARIANTS, and record the thesis corrections in TODO.
+   75-cell refit and nine-contrast analysis. Production has not started; the
+   coordinator queues six workers after frozen robustness is complete.
+9. [ ] Finalise documentation and evidence packaging. Engineering status,
+   architecture, decisions, invariants and recorded thesis corrections are
+   updated. Final run identifiers, claims, rendered bundles and visual QA
+   remain to be recorded after production verification.
 10. [ ] Commit and push all verified continuation work. Recovery and completed
     code checkpoints have been pushed; final production close-out remains open.
 
 Tick each box when its step is complete, and record where its outputs are.
+
+`scripts/complete_results_programme.py` is the automatic continuation entry
+point. Launch it once from a clean detached checkout of the final integrated
+commit, with external original-evidence paths and a separate output directory.
+It records the sealed code/source identity, runs the full 450-cell reproduction
+with two workers alongside the six frozen robustness workers, and waits for
+supervisor PID 40646 to finish robustness. It then verifies the exact 825-cell
+completion, runs all 75 post-hoc sampler cells with six workers, verifies the
+separate inference and renders both final bundles. Its verified-analysis
+record still requires final visual QA and evidence packaging; it does not
+complete thesis writing. The README records the machine-specific invocation.
 
 Administrative deadline: the live programme in `TODO.md` runs from 2026-08-17
 to 2026-11-30. This 15-week schedule supersedes the earlier 26-week dates for
@@ -161,8 +191,9 @@ gates, frozen-cell explanation, lean robustness and pure rendering.
 Implementation is not scientific evidence. The final-input result-blind
 rehearsal completed all 18 cells using only status/timing inspection, and the
 deterministic resource rule retained five repeats. The write-once protocol
-freeze now exists at `config/protocol_freeze.json`; all 80 recorded inputs
-rehash exactly to freeze content SHA-256
+freeze exists unchanged at `config/protocol_freeze.json`; all 80 recorded
+inputs verify against the original checkpoint, while live methodological
+inputs retain their frozen bytes. The freeze content SHA-256 is
 `3b5e1042d592ebb6fade0a4a76c1f0d31ce9c0c1cfc08357be46f163f037d2ca`.
 
 The frozen confirmatory execution is complete at
@@ -244,9 +275,10 @@ conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
 ```
 
 The helper downloads both assets, checks the supplied SHA-256, rejects unsafe
-archive paths, verifies every frozen artefact and confirms all 80 local frozen
-inputs before installing the run beneath `reports/confirmatory/`. It never
-overwrites an existing run and instead verifies it in place.
+archive paths, verifies every frozen artefact and confirms all 80 checkpoint
+input blobs plus unchanged live study inputs before installing the run beneath
+`reports/confirmatory/`. It never overwrites an existing run and instead
+verifies it in place.
 
 The available complete contrasts and descriptive aggregates are frozen
 production evidence, but the primary family is not complete. They may be used

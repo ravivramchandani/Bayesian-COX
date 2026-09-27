@@ -13,16 +13,23 @@ frozen confirmatory execution is complete: all 450 planned cells are stored,
 so the Holm family is incomplete and no complete-family superiority claim is
 available. Robustness production is running in the frozen worktree.
 Confirmatory explanation production completed but failed its convergence
-gate, so it permits no explanation-stability claim. The models and frozen explanation refactors have passed their exact-output
-gates. Confirmatory aggregation also reproduces all three frozen files exactly;
-its cell gates, renderer and robustness extraction are being completed.
-The original WIP checkpoints remain preserved on three `wip/*-20260927` branches. Thesis edits remain outside the current code programme. Existing
-legacy benchmark tables and figures remain exploratory pilot artefacts.
+gate, so it permits no explanation-stability claim.
+
+The modular refactors are integrated and passed their required output gates:
+six model refits, the original explanation SHA-256, all three confirmatory
+aggregate files, the six-cell quick selection and four additional confirmatory
+cells, three robustness refits, and the exhaustive renderer comparison.
+ADR-030 checkpoint verification is integrated throughout the active pipeline;
+ADR-034 retired the pilot execution lane while preserving its historical
+data, results and source history. The original WIP checkpoints remain on
+three `wip/*-20260927` branches. The full 450-cell reproduction and separate
+75-cell sampler sensitivity have not started. Final rendering, visual QA and
+evidence packaging remain. Thesis edits are outside this code programme.
 
 ## Start here — continue from another machine
 
-Do not rerun the completed confirmatory analysis. Its exact 552 MB evidence
-directory is preserved in the private GitHub Release
+Restore the completed confirmatory evidence before downstream work. Its exact
+552 MB evidence directory is preserved in the private GitHub Release
 [`confirmatory-v1-44b6085`](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085).
 The repository contains a fail-closed restoration helper that downloads both
 release assets, verifies SHA-256, rejects unexpected archive paths, validates
@@ -121,8 +128,8 @@ lock-equivalent because its PyTorch provenance differs. See
 The completed analysis was deliberately gated. Rehearsal output is labelled
 `rehearsal_only` and is not scientific evidence. The write-once freeze records
 five repeats and 80 content-addressed inputs. The current production evidence
-must be restored from the Release above, not regenerated or selectively
-rerun.
+must be restored from the Release above. The authorised reproduction writes
+verification-only refits to a separate directory and preserves that evidence.
 
 ```bash
 # Correct continuation path for this checkpoint:
@@ -146,26 +153,31 @@ in `coordination/HANDOFF.md` and `coordination/TODO.md`; Overleaf edits are excl
 
 ## Refactor verification and separate sampler sensitivity
 
-Run long jobs from a detached checkout of the final integrated code so source
-edits cannot mix implementations. Refit verification records every source
-hash, checks saved-cell hashes on resume and never overwrites frozen evidence.
-Use new output directories; add `--resume` only for the same code and selection.
+`scripts/complete_results_programme.py` coordinates the remaining work from
+a clean detached checkout of the final committed code. It seals the code and
+source hashes, verifies reusable checkpoints and writes outside the original
+evidence directories. Two workers regenerate all 450 confirmatory cells while
+the six original robustness workers continue. Supervisor PID 40646 performs
+the frozen run's final unsharded resume and aggregation automatically. Once
+robustness is complete and verified, the coordinator starts the separate
+75-cell sampler sensitivity with six workers, then verifies and renders both
+result bundles. Final visual QA and packaging follow those generated outputs.
+
+On the original machine, run from that sealed detached checkout:
 
 ```bash
-python scripts/reproduce_confirmatory_cells.py \
-  --run-dir reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651 \
-  --selection all --workers 2 \
-  --keep-cells reports/reproduction/full-refits \
-  --report reports/reproduction/full-refits-verification.json
-
-python scripts/run_horseshoe_sampler_sensitivity.py \
-  --run-dir reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651 \
-  --output-root reports/posthoc_sampler --workers 2
+python scripts/complete_results_programme.py \
+  --source-dir ~/bayes-cox-runs/frozen/reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651 \
+  --robustness-dir ~/bayes-cox-runs/frozen/reports/robustness/confirmatory_v1_robustness_robustness_702d93af33bf \
+  --explanation ~/bayes-cox-runs/frozen/reports/explainability/confirmatory_v1_confirmatory_cdcdcee84651_explainability_v1.json \
+  --output-dir ~/bayes-cox-runs/results-programme \
+  --reproduction-workers 2 --sampler-workers 6 \
+  --robustness-supervisor-pid 40646
 ```
 
-The first is a verification-only regeneration of all 450 cells. The second
-refits all 75 horseshoe cells under ADR-032, changing only target acceptance
-to 0.999 on every original attempt. Its labels, folds, seeds, diagnostic gate
+The full regeneration is verification-only. The sampler sensitivity refits
+all 75 horseshoe cells under ADR-032, changing only target acceptance to
+0.999 on every original attempt. Its labels, folds, seeds, diagnostic gate
 and separate nine-contrast inference are verified independently. It cannot
 replace the 20 confirmatory failures or complete the confirmatory Holm family.
 
@@ -199,8 +211,12 @@ of the observed five p-values, without supplying the four missing tests.
   No complete-family superiority or equivalence claim is accepted. ADR-033
   permits a separately labelled post-hoc bound on the incomplete Holm family.
 
-The claim rules are in `docs/claim_evidence_register.md`; the live execution
-state is in `coordination/TODO.md` and `coordination/HANDOFF.md`.
+The observed findings and permitted interpretations are recorded in
+[current_evidence_status.md](docs/current_evidence_status.md). The frozen
+claim rules remain in `docs/claim_evidence_register.md`; the live execution
+state is in `coordination/TODO.md` and `coordination/HANDOFF.md`. Completed
+engineering gates are recorded in
+[the integrated verification report](coordination/reviews/2026-09-27-integrated-code-verification.md).
 
 ## Layout
 

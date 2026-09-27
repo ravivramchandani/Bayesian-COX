@@ -1,0 +1,49 @@
+{
+  "archive": "2026-09-27-refactor-gates.tar.gz",
+  "archive_sha256": "f19d1b67ed185a656672583fe65cd8fe0ff36b68a7ee94070fb1a6b1e88d38fd",
+  "files": [
+    {
+      "bytes": 831,
+      "original_path": "/Users/macuser/bayes-cox-runs/agent-scratch/confirmatory/rebuild_refactored_20260927.log",
+      "path": "confirmatory-aggregation.log",
+      "sha256": "55df40dca1167629555f26415509c27f9f23f322e1b39478a3b90b981e847f39"
+    },
+    {
+      "bytes": 1373,
+      "original_path": "/Users/macuser/bayes-cox-runs/refactor-verification/confirmatory-20260927-v1/quick6.json",
+      "path": "confirmatory-quick6.json",
+      "sha256": "dd0953b933f925c280a0ea823bab1dea862de06cba948defc59b28682a8bde41"
+    },
+    {
+      "bytes": 1088,
+      "original_path": "/Users/macuser/bayes-cox-runs/refactor-verification/confirmatory-20260927-v1/specified4.json",
+      "path": "confirmatory-specified4.json",
+      "sha256": "c903b5769f327c071c27ae4e16e80b3dfc50042d363aacc7cdeedc893500be69"
+    },
+    {
+      "bytes": 1373,
+      "original_path": "/Users/macuser/bayes-cox-runs/refactor-verification/models-20260927-v1/quick6.json",
+      "path": "models-quick6.json",
+      "sha256": "020e360ad62dcbbb24a85819c88fa296e4bcf5104d323112ed58cb06ed870e95"
+    },
+    {
+      "bytes": 350,
+      "original_path": "/Users/macuser/bayes-cox-runs/checks/robustness-refactor-gate-1.log",
+      "path": "robustness-gate-1.log",
+      "sha256": "e8a8c5667a45c6cd7930c6302479d207357da8f9d0f804d65ecd49f770e0f864"
+    },
+    {
+      "bytes": 365,
+      "original_path": "/Users/macuser/bayes-cox-runs/checks/robustness-refactor-gate-2.log",
+      "path": "robustness-gate-2.log",
+      "sha256": "68c351205a91605162a3c9b3888bc37620f0028fbe20cfa58b2461296421be25"
+    },
+    {
+      "bytes": 383,
+      "original_path": "/Users/macuser/bayes-cox-runs/checks/robustness-refactor-gate-3.log",
+      "path": "robustness-gate-3.log",
+      "sha256": "d99aa14d54aa82ecd204bf5a8c79edbacbacb5911d7db21474fed34121d76dd0"
+    }
+  ],
+  "scope": "Selected refactor acceptance evidence; full 450-cell regeneration remains separate."
+}

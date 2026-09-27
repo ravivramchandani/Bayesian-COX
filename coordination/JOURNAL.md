@@ -521,3 +521,72 @@ and interrupted aggregate finalisation. These checks validate implementation;
 ADR-034 records retirement of the pilot execution lane, preservation of its
 historical data/results/source history and migration of tests to active
 fold-local cohort inputs. Implementation and robustness gates remain open.
+
+## 2026-09-27 — Modular engineering gates complete; final production programme prepared
+
+The modular models, confirmatory, explanation, robustness and rendering
+implementations are integrated. Their required equivalence gates passed:
+
+- All six model reference refits matched every field except wall-clock
+  timings and their containing hash; the horseshoe retained all three failed
+  attempts and its original `failed_diagnostics` outcome.
+- Explanation reproduced SHA-256
+  `120984c7edfac468f471b9f500470623689b2647e4bde56d271cc9623346ecd5`.
+  The 102 failed comparisons among 1,640 evaluable convergence comparisons
+  remain; no RQ3 stability claim is permitted.
+- Rebuilding aggregates from all 450 stored confirmatory cells reproduced
+  all three files byte for byte. The six-cell quick selection and four
+  specified additional confirmatory refits also matched exactly.
+- Three stored robustness cells covering Normal, spike-and-slab and
+  horseshoe priors reproduced every non-timing field. The robustness package
+  passed 196 tests, Ruff and coordination schemas before integration.
+- The rendering gate retained 874 identical files, seven intentional
+  changes, five additions and no missing output. Representative PDFs passed
+  visual inspection; final bundles incorporating completed robustness are
+  still pending.
+
+The integrated `make all` check passed 241 tests, exact environment
+verification, Ruff and coordination schemas. Subsequent focused checks passed
+three supplemental tests; the final release checkpoint still requires the
+complete suite after packaging integration. Gate evidence and local artifact
+locations are recorded in
+`coordination/reviews/2026-09-27-integrated-code-verification.md`.
+
+ADR-030 is integrated throughout the active evidence pipeline: historical
+source inputs verify at checkpoint `44b6085`, and live protocol, raw data,
+manifest and lock files retain their frozen content. New robustness manifests
+capture all actual current code and scripts and separate code identities in
+run directories. The completed-run verifier reconstructs the exact frozen
+825-cell/885-fit plan, checks cell body identities and conditions, raw-data
+hashes, permitted statuses, source inputs and every recorded file/content hash.
+Rehashed wrong-cell tests reject corruption. Unfinished frozen production
+continues only with its original unchanged code and runtime.
+
+ADR-034 pilot retirement is implemented at `3d6da8a`: pilot entry points,
+exclusive modules and unused shells are retired, historical data/results
+remain in place, source remains in Git history, and active tests use real
+raw cohorts with fold-local training preprocessing. The default workflow
+verifies the environment, tests and lint.
+
+`scripts/complete_results_programme.py` coordinates the remaining long runs
+from a clean detached checkout of the final integrated commit and records
+sealed source/code identity. It runs the full 450-cell reproduction with two
+workers alongside the six original frozen robustness workers. Existing
+supervisor PID 40646 automatically finishes the frozen robustness run and its
+aggregates. Once the exact 825-cell completion verifies, the coordinator
+queues all 75 ADR-032 post-hoc horseshoe refits with six workers, verifies the
+separate inference and renders both final bundles.
+
+At this engineering checkpoint the full 450-cell reproduction and the
+75-cell sampler sensitivity have not launched or completed. Frozen robustness
+is still running. The modular gates establish implementation equivalence,
+not completion of those production tasks. Final rendering, visual QA, claim
+review, evidence packaging and final commit/push remain. No Overleaf file
+was changed; thesis corrections remain recorded for later chapter work.
+
+The completed integrated checkpoint passed 244 tests in 70.61 seconds,
+coordination schemas and Ruff. Release restoration again verified all 450
+original cells and 80 frozen inputs unchanged. The current render-bundle
+checker accepted all 885 base outputs and their explanation-source lineage.
+Seven selected numerical gate reports/logs are preserved in the deterministic
+`coordination/recovery/2026-09-27-refactor-gates.tar.gz` with per-file hashes.

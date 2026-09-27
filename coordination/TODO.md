@@ -18,23 +18,35 @@ artefacts satisfy the stated gate.
 ## Current programme — 2026-09-27
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
-pause. Robustness is running, explanation production completed with a failed
-convergence gate, and the readability refactor is progressing. Models passed
-the six-cell exact-refit gate; explanation reproduces its original SHA-256.
-Confirmatory aggregation reproduces all three frozen files byte for byte;
-its cell checks and robustness integration remain in progress. Rendering passed
-the exhaustive old/new-file gate: 874 identical, seven intentional changes,
-five additions and no missing output; representative PDFs passed visual QA.
-The three original WIP checkpoints and verified main work are pushed.
-The recovery audit records the exact files, validation and remaining sequence:
-`coordination/reviews/2026-09-27-recovery-audit.md`.
+pause. All modular refactors are integrated and passed their required gates:
+six exact model refits; the original explanation SHA-256; three byte-identical
+confirmatory aggregate files rebuilt from all 450 cells; the six quick-selection
+and four specified additional confirmatory refits; and three exact robustness
+refits. Rendering passed the exhaustive old/new-file gate: 874 identical,
+seven intentional changes, five additions and no missing output; representative
+PDFs passed visual QA. ADR-030 checkpoint verification is integrated, and
+ADR-034 pilot retirement is complete. Historical data, results and retired
+source history remain preserved. The recovery audit records the original
+interruption state, which the completed engineering checkpoints supersede.
+Current gate evidence is in
+`coordination/reviews/2026-09-27-integrated-code-verification.md`.
 
-Immediate engineering work is checkpoint-bound verification (ADR-030),
-completion and equivalence checks for the three refactors, rendering, the
-remaining robustness/pilot cleanup, full reproduction, the separate 75-cell
-horseshoe sensitivity (ADR-032), and final evidence packaging. Overleaf edits
-remain excluded from the current code programme; the 19 recorded thesis
-corrections belong to T-152 through T-156 when thesis work resumes.
+Frozen robustness production remains active under its original six workers.
+Supervisor PID 40646 automatically performs the final unsharded resume and
+aggregation; no duplicate manual finish is required. Explanation production
+retains its failed convergence gate and permits no RQ3 stability claim.
+
+The full 450-cell reproduction and the separate 75-cell ADR-032 horseshoe
+sensitivity have not launched or completed. The new
+`scripts/complete_results_programme.py` runs from a clean detached checkout
+of the final committed code, records sealed source/code hashes, uses two
+reproduction workers while the six frozen robustness workers continue, then
+starts the 75-cell sensitivity with six workers after robustness is complete.
+It strictly verifies completed evidence and renders both final bundles.
+Final rendering with robustness, visual QA, claim review, evidence packaging
+and production close-out remain. Selected refit gates do not satisfy the full
+reproduction requirement. Overleaf edits remain excluded; the 19 recorded
+thesis corrections belong to T-152 through T-156 when thesis work resumes.
 
 ## Completed foundation
 
@@ -227,6 +239,8 @@ corrections belong to T-152 through T-156 when thesis work resumes.
 T-132 is complete and verified. The 2026-09-27 instruction resumed downstream
 production: T-140 through T-143 are running from the frozen code, and T-144
 has a production artefact with a failed convergence gate.
+The final robustness aggregates are managed by the existing automatic
+supervisor; the results coordinator waits for and verifies that completion.
 
 - [ ] T-140 (T, W7–8, owners R/SS; depends T-131) — Run the frozen prior
   hyperparameter and baseline-interval sensitivity. Acceptance: performance,

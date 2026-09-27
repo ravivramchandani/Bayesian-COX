@@ -28,10 +28,10 @@ Format:
 
 ## INV-002 — Preprocessing preserves prognostic signal
 
-- Scope: `src/data/preprocessing.py`.
-- Contract: For each dataset a covariate with known prognostic value retains
-  univariate concordance away from 0.5 after preprocessing: `log_pnodes` on
-  GBSG2 at least 0.60, `age` on WHAS500 at least 0.65,
+- Scope: `src/data/cohorts.py`, `src/data/fold_preprocessing.py`.
+- Contract: Within analysis-training subjects of the first paired outer fold,
+  a declared primary covariate retains its raw univariate concordance after training-fitted
+  preprocessing: `pnodes` on GBSG2 at least 0.60, `age` on WHAS500 at least 0.65,
   `nottingham_prognostic_index` on METABRIC at least 0.55.
 - Verified-by: `pytest tests/test_data.py -k preserves_prognostic_signal`
 - Rationale: If features and outcomes become misaligned, every model collapses
@@ -40,8 +40,9 @@ Format:
 ## INV-003 — Baselines reach their published range
 
 - Scope: `src/models/cox.py`, `src/models/random_survival_forest.py`.
-- Contract: Test-set concordance stays above 0.62 on GBSG2, 0.65 on WHAS500
-  and 0.60 on METABRIC for both baselines.
+- Contract: On real raw cohorts and the deterministic first paired outer fold,
+  concordance stays above 0.62 on GBSG2, 0.65 on WHAS500 and 0.60 on METABRIC
+  for both baselines. Preprocessing is fitted only on analysis-training subjects.
 - Verified-by: `pytest tests/test_models.py -k published_range`
 - Rationale: These cohorts have published Cox baselines near 0.67, 0.75 and
   0.63. A baseline at chance indicates a pipeline defect, and this check
@@ -70,19 +71,45 @@ Format:
 ## INV-006 — Every package imports and every analysis module runs
 
 - Scope: `src/`.
-- Contract: Every package under `src/` imports without error, and the
-  bootstrap, cross-validation and ranking modules run against real data even
-  while no script calls them.
+- Contract: Every remaining package under `src/` imports without error.
+  Event-stratified bootstrap, single-time AUC and full outer-fold evaluation
+  run on real data using training-fitted preprocessing and training censoring.
+  Every eligible subject appears exactly once in validation within a repeat.
 - Verified-by: `pytest tests/test_pipeline.py`
-- Rationale: Modules not yet wired into a script have no other check. Three of
-  them were left broken by a metrics rename and nothing detected it.
+- Rationale: Functional analysis utilities and the active pipeline must remain
+  usable after retirement of unused pilot loaders and placeholder packages.
 
 ## INV-007 — Reported numbers trace to a result file
 
 - Scope: `reports/`.
-- Contract: Every quantitative claim in a report corresponds to a value in
-  `reports/tables/*.json` produced by a script in `scripts/`.
-- Verified-by: Manual check at phase exit, recorded in
-  `coordination/phase_reports/`.
+- Contract: Every current quantitative report corresponds to a hash-verified
+  cell or aggregate in its declared run. Rendered files record exact source
+  keys, source hashes and renderer code hashes. Missing estimates and failed
+  gates remain explicit; post-hoc sensitivity never replaces confirmatory data.
+- Verified-by: `pytest tests/test_confirmatory_rendering.py tests/test_holm_bounds.py tests/test_posthoc_evidence.py tests/test_results_programme.py`
 - Rationale: The previous reports narrated numbers that no longer matched any
   artefact, and drew conclusions the data did not support.
+
+## INV-008 — Frozen evidence and current refits keep separate identities
+
+- Scope: `src/utils/frozen_evidence.py`, confirmatory/robustness resume,
+  `scripts/reproduce_confirmatory_cells.py`.
+- Contract: Historical inputs match all 80 pinned Git blobs; live protocol,
+  raw data/manifest and lock inputs retain their frozen content. Completed
+  confirmatory resume is read-only. Refit checkpoints verify actual source
+  identity and saved-cell hashes before reuse; only timing fields are excluded
+  from reproduction comparisons.
+- Verified-by: `pytest tests/test_frozen_evidence.py tests/test_closed_confirmatory_resume.py tests/test_reproduction_checkpoint.py`
+- Rationale: A readability change must not invalidate historical evidence or
+  silently mix cells computed by different implementations.
+
+## INV-009 — Sampler sensitivity is complete, separate and acceptance-only
+
+- Scope: `src/pipelines/posthoc_sampler.py`, `src/utils/posthoc_evidence.py`.
+- Contract: Refit all 75 original horseshoe folds, change only target acceptance
+  to 0.999 on every original attempt, preserve seeds/folds/remedies and the
+  diagnostic gate, and retain all nine contrasts against unchanged comparators.
+  Every cell and aggregate is labelled post-hoc; remaining failures are reported.
+- Verified-by: `pytest tests/test_posthoc_sampler.py tests/test_posthoc_evidence.py`
+- Rationale: Selecting only failures or relabelling a sensitivity as confirmatory
+  would change the accepted evidence and conceal diagnostic attrition.

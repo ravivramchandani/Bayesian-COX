@@ -19,7 +19,7 @@ import yaml
 from src.data.survival_folds import repeated_survival_folds
 from src.pipelines import confirmatory
 from src.utils.frozen_evidence import verify_frozen_evidence
-from src.utils.io import json_safe, write_json_atomic
+from src.utils.io import json_safe, read_mapping, write_json_atomic
 from src.utils.reproducibility import build_run_manifest, canonical_json_hash, sha256_file
 
 TARGET_ACCEPT = 0.999
@@ -172,6 +172,8 @@ def execute_sampler_sensitivity(
         raise ValueError("sampler sensitivity requires a confirmatory source")
     freeze = verify_frozen_evidence(project_root, source.manifest["input_sha256"])
     settings = source.manifest["run_config"]
+    if settings["protocol"] != read_mapping(project_root / "config/confirmatory.yaml"):
+        raise RuntimeError("post-hoc source protocol differs from the frozen study")
     keys = sorted(
         (cell["dataset"], cell["repeat"], cell["fold"])
         for _, cell in source.cells
@@ -218,6 +220,7 @@ def execute_sampler_sensitivity(
         if (
             recorded["config_sha256"] != manifest["config_sha256"]
             or recorded["input_sha256"] != manifest["input_sha256"]
+            or recorded["environment"] != manifest["environment"]
         ):
             raise RuntimeError("post-hoc code or inputs changed after the first checkpoint")
         if (run_dir / "completion.json").exists():

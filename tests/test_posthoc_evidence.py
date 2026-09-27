@@ -67,6 +67,12 @@ def sensitivity(tmp_path, monkeypatch):
         relative = f"cells/{dataset}/repeat_{repeat:02d}_fold_{fold:02d}/bayesian_horseshoe.json"
         _write_hashed(source_dir / relative, original, "cell_content_sha256")
         source_cells.append((relative, original))
+        for comparator in ("bayesian_normal", "bayesian_spike_slab"):
+            comparator_cell = copy.deepcopy(original)
+            comparator_cell["model_key"] = comparator
+            source_cells.append(
+                (relative.replace("bayesian_horseshoe", comparator), comparator_cell)
+            )
         refit = copy.deepcopy(original)
         refit.update(
             {
@@ -149,7 +155,16 @@ def test_all75_posthoc_cells_verify(sensitivity):
 
 @pytest.mark.parametrize(
     "corruption",
-    ["undeclared_method", "seed", "acceptance", "label", "missing_cell", "replacement_claim"],
+    [
+        "undeclared_method",
+        "seed",
+        "acceptance",
+        "label",
+        "missing_cell",
+        "replacement_claim",
+        "failed_hidden_as_complete",
+        "unknown_status",
+    ],
 )
 def test_rehashed_corrupt_evidence_still_fails(sensitivity, corruption):
     run, source = sensitivity
@@ -175,6 +190,12 @@ def test_rehashed_corrupt_evidence_still_fails(sensitivity, corruption):
                 cell["cell_seed"] += 1
             elif corruption == "acceptance":
                 cell["fit_attempts"][0]["target_accept"] = 0.99
+            elif corruption == "failed_hidden_as_complete":
+                cell["status"] = "failed_diagnostics"
+                completion["status_counts"] = {"complete": 74, "failed_diagnostics": 1}
+            elif corruption == "unknown_status":
+                cell["status"] = "ignored"
+                completion["status_counts"] = {"complete": 74, "ignored": 1}
             else:
                 cell["evidence_status"] = "confirmatory"
             _write_hashed(path, cell, "cell_content_sha256")

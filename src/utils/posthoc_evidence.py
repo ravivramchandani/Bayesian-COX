@@ -8,6 +8,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+from src.pipelines.confirmatory.options import MODEL_LABELS
 from src.rendering.verification import _safe_child, _verify_content_hash, verify_frozen_run
 from src.utils.reproducibility import canonical_json_hash, sha256_file
 
@@ -28,6 +29,8 @@ def verify_posthoc_cell(path: Path, source_dir: Path, key: tuple[str, int, int])
         raise RuntimeError(f"post-hoc cell fold key is invalid: {path}")
     if cell.get("model_key") != "bayesian_horseshoe":
         raise RuntimeError(f"post-hoc cell model is invalid: {path}")
+    if cell.get("status") not in {"complete", "failed", "failed_diagnostics"}:
+        raise RuntimeError(f"post-hoc cell status is invalid: {path}")
     dataset, repeat, fold = key
     original_path = (
         source_dir
@@ -168,6 +171,20 @@ def verify_posthoc_run(run_dir: Path, source_dir: Path) -> dict[str, Any]:
     }
     if len(expected_pairs) != 9 or observed_pairs != expected_pairs:
         raise RuntimeError("post-hoc contrast family differs from the frozen source")
+    accepted: dict[tuple[str, str], set[tuple[int, int]]] = {}
+    mixed = [cell for _, cell in source.cells if cell["model_key"] != "bayesian_horseshoe"] + cells
+    for cell in mixed:
+        if cell["status"] == "complete":
+            label = MODEL_LABELS[cell["model_key"]]
+            accepted.setdefault((cell["dataset"], label), set()).add((cell["repeat"], cell["fold"]))
+    for row in inference["primary"]:
+        paired = accepted.get((row["dataset"], row["model_a"]), set()) & accepted.get(
+            (row["dataset"], row["model_b"]), set()
+        )
+        if row.get("n_paired_folds") != len(paired):
+            raise RuntimeError("post-hoc paired-fold count differs from accepted cells")
+        if isinstance(row.get("ibs"), dict) != (len(paired) == 25):
+            raise RuntimeError("post-hoc inference availability differs from accepted cells")
     complete_family = all(
         row.get("n_paired_folds") == 25 and isinstance(row.get("ibs"), dict)
         for row in inference["primary"]

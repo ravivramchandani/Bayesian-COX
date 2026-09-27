@@ -28,6 +28,11 @@ def driver(tmp_path, monkeypatch):
     script.write_bytes(path.read_bytes())
     monkeypatch.setattr(module, "PROJECT_ROOT", root)
     monkeypatch.setattr(module, "__file__", str(script))
+    (root / "config").mkdir()
+    write_json_atomic(
+        root / "config/confirmatory.yaml", {"design_status": "frozen_after_rehearsal"}
+    )
+    monkeypatch.setattr("src.utils.reproducibility.dependency_versions", lambda: {})
     monkeypatch.setattr("src.utils.frozen_evidence.verify_frozen_evidence", lambda *args: {})
     return module
 
@@ -47,6 +52,18 @@ def test_verified_resume_reuses_only_original_code_and_selection(driver, tmp_pat
         driver.prepare_reproduction_checkpoint(run, keys, keep, resume=True)
     with pytest.raises(RuntimeError, match="source code changed"):
         driver.verify_reproduction_inputs(initial, run)
+
+
+def test_changed_environment_is_rejected_before_resume(driver, tmp_path, monkeypatch):
+    run = _make_run(tmp_path / "source")
+    keep = tmp_path / "refits"
+    keys = [("toy", "cox_ph", 1, 1)]
+    driver.prepare_reproduction_checkpoint(run, keys, keep, resume=False)
+    monkeypatch.setattr(
+        "src.utils.reproducibility.dependency_versions", lambda: {"numpy": "changed"}
+    )
+    with pytest.raises(RuntimeError, match="environment"):
+        driver.prepare_reproduction_checkpoint(run, keys, keep, resume=True)
 
 
 def test_corrupted_original_evidence_is_rejected_before_resume(driver, tmp_path):
@@ -78,6 +95,20 @@ def test_saved_refit_has_valid_content_hash_and_can_only_ignore_timings(driver, 
     refit["cell_content_sha256"] = canonical_json_hash(refit)
     write_json_atomic(saved, refit)
     assert not driver.check_saved_refit(run, saved, key)["identical"]
+
+
+def test_saved_refit_layout_matches_write_resume_and_verification(driver, tmp_path, monkeypatch):
+    run = _make_run(tmp_path / "source")
+    key = ("toy", "cox_ph", 1, 1)
+    keep = tmp_path / "refits"
+    original = json.loads(driver.stored_cell_path(run, *key).read_text())
+    monkeypatch.setattr(driver, "refit_cell", lambda *args: original)
+    driver.prepare_reproduction_checkpoint(run, [key], keep, resume=False)
+    assert driver.check_cell(run, key, keep)["identical"]
+    saved = driver.saved_refit_path(keep, *key)
+    assert saved.is_file()
+    assert saved == keep / "toy/repeat_01_fold_01/cox_ph.json"
+    assert driver.check_saved_refit(run, saved, key)["identical"]
 
 
 @pytest.mark.parametrize("destination", ["keep_cells", "report"])
