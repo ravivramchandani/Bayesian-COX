@@ -453,7 +453,15 @@ are withdrawn; estimate compute from blind profiling of the specified design.
   Report predictor/event counts, diagnostics, matched effects, uncertainty,
   multiplicity and reproduction checks. Preserve the original full-cohort
   primary analysis separately.
-- [ ] T-186 (T; depends T-181–T-185) — Render the extension bundle with the
+- [ ] T-189 (T; depends T-180) — Implement and run the Cox catalytic prior
+  arm (ADR-037). Acceptance:
+  - the prior log-density and weighted mixture estimate match the authors'
+    reference implementation on a fixed test case;
+  - fixed-τ = p and adaptive-τ Bayesian cells, plus weighted-mixture cells,
+    exist for the 25 outer folds of each cohort, the RQ2 conditions and the
+    T-185 expression setting, all under the unchanged diagnostic gate;
+  - paired contrasts against the other priors and comparators are recorded.
+- [ ] T-186 (T; depends T-181–T-185, T-189) — Render the extension bundle with the
   same verified renderer and lineage rules. Acceptance: every thesis number
   traces to generated evidence, with actual visual QA and separate primary/
   post-hoc lineage. Preserve the negative original explanation finding and

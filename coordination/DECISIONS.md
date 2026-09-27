@@ -785,3 +785,65 @@ Format:
   for the regularised horseshoe and non-Gaussian calibration, and
   [Vickers et al. (2008)](https://link.springer.com/article/10.1186/1472-6947-8-53)
   for survival decision curves and uncertainty.
+
+## ADR-037 — Cox catalytic prior as a post-hoc extension arm
+
+- Status: ACCEPTED
+- Date: 2026-09-28
+- Context:
+  - Q-001 deferred the catalytic prior, to be reopened if the small-sample
+    robustness analysis showed the existing priors degrading.
+    `docs/study_protocol.md` (lines 69–70) excludes it unless a later,
+    supervisor-approved decision reopens it.
+  - The Cox catalytic prior is now published: Li and Huang (2026),
+    Biometrics 82(1), ujag004, doi:10.1093/biomtc/ujag004. It extends the
+    original catalytic prior of Huang et al. (2020, PNAS 117(22),
+    doi:10.1073/pnas.1920913117).
+  - The Cox version adds a down-weighted likelihood of synthetic data drawn
+    from a simple model. Its evaluation covers simulations and one small
+    cohort; no independent multi-cohort benchmark with IBS, calibration or
+    repeated cross-validation exists.
+  - It stabilises estimation where data are scarce relative to the number of
+    predictors, the regime that RQ2 and the METABRIC expression setting
+    test.
+  - The supervisor approved adding it on 2026-09-28, before any RQ2
+    robustness result had been inspected.
+- Decision:
+  - Add the Cox catalytic prior (Li and Huang, Eq. 7) as a prior on β,
+    combined with the existing piecewise-exponential likelihood and sampled
+    with NUTS under the unchanged ADR-027 gate. There are two Bayesian
+    variants:
+    - fixed total weight τ = p, the authors' small-sample recommendation;
+    - the adaptive catalytic prior on (τ, β), with (α, γ) = (2, 1), the
+      authors' default.
+  - Also add the authors' weighted mixture estimator, with cross-validated
+    τ, as a point-estimate comparator.
+  - Generate synthetic data inside each outer training fold:
+    - covariates resampled from each preprocessed training column's
+      empirical marginal;
+    - uncensored times from an exponential model fitted to the training fold
+      on the model's time scale;
+    - the fitted rate as the surrogate baseline hazard;
+    - M = max(1,000, 4p);
+    - seeds derived from the cell seed.
+  - Before production, the prior log-density and the weighted mixture
+    estimate must match the authors' reference implementation (R package
+    `catalytic` or their published code) on a fixed test case.
+  - Evaluate the arm wherever the other priors are evaluated: the 25 outer
+    folds of each cohort, the RQ2 information-regime conditions and the
+    METABRIC expression setting.
+  - The exact settings are fixed in `docs/protocol_addendum_extensions.md`
+    (T-180) before any catalytic result exists. Every result is labelled
+    post-hoc.
+  - This reopens Q-001 and supersedes the protocol's catalytic exclusion for
+    this arm only; `docs/study_protocol.md` remains the unchanged historical
+    plan.
+- Consequences:
+  - The thesis becomes the first independent, preregistered evaluation of
+    the Cox catalytic prior across real cohorts and clinical metrics, next
+    to parameter-space priors, penalised Cox and machine-learning
+    comparators.
+  - The prior is log-concave, so its compute cost should be close to the
+    normal prior's.
+  - The RQ2 conditions need new catalytic cells, because the frozen
+    robustness run has no catalytic arm.
