@@ -866,3 +866,9 @@ curve pointwise-interval, support and unavailable-model CSVs. The three
 analysis-only source hashes are recorded separately; production inputs and
 the result-blind freeze remain unchanged. Final 32-figure visual QA is still
 required after the complete grid.
+
+The release staging tool is now copied into the repository under
+`scripts/extension_release/`. Its deterministic shard/inventory self-test
+passes round-trip, tamper, unsafe-path, duplicate, gzip-trailer and source-
+change cases; this prepares transfer integrity but does not close the future
+actual-result packaging, upload, download or restoration gates.

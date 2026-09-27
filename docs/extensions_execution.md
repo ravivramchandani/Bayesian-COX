@@ -97,7 +97,11 @@ missing primary findings remain visible.
 
 Package code, inputs/source metadata, all attempted cells/traces, aggregates,
 92 reproduction receipts/traces, plots/tables and actual QA in a new private
-GitHub release. Include checksums and an exact member inventory, then download
-and restore into a fresh clone/directory before claiming Ravi has the full
+GitHub release. The standard-library packer in
+`scripts/extension_release/` creates bounded tar.gz shards and an exact
+member/hash inventory from a stable, symlink-free staging tree; its verifier
+requires the independently recorded canonical inventory digest. Include
+checksums and an exact member inventory, then download and restore into a
+fresh clone/directory before claiming Ravi has the full
 extension evidence remotely. Public publication, paper drafting, DOI and
 Overleaf changes remain deferred.
