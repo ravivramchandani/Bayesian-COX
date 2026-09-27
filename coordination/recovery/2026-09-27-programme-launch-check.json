@@ -1,0 +1,67 @@
+{
+  "cells": [
+    {
+      "cell": "gbsg2:bayesian_normal:1:1",
+      "first_differences": [],
+      "identical": true,
+      "n_differences": 0,
+      "original_file_sha256": "142bf4461fcb08e1e69febc012f0d7184eaf6915ca87764e67b2b2c4a0dc43d8",
+      "refit_file_sha256": "22a250920a968ce59308faae258eed787c603918ee3f7c6607365c5af0898cbf",
+      "resumed_verified_refit": true,
+      "seconds": 0.0,
+      "status": "complete"
+    },
+    {
+      "cell": "gbsg2:bayesian_spike_slab:1:1",
+      "first_differences": [],
+      "identical": true,
+      "n_differences": 0,
+      "original_file_sha256": "1d3514571ed604c799a4cca90c44a7438c575ecc23f15c3fc563da58726690d9",
+      "refit_file_sha256": "593db0bd5c05bdfd711557ebab94f12fc9413f8b679bf134fd80fb287c926e0f",
+      "resumed_verified_refit": true,
+      "seconds": 0.0,
+      "status": "complete"
+    },
+    {
+      "cell": "gbsg2:cox_ph:1:1",
+      "first_differences": [],
+      "identical": true,
+      "n_differences": 0,
+      "original_file_sha256": "9914f8139f10d52340e743888d81178f040f524487d6469265c2a8c066c6e2b1",
+      "refit_file_sha256": "01dda6e044e46862017a875d92a4eb67078b8d31c0648a6151af3955ac4d25bf",
+      "resumed_verified_refit": true,
+      "seconds": 0.0,
+      "status": "complete"
+    },
+    {
+      "cell": "gbsg2:deepsurv:1:1",
+      "first_differences": [],
+      "identical": true,
+      "n_differences": 0,
+      "original_file_sha256": "ba8d520b29056baed18c7d750f2cb80d2e737fa8e2a9f40f315665109b69ec95",
+      "refit_file_sha256": "5473f6806a034e00a5d08d544d69acde4c4f095f9684a79d6a0ed4dc797d7eba",
+      "resumed_verified_refit": true,
+      "seconds": 0.0,
+      "status": "complete"
+    },
+    {
+      "cell": "gbsg2:random_survival_forest:1:1",
+      "first_differences": [],
+      "identical": true,
+      "n_differences": 0,
+      "original_file_sha256": "d460319197966d46463b7ac5d19e58e5576f0f788d71e96ad4a09c3967481c41",
+      "refit_file_sha256": "c9d41e30f5ba70bba570a76d26e1a66b7303c9a4a0da6e510b21ac69879c7ea1",
+      "resumed_verified_refit": true,
+      "seconds": 0.0,
+      "status": "complete"
+    }
+  ],
+  "check_content_sha256": "15a831f87ca9fee1631cf634f5cd45378f1173739717aa46e02fc4d5c7fb29e9",
+  "checked_at_utc": "2026-09-27T00:46:40.116312+00:00",
+  "checked_cells": 5,
+  "code_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+  "full_reproduction_complete": false,
+  "planned_cells": 450,
+  "scope": "five_initial_saved_refits_only",
+  "status": "partial_execution_verified"
+}

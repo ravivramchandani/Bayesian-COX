@@ -22,8 +22,9 @@ cells, three robustness refits, and the exhaustive renderer comparison.
 ADR-030 checkpoint verification is integrated throughout the active pipeline;
 ADR-034 retired the pilot execution lane while preserving its historical
 data, results and source history. The original WIP checkpoints remain on
-three `wip/*-20260927` branches. The full 450-cell reproduction and separate
-75-cell sampler sensitivity have not started. Final rendering, visual QA and
+three `wip/*-20260927` branches. The full 450-cell reproduction is running
+from sealed commit `11f86ce`; the separate 75-cell sampler sensitivity is
+queued after robustness. Final rendering, visual QA and
 evidence packaging remain. Thesis edits are outside this code programme.
 
 ## Start here — continue from another machine

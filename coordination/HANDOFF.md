@@ -116,8 +116,10 @@ Completed integration gates and their evidence locations are in
    active tests use real raw cohorts with fold-local preprocessing.
 6. [ ] Regenerate the 450-cell run with the refactored code and compare it
    with the frozen artefacts (the ADR-026 reproduction claim). The full
-   450-cell regeneration has not launched; selected module gates and pure
-   aggregate reproduction do not complete this task.
+   450-cell regeneration launched at 13:41 Auckland time on 2026-09-27 from
+   sealed commit `11f86ced8735b32767debb58f3cbbefbb5a7b8e6` with two workers.
+   Its complete 450/450 equality report remains pending; selected module
+   gates and pure aggregate reproduction do not complete this task.
 7. [x] Render the frozen results tables and figures, including the Holm
    family-completion bound. The full old/new comparison retained 874 identical
    files, seven intended changes and five additions, with no missing output.
@@ -150,6 +152,18 @@ completion, runs all 75 post-hoc sampler cells with six workers, verifies the
 separate inference and renders both final bundles. Its verified-analysis
 record still requires final visual QA and evidence packaging; it does not
 complete thesis writing. The README records the machine-specific invocation.
+
+The live coordinator is PID 57940; `caffeinate` PID 57941 prevents idle sleep
+for its lifetime. The immutable checkout is
+`~/bayes-cox-runs/refactored-programme-20260927/`, and outputs are in
+`~/bayes-cox-runs/continuation-20260927/`. Its manifest pins all 90 current
+source/script files and the exact original explanation hash. Preflight
+verified the frozen run, unchanged study inputs and locked runtime before
+starting the reproduction stage. The log is
+`~/bayes-cox-runs/logs/results_programme_20260927.log` and the PID file is
+alongside it. Do not edit that checkout or launch a second coordinator.
+Full reproduction, robustness aggregation, sampler results, final visual QA
+and packaging remain pending until their actual completed evidence verifies.
 
 Administrative deadline: the live programme in `TODO.md` runs from 2026-08-17
 to 2026-11-30. This 15-week schedule supersedes the earlier 26-week dates for

@@ -620,3 +620,24 @@ The final execution checkpoint passed all 270 tests in 59.11 seconds,
 coordination schemas, Ruff and the exact 259-package runtime verification.
 The full check log is preserved in
 `coordination/recovery/2026-09-27-final-code-check.log`.
+
+## 2026-09-27 — Sealed full reproduction launched
+
+Coordinator PID 57940 launched the remaining programme from detached commit
+`11f86ced8735b32767debb58f3cbbefbb5a7b8e6` in
+`~/bayes-cox-runs/refactored-programme-20260927/`. The output manifest in
+`~/bayes-cox-runs/continuation-20260927/` records all 90 source/script hashes,
+original evidence locations and the exact explanation hash. The locked
+runtime and frozen-source preflight passed before the reproduction stage.
+Two workers are allocated to the full 450-cell check; the six original
+robustness workers continue, with supervisor PID 40646 managing aggregation.
+The separate 75-cell sensitivity remains queued after robustness. `caffeinate`
+PID 57941 prevents idle sleep while the coordinator is alive. No completion
+or release-readiness claim is made at launch.
+
+The first five saved cells (GBSG2 repeat 1, fold 1: normal, spike-and-slab,
+Cox, DeepSurv and forest) independently passed their own content hashes and
+matched every original non-timing field. The partial check is preserved in
+`coordination/recovery/2026-09-27-programme-launch-check.json`; it explicitly
+does not certify the full 450-cell reproduction. Both reproduction workers,
+all six original robustness workers and their finishing supervisor are alive.

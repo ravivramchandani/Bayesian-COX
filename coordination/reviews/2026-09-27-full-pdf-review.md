@@ -24,8 +24,18 @@ presentation only. Source evidence, numeric values, failed diagnostic outcomes
 and claim gates remain unchanged.
 
 The three corrected overview figures and the corrected METABRIC normal-prior
-coefficient trace passed native-size visual inspection. A complete public-CLI
-render is being generated in `~/bayes-cox-runs/render-equivalence-20260927/refactored_v3/`.
-Its final file comparison and full visual review remain pending. The final
+coefficient trace passed native-size visual inspection. The complete public-CLI
+render is in `~/bayes-cox-runs/render-equivalence-20260927/refactored_v3/`.
+The exhaustive comparison is `../recovery/2026-09-27-final-layout-equivalence.json`
+(SHA-256 `1cf4a96041a293340dd140971b0e830ddd78c979bf9e8e1a5ac249005549c186`).
+It retains all 881 original paths and adds the same five documented outputs.
+Thirty-six original files remain byte-identical. The 845 changed files include
+the seven previously documented changes and 838 presentation-only changes:
+832 trace PDF/PNG files and six corrected overview PDF/PNG files. No unexpected
+change or missing output exists. Every numerical CSV/LaTeX table retains its
+original bytes except the previously documented primary-contrast tables.
+The bundle verifier accepted all 885 registered outputs, their exact original
+source hashes, explanation reference and unchanged current renderer code.
+The full replacement visual review remains pending. The final
 programme bundle will additionally include completed robustness and separate
 post-hoc sampler evidence, and will require its own hash-bound visual QA.

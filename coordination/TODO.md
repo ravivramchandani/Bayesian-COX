@@ -41,12 +41,13 @@ Supervisor PID 40646 automatically performs the final unsharded resume and
 aggregation; no duplicate manual finish is required. Explanation production
 retains its failed convergence gate and permits no RQ3 stability claim.
 
-The full 450-cell reproduction and the separate 75-cell ADR-032 horseshoe
-sensitivity have not launched or completed. The new
-`scripts/complete_results_programme.py` runs from a clean detached checkout
-of the final committed code, records sealed source/code hashes, uses two
-reproduction workers while the six frozen robustness workers continue, then
-starts the 75-cell sensitivity with six workers after robustness is complete.
+The full 450-cell reproduction launched on 2026-09-27 from sealed commit
+`11f86ced8735b32767debb58f3cbbefbb5a7b8e6`; its complete equality report is
+pending. The separate 75-cell ADR-032 horseshoe sensitivity has not launched.
+`scripts/complete_results_programme.py` runs from the clean detached checkout,
+records sealed source/code hashes, uses two reproduction workers while the
+six frozen robustness workers continue, then starts the 75-cell sensitivity
+with six workers after robustness is complete.
 It strictly verifies completed evidence and renders both final bundles.
 Final rendering with robustness, visual QA, claim review, evidence packaging
 and production close-out remain. Selected refit gates do not satisfy the full
