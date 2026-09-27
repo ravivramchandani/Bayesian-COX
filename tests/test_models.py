@@ -1,11 +1,9 @@
 """Model behaviour tests.
 
 Baselines are checked against the concordance range reported for these
-cohorts in the literature. A model that lands at chance level indicates a
-broken pipeline rather than a weak model.
+cohorts in the literature, using the active raw-cohort loader and training-only
+outer-fold preprocessing. A model at chance level indicates a pipeline defect.
 """
-
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -16,9 +14,7 @@ from src.models.bayesian.model import SUPPORTED_PRIORS, BayesianCoxModel
 from src.models.cox import CoxPHModel
 from src.models.deepsurv import DeepSurvModel
 from src.models.random_survival_forest import RandomSurvivalForestModel
-
-ROOT = Path(__file__).resolve().parent.parent
-PROCESSED = ROOT / "data" / "processed"
+from tests.cohort_fixtures import prepare_real_fold
 
 # Lower bounds on test-set concordance. Published Cox baselines are about
 # 0.67 (GBSG2), 0.75 (WHAS500) and 0.63 (METABRIC); these floors sit well
@@ -27,19 +23,14 @@ BASELINE_FLOOR = {"gbsg2": 0.62, "whas500": 0.65, "metabric": 0.60}
 
 
 def load(dataset):
-    train = pd.read_csv(PROCESSED / dataset / "train.csv")
-    test = pd.read_csv(PROCESSED / dataset / "test.csv")
-    features = [c for c in train.columns if c not in ("time", "event")]
-    return train, test, features
+    return prepare_real_fold(dataset).model_frames()
 
 
 @pytest.mark.parametrize("dataset", sorted(BASELINE_FLOOR))
 def test_cox_ph_reaches_published_range(dataset):
     train, test, features = load(dataset)
     model = CoxPHModel().fit(train[features], train["time"], train["event"])
-    c, _ = concordance_index(
-        test["time"], test["event"], model.predict_risk(test[features])
-    )
+    c, _ = concordance_index(test["time"], test["event"], model.predict_risk(test[features]))
     assert c >= BASELINE_FLOOR[dataset], (
         f"{dataset}: Cox PH concordance {c:.3f} is below the published range"
     )
@@ -48,12 +39,10 @@ def test_cox_ph_reaches_published_range(dataset):
 @pytest.mark.parametrize("dataset", sorted(BASELINE_FLOOR))
 def test_random_survival_forest_reaches_published_range(dataset):
     train, test, features = load(dataset)
-    model = RandomSurvivalForestModel(n_estimators=100).fit(
+    model = RandomSurvivalForestModel(n_estimators=100, n_jobs=1).fit(
         train[features], train["time"], train["event"]
     )
-    c, _ = concordance_index(
-        test["time"], test["event"], model.predict_risk(test[features])
-    )
+    c, _ = concordance_index(test["time"], test["event"], model.predict_risk(test[features]))
     assert c >= BASELINE_FLOOR[dataset]
 
 
@@ -81,16 +70,14 @@ def test_cox_hazard_ratios_have_expected_direction():
 def test_cox_proportional_hazards_test_runs():
     train, _, features = load("gbsg2")
     model = CoxPHModel().fit(train[features], train["time"], train["event"])
-    table = model.proportional_hazards_test(
-        train[features], train["time"], train["event"]
-    )
+    table = model.proportional_hazards_test(train[features], train["time"], train["event"])
     assert set(table.columns) == {"feature", "test_statistic", "p", "ph_satisfied"}
     assert len(table) == len(features)
 
 
 def test_rsf_permutation_importance_ranks_known_predictor():
     train, _, features = load("gbsg2")
-    model = RandomSurvivalForestModel(n_estimators=100).fit(
+    model = RandomSurvivalForestModel(n_estimators=100, n_jobs=1).fit(
         train[features], train["time"], train["event"]
     )
     importance = model.permutation_importance(
@@ -150,9 +137,7 @@ def test_bayesian_cox_priors_fit_and_report_diagnostics(prior):
         target_accept=0.95,
     ).fit(train[features], train["time"], train["event"])
 
-    c, _ = concordance_index(
-        test["time"], test["event"], model.predict_risk(test[features])
-    )
+    c, _ = concordance_index(test["time"], test["event"], model.predict_risk(test[features]))
     assert c > 0.55
 
     diagnostics = model.diagnostics
@@ -207,16 +192,16 @@ def test_sparsity_priors_expose_an_inclusion_signal():
     train, _, features = load("gbsg2")
 
     for prior in ("horseshoe", "spike_slab"):
-        model = BayesianCoxModel(
-            coefficient_prior=prior, draws=300, tune=300, chains=2
-        ).fit(train[features], train["time"], train["event"])
+        model = BayesianCoxModel(coefficient_prior=prior, draws=300, tune=300, chains=2).fit(
+            train[features], train["time"], train["event"]
+        )
         signal = model.inclusion_signal()
         assert signal is not None
         assert len(signal) == len(features)
 
-    normal = BayesianCoxModel(
-        coefficient_prior="normal", draws=200, tune=200, chains=2
-    ).fit(train[features], train["time"], train["event"])
+    normal = BayesianCoxModel(coefficient_prior="normal", draws=200, tune=200, chains=2).fit(
+        train[features], train["time"], train["event"]
+    )
     assert normal.inclusion_signal() is None
 
     contribution = normal.posterior_expected_absolute_contribution(train[features])
@@ -224,13 +209,12 @@ def test_sparsity_priors_expose_an_inclusion_signal():
     assert len(contribution) == len(features)
 
     selected = train[features].iloc[:4]
-    feature_groups = {feature: "first_two" if index < 2 else feature for index, feature in enumerate(features)}
-    grouped = normal.posterior_expected_absolute_group_contribution(
-        selected, feature_groups
-    )
+    feature_groups = {
+        feature: "first_two" if index < 2 else feature for index, feature in enumerate(features)
+    }
+    grouped = normal.posterior_expected_absolute_group_contribution(selected, feature_groups)
     first_two = [0, 1]
     expected = np.abs(
-        normal.beta_samples[:, first_two]
-        @ selected.iloc[:, first_two].to_numpy(dtype=float).T
+        normal.beta_samples[:, first_two] @ selected.iloc[:, first_two].to_numpy(dtype=float).T
     ).mean(axis=0)
     np.testing.assert_allclose(grouped["first_two"], expected)

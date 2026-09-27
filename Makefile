@@ -1,5 +1,4 @@
 PYTHON ?= python
-CONDA_ENV ?= bayes-cox
 CONDA_LOCK ?= conda-lock
 LOCK_ENV ?= bayes-cox-lock-verify
 LOCK_FILE ?= conda-lock.yml
@@ -8,6 +7,9 @@ CONFIRMATORY_RUN ?=
 EXPLAINABILITY_ARTIFACT ?=
 ROBUSTNESS_RUN ?=
 RENDER_OUTPUT ?=
+REPRODUCTION_SELECTION ?= quick
+REPRODUCTION_WORKERS ?= 1
+REPRODUCTION_REPORT ?=
 RENDER_OPTIONAL_ARGS = $(if $(EXPLAINABILITY_ARTIFACT),--explainability-artifact "$(EXPLAINABILITY_ARTIFACT)") $(if $(ROBUSTNESS_RUN),--robustness-dir "$(ROBUSTNESS_RUN)") $(if $(RENDER_OUTPUT),--output-dir "$(RENDER_OUTPUT)")
 
 # The thesis document lives in a separate Overleaf-backed repository beside
@@ -15,10 +17,9 @@ RENDER_OPTIONAL_ARGS = $(if $(EXPLAINABILITY_ARTIFACT),--explainability-artifact
 THESIS_DIR ?= ../thesis-overleaf
 THESIS_MAIN ?= Main
 
-.PHONY: env lock env-locked verify-env clean-build data eda benchmark confirmatory-rehearsal confirmatory confirmatory-resume robustness robustness-resume explain render-confirmatory figures pilot-figures reports thesis jargon test schemas lint format all clean
+.PHONY: env lock env-locked verify-env clean-build data confirmatory-rehearsal confirmatory confirmatory-resume reproduce-confirmatory robustness robustness-resume explain render-confirmatory figures reports thesis jargon test schemas lint format all clean
 
-env:
-	conda env create -f environment.yml || conda env update -f environment.yml
+env: env-locked
 
 lock:
 	$(CONDA_LOCK) lock --platform osx-arm64 --file environment.yml \
@@ -44,13 +45,6 @@ clean-build:
 
 data:
 	$(PYTHON) scripts/download_datasets.py
-	$(PYTHON) scripts/prepare_dataset.py
-
-eda:
-	$(PYTHON) scripts/run_eda.py
-
-benchmark:
-	$(PYTHON) scripts/run_benchmark.py
 
 confirmatory-rehearsal:
 	$(PYTHON) scripts/run_confirmatory.py --mode rehearsal
@@ -60,6 +54,10 @@ confirmatory:
 
 confirmatory-resume:
 	$(PYTHON) scripts/run_confirmatory.py --mode confirmatory --resume
+
+reproduce-confirmatory:
+	@test -n "$(CONFIRMATORY_RUN)" || { echo "set CONFIRMATORY_RUN to a completed frozen run"; exit 1; }
+	$(PYTHON) scripts/reproduce_confirmatory_cells.py --run-dir "$(CONFIRMATORY_RUN)" --selection "$(REPRODUCTION_SELECTION)" --workers $(REPRODUCTION_WORKERS) $(if $(REPRODUCTION_REPORT),--report "$(REPRODUCTION_REPORT)")
 
 robustness:
 	@test -n "$(CONFIRMATORY_RUN)" || { echo "set CONFIRMATORY_RUN to a completed frozen run"; exit 1; }
@@ -79,12 +77,7 @@ render-confirmatory:
 
 figures: render-confirmatory
 
-pilot-figures:
-	@echo "exploratory pilot figures only; not confirmatory evidence"
-	$(PYTHON) scripts/make_figures.py
-
-reports:
-	$(PYTHON) scripts/make_reports.py
+reports: render-confirmatory
 
 thesis:
 	@test -d $(THESIS_DIR) || { echo "thesis repository not found at $(THESIS_DIR)"; exit 1; }
@@ -115,7 +108,7 @@ lint:
 format:
 	$(PYTHON) -m ruff format .
 
-all: data eda benchmark reports
+all: verify-env test lint
 
 clean:
 	find . -type d -name __pycache__ -exec rm -rf {} +
