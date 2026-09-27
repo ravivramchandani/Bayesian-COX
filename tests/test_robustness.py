@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import numpy as np
@@ -31,7 +32,7 @@ from src.pipelines.robustness import (
     summarize_imputation_predictions,
     validate_robustness_cell,
 )
-from src.utils.reproducibility import canonical_json_hash
+from src.utils.reproducibility import canonical_json_hash, sha256_file
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -406,3 +407,271 @@ def test_ph_aggregation_recomputes_holm_without_fitting(tmp_path: Path):
     assert rows[0]["holm_adjusted_p"] == pytest.approx(0.02)
     assert rows[0]["holm_reject_0_05"] is True
     assert "limitation" in result["frozen_response"]
+
+
+def _rehearsal_options(output_root: Path):
+    from src.pipelines.robustness import RobustnessOptions
+
+    return RobustnessOptions(
+        mode="rehearsal",
+        datasets=("whas500",),
+        components=("rq2",),
+        outer_splits=5,
+        outer_repeats=1,
+        fold_limit_per_dataset=1,
+        bayes_draws=300,
+        bayes_tune=300,
+        bayes_chains=2,
+        sensitivity_bootstraps=30,
+        resume=False,
+        output_root=output_root,
+    )
+
+
+def test_execution_manifest_records_all_current_modules(configs, tmp_path):
+    from src.pipelines.robustness.provenance import build_execution_manifest
+
+    config, _datasets = configs
+    manifest = build_execution_manifest(
+        PROJECT_ROOT, {"protocol": config}, _rehearsal_options(tmp_path)
+    )
+    current_sources = {
+        str(path.relative_to(PROJECT_ROOT)) for path in PROJECT_ROOT.glob("src/**/*.py")
+    }
+    assert current_sources <= set(manifest["input_sha256"])
+    assert "src/pipelines/robustness.py" not in manifest["input_sha256"]
+    assert "src/pipelines/robustness/__init__.py" in manifest["input_sha256"]
+    assert "MISSING" not in manifest["input_sha256"].values()
+
+
+def test_code_identity_separates_runs_and_changed_runtime_cannot_resume(tmp_path, monkeypatch):
+    from src.pipelines.robustness import provenance
+
+    actual_config = {"protocol": {"analysis_id": "toy"}}
+    manifest = {
+        "run_config": actual_config,
+        "config_sha256": canonical_json_hash(actual_config),
+        "input_sha256": {"src/example.py": "a" * 64},
+        "execution_code_sha256": "b" * 64,
+        "environment": {"python": "3.11.15"},
+    }
+
+    def current_manifest(*_args):
+        current = copy.deepcopy(manifest)
+        current["manifest_content_sha256"] = canonical_json_hash(current)
+        return current
+
+    monkeypatch.setattr(provenance, "build_execution_manifest", current_manifest)
+    options = _rehearsal_options(tmp_path)
+    first, complete = provenance.initialise_run_directory(
+        PROJECT_ROOT, actual_config, options, {}, {}
+    )
+    assert complete is False
+    manifest["environment"] = {"python": "different"}
+    with pytest.raises(RuntimeError, match="runtime changed"):
+        provenance.initialise_run_directory(
+            PROJECT_ROOT, actual_config, replace(options, resume=True), {}, {}
+        )
+    manifest["execution_code_sha256"] = "c" * 64
+    manifest["input_sha256"]["src/example.py"] = "d" * 64
+    second, complete = provenance.initialise_run_directory(
+        PROJECT_ROOT, actual_config, options, {}, {}
+    )
+    assert first != second
+    assert complete is False
+
+
+def test_unfinished_historical_run_is_not_resumed_by_current_code(tmp_path, monkeypatch):
+    from src.pipelines.robustness import provenance
+
+    actual_config = {"protocol": {"analysis_id": "toy"}}
+    digest = canonical_json_hash(actual_config)
+    monkeypatch.setattr(
+        provenance,
+        "build_execution_manifest",
+        lambda *_args: {
+            "config_sha256": digest,
+            "execution_code_sha256": "c" * 64,
+        },
+    )
+    legacy = tmp_path / f"toy_robustness_rehearsal_{digest[:12]}"
+    legacy.mkdir()
+    (legacy / "manifest.json").write_text("{}", encoding="utf-8")
+    with pytest.raises(RuntimeError, match="unchanged original code and runtime"):
+        provenance.initialise_run_directory(
+            PROJECT_ROOT,
+            actual_config,
+            replace(_rehearsal_options(tmp_path), resume=True),
+            {},
+            {},
+        )
+    assert sorted(path.name for path in legacy.iterdir()) == ["manifest.json"]
+
+
+@pytest.mark.parametrize(
+    ("wrong_body", "message"),
+    [
+        ({"dataset": "other"}, "identity differs"),
+        ({"repeat": 2}, "identity differs"),
+        ({"fold": 2}, "identity differs"),
+        ({"model_key": "bayesian_horseshoe"}, "identity differs"),
+        ({"condition": {"feature_set": "wrong"}}, "condition differs"),
+        ({"dataset_sha256": "e" * 64}, "raw-data hash differs"),
+        ({"status": "unavailable_minimum_training_events"}, "completed-run status"),
+    ],
+)
+def test_completed_historical_verification_is_read_only_and_rejects_rehashed_wrong_cells(
+    tmp_path, monkeypatch, wrong_body, message
+):
+    from src.pipelines.robustness import provenance
+
+    project = tmp_path / "project"
+    run_dir = tmp_path / "robustness"
+    source = tmp_path / "frozen_confirmatory"
+    source.mkdir()
+    (project / "config").mkdir(parents=True)
+    (project / "config/datasets.yaml").write_text(
+        "toy:\n  raw_file: data/raw/toy.csv\n", encoding="utf-8"
+    )
+    (source / "manifest.json").write_text("{}", encoding="utf-8")
+    inputs = {
+        "src/retired.py": "a" * 64,
+        "config/confirmatory.yaml": "b" * 64,
+        "data/raw/toy.csv": "d" * 64,
+    }
+    freeze = {"freeze_content_sha256": "f" * 64, "frozen_input_sha256": inputs}
+    checked = []
+
+    def verify_checkpoint(_project_root, expected=None):
+        checked.append(expected)
+        return freeze
+
+    monkeypatch.setattr(provenance, "verify_frozen_evidence", verify_checkpoint)
+    monkeypatch.setattr(provenance, "_verify_frozen_plan", lambda *_args: None)
+    run_config = {
+        "mode": "robustness",
+        "components": ["rq2"],
+        "confirmatory_run": source.name,
+        "datasets": ["toy"],
+        "outer_repeats": 1,
+        "outer_splits": 1,
+        "condition_plan": {
+            "toy": [_fake_cell("bayesian_normal", "fraction_100_observed", [])['condition']]
+        },
+    }
+    manifest = {
+        "run_config": run_config,
+        "config_sha256": canonical_json_hash(run_config),
+        "protocol_freeze_sha256": freeze["freeze_content_sha256"],
+        "input_sha256": {
+            **inputs,
+            f"reports/confirmatory/{source.name}/manifest.json": sha256_file(
+                source / "manifest.json"
+            ),
+        },
+    }
+    manifest["manifest_content_sha256"] = canonical_json_hash(manifest)
+    run_dir.mkdir()
+    (run_dir / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    cell_hashes = {}
+    for model_key in BAYESIAN_MODEL_KEYS:
+        cell = _fake_cell(model_key, "fraction_100_observed", [0.1] * 4)
+        cell["analysis_mode"] = "robustness"
+        cell.pop("cell_content_sha256")
+        cell["cell_content_sha256"] = canonical_json_hash(cell)
+        path = run_dir / f"cells/toy/repeat_01_fold_01/rq2_fraction_100_observed/{model_key}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(cell), encoding="utf-8")
+        cell_hashes[str(path.relative_to(run_dir))] = sha256_file(path)
+    cell_path = (
+        run_dir / "cells/toy/repeat_01_fold_01/rq2_fraction_100_observed/bayesian_normal.json"
+    )
+    aggregates = {}
+    for name in (
+        "paired_ibs_inference.json",
+        "analysis_availability.json",
+        "feasibility_plan.json",
+    ):
+        (run_dir / name).write_text("{}", encoding="utf-8")
+        aggregates[name] = sha256_file(run_dir / name)
+    completion = {
+        "stored_cells": 3,
+        "planned_cells_in_this_invocation": 3,
+        "status_counts": {"complete": 3},
+        "cell_sha256": cell_hashes,
+        "aggregate_sha256": aggregates,
+    }
+    completion["completion_content_sha256"] = canonical_json_hash(completion)
+    (run_dir / "completion.json").write_text(json.dumps(completion), encoding="utf-8")
+    before = {
+        path: (path.read_bytes(), path.stat().st_mtime_ns)
+        for path in run_dir.rglob("*")
+        if path.is_file()
+    }
+    assert (
+        provenance.verify_completed_robustness_run(run_dir, project, confirmatory_run_dir=source)
+        == completion
+    )
+    assert checked == [None]
+    assert before == {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in before}
+    cell_path.write_text(cell_path.read_text() + " ", encoding="utf-8")
+    with pytest.raises(RuntimeError, match="stored cell file hash"):
+        provenance.verify_completed_robustness_run(run_dir, project, confirmatory_run_dir=source)
+    wrong_cell = json.loads(before[cell_path][0])
+    for key, value in wrong_body.items():
+        if key == "condition":
+            wrong_cell[key].update(value)
+        else:
+            wrong_cell[key] = value
+    wrong_cell.pop("cell_content_sha256")
+    wrong_cell["cell_content_sha256"] = canonical_json_hash(wrong_cell)
+    cell_path.write_text(json.dumps(wrong_cell), encoding="utf-8")
+    completion["cell_sha256"][str(cell_path.relative_to(run_dir))] = sha256_file(cell_path)
+    completion.pop("completion_content_sha256")
+    completion["completion_content_sha256"] = canonical_json_hash(completion)
+    (run_dir / "completion.json").write_text(json.dumps(completion), encoding="utf-8")
+    with pytest.raises(RuntimeError, match=message):
+        provenance.verify_completed_robustness_run(run_dir, project, confirmatory_run_dir=source)
+
+
+def test_completed_production_plan_must_match_all_825_frozen_cells(configs, tmp_path):
+    from src.pipelines.robustness import provenance
+    from src.utils.io import json_safe
+
+    config, datasets = configs
+    validation = config["validation"]
+    bayesian = config["models"]["bayesian_cox"]
+    plans = {
+        name: build_condition_plan(config, datasets[name], ("rq2", "design", "feature"))
+        for name in config["datasets"]
+    }
+    fit_plan = planned_fit_counts(
+        plans, outer_repeats=validation["outer_repeats"], outer_splits=validation["outer_splits"]
+    )
+    run_config = {
+        "mode": "robustness",
+        "protocol": config,
+        "datasets": config["datasets"],
+        "components": ["rq2", "design", "feature", "ph"],
+        "outer_splits": validation["outer_splits"],
+        "outer_repeats": validation["outer_repeats"],
+        "fold_limit_per_dataset": None,
+        "bayes_draws": bayesian["draws"],
+        "bayes_tune": bayesian["tune"],
+        "bayes_chains": bayesian["chains"],
+        "sensitivity_bootstraps": 2000,
+        "frozen_production_fit_plan": fit_plan,
+        "condition_plan": json_safe(
+            {name: [condition.to_dict() for condition in plan] for name, plan in plans.items()}
+        ),
+        "runtime_projection": {"feasible": True},
+    }
+    feasibility = {"fit_plan": fit_plan, "runtime_projection": run_config["runtime_projection"]}
+    feasibility["feasibility_content_sha256"] = canonical_json_hash(feasibility)
+    (tmp_path / "feasibility_plan.json").write_text(json.dumps(feasibility), encoding="utf-8")
+    provenance._verify_frozen_plan(PROJECT_ROOT, tmp_path, run_config)
+    assert len(provenance._planned_cell_paths(run_config)) == 825
+    incomplete = copy.deepcopy(run_config)
+    incomplete["condition_plan"]["gbsg2"].pop()
+    with pytest.raises(RuntimeError, match="condition grid differs"):
+        provenance._verify_frozen_plan(PROJECT_ROOT, tmp_path, incomplete)
