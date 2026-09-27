@@ -1,0 +1,2 @@
+# Preserve the external, hash-frozen CSV's CRLF bytes through clean clones.
+tests/fixtures/extensions/metabric_known_accession_pairs.csv -text whitespace=trailing-space,space-before-tab,cr-at-eol

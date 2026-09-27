@@ -113,3 +113,26 @@ Format:
 - Verified-by: `pytest tests/test_posthoc_sampler.py tests/test_posthoc_evidence.py`
 - Rationale: Selecting only failures or relabelling a sensitivity as confirmatory
   would change the accepted evidence and conceal diagnostic attrition.
+
+## INV-010 — Catalytic prior data are isolated from evaluation patients
+
+- Scope: `src/models/catalytic.py`, `src/pipelines/extensions/preprocessing.py`.
+- Contract: Synthetic rows are explicitly prior data. Generate source-variable
+  marginals within the current training set before valid categorical encoding;
+  require positive times and full column rank. They never enter real-data
+  arrays, outer validation outcomes or cohort counts.
+- Verified-by: `pytest tests/test_extensions.py -k "synthetic_source or prior_data"`
+- Rationale: Invalid dummy combinations or synthetic evaluation observations
+  would change the scientific comparison without a visible missing-data error.
+
+## INV-011 — Actual catalytic joint density and prior sampling are verified
+
+- Scope: `src/models/bayesian/extensions.py`, `src/pipelines/extensions/verification.py`.
+- Contract: Adaptive tau includes the p-dependent joint normalizing term and
+  consistent kappa centering. Likelihood-free actual-prior MCMC replaces
+  forward sampling that ignores Potentials. Accepted Bayesian cells require
+  stored actual traces and the unchanged gate, with both joint-prior and
+  posterior traces/diagnostics for catalytic variants.
+- Verified-by: `pytest tests/test_extensions.py -k "catalytic_prior or pymc_joint or later_fit"`
+- Rationale: Prior-only drawing from an unrelated distribution or asserting
+  convergence without stored traces cannot verify this extension.

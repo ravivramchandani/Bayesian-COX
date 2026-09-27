@@ -1,0 +1,15 @@
+{
+  "classification": "implementation validation; no new production outcomes",
+  "coordination_schema": "passed",
+  "environment_verification_sha256": "cc6fc42b01e2a273c31e4c85acff93c4090e289d1b8dd924438e5c7e211475e7",
+  "extension_freeze_content_sha256": "50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f",
+  "frozen_primary_changed": false,
+  "git_diff_check": "passed",
+  "reference_boundary": "actual R prior arithmetic and WME executed; Stan not compiled; no whole-posterior parity claim",
+  "ruff": "passed",
+  "tests": {
+    "full_log_sha256": "5827b3e31735903c2f7e5170c5c1db7228e6cc77de81035d74ee76cf9af77665",
+    "passed": 295,
+    "seconds": 51.75
+  }
+}

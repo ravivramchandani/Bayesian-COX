@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "fixture_id": "catalytic-cox-treatment-coded-censored-tied-v1",
+  "execution": {
+    "R": "R version 4.4.3 (2025-02-28)",
+    "survival": "3.8.12",
+    "jsonlite": "2.0.0",
+    "catalytic_version": "0.1.0",
+    "catalytic_installation": "Unmodified functions sourced from official CRAN 0.1.0 tarball; full package not installed",
+    "authors_commit": "9b27334f3bf5bb7f6e8d0d6a1700cba4f7ba75c7",
+    "wme_reference": "Executed exact author R estimator and CRAN cat_cox WME with survival::coxph",
+    "prior_reference": "Executed R arithmetic matching paper Eq7/Eq10/Eq11 and official Stan kernel; Stan not compiled"
+  },
+  "inputs": {
+    "schema_version": 1,
+    "fixture_id": "catalytic-cox-treatment-coded-censored-tied-v1",
+    "encoding": {
+      "columns": ["z", "group_B", "group_C"],
+      "group_levels": ["A", "B", "C"],
+      "reference_level": "A",
+      "intercept": false
+    },
+    "observed": {
+      "z": [-1, 0.2, 1.4, -0.5, 0.7, -0.8, 1.1, 0.5, -0.3, 0.9],
+      "group": ["A", "B", "C", "A", "B", "C", "A", "B", "C", "A"],
+      "X": [
+        [-1, 0, 0],
+        [0.2, 1, 0],
+        [1.4, 0, 1],
+        [-0.5, 0, 0],
+        [0.7, 1, 0],
+        [-0.8, 0, 1],
+        [1.1, 0, 0],
+        [0.5, 1, 0],
+        [-0.3, 0, 1],
+        [0.9, 0, 0]
+      ],
+      "time": [1, 2, 2, 3, 3, 4, 4, 5, 6, 7],
+      "event": [1, 1, 0, 1, 1, 0, 1, 0, 1, 0]
+    },
+    "synthetic": {
+      "z": [-1.2, 0.4, 1.1, -0.7, 0.8, -0.3, 1.3, 0.1, -1.1, 0.6, -0.2, 0.9],
+      "group": ["A", "B", "C", "A", "B", "C", "A", "B", "C", "A", "B", "C"],
+      "X": [
+        [-1.2, 0, 0],
+        [0.4, 1, 0],
+        [1.1, 0, 1],
+        [-0.7, 0, 0],
+        [0.8, 1, 0],
+        [-0.3, 0, 1],
+        [1.3, 0, 0],
+        [0.1, 1, 0],
+        [-1.1, 0, 1],
+        [0.6, 0, 0],
+        [-0.2, 1, 0],
+        [0.9, 0, 1]
+      ],
+      "time": [1.2, 2, 3.4, 0.8, 2, 1.5, 4.5, 2.8, 0.9, 3, 4.1, 1.8],
+      "event": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    },
+    "prior": {
+      "hazard_constant": 0.23,
+      "alpha": 2,
+      "gamma_scale": 1.4,
+      "beta_probes": [
+        [0, 0, 0],
+        [0.3, -0.2, 0.4],
+        [-0.5, 0.6, -0.1]
+      ],
+      "tau_probes": [0.7, 3.5]
+    },
+    "wme": {
+      "tau": 3.5,
+      "ties": "breslow",
+      "new_X": [
+        [0, 0, 0],
+        [0.25, 1, 0],
+        [-0.5, 0, 1]
+      ],
+      "prediction_times": [0, 1, 2, 3, 4, 5, 6, 7]
+    }
+  },
+  "design": {
+    "synthetic_rank": 3,
+    "combined_rank": 3,
+    "factor_coefficient_names": ["z", "groupB", "groupC"],
+    "factor_design_columns": ["z", "groupB", "groupC"]
+  },
+  "prior": {
+    "p": 3,
+    "M": 12,
+    "kappa_without_log_h0": -0.375915003296517,
+    "kappa_full_log_likelihood": -1.84559097335546,
+    "mode_beta": [-0.419583687306996, 0.527272578080373, 0.983243730985682],
+    "mode_gradient": [-1.40718813916122e-10, -2.05321946481855e-09, -1.2078118773647e-08],
+    "independent_optimizer_kappa": -0.375915003296517,
+    "centering": "q(beta)-kappa; any beta-independent log(h0) term cancels only if included in both",
+    "gamma_convention": "gamma is scale, tau conditional rate includes 1/gamma",
+    "probes": [
+      {
+        "beta": [0, 0, 0],
+        "tau": 0.7,
+        "q_without_log_h0": -0.536666666666667,
+        "q_full_log_likelihood_per_M": -2.00634263672561,
+        "fixed_log_density_kernel": -0.375666666666667,
+        "fixed_log_density_full_likelihood": -1.40443984570793,
+        "beta_gradient": [-0.0541858333333333, 0.0870916666666667, 0.131366666666667],
+        "adaptive_joint_log_density_kernel": -2.03922594011403,
+        "adaptive_joint_log_density_full": -2.03922594011403,
+        "adaptive_tau_gradient": 4.83924833662985,
+        "conditional_tau_shape": 5,
+        "conditional_tau_rate": 0.875037377655864
+      },
+      {
+        "beta": [0, 0, 0],
+        "tau": 3.5,
+        "q_without_log_h0": -0.536666666666667,
+        "q_full_log_likelihood_per_M": -2.00634263672561,
+        "fixed_log_density_kernel": -1.87833333333333,
+        "fixed_log_density_full_likelihood": -7.02219922853963,
+        "beta_gradient": [-0.270929166666667, 0.435458333333333, 0.656833333333333],
+        "adaptive_joint_log_density_kernel": 1.94842105218595,
+        "adaptive_joint_log_density_full": 1.94842105218595,
+        "adaptive_tau_gradient": 0.267819765201279,
+        "conditional_tau_shape": 5,
+        "conditional_tau_rate": 0.875037377655864
+      },
+      {
+        "beta": [0.3, -0.2, 0.4],
+        "tau": 0.7,
+        "q_without_log_h0": -0.557037306340296,
+        "q_full_log_likelihood_per_M": -2.02671327639924,
+        "fixed_log_density_kernel": -0.389926114438207,
+        "fixed_log_density_full_likelihood": -1.41869929347947,
+        "beta_gradient": [-0.177160900371933, 0.106526684671914, 0.0510907749426861],
+        "adaptive_joint_log_density_kernel": -2.05348538788558,
+        "adaptive_joint_log_density_full": -2.05348538788558,
+        "adaptive_tau_gradient": 4.81887769695622,
+        "conditional_tau_shape": 5,
+        "conditional_tau_rate": 0.895408017329494
+      },
+      {
+        "beta": [0.3, -0.2, 0.4],
+        "tau": 3.5,
+        "q_without_log_h0": -0.557037306340296,
+        "q_full_log_likelihood_per_M": -2.02671327639924,
+        "fixed_log_density_kernel": -1.94963057219104,
+        "fixed_log_density_full_likelihood": -7.09349646739733,
+        "beta_gradient": [-0.885804501859667, 0.532633423359571, 0.25545387471343],
+        "adaptive_joint_log_density_kernel": 1.87712381332824,
+        "adaptive_joint_log_density_full": 1.87712381332824,
+        "adaptive_tau_gradient": 0.247449125527649,
+        "conditional_tau_shape": 5,
+        "conditional_tau_rate": 0.895408017329494
+      },
+      {
+        "beta": [-0.5, 0.6, -0.1],
+        "tau": 0.7,
+        "q_without_log_h0": -0.521932476246478,
+        "q_full_log_likelihood_per_M": -1.99160844630542,
+        "fixed_log_density_kernel": -0.365352733372534,
+        "fixed_log_density_full_likelihood": -1.39412591241379,
+        "beta_gradient": [0.0480215507599765, -0.0153573219519956, 0.155491806775035],
+        "adaptive_joint_log_density_kernel": -2.0289120068199,
+        "adaptive_joint_log_density_full": -2.0289120068199,
+        "adaptive_tau_gradient": 4.85398252705004,
+        "conditional_tau_shape": 5,
+        "conditional_tau_rate": 0.860303187235675
+      },
+      {
+        "beta": [-0.5, 0.6, -0.1],
+        "tau": 3.5,
+        "q_without_log_h0": -0.521932476246478,
+        "q_full_log_likelihood_per_M": -1.99160844630542,
+        "fixed_log_density_kernel": -1.82676366686267,
+        "fixed_log_density_full_likelihood": -6.97062956206897,
+        "beta_gradient": [0.240107753799882, -0.0767866097599779, 0.777459033875175],
+        "adaptive_joint_log_density_kernel": 1.99999071865661,
+        "adaptive_joint_log_density_full": 1.99999071865661,
+        "adaptive_tau_gradient": 0.282553955621468,
+        "conditional_tau_shape": 5,
+        "conditional_tau_rate": 0.860303187235675
+      }
+    ]
+  },
+  "wme": {
+    "coefficients": [-0.948414067917538, 0.112041790794521, -1.21601205872214],
+    "coefficient_names": ["z", "group_B", "group_C"],
+    "authors_coefficients": [-0.948414067917538, 0.112041790794521, -1.21601205872214],
+    "factor_coefficients": [-0.948414067917538, 0.112041790794521, -1.21601205872214],
+    "weights": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.291666666666667, 0.291666666666667, 0.291666666666667, 0.291666666666667, 0.291666666666667, 0.291666666666667, 0.291666666666667, 0.291666666666667, 0.291666666666667, 0.291666666666667, 0.291666666666667, 0.291666666666667],
+    "tie_method": "breslow",
+    "event_count": 18,
+    "weighted_event_count": 9.5,
+    "null_log_likelihood": -19.1038901955486,
+    "optimum_log_likelihood": -17.4688470407106,
+    "manual_optimum_log_likelihood": -17.4688470407106,
+    "optimum_gradient": [-2.71371813909127e-12, -1.8295365222798e-12, 2.21861418125968e-12],
+    "objective_probes": [
+      {
+        "beta": [0, 0, 0],
+        "log_likelihood": -19.1038901955486,
+        "gradient": [-2.36278793707257, 0.529458967810292, -0.93573321807274]
+      },
+      {
+        "beta": [0.3, -0.2, 0.4],
+        "log_likelihood": -20.5892459017287,
+        "gradient": [-3.18917589091813, 1.13630367177635, -1.52500520623601]
+      },
+      {
+        "beta": [-0.5, 0.6, -0.1],
+        "log_likelihood": -18.263781420734,
+        "gradient": [-0.660893466002396, -0.449835157990692, -0.9340855720473]
+      }
+    ],
+    "package_prediction_linear_predictor": [0, -0.125061726184863, -0.74180502476337],
+    "coxph_means": [0.199691358024691, 0, 0],
+    "prediction_baseline_contract": "Package predict.cat_cox exposes raw LP only. The two absolute-survival baselines here are explicitly labeled reference choices, not catalytic package predict outputs.",
+    "merged_weighted_baseline": {
+      "source": "survival::basehaz(weighted merged WME fit, centered=FALSE)",
+      "table": [
+        {
+          "hazard": 0.0253821819919879,
+          "time": 0.8
+        },
+        {
+          "hazard": 0.0520806140564773,
+          "time": 0.9
+        },
+        {
+          "hazard": 0.14572150606777,
+          "time": 1
+        },
+        {
+          "hazard": 0.18174092901692,
+          "time": 1.2
+        },
+        {
+          "hazard": 0.222322090857638,
+          "time": 1.5
+        },
+        {
+          "hazard": 0.263562591103422,
+          "time": 1.8
+        },
+        {
+          "hazard": 0.488611224047461,
+          "time": 2
+        },
+        {
+          "hazard": 0.540182212328629,
+          "time": 2.8
+        },
+        {
+          "hazard": 0.967819104153869,
+          "time": 3
+        },
+        {
+          "hazard": 1.0646803030664,
+          "time": 3.4
+        },
+        {
+          "hazard": 1.40016928614735,
+          "time": 4
+        },
+        {
+          "hazard": 1.54633768458349,
+          "time": 4.1
+        },
+        {
+          "hazard": 1.72851242257489,
+          "time": 4.5
+        },
+        {
+          "hazard": 1.72851242257489,
+          "time": 5
+        },
+        {
+          "hazard": 2.94823619149803,
+          "time": 6
+        },
+        {
+          "hazard": 2.94823619149803,
+          "time": 7
+        }
+      ],
+      "event_time_increments": {
+        "time": [0.8, 0.9, 1, 1.2, 1.5, 1.8, 2, 2.8, 3, 3.4, 4, 4.1, 4.5, 6],
+        "increment": [0.0253821819919879, 0.0266984320644894, 0.0936408920112927, 0.0360194229491501, 0.0405811618407181, 0.0412405002457836, 0.225048632944039, 0.0515709882811672, 0.42763689182524, 0.0968611989125272, 0.335488983080958, 0.146168398436132, 0.182174737991402, 1.21972376892315],
+        "cumulative_hazard": [0.0253821819919879, 0.0520806140564773, 0.14572150606777, 0.18174092901692, 0.222322090857638, 0.263562591103422, 0.488611224047461, 0.540182212328628, 0.967819104153869, 1.0646803030664, 1.40016928614735, 1.54633768458349, 1.72851242257489, 2.94823619149803]
+      },
+      "prediction_grid_hazard": [0, 0.14572150606777, 0.488611224047461, 0.967819104153869, 1.40016928614735, 1.72851242257489, 2.94823619149803, 2.94823619149803],
+      "survival_time_by_new_subject": [
+        [1, 1, 1],
+        [0.864398399376128, 0.879333680050281, 0.932953073445972],
+        [0.613477786047983, 0.649747614804567, 0.792389036046687],
+        [0.379910680899862, 0.425689682440352, 0.630698574240755],
+        [0.246555222024895, 0.290669385843815, 0.513330439840787],
+        [0.177548330508422, 0.217553016450419, 0.439020103313889],
+        [0.0524321046296098, 0.0741512233456258, 0.245586076730441],
+        [0.0524321046296098, 0.0741512233456258, 0.245586076730441]
+      ]
+    },
+    "observed_training_baseline_at_wme_beta": {
+      "source": "Breslow observed-data-only baseline holding WME beta fixed via offset; offset centering undone",
+      "offset_center": -0.539842175320144,
+      "table": [
+        {
+          "hazard": 0.120927256153654,
+          "time": 1
+        },
+        {
+          "hazard": 0.296741473494213,
+          "time": 2
+        },
+        {
+          "hazard": 0.723730811972934,
+          "time": 3
+        },
+        {
+          "hazard": 1.12351755944817,
+          "time": 4
+        },
+        {
+          "hazard": 1.12351755944817,
+          "time": 5
+        },
+        {
+          "hazard": 2.34324132837131,
+          "time": 6
+        },
+        {
+          "hazard": 2.34324132837131,
+          "time": 7
+        }
+      ],
+      "event_time_increments": {
+        "time": [1, 2, 3, 4, 6],
+        "increment": [0.120927256153654, 0.175814217340559, 0.426989338478721, 0.399786747475232, 1.21972376892315],
+        "cumulative_hazard": [0.120927256153654, 0.296741473494213, 0.723730811972934, 1.12351755944817, 2.34324132837131]
+      },
+      "prediction_grid_hazard": [0, 0.120927256153654, 0.296741473494213, 0.723730811972934, 1.12351755944817, 1.12351755944817, 2.34324132837131, 2.34324132837131],
+      "survival_time_by_new_subject": [
+        [1, 1, 1],
+        [0.886098415455445, 0.898785077135927, 0.944035008958459],
+        [0.74323613376727, 0.769620865949392, 0.868207825796246],
+        [0.484939658148847, 0.528004339173234, 0.708447498499716],
+        [0.325134102250558, 0.371042166484123, 0.585622931210383],
+        [0.325134102250558, 0.371042166484123, 0.585622931210383],
+        [0.0960159141966523, 0.126466785000333, 0.327595107909011],
+        [0.0960159141966523, 0.126466785000333, 0.327595107909011]
+      ]
+    }
+  }
+}

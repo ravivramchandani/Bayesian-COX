@@ -1,0 +1,338 @@
+{
+  "report_version": 1,
+  "created_utc": "2026-09-27T21:15:08.591587+00:00",
+  "study_id": "brca_metabric",
+  "repository": "https://github.com/cBioPortal/datahub",
+  "commit": "165bd77077b03038f9c2ee104959eb474770b2a9",
+  "commit_verified": true,
+  "commit_time": "2026-08-04T17:16:30Z",
+  "commit_tree_sha1": "b56610c35e52c677ee371183754e116b82843f71",
+  "directory_manifest_url": "https://api.github.com/repos/cBioPortal/datahub/contents/public/brca_metabric?ref=165bd77077b03038f9c2ee104959eb474770b2a9",
+  "data_files": [
+    {
+      "name": "LICENSE",
+      "git_blob_sha1": "d5f3c4b53574a0700c33233231009782aef56e84",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/LICENSE",
+      "git_blob_verified": true,
+      "payload_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/LICENSE",
+      "downloaded_sha256": "aa607179437132751f7c8fcd9f2b4ed97677ded9812ad97b99abd380ae77aec2",
+      "downloaded_size": 455,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/LICENSE",
+      "lfs_verified": null
+    },
+    {
+      "name": "Readme.txt",
+      "git_blob_sha1": "6202caf574011ab555ac6b792d9015f41df1463a",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/Readme.txt",
+      "git_blob_verified": true,
+      "payload_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/Readme.txt",
+      "downloaded_sha256": "0f414b40c6da118c75900177552010582d81a4d6b00c5639396983c40716ce91",
+      "downloaded_size": 122,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/Readme.txt",
+      "lfs_verified": null
+    },
+    {
+      "name": "data_clinical_patient.txt",
+      "git_blob_sha1": "4298260cfc2c99e4e70881ceafdc0486b851e41b",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/data_clinical_patient.txt",
+      "git_blob_verified": true,
+      "payload_url": "https://media.githubusercontent.com/media/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/data_clinical_patient.txt",
+      "lfs_sha256": "2a6bbadc6e4b2b07c0505559d438da959fc5c9aba55c7194abc394e2d6454995",
+      "lfs_size": 408387,
+      "downloaded_sha256": "2a6bbadc6e4b2b07c0505559d438da959fc5c9aba55c7194abc394e2d6454995",
+      "downloaded_size": 408387,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/data_clinical_patient.txt",
+      "lfs_verified": true
+    },
+    {
+      "name": "data_clinical_sample.txt",
+      "git_blob_sha1": "a024bc09b9b0b8934ba742d0a5d5895e616bd1bc",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/data_clinical_sample.txt",
+      "git_blob_verified": true,
+      "payload_url": "https://media.githubusercontent.com/media/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/data_clinical_sample.txt",
+      "lfs_sha256": "9a2291e065e2a0a5337b4eaeb09836e70b1bc3e1ed17714a013b53515697e6dc",
+      "lfs_size": 299020,
+      "downloaded_sha256": "9a2291e065e2a0a5337b4eaeb09836e70b1bc3e1ed17714a013b53515697e6dc",
+      "downloaded_size": 299020,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/data_clinical_sample.txt",
+      "lfs_verified": true
+    },
+    {
+      "name": "data_mrna_illumina_microarray.txt",
+      "git_blob_sha1": "9516600ad4aaaa255dd269ad5e197d7dae836c01",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/data_mrna_illumina_microarray.txt",
+      "git_blob_verified": true,
+      "payload_url": "https://media.githubusercontent.com/media/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/data_mrna_illumina_microarray.txt",
+      "lfs_sha256": "4470069455a4ed38ffed5d12513e468bbf5b9a57d66fa1162e7bd9a64889ab7a",
+      "lfs_size": 689254846,
+      "downloaded_sha256": "4470069455a4ed38ffed5d12513e468bbf5b9a57d66fa1162e7bd9a64889ab7a",
+      "downloaded_size": 689254846,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/data_mrna_illumina_microarray.txt",
+      "lfs_verified": true
+    },
+    {
+      "name": "meta_clinical_patient.txt",
+      "git_blob_sha1": "3ffdd5bf3d2ccf5e4618e53fe82de0a13fbd645f",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_clinical_patient.txt",
+      "git_blob_verified": true,
+      "payload_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_clinical_patient.txt",
+      "downloaded_sha256": "884b5b0f83a632f8a347dc9b539312ed631d63a71c4da03a88116903b7ee0ec2",
+      "downloaded_size": 143,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/meta_clinical_patient.txt",
+      "lfs_verified": null
+    },
+    {
+      "name": "meta_clinical_sample.txt",
+      "git_blob_sha1": "8459e7ba4e6f0a65958e98eeb23507e9a607bcd4",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_clinical_sample.txt",
+      "git_blob_verified": true,
+      "payload_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_clinical_sample.txt",
+      "downloaded_sha256": "6303f0e6b959b306c09d50653555888f04244a3338fc6e1e97a03d807e646a02",
+      "downloaded_size": 141,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/meta_clinical_sample.txt",
+      "lfs_verified": null
+    },
+    {
+      "name": "meta_mrna_illumina_microarray.txt",
+      "git_blob_sha1": "81de441ca73c52d67a8fbebed955ac9a4386605d",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_mrna_illumina_microarray.txt",
+      "git_blob_verified": true,
+      "payload_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_mrna_illumina_microarray.txt",
+      "downloaded_sha256": "1a2a6ad6c31ea345e39d6b9c4dae36e5f8a1578cabbc86c2f0075a7649d1df31",
+      "downloaded_size": 348,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/meta_mrna_illumina_microarray.txt",
+      "lfs_verified": null
+    },
+    {
+      "name": "meta_mrna_illumina_microarray_zscores_ref_diploid_samples.txt",
+      "git_blob_sha1": "92f3dda111828515d2dbba323a2b58e57a7bb317",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_mrna_illumina_microarray_zscores_ref_diploid_samples.txt",
+      "git_blob_verified": true,
+      "payload_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_mrna_illumina_microarray_zscores_ref_diploid_samples.txt",
+      "downloaded_sha256": "91de6afbc2eddc8ef1d922574142a3c9c09ac3356f82e40156dd4b740114a6c1",
+      "downloaded_size": 470,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/meta_mrna_illumina_microarray_zscores_ref_diploid_samples.txt",
+      "lfs_verified": null
+    },
+    {
+      "name": "meta_study.txt",
+      "git_blob_sha1": "5fbfe8388b597818823d9783eba203fa03506bf5",
+      "raw_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_study.txt",
+      "git_blob_verified": true,
+      "payload_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/meta_study.txt",
+      "downloaded_sha256": "e3520792252f2910c10cb9361f48a66beeaded678616173db9f455d9af1aa06b",
+      "downloaded_size": 372,
+      "local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/raw/meta_study.txt",
+      "lfs_verified": null
+    }
+  ],
+  "excluded_zscore_profile": {
+    "metadata_name": "meta_mrna_illumina_microarray_zscores_ref_diploid_samples.txt",
+    "data_name": "data_mrna_illumina_microarray_zscores_ref_diploid_samples.txt",
+    "raw_pointer_url": "https://raw.githubusercontent.com/cBioPortal/datahub/165bd77077b03038f9c2ee104959eb474770b2a9/public/brca_metabric/data_mrna_illumina_microarray_zscores_ref_diploid_samples.txt",
+    "git_blob_sha1": "7ad6a009a9186aa131fca92dd21e12bb8179f832",
+    "lfs_sha256": "f2ec4e1badc6f3a49c5db323e90faf3cb091cd29e880f58b3163bf24d30f6b7c",
+    "lfs_size": 303120338,
+    "payload_downloaded": false,
+    "exclusion_reason": "Pinned metadata explicitly references expression distribution of all samples, despite ref_diploid filename. Cohort-computed gene standardization would involve held-out samples."
+  },
+  "audits": {
+    "schema_alignment": {
+      "patient_schema": {
+        "n_rows": 2509,
+        "n_columns": 24,
+        "columns": [
+          "PATIENT_ID",
+          "LYMPH_NODES_EXAMINED_POSITIVE",
+          "NPI",
+          "CELLULARITY",
+          "CHEMOTHERAPY",
+          "COHORT",
+          "ER_IHC",
+          "HER2_SNP6",
+          "HORMONE_THERAPY",
+          "INFERRED_MENOPAUSAL_STATE",
+          "SEX",
+          "INTCLUST",
+          "AGE_AT_DIAGNOSIS",
+          "OS_MONTHS",
+          "OS_STATUS",
+          "CLAUDIN_SUBTYPE",
+          "THREEGENE",
+          "VITAL_STATUS",
+          "LATERALITY",
+          "RADIO_THERAPY",
+          "HISTOLOGICAL_SUBTYPE",
+          "BREAST_SURGERY",
+          "RFS_MONTHS",
+          "RFS_STATUS"
+        ],
+        "duplicate_patient_id_count": 0
+      },
+      "sample_schema": {
+        "n_rows": 2509,
+        "n_columns": 13,
+        "columns": [
+          "PATIENT_ID",
+          "SAMPLE_ID",
+          "CANCER_TYPE",
+          "CANCER_TYPE_DETAILED",
+          "ER_STATUS",
+          "HER2_STATUS",
+          "GRADE",
+          "ONCOTREE_CODE",
+          "PR_STATUS",
+          "SAMPLE_TYPE",
+          "TUMOR_SIZE",
+          "TUMOR_STAGE",
+          "TMB_NONSYNONYMOUS"
+        ],
+        "duplicate_sample_id_count": 0,
+        "unique_patient_count": 2509,
+        "patients_with_multiple_samples": 0,
+        "samples_without_patient_row": 0,
+        "sample_type_counts": {
+          "Primary": 2509
+        }
+      },
+      "expression_schema": {
+        "n_gene_rows": 20603,
+        "n_sample_columns": 1980,
+        "n_total_columns": 1982,
+        "identifier_columns": [
+          "Hugo_Symbol",
+          "Entrez_Gene_Id"
+        ],
+        "duplicate_sample_columns": 0,
+        "gene_symbol_identifiers": {
+          "duplicate_identifier_values": 200,
+          "duplicate_rows_beyond_first": 219,
+          "unique_count": 20384,
+          "empty_identifier_count": 0
+        },
+        "entrez_identifiers": {
+          "duplicate_identifier_values": 380,
+          "duplicate_rows_beyond_first": 411,
+          "unique_count": 20192,
+          "empty_identifier_count": 0
+        },
+        "gene_symbol_entrez_pairs": {
+          "duplicate_identifier_values": 200,
+          "duplicate_rows_beyond_first": 219,
+          "unique_count": 20384,
+          "empty_identifier_count": 0
+        },
+        "row_width_counts": {
+          "1982": 20603
+        },
+        "nonfinite_value_count": 16,
+        "gene_rows_with_nonfinite": 11,
+        "samples_with_nonfinite": 16,
+        "nonnumeric_nonmissing_value_count": 0,
+        "finite_min": 4.55791033184584,
+        "finite_max": 14.8794124402054,
+        "constant_gene_rows_all_expression_samples": 0
+      },
+      "alignment_and_os_eligibility": {
+        "expression_samples_without_sample_row": 0,
+        "expression_samples_without_patient_row": 0,
+        "joined_expression_sample_count": 1980,
+        "joined_expression_patient_count": 1980,
+        "patient_rows_without_expression": 529,
+        "positive_os_months_with_recognized_binary_os_status": 1979,
+        "recognized_os_status_counts_expression_join": {
+          "1:DECEASED": 1143,
+          "0:LIVING": 837
+        },
+        "recognized_rfs_status_counts_expression_join": {
+          "1:Recurred": 803,
+          "0:Not Recurred": 1176,
+          "NA": 1
+        },
+        "os_months_zero": 1,
+        "os_months_negative": 0,
+        "os_months_nonfinite": 0,
+        "expression_join_missing_counts_by_clinical_column": {
+          "LYMPH_NODES_EXAMINED_POSITIVE": 76,
+          "NPI": 0,
+          "CELLULARITY": 63,
+          "CHEMOTHERAPY": 0,
+          "COHORT": 0,
+          "ER_IHC": 43,
+          "HER2_SNP6": 0,
+          "HORMONE_THERAPY": 0,
+          "INFERRED_MENOPAUSAL_STATE": 0,
+          "SEX": 0,
+          "INTCLUST": 0,
+          "AGE_AT_DIAGNOSIS": 0,
+          "OS_MONTHS": 0,
+          "OS_STATUS": 0,
+          "CLAUDIN_SUBTYPE": 0,
+          "THREEGENE": 216,
+          "VITAL_STATUS": 1,
+          "LATERALITY": 110,
+          "RADIO_THERAPY": 0,
+          "HISTOLOGICAL_SUBTYPE": 44,
+          "BREAST_SURGERY": 25,
+          "RFS_MONTHS": 0,
+          "RFS_STATUS": 1,
+          "CANCER_TYPE": 0,
+          "CANCER_TYPE_DETAILED": 0,
+          "ER_STATUS": 0,
+          "HER2_STATUS": 0,
+          "GRADE": 88,
+          "ONCOTREE_CODE": 0,
+          "PR_STATUS": 0,
+          "SAMPLE_TYPE": 0,
+          "TUMOR_SIZE": 26,
+          "TUMOR_STAGE": 514,
+          "TMB_NONSYNONYMOUS": 0
+        }
+      }
+    },
+    "gene_identity": {
+      "noninteger_entrez_rows": 0,
+      "zero_entrez_rows": 0,
+      "duplicate_pair_values": 200,
+      "duplicate_pairs_with_different_expression_profiles": 200,
+      "entrez_values_associated_with_multiple_symbols": 190
+    },
+    "known_biological_duplicates": {
+      "known_2012_same_individual_pairs": 12,
+      "expression_pairs_both_members_present": 0,
+      "expression_pairs_one_member_present": 12,
+      "expression_pairs_neither_present": 0,
+      "clinical_pairs_both_members_present": 5,
+      "clinical_pairs_one_member_present": 7,
+      "clinical_pairs_neither_present": 0,
+      "source_pair_mapping_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/known_same_individual_accession_pairs.csv",
+      "source_pair_mapping_sha256": "9293ec90899aa79afb5fb2162bca60ebc86a2f49bcf6e7a507acb793883810f9"
+    }
+  },
+  "platform_and_processing": {
+    "pinned_metadata_verified": "Measured CONTINUOUS expression log2 intensity levels, Illumina HT-12 v3 microarray; no further logarithm should be applied.",
+    "original_study_workflow": "Curtis et al. 2012 supplementary methods 4.1, pp.5-6: beadarray/BASH spatial artefact adjustment and summarization of log2 intensity; quality control; ER-positive and ER-negative sample quantile target distributions averaged; interpolation for other probes; limma correction for BeadChip-position batch effects.",
+    "lineage_limit": "Pinned DataHub profile does not document the full probe-to-gene aggregation/curation history. Original-study methods describe upstream published processing, not a proven byte-level recreation of this curated gene matrix.",
+    "benchmark_limit": "Use as a benchmark conditional on immutable publicly processed expression. Upstream cohort normalization is already embedded and cannot be refit inside model folds from this matrix; do not claim a fully prospective raw-assay pipeline.",
+    "original_primary_source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3440846/",
+    "supplement_archive_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC3440846/supplementaryFiles",
+    "supplement_archive_member": "NIHMS45243-supplement-1.pdf",
+    "supplement_local_path": "/Users/macuser/bayes-cox-runs/extension-reference-20260928/metabric/curtis_2012_supplement_methods.pdf",
+    "supplement_sha256": "17ca72e029eadad4f08a392847fe92a024621839fde4b567bd6965b66bd6ae4e"
+  },
+  "timing": {
+    "verified": "All pinned clinical sample records specify Primary; original study describes clinically annotated primary fresh-frozen breast cancer specimens. Expression therefore represents sampled primary tumour tissue, rather than longitudinal or metastatic measurements.",
+    "unresolved": "Pinned files provide no specimen acquisition date, expression report date, or treatment start dates. Do not assert pretreatment availability, exact surgery/diagnosis clock alignment, or prospective deployment from these files. Treatment histories are not verified baseline covariates."
+  },
+  "recommended_preprocessing": {
+    "cohort": "Use only explicit SAMPLE_ID -> PATIENT_ID joins, one expression sample per patient. For OS retain recognized binary OS_STATUS and finite OS_MONTHS >0: 1979 rows. Use identical patient cohort and folds for clinical-only and clinical-plus-expression comparisons.",
+    "gene_identity": "All Entrez IDs are positive integers. Canonicalize by Entrez ID; preserve Hugo aliases in a feature dictionary; aggregate repeated gene rows by a fixed within-sample median of finite log2 intensities before splitting. This uses only the given sample, no outcomes or other samples. Do not silently keep-first, or choose duplicate rows using full-cohort variance.",
+    "selection": "Predeclare a bounded gene budget (for example 100). In each inner training fold only, exclude genes above a prespecified missingness threshold and genes with zero variance, median-impute from training values, rank genes by variance on unstandardized log2 intensities with deterministic Entrez-ID tie breaking, and retain up to budget. Apply learned selection/imputation to validation/test; then fit scaling on training only. Repeat all steps in outer training fit. Do not standardize before variance ranking.",
+    "missingness": "Only 16 nonfinite expression cells exist. Prefer training-gene-median imputation; a missingness cutoff should remain prespecified even though source missingness is tiny. Clinical missingness (notably stage 514/1980) also needs training-only handling rather than global complete-case selection that changes comparator populations.",
+    "clinical_scope": "Exclude outcome/status/follow-up columns from predictors; do not present expression-derived INTCLUST/CLAUDIN_SUBTYPE/THREEGENE as purely clinical baseline variables. Treatment and derived molecular fields require explicit availability rationale."
+  },
+  "model_fits_performed": false,
+  "outcome_performance_analysis_performed": false,
+  "raw_files_preserved": true,
+  "project_repository_accessed": false
+}

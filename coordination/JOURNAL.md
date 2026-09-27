@@ -802,3 +802,27 @@ The 20-file close-out support archive under
 `coordination/recovery/2026-09-28-closeout-support/` preserves both seal
 versions, published-release receipts, environment verification, full final
 test output and the close-out helper source, with verified member hashes.
+
+## 2026-09-28 — Extension implementation authorised and reference preparation verified
+
+The owner requested full implementation after reviewing the revised plan.
+ADR-039 records methodological corrections, explicit scope and dependencies.
+One repository integration owner is implementing separate extension modules.
+Executed author and official CRAN R functions produced frozen numerical
+fixtures; Python catalytic kernel/kappa/WME checks agree at numerical tolerance.
+Pinned measured METABRIC inputs passed hashes and alignment; matched
+preparation contains 1,979 patients, 1,143 events and 20,192 Entrez genes after
+within-sample median aggregation. No extension outer-validation score has
+been computed, and T-180's result-blind freeze remains pending.
+
+The post-hoc addendum and settings were frozen before any new outer-validation
+result, content hash `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
+A bounded 512-gene setting uses training-only variance ranking. The 100/100
+one-chain training-only compact probes took 22.57 s (P-V), 4.95 s (fixed
+catalytic) and 8.51 s (adaptive catalytic), not whole-programme estimates.
+The compact likelihood/gradient matches interval expansion. Source audit
+identified one biological duplicate pair in the frozen full clinical
+METABRIC CSV; the matched cohort contains no overlapping known pair.
+External snapshot review found warning-category, lost-attempt and pairing
+verification defects. Implementation corrected them before production and
+added focused negative tests; the review did not certify revised code.

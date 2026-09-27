@@ -1,5 +1,10 @@
 # Ravi: restore the results and continue the work
 
+The newly authorised post-hoc extensions are a separate active programme.
+See [extension execution](extensions_execution.md) for its frozen settings,
+complete fit grid and verification gates. The released baseline below stays
+unchanged; extension results are not yet remotely complete.
+
 This guide describes the handoff for an Apple Silicon Mac. The authoritative
 task state is in [HANDOFF](../coordination/HANDOFF.md) and
 [TODO](../coordination/TODO.md). Read [the code guide](code_guide.md) for the

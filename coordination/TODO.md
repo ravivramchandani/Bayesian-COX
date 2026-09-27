@@ -404,18 +404,18 @@ the existing programme's private code/evidence release and restore checks.
   for failed reruns, licence decisions, supervisor revisions, university
   corrections or journal formatting only.
 
-## Thesis extension experiments — post-hoc under ADR-036/ADR-037
+## Thesis extension experiments — post-hoc under ADR-036–ADR-039
 
 Owner instruction 2026-09-27: the thesis contains every experiment needed
 for a Q1 journal paper, and the paper is drafted later. This is a quality
 target, not an acceptance guarantee. Every result below is post-hoc and
 labelled as such; the frozen confirmatory record stays primary. ADR-033's
 Holm bound is already computed and rendered; ADR-032 has seven existing
-probes and a separately specified 75-cell production stage. The four new
-analyses have not started. Unmeasured two-hour and ten-hour runtime estimates
+probes and a separately specified 75-cell production stage. Implementation preparation is active under ADR-039; no new outer-validation
+result has been computed. Unmeasured two-hour and ten-hour runtime estimates
 are withdrawn; estimate compute from blind profiling of the specified design.
 
-- [ ] T-180 (T; no dependency) — Write and freeze
+- [x] T-180 (T; no dependency) — Write and freeze
   `docs/protocol_addendum_extensions.md` before results of the four new
   analyses exist. Acceptance: grids and inner-CV objectives, precise variant
   priors and survival-scale calibration, decision-curve action/thresholds/
@@ -425,7 +425,10 @@ are withdrawn; estimate compute from blind profiling of the specified design.
   diagnostic/exclusion rules, seeds and reproduction checks. Reference the
   actual earlier ADR-032/ADR-033 decisions, probes and known results; do not
   label them result-blind. Record the addendum hash in a write-once file.
-  This planning update does not constitute the frozen addendum.
+  Frozen under content hash
+  `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`;
+  write-once record: `coordination/extension_protocol_freeze.json`.
+  No extension outer-validation result existed at this freeze.
   Also fixes the ADR-038 catalytic-prior settings: τ rules, synthetic-data
   generation, M and the reference-parity test case.
 - [x] T-181 (T; depends frozen robustness completion) — Run the ADR-032
@@ -454,24 +457,27 @@ are withdrawn; estimate compute from blind profiling of the specified design.
   accounts for repeated patients across folds/repeats. Report every specified
   available curve and exclusions; identify fold-specific horizons honestly.
   No refitting or clinical deployment/impact claim.
-- [ ] T-185 (T; depends T-180, T-182, T-183) — Build the matched METABRIC
+- [ ] T-185 (T; preparation depends T-180 source rules; fitting depends T-180, T-182, T-183, T-189 implementation) — Build the matched METABRIC
   clinical-only and clinical-plus-expression comparison from the pinned
   cBioPortal archive. Acceptance: source hashes, audited patient/sample
   alignment and timing, same eligible patients/25 outer folds/endpoints/
   evaluation times in both arms. Fit gene selection, imputation and scaling
   inside the relevant training split, including inner CV; use the frozen
   feature budget. Include all six original model arms, the penalised Cox
-  models and the Piironen–Vehtari variant in both arms.
+  models, the Piironen–Vehtari variant and all three catalytic variants in both arms.
+  Data preparation and its alignment/hash manifest precede all matched fits;
+  it does not depend on completed comparator fits.
   Report predictor/event counts, diagnostics, matched effects, uncertainty,
   multiplicity and reproduction checks. Preserve the original full-cohort
   primary analysis separately.
-- [ ] T-189 (T; depends T-180) — Implement and run the Cox catalytic prior
+- [ ] T-189 (T; depends T-180 and T-185 prepared data, not completed matched fits) — Implement and run the Cox catalytic prior
   arm (ADR-038). Acceptance:
   - the prior log-density and weighted mixture estimate match the authors'
     reference implementation on a fixed test case;
   - fixed-τ = p and adaptive-τ Bayesian cells, plus weighted-mixture cells,
     exist for the 25 outer folds of each cohort, the RQ2 conditions and the
-    T-185 expression setting, all under the unchanged diagnostic gate;
+    T-185 clinical-only and expression settings; Bayesian cells use the unchanged
+    diagnostic gate, point-estimate cells use optimizer and prediction checks;
   - paired contrasts against the other priors and comparators are recorded.
 - [ ] T-186 (T; depends T-181–T-185, T-189) — Render the extension bundle with the
   same verified renderer and lineage rules. Acceptance: every thesis number
@@ -483,7 +489,7 @@ are withdrawn; estimate compute from blind profiling of the specified design.
 
 - No unprespecified model family, prior, real dataset or analysis after
   protocol freeze at the end of Week 5, except the post-hoc thesis
-  analyses named in ADR-035/ADR-036 and refined by ADR-037, specified in the
+  analyses named in ADR-035/ADR-036 and refined by ADR-037–ADR-039, specified in the
   frozen addendum before their own results. Existing ADR-032/ADR-033 evidence
   retains its earlier specification and actual chronology.
 - Rotterdam transport and ADEMP simulation are already dropped and cannot be

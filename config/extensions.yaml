@@ -1,0 +1,64 @@
+analysis_id: extensions_v1
+evidence_status: post_hoc_extension
+base_seed: 260817
+gene_budget: 512
+gene_rule: training_missing_fraction_le_0.20_then_variance_rank_before_scaling
+gene_duplicate_rule: within_sample_entrez_median
+penalties: [0.0001, 0.000316227766016838, 0.001, 0.00316227766016838, 0.01, 0.0316227766016838, 0.1, 0.316227766016838, 1.0, 3.16227766016838, 10.0, 31.6227766016838, 100.0]
+elastic_net_l1_ratio: 0.5
+inner_cv_splits: 3
+inner_objective: mean_ipcw_ibs
+sampling:
+  draws: 2000
+  tune: 2000
+  chains: 4
+  cores: 1
+  target_accept: 0.999
+  maximum_refits: 2
+  refit_tune_multiplier: 2
+  final_noncentered_baseline: true
+  diagnostic_gate: unchanged_ADR027_all_parameters
+  catalytic_prior_predictive: likelihood_free_joint_prior_nuts_with_same_gate
+calibration_bootstraps: 500
+horseshoe:
+  local: half_cauchy_1
+  global: half_cauchy_tau0
+  slab_c: 2.0
+  p0: five_unless_p_le_five_then_half_p
+  tau0_rule: diagonal_total_profiled_pwe_curvature_with_baseline_precision_0.25
+catalytic:
+  fixed_tau: encoded_p
+  adaptive_alpha: 2.0
+  adaptive_gamma_scale: 1.0
+  M: max_1000_4p
+  synthetic_covariates: independent_source_marginals_then_training_encoder
+  synthetic_times: training_censored_exponential_mle_on_median_event_scaled_axis
+  wme_tau_multipliers: [0.25, 1.0, 4.0]
+  wme_baseline: weighted_merged_breslow
+  wme_ties: breslow
+  kappa_score_tolerance: 0.000001
+  wme_score_tolerance: 0.0001
+decision_curves:
+  thresholds: [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2, 0.21, 0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3, 0.31, 0.32, 0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4, 0.41, 0.42, 0.43, 0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.5]
+  horizon_event_quantiles: [0.25, 0.5, 0.75]
+  minimum_G: 0.1
+  minimum_training_at_risk: 10
+  bootstrap_replicates: 1000
+  resampling_unit: paired_patient_ids_with_all_repeats
+  uncertainty: conditional_pointwise_exploratory
+inference:
+  metric: ibs
+  confidence_level: 0.95
+  corrected_cv: nadeau_bengio
+  incomplete_family: no_holm_rejection_claim
+  families:
+    penalized_vs_original_priors: 27
+    calibrated_vs_adr032_horseshoe: 3
+    catalytic_vs_original_priors: 27
+    expression_increment: 13
+  rq2: matched_condition_differences_and_differences_in_differences_descriptive
+reproduction:
+  all_cell_hashes_metrics_and_trace_diagnostics: true
+  clinical_first_fold_all_new_models_each_cohort: true
+  matched_first_fold_all_thirteen_models_both_settings: true
+  rq2_first_repeat_first_fold_each_nonfull_condition_all_catalytic_models_each_cohort: true

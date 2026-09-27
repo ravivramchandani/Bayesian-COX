@@ -5,7 +5,8 @@ change the work. Anything with an obvious answer is decided and recorded in
 `DECISIONS.md` instead.
 
 There are currently no open questions. Q-001 through Q-006 are answered and
-must not be reopened within this study. Dated source, journal-policy and
+retain their recorded answers; Q-001 has the explicit ADR-038/ADR-039
+post-hoc exception. No further reopening is implied. Dated source, journal-policy and
 ranking rechecks are verification tasks, not requests for a new owner
 decision.
 

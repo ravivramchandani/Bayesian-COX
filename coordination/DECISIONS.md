@@ -788,7 +788,7 @@ Format:
 
 ## ADR-038 — Cox catalytic prior as a post-hoc extension arm
 
-- Status: ACCEPTED
+- Status: ACCEPTED; methodological details refined by ADR-039
 - Date: 2026-09-28
 - Context:
   - Q-001 deferred the catalytic prior, to be reopened if the small-sample
@@ -852,3 +852,64 @@ Format:
     to the normal prior's. It must be measured, not assumed.
   - The RQ2 conditions need new catalytic cells, because the frozen
     robustness run has no catalytic arm.
+
+## ADR-039 — Verified implementation of the post-hoc extension programme
+
+- Status: ACCEPTED
+- Date: 2026-09-28
+- Context: The owner requested a full, complete and verified implementation
+  after review of ADR-036–ADR-038. Reference inspection identified invalid
+  independent dummy resampling, adaptive-prior normalization and
+  prior-predictive sampling hazards, an incomplete matched-model roster, and
+  an unsupported novelty/preregistration claim.
+- Decision:
+  - Continue all authorised code/results extensions under one repository
+    integration owner. External reference research may run independently;
+    it does not edit the repository. Overleaf and paper/DOI work stay deferred.
+  - The extension is an independent multi-cohort post-hoc evaluation. Neither
+    a first-evaluation claim nor external preregistration is established.
+    The earlier ADR-038 novelty/preregistration sentence is superseded.
+  - Freeze the exact addendum and machine-readable settings before any new
+    outer-validation result is computed. Training-only computational
+    profiling, source alignment and executed reference fixtures are
+    preparation, not extension outcome evidence. Record their chronology.
+  - Generate categorical source levels before encoding, recompute derived
+    features, and resample numeric source marginals. Learn the censored
+    exponential generator within each relevant inner or outer training set.
+    Require positive synthetic times and full column rank; M=max(1000,4p).
+  - Fixed log prior is tau*q(beta). Adaptive joint log prior is
+    (p+alpha-1)*log(tau)+tau*(q(beta)-kappa-1/gamma), alpha=2, gamma=1,
+    kappa=sup q. Omit beta-independent constants consistently.
+    Preserve the common PWE likelihood and baseline: this is an adaptation
+    of the authors' prior, not reproduction of their grouped-baseline posterior.
+    Potentials require likelihood-free prior MCMC for valid prior checks.
+  - The weighted-mixture comparator uses weighted Breslow partial likelihood
+    with weights 1 and tau/M, including weighted risk denominators. Its
+    absolute survival uses the weighted merged-data Breslow baseline.
+    Check optimizer status, finite coefficients/score and survival validity.
+    Bayesian variants retain the unchanged all-parameter MCMC gate.
+  - Use measured log2 METABRIC expression, within-sample median collapse by
+    Entrez ID, audited unique sample/patient mapping and identical eligible
+    patients and folds in both feature settings. Training-only gene filtering,
+    imputation and scaling also run inside inner CV. Report published
+    cohort-normalization and unresolved exact pretreatment availability.
+  - Split T-185 data preparation from fitting. Both matched settings include
+    the original six arms, three penalised Cox models, the calibrated
+    horseshoe and all three catalytic variants. T-189 depends on prepared
+    matched data, avoiding a circular fit dependency.
+  - One known same-individual pair exists in the frozen clinical METABRIC
+    CSV. Preserve historical folds and report possible inherited train/test
+    overlap. The matched expression cohort has no such pair overlap; cluster
+    known aliases together in decision-curve uncertainty.
+  - Fold-quantile decision curves estimate an adaptive training-horizon
+    procedure. Use training censoring weights and paired patient-cluster
+    resampling, with conditional exploratory uncertainty and no deployment
+    claim. Multiplicity and diagnostic attrition stay explicit.
+  - Measure compute before giving runtime predictions. Log-concavity does
+    not imply normal-prior sampling cost or an attainable posterior gate.
+- Consequences: ADR-038's post-encoding generator, unsupported novelty claim,
+  and common diagnostic language for point/Bayesian estimators are replaced
+  by these rules. Original frozen failures, incomplete inference, negative
+  explanation results and existing released evidence remain immutable. New
+  code, manifests, attempted cells, verification and rendered outputs have
+  their own lineage and private remote release.

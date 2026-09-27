@@ -1,0 +1,15 @@
+{
+  "aggregation": "within-sample median by Entrez ID",
+  "clinical_sha256": "731ea80ce0240cb6aa96ffb0f4a3bb379615202966c954512664bef02b29545c",
+  "events": 1143,
+  "known_pairs_sha256": "9293ec90899aa79afb5fb2162bca60ebc86a2f49bcf6e7a507acb793883810f9",
+  "matched_sha256": "36ddcdc14d0bd76ee7c88d2c78fab2fab2039ed3819e5c70fd27b21c7b335971",
+  "n_genes": 20192,
+  "n_patients": 1979,
+  "processed_expression_limitation": "published cohort-normalized log2 assay; prospective normalization and exact pretreatment availability unresolved",
+  "source_sha256": {
+    "data_clinical_patient.txt": "2a6bbadc6e4b2b07c0505559d438da959fc5c9aba55c7194abc394e2d6454995",
+    "data_clinical_sample.txt": "9a2291e065e2a0a5337b4eaeb09836e70b1bc3e1ed17714a013b53515697e6dc",
+    "data_mrna_illumina_microarray.txt": "4470069455a4ed38ffed5d12513e468bbf5b9a57d66fa1162e7bd9a64889ab7a"
+  }
+}

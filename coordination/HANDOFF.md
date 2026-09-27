@@ -4,7 +4,20 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-09-28
 
-## Current state — verified programme released; Ravi can restore it
+## Active extension implementation — authorised 2026-09-28
+
+The owner requested plan corrections and full verified code/results
+implementation. ADR-039 refines ADR-038. One repository integration owner
+implements separate modules; reference research uses external files only.
+Preparation has verified actual author/CRAN R fixtures and pinned measured
+METABRIC inputs. No new outer-validation scores have been computed.
+T-180 is frozen: content hash
+`50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
+No extension outer-validation result existed before the freeze. All
+extension outputs will use a new sealed code checkout and separate run root.
+Original results remain available below. Overleaf and paper/DOI work are deferred.
+
+## Completed baseline programme — Ravi can restore it
 
 The completed programme is remotely available and independently restored.
 Follow [Ravi's handoff](../docs/ravi_handoff.md), rather than historical PID
@@ -34,8 +47,8 @@ on this Apple Silicon Mac with the existing verified lock, not on a second
 physical laptop. The receiving Mac must verify its environment.
 
 Original 20 horseshoe failures, incomplete primary inference and the failed
-explanation gate remain findings. T-180 and the new extensions have not
-started. The separate documentation-only pass is tracked in step 12.
+explanation gate remain findings. T-180 and extension implementation are active under ADR-039;
+production awaits the recorded addendum freeze. The separate documentation-only pass is tracked in step 12.
 Overleaf edits and paper/DOI work remain excluded.
 
 ## Earlier numerical checkpoint — before final close-out

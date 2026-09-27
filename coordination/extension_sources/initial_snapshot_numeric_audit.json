@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "fixture_only": true,
+  "new_real_scientific_fits": false,
+  "pymc": "5.28.5",
+  "checks": [
+    "prior kernels and gradients",
+    "kappa",
+    "WME estimator and merged baseline",
+    "rate/time scaling invariance",
+    "exact copied PyMC coefficient logp with correct gamma factor",
+    "isolated prior parent/context"
+  ],
+  "MCMC_execution": "Mocked pm.sample to inspect exact isolated model construction; no sampling diagnostic claim",
+  "inherited_base_methods": "Not supplied in snapshot; stubbed only for model construction",
+  "context_checks": [
+    {
+      "variant": "catalytic_fixed",
+      "parent_is_none": true,
+      "observed_variables": [],
+      "free_variables": [
+        "beta",
+        "log_lambda"
+      ],
+      "kwargs": {
+        "draws": 2,
+        "tune": 2,
+        "chains": 2,
+        "cores": 1,
+        "target_accept": 0.9,
+        "random_seed": 8030,
+        "progressbar": false,
+        "return_inferencedata": true
+      }
+    },
+    {
+      "variant": "catalytic_adaptive",
+      "parent_is_none": true,
+      "observed_variables": [],
+      "free_variables": [
+        "beta",
+        "tau",
+        "log_lambda"
+      ],
+      "kwargs": {
+        "draws": 2,
+        "tune": 2,
+        "chains": 2,
+        "cores": 1,
+        "target_accept": 0.9,
+        "random_seed": 8030,
+        "progressbar": false,
+        "return_inferencedata": true
+      }
+    }
+  ],
+  "pymc_logp_beta_tau_independent_offsets": [
+    {
+      "variant": "catalytic_fixed",
+      "constant_offset": 0.0,
+      "offset_range": 4.440892098500626e-16
+    },
+    {
+      "variant": "catalytic_adaptive",
+      "constant_offset": -2.5548051674206818e-08,
+      "offset_range": 8.881784197001252e-16
+    }
+  ],
+  "snapshot_sha256": {
+    "__init__.py": "e4217b1fe22d45e1febc65fa320b455769912fae513f04bff0504d879d3a90f0",
+    "analysis.py": "49271e69bdbe7f2bc53c042819777f4ced75fe6dbf0804490f6e352eb77b55ba",
+    "bayesian_extensions.py": "6148415b512915dbf4141c8bc1ce3ca4d6adcea4dea81d99f25f9c6909791449",
+    "catalytic.py": "53b38e5d9314fefcfd37260ac95d1bd9400af44f564c2142f7e7d61986f20332",
+    "decision_curves.py": "b23b25846dbb9e1240085d5a64f7bb92f1a921753de2ea2aff518ace597e6e69",
+    "extensions.yaml": "97dfaa840a6d716b2072308a88719f45c3ecb5d0b3e6aeee92f381d9582c776d",
+    "fitting.py": "afc5fbc826cb1aa847a3e6b6e9097b5038f37343e1c75f7f9360488e465b24e3",
+    "genomics.py": "68afa073ed3be241039356e8dbc16fa2a22dc81210781f262a2ee6129be8ad66",
+    "penalized_cox.py": "0991490bc5a522af86a06c653eb988081b5d618ac3ab7ff82390a788a154c982",
+    "planning.py": "99d2174d90aa7f50335fff510bae32da363c2dc2e54b08488e04bbc904006ee1",
+    "preprocessing.py": "94f40f635c0b072e6f42314a04f7447f5ee9546297ee4fcd3cfed42a2af9f635",
+    "protocol_addendum_extensions.md": "8210560a7d60f34b16246ea2b9ed00ecf991e63b0f0006933b1fc6d3e24451e0",
+    "rq2.py": "a246d536cc40bdc9bb536fc3d680fce2c85309c319fb7c8b2624e61ed69a204c",
+    "runner.py": "a5dc916d44140b9eef6b1a0835ba12869d683675795b98b342b986d7df3e4a8d",
+    "verification.py": "59b1d0cfc94680e1f0e19a19ec2585a56f6906289e41115bc74bdc778d98c165"
+  }
+}

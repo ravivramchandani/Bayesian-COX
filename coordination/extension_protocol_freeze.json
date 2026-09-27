@@ -1,0 +1,20 @@
+{
+  "classification": "post_hoc_extension; not external preregistration",
+  "content_sha256": "50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f",
+  "distinct_planned_fits": 1625,
+  "frozen_utc": "2026-09-27T21:38:09.640508+00:00",
+  "new_outer_validation_results_before_freeze": 0,
+  "reused_rq2_anchors": 90,
+  "selected_exact_refits": 92,
+  "sha256": {
+    "config/extensions.yaml": "97dfaa840a6d716b2072308a88719f45c3ecb5d0b3e6aeee92f381d9582c776d",
+    "coordination/extension_sources/baseline_sources.json": "54aaeb4b0e90688f3e50960c1a2487a1ba5e1ecfc4e907c0a223957541d3bd1f",
+    "coordination/extension_sources/matched_metabric_manifest.json": "ea9af041276553e62793c1620bef6790cb83d5274643053a21be7ef03a07d488",
+    "coordination/extension_sources/metabric_source_report.json": "346346ef5b042888d1d54f6ab215d8246a7654e8921d34038ad9bb79dcc1d22e",
+    "coordination/extension_sources/training_compute_profile.json": "2e4bb3e80815445889d8675e2525cb55688ea6843c29f8c1afed9d91843941c2",
+    "docs/protocol_addendum_extensions.md": "8210560a7d60f34b16246ea2b9ed00ecf991e63b0f0006933b1fc6d3e24451e0",
+    "tests/fixtures/extensions/catalytic_r_reference.json": "2dcbc663034e404106a2dfe4c8b7390765494eafd68bd98841cbeaa5dbb92b10",
+    "tests/fixtures/extensions/metabric_known_accession_pairs.csv": "9293ec90899aa79afb5fb2162bca60ebc86a2f49bcf6e7a507acb793883810f9"
+  },
+  "version": 1
+}
