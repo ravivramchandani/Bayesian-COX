@@ -32,17 +32,32 @@ exact final deliverable, not the preparatory engineering around it.
 ## Build
 
 ```bash
-make env        # create the conda environment
-make data       # download and preprocess the three cohorts
-make all        # data, eda, benchmark, explainability, figures, reports
+make env        # install the exact lock into LOCK_ENV
+make data       # retrieve and verify the three raw cohorts
+make all        # verify the environment, run tests and lint
 make test       # test suite plus coordination schema validation
 make lint       # ruff
 make thesis     # compile ../thesis-overleaf/Main.tex
 make jargon     # check no internal identifiers reached the chapters
 ```
 
-Run inside the `bayes-cox` environment. The thesis document is a separate
-Overleaf-backed repository beside this one; `THESIS_DIR` overrides its path.
+Run inside the exact lock environment recorded in `coordination/HANDOFF.md`,
+and set `PYTHON` to that environment's interpreter. The thesis document is a
+separate Overleaf-backed repository beside this one; `THESIS_DIR` overrides
+its path.
+
+The active data path is `src/data/cohorts.py`, `survival_folds.py` and
+`fold_preprocessing.py`. Preprocessing is fitted inside each training fold;
+no active script consumes the historical `data/processed` splits. The six
+legacy pilot scripts, duplicate loaders and placeholder pipelines are retired.
+Their original source remains available from checkpoint commits. Historical
+data and results remain unchanged in the checkout.
+
+Use `make reproduce-confirmatory CONFIRMATORY_RUN=<directory>` for a frozen-
+cell reproduction check. Rendering targets `make reports`, `make figures`
+and `make render-confirmatory` require that same run directory and read its
+stored evidence. They never refit models. Confirmatory production is closed;
+the current authorised downstream programme is recorded in `HANDOFF.md`.
 
 ## Code rules
 
