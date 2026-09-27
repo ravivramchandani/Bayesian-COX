@@ -119,3 +119,13 @@ thesis:
   the institution's current generative-AI policy.
 - The title differs from the approved proposal.
 - The declaration and acknowledgement pages are missing.
+
+## Literature to add
+
+For the catalytic prior arm (ADR-038), cite:
+- Li and Huang (2026), Bayesian inference for Cox regression models using
+  catalytic prior distributions, Biometrics 82(1), ujag004,
+  doi:10.1093/biomtc/ujag004;
+- Huang, Stein, Rubin and Kou (2020), Catalytic prior distributions with
+  application to generalized linear models, PNAS 117(22), 12004–12010,
+  doi:10.1073/pnas.1920913117.

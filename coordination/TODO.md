@@ -418,6 +418,8 @@ are withdrawn; estimate compute from blind profiling of the specified design.
   actual earlier ADR-032/ADR-033 decisions, probes and known results; do not
   label them result-blind. Record the addendum hash in a write-once file.
   This planning update does not constitute the frozen addendum.
+  Also fixes the ADR-038 catalytic-prior settings: τ rules, synthetic-data
+  generation, M and the reference-parity test case.
 - [ ] T-181 (T; depends frozen robustness completion) — Run the ADR-032
   horseshoe sampler sensitivity: all 75 cells at target acceptance 0.999.
   Acceptance: all 75 cells and their attempts are accounted for, with pass
@@ -454,7 +456,7 @@ are withdrawn; estimate compute from blind profiling of the specified design.
   multiplicity and reproduction checks. Preserve the original full-cohort
   primary analysis separately.
 - [ ] T-189 (T; depends T-180) — Implement and run the Cox catalytic prior
-  arm (ADR-037). Acceptance:
+  arm (ADR-038). Acceptance:
   - the prior log-density and weighted mixture estimate match the authors'
     reference implementation on a fixed test case;
   - fixed-τ = p and adaptive-τ Bayesian cells, plus weighted-mixture cells,

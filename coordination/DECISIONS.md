@@ -786,7 +786,7 @@ Format:
   [Vickers et al. (2008)](https://link.springer.com/article/10.1186/1472-6947-8-53)
   for survival decision curves and uncertainty.
 
-## ADR-037 — Cox catalytic prior as a post-hoc extension arm
+## ADR-038 — Cox catalytic prior as a post-hoc extension arm
 
 - Status: ACCEPTED
 - Date: 2026-09-28
@@ -835,6 +835,11 @@ Format:
   - The exact settings are fixed in `docs/protocol_addendum_extensions.md`
     (T-180) before any catalytic result exists. Every result is labelled
     post-hoc.
+  - Every ADR-037 refinement applies to this arm too:
+    - same eligible patients, frozen outer folds and evaluation rules;
+    - the weighted mixture estimator's τ tuned by inner CV only;
+    - inclusion in both matched METABRIC settings;
+    - no equivalence or superiority claim beyond its evidence.
   - This reopens Q-001 and supersedes the protocol's catalytic exclusion for
     this arm only; `docs/study_protocol.md` remains the unchanged historical
     plan.
@@ -843,7 +848,7 @@ Format:
     the Cox catalytic prior across real cohorts and clinical metrics, next
     to parameter-space priors, penalised Cox and machine-learning
     comparators.
-  - The prior is log-concave, so its compute cost should be close to the
-    normal prior's.
+  - The prior is log-concave, so its compute cost is expected to be close
+    to the normal prior's. It must be measured, not assumed.
   - The RQ2 conditions need new catalytic cells, because the frozen
     robustness run has no catalytic arm.

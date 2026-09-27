@@ -263,8 +263,8 @@ Completed integration gates and their evidence locations are in
 10. [ ] Commit and push all verified continuation work. Recovery and completed
     code checkpoints have been pushed; final production close-out remains open.
 
-11. [ ] Thesis extension experiments under ADR-036/ADR-037; T-180–T-186 in
-    `TODO.md`. The four new analyses are not part of the running coordinator.
+11. [ ] Thesis extension experiments under ADR-036–ADR-038; T-180–T-186 and
+    T-189 in `TODO.md`. The four new analyses are not part of the running coordinator.
     Dependencies:
     - freeze the actual new-analysis addendum (T-180) before their own results;
       reference existing ADR-032/ADR-033 evidence with its actual chronology;
@@ -276,6 +276,9 @@ Completed integration gates and their evidence locations are in
       variant (T-183), with comparable sampler settings and unchanged gates;
     - after T-180/T-182/T-183, run matched METABRIC clinical-only and clinical-
       plus-expression arms (T-185), explicitly including the new variant;
+    - after T-180, validate the Cox catalytic prior against the authors'
+      implementation and run it wherever the other priors run, including
+      RQ2 conditions and both matched METABRIC settings (T-189, ADR-038);
     - render and actually review the separate extension bundle (T-186).
 
     Paper drafting and submission are deferred until after the thesis.

@@ -38,7 +38,7 @@ Format:
   priors answer the frozen questions; adding another arm after results risks
   scope and outcome-driven model selection. A catalytic prior is future work
   under ADR-019.
-- Update 2026-09-28: Reopened and superseded by ADR-037. The supervisor
+- Update 2026-09-28: Reopened and superseded by ADR-038. The supervisor
   approved adding the Cox catalytic prior as a labelled post-hoc extension
   arm before any RQ2 robustness result was inspected.
 
