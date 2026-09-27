@@ -4,7 +4,43 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-09-27
 
-## Session checkpoint — numerical jobs left running
+## Current checkpoint — resumed after reboot
+
+The owner requested completion of all remaining code/results tasks. At
+07:51:46 UTC (20:51 Auckland) on 2026-09-27, execution resumed on this Mac
+after its reboot had stopped every earlier numerical process. The exact
+259-package runtime, unchanged frozen checkout and all 90 sealed code hashes
+were verified before restarting. No completed cell was rerun or removed.
+
+- Robustness resumed from 551/825 stored cells: GBSG2 255, WHAS500 270,
+  METABRIC 26. Six missing-cell claims were recorded and released; the 551
+  claims for saved cells were retained.
+- Full reproduction resumed from 154/450 saved cells: GBSG2 150 and
+  METABRIC 4. The checkpoint verifies these refits before submitting only
+  the remaining 296 cells. No mismatch had been reported at restart.
+- Sampler sensitivity remains queued after robustness, with 0/75 cells.
+- Six frozen workers are PIDs 3362–3367; supervisor PID 3372 owns the final
+  official robustness resume. Coordinator PID 3374 runs the sealed programme;
+  `caffeinate` PID 3376 prevents idle sleep during its lifetime.
+- Fresh launcher logs are in
+  `~/bayes-cox-runs/logs/resume_20260927T075146Z/`. Earlier logs and PID records
+  were copied there and hash-checked before restart. Internal programme logs
+  append to their existing files.
+
+The restart receipt is preserved in
+`coordination/recovery/2026-09-27-restart-checkpoint.json`; external recovery
+tools are in the matching restart-tools archive and hash manifest. The current
+monitor reads `~/bayes-cox-runs/logs/current_resume.json`, rather than historical
+PIDs. Inspect actual command lines before any further restart. The cross-laptop
+instructions remain available in
+`coordination/reviews/2026-09-27-cross-laptop-continuation.md`; no evidence was
+transferred and no second laptop run was launched.
+
+Numerical completion, final rendering, actual final visual QA, claim review,
+packaging, isolated restore and private release remain required. The older
+checkpoint below records historical state, not current process ownership.
+
+## Earlier session checkpoint — numerical jobs left running
 
 The owner wrapped up the interactive session on 2026-09-27 and explicitly
 requested that the detached numerical jobs keep running. This pauses
@@ -140,7 +176,7 @@ Completed integration gates and their evidence locations are in
      the unmodified `run_robustness.py`. The worker claims each cell with a
      lock file in `~/bayes-cox-runs/robustness-claims/` and stops before
      aggregation. Logs and PIDs are in `~/bayes-cox-runs/logs/`.
-   - Supervisor PID 40646 runs `scripts/wait_for_robustness.py` and manages
+   - Resumed supervisor PID 3372 runs `scripts/wait_for_robustness.py` and manages
      the final unsharded official `--resume` pass automatically after the
      workers finish. That pass verifies the original freeze, completes any
      missing cells and writes aggregates and `completion.json`. Do not launch
@@ -207,21 +243,21 @@ point. Launch it once from a clean detached checkout of the final integrated
 commit, with external original-evidence paths and a separate output directory.
 It records the sealed code/source identity, runs the full 450-cell reproduction
 with two workers alongside the six frozen robustness workers, and waits for
-supervisor PID 40646 to finish robustness. It then verifies the exact 825-cell
+supervisor PID 3372 to finish robustness. It then verifies the exact 825-cell
 completion, runs all 75 post-hoc sampler cells with six workers, verifies the
 separate inference and renders both final bundles. Its verified-analysis
 record still requires final visual QA and evidence packaging; it does not
 complete thesis writing. The README records the machine-specific invocation.
 
-The live coordinator is PID 57940; `caffeinate` PID 57941 prevents idle sleep
+The resumed coordinator is PID 3374; `caffeinate` PID 3376 prevents idle sleep
 for its lifetime. The immutable checkout is
 `~/bayes-cox-runs/refactored-programme-20260927/`, and outputs are in
 `~/bayes-cox-runs/continuation-20260927/`. Its manifest pins all 90 current
 source/script files and the exact original explanation hash. Preflight
 verified the frozen run, unchanged study inputs and locked runtime before
 starting the reproduction stage. The log is
-`~/bayes-cox-runs/logs/results_programme_20260927.log` and the PID file is
-alongside it. Do not edit that checkout or launch a second coordinator.
+`~/bayes-cox-runs/logs/resume_20260927T075146Z/programme.log` and its PID file
+is alongside it. Do not edit that checkout or launch a second coordinator.
 Full reproduction, robustness aggregation, sampler results, final visual QA
 and packaging remain pending until their actual completed evidence verifies.
 

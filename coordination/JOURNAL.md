@@ -682,3 +682,25 @@ steps. No Overleaf file was changed.
 The handoff changes passed all 270 tests in 250.54 seconds while background
 fits continued. Coordination schemas and the four-file resume archive's
 hashes and deterministic metadata also passed verification.
+
+## 2026-09-27 — Programme resumed after reboot
+
+After the owner requested completion of every remaining code/results task,
+execution resumed locally at 07:51:46 UTC (20:51 Auckland). The reboot had
+stopped all earlier numerical jobs. The exact Python 3.11.15 environment with
+237 conda and 22 pip packages, unchanged frozen checkout and all 90 code hashes
+at sealed commit `11f86ced8735b32767debb58f3cbbefbb5a7b8e6` were verified.
+
+The restart preserved and hash-checked earlier logs, recorded and released
+only six claims for missing cells, and retained the 551 completed robustness
+claims. Six new workers continue the unchanged frozen robustness runner;
+supervisor PID 3372 owns its final official resume and aggregation. Coordinator
+PID 3374 passed its runtime/source preflight and resumed the existing
+154-cell reproduction checkpoint with two workers. Its sensitivity stage
+remains queued after robustness. No saved numerical cell or original failure
+was changed. The progress-only restart receipt and recovery tools are preserved
+under `coordination/recovery/`. Overleaf remains outside this scope.
+
+The restart checkpoint passed all 270 tests in 72.06 seconds and separate
+coordination schema validation. Independent verification accepted the
+deterministic two-file restart archive and checkpoint hashes.

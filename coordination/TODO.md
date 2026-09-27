@@ -36,8 +36,9 @@ defects in the legacy layouts. Full replacement rendering and review passed
 all 426 PDFs, resolving every observed defect. See
 `coordination/reviews/2026-09-27-full-pdf-review.md`.
 
-Frozen robustness production remains active under its original six workers.
-Supervisor PID 40646 automatically performs the final unsharded resume and
+Frozen robustness production resumed after reboot under six new workers,
+without changing its original code or saved cells. Supervisor PID 3372
+automatically performs the final unsharded resume and
 aggregation; no duplicate manual finish is required. Explanation production
 retains its failed convergence gate and permits no RQ3 stability claim.
 
@@ -54,10 +55,12 @@ and production close-out remain. Selected refit gates do not satisfy the full
 reproduction requirement. Overleaf edits remain excluded; the 19 recorded
 thesis corrections belong to T-152 through T-156 when thesis work resumes.
 
-The owner wrapped up interactive work on 2026-09-27 and explicitly left the
-detached numerical jobs running. The dated progress-only checkpoint and
-resumption steps are in `HANDOFF.md` and
-`coordination/recovery/2026-09-27-wrapup-checkpoint.json`. Production tasks
+The earlier wrap-up checkpoint is preserved unchanged. After the Mac rebooted,
+the owner's instruction to complete all remaining tasks resumed the full
+programme locally at 07:51:46 UTC on 2026-09-27: robustness 551/825,
+reproduction 154/450 and sensitivity 0/75. The restart receipt and resumption
+steps are in `HANDOFF.md` and
+`coordination/recovery/2026-09-27-restart-checkpoint.json`. Production tasks
 remain unchecked until their actual completed evidence satisfies the gates.
 
 ## Completed foundation

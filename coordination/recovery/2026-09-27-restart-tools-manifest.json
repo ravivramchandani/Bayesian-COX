@@ -1,0 +1,10 @@
+{
+  "archive": "2026-09-27-restart-tools.tar.gz",
+  "archive_sha256": "ee434824ddaff2478ef050e9ff9b050cc09a4a10fb710cee4d63a3c83135cbd7",
+  "files": {
+    "harness/monitor_programme_once.py": "ac04b8efa2a350b4716b4d5e8842eee5b4b28e52cfcce2db07d0052875423bfd",
+    "harness/resume_results_programme.py": "e47ff8c9781e3e6ca4dd85b479a66312c3d4f6c74d191b1dcb02e22754bc54db"
+  },
+  "restart_checkpoint_sha256": "66a35ff957504f6d214e6a88c6e651a5136bb7a3a3e7ad74ff5a586418c7f8cc",
+  "status": "recovery_tools_not_scientific_completion"
+}
