@@ -13,7 +13,7 @@ their claim rules. It does not assert submission review or supervisor sign-off.
 | C-011: Bayesian convergence | 205 of 225 original Bayesian cells passed; 20 horseshoe cells failed the frozen diagnostic gate. | An all-fit convergence claim is false. Preserve and report diagnostic attrition. |
 | C-012: horseshoe advantage | Five primary prior contrasts are estimable; four horseshoe contrasts are unavailable. No available unadjusted p-value is below 0.49. | Do not infer superiority or equivalence. The confirmatory Holm family remains incomplete. |
 | C-016: stable explanations | The original explanation artifact has 1,845 comparisons. Of 1,640 evaluable convergence comparisons, 102 fail the prespecified rule. Global claim permission is false. | Descriptive explanation results may be labelled as such; an explanation-stability claim is not permitted. |
-| C-021: robustness | Frozen-code production and aggregates completed. Strict verification accepted 825 cells: 770 pass diagnostics and 55 fail. Coverage and scientific claim review remain pending. | Report the completed grid and attrition; inferential claims require actual comparison coverage and intervals. Completion alone does not establish general robustness. |
+| C-021: robustness | Frozen-code production and aggregates completed. Strict verification accepted 825 cells: 770 pass diagnostics and 55 fail. Coverage and review are complete: 121/129 direct estimates (95 fully paired); 45/45 difference-in-differences estimates (33 fully paired). | Report intervals and attrition; grid completion alone does not establish general robustness. Completion alone does not establish general robustness. |
 
 ADR-033 allows a separately labelled mathematical bound: none of the five
 estimable primary contrasts can be rejected by Holm for any values of the
@@ -25,13 +25,28 @@ target acceptance to 0.999 on every original attempt is post-hoc. Its findings
 cannot replace the 20 confirmatory failures, complete the original Holm
 family or change the explanation artifact's failed gate.
 
-All 75 ADR-032 cells are saved, independently verified and have passing
-diagnostic status. Their aggregate inference and completion records were
-pending at the dated numerical checkpoint. The final programme record,
-rendered lineages, actual visual QA, claim review and private supplementary
-release remain outstanding. New results are still local; a pushed code
-checkpoint is not a pushed evidence bundle. The dated evidence and report
-hashes are in `coordination/recovery/2026-09-28-numerical-checkpoint.json`.
+All 75 ADR-032 cells, completion and separate inference are verified. All
+pass diagnostics; all nine contrasts are estimable, all Holm-adjusted
+p-values are 1.0 and every corrected interval includes zero. This post-hoc
+finding cannot replace primary evidence or establish equivalence.
+
+The robustness review retains 95 fully paired, 26 partially paired and eight
+unavailable direct effects. All 45 difference-in-differences rows have
+estimates, 33 fully paired and 12 partial. No robustness p-values are stored
+or inferred. The five-imputation sensitivity averages predictions, rather
+than forming a single posterior propagating imputation uncertainty.
+Within-fit Holm PH tests identify repeated METABRIC age/NPI violations;
+outer-fit frequencies are descriptive and no time-varying replacement model
+was introduced. Full intervals and accepted/planned counts are in the
+[numerical summary](../coordination/recovery/2026-09-28-numerical-evidence-summary.json)
+and released tables.
+
+Both rendered lineages and all 428 PDFs passed verification and review.
+The private result and supporting-audit releases were downloaded and verified;
+a fresh clone restored original and supplementary evidence without copying
+original-host result files. See [Ravi's handoff](ravi_handoff.md) and the
+[close-out review](../coordination/reviews/2026-09-28-programme-closeout.md).
+The earlier numerical checkpoint is preserved unchanged as historical state.
 
 ADR-036/ADR-037 make the four new post-hoc analyses planned thesis evidence:
 tuned penalised Cox, a precisely specified Piironen–Vehtari variant, survival

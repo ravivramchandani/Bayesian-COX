@@ -1,0 +1,211 @@
+{
+  "analysis_verification_sha256": "a6e35856d7e887cc7aabc5bf978a8e8fb2783db534dbb85926d5c388c1acfc57",
+  "audit_release": {
+    "assets": [
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593664368",
+        "bytes": 496134676,
+        "name": "programme-audit-evidence.tar.gz"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593664366",
+        "bytes": 152373,
+        "name": "programme-audit-manifest.json"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593664367",
+        "bytes": 194,
+        "name": "SHA256SUMS"
+      }
+    ],
+    "published_at": "2026-09-27T20:01:02Z",
+    "remote_verification": {
+      "archive_bytes": 496134676,
+      "asset_sha256": {
+        "SHA256SUMS": "4246d1c51f71bc3957c93e6c184413a0d2a32d87cac31bdd3f21b1a13de96027",
+        "programme-audit-evidence.tar.gz": "583715eb92b4c0142898bd268038630a7aa37b39df442f3325db1b04d37ef0ed",
+        "programme-audit-manifest.json": "454d1734c6de77320f81d75107890fc7d03ebbeef5536efd797e7ebe887de25c"
+      },
+      "checked_at_utc": "2026-09-27T20:00:39.403151+00:00",
+      "manifest_content_sha256": "f85b59f72adf0e7291ae7752684d9874a538d2499db881732cbfaaf55acd0cdd",
+      "member_count": 899,
+      "status": "all_remote_audit_assets_and_members_verified"
+    },
+    "tag": "results-programme-audit-20260928",
+    "target_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+    "url": "https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-audit-20260928"
+  },
+  "claim_review_sha256": "e7cd206705478702be37e4d259fa01dcec6fcf5786ef7ba370ff9fcaafa417b8",
+  "closeout_content_sha256": "09364de387d8c3de0905dcd1b6ec880244718439f09ee4ab1f148665a2ecf476",
+  "code_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+  "exact_runtime": {
+    "lock_sha256": "1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57",
+    "locked_packages": 259,
+    "platform": "macOS arm64",
+    "python": "3.11.15"
+  },
+  "excluded_work": [
+    "Overleaf editing",
+    "paper submission",
+    "DOI minting"
+  ],
+  "numerical_summary_content_sha256": "9477ad52020ef7951e7cbe24ac6d6b2096a4369f9d1843d5cdf33cf2a42ddc5c",
+  "original_release": {
+    "completion_content_sha256": "03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1",
+    "tag": "confirmatory-v1-44b6085",
+    "unchanged_archive_sha256": "0dbb745b82e5998b5aabc4bb3f05b28f87e00ba2851101a8accb83d447ddf34b",
+    "url": "https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085"
+  },
+  "packaging_path_correction_sha256": "aae0b4e8e8ae045b02b7cb554f9ace239a303b7c518d445a23b40842be060c8b",
+  "recorded_at_utc": "2026-09-27T20:13:11.609640+00:00",
+  "release_ready_seal_sha256": "7fdeffa6fb6a9ceaddf626df23a6e0009200428639b4622cf71b5aa9321ec08f",
+  "resolved_release_tags_verified": true,
+  "scientific_boundaries": {
+    "new_thesis_extensions": "planned; no results yet",
+    "original_explanation_global_claim_permitted": false,
+    "original_failed_cells_preserved": 20,
+    "original_primary_contrasts_estimable": 5,
+    "original_primary_contrasts_planned": 9,
+    "sampler_sensitivity_post_hoc": true
+  },
+  "status": "completed_code_results_programme_remote_handoff_verified",
+  "supplementary_release": {
+    "assets": [
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678415",
+        "bytes": 4520362,
+        "name": "programme-committed-code.tar.gz"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678416",
+        "bytes": 588287486,
+        "name": "programme-confirmatory-reports.tar.gz"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678413",
+        "bytes": 39068079,
+        "name": "programme-posthoc-sensitivity.tar.gz"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678412",
+        "bytes": 137615973,
+        "name": "programme-reproduction.tar.gz"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678449",
+        "bytes": 178642618,
+        "name": "programme-robustness.tar.gz"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678468",
+        "bytes": 1922,
+        "name": "programme_analysis_verified.json"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678484",
+        "bytes": 462803,
+        "name": "programme_release_manifest.json"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678505",
+        "bytes": 410251,
+        "name": "programme_release_ready.json"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678547",
+        "bytes": 1269238,
+        "name": "programme_visual_qa.json"
+      },
+      {
+        "api_url": "https://api.github.com/repos/ravivramchandani/Bayesian-COX/releases/assets/593678421",
+        "bytes": 878,
+        "name": "SHA256SUMS"
+      }
+    ],
+    "published_at": "2026-09-27T20:12:25Z",
+    "remote_verification": {
+      "archive_members_verified": 2498,
+      "asset_sha256": {
+        "SHA256SUMS": "29b833638178637c969106c28063e06ee6530f4f0f7e9d95044ec23a8c0f603f",
+        "programme-committed-code.tar.gz": "09693f23c2246fbc35f4e6514fe53c3dc661cd9abe427e0435ff8015efd85091",
+        "programme-confirmatory-reports.tar.gz": "008f31e2b6d5c33930a79156a850a31afc574f53909d8a1d67c4f1d93662ce15",
+        "programme-posthoc-sensitivity.tar.gz": "7445abe7fb28c85a559566ad54cb4e5cf70e663250dd3b4f25a4d4ff55ce69ee",
+        "programme-reproduction.tar.gz": "4f5b684dad73ebe1c6fbc612ce95a51648ab11d05524c7ca970e47392ec96826",
+        "programme-robustness.tar.gz": "05918c159acf84367cdcbb8d9fdd5cf8a6ceeb1bf6d72fb56d9a4ab09f7ea7e4",
+        "programme_analysis_verified.json": "a6e35856d7e887cc7aabc5bf978a8e8fb2783db534dbb85926d5c388c1acfc57",
+        "programme_release_manifest.json": "6f72781d4485c768988fded9d288da30a7e513b69b283c38376d8a5e5bef30f1",
+        "programme_release_ready.json": "7fdeffa6fb6a9ceaddf626df23a6e0009200428639b4622cf71b5aa9321ec08f",
+        "programme_visual_qa.json": "a8bdb99bd79351cef78e40e0aba0a21a1e97cd1aeb532b4f44265520dd8d03c5"
+      },
+      "checked_at_utc": "2026-09-27T20:13:11.542649+00:00",
+      "code_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+      "environment": {
+        "conda_package_count": 237,
+        "direct_import_versions": {
+          "arviz": "0.23.4",
+          "h5py": "3.16.0",
+          "lifelines": "0.30.3",
+          "matplotlib": "3.11.1",
+          "numpy": "2.4.6",
+          "pandas": "2.3.3",
+          "pycox": "0.3.0",
+          "pymc": "5.28.5",
+          "scipy": "1.17.1",
+          "seaborn": "0.13.2",
+          "shap": "0.51.0",
+          "sksurv": "0.28.0",
+          "torch": "2.13.0",
+          "torchtuples": "0.2.2",
+          "yaml": "6.0.3"
+        },
+        "hdf5": {
+          "h5py": "3.16.0",
+          "hdf5_built": "2.1.0",
+          "hdf5_runtime": "2.1.0"
+        },
+        "lock_sha256": "1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57",
+        "package_count": 259,
+        "pip_package_count": 22,
+        "platform": {
+          "machine": "arm64",
+          "macos": "26.6",
+          "system": "Darwin"
+        },
+        "python": "3.11.15",
+        "status": "ok",
+        "verified_conda_packages": 237,
+        "verified_pip_packages": 22
+      },
+      "fresh_clone": "/Users/macuser/bayes-cox-runs/student-restore-check-20260928",
+      "fresh_clone_commit": "f5d2efa8c9527a6fd189db13de7196a7e9ecc858",
+      "model_fitting_performed": false,
+      "original_inventory_files": 455,
+      "original_source": "Downloaded by fresh clone scripts/restore_confirmatory_release.py from unchanged private confirmatory-v1-44b6085 release",
+      "programme_manifest_content_sha256": "de0cd34a9481124391ea10325445c8ba1c5659a7753a3137210f758629bcf6de",
+      "restored_directory": "/Users/macuser/bayes-cox-runs/student-programme-results-20260928",
+      "restored_files": 2503,
+      "ruff": "All checks passed",
+      "scope_limit": "Current Apple Silicon Mac, fresh clone/download/restore directories and existing exact verified lock; second physical laptop not tested",
+      "status": "fresh_clone_remote_restore_verified",
+      "supplementary_download": "/Users/macuser/bayes-cox-runs/private-programme-download-20260927"
+    },
+    "tag": "results-programme-20260927-11f86ce",
+    "target_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+    "url": "https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-20260927-11f86ce"
+  },
+  "verification_limits": "Fresh clone and fresh GitHub downloads/restores on current Apple Silicon Mac with existing verified exact environment; second physical laptop not tested",
+  "visual_qa": {
+    "exact_hash_reused_pdf_count": 426,
+    "failed_pdf_count": 0,
+    "manual_review_file": {
+      "path": "/Users/macuser/bayes-cox-runs/final-pdf-qa-20260927/reviews.completed.json",
+      "sha256": "98ce9d277203408b73cf5eecd248f28c5644b13e4b4c3fddc10237bcac776406"
+    },
+    "new_or_changed_pdf_count": 2,
+    "page_count": 428,
+    "pdf_count": 428,
+    "pending_actual_visual_review_pdf_count": 0,
+    "sha256": "a8bdb99bd79351cef78e40e0aba0a21a1e97cd1aeb532b4f44265520dd8d03c5",
+    "status": "passed"
+  }
+}

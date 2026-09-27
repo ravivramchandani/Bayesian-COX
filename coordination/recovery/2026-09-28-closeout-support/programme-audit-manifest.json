@@ -1,0 +1,95 @@
+{
+  "archive": {
+    "bytes": 279398,
+    "name": "programme-audit-evidence.tar.gz",
+    "sha256": "690dbd1788d0a718cc87654aac0d5027f51555364b2af7022844a7db6f9b0b56"
+  },
+  "manifest_content_sha256": "e0a45144df6b7acf26aa2e09f8f78b42bee3b6de2c0ce6c1bd226f9c8abc4501",
+  "member_count": 20,
+  "members": {
+    "final_closeout/all_10_downloaded_asset_hashes.json": {
+      "bytes": 1028,
+      "sha256": "a1b2043cde9113e3d7c758f447caf4cc8b7ec6c46279ab3fed2e9a5b9331ffbb"
+    },
+    "final_closeout/audit-download-verification.json": {
+      "bytes": 591,
+      "sha256": "e7817de9ea6430ae973ca329d1860b5ae47788ad12a50ab1c9c33287bd734b89"
+    },
+    "final_closeout/audit-release-notes.md": {
+      "bytes": 1238,
+      "sha256": "8a60c9820156f7d9abed8a88aa979289fdc3394d1b36e27d8ab07f73a8c87929"
+    },
+    "final_closeout/build_seal.py": {
+      "bytes": 4169,
+      "sha256": "3e74df92b4a96ca8da9d617d4f4d6b2bfeda765ea68884483f7896a274148f41"
+    },
+    "final_closeout/claim_review.json": {
+      "bytes": 1506,
+      "sha256": "e7cd206705478702be37e4d259fa01dcec6fcf5786ef7ba370ff9fcaafa417b8"
+    },
+    "final_closeout/final-tests.log": {
+      "bytes": 584,
+      "sha256": "52ca4d90200e8398e9e3933ab7ca58a2f7ec9617eec993cb5c7ee1017fb64e6f"
+    },
+    "final_closeout/github-draft-audit-release.json": {
+      "bytes": 1851,
+      "sha256": "7a4172efc319d748ba215f214c7bea9a6b464096ac657d14d67efa45927835da"
+    },
+    "final_closeout/github-draft-release.json": {
+      "bytes": 5743,
+      "sha256": "c01d841ef9074ed06eade8e8d1f34aff1d8e7c8422725147bed152ce04a42e52"
+    },
+    "final_closeout/github-published-audit-release.json": {
+      "bytes": 1901,
+      "sha256": "0cd1fbfd33601ca89c8205cae7854399abca2c65260a6408f62083cfe5c0d062"
+    },
+    "final_closeout/github-published-release.json": {
+      "bytes": 5836,
+      "sha256": "07c470316213d26ec387348b7936eba1fa976a3e3638e0970d4008e2e2f48d7d"
+    },
+    "final_closeout/numerical_evidence_summary.json": {
+      "bytes": 181575,
+      "sha256": "cf795e463b0dbf5a2095cbcceab34a9e855bf2279836d63b2105efe430db76ac"
+    },
+    "final_closeout/packaging-path-correction.json": {
+      "bytes": 638,
+      "sha256": "aae0b4e8e8ae045b02b7cb554f9ace239a303b7c518d445a23b40842be060c8b"
+    },
+    "final_closeout/programme.env": {
+      "bytes": 1184,
+      "sha256": "996e4158a5c68a64d08f0172f0d2f8a8137b2236ef78b3e2b4d024c2e663de99"
+    },
+    "final_closeout/programme_release_ready-v2.json": {
+      "bytes": 410251,
+      "sha256": "7fdeffa6fb6a9ceaddf626df23a6e0009200428639b4622cf71b5aa9321ec08f"
+    },
+    "final_closeout/programme_release_ready.json": {
+      "bytes": 410257,
+      "sha256": "2fa4fc230a451c782d311140eb15f3cdfb532943e26f920834c058d422c5fe62"
+    },
+    "final_closeout/record_closeout.py": {
+      "bytes": 4127,
+      "sha256": "615817e8f0241cf455b9264c8fdf4452bbd35f2027d5a58af28a236f6108ab5e"
+    },
+    "final_closeout/release-notes.md": {
+      "bytes": 2448,
+      "sha256": "daa287582ca22d292cfa4e6a180f2558024c4afca50fa1bacb3850216d2b6277"
+    },
+    "final_closeout/student-environment-verification.txt": {
+      "bytes": 847,
+      "sha256": "cc6fc42b01e2a273c31e4c85acff93c4090e289d1b8dd924438e5c7e211475e7"
+    },
+    "final_closeout/student-restore-verification.json": {
+      "bytes": 3087,
+      "sha256": "64d07c3a798a39cd062fc1c090341c764835944232dae4a18aabfcbc82b3a8fa"
+    },
+    "final_closeout/update_handoff.py": {
+      "bytes": 19099,
+      "sha256": "36ec6fedbb87dec2c03863c0bfc5225cf1fada8b96d70166b96fdac556c8a208"
+    }
+  },
+  "source_roots": {
+    "final_closeout": "/Users/macuser/bayes-cox-runs/closeout-support-files-20260928"
+  },
+  "status": "verified_programme_audit_archive"
+}

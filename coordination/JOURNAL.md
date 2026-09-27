@@ -760,3 +760,45 @@ has been created. Overleaf remains unchanged.
 
 The checkpoint refresh passed all 270 tests in 55.52 seconds, separate
 coordination schema validation and `git diff --check` in the exact runtime.
+
+## 2026-09-28 — Completed programme released and restored from GitHub
+
+The coordinator completed from sealed commit
+`11f86ced8735b32767debb58f3cbbefbb5a7b8e6`. Exact reproduction is 450/450;
+the completed frozen robustness grid is 825 cells with 770 diagnostic passes
+and 55 failures; the separate post-hoc sensitivity has 75/75 passes and all
+nine estimable contrasts have Holm-adjusted p-values 1.0 and corrected
+intervals including zero. The original failures, incomplete primary family
+and failed explanation gate remain unchanged. Coverage and scientific review
+retain partial/unavailable robustness estimates and the PH/imputation limits.
+Both final lineages and all 428 PDFs/pages passed verification and actual or
+exact-hash-reused visual review.
+
+Private releases `results-programme-20260927-11f86ce` and
+`results-programme-audit-20260928` contain the completed results/code and full
+QA/log/probe support respectively. All ten programme assets, all three audit
+assets and every declared member were independently verified after download.
+A fresh GitHub clone restored the original source and supplementary programme
+into new folders: 455 original source files and 2,498 supplementary archive
+members, plus five metadata files. It required no original-host result copy
+or new fit. Published asset inventories and both resolved tag commits match
+the verified drafts. Repository privacy and the unchanged original release
+were checked.
+
+The first packaging attempt rejected the path of an identical explanation
+copy before assets were created. A revised seal binds its unchanged original
+single-file directory; both seals and the correction history are preserved.
+Ravi's guide, README, HANDOFF, TODO, evidence status and dated remote receipts
+record restoration and the next extension tasks. New extension fits and
+Overleaf editing have not started; paper/DOI work remains deferred.
+
+The final close-out passed all 270 tests in 48.44 seconds, separate
+coordination schema validation, Ruff and `git diff --check`. The fresh clone
+also passed exact environment verification and Ruff. Compact validation is
+in `coordination/recovery/2026-09-28-closeout-validation.json`; the final
+Overleaf worktree remained unchanged.
+
+The 20-file close-out support archive under
+`coordination/recovery/2026-09-28-closeout-support/` preserves both seal
+versions, published-release receipts, environment verification, full final
+test output and the close-out helper source, with verified member hashes.

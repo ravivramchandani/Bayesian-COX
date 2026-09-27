@@ -1,0 +1,37 @@
+{
+  "status": "reviewed",
+  "reviewer": "Codex root",
+  "reviewed_at_utc": "2026-09-27T19:55:46.930695+00:00",
+  "basis": "Strict numerical summary, original and post-hoc inference tables, all robustness interval and accepted/planned-pair coverage rows, original explanation gate, actual visual QA",
+  "original_primary_family": {
+    "estimable": 5,
+    "planned": 9,
+    "complete": false,
+    "claim": "No complete-family primary inference; original 20 diagnostic failures preserved"
+  },
+  "sampler_sensitivity": {
+    "post_hoc": true,
+    "diagnostic_pass": 75,
+    "planned": 75,
+    "estimable_contrasts": 9,
+    "holm_adjusted_p_all": 1.0,
+    "all_corrected_intervals_include_zero": true,
+    "claim": "No superiority or equivalence conclusion"
+  },
+  "robustness": {
+    "stored_cells": 825,
+    "diagnostic_pass": 770,
+    "diagnostic_fail": 55,
+    "direct_rows": 129,
+    "direct_available": 121,
+    "direct_full_pair_coverage": 95,
+    "direct_unavailable": 8,
+    "did_rows": 45,
+    "did_available": 45,
+    "did_full_pair_coverage": 33,
+    "claim": "Descriptive intervals with incomplete pairing labelled; no stored robustness p-values"
+  },
+  "explanation_global_claim_permitted": false,
+  "multiple_imputation_claim": "Prediction-averaging sensitivity, not a single posterior propagating covariate imputation uncertainty",
+  "proportional_hazards_claim": "Within-fit adjusted violations and outer-fit stability frequencies are descriptive; no time-varying replacement model fitted"
+}

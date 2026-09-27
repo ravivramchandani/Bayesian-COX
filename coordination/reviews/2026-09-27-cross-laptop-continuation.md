@@ -1,5 +1,10 @@
 # Cross-laptop continuation and reboot recovery
 
+Superseded on 2026-09-28 by [Ravi's completed-results restore guide](../../docs/ravi_handoff.md).
+All numerical stages completed and their verified evidence is in private
+GitHub Releases. Partial-run transfer/restart instructions below are historical;
+no partial transfer or restart is now needed.
+
 The read-only reboot audit found no surviving numerical processes, 551 of 825
 robustness cells and 154 of 450 reproduction cells. Robustness comprised
 GBSG2 255, WHAS500 270 and METABRIC 26 cells; reproduction comprised GBSG2

@@ -1,0 +1,8 @@
+{
+  "first_attempt": "failed_before_assets_created",
+  "reason": "Copied explanation file has identical bytes but an absolute path different from the rendered optional-source lineage",
+  "correction": "Revised seal binds the unchanged single-file original explanation directory; no code, evidence, renderer or QA bytes changed",
+  "preserved_first_seal_sha256": "2fa4fc230a451c782d311140eb15f3cdfb532943e26f920834c058d422c5fe62",
+  "accepted_seal_path": "/Users/macuser/bayes-cox-runs/final-closeout-20260927/programme_release_ready-v2.json",
+  "accepted_seal_sha256": "7fdeffa6fb6a9ceaddf626df23a6e0009200428639b4622cf71b5aa9321ec08f"
+}

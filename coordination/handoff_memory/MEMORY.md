@@ -48,8 +48,13 @@ complete. Never describe the partial family as a complete primary analysis,
 never admit a failed fit into an estimate and never add a post hoc remedy to
 this freeze.
 
-Robustness, confirmatory explanation, claim review and post-confirmatory thesis
-result writing are paused until the owner gives a new instruction.
+The owner resumed downstream code/results work on 2026-09-27. Robustness,
+original explanation, separate sampler sensitivity, claim review and final
+rendering/QA are complete. Results and full audit support are in private
+GitHub Releases; follow `docs/ravi_handoff.md` for restoration and the current
+`HANDOFF.md`/`TODO.md` for next tasks. Original negative gates are preserved.
+New extension experiments remain planned; Overleaf edits and paper/DOI work
+remain outside this completed programme.
 
 The complete confirmatory directory is transferred through the private GitHub
 Release `confirmatory-v1-44b6085`. From a current `main` clone, use

@@ -1,0 +1,5147 @@
+{
+  "code_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+  "explainability": {
+    "convergence_summary": {
+      "claim_permitted": false,
+      "n_evaluable": 1640,
+      "n_failed": 102,
+      "n_passed": 1538,
+      "status": "failed"
+    },
+    "interpretation_limits": [
+      "Agreement is model-conditional ranking agreement, not causal truth.",
+      "No treatment benefit, feature truth, clinical utility or deployment claim is supported.",
+      "Grouped posterior scores use stored full-posterior signed group sums before taking absolute values; they remain model-conditional importance, not feature truth.",
+      "Across-fold/seed intervals are descriptive stability summaries, not independent-sample confidence intervals.",
+      "Exact LinearExplainer has no coalition Monte Carlo budget; randomness enters only through recorded subject and background samples.",
+      "Cox agreement is a secondary cross-model comparison between different fitted risk models.",
+      "RSF SHAP is unavailable from the frozen artifacts and was not approximated or refitted."
+    ],
+    "source_unchanged": true
+  },
+  "interpretation": "Descriptive evidence only; no superiority or equivalence claim.",
+  "original_confirmatory": {
+    "by_cohort_model_prior": [
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_horseshoe",
+        "prior": "horseshoe",
+        "status_counts": {
+          "complete": 7,
+          "failed_diagnostics": 18
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_normal",
+        "prior": "normal",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_spike_slab",
+        "prior": "spike_slab",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "cox_ph",
+        "prior": null,
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "deepsurv",
+        "prior": null,
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "random_survival_forest",
+        "prior": null,
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_horseshoe",
+        "prior": "horseshoe",
+        "status_counts": {
+          "complete": 23,
+          "failed_diagnostics": 2
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_normal",
+        "prior": "normal",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_spike_slab",
+        "prior": "spike_slab",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "cox_ph",
+        "prior": null,
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "deepsurv",
+        "prior": null,
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "random_survival_forest",
+        "prior": null,
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_horseshoe",
+        "prior": "horseshoe",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_normal",
+        "prior": "normal",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_spike_slab",
+        "prior": "spike_slab",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "cox_ph",
+        "prior": null,
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "deepsurv",
+        "prior": null,
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "random_survival_forest",
+        "prior": null,
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      }
+    ],
+    "holm_family_complete": false,
+    "primary_contrasts": [
+      {
+        "dataset": "gbsg2",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": null,
+        "holm_adjustment_recorded": false,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (horseshoe)",
+        "paired_folds": 7,
+        "status": "incomplete_no_confirmatory_inference"
+      },
+      {
+        "dataset": "gbsg2",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": null,
+        "holm_adjustment_recorded": false,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00010315792165734528,
+          "confidence_upper": 0.00015264829355560283,
+          "estimate": 2.474518594912878e-05,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.6932041369111692
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "dataset": "gbsg2",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": null,
+        "holm_adjustment_recorded": false,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "Bayesian Cox (horseshoe)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "paired_folds": 7,
+        "status": "incomplete_no_confirmatory_inference"
+      },
+      {
+        "dataset": "whas500",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": null,
+        "holm_adjustment_recorded": false,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0017063867973574824,
+          "confidence_upper": 0.002395334582384481,
+          "estimate": 0.00034447389251349934,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.7318650125298967
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (horseshoe)",
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "dataset": "whas500",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": null,
+        "holm_adjustment_recorded": false,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0001199567824993662,
+          "confidence_upper": 0.00024189364289477027,
+          "estimate": 6.0968430197702036e-05,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.49342487310734645
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "dataset": "whas500",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": null,
+        "holm_adjustment_recorded": false,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0021738281386186865,
+          "confidence_upper": 0.0016068172139870917,
+          "estimate": -0.00028350546231579733,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.7595839297206525
+        },
+        "model_a": "Bayesian Cox (horseshoe)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "dataset": "metabric",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": null,
+        "holm_adjustment_recorded": false,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (horseshoe)",
+        "paired_folds": 23,
+        "status": "incomplete_no_confirmatory_inference"
+      },
+      {
+        "dataset": "metabric",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": null,
+        "holm_adjustment_recorded": false,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -8.671756919204219e-05,
+          "confidence_upper": 7.051674018456886e-05,
+          "estimate": -8.100414503736663e-06,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.8333909379675831
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "dataset": "metabric",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": null,
+        "holm_adjustment_recorded": false,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "Bayesian Cox (horseshoe)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "paired_folds": 23,
+        "status": "incomplete_no_confirmatory_inference"
+      }
+    ],
+    "status_counts": {
+      "complete": 430,
+      "failed_diagnostics": 20
+    },
+    "stored_cells": 450,
+    "unchanged_evidence": true
+  },
+  "posthoc_sampler_sensitivity": {
+    "by_cohort_model_prior": [
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_horseshoe",
+        "prior": "horseshoe",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_horseshoe",
+        "prior": "horseshoe",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_horseshoe",
+        "prior": "horseshoe",
+        "status_counts": {
+          "complete": 25
+        },
+        "stored_cells": 25
+      }
+    ],
+    "evidence_status": "posthoc_sampler_sensitivity",
+    "holm_family_complete": true,
+    "original_confirmatory_outcome_replaced": false,
+    "primary_contrasts": [
+      {
+        "became_available_in_posthoc": true,
+        "dataset": "gbsg2",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": 1.0,
+        "holm_adjustment_recorded": true,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0017804946831759861,
+          "confidence_upper": 0.0016178379565433912,
+          "estimate": -8.132836331629756e-05,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.9221288192451591
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (horseshoe)",
+        "original_confirmatory_comparison_available": false,
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "became_available_in_posthoc": false,
+        "dataset": "gbsg2",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": 1.0,
+        "holm_adjustment_recorded": true,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00010315792165734528,
+          "confidence_upper": 0.00015264829355560283,
+          "estimate": 2.474518594912878e-05,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.6932041369111692
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "original_confirmatory_comparison_available": true,
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "became_available_in_posthoc": true,
+        "dataset": "gbsg2",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": 1.0,
+        "holm_adjustment_recorded": true,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.001476334950988703,
+          "confidence_upper": 0.0016884820495195556,
+          "estimate": 0.00010607354926542634,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.8911186727139903
+        },
+        "model_a": "Bayesian Cox (horseshoe)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "original_confirmatory_comparison_available": false,
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "became_available_in_posthoc": false,
+        "dataset": "whas500",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": 1.0,
+        "holm_adjustment_recorded": true,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0016892285294795605,
+          "confidence_upper": 0.002382198095895807,
+          "estimate": 0.000346484783208123,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.7284419678046662
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (horseshoe)",
+        "original_confirmatory_comparison_available": true,
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "became_available_in_posthoc": false,
+        "dataset": "whas500",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": 1.0,
+        "holm_adjustment_recorded": true,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0001199567824993662,
+          "confidence_upper": 0.00024189364289477027,
+          "estimate": 6.0968430197702036e-05,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.49342487310734645
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "original_confirmatory_comparison_available": true,
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "became_available_in_posthoc": false,
+        "dataset": "whas500",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": 1.0,
+        "holm_adjustment_recorded": true,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.002160650764074722,
+          "confidence_upper": 0.0015896180580538797,
+          "estimate": -0.000285516353010421,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.756040306989689
+        },
+        "model_a": "Bayesian Cox (horseshoe)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "original_confirmatory_comparison_available": true,
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "became_available_in_posthoc": true,
+        "dataset": "metabric",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": 1.0,
+        "holm_adjustment_recorded": true,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0015807868639116027,
+          "confidence_upper": 0.000609394167171335,
+          "estimate": -0.00048569634837013377,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.3690965294844253
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (horseshoe)",
+        "original_confirmatory_comparison_available": false,
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "became_available_in_posthoc": false,
+        "dataset": "metabric",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": 1.0,
+        "holm_adjustment_recorded": true,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -8.671756919204219e-05,
+          "confidence_upper": 7.051674018456886e-05,
+          "estimate": -8.100414503736663e-06,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.8333909379675831
+        },
+        "model_a": "Bayesian Cox (normal)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "original_confirmatory_comparison_available": true,
+        "paired_folds": 25,
+        "status": "complete"
+      },
+      {
+        "became_available_in_posthoc": true,
+        "dataset": "metabric",
+        "direction": "model_a minus model_b",
+        "expected_paired_folds": 25,
+        "holm_adjusted_p": 1.0,
+        "holm_adjustment_recorded": true,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005589287130201167,
+          "confidence_upper": 0.001514120580752911,
+          "estimate": 0.0004775959338663971,
+          "estimate_key": "mean_difference",
+          "p_value_recorded": true,
+          "raw_p_value": 0.3510962267672933
+        },
+        "model_a": "Bayesian Cox (horseshoe)",
+        "model_b": "Bayesian Cox (spike_slab)",
+        "original_confirmatory_comparison_available": false,
+        "paired_folds": 25,
+        "status": "complete"
+      }
+    ],
+    "status_counts": {
+      "complete": 75
+    },
+    "stored_cells": 75
+  },
+  "reproduction": {
+    "all_450_equal": true,
+    "cells_checked": 450,
+    "cells_identical": 450,
+    "evidence_status": "verification_only",
+    "ignored_fields": [
+      "cell_content_sha256",
+      "fit_seconds",
+      "total_seconds"
+    ]
+  },
+  "robustness": {
+    "analysis_availability": {
+      "categorical_method": "training-fold mode",
+      "claim_limit": "This sensitivity does not form one Bayesian posterior that propagates covariate-imputation uncertainty.",
+      "combination": "average predictions, then recompute metrics",
+      "number_of_imputations": 5,
+      "numeric_method": "training-fold IterativeImputer(sample_posterior=True) with distinct seeds",
+      "posterior_uncertainty_propagated": false,
+      "status": "implemented_metabric_npi_plus_stage_sensitivity"
+    },
+    "by_cohort_model_prior": [
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_horseshoe",
+        "prior": "horseshoe",
+        "status_counts": {
+          "complete": 45,
+          "failed_diagnostics": 40
+        },
+        "stored_cells": 85
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_normal",
+        "prior": "normal",
+        "status_counts": {
+          "complete": 85
+        },
+        "stored_cells": 85
+      },
+      {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_spike_slab",
+        "prior": "spike_slab",
+        "status_counts": {
+          "complete": 85
+        },
+        "stored_cells": 85
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_horseshoe",
+        "prior": "horseshoe",
+        "status_counts": {
+          "complete": 88,
+          "failed_diagnostics": 12
+        },
+        "stored_cells": 100
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_normal",
+        "prior": "normal",
+        "status_counts": {
+          "complete": 100
+        },
+        "stored_cells": 100
+      },
+      {
+        "dataset": "metabric",
+        "model_key": "bayesian_spike_slab",
+        "prior": "spike_slab",
+        "status_counts": {
+          "complete": 100
+        },
+        "stored_cells": 100
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_horseshoe",
+        "prior": "horseshoe",
+        "status_counts": {
+          "complete": 87,
+          "failed_diagnostics": 3
+        },
+        "stored_cells": 90
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_normal",
+        "prior": "normal",
+        "status_counts": {
+          "complete": 90
+        },
+        "stored_cells": 90
+      },
+      {
+        "dataset": "whas500",
+        "model_key": "bayesian_spike_slab",
+        "prior": "spike_slab",
+        "status_counts": {
+          "complete": 90
+        },
+        "stored_cells": 90
+      }
+    ],
+    "contrasts": [
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "baseline_intervals_10",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005602751558611814,
+          "confidence_upper": 0.004316308365734081,
+          "estimate": 0.0019704429069442183,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 2,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_10",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "above_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": 8.576007584317494e-06,
+          "confidence_upper": 0.00020948992325555045,
+          "estimate": 0.0001065860131829134,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "baseline_intervals_10",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.004360249564511325,
+          "confidence_upper": 0.00047090643799580975,
+          "estimate": -0.0018617419143585575,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 2,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "baseline_intervals_4",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 0,
+        "status": "incomplete_no_paired_cells"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_4",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.293426205992907e-05,
+          "confidence_upper": 0.0001976998864872313,
+          "estimate": 8.584434917117118e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "baseline_intervals_4",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 0,
+        "status": "incomplete_no_paired_cells"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "prior_primary",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 0,
+        "status": "incomplete_no_paired_cells"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_primary",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "above_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": 1.168038785154919e-05,
+          "confidence_upper": 0.00021001379397465715,
+          "estimate": 0.00010745983215917142,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "prior_primary",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 0,
+        "status": "incomplete_no_paired_cells"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_tighter",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0003967756113131308,
+          "confidence_upper": 0.0025656242598539585,
+          "estimate": 0.0010587596621643186,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_tighter",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -8.277880420466628e-05,
+          "confidence_upper": 0.0001685124859155378,
+          "estimate": 4.077012166625909e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_tighter",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00239841230842934,
+          "confidence_upper": 0.00030127236386816753,
+          "estimate": -0.0010179895404980595,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "prior_wider",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0012712541005128076,
+          "confidence_upper": 0.004482628784750869,
+          "estimate": 0.0016165627239950998,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 1,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_wider",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -7.603306741385965e-05,
+          "confidence_upper": 9.419776898151348e-05,
+          "estimate": 1.2167306288097265e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "prior_wider",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.004691603070381218,
+          "confidence_upper": 0.001057071102146344,
+          "estimate": -0.00173005396913514,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 1,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "feature",
+        "condition": "engineered_augmented",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.000970174973728273,
+          "confidence_upper": 0.0030073996396065166,
+          "estimate": 0.0009009172447526104,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 3,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "engineered_augmented",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -3.924188692410124e-05,
+          "confidence_upper": 0.0002322148104610475,
+          "estimate": 8.56525350059009e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "feature",
+        "condition": "engineered_augmented",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0029761714042104313,
+          "confidence_upper": 0.0011060527735378002,
+          "estimate": -0.0008677048401478934,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 3,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "feature",
+        "condition": "primary",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 0,
+        "status": "incomplete_no_paired_cells"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "primary",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "above_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": 1.19833943325697e-05,
+          "confidence_upper": 0.00021254200819444054,
+          "estimate": 0.00010745983215917142,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "feature",
+        "condition": "primary",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 0,
+        "status": "incomplete_no_paired_cells"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_025_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0036527373558450705,
+          "confidence_upper": 0.005494772822863442,
+          "estimate": 0.0009007354050975934,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_025_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0003912104537983871,
+          "confidence_upper": 0.00011462368345420584,
+          "estimate": -0.00013707440538458617,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_025_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.005697576758259618,
+          "confidence_upper": 0.0034178855442452095,
+          "estimate": -0.0010378098104821796,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "fraction_050_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0027248805367481015,
+          "confidence_upper": 0.0025760681795085434,
+          "estimate": -1.5030649412515936e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 7,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_050_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.867438902671502e-05,
+          "confidence_upper": 0.00028405077009224767,
+          "estimate": 0.0001180873463512136,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "fraction_050_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0023206036676686258,
+          "confidence_upper": 0.002671335812496077,
+          "estimate": 0.00013938848398816338,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 7,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.001335483562197372,
+          "confidence_upper": 0.0027815827038452953,
+          "estimate": 0.000632947925677627,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -7.193352086488473e-05,
+          "confidence_upper": 0.00019215691995477964,
+          "estimate": 6.472918195863071e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.002534937105830249,
+          "confidence_upper": 0.0013387069014276038,
+          "estimate": -0.0005523730626560499,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "fraction_100_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0029638918893400055,
+          "confidence_upper": 0.0012364697796042258,
+          "estimate": -0.0008872459954696674,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 3,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_100_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -5.334436400563377e-05,
+          "confidence_upper": 0.00012375969657564334,
+          "estimate": 3.639496921348602e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "fraction_100_observed",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0013448118713100374,
+          "confidence_upper": 0.0028659076359650567,
+          "estimate": 0.0008207490907573429,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 3,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "truncate_at_training_q50",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0008845491881814651,
+          "confidence_upper": 0.001946154077239889,
+          "estimate": 0.00039204130627769373,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 4,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q50",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -6.064071681657191e-05,
+          "confidence_upper": 9.922762166226946e-05,
+          "estimate": 1.4734948003740792e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "truncate_at_training_q50",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0017316821090423249,
+          "confidence_upper": 0.0008860677096632297,
+          "estimate": -0.0003573465962887589,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 4,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "truncate_at_training_q75",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0012084310741735133,
+          "confidence_upper": 0.0029744893744202434,
+          "estimate": 0.0006869071678492173,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q75",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -1.0292013284613575e-05,
+          "confidence_upper": 0.00016672617566800075,
+          "estimate": 8.121658143326791e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "truncate_at_training_q75",
+        "dataset": "gbsg2",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0028278675631413413,
+          "confidence_upper": 0.0011955921152785388,
+          "estimate": -0.0006057894997580622,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "baseline_intervals_10",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0012497595494028258,
+          "confidence_upper": 0.000657866955481125,
+          "estimate": -0.00034838729641644165,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 4,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_10",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -5.875494572741592e-05,
+          "confidence_upper": 7.525669743058255e-05,
+          "estimate": 2.7884234887459628e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "baseline_intervals_10",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0006683686153204438,
+          "confidence_upper": 0.0012183580719545754,
+          "estimate": 0.00035638063081870554,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 4,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_4",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.001123064872816453,
+          "confidence_upper": 0.0006337501721146244,
+          "estimate": -0.0002815319892961361,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_4",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -5.478728842802624e-05,
+          "confidence_upper": 8.296509783349776e-05,
+          "estimate": 7.827405551109239e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_4",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005143333804943818,
+          "confidence_upper": 0.0010544007367170889,
+          "estimate": 0.0002893593948472454,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_primary",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0010908263036852575,
+          "confidence_upper": 0.0006114515714133448,
+          "estimate": -0.00027687512304099026,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_primary",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -7.429620581264982e-05,
+          "confidence_upper": 7.619312597725167e-05,
+          "estimate": -7.143809420886012e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_primary",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005650572460084934,
+          "confidence_upper": 0.0009900480517568036,
+          "estimate": 0.00026973131362010417,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_tighter",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0010259089595210382,
+          "confidence_upper": 0.00034655748119918455,
+          "estimate": -0.0003310864538066824,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_tighter",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -8.495320480191541e-05,
+          "confidence_upper": 1.741198290639038e-05,
+          "estimate": -3.421476595587018e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_tighter",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0003968963392885521,
+          "confidence_upper": 0.0009525570401306441,
+          "estimate": 0.00029687168785081226,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "prior_wider",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 0,
+        "status": "incomplete_no_paired_cells"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_wider",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.1401411494668205e-05,
+          "confidence_upper": 9.671384104152755e-05,
+          "estimate": 3.403891061702018e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "prior_wider",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": false,
+          "confidence_interval_direction": "unavailable"
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 0,
+        "status": "incomplete_no_paired_cells"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "feature",
+        "condition": "npi_components",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005439560214822431,
+          "confidence_upper": 0.0012389681477412544,
+          "estimate": 0.0003345232853387681,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 2,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "npi_components",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.8762046327130683e-05,
+          "confidence_upper": 7.078111557479284e-05,
+          "estimate": 1.711999322015066e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "feature",
+        "condition": "npi_components",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0011060917126906095,
+          "confidence_upper": 0.0006158620748046306,
+          "estimate": -0.0002710590699349748,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 2,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "npi_plus_stage",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0010684894016447517,
+          "confidence_upper": 0.0006168783613063311,
+          "estimate": -0.00026726222669575217,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "npi_plus_stage",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -7.478691588686792e-05,
+          "confidence_upper": 7.93933051038528e-05,
+          "estimate": -3.4440501560802223e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "npi_plus_stage",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005391318401350956,
+          "confidence_upper": 0.001014484609239034,
+          "estimate": 0.00026381817653967185,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "feature",
+        "condition": "npi_plus_stage_multiple_imputation",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.001897928007860626,
+          "confidence_upper": 0.0003316808211245552,
+          "estimate": -0.0007788405917930337,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 2,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "npi_plus_stage_multiple_imputation",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0004643049970716782,
+          "confidence_upper": 0.0003799108869680522,
+          "estimate": -3.80566965035069e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "feature",
+        "condition": "npi_plus_stage_multiple_imputation",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00033153917553546713,
+          "confidence_upper": 0.001560571629274125,
+          "estimate": 0.000612098788919648,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 2,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "primary",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.001083657228195371,
+          "confidence_upper": 0.0005994816637924315,
+          "estimate": -0.00027687512304099026,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "primary",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -7.586021536008484e-05,
+          "confidence_upper": 8.273126477784988e-05,
+          "estimate": -7.143809420886012e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "primary",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005320641384274914,
+          "confidence_upper": 0.001033821532176606,
+          "estimate": 0.00026973131362010417,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "treatment_augmented",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0010335577769947685,
+          "confidence_upper": 0.0008331924581738819,
+          "estimate": -0.00010738326414626122,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "treatment_augmented",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00011728973720679387,
+          "confidence_upper": 6.310309949757234e-05,
+          "estimate": -2.7777145538913303e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "treatment_augmented",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.000815738804412002,
+          "confidence_upper": 0.000960163077373671,
+          "estimate": 7.960611860734799e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_025_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0018997421247061146,
+          "confidence_upper": 0.0012284040977109743,
+          "estimate": -0.0002123256327114356,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_025_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -9.198040360687582e-05,
+          "confidence_upper": 0.00014379777532607434,
+          "estimate": 3.346751898051831e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_025_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.001148437724906875,
+          "confidence_upper": 0.0017253200963703445,
+          "estimate": 0.0002457931516919539,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_050_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0012279038174191341,
+          "confidence_upper": 0.0007600619827420966,
+          "estimate": -0.00021615086408352898,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_050_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.67974377767065e-05,
+          "confidence_upper": 0.00012217214851055388,
+          "estimate": 4.846215076730626e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_050_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0007111151782925574,
+          "confidence_upper": 0.0012372380359279734,
+          "estimate": 0.00026461301485083505,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.001175492019691661,
+          "confidence_upper": 0.00035179096545586287,
+          "estimate": -0.0004013509828931719,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -3.7362308935773995e-05,
+          "confidence_upper": 9.539497757865971e-05,
+          "estimate": 2.761676504729528e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00027387092217667986,
+          "confidence_upper": 0.0011300761976214503,
+          "estimate": 0.0004289677479404671,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_100_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.001204775325732941,
+          "confidence_upper": 0.00032435012119356386,
+          "estimate": -0.00042356258784815996,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_100_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -5.92489264408474e-05,
+          "confidence_upper": 6.724359500735539e-05,
+          "estimate": 2.773039520127926e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_100_observed",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00027178990054228184,
+          "confidence_upper": 0.0011322445061787965,
+          "estimate": 0.00042633562736828776,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q50",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0006930496362265195,
+          "confidence_upper": 0.0005442700695239644,
+          "estimate": -7.45246400396415e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q50",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -6.708255923908712e-05,
+          "confidence_upper": 3.414749819201083e-05,
+          "estimate": -9.988425104127423e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q50",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005565236379057141,
+          "confidence_upper": 0.0006611408297616204,
+          "estimate": 6.453621493551408e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q75",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0009333589185820793,
+          "confidence_upper": 0.00036903512946304573,
+          "estimate": -0.0002615556061728209,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q75",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -3.931822935380979e-05,
+          "confidence_upper": 5.108650726711321e-05,
+          "estimate": 6.192569636362913e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q75",
+        "dataset": "metabric",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0003686919268618605,
+          "confidence_upper": 0.000913018987234452,
+          "estimate": 0.00026774817580918367,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_10",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0006194296367890141,
+          "confidence_upper": 0.0034778909672501675,
+          "estimate": 0.0014053109720017286,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_10",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0001477093164870448,
+          "confidence_upper": 0.0002682256352088138,
+          "estimate": 7.283485523424594e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_10",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0032009069070864553,
+          "confidence_upper": 0.0005454318086437099,
+          "estimate": -0.0013324761167674826,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_4",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005329462071860183,
+          "confidence_upper": 0.0032960770210654854,
+          "estimate": 0.0013692480362290224,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_4",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.050456356293868e-05,
+          "confidence_upper": 0.00030716426013875566,
+          "estimate": 0.00014212083206921006,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "baseline_intervals_4",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.003067303230672135,
+          "confidence_upper": 0.0005844607927264246,
+          "estimate": -0.0012271272041598125,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_primary",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0007232493310208331,
+          "confidence_upper": 0.003411559087005241,
+          "estimate": 0.0013222428554104703,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_primary",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0002486887913450825,
+          "confidence_upper": 0.00036356697515326923,
+          "estimate": 6.518796365733676e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_primary",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.003123438649538845,
+          "confidence_upper": 0.0005552227178044839,
+          "estimate": -0.0012570548917531332,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_tighter",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0010426807879359936,
+          "confidence_upper": 0.002795684854680197,
+          "estimate": 0.000871644896144565,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_tighter",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005718057488992721,
+          "confidence_upper": 0.0002209862453116259,
+          "estimate": -0.00013003109910309792,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_tighter",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0027067027795910138,
+          "confidence_upper": 0.0006848328683294169,
+          "estimate": -0.001001675995247663,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "prior_wider",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0007945330092298478,
+          "confidence_upper": 0.0043180341612240915,
+          "estimate": 0.0017438080547491671,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 3,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "design",
+        "condition": "prior_wider",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -8.415715342121975e-05,
+          "confidence_upper": 0.00018763716930880064,
+          "estimate": 5.5852465553071164e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "design",
+        "condition": "prior_wider",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00412632145642598,
+          "confidence_upper": 0.0007573418047765536,
+          "estimate": -0.0017206540815791229,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 3,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "engineered_augmented",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -1.3951535117247711e-05,
+          "confidence_upper": 0.004478711093349161,
+          "estimate": 0.00211204737599863,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "engineered_augmented",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00016960757928881988,
+          "confidence_upper": 0.0003733497250833821,
+          "estimate": 0.00012276495148149633,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "engineered_augmented",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "below_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.004065784172311328,
+          "confidence_upper": -4.382603780999329e-05,
+          "estimate": -0.001989282424517134,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "primary",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0007268822428367503,
+          "confidence_upper": 0.0033773668220838152,
+          "estimate": 0.0013222428554104703,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "primary",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0002456452730038789,
+          "confidence_upper": 0.00035902695384037683,
+          "estimate": 6.518796365733676e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "primary",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0030877686635586796,
+          "confidence_upper": 0.0006034356430242086,
+          "estimate": -0.0012570548917531332,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "published_full",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0019058976770186047,
+          "confidence_upper": 0.0033383896552608805,
+          "estimate": 0.0009837270798634533,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "published_full",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00017669186333971643,
+          "confidence_upper": 0.0002749006744063073,
+          "estimate": 6.126396882197635e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "feature",
+        "condition": "published_full",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 5,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.003322923502508797,
+          "confidence_upper": 0.0019430051527902124,
+          "estimate": -0.0009224631110414768,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 5,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_025_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "above_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": 0.0032312774533349905,
+          "confidence_upper": 0.011348892854042848,
+          "estimate": 0.007021866111276533,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_025_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0003078616416685122,
+          "confidence_upper": 0.0005586557206970882,
+          "estimate": 0.0001465889252071692,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_025_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "below_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.010777596189893004,
+          "confidence_upper": -0.003391869337513244,
+          "estimate": -0.006875277186069363,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_050_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0010918127201813468,
+          "confidence_upper": 0.003795075007600536,
+          "estimate": 0.0013110992375097706,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_050_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -5.790908772946886e-05,
+          "confidence_upper": 0.00038918049677323364,
+          "estimate": 0.00016727264528541944,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_050_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.003418880421435849,
+          "confidence_upper": 0.0009161468785131308,
+          "estimate": -0.0011438265922243509,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0010412161163638194,
+          "confidence_upper": 0.002921963600700613,
+          "estimate": 0.0008956315216290357,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -7.817940581423954e-05,
+          "confidence_upper": 0.00029831082148423327,
+          "estimate": 0.00011280990407719642,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.002573675380297751,
+          "confidence_upper": 0.0009841685867003557,
+          "estimate": -0.0007828216175518394,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_100_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0010407829202780845,
+          "confidence_upper": 0.0023496006417408045,
+          "estimate": 0.0006990551343784431,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_100_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00011924304998315001,
+          "confidence_upper": 0.00024386797139107043,
+          "estimate": 6.006769764267683e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "fraction_100_observed",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0020684737297373343,
+          "confidence_upper": 0.0007799481301267541,
+          "estimate": -0.0006389874367357662,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q50",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.001170923053775989,
+          "confidence_upper": 0.0029177954895186456,
+          "estimate": 0.0008548778015490855,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q50",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -9.448016140867015e-05,
+          "confidence_upper": 0.00019284300224018587,
+          "estimate": 5.1898096298710376e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q50",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0026869457933709788,
+          "confidence_upper": 0.0011047058793741552,
+          "estimate": -0.0008029797052503751,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "truncate_at_training_q75",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0014259819930211167,
+          "confidence_upper": 0.0028397085077693242,
+          "estimate": 0.0008309018125936717,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 9,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2",
+        "condition": "truncate_at_training_q75",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0001604700639073423,
+          "confidence_upper": 0.00028219941823065753,
+          "estimate": 7.105196569825607e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2",
+        "condition": "truncate_at_training_q75",
+        "dataset": "whas500",
+        "direction": "IBS(model_a) minus IBS(model_b)",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0027400402784567394,
+          "confidence_upper": 0.0012886663638468005,
+          "estimate": -0.0008024480853733243,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 9,
+        "status": "complete"
+      }
+    ],
+    "contrasts_with_all_planned_pairs": 95,
+    "contrasts_with_estimates": 121,
+    "difference_in_differences": [
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_025_observed",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.009887051446517773,
+          "confidence_upper": 0.003347523145852115,
+          "estimate": -0.002549013360764253,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 3,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_025_observed",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00045646173230280305,
+          "confidence_upper": 8.672749230189827e-05,
+          "estimate": -0.00017346937459807222,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_025_observed",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.003492379432587489,
+          "confidence_upper": 0.009500398559024388,
+          "estimate": 0.002376348006878255,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 3,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_050_observed",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.003542858244153538,
+          "confidence_upper": 0.00029257882588687884,
+          "estimate": -0.001608701812556555,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 2,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_050_observed",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.2500058655356422e-05,
+          "confidence_upper": 0.00020094208982169627,
+          "estimate": 8.169237713772759e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_050_observed",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00028202211061088627,
+          "confidence_upper": 0.0035562026478856788,
+          "estimate": 0.0017261520503267709,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 2,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_075_observed",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "below_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0018950907650595009,
+          "confidence_upper": -8.837438130605423e-05,
+          "estimate": -0.0009869445604801736,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 1,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_075_observed",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -4.6078225253758796e-05,
+          "confidence_upper": 0.00012584253309246964,
+          "estimate": 2.8334212745144703e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_075_observed",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "above_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": 0.0001400051856967669,
+          "confidence_upper": 0.0017522515185959433,
+          "estimate": 0.0009679098502542088,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 1,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q50",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0017016544007234435,
+          "confidence_upper": 0.0012715636403922473,
+          "estimate": -0.0002478289528121937,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 2,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q50",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00010270431486953595,
+          "confidence_upper": 4.8120938727236535e-05,
+          "estimate": -2.1660021209745222e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q50",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0012511029209403052,
+          "confidence_upper": 0.0015856541434884272,
+          "estimate": 0.00027367847695472844,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 2,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q75",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0007962044193132175,
+          "confidence_upper": 0.0007347328601885124,
+          "estimate": 3.0696729226993276e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 2,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q75",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.11574654068772e-05,
+          "confidence_upper": 0.00010784962622690767,
+          "estimate": 4.482161221978188e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q75",
+        "dataset": "gbsg2",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0006814975273093417,
+          "confidence_upper": 0.0008222599449254967,
+          "estimate": 5.155214747718366e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 2,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_025_observed",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0011494471833091739,
+          "confidence_upper": 0.0015081721579076818,
+          "estimate": 0.00021123695513672428,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_025_observed",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00010711046369489007,
+          "confidence_upper": 0.00015753447189463134,
+          "estimate": 3.069447946039038e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_025_observed",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0014306362785760922,
+          "confidence_upper": 0.001124313177641214,
+          "estimate": -0.00018054247567633386,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_050_observed",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005646347291535424,
+          "confidence_upper": 0.0009301852044445938,
+          "estimate": 0.00020741172376463106,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_050_observed",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.785337762481947e-05,
+          "confidence_upper": 0.00012266141366087304,
+          "estimate": 4.568911124717833e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_050_observed",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0008151623929848455,
+          "confidence_upper": 0.0005647629389143971,
+          "estimate": -0.0001617226125174527,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_075_observed",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00037101729074977816,
+          "confidence_upper": 0.0004957009148890311,
+          "estimate": 2.2211604954988177e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_075_observed",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -2.2899952621484614e-05,
+          "confidence_upper": 6.794834171446878e-05,
+          "estimate": 2.484372552716735e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_075_observed",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0004084554980754243,
+          "confidence_upper": 0.00037292822108354483,
+          "estimate": 2.6321205721791486e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q50",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "above_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": 1.9042837199408228e-06,
+          "confidence_upper": 0.0007341037923610061,
+          "estimate": 0.0003490379478085184,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q50",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -7.979983221442335e-05,
+          "confidence_upper": 4.3523191317349024e-05,
+          "estimate": -1.2761464624255347e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q50",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "below_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0007145052310059968,
+          "confidence_upper": -2.1373263086574536e-05,
+          "estimate": -0.0003617994124327738,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q75",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -1.858924126587427e-05,
+          "confidence_upper": 0.0003366377555363117,
+          "estimate": 0.00016200698167533907,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q75",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -4.014071721258404e-05,
+          "confidence_upper": 4.388193479305141e-05,
+          "estimate": 3.419530116234988e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q75",
+        "dataset": "metabric",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0003278738530017927,
+          "confidence_upper": 1.030339257615494e-05,
+          "estimate": -0.00015858745155910415,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_025_observed",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "above_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": 0.0025115389483346203,
+          "confidence_upper": 0.010561230370748145,
+          "estimate": 0.00632281097689809,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_025_observed",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.000342519202734595,
+          "confidence_upper": 0.0005113861032646529,
+          "estimate": 8.652122756449235e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_025_observed",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "below_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.010054839222956007,
+          "confidence_upper": -0.002534772708617183,
+          "estimate": -0.006236289749333597,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_050_observed",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0009445630446262376,
+          "confidence_upper": 0.0023491940333476855,
+          "estimate": 0.0006120441031313274,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_050_observed",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -7.031178506607755e-05,
+          "confidence_upper": 0.0002899149409291817,
+          "estimate": 0.00010720494764274262,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_050_observed",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.002058820672894258,
+          "confidence_upper": 0.0010825446081631225,
+          "estimate": -0.0005048391554885847,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_075_observed",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0010730085784412954,
+          "confidence_upper": 0.0015506841825439477,
+          "estimate": 0.00019657638725059258,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_075_observed",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -5.43269159768022e-05,
+          "confidence_upper": 0.00015322762042676747,
+          "estimate": 5.274220643451959e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "fraction_075_observed",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0013117630756734788,
+          "confidence_upper": 0.0010601193752464626,
+          "estimate": -0.00014383418081607313,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q50",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0007395398850026276,
+          "confidence_upper": 0.0011504595800754065,
+          "estimate": 0.00015582266717064229,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q50",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.00017151549876916276,
+          "confidence_upper": 0.00013833773717854787,
+          "estimate": -8.169601343966453e-06,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q50",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0011377239460650947,
+          "confidence_upper": 0.0006503408008128187,
+          "estimate": -0.00016399226851460873,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q75",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.0005646671450611786,
+          "confidence_upper": 0.0010323131838211677,
+          "estimate": 0.00028487981419544737,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_horseshoe",
+        "paired_folds": 9,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": true,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q75",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -9.700140287767923e-05,
+          "confidence_upper": 0.00011938314522069555,
+          "estimate": 1.0984268055579265e-05,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_normal",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 10,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      },
+      {
+        "all_planned_pairs_available": false,
+        "component": "rq2_difference_in_differences",
+        "condition": "truncate_at_training_q75",
+        "dataset": "whas500",
+        "direction": "[IBS(model_a)-IBS(model_b)] condition minus full observed",
+        "expected_paired_folds": 10,
+        "ibs_effect": {
+          "available": true,
+          "confidence_interval_direction": "includes_zero",
+          "confidence_level": 0.95,
+          "confidence_lower": -0.000974821401712697,
+          "confidence_upper": 0.0005777479386664467,
+          "estimate": -0.0002922851699718178,
+          "estimate_key": "observed",
+          "p_value_recorded": false,
+          "raw_p_value": null
+        },
+        "model_a": "bayesian_horseshoe",
+        "model_b": "bayesian_spike_slab",
+        "paired_folds": 9,
+        "reference_condition": "fraction_100_observed",
+        "status": "complete"
+      }
+    ],
+    "p_value_note": "Robustness bootstrap IBS effects store intervals, not p-values; none are inferred.",
+    "ph_covariate_stability_summary": [
+      {
+        "covariate": "age",
+        "dataset": "gbsg2",
+        "median_raw_p": 0.12685395569672273,
+        "minimum_raw_p": 0.030679500161780438,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "estrec",
+        "dataset": "gbsg2",
+        "median_raw_p": 0.31918985848932463,
+        "minimum_raw_p": 0.09242232347858127,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "horTh=yes",
+        "dataset": "gbsg2",
+        "median_raw_p": 0.6572073044472069,
+        "minimum_raw_p": 0.20490888086504933,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "menostat=Pre",
+        "dataset": "gbsg2",
+        "median_raw_p": 0.7689935905960308,
+        "minimum_raw_p": 0.4517953437026966,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "pnodes",
+        "dataset": "gbsg2",
+        "median_raw_p": 0.4373045805516622,
+        "minimum_raw_p": 0.16912817229801344,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "progrec",
+        "dataset": "gbsg2",
+        "median_raw_p": 0.33465998047326023,
+        "minimum_raw_p": 0.03049947152495419,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "tgrade",
+        "dataset": "gbsg2",
+        "median_raw_p": 0.03253946568372633,
+        "minimum_raw_p": 0.0076325665410055836,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "tsize",
+        "dataset": "gbsg2",
+        "median_raw_p": 0.6082477030375257,
+        "minimum_raw_p": 0.21998821601260826,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "age_at_diagnosis",
+        "dataset": "metabric",
+        "median_raw_p": 3.5404081207436326e-05,
+        "minimum_raw_p": 1.8320930187319845e-07,
+        "n_holm_rejections": 25,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 1.0
+      },
+      {
+        "covariate": "cellularity=Low",
+        "dataset": "metabric",
+        "median_raw_p": 0.8345356502348886,
+        "minimum_raw_p": 0.3844672300219042,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "cellularity=Moderate",
+        "dataset": "metabric",
+        "median_raw_p": 0.7199124050508223,
+        "minimum_raw_p": 0.5206868415124173,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "cellularity=__MISSING__",
+        "dataset": "metabric",
+        "median_raw_p": 0.15517433421189303,
+        "minimum_raw_p": 0.03024049213812269,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "er_status=Positive",
+        "dataset": "metabric",
+        "median_raw_p": 0.0031155458143036167,
+        "minimum_raw_p": 0.00031824145471652147,
+        "n_holm_rejections": 13,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.52
+      },
+      {
+        "covariate": "her2_status=Positive",
+        "dataset": "metabric",
+        "median_raw_p": 0.7318318857408617,
+        "minimum_raw_p": 0.17571117446358148,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "her2_status=__MISSING__",
+        "dataset": "metabric",
+        "median_raw_p": 0.9975290932045364,
+        "minimum_raw_p": 0.9971621466799836,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 20,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "inferred_menopausal_state=Pre",
+        "dataset": "metabric",
+        "median_raw_p": 0.6496254570816176,
+        "minimum_raw_p": 0.31789076784624526,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "inferred_menopausal_state=__MISSING__",
+        "dataset": "metabric",
+        "median_raw_p": 0.9975290932045408,
+        "minimum_raw_p": 0.9971621466799934,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 20,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "nottingham_prognostic_index",
+        "dataset": "metabric",
+        "median_raw_p": 4.692057844347259e-07,
+        "minimum_raw_p": 1.335531936310682e-09,
+        "n_holm_rejections": 25,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 1.0
+      },
+      {
+        "covariate": "pam50_+_claudin-low_subtype=Her2",
+        "dataset": "metabric",
+        "median_raw_p": 0.048554173909138076,
+        "minimum_raw_p": 0.005330865507449623,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "pam50_+_claudin-low_subtype=LumA",
+        "dataset": "metabric",
+        "median_raw_p": 0.005776995218973585,
+        "minimum_raw_p": 0.0002657228062289485,
+        "n_holm_rejections": 11,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.44
+      },
+      {
+        "covariate": "pam50_+_claudin-low_subtype=LumB",
+        "dataset": "metabric",
+        "median_raw_p": 0.07013179033400246,
+        "minimum_raw_p": 0.01433402233483933,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "pam50_+_claudin-low_subtype=NC",
+        "dataset": "metabric",
+        "median_raw_p": 0.4884497872279875,
+        "minimum_raw_p": 0.08412692950757757,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "pam50_+_claudin-low_subtype=Normal",
+        "dataset": "metabric",
+        "median_raw_p": 0.15789023990250045,
+        "minimum_raw_p": 0.05669368631898685,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "pam50_+_claudin-low_subtype=__MISSING__",
+        "dataset": "metabric",
+        "median_raw_p": 0.99752909320455,
+        "minimum_raw_p": 0.9971621466799844,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 20,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "pam50_+_claudin-low_subtype=claudin-low",
+        "dataset": "metabric",
+        "median_raw_p": 0.0006970299290364158,
+        "minimum_raw_p": 1.236102276576102e-05,
+        "n_holm_rejections": 21,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.84
+      },
+      {
+        "covariate": "pr_status=Positive",
+        "dataset": "metabric",
+        "median_raw_p": 0.07092334526667118,
+        "minimum_raw_p": 0.010625354490572827,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "pr_status=__MISSING__",
+        "dataset": "metabric",
+        "median_raw_p": 0.9975290932045471,
+        "minimum_raw_p": 0.9971621466800288,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 20,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "age",
+        "dataset": "whas500",
+        "median_raw_p": 0.5922219425912185,
+        "minimum_raw_p": 0.07785949820769471,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "bmi",
+        "dataset": "whas500",
+        "median_raw_p": 0.1885499855858012,
+        "minimum_raw_p": 0.02445621001625802,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "cvd=1",
+        "dataset": "whas500",
+        "median_raw_p": 0.28109887665621036,
+        "minimum_raw_p": 0.15155090733437693,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "diasbp",
+        "dataset": "whas500",
+        "median_raw_p": 0.7395151771950965,
+        "minimum_raw_p": 0.13199113800770318,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "gender=1",
+        "dataset": "whas500",
+        "median_raw_p": 0.6866911628822213,
+        "minimum_raw_p": 0.45597222003792315,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "hr",
+        "dataset": "whas500",
+        "median_raw_p": 0.2973595659041057,
+        "minimum_raw_p": 0.035646787077187284,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "miord=1",
+        "dataset": "whas500",
+        "median_raw_p": 0.47923023777219687,
+        "minimum_raw_p": 0.07647315594264092,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "mitype=1",
+        "dataset": "whas500",
+        "median_raw_p": 0.1114223253908243,
+        "minimum_raw_p": 0.009791935962110573,
+        "n_holm_rejections": 0,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.0
+      },
+      {
+        "covariate": "sysbp",
+        "dataset": "whas500",
+        "median_raw_p": 0.035538389222568564,
+        "minimum_raw_p": 0.0020189162082795116,
+        "n_holm_rejections": 2,
+        "n_outer_fits": 25,
+        "proportion_holm_rejections": 0.08
+      }
+    ],
+    "prespecified_fit_plan": {
+      "calibration_bootstrap_replicates_per_cell": 0,
+      "design_feature_fold_numbers_per_repeat": [
+        1
+      ],
+      "grouped": [
+        {
+          "bayesian_fits": 85,
+          "checkpoint_cells": 85,
+          "dataset": "gbsg2",
+          "model_key": "bayesian_normal"
+        },
+        {
+          "bayesian_fits": 85,
+          "checkpoint_cells": 85,
+          "dataset": "gbsg2",
+          "model_key": "bayesian_horseshoe"
+        },
+        {
+          "bayesian_fits": 85,
+          "checkpoint_cells": 85,
+          "dataset": "gbsg2",
+          "model_key": "bayesian_spike_slab"
+        },
+        {
+          "bayesian_fits": 120,
+          "checkpoint_cells": 100,
+          "dataset": "metabric",
+          "model_key": "bayesian_normal"
+        },
+        {
+          "bayesian_fits": 120,
+          "checkpoint_cells": 100,
+          "dataset": "metabric",
+          "model_key": "bayesian_horseshoe"
+        },
+        {
+          "bayesian_fits": 120,
+          "checkpoint_cells": 100,
+          "dataset": "metabric",
+          "model_key": "bayesian_spike_slab"
+        },
+        {
+          "bayesian_fits": 90,
+          "checkpoint_cells": 90,
+          "dataset": "whas500",
+          "model_key": "bayesian_normal"
+        },
+        {
+          "bayesian_fits": 90,
+          "checkpoint_cells": 90,
+          "dataset": "whas500",
+          "model_key": "bayesian_horseshoe"
+        },
+        {
+          "bayesian_fits": 90,
+          "checkpoint_cells": 90,
+          "dataset": "whas500",
+          "model_key": "bayesian_spike_slab"
+        }
+      ],
+      "rq2_fold_numbers_per_repeat": [
+        1,
+        2
+      ],
+      "schema_version": "1.0.0",
+      "total_bayesian_fits": 885,
+      "total_checkpoint_cells": 825
+    },
+    "status_counts": {
+      "complete": 770,
+      "failed_diagnostics": 55
+    },
+    "stored_cells": 825
+  },
+  "scope": "Numerical evidence summary; final rendered-artifact visual QA is a separate release requirement.",
+  "source_file_sha256": {
+    "/Users/macuser/bayes-cox-runs/continuation-20260927/posthoc_sampler/horseshoe_ta0999_posthoc_62f4f08bf76d/completion.json": "0684ca1e61ef8492f27c79f486ea8e57cc75e139808f9a15535f426e82d4833a",
+    "/Users/macuser/bayes-cox-runs/continuation-20260927/posthoc_sampler/horseshoe_ta0999_posthoc_62f4f08bf76d/manifest.json": "76acf071cf41f5456538799625979775ad00a5ab699b55b88987fee7ed6c5d00",
+    "/Users/macuser/bayes-cox-runs/continuation-20260927/programme_manifest.json": "a26bcb3c6e8da343b8576085c0d8a05f60c7b54d59d959fe159acd15310c2582",
+    "/Users/macuser/bayes-cox-runs/continuation-20260927/reproduction/verification.json": "5ee67afad696efe1848f3b697c45ed995127ec5cefbefac21291b4753af1ec28",
+    "/Users/macuser/bayes-cox-runs/frozen/reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/completion.json": "44d5d6e2c3cf4d0350c3bc8cb27291436c9934b219c4c895cb139525e6fa25f6",
+    "/Users/macuser/bayes-cox-runs/frozen/reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/manifest.json": "2a1817365675aa179174b5edf5b3da67bbcb2be1b2eb4143347e4b295052ce02",
+    "/Users/macuser/bayes-cox-runs/frozen/reports/explainability/confirmatory_v1_confirmatory_cdcdcee84651_explainability_v1.json": "120984c7edfac468f471b9f500470623689b2647e4bde56d271cc9623346ecd5",
+    "/Users/macuser/bayes-cox-runs/frozen/reports/robustness/confirmatory_v1_robustness_robustness_702d93af33bf/completion.json": "8f136a6b2f9cf0a18308db71d63a69b1b145b0c767548cc7465d4af73e781152",
+    "/Users/macuser/bayes-cox-runs/frozen/reports/robustness/confirmatory_v1_robustness_robustness_702d93af33bf/manifest.json": "0fc556b803da4f37daa9a63dbddc5ce5ffd350aa2b2831b0a6546b634c36139f"
+  },
+  "status": "completed_numerical_evidence_verified_descriptive_summary",
+  "summarizer_sha256": "aa7a420e380d5d69b1f35ec6423285e697f1b0ca347da66beadd07bbde7db950",
+  "summary_content_sha256": "9477ad52020ef7951e7cbe24ac6d6b2096a4369f9d1843d5cdf33cf2a42ddc5c"
+}

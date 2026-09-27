@@ -4,7 +4,41 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-09-28
 
-## Current checkpoint — numerical cells complete; final close-out pending
+## Current state — verified programme released; Ravi can restore it
+
+The completed programme is remotely available and independently restored.
+Follow [Ravi's handoff](../docs/ravi_handoff.md), rather than historical PID
+or reboot instructions below. No numerical process needs restart.
+
+- Exact reproduction: 450/450 matches from sealed commit
+  `11f86ced8735b32767debb58f3cbbefbb5a7b8e6`; all 90 code hashes match.
+- Frozen robustness: 825 verified cells, 770 diagnostic passes and 55
+  failures. Direct effects have 121/129 estimates and 95/129 fully paired
+  rows; difference-in-differences has 45/45 estimates, 33 fully paired.
+- Separate post-hoc sampler sensitivity: 75/75 diagnostic passes, nine
+  estimable contrasts, all Holm-adjusted p-values 1.0 and all corrected
+  intervals including zero.
+- Both rendered lineages and all 428 PDFs/pages passed. The passed V3 review
+  supports 426 exact PDF hashes; two new PDFs were actually inspected.
+- The unchanged original source is in release `confirmatory-v1-44b6085`.
+  New results and sealed code: [results-programme-20260927-11f86ce](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-20260927-11f86ce),
+  exactly ten downloaded/verified assets, restored through a fresh clone.
+- Native QA evidence, probes, complete logs and external helpers:
+  [results-programme-audit-20260928](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-audit-20260928),
+  three downloaded assets and all 899 archive members verified.
+
+Compact evidence is in `coordination/recovery/2026-09-28-programme-closeout.json`
+and `2026-09-28-numerical-evidence-summary.json`; the factual review is
+`coordination/reviews/2026-09-28-programme-closeout.md`. Restoration was tested
+on this Apple Silicon Mac with the existing verified lock, not on a second
+physical laptop. The receiving Mac must verify its environment.
+
+Original 20 horseshoe failures, incomplete primary inference and the failed
+explanation gate remain findings. T-180 and the new extensions have not
+started. The separate documentation-only pass is tracked in step 12.
+Overleaf edits and paper/DOI work remain excluded.
+
+## Earlier numerical checkpoint — before final close-out
 
 The dated checkpoint is
 `coordination/recovery/2026-09-28-numerical-checkpoint.json`. Independent
@@ -167,20 +201,15 @@ in the 2026-08-16 sequence below:
   of acceptance or of no further reviewer-requested analysis.
 - Do not edit the Overleaf thesis until the owner instructs.
 - Only one agent works on the repository at a time.
-- **Current state: core programme running; planning updates authorised.**
-  - The owner's latest instruction requests plan and coordination updates
-    following the scientific review. ADR-037 and T-180–T-186 record them.
-  - The existing coordinator has completed reproduction and robustness;
-    all 75 ADR-032 sensitivity cells are stored. It is finishing sensitivity
-    inference and final verification, then rendering.
-    Final visual QA, claim review, packaging, restore and private code/evidence
-    release remain in the existing authorised programme.
-  - The four new ADR-035 analyses and ADR-038 catalytic arm are planned,
-    not launched or queued by this coordinator. T-180's actual addendum
-    and freeze remain unfinished.
-    This planning update does not start their experiments.
-  - Do not run `finish_robustness.sh`, restart active workers or launch a
-    duplicate coordinator/sensitivity. The supervisor owns robustness finish.
+- **Current state: core code/results programme complete and remotely verified.**
+  - The latest owner instruction requests everything Ravi needs on GitHub.
+    Evidence, full QA/log audit, restore guide and current plans are released.
+  - The coordinator and numerical stages exited successfully. Do not launch
+    a duplicate coordinator, robustness finisher or sampler run.
+  - New ADR-035 analyses and the ADR-038 catalytic arm remain planned.
+    T-180's actual addendum/freeze must precede their own results.
+  - The documentation-only pass is tracked in step 12; its worktree edits
+    are separate from the sealed numerical code identity.
 
 At 10:01 UTC on 2026-09-27, the read-only monitor reported 603/825 robustness
 cells and 205/450 reproduction cells, no reported reproduction mismatch,
@@ -234,8 +263,8 @@ Completed integration gates and their evidence locations are in
      finished the official unsharded resume and aggregation; workers and
      supervisor have now exited. All 825 cells verify, including 55 recorded
      diagnostic failures. Logs remain in `~/bayes-cox-runs/logs/`.
-   - Computational production is complete; task acceptance and scientific
-     claims still require the coverage/interpretation review in T-140–T-144.
+   - Production and coverage/interpretation review are complete; T-140–T-144
+     record actual partial coverage and negative claim gates.
      Do not relaunch workers or the robustness finisher.
 2. [x] Build a reproduction harness that reruns one cell and compares it
    with the frozen record: `scripts/reproduce_confirmatory_cells.py`. The
@@ -279,27 +308,26 @@ Completed integration gates and their evidence locations are in
    The subsequent full 426-page review found 30 legacy layout defects.
    The complete replacement bundle passed all 426 PDF pages, recorded in
    `coordination/reviews/2026-09-27-full-pdf-review.md`.
-   A final bundle incorporating completed robustness remains required.
-8. [ ] Complete the labelled post-hoc horseshoe sensitivity under ADR-032.
-   Initial investigation and seven target-acceptance probes are complete;
-   `scripts/run_horseshoe_sampler_sensitivity.py` implements the separate
-   75-cell refit and nine-contrast analysis. All 75 refits are saved and pass
-   diagnostics; aggregate inference, completion verification and final
-   rendering were still pending at the numerical checkpoint.
-9. [ ] Finalise documentation and evidence packaging. Engineering status,
-   architecture, decisions, invariants and recorded thesis corrections are
-   updated. Final run identifiers, claims, rendered bundles and visual QA
-   remain to be recorded after production verification.
-10. [ ] Commit and push all verified continuation work. Recovery and completed
-    code checkpoints have been pushed; final production close-out remains open.
+   The final completed-robustness and post-hoc bundles passed all 428 PDFs;
+   see the 2026-09-28 close-out review.
+8. [x] Complete the labelled post-hoc horseshoe sensitivity under ADR-032.
+   All 75 cells and attempts verify and pass diagnostics. All nine contrasts
+   are estimable, all adjusted p-values are 1.0 and all corrected intervals
+   include zero. Separate rendering passed lineage verification and PDF review.
+9. [x] Finalise documentation and evidence packaging. Strict numerical summary,
+   coverage/claim review, actual visual QA and the seven-root seal are complete.
+   Local and fresh remote restorations verified every archive member hash;
+   two new private releases preserve results and full audit support.
+10. [x] Commit and push verified evidence and Ravi's handoff. The final
+    close-out is recorded in the dated review and compact receipt.
 
 11. [ ] Thesis extension experiments under ADR-036–ADR-038; T-180–T-186 and
-    T-189 in `TODO.md`. The four new analyses are not part of the running coordinator.
+    T-189 in `TODO.md`. The new analyses were not part of the completed coordinator.
     Dependencies:
     - freeze the actual new-analysis addendum (T-180) before their own results;
       reference existing ADR-032/ADR-033 evidence with its actual chronology;
-    - T-181 is the same sensitivity as step 8, already queued after robustness
-      and independent of T-180; do not run it twice;
+    - T-181 is the completed sensitivity in step 8, independent of T-180;
+      do not run it twice;
     - after T-180, run fair inner-CV penalised-Cox comparators (T-182) and
       censoring-aware decision curves from stored predictions (T-184);
     - after T-180/T-181, run the precisely specified Piironen–Vehtari clinical
@@ -323,29 +351,14 @@ Completed integration gates and their evidence locations are in
 
 Tick each box when its step is complete, and record where its outputs are.
 
-`scripts/complete_results_programme.py` is the automatic continuation entry
-point. Launch it once from a clean detached checkout of the final integrated
-commit, with external original-evidence paths and a separate output directory.
-It records the sealed code/source identity, runs the full 450-cell reproduction
-with two workers alongside the six frozen robustness workers, and waits for
-supervisor PID 3372 to finish robustness. It then verifies the exact 825-cell
-completion, runs all 75 post-hoc sampler cells with six workers, verifies the
-separate inference and renders both final bundles. Its verified-analysis
-record still requires final visual QA and evidence packaging; it does not
-complete thesis writing. The README records the machine-specific invocation.
-
-The resumed coordinator is PID 3374; `caffeinate` PID 3376 prevents idle sleep
-for its lifetime. The immutable checkout is
-`~/bayes-cox-runs/refactored-programme-20260927/`, and outputs are in
-`~/bayes-cox-runs/continuation-20260927/`. Its manifest pins all 90 current
-source/script files and the exact original explanation hash. Preflight
-verified the frozen run, unchanged study inputs and locked runtime before
-starting the reproduction stage. The log is
-`~/bayes-cox-runs/logs/resume_20260927T075146Z/programme.log` and its PID file
-is alongside it. Do not edit that checkout or launch a second coordinator.
-Full reproduction and robustness aggregation have verified completion.
-Sampler inference, final render verification, visual QA and packaging remain
-pending until their actual completed evidence verifies.
+`scripts/complete_results_programme.py` completed from immutable checkout
+`~/bayes-cox-runs/refactored-programme-20260927/`, with output in
+`~/bayes-cox-runs/continuation-20260927/`. All 90 code hashes and original
+explanation bytes remain sealed. Coordinator PID 3374, supervisor 3372,
+workers and caffeinate exited. Its verified-analysis record was followed by
+actual visual QA, claim review and private release verification. Historical
+logs and host paths are in the audit release. The student restore guide
+requires neither these host paths nor another run of the completed fits.
 
 Administrative deadline: the live programme in `TODO.md` runs from 2026-08-17
 to 2026-11-30. This 15-week schedule supersedes the earlier 26-week dates for

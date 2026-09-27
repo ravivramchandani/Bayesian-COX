@@ -11,59 +11,36 @@ frozen confirmatory execution is complete: all 450 planned cells are stored,
 430 passed the diagnostic gate and 20 horseshoe cells retain prespecified
 `failed_diagnostics` records. Five of nine primary contrasts are estimable,
 so the Holm family is incomplete and no complete-family superiority claim is
-available. Robustness production is running in the frozen worktree.
-Confirmatory explanation production completed but failed its convergence
+available. Explanation production completed but failed its convergence
 gate, so it permits no explanation-stability claim.
 
-The modular refactors are integrated and passed their required output gates:
-six model refits, the original explanation SHA-256, all three confirmatory
-aggregate files, the six-cell quick selection and four additional confirmatory
-cells, three robustness refits, and the exhaustive renderer comparison.
-ADR-030 checkpoint verification is integrated throughout the active pipeline;
-ADR-034 retired the pilot execution lane while preserving its historical
-data, results and source history. The original WIP checkpoints remain on
-three `wip/*-20260927` branches. The full 450-cell reproduction is running
-from sealed commit `11f86ce`; the separate 75-cell sampler sensitivity is
-queued after robustness. Final rendering, visual QA and
-evidence packaging remain. Thesis edits are outside this code programme.
+The refactors and complete code/results programme are verified. All 450
+reproduction cells match outside recorded timing/hash fields. Robustness
+retains 770 diagnostic passes and 55 failures across all 825 cells. The
+separate post-hoc sampler sensitivity has 75 diagnostic passes; all nine
+contrasts have Holm-adjusted p-values of 1.0 and corrected intervals including
+zero. Both final rendered lineages and all 428 PDFs passed verification and
+review. Original failed cells and incomplete primary inference are unchanged.
 
-## Start here — continue from another machine
+All completed results, exact code, tables, figures and audit records are in
+private GitHub Releases and have been downloaded and restored independently.
+New extension experiments remain planned. Overleaf edits and paper submission
+are outside this completed code/results handoff.
 
-Restore the completed confirmatory evidence before downstream work. Its exact
-552 MB evidence directory is preserved in the private GitHub Release
-[`confirmatory-v1-44b6085`](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085).
-The repository contains a fail-closed restoration helper that downloads both
-release assets, verifies SHA-256, rejects unexpected archive paths, validates
-all run/cell/aggregate hashes and checks all 80 frozen input blobs against
-the release checkpoint. Live protocol, raw data, manifest and lock files must
-also remain unchanged.
+## Start here — Ravi's handoff
 
-From the root of a fresh clone:
+Follow [Ravi's restore and continuation guide](docs/ravi_handoff.md) for a
+fresh Apple Silicon Mac: exact environment, private-repository access,
+checksummed downloads, restoration and next tasks.
 
-```bash
-# Confirm that GitHub CLI can access the private repository.
-gh auth status
+- [Original 450-cell evidence](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085)
+- [Verified code/results programme](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-20260927-11f86ce)
+- [Full audit evidence and logs](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-audit-20260928)
 
-# Build the exact macOS arm64 environment.
-conda-lock install -n bayes-cox-clean conda-lock.yml
-
-# Download, verify and restore the released evidence.
-conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
-```
-
-A successful restoration ends with:
-
-```text
-cells=450 complete=430 failed_diagnostics=20
-completion_content_sha256=03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1
-frozen_inputs=80 checkpoint verified; live study inputs unchanged
-```
-
-The restored directory is
-`reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/`. The helper
-never overwrites an existing directory; when the run is already present it
-verifies it in place. After restoration, read `coordination/HANDOFF.md` and
-`coordination/TODO.md` for the evidence boundary and next tasks.
+A Git clone contains current code, data manifests, plans and guides. Large
+results are release assets in the same private repository. Restoration
+verifies hashes and preserves immutable evidence; it does not fit models.
+No files from the original laptop are required.
 
 ## Models
 
@@ -139,9 +116,9 @@ conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py
 
 The restore helper verifies historical code against checkpoint `44b6085`
 under ADR-030, so refactoring does not invalidate preserved evidence. It still
-rejects changes to the live study inputs. Frozen robustness production remains
-in its original unchanged worktree; refactored-code reproduction writes to
-separate output directories.
+rejects changes to the live study inputs. Frozen robustness production
+completed in its unchanged worktree; refactored-code reproduction completed
+in a separate output directory.
 
 Completed confirmatory resume is now read-only verification and accepts the
 refactored code when historical evidence and live study inputs are intact.
@@ -154,30 +131,12 @@ in `coordination/HANDOFF.md` and `coordination/TODO.md`; Overleaf edits are excl
 
 ## Refactor verification and separate sampler sensitivity
 
-`scripts/complete_results_programme.py` coordinates the remaining work from
-a clean detached checkout of the final committed code. It seals the code and
-source hashes, verifies reusable checkpoints and writes outside the original
-evidence directories. Two workers regenerate all 450 confirmatory cells while
-the six original robustness workers continue. Supervisor PID 40646 performs
-the frozen run's final unsharded resume and aggregation automatically. Once
-robustness is complete and verified, the coordinator starts the separate
-75-cell sampler sensitivity with six workers, then verifies and renders both
-result bundles. Final visual QA and packaging follow those generated outputs.
-One operating-system lock protects the programme output, including surviving
-child stages after a coordinator crash. Resume the same sealed checkout and
-output directory only after the previous stage processes have finished.
-
-On the original machine, run from that sealed detached checkout:
-
-```bash
-python scripts/complete_results_programme.py \
-  --source-dir ~/bayes-cox-runs/frozen/reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651 \
-  --robustness-dir ~/bayes-cox-runs/frozen/reports/robustness/confirmatory_v1_robustness_robustness_702d93af33bf \
-  --explanation ~/bayes-cox-runs/frozen/reports/explainability/confirmatory_v1_confirmatory_cdcdcee84651_explainability_v1.json \
-  --output-dir ~/bayes-cox-runs/results-programme \
-  --reproduction-workers 2 --sampler-workers 6 \
-  --robustness-supervisor-pid 40646
-```
+`scripts/complete_results_programme.py` completed the sealed programme from
+commit `11f86ced8735b32767debb58f3cbbefbb5a7b8e6`: 450 reproduction cells,
+frozen 825-cell robustness verification, the separate 75-cell sampler
+sensitivity and both rendered bundles. All numerical stages and the
+coordinator exited successfully. No restart is needed. Restore the released
+evidence through Ravi's guide instead of using historical host PIDs.
 
 The full regeneration is verification-only. The sampler sensitivity refits
 all 75 horseshoe cells under ADR-032, changing only target acceptance to
@@ -193,7 +152,7 @@ of the observed five p-values, without supplying the four missing tests.
 
 ## Private evidence packaging and restoration
 
-After the generated bundles pass final visual QA, a `release_ready` seal
+The generated bundles passed final visual QA. A `release_ready` seal
 records the verified analysis report, actual QA report, sealed code commit
 and exact inventories of the seven evidence directories. Analysis verification
 alone cannot satisfy this gate.
@@ -238,11 +197,14 @@ overwrites existing files.
 - `inference.json` is explicitly incomplete. Five of nine primary contrasts
   have all 25 paired folds; the four GBSG2/METABRIC horseshoe contrasts have
   no confirmatory inference. The Holm family is therefore incomplete.
-- Robustness production is running under the frozen code; final aggregation
-  and verification remain outstanding. Confirmatory explanation production
-  stored 1,845 comparisons, but 102 of 1,640 evaluable convergence comparisons
-  failed, so no RQ3 claim is permitted. Primary claim review and thesis writing
-  remain unfinished; Overleaf edits are excluded from the current programme.
+- Robustness production, aggregation and review completed: 825 cells, 770
+  diagnostic passes and 55 failures. Direct effects have 121/129 estimates
+  and 95/129 fully paired rows; difference-in-differences has 45 estimates
+  and 33 fully paired rows. Partial and unavailable estimates stay explicit.
+  Confirmatory explanation production stored 1,845 comparisons, but 102 of 1,640 evaluable convergence comparisons
+  failed, so no RQ3 claim is permitted. Code/results claim review is complete;
+  thesis wording and supervisor sign-off are later tasks. Overleaf edits
+  remain excluded from the current programme.
   No complete-family superiority or equivalence claim is accepted. ADR-033
   permits a separately labelled post-hoc bound on the incomplete Holm family.
 
