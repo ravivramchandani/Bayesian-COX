@@ -97,7 +97,11 @@ missing primary findings remain visible.
 
 Package code, inputs/source metadata, all attempted cells/traces, aggregates,
 92 reproduction receipts/traces, plots/tables and actual QA in a new private
-GitHub release. The standard-library packer in
+GitHub release. `scripts/extension_release/stage_extensions.py` checks the
+complete cell, receipt, figure, table, source-license and visual-QA inventories
+before assembling the transfer tree. It includes both exact Git code archives,
+the measured cBioPortal source and its license, matched Parquet, all run and
+refit traces, logs, rendered outputs and QA record. The standard-library packer in
 `scripts/extension_release/` creates bounded tar.gz shards and an exact
 member/hash inventory from a stable, symlink-free staging tree; its verifier
 requires the independently recorded canonical inventory digest. Include

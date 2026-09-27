@@ -872,3 +872,8 @@ The release staging tool is now copied into the repository under
 passes round-trip, tamper, unsafe-path, duplicate, gzip-trailer and source-
 change cases; this prepares transfer integrity but does not close the future
 actual-result packaging, upload, download or restoration gates.
+The project-specific staging helper adds fail-closed checks for all 1,625
+production cells, 92 selected reproduction receipts, 32 PDF/PNG pairs, six
+tables, the matched-data/source-license hashes and an actual passed visual-QA
+receipt before it assembles the private transfer tree. It has not yet been
+run on a completed programme.
