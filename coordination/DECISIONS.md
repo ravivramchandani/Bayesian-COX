@@ -647,3 +647,41 @@ Format:
   stays accessible but cannot accidentally be regenerated as current evidence.
   INV-002, INV-003, INV-006 and INV-007 are restated around active fold-local
   tests and hashed result lineage; their integrity requirements are retained.
+
+## ADR-035 — Post-hoc extension for a Q1 journal paper
+
+- Status: ACCEPTED
+- Date: 2026-09-27
+- Context: The owner's target is a Q1 journal paper. The frozen analysis finds
+  no prior effect wherever a contrast is estimable, which is the expected
+  result with 8–19 clinical predictors. A Q1 reviewer will ask three things:
+  - whether Bayesian shrinkage beats frequentist penalised Cox;
+  - whether the result changes in the high-dimensional setting that
+    shrinkage priors are designed for;
+  - what clinical net benefit the predictions carry.
+
+  The hard scope control in `TODO.md` forbids new model families, datasets or
+  analyses after the freeze, so this record is needed before any addition.
+- Decision:
+  - Add four clearly labelled post-hoc analyses on the frozen outer folds:
+    1. ridge, lasso and elastic-net Cox comparators with inner-CV penalties;
+    2. a Piironen–Vehtari regularised horseshoe variant (half-Cauchy local
+       scales, τ0 from the expected number of relevant predictors) as a
+       prior-specification sensitivity;
+    3. decision curve analysis at the three training-defined horizons, from
+       stored out-of-fold predictions without refitting;
+    4. a METABRIC clinical-plus-gene-expression setting from the pinned
+       cBioPortal study.
+  - Before any extension result is computed, specify every setting,
+    hypothesis, metric and inference rule in `docs/protocol_addendum_paper.md`
+    and freeze its hash.
+  - This supersedes the first hard scope control for these four named
+    analyses only. Rotterdam transport and the simulation study remain
+    dropped under ADR-025.
+- Consequences:
+  - The confirmatory record stays the primary evidence and is never
+    overwritten.
+  - The extensions are reported as prespecified post-hoc analyses, frozen
+    before their own results, and their outputs live in separate run
+    directories.
+  - Only a new ADR can add further analyses.

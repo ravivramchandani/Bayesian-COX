@@ -236,6 +236,19 @@ Completed integration gates and their evidence locations are in
 10. [ ] Commit and push all verified continuation work. Recovery and completed
     code checkpoints have been pushed; final production close-out remains open.
 
+11. [ ] Q1 paper extension under ADR-035; tasks T-180–T-188 in `TODO.md`.
+    Order:
+    - freeze the protocol addendum (T-180) before any extension result;
+    - once frozen robustness finishes, run the horseshoe sensitivity (T-181);
+    - run the penalised-Cox comparators (T-182) and decision curve analysis
+      (T-184);
+    - run the Piironen–Vehtari horseshoe variant (T-183);
+    - build and run the METABRIC genomic setting (T-185);
+    - render the extension bundle (T-186), then draft the paper (T-187).
+
+    Only one agent works on the repository at a time. The owner provides the
+    Zenodo link and submission steps (T-188).
+
 Tick each box when its step is complete, and record where its outputs are.
 
 `scripts/complete_results_programme.py` is the automatic continuation entry
