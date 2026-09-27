@@ -20,7 +20,7 @@ pins every production input; its status is incomplete until all 1,625 cells
 exist and downstream gates pass.
 
 The verifier-only correction began at `ce8d6f5`; the separately pinned
-analysis/renderer checkout is now `f0fd3ef`. Finalization
+analysis/renderer checkout is now `8551d32`. Finalization
 uses that analysis checkout with `--production-code` pointing at the original
 `119476f` checkout, and confirms all production hashes. Selected 92 numerical
 refits must use the original production checkout. See
@@ -31,11 +31,15 @@ private evidence release and fresh restoration check.
 At 2026-09-27 22:55 UTC (2026-09-28 11:55 Auckland), 226 of 1,625 production
 cells and 22 selected candidate refits had been written; all observed source
 cells were complete. Six production PIDs 62025–62030 and two sealed-code
-pre-stage refit PIDs 64406/64435 were active. A detached coordinator PID
-68914, source `~/bayes-cox-runs/extensions-20260928/coordinate_after_fits.py`,
-logs to `~/bayes-cox-runs/extensions-20260928/worker_logs/coordinator.log`.
+pre-stage refit PIDs 64406/64435 were active. At 23:22 UTC the monitoring
+coordinator alone was replaced to use the strengthened verifier; no fit or
+refit process was interrupted. Current coordinator PID 71385 runs
+`~/bayes-cox-runs/extensions-20260928/coordinate_after_fits_v2.py` and logs to
+`~/bayes-cox-runs/extensions-20260928/worker_logs/coordinator_v2.log`.
+The earlier coordinator source/log are retained; current counts at replacement
+were 353 production cells and 35 selected refits.
 After all workers exit it requires the complete grid and 92 candidate
-refits, runs deep finalization from clean analysis commit `f0fd3ef`, executes
+refits, runs deep finalization from clean analysis commit `8551d32`, executes
 the official 92-cell exact comparison from production commit `119476f`,
 renders 32 figures/six tables, and prepares full-size PDF contact sheets.
 It stops on any failed gate and writes `coordinator_failure.json`; successful
@@ -43,7 +47,7 @@ preparation writes `analysis_prepared.json`. Neither file constitutes final
 visual approval or remote release. Inspect actual commands/PIDs and the
 current cell/receipt files before any restart; the dated counts above are a
 checkpoint, not a live progress claim.
-`caffeinate -dimsu -w 68914` is active as PID 69894, bound to the
+`caffeinate -dimsu -w 71385` is active as PID 71386, bound to the
 coordinator lifetime so idle sleep does not interrupt this Mac's computation.
 
 T-180 is frozen: content hash

@@ -899,3 +899,8 @@ A focused negative test rejects a changed seed/condition and a missing nullable
 cutoff field. This is an analysis-only verification extension; no fitting
 process, frozen setting or saved outcome is altered.
 The full 298-test suite, coordination schemas and Ruff pass.
+The strengthened analysis code is separately sealed at `8551d32`.
+Only the sleeping continuation coordinator was replaced to use that checkout;
+the six production and two refit processes continued uninterrupted. The old
+coordinator source and log are preserved, and the new monitor/sleep assertion
+are recorded in HANDOFF.
