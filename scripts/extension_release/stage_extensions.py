@@ -38,7 +38,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("production-code", "analysis-code", "matched", "matched-manifest", "raw-source",
                  "source-report", "run", "reproduction", "rendered", "qa-dir", "worker-logs",
-                 "prestage-helper", "output"):
+                 "prestage-helper", "coordinator-helper", "output"):
         parser.add_argument(f"--{name}", type=Path, required=True)
     args = parser.parse_args()
     production, analysis = args.production_code.resolve(), args.analysis_code.resolve()
@@ -140,6 +140,8 @@ def main() -> None:
         copy_tree(args.qa_dir, stage / "visual_qa")
         copy_tree(args.worker_logs, stage / "execution/worker_logs")
         copy_file(args.prestage_helper, stage / "execution/prestage_refits.py")
+        copy_file(args.coordinator_helper, stage / "execution/coordinate_after_fits.py")
+        copy_file(Path(__file__), stage / "execution/stage_extensions.py")
         if sha256_file(stage / "data/matched_metabric.parquet") != manifest["matched_sha256"]:
             raise ValueError("staged matched data changed")
         for identity in planned_ids:

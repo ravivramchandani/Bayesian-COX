@@ -19,13 +19,30 @@ claims, logs and cell hashes before resuming a stopped process. The manifest
 pins every production input; its status is incomplete until all 1,625 cells
 exist and downstream gates pass.
 
-The verifier-only correction at `ce8d6f5` is pushed on main. Finalization
+The verifier-only correction began at `ce8d6f5`; the separately pinned
+analysis/renderer checkout is now `f0fd3ef`. Finalization
 uses that analysis checkout with `--production-code` pointing at the original
 `119476f` checkout, and confirms all production hashes. Selected 92 numerical
 refits must use the original production checkout. See
 [execution instructions](../docs/extensions_execution.md). Both code
 versions and the actual result directories must be included in the final
 private evidence release and fresh restoration check.
+
+At 2026-09-27 22:55 UTC (2026-09-28 11:55 Auckland), 226 of 1,625 production
+cells and 22 selected candidate refits had been written; all observed source
+cells were complete. Six production PIDs 62025–62030 and two sealed-code
+pre-stage refit PIDs 64406/64435 were active. A detached coordinator PID
+68914, source `~/bayes-cox-runs/extensions-20260928/coordinate_after_fits.py`,
+logs to `~/bayes-cox-runs/extensions-20260928/worker_logs/coordinator.log`.
+After all workers exit it requires the complete grid and 92 candidate
+refits, runs deep finalization from clean analysis commit `f0fd3ef`, executes
+the official 92-cell exact comparison from production commit `119476f`,
+renders 32 figures/six tables, and prepares full-size PDF contact sheets.
+It stops on any failed gate and writes `coordinator_failure.json`; successful
+preparation writes `analysis_prepared.json`. Neither file constitutes final
+visual approval or remote release. Inspect actual commands/PIDs and the
+current cell/receipt files before any restart; the dated counts above are a
+checkpoint, not a live progress claim.
 
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.

@@ -882,3 +882,11 @@ passed a synthetic 1,625-cell/32-figure/six-table fixture, rejected partial
 and altered evidence, and requires a separate named review of every actual
 PDF page before issuing a write-once passed receipt. This synthetic success
 does not constitute final visual QA.
+
+Analysis and rendering are pinned to a new clean detached `f0fd3ef`
+checkout; the production checkout remains `119476f`. A detached external
+coordinator now monitors the six production and two selected-refit workers.
+It will run deep finalization, the official 92-cell exact comparison,
+rendering and automated 32-PDF QA preparation only after all source/refit
+cells exist. It stops with a failure record on an unmet gate, and never
+issues a visual verdict or publishes a release.
