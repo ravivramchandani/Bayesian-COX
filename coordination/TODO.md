@@ -325,6 +325,8 @@ supervisor; the results coordinator waits for and verifies that completion.
   results and sensitivities are included without manual number transcription.
   The 2026-09-27 code programme prepares generated artefacts and recorded
   corrections; editing the Overleaf results chapter remains outside its scope.
+  Scope now includes the ADR-036 thesis extension experiments (T-180–T-186);
+  Overleaf editing starts only on owner instruction.
 - [ ] T-154 (T, W9–10, owners R/PS/SS; depends T-147) — Draft discussion and
   conclusion. Acceptance: each RQ is answered at its supported strength;
   limitations cover internal evaluation, endpoint heterogeneity, predictor
@@ -355,7 +357,10 @@ supervisor; the results coordinator waits for and verifies that completion.
   format thesis/source/evidence archive, leaving Week 15 as contingency before
   the 2026-11-30 deadline.
 
-## Weeks 9–15 — Paper and release
+## Paper and release — deferred until after thesis submission (ADR-036)
+
+The paper uses the thesis evidence and needs no new analysis. T-170 to T-174,
+T-187 and T-188 start only after the thesis is submitted.
 
 - [ ] T-170 (P, W9–11, owners R/PS; depends T-135 progressively) — Create
   the target-journal article and supplement architecture from frozen thesis
@@ -375,57 +380,57 @@ supervisor; the results coordinator waits for and verifies that completion.
   journal submission package. Acceptance: manuscript, supplement, reporting
   checklist, cover letter, CRediT/COI/funding declarations and repository link
   are submission-ready.
+- [ ] T-187 (P, deferred; depends T-186) — Draft the paper around the question "when
+  do Bayesian shrinkage priors matter for survival prediction?". Acceptance:
+  TRIPOD+AI checklist complete; the target journal's quartile re-verified
+  from JCR or SJR on the submission date.
+- [ ] T-188 (P, deferred, owner action) — Mint an archival DOI for code and evidence
+  (Zenodo), then submit. Owner steps: repository-to-Zenodo link, author
+  declarations, journal submission.
 - [ ] T-175 (T/P, W14–15, owners R/PS; no new scope) — Protected contingency
   for failed reruns, licence decisions, supervisor revisions, university
   corrections or journal formatting only.
 
-## Q1 paper extension — post-hoc under ADR-035
+## Thesis extension experiments — post-hoc under ADR-036
 
-Owner instruction 2026-09-27. Engineering owner: coordinator agent. Every
-result below is post-hoc and labelled as such; the frozen confirmatory record
-stays primary.
+Owner instruction 2026-09-27: the thesis contains every experiment needed
+for a Q1 journal paper, and the paper is drafted later. Every result below is
+post-hoc and labelled as such; the frozen confirmatory record stays primary.
 
-- [ ] T-180 (P; no dependency) — Write and freeze
-  `docs/protocol_addendum_paper.md` before any extension result exists.
+- [ ] T-180 (T; no dependency) — Write and freeze
+  `docs/protocol_addendum_extensions.md` before any extension result exists.
   Acceptance: the penalised-Cox grid, horseshoe variant, decision-curve
   thresholds and horizons, genomic feature rule, hypotheses, metrics and
   inference are fixed; the addendum hash is recorded in a write-once file.
-- [ ] T-181 (P; depends frozen robustness completion) — Run the ADR-032
+- [ ] T-181 (T; depends frozen robustness completion) — Run the ADR-032
   horseshoe sampler sensitivity: all 75 cells at target acceptance 0.999.
   Acceptance: pass rate and nine-contrast inference with Holm, rendered
   next to the frozen five-of-nine result. About 2 hours on six workers.
-- [ ] T-182 (P; depends T-180) — Fit ridge, lasso and elastic-net Cox on the
+- [ ] T-182 (T; depends T-180) — Fit ridge, lasso and elastic-net Cox on the
   frozen outer folds of all three cohorts. Acceptance: cells, paired
   contrasts against each Bayesian prior, and reproduction by the cell check.
-- [ ] T-183 (P; depends T-180, T-181) — Run the Piironen–Vehtari horseshoe
+- [ ] T-183 (T; depends T-180, T-181) — Run the Piironen–Vehtari horseshoe
   variant on all 75 cells. Acceptance: diagnostics, pass rate and paired
   contrasts, reported as a prior-specification sensitivity.
-- [ ] T-184 (P; depends T-180) — Run decision curve analysis from the stored
+- [ ] T-184 (T; depends T-180) — Run decision curve analysis from the stored
   out-of-fold predictions at the three training-defined horizons.
   Acceptance: net benefit against treat-all and treat-none, with
   fold-level uncertainty, for every complete cell; no refitting.
-- [ ] T-185 (P; depends T-180) — Build the METABRIC clinical-plus-expression
+- [ ] T-185 (T; depends T-180) — Build the METABRIC clinical-plus-expression
   setting from the pinned cBioPortal archive. Acceptance: the source hash,
   the gene-selection rule inside the training fold, fold-local
   preprocessing, and all models including the penalised Cox models and three
   priors over 25 folds, with diagnostics. About 10 hours or more on six
   workers.
-- [ ] T-186 (P; depends T-181–T-185) — Render the extension bundle with the
-  same verified renderer and lineage rules. Acceptance: every paper number
+- [ ] T-186 (T; depends T-181–T-185) — Render the extension bundle with the
+  same verified renderer and lineage rules. Acceptance: every thesis number
   traces to a rendered table.
-- [ ] T-187 (P; depends T-186) — Draft the paper around the question "when
-  do Bayesian shrinkage priors matter for survival prediction?". Acceptance:
-  TRIPOD+AI checklist complete; the target journal's quartile re-verified
-  from JCR or SJR on the submission date.
-- [ ] T-188 (P, owner action) — Mint an archival DOI for code and evidence
-  (Zenodo), then submit. Owner steps: repository-to-Zenodo link, author
-  declarations, journal submission.
-
 ## Hard scope controls
 
 - No unprespecified model family, prior, real dataset or analysis after
-  protocol freeze at the end of Week 5, except the four post-hoc paper
-  analyses named in ADR-035, each specified in the frozen addendum first.
+  protocol freeze at the end of Week 5, except the post-hoc thesis
+  extension experiments named in ADR-035 and ADR-036, each specified in the
+  frozen addendum first.
 - Rotterdam transport and ADEMP simulation are already dropped and cannot be
   reactivated within this study.
 - If more than one week behind, drop non-primary SHAP case studies and then

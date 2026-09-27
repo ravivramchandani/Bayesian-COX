@@ -650,7 +650,7 @@ Format:
 
 ## ADR-035 — Post-hoc extension for a Q1 journal paper
 
-- Status: ACCEPTED
+- Status: SUPERSEDED-BY-ADR-036
 - Date: 2026-09-27
 - Context: The owner's target is a Q1 journal paper. The frozen analysis finds
   no prior effect wherever a contrast is estimable, which is the expected
@@ -685,3 +685,32 @@ Format:
     before their own results, and their outputs live in separate run
     directories.
   - Only a new ADR can add further analyses.
+
+## ADR-036 — Extension experiments are thesis evidence; the paper is deferred
+
+- Status: ACCEPTED
+- Date: 2026-09-27
+- Context: The owner wants the thesis itself to contain every experiment a
+  Q1 journal paper would need. The paper is to be drafted after the thesis.
+- Decision:
+  - The four post-hoc analyses defined in ADR-035 are thesis experiments:
+    1. the penalised Cox comparators;
+    2. the Piironen–Vehtari horseshoe variant;
+    3. decision curve analysis;
+    4. the METABRIC clinical-plus-expression setting.
+  - So are the ADR-032 horseshoe sampler sensitivity and the ADR-033 Holm
+    bound.
+  - Every rule of ADR-035 still applies:
+    - each analysis is specified in a frozen addendum before its results
+      exist (`docs/protocol_addendum_extensions.md`);
+    - each is labelled post-hoc;
+    - each is stored in its own run directory;
+    - the frozen confirmatory record stays primary.
+  - Journal drafting, submission and archival DOI minting (T-170–T-174,
+    T-187, T-188) are deferred until after the thesis is submitted.
+- Consequences:
+  - The results chapter covers the confirmatory analysis, robustness,
+    explanation and the extension experiments.
+  - The later paper needs no new analysis.
+  - Thesis text in the Overleaf repository is still edited only on the
+    owner's instruction.

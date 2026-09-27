@@ -130,6 +130,18 @@ in the 2026-08-16 sequence below:
   corrections in `TODO.md` for later;
 - commit and push at the end, with no AI co-author trailer.
 
+### Standing owner instructions (2026-09-27)
+
+- The thesis must contain every experiment a Q1 journal paper needs
+  (ADR-036). The paper is drafted later.
+- Do not edit the Overleaf thesis until the owner instructs.
+- Only one agent works on the repository at a time.
+- **Current state: waiting for the owner's next instruction.**
+  - Background jobs already running continue on their own: the six
+    frozen-robustness workers and the 450-cell regeneration.
+  - Do not start a new step, run `finish_robustness.sh` or begin T-180
+    until the owner instructs.
+
 Findings behind each step are in
 `coordination/reviews/2026-09-27-codebase-audit.md`.
 Completed integration gates and their evidence locations are in
@@ -236,18 +248,19 @@ Completed integration gates and their evidence locations are in
 10. [ ] Commit and push all verified continuation work. Recovery and completed
     code checkpoints have been pushed; final production close-out remains open.
 
-11. [ ] Q1 paper extension under ADR-035; tasks T-180–T-188 in `TODO.md`.
-    Order:
-    - freeze the protocol addendum (T-180) before any extension result;
-    - once frozen robustness finishes, run the horseshoe sensitivity (T-181);
+11. [ ] Thesis extension experiments under ADR-036; tasks T-180–T-186 in
+    `TODO.md`. Order:
+    - freeze `docs/protocol_addendum_extensions.md` (T-180) before any
+      extension result;
+    - once frozen robustness finishes, run the horseshoe sampler sensitivity
+      (T-181);
     - run the penalised-Cox comparators (T-182) and decision curve analysis
       (T-184);
-    - run the Piironen–Vehtari horseshoe variant (T-183);
-    - build and run the METABRIC genomic setting (T-185);
-    - render the extension bundle (T-186), then draft the paper (T-187).
+    - run the Piironen–Vehtari variant (T-183);
+    - build and run the METABRIC clinical-plus-expression setting (T-185);
+    - render the extension bundle (T-186).
 
-    Only one agent works on the repository at a time. The owner provides the
-    Zenodo link and submission steps (T-188).
+    Paper drafting and submission are deferred until after the thesis.
 
 Tick each box when its step is complete, and record where its outputs are.
 
