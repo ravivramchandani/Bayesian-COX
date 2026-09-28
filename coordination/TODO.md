@@ -430,6 +430,14 @@ The prepared factual claim helper and supporting-bundle assembler require
 actual finished-grid receipts, findings review and visual QA as appropriate.
 Their passed pure checks and remote recovery archive preserve preparation;
 they do not close numerical, scientific or transfer tasks.
+Reporting close-out must also emit the frozen explicit p/n and events/p
+ratios and descriptive catalytic-versus-comparator paired tables. These
+read-only sidecars use verified stored cells, preserve all four specified
+Holm families and retain partial or unavailable coverage. Complete paired
+rows use the already specified Nadeau–Bengio 95% intervals, without additional
+p-values, rejection flags or superiority claims. Original formal outputs
+remain unchanged; these tables and their replayable lineage must be included
+in the extension transfer.
 
 - [x] T-180 (T; no dependency) — Write and freeze
   `docs/protocol_addendum_extensions.md` before results of the four new

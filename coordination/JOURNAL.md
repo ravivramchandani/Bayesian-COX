@@ -1118,3 +1118,21 @@ The 39-member recovery archive round-trips every retained byte. Its dated
 and no official comparison receipts. Numerical workers and downstream gates
 remain active. Compact receipt:
 `coordination/recovery/2026-09-28-extension-final-closeout-preparation-verification.json`.
+
+## 2026-09-28 — Frozen reporting coverage audit
+
+Read-only coverage review confirmed that all four formal contrast lists
+match the frozen addendum. It identified two presentation omissions:
+explicit p/n and events/p in the generated fold table, and descriptive
+catalytic effects against other comparators under T-189. The stored cells
+already contain predictor/training/event counts. The addendum permits
+descriptive comparator effects without adding significance claims.
+
+Preparing separate read-only sidecars closes these existing requirements.
+Complete paired effects use the specified Nadeau–Bengio 95% interval;
+partial coverage cannot receive that interval or a full-procedure claim.
+The sealed fits, three aggregates, four Holm families and original primary
+findings remain unchanged. Include source-bound tables and a pre-package
+replay receipt in the final supporting bundle. A separate fresh-restored
+replay receipt is required before publication and remains outside the
+immutable pre-sealed bundle, avoiding a package/restore dependency cycle.

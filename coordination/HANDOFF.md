@@ -240,6 +240,15 @@ source files. The dated 2026-09-28 03:47:56 UTC checkpoint has 852 source
 cells (736 complete, 106 execution failures, ten diagnostic failures),
 66 candidate refits and no official receipts. These remain partial counts.
 
+The final coverage audit identified two reporting omissions under the
+already frozen addendum: explicit p/n and events/p in generated tables,
+and descriptive paired catalytic-versus-comparator effects outside the four
+formal families. Separate read-only sidecars are being prepared; do not
+alter the sealed fits, existing aggregates or specified families. Include
+the sidecar source, verified tables and replay instructions in final transfer.
+Complete paired effects retain the specified Nadeau–Bengio 95% intervals
+without new significance claims; partial coverage stays explicit.
+
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
 No extension outer-validation result existed before the freeze. All
