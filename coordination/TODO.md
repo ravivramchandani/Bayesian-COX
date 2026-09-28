@@ -438,6 +438,10 @@ rows use the already specified Nadeau–Bengio 95% intervals, without additional
 p-values, rejection flags or superiority claims. Original formal outputs
 remain unchanged; these tables and their replayable lineage must be included
 in the extension transfer.
+The separate reporting helper passed 21 synthetic guards and independent
+review. Its 15 preparation files are preserved in the remote recovery archive;
+actual tables, source replay and fresh-restored replay remain pending. This
+preparation does not close any experiment or transfer gate.
 
 - [x] T-180 (T; no dependency) — Write and freeze
   `docs/protocol_addendum_extensions.md` before results of the four new

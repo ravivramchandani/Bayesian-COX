@@ -243,11 +243,28 @@ cells (736 complete, 106 execution failures, ten diagnostic failures),
 The final coverage audit identified two reporting omissions under the
 already frozen addendum: explicit p/n and events/p in generated tables,
 and descriptive paired catalytic-versus-comparator effects outside the four
-formal families. Separate read-only sidecars are being prepared; do not
+formal families. Separate read-only sidecars are prepared; do not
 alter the sealed fits, existing aggregates or specified families. Include
 the sidecar source, verified tables and replay instructions in final transfer.
 Complete paired effects retain the specified Nadeau–Bengio 95% intervals
 without new significance claims; partial coverage stays explicit.
+
+The reporting helper is prepared in
+`~/bayes-cox-runs/extensions-20260928/final_reporting_sidecar_preparation_v1`.
+It passed 21 synthetic checks, scoped lint/syntax checks and independent
+review. It emits 1,625 ratio rows and 123 descriptive comparator rows, linking
+27 existing formal contrasts without duplication. Its five-file output and
+portable read-only replay preserve partial coverage and the original baseline
+identities. Actual generation and source/fresh-restored replays remain pending.
+All 15 preparation files, root review and dated observation are preserved in
+the 19-member
+`coordination/recovery/2026-09-28-extension-reporting-preparation.tar.gz`.
+The archive verifies every retained byte; all 157 previously tested source
+files and 18 earlier claim-preparation files remain unchanged. At
+2026-09-28 04:33:35 UTC, 900 source cells are stored: 762 complete, 127 execution
+failures and 11 diagnostic failures. Clinical METABRIC has 250 cells;
+matched production has no stored cells. The 66 candidate refits have no
+official comparison receipts yet. These are partial dated counts.
 
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.

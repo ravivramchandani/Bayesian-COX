@@ -1136,3 +1136,26 @@ findings remain unchanged. Include source-bound tables and a pre-package
 replay receipt in the final supporting bundle. A separate fresh-restored
 replay receipt is required before publication and remains outside the
 immutable pre-sealed bundle, avoiding a package/restore dependency cycle.
+
+## 2026-09-28 — Verified reporting-sidecar preparation
+
+Prepared the read-only reporting helper for 1,625 dimension/ratio rows and
+123 descriptive catalytic-comparator rows, with 27 existing formal contrasts
+linked separately. Complete paired rows use the exact frozen corrected
+interval routine; partial rows have observed means only and zero coverage
+remains unavailable. No new test or multiplicity family is introduced.
+
+All 21 synthetic checks, scoped lint and syntax checks pass. Independent
+review identified a receipt-publication IO edge; the helper now writes,
+flushes and closes a pending receipt before installing its final name without
+overwrite. Write/close/collision/cleanup checks pass and review has no
+unresolved static issue. Actual result generation has not been invoked.
+
+Root reverified all 14 receipt-bound files, its canonical receipt, 18 unchanged
+earlier claim-preparation files and all 157 unchanged tested source files.
+The 19-member recovery archive passed exact byte roundtrip and preserves
+all prepared sources, scope, validation, independent review and root review.
+Its 04:33:35 UTC checkpoint has 900 of 1,625 stored source cells, 66 candidate
+refits and no official receipts. Scientific, actual figure review and final
+private release/restoration gates remain pending. Compact receipt:
+`coordination/recovery/2026-09-28-extension-reporting-preparation-verification.json`.

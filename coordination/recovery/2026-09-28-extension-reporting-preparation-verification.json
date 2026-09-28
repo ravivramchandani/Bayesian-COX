@@ -1,0 +1,57 @@
+{
+  "actual_reporting_helper_invoked": false,
+  "actual_reporting_tables_produced": false,
+  "archive": "coordination/recovery/2026-09-28-extension-reporting-preparation.tar.gz",
+  "archive_bytes": 88123,
+  "archive_inventory_sha256": "b018597bdd658ded5bfd0daa1d2126796dc559dfa2e9fabc5f422a4b110b4fdb",
+  "archive_members_verified": 19,
+  "archive_sha256": "a96abd1c565000a245fde1b8ae99fc58c481dce43a0b47a1731bc682983a58cd",
+  "bound_preparation_files_verified": 14,
+  "dated_partial_checkpoint": {
+    "candidate_refits": 66,
+    "markers": {
+      "analysis_prepared.json": false,
+      "coordinator_failure.json": false,
+      "postfit_support_failure_v1.json": false,
+      "postfit_support_prepared_v1.json": false
+    },
+    "observed_utc": "2026-09-28T04:33:35.716773+00:00",
+    "official_refit_receipts": 0,
+    "planned_cells": 1625,
+    "scope": "Dated stored-cell accounting only; numerical and transfer completion unassessed",
+    "settings": {
+      "gbsg2/clinical": 325,
+      "metabric/clinical": 250,
+      "whas500/clinical": 325
+    },
+    "statuses": {
+      "complete": 762,
+      "failed": 127,
+      "failed_diagnostics": 11
+    },
+    "stored_cells": 900
+  },
+  "existing_formal_rows_linked": 27,
+  "expected_descriptive_rows": 123,
+  "expected_ratio_rows": 1625,
+  "helper_sha256": "e8930fc49b1d5f81ae85d98fd1492a6a2209d31ddb8b66b7ff828d7d36bf89f8",
+  "independent_review": "Receipt-publication IO finding resolved; no unresolved static issue",
+  "independent_review_sha256": "c049fad05cae11f18a4602a0ff7f16f879976e9882d88438088303ac00273718",
+  "models_fitted": false,
+  "new_formal_tests_or_families": 0,
+  "preparation_receipt_sha256": "3c71be36cf4f95029da1a724f730de8242bb461de65a87e5eabe41c69f6c4952",
+  "previous_claim_bound_files_unchanged": 18,
+  "previous_claim_receipt_sha256": "6c71cfa31b97ed0e50f285150bf07caf3c149bfb48be7dfed26d27f47ce46ed0",
+  "release_download_restore_executed": false,
+  "reviewer": "root",
+  "root_review": "Reviewed helper, README, validation and independent review; rehashed exact preparation",
+  "schema_version": 1,
+  "scientific_completion_certified": false,
+  "scope_sha256": "1cbdacdbd29a51b00011be33933efd84448b28afc58386ac90b5d31142e8f59f",
+  "status": "reporting_preparation_reviewed_actual_invocation_pending",
+  "synthetic_test_methods_passed": 21,
+  "tested_source_files_unchanged": 157,
+  "tested_source_sha256": "3849ab7498cfce430c290ba17555d886be33c70c5d4f4d6153796d96a85963b1",
+  "validation_bundle_assembled": false,
+  "verified_utc": "2026-09-28T04:33:35.717312+00:00"
+}
