@@ -17,6 +17,7 @@ from verify import verify_and_restore
 
 
 def must_fail(action, label: str) -> None:
+    """Run ``action`` and raise ``AssertionError`` unless it fails with an archive, OS or tar error."""
     try:
         action()
     except (ArchiveError, OSError, tarfile.TarError):
@@ -25,6 +26,11 @@ def must_fail(action, label: str) -> None:
 
 
 def resign(package_dir: Path, asset_bytes: bytes | None = None) -> None:
+    """Rewrite the first shard's size and hash, and the inventory hash, after tampering.
+
+    The tests use it to make a deliberately corrupted package pass the outer
+    hash checks, so that the deeper member-level checks are exercised.
+    """
     inventory_path = package_dir / "inventory.json"
     inventory = json.loads(inventory_path.read_text())
     shard = inventory["shards"][0]
@@ -41,6 +47,15 @@ def resign(package_dir: Path, asset_bytes: bytes | None = None) -> None:
 def synthetic_tar(
     name: str, payload: bytes, *, duplicate=False, symlink=False, huge_pax=False,
 ) -> bytes:
+    """Build a small gzip tar in memory, optionally with an attack pattern.
+
+    Args:
+        name: Member path to write.
+        payload: File content.
+        duplicate: Write the same member twice.
+        symlink: Write a symbolic link pointing outside the tree instead of a file.
+        huge_pax: Add an oversized PAX header.
+    """
     from io import BytesIO
     output = BytesIO()
     with gzip.GzipFile(filename="", mode="wb", fileobj=output, mtime=0) as zipped:
@@ -65,6 +80,12 @@ def synthetic_tar(
 
 
 def main() -> None:
+    """Run the round-trip and rejection checks on synthetic files in a temporary directory.
+
+    Packages the same source twice and checks that the shards are byte-identical
+    and restore correctly. Then checks that tampered, unsafe or changing inputs
+    are rejected.
+    """
     with tempfile.TemporaryDirectory(prefix="shard-selftest-") as temporary:
         root = Path(temporary)
         source = root / "source"
@@ -188,6 +209,7 @@ def main() -> None:
         original_read = packer.HashingReader.read
         mutated = False
         def mutate_during_read(self, length=-1):
+            """Patched read that edits a source file mid-packaging, to test change detection."""
             nonlocal mutated
             data = original_read(self, length)
             if data and not mutated:

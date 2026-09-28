@@ -395,6 +395,7 @@ def receipt(args: argparse.Namespace) -> None:
 
 
 def main() -> None:
+    """Command-line entry point with two subcommands: ``prepare`` (check the 32 figure pairs and build review images) and ``receipt`` (issue a receipt from a completed review form)."""
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     prep = commands.add_parser("prepare", help="check 32 figure pairs and build review images")

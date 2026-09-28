@@ -14,6 +14,14 @@ from pathlib import Path
 
 
 def main() -> None:
+    """Refit this worker's share of the 92 selected extension cells with the sealed production code.
+
+    The selected cells are those with repeat 1 and fold 1. Before fitting, it
+    checks that the production commit, manifest, matched data and every source
+    file are unchanged. Each refit is written once and compared with the source
+    cell's scientific content and traces. The worker waits for source cells that
+    do not exist yet, and stops when all its cells are prestaged.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("production-code", "matched", "source", "output"):
         parser.add_argument(f"--{name}", type=Path, required=True)

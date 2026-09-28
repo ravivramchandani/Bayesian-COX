@@ -39,11 +39,13 @@ def expected_names() -> list[str]:
 
 
 def _directory(path: Path) -> None:
+    """Raise ``ValueError`` unless ``path`` is a real directory (not a symbolic link)."""
     if path.is_symlink() or not path.is_dir():
         raise ValueError(f"missing or linked directory: {path}")
 
 
 def _digest(path: Path) -> str:
+    """Return the SHA-256 of a regular, non-linked file; raise ``ValueError`` otherwise."""
     if path.is_symlink() or not path.is_file():
         raise ValueError(f"missing or linked regular file: {path}")
     digest = hashlib.sha256()
@@ -54,6 +56,7 @@ def _digest(path: Path) -> str:
 
 
 def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """JSON object hook that rejects duplicate keys."""
     result: dict[str, Any] = {}
     for key, value in pairs:
         if key in result:
@@ -63,8 +66,10 @@ def _unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 
 def _read(path: Path) -> dict[str, Any]:
+    """Read a JSON mapping, rejecting links, duplicate keys and non-finite numbers."""
     _digest(path)
     def nonfinite(value: str) -> None:
+        """Reject ``NaN`` and ``Infinity`` literals in the JSON text."""
         raise ValueError(f"non-finite JSON value: {value}")
     value = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=_unique_object,
                        parse_constant=nonfinite)
@@ -74,11 +79,13 @@ def _read(path: Path) -> dict[str, Any]:
 
 
 def _require(condition: bool, message: str) -> None:
+    """Raise ``ValueError(message)`` when ``condition`` is false."""
     if not condition:
         raise ValueError(message)
 
 
 def _ordered(records: Any, names: list[str], label: str) -> list[dict[str, Any]]:
+    """Check that ``records`` is a list of dicts whose ``name`` fields equal ``names`` in order, and return it."""
     _require(isinstance(records, list) and all(isinstance(row, dict) for row in records),
              f"invalid {label} rows")
     _require([row.get("name") for row in records] == names, f"{label} inventory/order differs")
@@ -97,6 +104,7 @@ def verify_visual_transfer(qa_dir: Path, rendered: Path, run: Path, *,
         _directory(root)
     artifacts: dict[str, str] = {}
     def digest(path: Path, key: str) -> str:
+        """Hash ``path``, remember the digest under ``key`` for the report, and return it."""
         value = _digest(path)
         artifacts[key] = value
         return value

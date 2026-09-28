@@ -12,28 +12,37 @@ RANK_MESSAGE = "synthetic design is not full column rank"
 
 
 def _require(condition: bool, message: str) -> None:
+    """Raise ``ValueError(message)`` when ``condition`` is false."""
     if not condition:
         raise ValueError(message)
 
 
 def _hash(path: Path) -> str:
+    """Return the SHA-256 of a regular, non-linked failure-audit file."""
     _require(path.is_file() and not path.is_symlink(), f"missing or linked failure-audit file: {path}")
     with path.open("rb") as handle:
         return hashlib.file_digest(handle, "sha256").hexdigest()
 
 
 def _read(path: Path) -> dict[str, Any]:
+    """Check the file is a regular, non-linked file, then return its parsed JSON."""
     _hash(path)
     return json.loads(path.read_text())
 
 
 def _canonical(value: Any) -> str:
+    """Return the SHA-256 of a value's compact, key-sorted JSON encoding."""
     payload = json.dumps(value, sort_keys=True, separators=(",", ":"),
                          ensure_ascii=False, allow_nan=False).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()
 
 
 def _checked_content(value: dict[str, Any], identity: str) -> None:
+    """Check a failure-audit record's own content hash and its classification fields.
+
+    The record must declare the supplemental evidence status and that it
+    performed no model fits and wrote no patient-level records.
+    """
     _require(value.get("content_sha256") == _canonical({k: v for k, v in value.items() if k != "content_sha256"}),
              f"failure-audit content changed: {identity}")
     _require(value.get("evidence_status") == CLASSIFICATION
@@ -44,6 +53,7 @@ def _checked_content(value: dict[str, Any], identity: str) -> None:
 
 
 def _relative(root: Path, name: str) -> Path:
+    """Resolve ``name`` inside ``root``, rejecting absolute, escaping or linked paths."""
     relative = Path(name)
     _require(not relative.is_absolute() and bool(relative.parts)
              and not ({".", ".."} & set(relative.parts)), "unsafe failure-audit path")

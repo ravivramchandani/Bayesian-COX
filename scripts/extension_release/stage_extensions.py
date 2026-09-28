@@ -105,6 +105,18 @@ def verify_source_inputs(production: Path, manifest: dict, matched: Path,
 
 
 def main() -> None:
+    """Verify the finished extension run and copy only its verified evidence into a new ``--output`` directory.
+
+    Before copying, it checks:
+
+    - the run manifest and completion record, including their content hashes;
+    - the 1,625 planned cells and their stored hashes;
+    - the aggregate files;
+    - the 92 selected reproduction refits and their receipts;
+    - the rendered bundle (32 figures, 6 tables).
+
+    It then writes a staging record with every source commit and hash.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("production-code", "analysis-code", "matched", "matched-manifest", "raw-source",
                  "source-report", "run", "reproduction", "rendered", "qa-dir", "worker-logs",
