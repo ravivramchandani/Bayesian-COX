@@ -1,4 +1,10 @@
-"""Assemble a publication package from verified frozen artefacts."""
+"""Assemble a publication package from verified frozen artefacts.
+
+:func:`render_run` is the rendering entry point used by
+``scripts/render_confirmatory.py``. It verifies every input before creating
+any output, renders each section in a fixed order, and finally writes
+``lineage.json``, which lists the SHA-256 and sources of every table, figure
+and notice written before it."""
 
 from __future__ import annotations
 
@@ -7,6 +13,7 @@ from typing import Any
 
 import matplotlib
 
+# The non-interactive backend lets figures render without a display.
 matplotlib.use("Agg")
 
 
@@ -37,7 +44,33 @@ def render_run(
     explainability_artifact: Path | None = None,
     robustness_dir: Path | None = None,
 ) -> Path:
-    """Validate a frozen run and render its permitted publication artifacts."""
+    """Validate a frozen run and render its permitted publication artifacts.
+
+    A rehearsal run yields only the runtime and failure audit plus a notice
+    that it is not evidence. A confirmatory run yields cohort flow, fold
+    metrics, paired IBS effects, the Holm bound and thesis table, calibration,
+    runtime, predictive checks and trace snapshots; then the explanation and
+    robustness sections when those artefacts are supplied; and finally the
+    proportional-hazards section, which uses the robustness run's PH
+    assessment when it has one.
+
+    Args:
+        run_dir: Completed confirmatory or rehearsal run directory.
+        output_dir: New output directory; it must not exist or must be empty.
+        explainability_artifact: Optional explainability result for this run.
+        robustness_dir: Optional completed robustness run for this run.
+
+    Returns:
+        The resolved output directory.
+
+    Raises:
+        ValueError: If a rehearsal run is given an explainability or
+            robustness artefact, or a verification step finds a malformed
+            record.
+        RuntimeError: If any verification step finds a hash or lineage
+            mismatch.
+        FileExistsError: If the output directory already contains files.
+    """
     run = verify_frozen_run(run_dir)
     explanation_verified: tuple[dict[str, Any], dict[str, Any]] | None = None
     robustness_verified: tuple[dict[str, Any], dict[str, Any]] | None = None
@@ -47,6 +80,8 @@ def render_run(
         raise ValueError(
             "rehearsal rendering accepts no performance, explanation or robustness artifact"
         )
+    # Every input is verified before the output directory is touched, so a
+    # failed check leaves nothing behind.
     if explainability_artifact is not None:
         explanation_verified = verify_explainability_artifact(explainability_artifact, run)
     if robustness_dir is not None:
@@ -99,6 +134,7 @@ def render_run(
             robustness, summary_ref = robustness_verified
             _render_robustness(robustness, summary_ref, registry)
             optional_lineage.append(summary_ref)
+        # Rendered last because it may read the robustness PH assessment.
         _render_ph(run, registry, robustness=robustness)
 
     registry.write_lineage(

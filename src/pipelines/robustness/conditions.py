@@ -1,4 +1,24 @@
-"""Construct prespecified perturbations and their paired training subsets."""
+"""Construct prespecified perturbations and their paired training subsets.
+
+This is the planning stage of a robustness run. :func:`build_condition_plan`
+turns the frozen ``robustness`` section of ``config/confirmatory.yaml`` into a
+de-duplicated list of :class:`~.protocol.RobustnessCondition` records for one
+cohort. For each outer fold, :func:`_fold_condition_indices` then selects the
+condition's training subset and administrative cutoff, and
+:func:`_condition_config` produces the protocol the fit uses.
+
+The perturbations are:
+
+- RQ2 (research question 2) training size: nested 25, 50, 75 and 100 percent
+  subsets of the outer-training fold, identical for all three priors;
+- RQ2 censoring: administrative truncation at the 75th and 50th percentiles
+  of outer-training follow-up, at full training size, never crossed with
+  training size;
+- design: prior-scale scenarios and 4 or 10 baseline-hazard intervals, one
+  factor at a time;
+- feature: every sensitivity feature set, plus the METABRIC five-imputation
+  condition.
+"""
 
 from __future__ import annotations
 
@@ -22,6 +42,7 @@ from .protocol import (
 
 
 def _stable_hash(*parts: object) -> str:
+    """Return the SHA-256 hex digest of the parts joined by ``"|"``."""
     payload = "|".join(str(part) for part in parts)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
@@ -38,7 +59,26 @@ def stratified_training_subsets(
 
     A single seeded ordering is generated within every stratum. Each fraction
     takes the corresponding prefix, so subject membership is deterministic,
-    nested across fractions and independent of the model or prior.
+    nested across fractions and independent of the model or prior. Sharing
+    the subsets keeps every prior contrast paired on the same training
+    subjects.
+
+    Args:
+        times: Follow-up times of the outer-training fold.
+        events: Event indicators of the outer-training fold.
+        fractions: Requested fractions in ``(0, 1]``; must include 1.0.
+        seed: Seed of the per-stratum orderings; the caller derives it from
+            cohort, repeat and fold only.
+        max_time_bins: Maximum follow-up bins within each event group, as
+            used by the fold generator.
+
+    Returns:
+        Map from fraction to sorted positions within the outer-training fold.
+        Fraction 1.0 selects every position.
+
+    Raises:
+        ValueError: The fractions or arrays are invalid.
+        RuntimeError: The subsets are not nested (a defensive check).
     """
     time = np.asarray(times, dtype=float)
     event = np.asarray(events, dtype=int)
@@ -50,6 +90,9 @@ def stratified_training_subsets(
     if time.ndim != 1 or event.ndim != 1 or len(time) != len(event):
         raise ValueError("times and events must be aligned one-dimensional arrays")
 
+    # With ceil(1 / smallest fraction) as the stratifier's fold count, every
+    # stratum holds at least that many subjects, so even the smallest
+    # fraction takes at least one subject from each stratum.
     minimum_fraction = requested[0]
     subdivision_splits = max(2, int(math.ceil(1.0 / minimum_fraction)))
     strata = event_time_strata(
@@ -73,6 +116,7 @@ def stratified_training_subsets(
             if fraction == 1.0:
                 count = len(indices)
             else:
+                # At least one subject per stratum keeps every stratum present.
                 count = max(1, int(math.floor(fraction * len(indices))))
             selected.extend(indices[:count].tolist())
         subset = np.asarray(sorted(selected), dtype=int)
@@ -88,7 +132,23 @@ def apply_administrative_censoring(
     events: np.ndarray,
     cutoff: float | None,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """Apply a fixed administrative cutoff without altering earlier events."""
+    """Apply a fixed administrative cutoff without altering earlier events.
+
+    Follow-up beyond ``cutoff`` is set to ``cutoff`` and censored; an event
+    at or before the cutoff is kept. This mimics a study whose follow-up
+    ended earlier, and can only increase the share of censored subjects.
+
+    Args:
+        times: Follow-up times, strictly positive.
+        events: Event indicators (1 = event, 0 = censored).
+        cutoff: Administrative end of follow-up, or ``None`` for no change.
+
+    Returns:
+        New ``(times, events)`` arrays; the inputs are not modified.
+
+    Raises:
+        ValueError: The inputs or the cutoff are invalid.
+    """
     time = np.asarray(times, dtype=float)
     event = np.asarray(events, dtype=int)
     if time.ndim != 1 or event.ndim != 1 or len(time) != len(event):
@@ -108,7 +168,24 @@ def apply_administrative_censoring(
 
 
 def effective_information_ratio(events_train: int, transformed_columns: int) -> float:
-    """Return observed training events per processed predictor degree of freedom."""
+    """Return observed training events per processed predictor degree of freedom.
+
+    This is the RQ2 information measure. ``transformed_columns`` counts the
+    columns after encoding, so a categorical variable contributes one degree
+    of freedom per non-reference level.
+
+    Args:
+        events_train: Observed event count after subsetting and any cutoff.
+        transformed_columns: Encoded predictor-column count, excluding a
+            reference level for each categorical predictor.
+
+    Returns:
+        Training events divided by the processed predictor-column count.
+
+    Raises:
+        ValueError: ``events_train`` is negative or ``transformed_columns``
+            is below 1.
+    """
     events = int(events_train)
     columns = int(transformed_columns)
     if events < 0:
@@ -119,7 +196,25 @@ def effective_information_ratio(events_train: int, transformed_columns: int) -> 
 
 
 def build_rq2_conditions(config: dict[str, Any]) -> list[RobustnessCondition]:
-    """Build the frozen, deliberately non-factorial RQ2 condition grid."""
+    """Build the frozen, deliberately non-factorial RQ2 condition grid.
+
+    One condition per training fraction with observed follow-up, plus one
+    per truncation quantile at full training size. Sample size and censoring
+    are never crossed, as ADR-023 prescribes, which keeps the grid within the
+    compute budget. All conditions use the primary priors, the primary number
+    of baseline intervals and outer folds 1 and 2 of every repeat.
+
+    Args:
+        config: Frozen protocol containing training fractions, censoring
+            quantiles, selected folds and the primary Bayesian design.
+
+    Returns:
+        Training-fraction conditions followed by non-null censoring conditions,
+        in their declared configuration order.
+
+    Raises:
+        ValueError: The protocol asks to cross fraction with censoring.
+    """
     robustness = config["robustness"]
     if bool(robustness["cross_fraction_by_censoring"]):
         raise ValueError("RQ2 requires cross_fraction_by_censoring=false")
@@ -161,7 +256,21 @@ def build_rq2_conditions(config: dict[str, Any]) -> list[RobustnessCondition]:
 
 
 def build_design_conditions(config: dict[str, Any]) -> list[RobustnessCondition]:
-    """Build one-factor-at-a-time prior-scale and baseline-resolution checks."""
+    """Build one-factor-at-a-time prior-scale and baseline-resolution checks.
+
+    Each prior scenario (tighter, primary, wider) uses the primary baseline
+    resolution; each non-primary number of baseline intervals uses the
+    primary priors. The primary scenario keeps the RQ2 folds (1 and 2), so it
+    merges with the full-size RQ2 condition; the others use fold 1 only.
+
+    Args:
+        config: Frozen protocol containing prior-scale scenarios, baseline
+            interval counts and the primary design.
+
+    Returns:
+        Prior-scale conditions followed by non-primary baseline resolutions,
+        in their declared configuration order.
+    """
     robustness = config["robustness"]
     primary_anchor_folds = tuple(
         int(value) for value in robustness["outer_fold_numbers_per_repeat"]
@@ -209,7 +318,22 @@ def build_design_conditions(config: dict[str, Any]) -> list[RobustnessCondition]
 def build_feature_conditions(
     config: dict[str, Any], dataset_config: dict[str, Any]
 ) -> list[RobustnessCondition]:
-    """Use every complete, named feature representation in datasets.yaml."""
+    """Declare conditions for the named feature representations in datasets.yaml.
+
+    The primary feature set keeps the RQ2 folds (1 and 2); every sensitivity
+    feature set uses fold 1. For METABRIC, when ``npi_plus_stage`` is
+    defined, a further condition fits that set with five stochastic
+    imputations (see :mod:`~.imputation`).
+
+    Args:
+        config: Frozen protocol supplying the primary feature set and design.
+        dataset_config: Cohort declaration with sensitivity feature-set names.
+
+    Returns:
+        The primary and sensitivity feature conditions, plus the five-imputation
+        condition when METABRIC declares ``npi_plus_stage``. Feature contents are
+        resolved later by the runner.
+    """
     primary_intervals = int(config["models"]["bayesian_cox"]["n_intervals"])
     primary_anchor_folds = tuple(
         int(value) for value in config["robustness"]["outer_fold_numbers_per_repeat"]
@@ -256,7 +380,15 @@ def build_feature_conditions(
 
 
 def _merge_conditions(conditions: Iterable[RobustnessCondition]) -> list[RobustnessCondition]:
-    """Merge identical fits while retaining every analysis role."""
+    """Merge identical fits while retaining every analysis role.
+
+    Conditions that would fit exactly the same model on the same subjects
+    are fitted once; the merged record keeps the first condition's id and the
+    union of the analyses it serves.
+
+    Returns:
+        The merged conditions, sorted by ``condition_id``.
+    """
     merged: dict[tuple[Any, ...], RobustnessCondition] = {}
     for condition in conditions:
         key = (
@@ -294,7 +426,21 @@ def build_condition_plan(
     dataset_config: dict[str, Any],
     components: Iterable[str],
 ) -> list[RobustnessCondition]:
-    """Return the deduplicated fit plan for one cohort."""
+    """Return the deduplicated fit plan for one cohort.
+
+    Args:
+        config: Frozen protocol from ``config/confirmatory.yaml``.
+        dataset_config: This cohort's entry in ``config/datasets.yaml``.
+        components: Fitted components to include: ``"rq2"``, ``"design"``
+            and/or ``"feature"``.
+
+    Returns:
+        Conditions sorted by identifier, with identical fit specifications
+        merged and every analysis role retained.
+
+    Raises:
+        ValueError: An unknown component was requested.
+    """
     requested = set(components)
     unknown = requested - {"rq2", "design", "feature"}
     if unknown:
@@ -310,6 +456,11 @@ def build_condition_plan(
 
 
 def _condition_config(config: dict[str, Any], condition: RobustnessCondition) -> dict[str, Any]:
+    """Return a copy of the protocol with the condition's baseline intervals and prior scales.
+
+    Raises:
+        ValueError: The condition names an unknown prior scenario.
+    """
     modified = copy.deepcopy(config)
     modified["models"]["bayesian_cox"]["n_intervals"] = condition.n_intervals
     scenarios = modified["robustness"]["prior_sensitivity_scenarios"]
@@ -330,6 +481,22 @@ def _fold_condition_indices(
     seed: int,
     max_time_bins: int,
 ) -> tuple[np.ndarray, float | None]:
+    """Return a condition's training rows in the cohort frame and its cutoff.
+
+    Args:
+        condition: The planned perturbation.
+        fold: Outer fold whose training rows are subset.
+        fold_times: Follow-up times of the outer-training rows.
+        fold_events: Event indicators of the outer-training rows.
+        fractions: Every RQ2 training fraction, so the nested subsets are the
+            same whichever condition asks for them.
+        seed: Subset seed for this cohort, repeat and fold.
+        max_time_bins: Maximum follow-up bins used for stratification.
+
+    Returns:
+        ``(train_indices, cutoff)``: cohort row positions and the
+        administrative cutoff, or ``None`` for observed follow-up.
+    """
     subsets = stratified_training_subsets(
         fold_times,
         fold_events,
@@ -338,6 +505,8 @@ def _fold_condition_indices(
         max_time_bins=max_time_bins,
     )
     selected = subsets[condition.training_fraction]
+    # The cutoff is a quantile of the whole outer-training follow-up, events
+    # and censored times alike, so it uses no validation outcome.
     cutoff = (
         None
         if condition.censoring_quantile is None

@@ -1,4 +1,22 @@
-"""Create each model, tune its inner-fold candidates and apply the frozen diagnostic remedies."""
+"""Create each model, tune its inner-fold candidates and apply the frozen diagnostic remedies.
+
+This is the fitting stage of a cell, called by :mod:`cells` after fold-local
+preprocessing. It returns a fitted model and records of attempts that completed fitting;
+execution errors propagate to the cell wrapper. Cox proportional hazards
+(PH) is the fixed classical comparator.
+
+- :func:`tune_candidate` selects random-survival-forest and DeepSurv
+  hyperparameters by inner cross-validation on the outer-training rows,
+  scored by the inverse-probability-of-censoring-weighted (IPCW) integrated
+  Brier score (IBS).
+- :func:`_fit_with_diagnostic_rule` fits the selected model on the whole outer
+  training fold. For a Bayesian model in confirmatory mode it enforces the
+  diagnostic gate of ADR-027 and the prespecified refit ladder of ADR-023.
+  NUTS is the No-U-Turn Sampler that fits the Bayesian models.
+
+The robustness pipeline and the post-hoc sampler sensitivity reuse
+:func:`_fit_with_diagnostic_rule`, so production execution in all three applies the same gate.
+"""
 
 from __future__ import annotations
 
@@ -33,7 +51,25 @@ def _model_from_parameters(
     target_accept_override: float | None = None,
     noncentered_baseline: bool = False,
 ) -> Any:
-    """Construct one model with explicit sampling controls and a deterministic seed."""
+    """Construct one unfitted model with explicit sampling controls and a deterministic seed.
+
+    Args:
+        model_key: One of :data:`~.options.MODEL_KEYS`.
+        parameters: Hyperparameters for Cox PH, the forest or DeepSurv; ignored
+            for Bayesian models, whose settings come from the protocol.
+        seed: Random state passed to the model.
+        confirmatory_config: Protocol with the ``models`` section.
+        bayes_draws: Posterior draws per chain (Bayesian models only).
+        bayes_tune: Tuning steps per chain (Bayesian models only).
+        bayes_chains: Number of chains (Bayesian models only).
+        target_accept_override: Replaces the prior's configured NUTS target
+            acceptance when not ``None``; used by the refits.
+        noncentered_baseline: Write the baseline log-hazard prior in its
+            equivalent non-centred form; used by the second refit.
+
+    Raises:
+        ValueError: ``model_key`` is not recognised.
+    """
     model_config = confirmatory_config["models"]
     if model_key == "cox_ph":
         return CoxPHModel(l2_reg=float(parameters["l2_reg"]), random_state=seed)
@@ -67,7 +103,13 @@ def _model_from_parameters(
 
 
 def _model_candidates(model_key: str, confirmatory_config: dict[str, Any]) -> list[dict[str, Any]]:
-    """Return the fixed candidate order used to break exact inner-CV ties."""
+    """Return a model's hyperparameter candidates in their frozen order.
+
+    The order breaks exact inner cross-validation ties. Cox PH has one fixed
+    setting and Bayesian models one empty mapping, so neither is tuned; forest
+    and DeepSurv candidates merge the ``fixed`` settings with each
+    ``inner_grid`` entry.
+    """
     config = confirmatory_config["models"]
     if model_key == "cox_ph":
         return [dict(config[model_key])]
@@ -93,22 +135,35 @@ def tune_candidate(
     """Select compact forest or DeepSurv hyperparameters by inner-fold IPCW IBS.
 
     Preprocessing and censoring weights are fitted again within each inner
-    training fold. A candidate is eligible only if all of its folds succeed;
-    list order breaks exact ties in mean IBS. Untuned models have one candidate.
+    training fold, so no inner-validation outcome informs them. A candidate is
+    eligible only if all of its folds succeed; list order breaks exact ties in
+    mean IBS. A model with a single candidate is returned untuned without
+    fitting anything.
 
     Args:
+        model_key: One of :data:`~.options.MODEL_KEYS`.
         candidates: Frozen parameter dictionaries in their prescribed order.
         raw_training: Unprocessed outer-training rows, indexed from zero.
+        train_time: Outer-training follow-up times in the cohort's own unit,
+            in the same row order as ``raw_training``.
+        train_event: Outer-training event indicators (1 = event, 0 = censored).
         feature_spec: Predictor declaration used by every inner-fold processor.
         seed: Seed for inner folds and their model fits.
         confirmatory_config: Frozen model, validation and evaluation settings.
 
     Returns:
-        The selected parameter dictionary and the complete tuning record.
+        The selected parameter dictionary and the complete tuning record,
+        including every candidate's fold scores and failures.
+
+    Raises:
+        RuntimeError: Every candidate had at least one failed or unsupported
+            inner fold.
     """
     if len(candidates) == 1:
         return candidates[0], {"tuned": False, "candidates": []}
 
+    # Inner folds use the same event/time stratification as the outer folds,
+    # applied to the outer-training rows only.
     validation = confirmatory_config["validation"]
     inner_folds = repeated_survival_folds(
         train_time,
@@ -160,7 +215,47 @@ def _fit_with_diagnostic_rule(
     config: dict[str, Any],
     options: RunOptions,
 ) -> tuple[Any, list[dict[str, Any]]]:
-    """Apply at most the frozen remedies and retain diagnostics from every attempt."""
+    """Fit a model on its training rows, refitting a failed Bayesian fit as prescribed.
+
+    Non-Bayesian models, and every model in rehearsal mode, are fitted once
+    and returned whatever their diagnostics. In confirmatory mode a Bayesian
+    fit must pass the diagnostic gate (``diagnostics["converged"]``: zero
+    divergent transitions, maximum rank-normalised potential scale reduction statistic (R-hat)
+    below 1.01, minimum
+    bulk effective sample size (ESS) above 400, Bayesian fraction of missing
+    information (BFMI) at least 0.30 in every chain, and no maximum-tree-depth
+    hit). A failed fit is refitted at most ``failed_fit_rule.maximum_refits``
+    times (two in the frozen protocol), each on a new derived seed:
+
+    - attempt 1: the prior's configured target acceptance and ``bayes_tune``;
+    - attempt 2: target acceptance ``refit_target_accept`` (0.99) and
+      ``bayes_tune`` multiplied by ``refit_tune_multiplier`` (2);
+    - attempt 3: the attempt-2 settings plus the equivalent non-centred
+      baseline log-hazard parameterisation.
+
+    The first attempt that passes is returned. Only a failed diagnostic gate
+    triggers a remedy; a model-construction or fitting exception propagates
+    immediately, without returning attempt records. No other remedy is applied.
+
+    Args:
+        model_key: One of :data:`~.options.MODEL_KEYS`.
+        parameters: Selected hyperparameters from :func:`tune_candidate`.
+        x_train: Preprocessed training features: the outer-training fold here,
+            or a robustness condition's training subset.
+        train_time: Training follow-up times, aligned with ``x_train``.
+        train_event: Training event indicators (1 = event, 0 = censored).
+        seed: Cell seed; each attempt derives its own seed from it.
+        config: Frozen protocol, including ``failed_fit_rule``.
+        options: Run controls; ``options.mode`` switches the gate on.
+
+    Returns:
+        The fitted model and one record per attempt. Attempt numbers in the
+        records start at 1.
+
+    Raises:
+        DiagnosticFailure: Every permitted confirmatory attempt failed the
+            gate. It carries all attempt records.
+    """
     # Resolve the historical package hooks at call time for callers that replace
     # a model factory or trace collector, including the diagnostic-failure tests.
     from . import _model_from_parameters, _posterior_trace_snapshot
@@ -173,6 +268,8 @@ def _fit_with_diagnostic_rule(
             config["models"]["bayesian_cox"]["failed_fit_rule"]["maximum_refits"]
         )
 
+    # ``attempt`` is zero-based here: index 1 is the first refit and index 2
+    # the second, which alone adds the non-centred baseline.
     for attempt in range(maximum_attempts):
         target_override = None
         tune = options.bayes_tune
@@ -203,6 +300,8 @@ def _fit_with_diagnostic_rule(
         }
         if bayesian:
             attempt_record["diagnostics"] = model.diagnostics
+            # A failed attempt keeps a thinned trace and predictive checks so the
+            # failure can be inspected and rendered without refitting.
             if options.mode == "confirmatory" and not model.diagnostics.get("converged", False):
                 attempt_record["posterior_trace_snapshot"] = _posterior_trace_snapshot(model)
                 attempt_record["model_checks"] = {
@@ -231,7 +330,11 @@ def _candidate_record(
     seed: int,
     confirmatory_config: dict[str, Any],
 ) -> dict[str, Any]:
-    """Record every inner-fold score or explicit failure for one fixed candidate."""
+    """Record every inner-fold score or explicit failure for one fixed candidate.
+
+    ``mean_ibs`` is ``None`` unless every inner fold produced a score, which
+    makes the candidate ineligible in :func:`tune_candidate`.
+    """
     scores: list[float] = []
     failures: list[dict[str, Any]] = []
     for inner in inner_folds:
@@ -278,7 +381,12 @@ def _inner_fold_score(
     inner_seed: int,
     confirmatory_config: dict[str, Any],
 ) -> float:
-    """Fit preprocessing and one candidate wholly within an inner-training fold."""
+    """Fit preprocessing and one candidate wholly within an inner-training fold.
+
+    Returns:
+        The candidate's IPCW IBS on the inner-validation rows, with censoring
+        weights and the time grid taken from the inner-training rows.
+    """
     train_idx = inner.train_indices
     valid_idx = inner.validation_indices
     processor = FoldFeaturePreprocessor(feature_spec)
@@ -304,6 +412,8 @@ def _inner_fold_score(
         train_event[train_idx],
     )
     survival = model.predict_survival(x_valid, grid)
+    # Truncate at the last grid time, as the outer evaluation does, so inner
+    # tuning scores the same IBS estimand that is reported.
     valid_time, valid_event = administratively_truncate_for_ipcw(
         train_time[valid_idx], train_event[valid_idx], float(grid[-1])
     )

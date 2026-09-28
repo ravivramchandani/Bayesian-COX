@@ -3,6 +3,13 @@
 Baselines are checked against the concordance range reported for these
 cohorts in the literature, using the active raw-cohort loader and training-only
 outer-fold preprocessing. A model at chance level indicates a pipeline defect.
+
+Covers ``src/models/cox.py`` (Cox proportional hazards, PH),
+``random_survival_forest.py`` (random survival forest, RSF), ``deepsurv.py``
+and ``bayesian/model.py``. Verifies INV-003, that both baselines reach their
+published range, and INV-005, that the Bayesian model's No-U-Turn Sampler
+(NUTS) diagnostics are computed from the trace: R-hat, bulk effective sample
+size (ESS) and the Bayesian fraction of missing information (BFMI).
 """
 
 import numpy as np
@@ -23,11 +30,13 @@ BASELINE_FLOOR = {"gbsg2": 0.62, "whas500": 0.65, "metabric": 0.60}
 
 
 def load(dataset):
+    """Return first-fold training and validation frames with outcomes, and the feature names."""
     return prepare_real_fold(dataset).model_frames()
 
 
 @pytest.mark.parametrize("dataset", sorted(BASELINE_FLOOR))
 def test_cox_ph_reaches_published_range(dataset):
+    """Cox PH validation concordance on the first outer fold reaches the cohort floor (INV-003)."""
     train, test, features = load(dataset)
     model = CoxPHModel().fit(train[features], train["time"], train["event"])
     c, _ = concordance_index(test["time"], test["event"], model.predict_risk(test[features]))
@@ -38,6 +47,7 @@ def test_cox_ph_reaches_published_range(dataset):
 
 @pytest.mark.parametrize("dataset", sorted(BASELINE_FLOOR))
 def test_random_survival_forest_reaches_published_range(dataset):
+    """RSF validation concordance on the first outer fold reaches the cohort floor (INV-003)."""
     train, test, features = load(dataset)
     model = RandomSurvivalForestModel(n_estimators=100, n_jobs=1).fit(
         train[features], train["time"], train["event"]
@@ -47,6 +57,7 @@ def test_random_survival_forest_reaches_published_range(dataset):
 
 
 def test_cox_survival_curves_are_monotone_and_bounded():
+    """Cox PH survival predictions have one row per subject, lie in [0, 1] and never increase."""
     train, test, features = load("gbsg2")
     model = CoxPHModel().fit(train[features], train["time"], train["event"])
 
@@ -59,7 +70,7 @@ def test_cox_survival_curves_are_monotone_and_bounded():
 
 
 def test_cox_hazard_ratios_have_expected_direction():
-    """More positive lymph nodes must not reduce the hazard."""
+    """The GBSG2 Cox coefficient for positive lymph nodes (pnodes) is positive, raising the hazard."""
     train, _, features = load("gbsg2")
     model = CoxPHModel().fit(train[features], train["time"], train["event"])
 
@@ -68,6 +79,7 @@ def test_cox_hazard_ratios_have_expected_direction():
 
 
 def test_cox_proportional_hazards_test_runs():
+    """The Schoenfeld-residual PH test returns one row per feature with its standard columns."""
     train, _, features = load("gbsg2")
     model = CoxPHModel().fit(train[features], train["time"], train["event"])
     table = model.proportional_hazards_test(train[features], train["time"], train["event"])
@@ -76,6 +88,7 @@ def test_cox_proportional_hazards_test_runs():
 
 
 def test_rsf_permutation_importance_ranks_known_predictor():
+    """RSF permutation importance places a lymph-node feature among the top four on GBSG2."""
     train, _, features = load("gbsg2")
     model = RandomSurvivalForestModel(n_estimators=100, n_jobs=1).fit(
         train[features], train["time"], train["event"]
@@ -84,10 +97,14 @@ def test_rsf_permutation_importance_ranks_known_predictor():
         train[features], train["time"], train["event"], n_repeats=3
     )
     top = set(importance.head(4)["feature"])
+    # The primary GBSG2 set has no engineered columns, so only pnodes can match.
     assert {"log_pnodes", "pnodes"} & top
 
 
 def test_deepsurv_reference_fit_is_deterministic_and_predictive():
+    """DeepSurv learns a simulated risk, gives valid pycox survival curves and refits identically."""
+    # Exponential event times with hazard exp(1.5 x1 - 0.8 x2); x3 is noise.
+    # The 0.01 shift keeps every duration strictly positive, as DeepSurv requires.
     rng = np.random.default_rng(17)
     x = rng.normal(size=(100, 3))
     linear_predictor = 1.5 * x[:, 0] - 0.8 * x[:, 1]
@@ -107,6 +124,7 @@ def test_deepsurv_reference_fit_is_deterministic_and_predictive():
     }
     model = DeepSurvModel(**kwargs).fit(frame, time, event)
     risk = model.predict_risk(frame)
+    # In-sample concordance: the fitted rows are also the evaluated rows.
     c_index, _ = concordance_index(time, event, risk)
     assert c_index > 0.65
 
@@ -128,6 +146,7 @@ def test_deepsurv_reference_fit_is_deterministic_and_predictive():
 
 @pytest.mark.parametrize("prior", SUPPORTED_PRIORS)
 def test_bayesian_cox_priors_fit_and_report_diagnostics(prior):
+    """Each prior fits by NUTS, ranks better than chance and reports trace-derived checks (INV-005)."""
     train, test, features = load("gbsg2")
     model = BayesianCoxModel(
         coefficient_prior=prior,
@@ -149,11 +168,14 @@ def test_bayesian_cox_priors_fit_and_report_diagnostics(prior):
     assert "log_lambda" in diagnostics["variables_checked"]
     assert diagnostics["n_parameters_checked"] > len(features)
     assert np.isfinite(diagnostics["bfmi_min"])
+    # The prior check uses at most 512 training rows at four scaled times; the
+    # fitted-survival check uses the three training event-time quartiles.
     assert model.prior_predictive_summary["finite"]
     assert model.prior_predictive_summary["n_covariate_rows"] == min(512, len(train))
     assert len(model.prior_predictive_summary["covariate_population_survival"]) == 4
     assert len(model.posterior_predictive_summary["survival_check"]) == 3
     replication = model.posterior_predictive_summary["replicated_event_counts"]
+    # Two chains of 300 draws pool to 600; replication uses at most 200 of them.
     assert replication["n_posterior_draws"] == 200
     assert replication["total"]["observed"] == train["event"].sum()
     assert np.isfinite(replication["total"]["replicated_mean"])
@@ -161,6 +183,7 @@ def test_bayesian_cox_priors_fit_and_report_diagnostics(prior):
 
 
 def test_bayesian_cox_rejects_unknown_prior():
+    """An unsupported coefficient prior such as Laplace raises ValueError before sampling (ADR-008)."""
     train, _, features = load("gbsg2")
     model = BayesianCoxModel(coefficient_prior="laplace", draws=10, tune=10, chains=1)
     with pytest.raises(ValueError, match="Unknown coefficient prior"):
@@ -168,6 +191,7 @@ def test_bayesian_cox_rejects_unknown_prior():
 
 
 def test_bayesian_noncentered_baseline_remedy_preserves_predictions():
+    """The non-centred baseline remedy samples an offset and yields valid survival curves (ADR-023)."""
     train, test, features = load("gbsg2")
     model = BayesianCoxModel(
         coefficient_prior="normal",
@@ -189,6 +213,7 @@ def test_bayesian_noncentered_baseline_remedy_preserves_predictions():
 
 
 def test_sparsity_priors_expose_an_inclusion_signal():
+    """Only sparsity priors give inclusion signals; group contributions equal E|group linear term|."""
     train, _, features = load("gbsg2")
 
     for prior in ("horseshoe", "spike_slab"):
@@ -208,6 +233,8 @@ def test_sparsity_priors_expose_an_inclusion_signal():
     assert list(contribution.columns) == ["feature", "expected_abs_contribution"]
     assert len(contribution) == len(features)
 
+    # Group the first two model columns together; the expected value is the
+    # per-subject posterior mean of |x_1 beta_1 + x_2 beta_2|.
     selected = train[features].iloc[:4]
     feature_groups = {
         feature: "first_two" if index < 2 else feature for index, feature in enumerate(features)

@@ -1,4 +1,15 @@
-"""Frozen-grid, pairing, censoring and schema tests for robustness analyses."""
+"""Frozen-grid, pairing, censoring and schema tests for robustness analyses.
+
+Covers ``src/pipelines/robustness``: the prespecified condition grids for RQ2
+(information-regime robustness: training size and administrative censoring)
+and for the design and feature sensitivities (ADR-023), paired training
+subsets, per-subject inverse-probability-of-censoring-weighted (IPCW)
+integrated Brier score (IBS) losses, fold-local multiple imputation (MI),
+paired IBS inference, aggregation of the Cox proportional hazards (PH) tests,
+fit counts and runtime projection, and the provenance checks that decide
+whether a run directory may be created, resumed or accepted as complete.
+Frozen evidence is verified at its checkpoint commit (ADR-030).
+"""
 
 from __future__ import annotations
 
@@ -38,12 +49,14 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 def _yaml(path: Path) -> dict:
+    """Parse one YAML file."""
     with path.open(encoding="utf-8") as handle:
         return yaml.safe_load(handle)
 
 
 @pytest.fixture
 def configs() -> tuple[dict, dict]:
+    """The frozen protocol (``confirmatory.yaml``) and cohort schemas (``datasets.yaml``)."""
     return (
         _yaml(PROJECT_ROOT / "config" / "confirmatory.yaml"),
         _yaml(PROJECT_ROOT / "config" / "datasets.yaml"),
@@ -51,6 +64,9 @@ def configs() -> tuple[dict, dict]:
 
 
 def test_fractional_subsets_are_nested_deterministic_and_prior_independent():
+    """Seeded training fractions are reproducible, keep both event classes and are strictly nested."""
+    # Evenly spaced times with alternating event status give eight equal
+    # event/time strata of 15 subjects, so every fraction samples each stratum.
     times = np.linspace(1.0, 120.0, 120)
     events = np.tile([0, 1], 60)
     fractions = [0.25, 0.50, 0.75, 1.0]
@@ -66,6 +82,7 @@ def test_fractional_subsets_are_nested_deterministic_and_prior_independent():
 
 
 def test_administrative_censoring_truncates_train_and_validation_consistently():
+    """A cutoff keeps events at or before it, censors later follow-up there, and None changes nothing."""
     times = np.asarray([2.0, 5.0, 8.0, 12.0])
     events = np.asarray([1, 0, 1, 1])
     truncated_time, truncated_event = apply_administrative_censoring(times, events, 8.0)
@@ -77,6 +94,11 @@ def test_administrative_censoring_truncates_train_and_validation_consistently():
 
 
 def test_individual_ibs_losses_average_to_reference_implementation():
+    """Per-subject IPCW Brier losses average to the reference integrated Brier score."""
+    # Each subject's loss is the trapezoidal average over the grid of
+    # S(t)^2 / G(T) if the subject had an event by t, or (1 - S(t))^2 / G(t)
+    # if still under follow-up after t, where G is the training censoring
+    # survival; a subject censored by t contributes zero at t.
     train_time = np.asarray([2.0, 3.0, 4.0, 6.0, 8.0, 10.0])
     train_event = np.asarray([1, 0, 1, 1, 0, 1])
     validation_time = np.asarray([2.5, 5.0, 7.0, 9.0])
@@ -110,6 +132,10 @@ def test_individual_ibs_losses_average_to_reference_implementation():
 
 
 def test_long_validation_followup_uses_same_ipcw_tau_for_losses_auc_and_uno():
+    """IBS, AUC and Uno's C-index share one truncation time, the last horizon (here tau = 7)."""
+    # The last validation subject is followed to 100, far beyond the last
+    # training time of 10. Untruncated, the reference IBS rejects that time;
+    # after truncation at tau = 7 it is censored just after 7.
     train_time = np.asarray([2.0, 3.0, 4.0, 6.0, 8.0, 10.0])
     train_event = np.asarray([1, 0, 1, 1, 0, 1])
     validation_time = np.asarray([2.5, 5.0, 7.0, 100.0])
@@ -162,6 +188,7 @@ def test_long_validation_followup_uses_same_ipcw_tau_for_losses_auc_and_uno():
 
 
 def test_rq2_grid_is_nonfactorial_and_uses_only_folds_one_and_two(configs):
+    """RQ2 has four training fractions and two full-size truncations, all on folds 1 and 2 (ADR-023)."""
     config, _datasets = configs
     conditions = build_rq2_conditions(config)
     assert len(conditions) == 6
@@ -174,6 +201,9 @@ def test_rq2_grid_is_nonfactorial_and_uses_only_folds_one_and_two(configs):
 
 
 def test_design_grid_is_one_factor_at_a_time_and_feature_names_are_exact(configs):
+    """Prior-scale and interval variants change one factor each; feature sets match the schema (ADR-023)."""
+    # The primary anchor (primary priors, six intervals) runs on folds 1 and 2;
+    # every other design condition runs on fold 1 only.
     config, datasets = configs
     design = build_design_conditions(config)
     assert {(item.prior_scenario, item.n_intervals) for item in design} == {
@@ -192,6 +222,7 @@ def test_design_grid_is_one_factor_at_a_time_and_feature_names_are_exact(configs
         for item in design
         if item is not primary
     )
+    # METABRIC also has the five-imputation stage sensitivity.
     plan = build_condition_plan(config, datasets["metabric"], ("feature",))
     assert {item.feature_set for item in plan} == {
         "primary",
@@ -203,6 +234,8 @@ def test_design_grid_is_one_factor_at_a_time_and_feature_names_are_exact(configs
 
 
 def test_frozen_lean_plan_has_exact_cell_and_fit_count(configs):
+    """The frozen plan has 825 checkpoint cells and 885 Bayesian fits (ADR-023)."""
+    # Fits exceed cells because each five-imputation cell needs five fits.
     config, datasets = configs
     plans = {
         name: build_condition_plan(config, datasets[name], ("rq2", "design", "feature"))
@@ -221,12 +254,17 @@ def test_frozen_lean_plan_has_exact_cell_and_fit_count(configs):
 
 
 def test_effective_information_is_events_over_transformed_columns():
+    """Effective information is training events per processed column; zero columns raise."""
     assert effective_information_ratio(40, 10) == 4.0
     with pytest.raises(ValueError, match="positive"):
         effective_information_ratio(40, 0)
 
 
 def test_runtime_projection_scales_result_blind_mcmc_work(tmp_path: Path):
+    """Runtime projection scales stored fit times by the ratio of Markov chain Monte Carlo work."""
+    # Source work is (100 + 100) x 2 and target work (200 + 200) x 2, a factor
+    # of 2. One 10-second cell projects to 20 s per fit; two fits with the
+    # 1.30 overhead give 52 s.
     manifest = {"run_config": {"bayes_draws": 100, "bayes_tune": 100, "bayes_chains": 2}}
     (tmp_path / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
     cell = {
@@ -262,6 +300,7 @@ def test_runtime_projection_scales_result_blind_mcmc_work(tmp_path: Path):
 
 
 def test_multiple_imputation_is_training_only_and_has_distinct_recorded_seeds(configs):
+    """MI is fitted on training rows only, records the five supplied seeds and marks no validation refit."""
     _config, datasets = configs
     specification = datasets["metabric"]["sensitivity_feature_sets"]["npi_plus_stage"]
     training = {
@@ -275,6 +314,8 @@ def test_multiple_imputation_is_training_only_and_has_distinct_recorded_seeds(co
         "inferred_menopausal_state": ["Post"] * 6,
         "pam50_+_claudin-low_subtype": ["LumA"] * 6,
     }
+    # The two runs differ only in one validation tumour stage, set to 1000;
+    # identical training imputations show that validation rows do not affect the fit.
     validation = {name: values[:2] for name, values in training.items()}
     validation_extreme = copy.deepcopy(validation)
     validation_extreme["tumor_stage"] = [1000.0, np.nan]
@@ -309,6 +350,19 @@ def _fake_cell(
     repeat: int = 1,
     fold: int = 1,
 ) -> dict:
+    """Return a minimal, correctly hashed, complete Bayesian cell for one RQ2 condition.
+
+    Args:
+        model_key: One of ``BAYESIAN_MODEL_KEYS``.
+        condition: RQ2 condition name, for example ``"fraction_100_observed"``.
+        losses: Individual IBS losses, one per validation subject.
+        repeat: Outer repeat number.
+        fold: Outer fold number.
+    """
+    # Four validation subjects in two event strata; the stored information
+    # ratio equals events_train / degrees of freedom, 1 / 2, so schema
+    # validation passes. Apart from its ID and analysis name, the condition
+    # record is the same for every RQ2 condition.
     cell = {
         "schema_version": "1.0.0",
         "analysis_id": "confirmatory_v1_robustness",
@@ -350,6 +404,9 @@ def _fake_cell(
 
 
 def test_result_schema_and_paired_difference_in_differences():
+    """Valid cells yield one complete RQ2 difference-in-differences per prior pair."""
+    # Constant losses per model, reduced and full, for the three Bayesian
+    # priors; the three prior pairs give three difference-in-differences.
     cells = []
     for model_index, model in enumerate(BAYESIAN_MODEL_KEYS):
         full = [0.10 + model_index * 0.01] * 4
@@ -376,6 +433,7 @@ def test_result_schema_and_paired_difference_in_differences():
 
 
 def test_cell_hash_tampering_is_rejected():
+    """Editing a cell without recomputing its content hash fails validation."""
     cell = _fake_cell("bayesian_normal", "fraction_100_observed", [0.1] * 4)
     broken = copy.deepcopy(cell)
     broken["events_train"] = 99
@@ -384,6 +442,9 @@ def test_cell_hash_tampering_is_rejected():
 
 
 def test_ph_aggregation_recomputes_holm_without_fitting(tmp_path: Path):
+    """Stored Cox PH tests are Holm-adjusted per fit without refitting and framed as a limitation."""
+    # With p-values 0.01 and 0.20, Holm multiplies the smaller by 2 (0.02),
+    # which rejects at 0.05.
     cell = {
         "dataset": "toy",
         "repeat": 1,
@@ -410,6 +471,7 @@ def test_ph_aggregation_recomputes_holm_without_fitting(tmp_path: Path):
 
 
 def _rehearsal_options(output_root: Path):
+    """Rehearsal options for one WHAS500 RQ2 fold, writing under ``output_root``."""
     from src.pipelines.robustness import RobustnessOptions
 
     return RobustnessOptions(
@@ -429,6 +491,7 @@ def _rehearsal_options(output_root: Path):
 
 
 def test_execution_manifest_records_all_current_modules(configs, tmp_path):
+    """The run manifest hashes every current src module, not the retired single-file module."""
     from src.pipelines.robustness.provenance import build_execution_manifest
 
     config, _datasets = configs
@@ -445,6 +508,7 @@ def test_execution_manifest_records_all_current_modules(configs, tmp_path):
 
 
 def test_code_identity_separates_runs_and_changed_runtime_cannot_resume(tmp_path, monkeypatch):
+    """A changed runtime blocks resume, and changed code gets a separate run directory."""
     from src.pipelines.robustness import provenance
 
     actual_config = {"protocol": {"analysis_id": "toy"}}
@@ -457,6 +521,7 @@ def test_code_identity_separates_runs_and_changed_runtime_cannot_resume(tmp_path
     }
 
     def current_manifest(*_args):
+        """Return the test's current manifest, hashed as the real builder would."""
         current = copy.deepcopy(manifest)
         current["manifest_content_sha256"] = canonical_json_hash(current)
         return current
@@ -482,8 +547,11 @@ def test_code_identity_separates_runs_and_changed_runtime_cannot_resume(tmp_path
 
 
 def test_unfinished_historical_run_is_not_resumed_by_current_code(tmp_path, monkeypatch):
+    """Resume refuses an unfinished run in the historical config-only directory and leaves it intact."""
     from src.pipelines.robustness import provenance
 
+    # Historical runs were named by the configuration hash alone; a manifest
+    # without completion.json marks one as unfinished.
     actual_config = {"protocol": {"analysis_id": "toy"}}
     digest = canonical_json_hash(actual_config)
     monkeypatch.setattr(
@@ -523,8 +591,14 @@ def test_unfinished_historical_run_is_not_resumed_by_current_code(tmp_path, monk
 def test_completed_historical_verification_is_read_only_and_rejects_rehashed_wrong_cells(
     tmp_path, monkeypatch, wrong_body, message
 ):
+    """Completed-run checks write nothing and reject cells re-hashed with a wrong identity (ADR-030)."""
     from src.pipelines.robustness import provenance
 
+    # Build a minimal completed production run: three RQ2 cells, empty
+    # aggregates and a consistent completion record. The frozen-evidence check
+    # is replaced by a stub whose frozen inputs equal the manifest's study
+    # inputs, so those inputs (including src/retired.py, absent from the
+    # project) count as historical and are not re-hashed from the project.
     project = tmp_path / "project"
     run_dir = tmp_path / "robustness"
     source = tmp_path / "frozen_confirmatory"
@@ -543,6 +617,7 @@ def test_completed_historical_verification_is_read_only_and_rejects_rehashed_wro
     checked = []
 
     def verify_checkpoint(_project_root, expected=None):
+        """Record the requested checkpoint and return the stub freeze."""
         checked.append(expected)
         return freeze
 
@@ -635,6 +710,7 @@ def test_completed_historical_verification_is_read_only_and_rejects_rehashed_wro
 
 
 def test_completed_production_plan_must_match_all_825_frozen_cells(configs, tmp_path):
+    """Require the frozen robustness plan to contain all 825 cell identities."""
     from src.pipelines.robustness import provenance
     from src.utils.io import json_safe
 

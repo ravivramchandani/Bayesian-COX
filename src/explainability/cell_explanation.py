@@ -1,8 +1,32 @@
 """Compute exact linear SHAP and read grouped posterior contributions for frozen cells.
 
-Features come from raw cohorts and stored preprocessing. Selected subjects share
+SHAP means Shapley additive explanations. Features come from raw cohorts and
+stored preprocessing. Selected subjects share
 a training background across Bayesian and Cox scores; signed contributions are
-grouped before their absolute magnitude is averaged."""
+grouped before their absolute magnitude is averaged.
+
+For one selection of a Bayesian cell, :func:`explain_selection` builds two
+grouped importance tables and compares them:
+
+- *Intrinsic*: the posterior expected absolute group contribution
+  ``E_s|sum_{j in g} x_ij beta_j^(s)|``, the average over posterior draws
+  ``s`` of the size of the group's contribution to subject ``i``'s log
+  relative hazard, then averaged over the selected subjects. It uses the
+  whole posterior and measures each contribution from ``x = 0`` on the
+  transformed feature scale. The confirmatory cell stored these values for
+  every validation subject when it was fitted, so this module only averages
+  the stored rows.
+- *Post-hoc*: grouped mean absolute SHAP on the posterior-mean risk score
+  ``x . E(beta)``, measured from the background mean. It summarises one
+  point estimate of the model, not the posterior.
+
+The two therefore describe the same fitted model in different ways, and their
+agreement is model-conditional. The Cox comparison keeps the intrinsic table
+and replaces the post-hoc one with SHAP on the paired Cox coefficients.
+
+:func:`prepare_cell_features` is called once per cell and
+:func:`explain_selection` once per selection, both from
+:mod:`src.explainability.frozen_cells`."""
 
 from __future__ import annotations
 
@@ -29,6 +53,9 @@ from src.explainability.source_run import (
     feature_specification,
 )
 
+# Key under a Bayesian cell's model_details that holds the stored per-subject
+# group contributions, and the two labels recorded in each comparison row to
+# say where its intrinsic table came from.
 STORED_GROUP_CONTRIBUTION_KEY = "posterior_expected_absolute_group_contribution_by_subject"
 STORED_SOURCE = "stored_exact_full_posterior_group_contribution"
 LEGACY_SOURCE = "legacy_termwise_reconstruction_rehearsal_only"
@@ -83,7 +110,12 @@ class CellFeatures:
 
 
 def _posterior_mean_beta(cell: dict[str, Any], feature_names: list[str]) -> np.ndarray:
-    """Read the stored posterior-mean coefficients in feature order."""
+    """Read the stored posterior-mean coefficients in feature order.
+
+    Raises:
+        ValueError: If the coefficients do not match the features or are not
+            finite.
+    """
     beta_mapping = cell["model_details"].get("posterior_mean_beta")
     if not isinstance(beta_mapping, dict) or set(beta_mapping) != set(feature_names):
         raise ValueError("cell posterior-mean coefficients do not match its features")
@@ -100,6 +132,14 @@ def _legacy_beta_abs(
 
     A confirmatory cell must store its exact group contributions, so this
     raises instead of falling back.
+
+    Returns:
+        ``(None, [])`` when the cell stores group contributions; otherwise the
+        result of :func:`~src.explainability.posterior_analysis.recover_posterior_mean_abs_beta`.
+
+    Raises:
+        ValueError: If a confirmatory run's cell lacks stored group
+            contributions.
     """
     exact_group_record = cell["model_details"].get(STORED_GROUP_CONTRIBUTION_KEY)
     if (
@@ -122,6 +162,24 @@ def prepare_cell_features(
 
     Restoring the preprocessor checks its state hash, so the current feature
     specification must be the one the cell was fitted with.
+
+    Args:
+        source: The verified run.
+        cell: The Bayesian cell.
+        cohort: The cell's raw cohort.
+        lineage: The cell's verified subject lists.
+
+    Returns:
+        The transformed training and validation rows in cell order, the
+        posterior-mean coefficients and, for rehearsal cells only, the
+        recovered ``E(|beta_j|)``.
+
+    Raises:
+        ValueError: If the preprocessing state hash or the coefficients fail
+            their checks, or a confirmatory cell lacks stored group
+            contributions.
+        RuntimeError: If a rehearsal cell's term-wise contributions cannot be
+            reconstructed.
     """
     dataset_config = source.dataset_configs[str(cell["dataset"])]
     specification = feature_specification(dataset_config, source.feature_set)
@@ -153,7 +211,8 @@ def stored_grouped_posterior_contribution(
 
     The cell stores ``E_s|sum_{j in g} x_ij beta_j^(s)|`` for every
     validation subject ``i`` and group ``g``, computed from the full
-    posterior when the model was fitted.
+    posterior when the model was fitted. Its rows follow the cell's
+    validation order, which is why selection positions index them directly.
 
     Args:
         model_details: The cell's ``model_details``.
@@ -165,6 +224,11 @@ def stored_grouped_posterior_contribution(
         ``group`` and ``expected_abs_contribution``, largest first with ties
         broken by group name, or ``None`` when the cell stores no group
         contributions.
+
+    Raises:
+        ValueError: If the stored record is not a mapping, its groups differ
+            from the preprocessing groups, or its values have the wrong shape,
+            are negative or are not finite.
     """
     record = model_details.get(STORED_GROUP_CONTRIBUTION_KEY)
     if record is None:
@@ -195,7 +259,11 @@ def _grouped_intrinsic(
     selection: dict[str, Any],
     x_explain: pd.DataFrame,
 ) -> tuple[pd.DataFrame, str]:
-    """Return the grouped posterior contribution of a selection and where it came from."""
+    """Return the grouped posterior contribution of a selection and where it came from.
+
+    Stored full-posterior values are used when present; otherwise the
+    term-wise rehearsal reconstruction is used and labelled as such.
+    """
     grouped = stored_grouped_posterior_contribution(
         cell["model_details"],
         selection["validation_positions"],
@@ -247,6 +315,11 @@ def explain_selection(
     ),
 ) -> tuple[dict[str, Any], dict[str, Any] | None]:
     """Explain one selection with the posterior mean and, if available, with Cox.
+
+    The Bayesian row compares the intrinsic table with SHAP on the
+    posterior-mean coefficients. The Cox row compares the same intrinsic
+    table with SHAP on the paired Cox coefficients, using the same subjects
+    and background, so the two rows differ only in the post-hoc model.
 
     Args:
         cell: The Bayesian cell.

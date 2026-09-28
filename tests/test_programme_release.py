@@ -1,4 +1,12 @@
-"""Archive-format and fail-closed tests; fixtures contain no clinical results."""
+"""Archive-format and fail-closed tests; fixtures contain no clinical results.
+
+Covers ``scripts/package_programme_release.py``, which packs verified programme
+evidence into deterministic private release archives, and
+``scripts/restore_programme_release.py``, which verifies and restores them. The
+checks cover path safety, byte-identical archives, exact file inventories, the
+``release_ready`` seal, committed-code identity, write-once restoration and the
+cell keys of the reproduction report.
+"""
 
 import hashlib
 import io
@@ -13,17 +21,22 @@ from scripts import restore_programme_release as restore
 
 
 def write_json(path, value):
+    """Write ``value`` as key-sorted JSON and return the file's SHA-256 digest."""
     path.write_text(json.dumps(value, sort_keys=True))
     return package.sha256_file(path)
 
 
+# Traversal, absolute, empty-segment, dot-segment, backslash, drive-letter,
+# control-character and empty names.
 @pytest.mark.parametrize("name", ["../x", "/x", "a/../x", "a//x", "a/./x", "a\\x", "C:x", "x\ny", "x\x00y", ""])
 def test_relative_paths_reject_traversal_and_nonportable_names(name):
+    """Unsafe, non-canonical or non-portable relative paths are rejected."""
     with pytest.raises(ValueError):
         package.safe_relative(name)
 
 
 def test_archives_are_byte_identical_despite_source_metadata(tmp_path):
+    """Archives of the same content are byte-identical after the source's permissions change."""
     source = tmp_path / "source"
     source.write_bytes(b"archive format test")
     first, second = tmp_path / "first.tar.gz", tmp_path / "second.tar.gz"
@@ -36,6 +49,8 @@ def test_archives_are_byte_identical_despite_source_metadata(tmp_path):
 
 @pytest.mark.parametrize("kind", ["traversal", "symlink", "hardlink", "duplicate", "extra"])
 def test_restore_rejects_unsafe_archive_members(tmp_path, kind):
+    """Archive inspection rejects traversal, link, duplicate and undeclared members."""
+    # Only "allowed" is declared; each kind adds one defect to the archive.
     path = tmp_path / "unsafe.tar.gz"
     with tarfile.open(path, "w:gz") as archive:
         member = tarfile.TarInfo("../escape" if kind == "traversal" else "allowed")
@@ -56,6 +71,7 @@ def test_restore_rejects_unsafe_archive_members(tmp_path, kind):
 
 
 def test_inventory_rejects_added_files_changed_bytes_and_links(tmp_path):
+    """Inventory verification rejects changed bytes, and a symbolic link cannot be inventoried."""
     root = tmp_path / "artifact"
     root.mkdir()
     (root / "first").write_bytes(b"first")
@@ -70,6 +86,7 @@ def test_inventory_rejects_added_files_changed_bytes_and_links(tmp_path):
 
 
 def test_pending_analysis_report_cannot_be_packaged(tmp_path):
+    """Packaging refuses a record without the release_ready status and creates no output."""
     path = tmp_path / "analysis.json"
     write_json(path, {"status": "analysis_and_rendering_verified_pending_final_visual_qa"})
     with pytest.raises(ValueError, match="release_ready"):
@@ -78,6 +95,7 @@ def test_pending_analysis_report_cannot_be_packaged(tmp_path):
 
 
 def test_committed_code_must_match_sealed_actual_bytes(tmp_path):
+    """Committed code is accepted only while the working-tree file still matches its seal."""
     subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
     (tmp_path / "source.py").write_bytes(b"print('format fixture')\n")
     subprocess.run(["git", "add", "source.py"], cwd=tmp_path, check=True)
@@ -94,6 +112,7 @@ def test_committed_code_must_match_sealed_actual_bytes(tmp_path):
 
 
 def test_directory_claim_never_replaces_an_existing_empty_directory(tmp_path):
+    """Publishing never takes over an existing destination, even an empty one."""
     stage, destination = tmp_path / "stage", tmp_path / "destination"
     stage.mkdir()
     (stage / "file").write_bytes(b"archive fixture")
@@ -104,7 +123,11 @@ def test_directory_claim_never_replaces_an_existing_empty_directory(tmp_path):
 
 
 def format_release(tmp_path):
-    """Construct only an archive-format fixture, without claiming scientific gates."""
+    """Construct only an archive-format fixture, without claiming scientific gates.
+
+    Returns:
+        The release directory and the stand-in original-run directory.
+    """
     release, original = tmp_path / "release", tmp_path / "original"
     release.mkdir()
     original.mkdir()
@@ -118,12 +141,16 @@ def format_release(tmp_path):
     code_name = "programme-committed-code.tar.gz"
     inventory = package.write_archive(release / code_name, {"code/script.py": b"code fixture"})
     assets[code_name] = {"sha256": package.sha256_file(release / code_name), "files": inventory}
+    # One placeholder file per sealed artefact, packed into its group archive.
+    # Restore compares the artefact descriptors but never reads their roots.
     for archive_name, names in package.ARCHIVE_GROUPS.items():
         members = {f"{name}/format_fixture": name.encode() for name in names}
         inventory = package.write_archive(release / archive_name, members)
         assets[archive_name] = {"sha256": package.sha256_file(release / archive_name), "files": inventory}
         for name in names:
             seal["artifacts"][name] = {"root": "/unit-format-fixture", "files": {"format_fixture": hashlib.sha256(name.encode()).hexdigest()}}
+    # The seal cites the verified report and passed visual quality assurance
+    # (QA) by hash; the manifest then cites the seal.
     metadata = {}
     metadata["programme_analysis_verified.json"] = write_json(release / "programme_analysis_verified.json", {"fixture": "archive-format-only"})
     metadata["programme_visual_qa.json"] = write_json(release / "programme_visual_qa.json", {"status": "passed", "fixture": "archive-format-only"})
@@ -143,14 +170,17 @@ def format_release(tmp_path):
 
 
 def test_restore_roundtrip_is_exact_write_once_and_original_is_unchanged(tmp_path):
+    """Restoration is exact and write-once, and never alters the original run."""
     release, original = format_release(tmp_path)
     before = package.directory_inventory(original)
     manifest = restore.verify_release(release, original)
     destination = tmp_path / "restored"
     assert restore.restore_release(release, original, destination) == destination
     assert package.directory_inventory(destination) == restore.restored_inventory(release, manifest)
+    # A second restore into the existing directory only verifies it.
     assert restore.restore_release(release, original, destination) == destination
     assert package.directory_inventory(original) == before
+    # An edited restored file is detected and left as it is, not overwritten.
     (destination / "reproduction/format_fixture").write_bytes(b"edited")
     with pytest.raises(ValueError):
         restore.restore_release(release, original, destination)
@@ -158,6 +188,7 @@ def test_restore_roundtrip_is_exact_write_once_and_original_is_unchanged(tmp_pat
 
 
 def test_verify_release_rejects_changed_asset_and_original(tmp_path):
+    """Release verification rejects a changed original-run file and a changed archive."""
     release, original = format_release(tmp_path)
     (original / "source").write_bytes(b"changed")
     with pytest.raises(ValueError, match="inventory"):
@@ -170,8 +201,11 @@ def test_verify_release_rejects_changed_asset_and_original(tmp_path):
 
 
 def test_reproduction_uses_model_key_with_human_readable_model_label(tmp_path, monkeypatch):
+    """Reproduction coverage is matched on ``model_key``, not the human-readable model label."""
     from types import SimpleNamespace
 
+    # One source cell whose label and key differ. The report repeats that
+    # cell's key 450 times to pass the count check.
     source = SimpleNamespace(cells=[("cell", {
         "dataset": "gbsg2", "model": "Bayesian Cox (normal)", "model_key": "bayesian_normal",
         "repeat": 0, "fold": 0,

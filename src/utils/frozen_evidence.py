@@ -1,7 +1,10 @@
 """Verify historical evidence against its Git checkpoint and live study inputs.
 
 The frozen analysis records its original code, including retired modules.
-Those blobs stay verifiable after refactoring. Protocol, data and lock files
+``checkpoint_blob`` reads historical file bytes without changing the checkout;
+``verify_checkpoint_inputs`` checks their SHA-256 (256-bit Secure Hash
+Algorithm) digests. ``verify_frozen_evidence`` also checks the live freeze and
+protected study inputs. Protocol, data and lock files
 must also retain their recorded bytes in the working tree.
 """
 
@@ -32,7 +35,20 @@ LIVE_STUDY_INPUTS = frozenset(
 def checkpoint_blob(
     project_root: Path, relative: str, *, checkpoint: str = CHECKPOINT_COMMIT
 ) -> bytes:
-    """Read a required file from a checkpoint without checking out its code."""
+    """Read required file bytes from Git without checking out historical code.
+
+    Args:
+        project_root: Checkout containing the requested Git history.
+        relative: Non-empty repository-relative path without parent traversal.
+        checkpoint: Commit or other Git revision containing that file.
+
+    Returns:
+        The exact bytes stored at the checkpoint path.
+
+    Raises:
+        ValueError: The path is absolute, empty or contains ``..`` components.
+        RuntimeError: Git cannot read the required checkpoint input.
+    """
     path = PurePosixPath(relative)
     if path.is_absolute() or ".." in path.parts or not path.parts:
         raise ValueError(f"invalid checkpoint input path: {relative!r}")
@@ -56,7 +72,20 @@ def verify_checkpoint_inputs(
     *,
     checkpoint: str = CHECKPOINT_COMMIT,
 ) -> None:
-    """Reject missing or altered checkpoint blobs in a recorded input map."""
+    """Reject missing or altered checkpoint blobs in a recorded input map.
+
+    Args:
+        project_root: Checkout containing the checkpoint history.
+        expected: Repository-relative paths mapped to expected SHA-256 digests.
+        checkpoint: Git revision against which every file is verified.
+
+    Returns:
+        None when every recorded blob matches.
+
+    Raises:
+        ValueError: A recorded path is invalid.
+        RuntimeError: The map is empty, a blob is unavailable, or a digest differs.
+    """
     if not expected:
         raise RuntimeError("frozen evidence has no recorded inputs")
     changed = []
@@ -83,6 +112,11 @@ def verify_frozen_evidence(
 
     Returns:
         The original freeze record, whose content hash remains unchanged.
+
+    Raises:
+        ValueError: A checkpoint input path is invalid or freeze JSON is malformed.
+        RuntimeError: The freeze lacks a valid hash, result-blind attestation
+            or input map, expected inputs differ, or any protected bytes differ.
     """
     freeze_bytes = checkpoint_blob(
         project_root, "config/protocol_freeze.json", checkpoint=checkpoint

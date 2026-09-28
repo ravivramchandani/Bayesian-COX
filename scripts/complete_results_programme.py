@@ -1,4 +1,44 @@
-"""Complete the authorised refits, evidence checks and result bundles from pinned code."""
+"""Complete the authorised refits, evidence checks and result bundles from pinned code.
+
+This coordinator runs the downstream stages that follow the closed
+confirmatory run, as child processes of the scripts in this directory, and
+records one verified summary. It must be started from a detached checkout
+with no changes to tracked files, and it fails if any ``src`` or ``scripts``
+module changes before the end.
+
+Stages, in order:
+
+1. verify the locked environment, the frozen confirmatory run, the frozen study
+   inputs and the explainability result;
+2. regenerate all 450 confirmatory cells with
+   ``reproduce_confirmatory_cells.py`` in a background thread, while waiting
+   for the frozen robustness run (825 cells), which is fitted by a separate
+   supervisor, to complete and verify;
+3. verify the environment again and run the 75-cell ADR-032 sampler
+   sensitivity with ``run_horseshoe_sampler_sensitivity.py``;
+4. render the confirmatory package, including robustness and explanation, and
+   the separate post-hoc package, then verify both bundles' outputs, sources
+   and renderer code.
+
+Writes, under ``--output-dir`` (which must lie outside the source and
+robustness runs): ``programme.lock``, ``programme_manifest.json`` (code commit,
+code hashes and inputs), ``logs/``, ``reproduction/``,
+``robustness_progress.json``, ``posthoc_sampler/``, ``rendered_confirmatory/``,
+``rendered_posthoc_sampler/`` and finally ``programme_analysis_verified.json``,
+whose status still awaits visual quality assurance (QA). A failure writes
+``programme_failure.json`` and re-raises the error.
+
+A rerun with the same output resumes: completed stages are verified rather
+than repeated, and an interrupted render is moved to ``interrupted_renders/``.
+The output lock is passed to every child stage, so while any child from a
+crashed coordinator is still running, a second coordinator cannot start on the
+same output.
+
+Example:
+    python scripts/complete_results_programme.py --source-dir <confirmatory run> \
+        --robustness-dir <robustness run> --explanation <explainability JSON> \
+        --output-dir <programme output>
+"""
 
 from __future__ import annotations
 
@@ -23,7 +63,20 @@ from src.utils.reproducibility import canonical_json_hash, sha256_file
 
 
 def acquire_programme_lock(output: Path) -> TextIO:
-    """Reject duplicates until the coordinator and its inherited child handles close."""
+    """Reject duplicates until the coordinator and its inherited child handles close.
+
+    The lock is an exclusive ``flock`` on ``<output>/programme.lock``, which
+    then records the coordinator's process identifier.
+
+    Args:
+        output: Existing programme output directory containing the lock file.
+
+    Returns:
+        The open lock file; the lock is held until every copy of it closes.
+
+    Raises:
+        RuntimeError: If another process already holds the lock.
+    """
     handle = (output / "programme.lock").open("a+", encoding="utf-8")
     try:
         fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -38,7 +91,18 @@ def acquire_programme_lock(output: Path) -> TextIO:
 
 
 def run_logged(arguments: list[str], log_path: Path, *, lock_fd: int | None = None) -> None:
-    """Require a child stage to succeed, preserving its log and any execution lock."""
+    """Require a child stage to succeed, preserving its log and any execution lock.
+
+    Args:
+        arguments: Script path and arguments, run with this interpreter from
+            the repository root.
+        log_path: File to which the child's combined output is appended.
+        lock_fd: Descriptor of the programme lock, passed to the child so that
+            it keeps holding the lock if the coordinator dies.
+
+    Raises:
+        RuntimeError: If the child exits with a non-zero status.
+    """
     log_path.parent.mkdir(parents=True, exist_ok=True)
     with log_path.open("a", encoding="utf-8") as handle:
         completed = subprocess.run(
@@ -65,7 +129,23 @@ def load_reproduction_driver():
 
 
 def verify_reproduction(source_dir: Path, cells_dir: Path, report_path: Path) -> dict:
-    """Verify all 450 saved refits and their code/source checkpoint independently."""
+    """Verify all 450 saved refits and their code/source checkpoint independently.
+
+    The comparison is repeated here from the saved refits, rather than taken
+    from the child's report, and the report must agree with it.
+
+    Args:
+        source_dir: Frozen confirmatory run.
+        cells_dir: Directory of saved refits (``--keep-cells``).
+        report_path: The reproduction report.
+
+    Returns:
+        The verified report.
+
+    Raises:
+        RuntimeError: If any cell is missing, extra or different, or the
+            report's hash, counts, provenance or label is wrong.
+    """
     driver = load_reproduction_driver()
     keys = driver.select_cells(source_dir, "all")
     checkpoint = driver.prepare_reproduction_checkpoint(source_dir, keys, cells_dir, resume=True)
@@ -99,7 +179,20 @@ def verify_reproduction(source_dir: Path, cells_dir: Path, report_path: Path) ->
 
 
 def refit_all(source_dir: Path, output: Path, workers: int, *, lock_fd: int | None = None) -> dict:
-    """Run or verify the full 450-cell reproduction in its own output directory."""
+    """Run or verify the full 450-cell reproduction in its own output directory.
+
+    The child runs only if ``reproduction/verification.json`` does not exist,
+    and resumes from an existing checkpoint.
+
+    Args:
+        source_dir: Immutable 450-cell confirmatory source run.
+        output: External programme output root.
+        workers: Number of refitting child processes.
+        lock_fd: Inherited programme-lock descriptor, or None.
+
+    Returns:
+        The verified reproduction report.
+    """
     cells = output / "reproduction/cells"
     report = output / "reproduction/verification.json"
     if not report.exists():
@@ -129,7 +222,24 @@ def wait_for_robustness(
     refits=None,
     supervisor_pid: int | None = None,
 ) -> None:
-    """Wait for the existing frozen supervisor, then require its exact full grid."""
+    """Wait for the existing frozen supervisor, then require its exact full grid.
+
+    This function fits nothing. It polls once a minute and writes
+    ``robustness_progress.json``.
+
+    Args:
+        robustness_dir: The frozen robustness run being completed elsewhere.
+        source_dir: Frozen confirmatory run used to verify the robustness run.
+        output: Programme output directory.
+        refits: The background reproduction future; its failure stops the
+            wait.
+        supervisor_pid: Process identifier of the robustness supervisor; if
+            that process has exited before completion, the wait fails.
+
+    Raises:
+        RuntimeError: If the supervisor exits early or the completed run does
+            not hold all 825 cells.
+    """
     from src.pipelines.robustness import verify_completed_robustness_run
 
     while not (robustness_dir / "completion.json").is_file():
@@ -178,7 +288,25 @@ def verify_rendered_bundle(
     expected_optional_sources: list | None = None,
     expected_source_hashes: dict | None = None,
 ) -> dict:
-    """Verify a complete output inventory and its exact source/code lineage."""
+    """Verify a complete output inventory and its exact source/code lineage.
+
+    Args:
+        directory: Rendered bundle containing ``lineage.json``.
+        source_dir: Run the bundle was rendered from.
+        posthoc: Whether this is the post-hoc sampler bundle, whose lineage
+            has a different format from the confirmatory one.
+        expected_optional_sources: Explanation and robustness references that
+            the confirmatory lineage must list exactly.
+        expected_source_hashes: Verified hash of every source artefact that a
+            confirmatory output may cite.
+
+    Returns:
+        The verified lineage record.
+
+    Raises:
+        RuntimeError: If the lineage hash, evidence label, sources, output
+            files or renderer code hashes differ.
+    """
     from src.rendering.verification import _safe_child
 
     lineage = json.loads((directory / "lineage.json").read_text())
@@ -235,7 +363,18 @@ def verify_rendered_bundle(
 def sampler_sensitivity(
     source_dir: Path, output: Path, workers: int, *, lock_fd: int | None = None
 ) -> Path:
-    """Run all 75 post-hoc cells after the original six-worker production finishes."""
+    """Run all 75 post-hoc cells after the original six-worker production finishes.
+
+    Args:
+        source_dir: Immutable confirmatory source supplying all 75 horseshoe cells.
+        output: External programme output root.
+        workers: Number of sensitivity-fitting processes.
+        lock_fd: Inherited programme-lock descriptor, or None.
+
+    Returns:
+        The single completed sensitivity run directory under
+        ``<output>/posthoc_sampler``.
+    """
     root = output / "posthoc_sampler"
     arguments = [
         "scripts/run_horseshoe_sampler_sensitivity.py",
@@ -256,7 +395,14 @@ def sampler_sensitivity(
 
 
 def preserve_partial_render(directory: Path) -> None:
-    """Keep an interrupted pure render and give its retry a fresh directory."""
+    """Keep an interrupted pure render and give its retry a fresh directory.
+
+    A non-empty render directory without ``lineage.json`` is renamed to the
+    next free ``interrupted_renders/<name>_NNN`` beside it.
+
+    Args:
+        directory: Render directory whose missing lineage identifies an interrupted output.
+    """
     if not directory.exists() or (directory / "lineage.json").exists():
         return
     if not any(directory.iterdir()):
@@ -272,7 +418,12 @@ def preserve_partial_render(directory: Path) -> None:
 
 
 def write_or_verify_result(path: Path, record: dict) -> None:
-    """Keep a verified final result immutable when a completed programme resumes."""
+    """Keep a verified final result immutable when a completed programme resumes.
+
+    Args:
+        path: Final programme record path.
+        record: Verified mapping that an existing file must match exactly.
+    """
     if path.exists():
         if json.loads(path.read_text()) != record:
             raise RuntimeError("existing verified programme result differs")
@@ -281,7 +432,19 @@ def write_or_verify_result(path: Path, record: dict) -> None:
 
 
 def main() -> int:
-    """Execute long stages from an immutable detached checkout and record readiness."""
+    """Execute long stages from an immutable detached checkout and record readiness.
+
+    Returns:
+        Exit status 0 once ``programme_analysis_verified.json`` is written or
+        matches.
+
+    Raises:
+        ValueError: If a worker count is below 1 or the output lies inside
+            the source or robustness run.
+        RuntimeError: If the checkout is on a branch, has tracked changes, or
+            belongs to a different programme checkpoint, or if any stage or
+            verification fails.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-dir", required=True, type=Path)
     parser.add_argument("--robustness-dir", required=True, type=Path)
@@ -361,6 +524,8 @@ def main() -> int:
         verify_frozen_evidence(PROJECT_ROOT, preflight.manifest["input_sha256"])
         verify_explainability_artifact(explanation, preflight)
         del preflight
+        # The reproduction and the robustness wait overlap because neither
+        # depends on the other; the sampler stage starts only after robustness.
         with ThreadPoolExecutor(max_workers=1) as pool:
             full_refits = pool.submit(
                 refit_all, source, output, args.reproduction_workers, lock_fd=lock_fd
@@ -381,6 +546,7 @@ def main() -> int:
         )
         from src.utils.frozen_evidence import verify_frozen_evidence
 
+        # Verify every source again after the long stages and before rendering.
         frozen = verify_frozen_run(source)
         verify_frozen_evidence(PROJECT_ROOT, frozen.manifest["input_sha256"])
         explanation_record, explanation_ref = verify_explainability_artifact(explanation, frozen)

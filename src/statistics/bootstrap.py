@@ -1,4 +1,10 @@
-"""Paired event-stratified inference and the legacy metric bootstrap interface."""
+"""Paired event-stratified inference and a legacy metric bootstrap.
+
+:func:`paired_event_stratified_bootstrap` resamples aligned outcomes and
+predictions to obtain a percentile interval for a signed metric difference.
+:class:`BootstrapResampler` retains an unstratified compatibility interface
+that returns metric samples using the evaluated sample for censoring weights.
+"""
 
 import logging
 from collections.abc import Callable
@@ -14,7 +20,15 @@ logger = logging.getLogger(__name__)
 
 @dataclass(frozen=True)
 class PairedBootstrapResult:
-    """Paired metric difference from an event-stratified subject bootstrap."""
+    """Signed metric difference and event-stratified bootstrap uncertainty.
+
+    ``observed_difference`` is metric A minus metric B on the original sample.
+    ``bootstrap_mean_difference`` and ``bootstrap_standard_error`` are the
+    mean and sample standard deviation of successful bootstrap differences.
+    ``confidence_lower``/``confidence_upper`` are percentile bounds at
+    ``confidence_level``. ``n_bootstraps`` records attempts and ``n_successful``
+    records finite, estimable replicates.
+    """
 
     observed_difference: float
     bootstrap_mean_difference: float
@@ -26,13 +40,18 @@ class PairedBootstrapResult:
     n_successful: int
 
     def to_dict(self) -> dict[str, float | int]:
-        """Return a JSON-serialisable representation."""
+        """Return the recorded bootstrap fields as a plain dictionary.
+
+        Returns:
+            JSON-serialisable scalar values keyed by the dataclass field names.
+        """
         return asdict(self)
 
 
 def _validate_paired_predictions(
     predictions_a: np.ndarray, predictions_b: np.ndarray, n_samples: int
 ) -> tuple[np.ndarray, np.ndarray]:
+    """Return aligned finite one- or two-dimensional prediction arrays."""
     a = np.asarray(predictions_a, dtype=float)
     b = np.asarray(predictions_b, dtype=float)
     if a.shape != b.shape or a.ndim not in (1, 2) or a.shape[0] != n_samples:
@@ -61,10 +80,33 @@ def paired_event_stratified_bootstrap(
 ) -> PairedBootstrapResult:
     """Bootstrap a paired metric difference while preserving event counts.
 
-    Subjects are sampled with replacement separately within observed-event and
-    censored strata. Outcomes and both models' predictions use the same sampled
-    indices. ``metric`` receives ``(time, event, predictions)`` and may capture
-    a fixed training censoring distribution in a closure.
+    Subjects are sampled with replacement separately within observed-event
+    and censored strata. Outcomes and both predictions use the same sampled
+    indices. Failed or non-finite replicates are skipped. No model is refitted.
+
+    Args:
+        y_time: Finite non-negative follow-up times of shape (n_subjects,),
+            in the cohort's own unit (days or months).
+        y_event: Matching binary event indicators (0/1).
+        predictions_a: Finite predictions from model A, of shape
+            (n_subjects,) or (n_subjects, n_times).
+        predictions_b: Model B predictions with exactly the same shape.
+        metric: Function of ``(time, event, predictions)`` returning one
+            finite scalar; it may capture a fixed training censoring
+            distribution. The signed effect is metric A minus metric B.
+        n_bootstraps: Number of attempted replicates, at least 20.
+        confidence_level: Percentile interval level, strictly between 0 and 1.
+        random_state: Seed for the event-stratified resampling stream.
+
+    Returns:
+        The observed signed difference, bootstrap mean and sample standard
+        deviation, percentile bounds and attempted/successful counts.
+
+    Raises:
+        ValueError: Inputs, resampling settings or the original difference
+            are invalid, or fewer than two observed events are supplied.
+        RuntimeError: Fewer than ``max(20, ceil(0.8 * n_bootstraps))``
+            finite, estimable replicates succeed.
     """
     time = np.asarray(y_time, dtype=float)
     event = np.asarray(y_event)
@@ -123,9 +165,18 @@ def paired_event_stratified_bootstrap(
 
 
 class BootstrapResampler:
-    """Performs repeated bootstrap resampling to estimate uncertainty in survival metrics."""
+    """Generate legacy metric samples by unstratified subject resampling.
+
+    This interface resamples predictions rather than refitting models. Its
+    censoring weights come from each resample, not a separate training fold.
+
+    Args:
+        n_bootstraps: Number of attempted resamples.
+        random_state: Seed for NumPy's legacy ``RandomState`` generator.
+    """
 
     def __init__(self, n_bootstraps: int = 100, random_state: int = 42):
+        """Store the number of bootstrap attempts and resampling seed."""
         self.n_bootstraps = n_bootstraps
         self.random_state = random_state
 
@@ -137,9 +188,26 @@ class BootstrapResampler:
         surv_prob_fn: Callable[[np.ndarray], np.ndarray] | None = None,
         eval_times: np.ndarray | None = None,
     ) -> dict[str, list[float]]:
-        """
-        Samples with replacement and evaluates metrics repeatedly.
-        Returns a dict mapping metric names to lists of bootstrap scores.
+        """Resample subjects and evaluate their aligned survival predictions.
+
+        The full survival matrix is computed once, then sliced with each
+        resample. Samples with fewer than two events or distinct times, and
+        failed evaluations, are skipped; successful counts may differ by metric.
+
+        Args:
+            y_time: Follow-up times of shape (n_subjects,) in the cohort's unit.
+            y_event: Matching binary event indicators (0/1).
+            risk_scores: Scores of shape (n_subjects,); larger means greater risk.
+            surv_prob_fn: Optional function of evaluation times returning
+                survival of shape (n_subjects, n_times).
+            eval_times: Fixed times for survival evaluation; when omitted,
+                each resample derives its own horizons and no survival
+                matrix is evaluated.
+
+        Returns:
+            ``c_index`` samples and, when available, ``integrated_brier_score``
+            and ``auc`` samples. Each AUC sample is the unweighted arithmetic
+            mean of its horizon-specific areas under the receiver operating characteristic curve.
         """
         rng = np.random.RandomState(self.random_state)
         n_samples = len(y_time)
@@ -168,6 +236,7 @@ class BootstrapResampler:
                 S_mat_boot = S_mat_full[boot_idx, :]
 
                 def boot_surv_fn(times, S_mat_b=S_mat_boot):
+                    """Return the resample's precomputed survival matrix on the fixed grid."""
                     return S_mat_b
             else:
                 boot_surv_fn = None

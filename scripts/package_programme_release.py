@@ -3,6 +3,37 @@
 
 Requires the final release_ready seal written after visual QA. This command never
 publishes assets and never changes the original confirmatory Release or run.
+
+This is the last step after ``complete_results_programme.py`` and the visual
+quality assurance (QA) review. This script does not create the seal
+(``programme_release_ready.json``); it must already exist. The seal names the
+committed code revision, the hash of every code file, the verified programme
+report, the passed visual QA record, and the root directory and file hashes of
+the seven programme artefacts: the original 450-cell run, the full
+reproduction, the robustness run, the explanation result, the rendered
+confirmatory package, the sampler-sensitivity run and the rendered post-hoc
+package.
+
+Before writing anything, the script checks every sealed file and artefact
+inventory, checks the sealed code against the committed Git tree and the
+working tree, and cross-checks the artefacts against their scientific
+evidence: 450 identical refits, 825 robustness cells, the verified
+explanation, the 75-cell sensitivity and both rendered bundles.
+
+Writes, into a new ``--output-dir``: five deterministic archives
+(``programme-committed-code.tar.gz``, ``programme-reproduction.tar.gz``,
+``programme-robustness.tar.gz``, ``programme-confirmatory-reports.tar.gz`` and
+``programme-posthoc-sensitivity.tar.gz``), copies of the seal, the verified
+report and the visual QA record, ``programme_release_manifest.json`` and
+``SHA256SUMS``. The original 450-cell run is referenced by its inventory, not
+repackaged. An existing output directory is verified against the same seal and
+left unchanged. Verify or restore the assets with
+``restore_programme_release.py``.
+
+Example:
+    python scripts/package_programme_release.py \
+        --seal <closeout>/programme_release_ready.json \
+        --output-dir <new release directory>
 """
 
 from __future__ import annotations
@@ -25,6 +56,8 @@ from typing import Any
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
+# The seven artefacts a release seal must name, and how the four evidence
+# archives group them; the committed-code archive is built separately.
 ARTIFACT_KEYS = {
     "original450", "reproduction", "robustness", "explanation",
     "rendered_confirmatory", "sampler_run", "rendered_posthoc",
@@ -39,7 +72,14 @@ HASH_PATTERN = re.compile(r"[0-9a-f]{64}\Z")
 
 
 def sha256_file(path: Path) -> str:
-    """Hash a file without loading a large result archive into memory."""
+    """Hash a file without loading a large result archive into memory.
+
+    Args:
+        path: File whose bytes are hashed.
+
+    Returns:
+        The 64-character hexadecimal digest of the file bytes.
+    """
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for chunk in iter(lambda: handle.read(1024 * 1024), b""):
@@ -48,14 +88,28 @@ def sha256_file(path: Path) -> str:
 
 
 def canonical_hash(value: Any) -> str:
-    """Hash the canonical JSON representation used by stored evidence."""
+    """Hash the canonical JSON representation used by stored evidence.
+
+    Args:
+        value: JSON-compatible content excluding any claimed hash field.
+
+    Returns:
+        The hexadecimal SHA-256 of the canonical UTF-8 JSON bytes.
+    """
     return hashlib.sha256(json.dumps(
         value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False,
     ).encode()).hexdigest()
 
 
 def load_mapping(path: Path) -> dict[str, Any]:
-    """Read a JSON object, rejecting missing files and non-object values."""
+    """Read a JSON object, rejecting missing files and non-object values.
+
+    Args:
+        path: JSON file required to contain an object.
+
+    Returns:
+        The parsed JSON object.
+    """
     value = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(value, dict):
         raise ValueError(f"expected JSON object: {path}")
@@ -63,7 +117,12 @@ def load_mapping(path: Path) -> dict[str, Any]:
 
 
 def verify_content_hash(record: dict[str, Any], field: str) -> None:
-    """Verify a record's self-contained canonical content hash."""
+    """Verify a record's self-contained canonical content hash.
+
+    Args:
+        record: Stored object including its claimed content hash.
+        field: Hash field excluded when recomputing the digest.
+    """
     content = dict(record)
     claimed = content.pop(field, None)
     if claimed != canonical_hash(content):
@@ -71,7 +130,21 @@ def verify_content_hash(record: dict[str, Any], field: str) -> None:
 
 
 def safe_relative(name: str) -> str:
-    """Accept a canonical, portable relative file path with no traversal."""
+    """Accept a canonical, portable relative file path with no traversal.
+
+    Rejected are empty names, backslashes, colons, control characters,
+    absolute paths, ``.`` or ``..`` components, and empty or redundant
+    separators.
+
+    Args:
+        name: Archive or inventory member name in POSIX form.
+
+    Returns:
+        ``name`` unchanged.
+
+    Raises:
+        ValueError: If ``name`` is not such a path.
+    """
     if (not isinstance(name, str) or not name or "\\" in name or ":" in name
             or any(ord(character) < 32 or ord(character) == 127 for character in name)):
         raise ValueError(f"unsafe relative path: {name!r}")
@@ -84,7 +157,14 @@ def safe_relative(name: str) -> str:
 
 
 def validate_inventory(value: Any) -> dict[str, str]:
-    """Require a nonempty mapping of safe relative files to SHA256 hashes."""
+    """Require a nonempty mapping of safe relative files to SHA256 hashes.
+
+    Args:
+        value: Nonempty mapping from relative file paths to hexadecimal SHA-256 digests.
+
+    Returns:
+        A copy of the mapping sorted by file name.
+    """
     if not isinstance(value, dict) or not value:
         raise ValueError("file inventory must be a nonempty mapping")
     for name, digest in value.items():
@@ -95,7 +175,14 @@ def validate_inventory(value: Any) -> dict[str, str]:
 
 
 def directory_inventory(root: Path) -> dict[str, str]:
-    """Hash every regular file, rejecting symlinks and special files."""
+    """Hash every regular file, rejecting symlinks and special files.
+
+    Args:
+        root: Real directory whose complete file tree is inventoried.
+
+    Returns:
+        Relative POSIX path of each file below ``root`` mapped to its SHA-256.
+    """
     if root.is_symlink() or not root.is_dir():
         raise ValueError(f"artifact root must be a real directory: {root}")
     inventory = {}
@@ -109,13 +196,23 @@ def directory_inventory(root: Path) -> dict[str, str]:
 
 
 def verify_inventory(root: Path, inventory: dict[str, str]) -> None:
-    """Require the exact declared set of files and bytes under an artifact root."""
+    """Require the exact declared set of files and bytes under an artifact root.
+
+    Args:
+        root: Artefact directory to check.
+        inventory: Expected nonempty relative-path and file-digest mapping.
+    """
     expected = validate_inventory(inventory)
     if directory_inventory(root) != expected:
         raise ValueError(f"artifact inventory changed or is incomplete: {root}")
 
 
 def _descriptor_file(descriptor: Any) -> tuple[Path, dict[str, Any]]:
+    """Check a sealed ``{"path", "sha256"}`` descriptor and load the JSON file it names.
+
+    Only the file's bytes are checked against the recorded hash; its content
+    is not otherwise validated here.
+    """
     if not isinstance(descriptor, dict):
         raise ValueError("missing sealed file descriptor")
     path = Path(descriptor["path"])
@@ -127,7 +224,21 @@ def _descriptor_file(descriptor: Any) -> tuple[Path, dict[str, Any]]:
 
 
 def read_release_seal(seal_path: Path) -> tuple[dict[str, Any], dict[str, Path]]:
-    """Require final visual QA and verify all sealed files and artifact inventories."""
+    """Require final visual QA and verify all sealed files and artifact inventories.
+
+    Args:
+        seal_path: Final programme release-ready JSON record.
+
+    Returns:
+        The seal and the resolved root directory of each of the seven
+        artefacts.
+
+    Raises:
+        ValueError: If the seal is not ``release_ready``, visual QA has not
+            passed, a sealed file or inventory differs, an artefact is missing
+            or has a relative root, or the code revision is not a full commit
+            hash.
+    """
     seal = load_mapping(seal_path)
     if seal.get("status") != "release_ready":
         raise ValueError("packaging requires the final release_ready seal after visual QA")
@@ -154,7 +265,22 @@ def read_release_seal(seal_path: Path) -> tuple[dict[str, Any], dict[str, Path]]
 
 
 def committed_code(project_root: Path, seal: dict[str, Any]) -> dict[str, bytes]:
-    """Read the immutable Git tree and verify sealed actual-code hashes against it."""
+    """Read the immutable Git tree and verify sealed actual-code hashes against it.
+
+    Every sealed code file must match both the blob at the sealed commit and
+    the file in the working tree.
+
+    Args:
+        project_root: Repository containing the named commit and actual sealed code files.
+        seal: Release-ready record naming the commit and sealed code-file digests.
+
+    Returns:
+        Every file of the commit's tree, by path, as bytes.
+
+    Raises:
+        ValueError: If the tree contains a link or submodule, or a sealed file
+            differs from the commit or the working tree.
+    """
     commit = seal["code_commit"]
     listing = subprocess.run(
         ["git", "ls-tree", "-rz", "--full-tree", commit], cwd=project_root,
@@ -182,6 +308,7 @@ def committed_code(project_root: Path, seal: dict[str, Any]) -> dict[str, bytes]
 
 
 def _find_record(root: Path, inventory: dict[str, str], field: str, value: str) -> Path:
+    """Return the only JSON file in ``inventory`` whose ``field`` equals ``value``."""
     candidates = []
     for relative in inventory:
         if relative.endswith(".json"):
@@ -194,6 +321,16 @@ def _find_record(root: Path, inventory: dict[str, str], field: str, value: str) 
 
 
 def _verify_reproduction(seal: dict[str, Any], roots: dict[str, Path], source: Any) -> None:
+    """Require a complete, identical 450-cell reproduction run with the sealed code.
+
+    The report, its checkpoint and every saved refit are checked; each refit
+    is compared with its original cell again through
+    ``reproduce_confirmatory_cells.check_saved_refit``.
+
+    Raises:
+        ValueError: If the report, checkpoint, code hashes or any saved refit
+            do not match.
+    """
     descriptor = seal["artifacts"]["reproduction"]
     root = roots["reproduction"]
     report_path = _find_record(
@@ -246,7 +383,20 @@ def _verify_reproduction(seal: dict[str, Any], roots: dict[str, Path], source: A
 
 
 def verify_programme(seal: dict[str, Any], roots: dict[str, Path], project_root: Path) -> None:
-    """Cross-check sealed artifacts against their stored scientific evidence."""
+    """Cross-check sealed artifacts against their stored scientific evidence.
+
+    Every code hash recorded by the sampler run, the reproduction and the two
+    renderers must equal the sealed code hash.
+
+    Args:
+        seal: Release-ready record containing all evidence descriptors.
+        roots: Resolved directories for the seven sealed programme artefacts.
+        project_root: Repository containing the sealed actual code and study inputs.
+
+    Raises:
+        ValueError: If an artefact fails its evidence check or used code that
+            differs from the seal.
+    """
     from src.pipelines.robustness.provenance import verify_completed_robustness_run
     from src.rendering.verification import (
         verify_explainability_artifact,
@@ -308,7 +458,19 @@ def verify_programme(seal: dict[str, Any], roots: dict[str, Path], project_root:
 
 
 def write_archive(path: Path, files: dict[str, Path | bytes]) -> dict[str, str]:
-    """Write a reproducible gzip/tar archive of regular files without source metadata."""
+    """Write a reproducible gzip/tar archive of regular files without source metadata.
+
+    Members are written in name order with zero timestamps and owner
+    identifiers and fixed permissions, so identical inputs give identical
+    archive bytes.
+
+    Args:
+        path: New archive path; an existing file is never overwritten.
+        files: Member name mapped to a source file or to the member's bytes.
+
+    Returns:
+        Member name mapped to the SHA-256 of the bytes written.
+    """
     inventory = {}
     with path.open("xb") as raw:
         with gzip.GzipFile(fileobj=raw, mode="wb", filename="", mtime=0) as compressed:
@@ -327,8 +489,16 @@ def write_archive(path: Path, files: dict[str, Path | bytes]) -> dict[str, str]:
 
 
 def publish_staged_directory(stage: Path, destination: Path) -> None:
-    """Claim a fresh directory and install files without replacing any existing path."""
+    """Claim a fresh directory and install files without replacing any existing path.
+
+    Args:
+        stage: Verified staged directory on the same filesystem as the destination.
+        destination: Unused output path; its parent must already exist.
+    """
     destination.mkdir(exist_ok=False)
+    # Hard links install each staged file without copying or overwriting. The
+    # release manifest is linked last, so a destination missing it is visibly
+    # incomplete.
     files = sorted(path for path in stage.rglob("*") if path.is_file())
     files.sort(key=lambda path: path.name == "programme_release_manifest.json")
     for source in files:
@@ -338,7 +508,22 @@ def publish_staged_directory(stage: Path, destination: Path) -> None:
 
 
 def package_release(seal_path: Path, project_root: Path, destination: Path) -> Path:
-    """Build write-once supplementary assets after every seal and factual gate passes."""
+    """Build write-once supplementary assets after every seal and factual gate passes.
+
+    Args:
+        seal_path: The final ``programme_release_ready.json`` seal.
+        project_root: Repository whose committed and working-tree code the
+            seal must match.
+        destination: New release directory outside every sealed artefact.
+
+    Returns:
+        ``destination``.
+
+    Raises:
+        ValueError: If any seal, code or evidence check fails, or an input
+            changes while the archives are written.
+        FileExistsError: If ``destination`` holds a release for another seal.
+    """
     seal, roots = read_release_seal(seal_path)
     seal_digest = sha256_file(seal_path)
     code = committed_code(project_root, seal)
@@ -403,6 +588,8 @@ def package_release(seal_path: Path, project_root: Path, destination: Path) -> P
         ))
         from scripts.restore_programme_release import verify_release
 
+        # Verify the staged release exactly as a restorer would before it is
+        # installed.
         verify_release(stage, roots["original450"])
         publish_staged_directory(stage, destination)
         return destination

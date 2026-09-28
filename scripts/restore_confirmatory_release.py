@@ -1,5 +1,33 @@
 #!/usr/bin/env python3
-"""Restore and verify the frozen confirmatory evidence from its private release."""
+"""Restore and verify the frozen confirmatory evidence from its private release.
+
+The completed 450-cell confirmatory run is not stored in Git. It is an archive
+attached to the private GitHub Release ``confirmatory-v1-44b6085``. Run this
+script on a new checkout before any step that reads the frozen run, such as
+cell reproduction, robustness verification or rendering.
+
+The script downloads the archive and its checksum file with the GitHub CLI
+(``gh``, which must be installed and authenticated with access to the
+repository). It checks the archive against both the checksum file and the
+pinned digest, extracts it into a temporary directory with path, member-type
+and duplicate checks, verifies the run, and only then moves it into place.
+If the run directory already exists, it is verified and never overwritten.
+
+Verification requires the pinned manifest and completion hashes, exactly 450
+cells (430 complete and 20 that failed the diagnostic gate), the recorded
+incomplete inference and Holm family, an exact file inventory, and the frozen
+study inputs checked against checkpoint ``44b6085`` (ADR-030, INV-008).
+
+Writes:
+    ``<output-root>/reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/``;
+    the output root defaults to the repository and must already exist.
+
+The exit status is 0 on success and 1 on any failure, with the reason on
+standard error.
+
+Example:
+    python scripts/restore_confirmatory_release.py
+"""
 
 from __future__ import annotations
 
@@ -13,6 +41,7 @@ import tempfile
 from collections import Counter
 from pathlib import Path, PurePosixPath
 
+# Pinned identity of the released run; every value is checked on restore.
 RELEASE_REPOSITORY = "ravivramchandani/Bayesian-COX"
 RELEASE_TAG = "confirmatory-v1-44b6085"
 ARCHIVE_NAME = "Bayesian-COX-confirmatory-v1-cdcdcee84651-44b6085.tar.gz"
@@ -28,7 +57,14 @@ EXPECTED_STATUSES = {"complete": 430, "failed_diagnostics": 20}
 
 
 def sha256_file(path: Path) -> str:
-    """Return the SHA-256 digest of a file."""
+    """Return the SHA-256 digest of a file.
+
+    Args:
+        path: Downloaded or stored file whose bytes are hashed.
+
+    Returns:
+        The 64-character hexadecimal digest of the file bytes.
+    """
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
@@ -37,7 +73,15 @@ def sha256_file(path: Path) -> str:
 
 
 def _safe_extract(archive_path: Path, extraction_root: Path) -> None:
-    """Extract only regular files/directories beneath the frozen run prefix."""
+    """Extract only regular files/directories beneath the frozen run prefix.
+
+    Absolute paths, ``..`` components, entries outside the run prefix,
+    duplicates, links and special files are rejected, and no existing file is
+    overwritten.
+
+    Raises:
+        RuntimeError: If the archive is empty or any member fails a check.
+    """
     extraction_root.mkdir(parents=True, exist_ok=False)
     root = extraction_root.resolve()
     seen: set[PurePosixPath] = set()
@@ -75,7 +119,16 @@ def _safe_extract(archive_path: Path, extraction_root: Path) -> None:
 
 
 def _prepare_destination(output_root: Path) -> tuple[Path, Path]:
-    """Create and validate a non-symlinked destination below output_root."""
+    """Create and validate a non-symlinked destination below output_root.
+
+    Returns:
+        The resolved ``reports/confirmatory`` directory and the run directory
+        within it, which may not exist yet.
+
+    Raises:
+        RuntimeError: If an ancestor is a symbolic link or not a directory, or
+            the destination is a symbolic link.
+    """
     parent = output_root
     for component in RUN_RELATIVE_PATH.parts[:-1]:
         parent = parent / component
@@ -96,7 +149,13 @@ def _prepare_destination(output_root: Path) -> tuple[Path, Path]:
 
 
 def _verify_exact_inventory(run_path: Path, expected_files: set[str]) -> None:
-    """Reject missing, extra or unsupported entries in a restored run."""
+    """Reject missing, extra or unsupported entries in a restored run.
+
+    Args:
+        run_path: Restored run directory.
+        expected_files: Paths relative to ``run_path`` of the manifest, the
+            completion record, and every aggregate and cell file it lists.
+    """
     if run_path.is_symlink():
         raise RuntimeError(f"run directory is a symbolic link: {run_path}")
 
@@ -134,7 +193,11 @@ def _verify_exact_inventory(run_path: Path, expected_files: set[str]) -> None:
 
 
 def _verify_run(project_root: Path, run_path: Path) -> None:
-    """Verify exact release lineage, checkpoint blobs and live study inputs."""
+    """Verify exact release lineage, checkpoint blobs and live study inputs.
+
+    Raises:
+        RuntimeError: If any hash, count, status or inventory check fails.
+    """
     if str(project_root) not in sys.path:
         sys.path.insert(0, str(project_root))
 
@@ -200,7 +263,21 @@ def _verify_checksum(checksum_path: Path, archive_path: Path) -> None:
 
 
 def restore(project_root: Path, output_root: Path) -> Path:
-    """Restore the release below output_root, or verify an existing copy."""
+    """Restore the release below output_root, or verify an existing copy.
+
+    Args:
+        project_root: Repository whose frozen study inputs are verified.
+        output_root: Existing directory below which the run is placed.
+
+    Returns:
+        The verified run directory.
+
+    Raises:
+        RuntimeError: If the GitHub CLI is missing, the release assets are
+            unexpected, or any verification fails.
+        subprocess.CalledProcessError: If ``gh`` is not authenticated or the
+            download fails.
+    """
     project_root = project_root.resolve(strict=True)
     output_root = output_root.resolve(strict=True)
     destination_parent, destination = _prepare_destination(output_root)
@@ -220,6 +297,8 @@ def restore(project_root: Path, output_root: Path) -> Path:
         stderr=subprocess.DEVNULL,
     )
 
+    # Stage beside the destination so that the final move is a rename within
+    # one file system and a partial restore never appears at the destination.
     with tempfile.TemporaryDirectory(
         prefix=".confirmatory-restore-", dir=destination_parent
     ) as temporary_name:
@@ -251,6 +330,8 @@ def restore(project_root: Path, output_root: Path) -> Path:
         _safe_extract(archive_path, extraction_root)
         staged_run = extraction_root / RUN_RELATIVE_PATH
         _verify_run(project_root, staged_run)
+        # Check the destination again after the download, in case a directory
+        # or link was created there in the meantime.
         checked_parent, checked_destination = _prepare_destination(output_root)
         if checked_parent != destination_parent or checked_destination != destination:
             raise RuntimeError("destination changed during restoration")
@@ -264,7 +345,11 @@ def restore(project_root: Path, output_root: Path) -> Path:
 
 
 def parse_args() -> argparse.Namespace:
-    """Parse command-line options."""
+    """Parse command-line options.
+
+    Returns:
+        Parsed command-line option namespace.
+    """
     parser = argparse.ArgumentParser(
         description=(
             "Download, checksum, safely extract and verify the frozen "
@@ -280,7 +365,11 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    """Run the fail-closed restore workflow."""
+    """Run the fail-closed restore workflow.
+
+    Returns:
+        0 on success, 1 after printing the error to standard error.
+    """
     args = parse_args()
     project_root = Path(__file__).resolve().parents[1]
     output_root = args.output_root or project_root

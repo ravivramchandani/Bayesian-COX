@@ -1,4 +1,33 @@
-"""Run the separate 75-cell post-hoc target-acceptance sensitivity in ADR-032."""
+"""Run the separate 75-cell post-hoc target-acceptance sensitivity in ADR-032.
+
+In the confirmatory run, 20 of the 75 horseshoe cells failed the
+zero-divergence gate, leaving four of the nine primary prior contrasts without
+inference. This sensitivity refits all 75 horseshoe cells, not only the
+failures, with the frozen folds, seeds, model, priors, remedy ladder and
+diagnostic gate. The only change is a target acceptance of 0.999 on every fit
+attempt. The nine contrasts are then re-estimated against the unchanged
+confirmatory normal and spike-and-slab cells (INV-009). The work is done by
+``src.pipelines.posthoc_sampler.execute_sampler_sensitivity``.
+
+Reads:
+    ``--run-dir``, the completed 450-cell confirmatory run. Its evidence, the
+    frozen study inputs and the live protocol are verified before any fit.
+
+Writes:
+    A new directory ``<output-root>/horseshoe_ta0999_posthoc_<hash>/`` with
+    ``manifest.json``, one ``bayesian_horseshoe.json`` per fold under
+    ``cells/``, ``inference.json`` and ``completion.json``. Every record is
+    labelled ``posthoc_sampler_sensitivity`` and never replaces a confirmatory
+    cell. ``--resume`` continues an interrupted run only if its code, inputs
+    and environment are unchanged; ``--workers`` sets the number of fitting
+    processes.
+
+Render the result with ``scripts/render_horseshoe_sensitivity.py``.
+
+Example:
+    python scripts/run_horseshoe_sampler_sensitivity.py \
+        --run-dir reports/confirmatory/<run> --output-root reports/posthoc --workers 4
+"""
 
 from __future__ import annotations
 

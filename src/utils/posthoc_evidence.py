@@ -1,4 +1,11 @@
-"""Verify the separate ADR-032 sampler evidence without fitting any model."""
+"""Check stored evidence for the separate sampler sensitivity in decision ADR-032.
+
+``verify_posthoc_cell`` checks a horseshoe refit's hashes, acceptance target
+and original fold identity. ``verify_posthoc_run`` checks the full 75-cell
+inventory and the nine integrated Brier score (IBS) contrasts' paired-fold
+availability. These lineage checks neither fit models nor recalculate the
+stored diagnostics, prediction scores or inferential estimates.
+"""
 
 from __future__ import annotations
 
@@ -17,7 +24,22 @@ TARGET_ACCEPT = 0.999
 
 
 def verify_posthoc_cell(path: Path, source_dir: Path, key: tuple[str, int, int]) -> dict[str, Any]:
-    """Verify a refit's hash, sampler setting and original fold lineage."""
+    """Verify a saved horseshoe refit's hash, acceptance target and fold lineage.
+
+    Args:
+        path: Post-hoc cell JSON (JavaScript Object Notation) file to verify.
+        source_dir: Immutable original confirmatory run directory.
+        key: Expected ``(dataset, repeat, fold)`` with one-based repeat/fold numbers.
+
+    Returns:
+        The decoded cell when its labels, status, source hash, fold fields and
+        every recorded attempt's target acceptance probability (0.999) agree.
+
+    Raises:
+        OSError: A required cell file cannot be read.
+        ValueError: JSON or the required content-hash field is invalid.
+        RuntimeError: A recorded hash, sensitivity setting or lineage field differs.
+    """
     cell = json.loads(path.read_text())
     _verify_content_hash(cell, "cell_content_sha256", path)
     if (
@@ -67,14 +89,26 @@ def verify_posthoc_cell(path: Path, source_dir: Path, key: tuple[str, int, int])
 
 
 def verify_posthoc_run(run_dir: Path, source_dir: Path) -> dict[str, Any]:
-    """Verify the complete 75-cell sensitivity and its paired-inference sources.
+    """Verify the stored 75-cell inventory, lineage and paired-inference availability.
+
+    Complete diagnostic status determines eligible pairs. Each IBS contrast
+    requires all 25 original fold pairs; the Holm multiple-testing family is
+    available only when every one of the nine contrasts has those pairs.
 
     Args:
         run_dir: Separate sensitivity directory containing its completion record.
         source_dir: Immutable 450-cell confirmatory directory.
 
     Returns:
-        Verified manifest, completion, inference and cells for a pure renderer.
+        A dictionary with verified ``manifest``, ``completion``, ``inference``
+        mappings and a ``cells`` list for rendering stored evidence.
+
+    Raises:
+        OSError: A required source or sensitivity file cannot be read.
+        ValueError: The source is not confirmatory, JSON is invalid, or an
+            inventory path or content-hash field is invalid.
+        RuntimeError: Hashes, grid membership, protocol changes, evidence
+            boundaries, status counts or paired-inference availability differ.
     """
     source = verify_frozen_run(source_dir)
     if source.mode != "confirmatory":

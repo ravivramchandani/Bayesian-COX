@@ -1,4 +1,31 @@
-"""Render separately labelled ADR-032 results after exhaustive evidence checks."""
+"""Render separately labelled ADR-032 results after exhaustive evidence checks.
+
+The ADR-032 sensitivity refits all 75 confirmatory horseshoe cells with target
+acceptance 0.999 and re-estimates the nine primary prior contrasts against the
+unchanged frozen normal and spike-and-slab cells. This script renders that
+post-hoc run into its own bundle; it never touches the confirmatory package.
+It verifies the post-hoc run and its confirmatory source with
+``src.utils.posthoc_evidence.verify_posthoc_run`` before and after writing,
+and fails if its own code changes during the render.
+
+Reads:
+    ``--run-dir`` (the completed post-hoc sensitivity run) and
+    ``--source-dir`` (the 450-cell frozen confirmatory run).
+
+Writes:
+    Into ``--output-dir``, which must be new or empty:
+    ``posthoc_primary_contrasts.csv`` and ``.tex`` (all nine contrasts),
+    ``posthoc_fit_diagnostics.csv`` (one row per refitted cell),
+    ``posthoc_ibs_effects.pdf`` and ``.png`` (integrated Brier score (IBS)
+    differences with 95 per cent intervals), ``POSTHOC_EVIDENCE_NOTICE.txt``
+    and ``lineage.json`` (source and output hashes). The CSV rows, figure
+    title, notice and lineage all carry the post-hoc sampler-sensitivity
+    label.
+
+Example:
+    python scripts/render_horseshoe_sensitivity.py --run-dir <post-hoc run> \
+        --source-dir <confirmatory run> --output-dir <new directory>
+"""
 
 from __future__ import annotations
 
@@ -23,7 +50,18 @@ from src.utils.reproducibility import canonical_json_hash, sha256_file
 
 
 def primary_rows(inference: dict) -> pd.DataFrame:
-    """Retain all nine contrasts, including any unavailable post-hoc tests."""
+    """Retain all nine contrasts, including any unavailable post-hoc tests.
+
+    Args:
+        inference: The run's ``inference.json`` mapping. Each entry of its
+            ``primary`` list is one prior contrast within one cohort; an
+            unavailable contrast has no ``ibs`` estimate.
+
+    Returns:
+        One row per contrast with the IBS difference (model A minus model B),
+        its 95 per cent interval, the p-value and Holm-adjusted p-value, left
+        missing where the contrast could not be estimated.
+    """
     rows = []
     for contrast in inference["primary"]:
         ibs = contrast.get("ibs") or {}
@@ -46,8 +84,25 @@ def primary_rows(inference: dict) -> pd.DataFrame:
 
 
 def render(run_dir: Path, source_dir: Path, destination: Path) -> Path:
-    """Create CSV, LaTeX and figures from a completed sensitivity only."""
+    """Create CSV, LaTeX and figures from a completed sensitivity only.
+
+    Args:
+        run_dir: Completed post-hoc sensitivity run.
+        source_dir: Frozen confirmatory run that supplies the comparator cells.
+        destination: New or empty output directory.
+
+    Returns:
+        ``destination``.
+
+    Raises:
+        FileExistsError: If ``destination`` already contains files.
+        RuntimeError: If evidence verification fails, or if this script or any
+            module in ``src/rendering`` or ``src/utils`` changes during the
+            render.
+    """
     records = verify_posthoc_run(run_dir, source_dir)
+    # Hash the rendering code now, and compare after writing, so the lineage
+    # cannot name code that differs from the code that produced the outputs.
     code_paths = [Path(__file__).resolve()]
     code_paths += sorted((PROJECT_ROOT / "src/rendering").glob("*.py"))
     code_paths += sorted((PROJECT_ROOT / "src/utils").glob("*.py"))
@@ -78,6 +133,8 @@ def render(run_dir: Path, source_dir: Path, destination: Path) -> Path:
     compact.to_latex(destination / "posthoc_primary_contrasts.tex", index=False, escape=True)
     cell_rows = []
     for cell in records["cells"]:
+        # A cell that failed the gate has no final model details; report the
+        # diagnostics of its last fit attempt instead.
         diagnostics = (cell.get("model_details") or {}).get("diagnostics") or {}
         if not diagnostics and cell["fit_attempts"]:
             diagnostics = cell["fit_attempts"][-1].get("diagnostics") or {}
@@ -147,6 +204,8 @@ def render(run_dir: Path, source_dir: Path, destination: Path) -> Path:
         f"Sensitivity Holm family complete: {records['inference'].get('holm_family_complete')}\n"
     )
     (destination / "POSTHOC_EVIDENCE_NOTICE.txt").write_text(notice)
+    # Verify again after writing, so a source edited during the render is
+    # caught before the lineage is sealed.
     verify_posthoc_run(run_dir, source_dir)
     if any(sha256_file(PROJECT_ROOT / name) != digest for name, digest in code_hashes.items()):
         raise RuntimeError("sensitivity renderer source changed during execution")

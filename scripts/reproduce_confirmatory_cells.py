@@ -9,6 +9,32 @@ Only wall-clock fields differ between two executions of the same cell:
 ``total_seconds``, each attempt's ``fit_seconds`` and ``cell_content_sha256``
 (which is computed over those timings). They are excluded from the check.
 
+This is the behaviour-preservation check of ADR-030: a code change is
+accepted only if it regenerates the frozen cells, and the full 450-cell run is
+also the result reproduction required by ADR-026. It is a verification
+output, not a new analysis, and it never writes into the source run (INV-008).
+
+Before any fit, the script verifies the source run and the frozen study inputs,
+requires the live protocol and the installed dependency versions to match the
+run's manifest, and records the hashes of every ``src`` module and of this
+script. It checks those hashes and the source evidence again after the last
+fit, so an edit made during a long reproduction is detected.
+
+Reads:
+    The completed confirmatory run (``--run-dir``, by default the frozen
+    ``confirmatory_v1_confirmatory_cdcdcee84651``) and the raw cohorts.
+
+Writes:
+    A JSON report, by default ``reports/reproduction/cells_<timestamp>.json``.
+    With ``--keep-cells DIR``, also each refitted cell and a
+    ``reproduction_checkpoint.json`` recording the code, environment, source
+    evidence and selection. ``--resume`` reuses the refits saved in ``DIR``
+    only when that checkpoint matches exactly and each saved cell passes its
+    own content hash.
+
+The exit status is 0 when every selected cell is identical and 1 otherwise.
+Make target: ``reproduce-confirmatory`` (needs ``CONFIRMATORY_RUN``).
+
 Examples::
 
     # Six quick cells: every model on GBSG2 repeat 1 fold 1.
@@ -40,10 +66,16 @@ if str(PROJECT_ROOT) not in sys.path:
 
 DEFAULT_RUN = PROJECT_ROOT / "reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651"
 CHECKPOINT_COMMIT = "44b6085"
+# Keys skipped wherever they occur in a cell when comparing refit and original.
 TIMING_FIELDS = {"total_seconds", "fit_seconds", "cell_content_sha256"}
 
 
 def parse_args() -> argparse.Namespace:
+    """Parse the command line.
+
+    Returns:
+        Parsed command-line option namespace.
+    """
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--run-dir", type=Path, default=DEFAULT_RUN)
     parser.add_argument(
@@ -77,6 +109,12 @@ def load_run_inputs(run_dir: Path) -> tuple[dict[str, Any], dict[str, Any], dict
     ``config/confirmatory.yaml`` cannot change what is reproduced. The
     dataset configuration is read from the working tree when its hash matches
     the manifest, otherwise from the checkpoint commit.
+
+    Args:
+        run_dir: Stored run whose manifest supplies the protocol and dataset hash.
+
+    Returns:
+        Manifest, recorded protocol and hash-matched dataset configuration.
     """
     manifest = json.loads((run_dir / "manifest.json").read_text(encoding="utf-8"))
     protocol = manifest["run_config"]["protocol"]
@@ -96,7 +134,17 @@ def load_run_inputs(run_dir: Path) -> tuple[dict[str, Any], dict[str, Any], dict
 
 
 def select_cells(run_dir: Path, selection: str) -> list[tuple[str, str, int, int]]:
-    """Translate a selection string into (dataset, model, repeat, fold) keys."""
+    """Translate a selection string into (dataset, model, repeat, fold) keys.
+
+    Args:
+        run_dir: Source run whose manifest and stored cells define the choices.
+        selection: ``"quick"`` for every model of the run on GBSG2 repeat 1
+            fold 1; ``"all"`` for every stored cell; otherwise comma-separated
+            ``dataset:model:repeat:fold`` keys.
+
+    Returns:
+        The selected keys; repeat and fold numbers start at 1.
+    """
     if selection == "quick":
         models = json.loads((run_dir / "manifest.json").read_text())["run_config"]["models"]
         return [("gbsg2", model, 1, 1) for model in models]
@@ -114,16 +162,49 @@ def select_cells(run_dir: Path, selection: str) -> list[tuple[str, str, int, int
 
 
 def stored_cell_path(run_dir: Path, dataset: str, model: str, repeat: int, fold: int) -> Path:
+    """Locate an original cell inside the source run.
+
+    Args:
+        run_dir: Original confirmatory run directory.
+        dataset: Cohort key.
+        model: Stored model key.
+        repeat: Outer repeat number, starting at one.
+        fold: Outer fold number, starting at one.
+
+    Returns:
+        Expected cell path; existence is checked by the caller.
+    """
     return run_dir / "cells" / dataset / f"repeat_{repeat:02d}_fold_{fold:02d}" / f"{model}.json"
 
 
 def saved_refit_path(keep: Path, dataset: str, model: str, repeat: int, fold: int) -> Path:
-    """Locate a refit under the directory passed as --keep-cells."""
+    """Locate a refit under the directory passed as --keep-cells.
+
+    Args:
+        keep: External refit directory passed as --keep-cells.
+        dataset: Cohort key.
+        model: Stored model key.
+        repeat: Outer repeat number, starting at one.
+        fold: Outer fold number, starting at one.
+
+    Returns:
+        Expected regenerated-cell path; no file is created here.
+    """
     return keep / dataset / f"repeat_{repeat:02d}_fold_{fold:02d}" / f"{model}.json"
 
 
 def differences(new: Any, old: Any, path: str = "") -> list[str]:
-    """List every leaf where two JSON values differ, ignoring timing fields."""
+    """List every leaf where two JSON values differ, ignoring timing fields.
+
+    Args:
+        new: The refitted value.
+        old: The stored value.
+        path: Location of the values within the cell, used in messages.
+
+    Returns:
+        One message per differing leaf, key present on only one side, or list
+        length mismatch. An empty list means the values agree.
+    """
     if isinstance(new, dict) and isinstance(old, dict):
         found = []
         for key in sorted(set(new) | set(old)):
@@ -145,7 +226,22 @@ def differences(new: Any, old: Any, path: str = "") -> list[str]:
 
 
 def refit_cell(run_dir: Path, key: tuple[str, str, int, int]) -> dict[str, Any]:
-    """Refit one cell with the current code and return it as stored JSON."""
+    """Refit one cell with the current code and return it as stored JSON.
+
+    The run settings, protocol and dataset configuration come from the run's
+    manifest, and the outer fold is regenerated from the frozen base seed, so
+    only the code can differ from the original fit.
+
+    Args:
+        run_dir: Immutable confirmatory source run.
+        key: Dataset, model, outer repeat and outer fold to regenerate.
+
+    Raises:
+        RuntimeError: If the cohort's raw file differs from the manifest.
+
+    Returns:
+        Regenerated cell with the same JSON-compatible value types as stored evidence.
+    """
     import src.pipelines.confirmatory as confirmatory
     from src.data.survival_folds import repeated_survival_folds
     from src.utils.reproducibility import sha256_file
@@ -196,11 +292,24 @@ def refit_cell(run_dir: Path, key: tuple[str, str, int, int]) -> dict[str, Any]:
         options=options,
         data_sha256=sha256_file(data_path),
     )
+    # Round-trip through JSON so that the refit has exactly the types and key
+    # order of a cell read back from disk.
     return json.loads(json.dumps(confirmatory._json_safe(cell), sort_keys=True))
 
 
 def check_cell(run_dir: Path, key: tuple[str, str, int, int], keep: Path | None) -> dict[str, Any]:
-    """Refit one cell, compare it with the stored cell and summarise."""
+    """Refit one cell, compare it with the stored cell and summarise.
+
+    Args:
+        run_dir: Source run.
+        key: The cell's (dataset, model, repeat, fold).
+        keep: Directory in which to save the refit, or ``None``.
+
+    Returns:
+        A summary with the cell key, its status, whether it is identical, the
+        number of differences, the first ten differences and the refit time
+        in seconds.
+    """
     started = time.perf_counter()
     new = refit_cell(run_dir, key)
     old = json.loads(stored_cell_path(run_dir, *key).read_text(encoding="utf-8"))
@@ -221,6 +330,15 @@ def check_cell(run_dir: Path, key: tuple[str, str, int, int], keep: Path | None)
 
 
 def main() -> int:
+    """Refit and compare the selected cells, then write the report.
+
+    Returns:
+        0 if every selected cell is identical, otherwise 1.
+
+    Raises:
+        ValueError: If ``--workers`` is below 1, ``--resume`` lacks
+            ``--keep-cells``, or an output path lies inside the source run.
+    """
     args = parse_args()
     run_dir = args.run_dir.resolve()
     keys = select_cells(run_dir, args.selection)
@@ -285,7 +403,28 @@ def prepare_reproduction_checkpoint(
     *,
     resume: bool,
 ) -> dict[str, Any]:
-    """Record actual code identity before fitting and validate resumable outputs."""
+    """Record actual code identity before fitting and validate resumable outputs.
+
+    Args:
+        run_dir: Completed confirmatory source run.
+        keys: Selected cell keys; they must be unique and all stored in the run.
+        keep: Refit directory, or ``None`` when refits are not saved.
+        resume: Whether saved refits in ``keep`` may be reused.
+
+    Returns:
+        The checkpoint record: environment, source manifest and completion
+        hashes, the run's source-file hashes, the planned keys and the hash of
+        every ``src`` module and this script.
+
+    Raises:
+        ValueError: If the source is not a completed confirmatory run or the
+            selection is empty, repeated or outside the run.
+        RuntimeError: If the protocol, dependency versions or Python version
+            differ from the source run, or a resumed checkpoint differs from
+            the current record.
+        FileExistsError: If a checkpoint exists without ``resume``, or a new
+            ``keep`` directory is not empty.
+    """
     from src.rendering.verification import verify_frozen_run
     from src.utils.frozen_evidence import verify_frozen_evidence
     from src.utils.reproducibility import dependency_versions, sha256_file
@@ -343,7 +482,12 @@ def prepare_reproduction_checkpoint(
 
 
 def verify_reproduction_inputs(checkpoint: dict[str, Any], run_dir: Path) -> None:
-    """Reject source edits made while an otherwise valid refit was running."""
+    """Reject source edits made while an otherwise valid refit was running.
+
+    Args:
+        checkpoint: Code and source hashes captured before refitting.
+        run_dir: Immutable original run whose recorded file hashes are checked again.
+    """
     from src.utils.frozen_evidence import verify_frozen_evidence
     from src.utils.reproducibility import sha256_file
 
@@ -359,7 +503,20 @@ def verify_reproduction_inputs(checkpoint: dict[str, Any], run_dir: Path) -> Non
 
 
 def check_saved_refit(run_dir: Path, path: Path, key: tuple[str, str, int, int]) -> dict[str, Any]:
-    """Verify a resumed cell's own hash and compare it with the original cell."""
+    """Verify a resumed cell's own hash and compare it with the original cell.
+
+    Args:
+        run_dir: Original confirmatory source run.
+        path: Saved regenerated cell to verify.
+        key: Dataset, model, repeat and fold identifying its original cell.
+
+    Returns:
+        A summary in the format of :func:`check_cell`, with zero seconds and
+        ``resumed_verified_refit`` set.
+
+    Raises:
+        RuntimeError: If the saved cell's content hash is invalid.
+    """
     from src.utils.reproducibility import canonical_json_hash
 
     new = json.loads(path.read_text())

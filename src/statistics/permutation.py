@@ -1,4 +1,8 @@
-"""Deterministic paired randomisation tests."""
+"""Deterministic paired randomisation tests.
+
+A general tool retained for older callers; the confirmatory contrasts use
+the Nadeau-Bengio corrected test in ``repeated_cv``.
+"""
 
 import itertools
 
@@ -6,9 +10,19 @@ import numpy as np
 
 
 class PermutationTest:
-    """Paired label-swap test for exchangeable model scores."""
+    """Paired label-swap test for exchangeable model scores.
+
+    Args:
+        n_permutations: Positive budget for sign patterns, used as the
+            number of Monte Carlo draws when exact enumeration exceeds it.
+        random_state: Seed for Monte Carlo sign draws.
+
+    Raises:
+        ValueError: ``n_permutations`` is below one.
+    """
 
     def __init__(self, n_permutations: int = 1000, random_state: int = 42):
+        """Validate the permutation budget and store the random seed."""
         if n_permutations < 1:
             raise ValueError("n_permutations must be positive.")
         self.n_permutations = n_permutations
@@ -28,6 +42,29 @@ class PermutationTest:
         a seeded Monte Carlo estimate uses the plus-one correction. Repeated-CV
         fold scores are dependent and should instead use the Nadeau-Bengio
         correction in :mod:`src.statistics.repeated_cv`.
+
+        The statistic is the sum of the non-zero paired differences
+        ``scores_a - scores_b``; zero differences are dropped because their
+        sign cannot change. Exact enumeration of all ``2^k`` sign patterns is
+        used when there are at most 20 non-zero differences and ``2^k`` does
+        not exceed ``n_permutations``. Otherwise ``n_permutations`` random sign
+        patterns give ``(extreme + 1) / (n_permutations + 1)``, which is never
+        zero. A tolerance of 1e-12 treats ties with the observed statistic as
+        extreme. Returns 1.0 when every difference is zero.
+
+        Args:
+            scores_a: Finite model A scores of shape (n_pairs,).
+            scores_b: Model B scores on the same observations and score scale.
+            alternative: ``"two-sided"`` compares absolute differences;
+                ``"greater"`` tests A minus B above zero; ``"less"`` below zero.
+
+        Returns:
+            The exact or plus-one Monte Carlo p-value in (0, 1].
+
+        Raises:
+            ValueError: The score vectors are misaligned or non-finite, or
+                ``alternative`` is not ``"two-sided"``, ``"greater"`` or
+                ``"less"``.
         """
         a = np.asarray(scores_a, dtype=float)
         b = np.asarray(scores_b, dtype=float)
@@ -45,6 +82,7 @@ class PermutationTest:
         observed = float(np.sum(nonzero))
 
         def is_extreme(statistic: float) -> bool:
+            """Return whether a sign-flipped statistic is at least as extreme as observed."""
             tolerance = 1e-12
             if alternative == "two-sided":
                 return abs(statistic) >= abs(observed) - tolerance

@@ -1,4 +1,22 @@
-"""Record current execution inputs and verify robustness evidence without refitting."""
+"""Record current execution inputs and verify robustness evidence without refitting.
+
+:mod:`runner` calls :func:`initialise_run_directory` before any fit. It builds
+a manifest that records the hash of every input, including the current code
+and the confirmatory result files the run reads, and names the run directory
+by the hashes of the configuration and the code. A resumed unfinished run must
+match the recorded configuration, inputs and environment; a completed run is verified by
+:func:`verify_completed_robustness_run` and returned without refitting.
+
+Verification is bound to the checkpoint commit (ADR-030). In ``robustness``
+mode :func:`src.utils.frozen_evidence.verify_frozen_evidence` checks the
+protocol freeze and its recorded inputs against the blobs in checkpoint commit
+``44b6085``, and the protocol, raw data and lock files against the live tree.
+A run whose recorded study inputs equal the freeze was made with the
+checkpoint code, so its code is not re-hashed in the working tree; code and
+documentation can then change without making that evidence unverifiable. A
+run made with other code has every input hashed in the live tree. The
+confirmatory result files it read must always match.
+"""
 
 from __future__ import annotations
 
@@ -22,9 +40,16 @@ from .protocol import BAYESIAN_MODEL_KEYS, RobustnessOptions
 def robustness_input_files(project_root: Path, datasets: tuple[str, ...]) -> list[str]:
     """Record the current source files together with required study inputs.
 
-    Retired code remains verifiable at the historical checkpoint. New runs
-    instead record every current source and script file, including package
-    initialisers and newly extracted modules.
+    Historical code remains verifiable at the checkpoint. Execution records
+    every current source and script file, including package initialisers.
+
+    Args:
+        project_root: Checkout containing configuration, source and scripts.
+        datasets: Cohort keys whose raw files are required by the run.
+
+    Returns:
+        The non-code inputs of :func:`~src.pipelines.confirmatory.provenance.relevant_input_files`
+        plus every ``src/**/*.py`` and ``scripts/**/*.py`` file, sorted.
     """
     files = [
         relative
@@ -41,6 +66,15 @@ def robustness_input_files(project_root: Path, datasets: tuple[str, ...]) -> lis
 
 
 def _external_result_inputs(project_root: Path, path: Path | None) -> list[str]:
+    """List the confirmatory result files a robustness run reads.
+
+    Cox cells supply proportional-hazards (PH) tests; Bayesian cells supply fit
+    timings. The list also includes the source manifest and completion record.
+    Paths are relative to ``project_root``.
+
+    Raises:
+        ValueError: The confirmatory run directory is outside ``project_root``.
+    """
     if path is None:
         return []
     try:
@@ -73,7 +107,12 @@ def _source_input_path(
     source_name: str | None,
     confirmatory_run_dir: Path | None,
 ) -> Path:
-    """Resolve a recorded source-result input without changing its recorded key."""
+    """Resolve a recorded source-result input without changing its recorded key.
+
+    A path recorded under ``reports/confirmatory/<source run>/`` is read from
+    ``confirmatory_run_dir`` when one is given, so evidence restored to
+    another location can still be verified.
+    """
     prefix = f"reports/confirmatory/{source_name}/"
     if confirmatory_run_dir is not None and relative.startswith(prefix):
         return confirmatory_run_dir / relative.removeprefix(prefix)
@@ -83,7 +122,12 @@ def _source_input_path(
 def _verify_manifest_inputs(
     project_root: Path, manifest: dict[str, Any], confirmatory_run_dir: Path | None
 ) -> None:
-    """Verify historical code at its checkpoint and every used source-result file."""
+    """Verify historical code at its checkpoint and every used source-result file.
+
+    Raises:
+        RuntimeError: No inputs are recorded, the protocol freeze differs, or
+            any input that must match in the live tree has changed.
+    """
     inputs = manifest.get("input_sha256")
     if not isinstance(inputs, dict) or not inputs:
         raise RuntimeError("robustness manifest has no recorded inputs")
@@ -94,6 +138,9 @@ def _verify_manifest_inputs(
         study_inputs = {
             key: value for key, value in inputs.items() if not key.startswith("reports/")
         }
+        # A run whose study inputs equal the freeze ran on the checkpoint code.
+        # Those inputs were verified against the checkpoint blobs above, so
+        # only the confirmatory result files are hashed in the live tree.
         historical = study_inputs == freeze["frozen_input_sha256"]
         if manifest.get("protocol_freeze_sha256") != freeze["freeze_content_sha256"]:
             raise RuntimeError("robustness manifest identifies a different protocol freeze")
@@ -113,6 +160,10 @@ def verify_completed_robustness_run(
     Historical code is checked against the pinned Git checkpoint, while live
     protocol, raw data and lock files must retain their frozen content. A
     production run must match all 825 frozen cells and the feasibility plan.
+    The checks cover the manifest and completion hashes, the recorded inputs,
+    the cell inventory against the declared condition grid, every cell's file
+    hash, content hash and identity, the status counts and every aggregate
+    file hash.
 
     Args:
         run_dir: Completed run containing its original manifest and completion.
@@ -121,6 +172,10 @@ def verify_completed_robustness_run(
 
     Returns:
         The verified original completion record.
+
+    Raises:
+        RuntimeError: Any check fails.
+        ValueError: A cell fails its schema or content-hash check.
     """
     manifest_path = run_dir / "manifest.json"
     manifest = read_mapping(manifest_path)
@@ -235,7 +290,13 @@ def _verify_aggregates(
 
 
 def _verify_frozen_plan(project_root: Path, run_dir: Path, run_config: dict[str, Any]) -> None:
-    """Require production evidence to match the frozen protocol and full feasibility grid."""
+    """Require production evidence to match the frozen protocol and full feasibility grid.
+
+    Rehearsal runs are not checked. For a production run the protocol,
+    execution controls, condition plan and fit plan are rebuilt from the live
+    configuration and must equal the recorded ones; the plan must contain
+    exactly 825 cells.
+    """
     if run_config["mode"] != "robustness":
         return
     config = read_mapping(project_root / "config/confirmatory.yaml")
@@ -271,7 +332,14 @@ def _verify_frozen_plan(project_root: Path, run_dir: Path, run_config: dict[str,
 
 
 def _verify_execution_controls(run_config: dict[str, Any], config: dict[str, Any]) -> None:
-    """Reject production overrides of the frozen datasets, folds, sampler and components."""
+    """Reject production overrides of the frozen datasets, folds, sampler and components.
+
+    Production must use every cohort, all four components, the confirmatory
+    folds and sampler settings, no fold limit and 2,000 bootstrap replicates.
+
+    Raises:
+        RuntimeError: Any control differs.
+    """
     validation = config["validation"]
     bayesian = config["models"]["bayesian_cox"]
     expected = {
@@ -293,7 +361,25 @@ def _verify_execution_controls(run_config: dict[str, Any], config: dict[str, Any
 def build_execution_manifest(
     project_root: Path, actual_config: dict[str, Any], options: RobustnessOptions
 ) -> dict[str, Any]:
-    """Capture current code separately from the unchanged methodological freeze."""
+    """Capture current code separately from the unchanged methodological freeze.
+
+    ``execution_code_sha256`` hashes the recorded ``src/`` and ``scripts/``
+    inputs together. In ``robustness`` mode the manifest also records the
+    protocol-freeze hash and the checkpoint commit it was verified against.
+
+    Args:
+        project_root: Checkout with configuration, frozen study inputs and code.
+        actual_config: Actual protocol, options and condition/fit plans.
+        options: Mode, datasets and optional completed confirmatory source.
+
+    Returns:
+        The content-hashed manifest with configuration, input and runtime
+        provenance, a separate execution-code hash and production freeze fields.
+
+    Raises:
+        RuntimeError: A required input is missing, a production control
+            differs or the frozen evidence fails verification.
+    """
     inputs = robustness_input_files(project_root, options.datasets)
     source_inputs = _external_result_inputs(project_root, options.confirmatory_run_dir)
     manifest = build_run_manifest(
@@ -329,7 +415,30 @@ def initialise_run_directory(
     availability: dict[str, Any],
     feasibility: dict[str, Any],
 ) -> tuple[Path, bool]:
-    """Choose a code-specific run directory and refuse mixed-code unfinished resumes."""
+    """Choose a code-specific run directory and refuse mixed-code unfinished resumes.
+
+    A directory named by the configuration hash alone is the layout of runs
+    made with the checkpoint code; with ``resume`` it is verified if complete
+    and otherwise refused. New runs are named by the configuration and code
+    hashes together, so changed code always starts a separate run.
+
+    Args:
+        project_root: Checkout containing the live study inputs and historical
+            Git objects used for verification.
+        actual_config: Configuration whose hash identifies the run.
+        options: Output root, resume flag, mode and confirmatory source.
+        availability: Analysis-availability record written for a new run.
+        feasibility: Frozen fit-count and runtime-projection record written
+            for a new run.
+
+    Returns:
+        ``(run_dir, already_complete)``.
+
+    Raises:
+        RuntimeError: An unfinished checkpoint-layout run, or a manifest,
+            input or runtime mismatch on resume.
+        FileExistsError: The run exists and ``resume`` is not set.
+    """
     manifest = build_execution_manifest(project_root, actual_config, options)
     analysis_id = actual_config["protocol"]["analysis_id"]
     prefix = f"{analysis_id}_robustness_{options.mode}_"

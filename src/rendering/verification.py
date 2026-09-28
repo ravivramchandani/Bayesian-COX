@@ -1,4 +1,18 @@
-"""Validate frozen cell, aggregate and supplemental evidence before rendering."""
+"""Validate frozen cell, aggregate and supplemental evidence before rendering.
+
+Rendering starts here. :func:`verify_frozen_run` checks a confirmatory or
+rehearsal run directory; :func:`verify_explainability_artifact` and
+:func:`verify_robustness_run` check the optional supplements and their link
+to that run. Each returns only after every hash, count and identity check
+has passed, and raises otherwise, so the renderers downstream read verified
+content only. :func:`_source` turns a verified file into the lineage record
+attached to each output.
+
+Every stored record carries a content hash: the SHA-256 of the canonical JSON
+encoding of the record without its hash field. Files are also checked by the
+SHA-256 of their bytes against the inventory that lists them. Other modules
+(the confirmatory and post-hoc pipelines, ``src/utils/posthoc_evidence.py``
+and several scripts) import these checks for the same purpose."""
 
 from __future__ import annotations
 
@@ -13,13 +27,21 @@ from typing import Any
 
 import matplotlib
 
+# Select the non-interactive backend before any rendering module imports pyplot.
 matplotlib.use("Agg")
 
 import pandas as pd
 
 
 def sha256_file(path: Path) -> str:
-    """Return the SHA-256 digest of one file."""
+    """Return the SHA-256 digest of one file.
+
+    Args:
+        path: File whose bytes are hashed.
+
+    Returns:
+        The 64-character hexadecimal digest of the file bytes.
+    """
     digest = hashlib.sha256()
     with path.open("rb") as handle:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
@@ -28,7 +50,19 @@ def sha256_file(path: Path) -> str:
 
 
 def canonical_json_hash(value: Any) -> str:
-    """Hash a JSON-compatible object using the analysis canonical encoding."""
+    """Hash a JSON-compatible object using the analysis canonical encoding.
+
+    Keys are sorted, separators carry no spaces, text is UTF-8 and NaN or
+    infinite numbers are rejected. This matches
+    ``src.utils.reproducibility.canonical_json_hash``, which sealed the
+    records being checked.
+
+    Args:
+        value: JSON-compatible object with finite numeric values.
+
+    Returns:
+        The hexadecimal SHA-256 of the canonical UTF-8 JSON bytes.
+    """
     payload = json.dumps(
         value,
         sort_keys=True,
@@ -40,6 +74,12 @@ def canonical_json_hash(value: Any) -> str:
 
 
 def _load_mapping(path: Path) -> dict[str, Any]:
+    """Read a JSON file that must contain a mapping.
+
+    Raises:
+        FileNotFoundError: If the file does not exist.
+        ValueError: If the top-level value is not a mapping.
+    """
     if not path.is_file():
         raise FileNotFoundError(f"required frozen artifact is missing: {path}")
     with path.open(encoding="utf-8") as handle:
@@ -50,6 +90,20 @@ def _load_mapping(path: Path) -> dict[str, Any]:
 
 
 def _verify_content_hash(record: dict[str, Any], hash_field: str, path: Path) -> str:
+    """Check that a record's stored content hash matches the rest of the record.
+
+    Args:
+        record: Parsed record.
+        hash_field: Name of the field that holds the claimed hash.
+        path: Source file, used in error messages.
+
+    Returns:
+        The recomputed hash.
+
+    Raises:
+        ValueError: If the hash field is missing or not a string.
+        RuntimeError: If the recomputed hash differs.
+    """
     claimed = record.get(hash_field)
     if not isinstance(claimed, str):
         raise ValueError(f"{path} is missing {hash_field}")
@@ -62,6 +116,14 @@ def _verify_content_hash(record: dict[str, Any], hash_field: str, path: Path) ->
 
 
 def _safe_child(root: Path, relative: str) -> Path:
+    """Resolve an inventory path and require it to stay inside ``root``.
+
+    Resolution follows ``..`` and symbolic links, so an inventory entry
+    cannot point at a file outside the run directory.
+
+    Raises:
+        ValueError: If the resolved path lies outside ``root``.
+    """
     candidate = (root / relative).resolve()
     try:
         candidate.relative_to(root.resolve())
@@ -71,11 +133,20 @@ def _safe_child(root: Path, relative: str) -> Path:
 
 
 def _slug(value: object) -> str:
+    """Return a lower-case file-name fragment of letters, digits and underscores.
+
+    Returns ``unnamed`` when nothing remains.
+    """
     text = re.sub(r"[^a-zA-Z0-9]+", "_", str(value)).strip("_").lower()
     return text or "unnamed"
 
 
 def _finite(value: Any, *, field: str) -> float:
+    """Convert a stored value to a float and reject NaN or infinity.
+
+    Raises:
+        ValueError: If the value is not finite; ``field`` names it.
+    """
     number = float(value)
     if not math.isfinite(number):
         raise ValueError(f"{field} must be finite")
@@ -84,7 +155,18 @@ def _finite(value: Any, *, field: str) -> float:
 
 @dataclass(frozen=True)
 class FrozenRun:
-    """A run whose manifests, aggregates and cell inventory have been verified."""
+    """A run whose manifests, aggregates and cell inventory have been verified.
+
+    Attributes:
+        run_dir: Resolved run directory.
+        manifest: Parsed ``manifest.json``.
+        completion: Parsed ``completion.json``.
+        inference: Parsed ``inference.json``, the paired-contrast aggregate.
+        cells: ``(path relative to run_dir, parsed cell)`` for every stored
+            cell, in sorted path order.
+        source_hashes: File SHA-256 of every verified source, keyed by path
+            relative to ``run_dir``; lineage may cite only these files.
+    """
 
     run_dir: Path
     manifest: dict[str, Any]
@@ -95,15 +177,49 @@ class FrozenRun:
 
     @property
     def mode(self) -> str:
+        """Return the analysis mode, ``confirmatory`` or ``rehearsal``."""
         return str(self.completion["analysis_mode"])
 
     @property
     def evidence_status(self) -> str:
+        """Return ``confirmatory`` for a confirmatory run and ``rehearsal_only`` otherwise."""
         return "confirmatory" if self.mode == "confirmatory" else "rehearsal_only"
 
 
 def verify_frozen_run(run_dir: Path) -> FrozenRun:
-    """Load a confirmatory/rehearsal run only after exhaustive hash checks."""
+    """Load a confirmatory/rehearsal run only after exhaustive hash checks.
+
+    The checks, in order:
+
+    - ``manifest.json`` and ``completion.json`` match their content hashes,
+      and the manifest's configuration and dependency-set hashes match.
+    - The mode is ``rehearsal`` or ``confirmatory`` in both files; a
+      confirmatory manifest declares a frozen design and a protocol-freeze
+      hash.
+    - Every aggregate in the completion inventory, including
+      ``fold_metrics.csv``, ``out_of_fold_predictions.csv.gz`` and
+      ``inference.json``, lies inside the run and matches its file hash.
+    - The cell files match the completion inventory exactly; each matches
+      its file and content hashes, the run's mode and evidence status, and
+      has a unique key and a known status; the status counts match.
+    - The cell count equals the planned grid (datasets x models x repeats x
+      folds, with any rehearsal fold limit); a confirmatory run forms that
+      grid exactly.
+    - ``fold_metrics.csv`` has exactly one row per complete cell, matched by
+      key and cell content hash.
+
+    Args:
+        run_dir: Run directory containing the manifest, completion record,
+            aggregates and ``cells/``.
+
+    Returns:
+        The verified run.
+
+    Raises:
+        FileNotFoundError: If a required JSON file is missing.
+        ValueError: If a record is malformed or a required entry is missing.
+        RuntimeError: If any hash, count, mode or key check fails.
+    """
     root = run_dir.resolve()
     manifest_path = root / "manifest.json"
     completion_path = root / "completion.json"
@@ -277,6 +393,20 @@ def verify_frozen_run(run_dir: Path) -> FrozenRun:
 
 
 def _source(run: FrozenRun, relative: str, result_keys: Iterable[str]) -> dict[str, Any]:
+    """Return the lineage record citing one verified file of the run.
+
+    Args:
+        run: The verified run.
+        relative: Path of the source file relative to the run directory.
+        result_keys: Fields of that file the output was derived from.
+
+    Returns:
+        ``artifact`` (the path prefixed with ``source_run/``), the verified
+        file ``sha256`` and the sorted, de-duplicated ``result_keys``.
+
+    Raises:
+        KeyError: If the file was not verified by :func:`verify_frozen_run`.
+    """
     if relative not in run.source_hashes:
         raise KeyError(f"unverified source requested for lineage: {relative}")
     return {
@@ -289,7 +419,27 @@ def _source(run: FrozenRun, relative: str, result_keys: Iterable[str]) -> dict[s
 def verify_explainability_artifact(
     path: Path, run: FrozenRun
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Verify an optional explainability result and its link to this source run."""
+    """Verify an optional explainability result and its link to this source run.
+
+    The result must match its content hash, be a frozen-cell explanation
+    result with the run's mode and evidence status, name the run's directory,
+    manifest and completion content hashes, and cite for every cell it used
+    the content hash that cell has in the run.
+
+    Args:
+        path: Explainability result written by
+            :func:`src.explainability.frozen_cells.write_explainability_result`.
+        run: The verified source run.
+
+    Returns:
+        The parsed result and its lineage record: path, file hash, content
+        hash and the result keys the renderer reads.
+
+    Raises:
+        FileNotFoundError: If the file is missing.
+        ValueError: If the result is malformed or of another analysis type.
+        RuntimeError: If a hash or any link to the source run does not match.
+    """
     artifact_path = path.resolve()
     result = _load_mapping(artifact_path)
     _verify_content_hash(result, "result_content_sha256", artifact_path)
@@ -334,7 +484,32 @@ def verify_explainability_artifact(
 def verify_robustness_run(
     robustness_dir: Path, run: FrozenRun
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Verify a frozen robustness directory and every declared artifact hash."""
+    """Verify a frozen robustness directory and every declared artifact hash.
+
+    The manifest and completion record must match their content and
+    configuration hashes, be in ``robustness`` mode and name this
+    confirmatory run. Every cell file must match the completion inventory,
+    its file and content hashes and the robustness mode, with matching status
+    and planned counts. Every aggregate must lie inside the directory and
+    match its file hash (and its content hash where it has one), and the three
+    required aggregates must be present. Finally the robustness manifest must
+    record exactly one input hash for each of this run's ``manifest.json`` and
+    ``completion.json``, equal to the current file hashes.
+
+    Args:
+        robustness_dir: Completed robustness run directory.
+        run: The verified confirmatory run it supplements.
+
+    Returns:
+        The parsed manifest, completion, cells and aggregates with a
+        ``source_refs`` lineage record per file, and a summary lineage record
+        for the directory.
+
+    Raises:
+        FileNotFoundError: If a required JSON file is missing.
+        ValueError: If a record or inventory is malformed or incomplete.
+        RuntimeError: If any hash, mode, count or link check fails.
+    """
     root = robustness_dir.resolve()
     manifest_path = root / "manifest.json"
     completion_path = root / "completion.json"

@@ -1,4 +1,12 @@
-"""Metric correctness against reference implementations and known values."""
+"""Metric correctness against reference implementations and known values.
+
+Covers ``src/evaluation/metrics.py``. Harrell's concordance index (C-index),
+Uno's inverse-probability-of-censoring-weighted (IPCW) C-index, the integrated
+Brier score (IBS) and the cumulative/dynamic area under the curve (AUC) must
+equal their scikit-survival references (INV-004). Further tests cover
+known-value edge cases, training-only horizon selection and the errors raised
+when training censoring cannot support a horizon.
+"""
 
 import numpy as np
 import pytest
@@ -24,7 +32,10 @@ from src.evaluation.metrics import (
 
 
 def test_concordance_matches_scikit_survival():
+    """Harrell's C-index equals the scikit-survival value, ties included (INV-004)."""
     rng = np.random.default_rng(0)
+    # Rounding times and risks creates tied times and tied risk scores, so the
+    # comparison exercises tie handling.
     for _ in range(50):
         n = int(rng.integers(30, 200))
         time = rng.exponential(100, n).round(1)
@@ -39,6 +50,7 @@ def test_concordance_matches_scikit_survival():
 
 
 def test_explicit_harrell_interface_matches_scikit_survival():
+    """harrell_c_index matches scikit-survival; the legacy tuple's error slot is None (INV-004)."""
     time = np.array([1.0, 2.0, 4.0, 5.0, 8.0, 9.0])
     event = np.array([1, 0, 1, 1, 0, 1])
     risk = np.array([2.0, 0.5, 1.4, 0.2, -0.5, -1.0])
@@ -49,6 +61,7 @@ def test_explicit_harrell_interface_matches_scikit_survival():
 
 
 def test_concordance_perfect_ranking():
+    """Risk that strictly decreases with event time gives a C-index of 1."""
     time = np.array([1.0, 2.0, 3.0, 4.0])
     event = np.array([1, 1, 1, 1])
     risk = np.array([4.0, 3.0, 2.0, 1.0])
@@ -57,6 +70,7 @@ def test_concordance_perfect_ranking():
 
 
 def test_concordance_inverted_ranking():
+    """Risk that strictly increases with event time gives a C-index of 0."""
     time = np.array([1.0, 2.0, 3.0, 4.0])
     event = np.array([1, 1, 1, 1])
     risk = np.array([1.0, 2.0, 3.0, 4.0])
@@ -65,6 +79,7 @@ def test_concordance_inverted_ranking():
 
 
 def test_concordance_tied_risk_is_one_half():
+    """Identical risk for every subject gives a C-index of 0.5, each tie counting one half."""
     time = np.array([1.0, 2.0, 3.0, 4.0])
     event = np.array([1, 1, 1, 1])
     risk = np.ones(4)
@@ -73,6 +88,7 @@ def test_concordance_tied_risk_is_one_half():
 
 
 def test_evaluation_times_inside_follow_up():
+    """The legacy horizon selector returns increasing times strictly inside the follow-up range."""
     rng = np.random.default_rng(1)
     time = rng.exponential(50, 300)
     event = rng.integers(0, 2, 300)
@@ -84,6 +100,7 @@ def test_evaluation_times_inside_follow_up():
 
 
 def test_training_horizons_are_observed_event_quantiles():
+    """Training horizons are quantiles of the observed event times, ignoring censored times."""
     time = np.arange(1.0, 13.0)
     event = np.array([1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0])
     horizons = training_event_time_horizons(
@@ -93,6 +110,9 @@ def test_training_horizons_are_observed_event_quantiles():
 
 
 def test_unsupported_censoring_horizon_fails_clearly():
+    """A horizon where training censoring survival is zero raises UnsupportedCensoringError."""
+    # The last two subjects are censored at 3 and 4, so the Kaplan-Meier
+    # estimate of the censoring survival G(t) falls to zero at t = 4.
     train_time = np.array([1.0, 2.0, 3.0, 4.0])
     train_event = np.array([1, 1, 0, 0])
     with pytest.raises(UnsupportedCensoringError, match="censoring survival"):
@@ -107,6 +127,7 @@ def test_integrated_brier_rewards_a_better_model():
     event = np.ones(n, dtype=int)
     eval_times = np.percentile(time, [25, 50, 75])
 
+    # There is no censoring, and exp(-t / 50) is every subject's true survival.
     informed = np.exp(-np.outer(1.0 / 50.0 * np.ones(n), eval_times))
     uninformed = np.full((n, len(eval_times)), 0.5)
 
@@ -116,7 +137,10 @@ def test_integrated_brier_rewards_a_better_model():
 
 
 def test_integrated_brier_matches_scikit_survival():
+    """The IPCW IBS equals the scikit-survival value (INV-004)."""
     rng = np.random.default_rng(12)
+    # Test follow-up (2 to 11) ends before training follow-up (2 to 12), so
+    # every test time lies inside the training censoring support.
     train_time = rng.uniform(2, 12, 300)
     train_event = rng.binomial(1, 0.7, 300)
     test_time = rng.uniform(2, 11, 120)
@@ -136,7 +160,7 @@ def test_integrated_brier_matches_scikit_survival():
 
 
 def test_evaluate_model_rejects_test_events_beyond_training_support():
-    """Metric code must not silently alter evaluation outcomes."""
+    """Test events beyond training censoring support raise an error instead of being altered."""
     from src.evaluation.metrics import evaluate_model
 
     rng = np.random.default_rng(4)
@@ -144,7 +168,8 @@ def test_evaluate_model_rejects_test_events_beyond_training_support():
     train_time = rng.uniform(1, 100, n)
     train_event = rng.integers(0, 2, n)
 
-    # Two test subjects have observed events past the training horizon.
+    # Two test subjects have observed events after the last training time,
+    # where the training censoring survival estimate is zero.
     test_time = np.concatenate([rng.uniform(1, 90, n), [150.0, 200.0]])
     test_event = np.concatenate([rng.integers(0, 2, n), [1, 1]])
     risk = rng.normal(0, 1, n + 2)
@@ -157,9 +182,11 @@ def test_evaluate_model_rejects_test_events_beyond_training_support():
 
 
 def test_time_dependent_auc_detects_signal():
+    """Mean cumulative/dynamic AUC exceeds 0.7 when the risk score is the true log hazard ratio."""
     rng = np.random.default_rng(3)
     n = 500
     risk = rng.normal(0, 1, n)
+    # Exponential times with hazard exp(risk) / 50 and no censoring.
     time = rng.exponential(np.exp(-risk) * 50)
     event = np.ones(n, dtype=int)
     eval_times = np.percentile(time, [25, 50, 75])
@@ -169,6 +196,7 @@ def test_time_dependent_auc_detects_signal():
 
 
 def test_time_dependent_auc_matches_scikit_survival():
+    """Cumulative/dynamic AUC and its mean equal the scikit-survival values (INV-004)."""
     rng = np.random.default_rng(13)
     train_time = rng.uniform(1, 20, 400)
     train_event = rng.binomial(1, 0.75, 400)
@@ -190,6 +218,7 @@ def test_time_dependent_auc_matches_scikit_survival():
 
 
 def test_uno_concordance_matches_scikit_survival():
+    """Uno's IPCW C-index truncated at tau equals the scikit-survival value (INV-004)."""
     rng = np.random.default_rng(14)
     train_time = rng.uniform(1, 20, 400)
     train_event = rng.binomial(1, 0.75, 400)

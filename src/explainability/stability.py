@@ -1,7 +1,27 @@
-"""Apply sampling-stability gates to grouped SHAP rankings.
+"""Apply sampling-stability gates to grouped Shapley additive explanations (SHAP).
 
 Successive budgets and successive seeds must meet the frozen Spearman and
-top-five overlap thresholds; failed comparisons block agreement claims."""
+top-five overlap thresholds; failed comparisons block agreement claims.
+
+A grouped SHAP ranking depends on which subjects and background rows were
+drawn. The gate checks that this sampling no longer changes the ranking in
+two ways, for every cell:
+
+- *Budget*: with the same seed, each budget (25/50, 50/100, 100/200
+  validation subjects / background rows, capped by fold size) is compared
+  with the next larger one.
+- *Seed*: at the largest budget, each of the three seeds is compared with
+  the next one.
+
+A comparison passes when the two rankings have Spearman correlation at least
+0.95 and share at least four of their top-five groups. It is not evaluable
+when there are fewer than four groups, when a ranking is constant, or when
+fold-size caps make two budgets explain identical samples. A model's gate
+passes only when every evaluable comparison passes; the H3a and H3b claim
+rules in :mod:`src.explainability.uncertainty` require that.
+
+:func:`convergence_records` is called by :mod:`src.explainability.result`,
+once for the Bayesian rows and once for the Cox rows."""
 
 from __future__ import annotations
 
@@ -12,8 +32,11 @@ import pandas as pd
 from src.explainability.posterior_analysis import compare_group_rankings
 from src.explainability.protocol import ExplanationProtocol
 
+# Only these statuses count towards a gate; "not_evaluable" and
+# "not_evaluable_identical_effective_budget" are reported but ignored.
 EVALUABLE_STATUSES = frozenset({"passed", "failed"})
 
+# (dataset, model_key, repeat, fold, seed, budget_index)
 ComparisonKey = tuple[Any, ...]
 
 
@@ -25,6 +48,12 @@ def _ranking_stability(
     protocol: ExplanationProtocol,
 ) -> dict[str, Any]:
     """Compare two grouped rankings of the same kind and apply the convergence rule.
+
+    Args:
+        left: Records of the first ranking, each with ``group`` and ``score``.
+        right: Records of the second ranking, in the same form.
+        score: Name of the score field in both.
+        protocol: Thresholds and top-five size.
 
     Returns:
         The agreement statistics of :func:`compare_group_rankings` plus the
@@ -71,7 +100,7 @@ def _comparison_lookup(comparisons: list[dict[str, Any]]) -> dict[ComparisonKey,
 
 
 def _same_effective_sample(left: dict[str, Any], right: dict[str, Any]) -> bool:
-    """Return whether two budgets ended up explaining the same subjects."""
+    """Detect equal selection hashes or equal effective nested-sampling budgets."""
     return left["selection_sha256"] == right["selection_sha256"] or (
         left["effective_validation_subjects"] == right["effective_validation_subjects"]
         and left["effective_training_background"] == right["effective_training_background"]
@@ -126,7 +155,11 @@ def _successive_seed_records(
     cell: tuple[Any, ...],
     protocol: ExplanationProtocol,
 ) -> list[dict[str, Any]]:
-    """Compare successive seeds at the largest budget for one cell."""
+    """Compare successive seeds at the largest budget for one cell.
+
+    Unlike the budget comparisons, these are not screened for identical
+    effective samples.
+    """
     dataset, model_key, repeat, fold = cell
     maximum_budget = len(protocol.budgets)
     records: list[dict[str, Any]] = []
@@ -180,6 +213,11 @@ def convergence_records(
 ) -> dict[str, Any]:
     """Run every successive-budget and successive-seed gate on the grouped SHAP rankings.
 
+    For Cox comparison rows ``grouped_shap`` holds the Cox SHAP ranking, so
+    the same rule then measures the stability of Cox SHAP. Those rows carry
+    the Bayesian cell's ``model_key``, so the Cox gate is reported per prior
+    and covers only the folds in which that prior's cell was interpretable.
+
     Args:
         comparisons: One row per cell, seed and budget, each holding a
             ``grouped_shap`` table.
@@ -206,7 +244,11 @@ def convergence_records(
 
 
 def unavailable_convergence() -> dict[str, Any]:
-    """Return the convergence record used when no Cox comparison exists."""
+    """Return the convergence record used when no Cox comparison exists.
+
+    Returns:
+        Empty comparison records and a non-evaluable gate that permits no claim.
+    """
     return {
         "primary_gate_target": "not applicable to unavailable Cox comparison",
         "budget_comparisons": [],
@@ -227,6 +269,14 @@ def model_convergence_status(convergence: dict[str, Any], dataset: str, model_ke
     Only ``passed`` and ``failed`` comparisons count. The status is
     ``passed`` when all of them passed, ``failed`` when any failed, and
     ``not_evaluable`` when there are none.
+
+    Args:
+        convergence: Budget and successive-seed comparison records.
+        dataset: Cohort key to select.
+        model_key: Stored model key to select.
+
+    Returns:
+        Passed, failed or not_evaluable for the selected model and cohort.
     """
     records = [
         row

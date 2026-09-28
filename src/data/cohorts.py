@@ -1,6 +1,8 @@
 """Load a study cohort and choose the feature set its models use.
 
-Every confirmatory and robustness cell starts here. The cohort CSV named in
+The confirmatory and robustness pipelines use ``load_analysis_dataset`` and
+``select_feature_spec`` before splitting and transforming rows. The cohort
+comma-separated values (CSV) file named in
 ``config/datasets.yaml`` is read unchanged, its survival outcome and subject
 identifiers are checked, and one feature-set declaration is selected for the
 fold-local preprocessor (``src.data.fold_preprocessing``).
@@ -31,16 +33,18 @@ def load_analysis_dataset(
 
     Returns:
         ``(frame, times, events, subject_ids)``: the unmodified CSV, follow-up
-        times as floats, event indicators as integers (1 = event, 0 =
-        censored), and one unique string identifier per row. A cohort without
-        ``id_col`` gets identifiers ``"<dataset_key>-<row number>"``,
+        times as floats in the cohort's recorded time unit, event indicators
+        as integers (1 = event, 0 = censored), and one unique string identifier
+        per row. Each array has shape ``(n_subjects,)`` in frame row order.
+        A cohort without ``id_col`` gets identifiers ``"<dataset_key>-<row number>"``,
         zero-padded to equal width.
 
     Raises:
         FileNotFoundError: The CSV does not exist.
         ValueError: An outcome or ID column is missing, a time is missing or not
-            positive, the event indicator is not 0/1, there are fewer than two
-            events or two censored subjects, or identifiers are not unique.
+            finite and positive, the event indicator is not 0/1, there are
+            fewer than two events or two censored subjects, or identifiers
+            are not unique.
     """
     path = project_root / dataset_config["raw_file"]
     if not path.is_file():
@@ -94,6 +98,13 @@ def select_feature_spec(dataset_config: dict[str, Any], feature_set: str) -> dic
 
     ``"primary"`` selects ``primary_features``. Any other name selects the
     complete specification of that name under ``sensitivity_feature_sets``.
+
+    Args:
+        dataset_config: One cohort's mapping from ``config/datasets.yaml``.
+        feature_set: ``"primary"`` or a declared sensitivity feature-set name.
+
+    Returns:
+        A shallow copy of the selected declaration; nested values remain shared.
 
     Raises:
         ValueError: The cohort declares no feature set with that name.

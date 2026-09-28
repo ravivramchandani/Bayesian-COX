@@ -1,4 +1,23 @@
-"""Finish a frozen robustness run once its sharded workers have exited."""
+"""Finish a frozen robustness run once its sharded workers have exited.
+
+Under ADR-031 the frozen robustness plan is fitted by several
+``shard_worker.py`` processes, each of which claims a cell with a lock file in
+a separate claims directory and stops before aggregation. This supervisor
+fits nothing itself. It polls the process table until no shard worker for the
+given checkout remains, releases the claims of cells that were never written,
+and then runs ``scripts/run_robustness.py --mode robustness --resume`` in that
+checkout. That unsharded resume fits any missing cell and writes the
+aggregates and ``completion.json``. If the run is already complete, nothing
+is launched.
+
+The resume is run without ``--confirmatory-run``; ``run_robustness.py`` then
+looks for the checkout's single completed confirmatory run under
+``reports/confirmatory/``.
+
+Example:
+    python scripts/wait_for_robustness.py --project-root <checkout> \
+        --run-dir <checkout>/reports/robustness/<run> --claims-dir <claims directory>
+"""
 
 from __future__ import annotations
 
@@ -12,7 +31,19 @@ from pathlib import Path
 
 
 def active_workers(project_root: Path) -> list[int]:
-    """Identify live shard workers for exactly the supplied frozen checkout."""
+    """Identify live shard workers for exactly the supplied frozen checkout.
+
+    A process counts only if one argument has the file name
+    ``shard_worker.py`` and another equals ``project_root`` exactly. This keeps
+    workers of other checkouts, and unrelated processes that merely mention
+    the path, out of the result.
+
+    Args:
+        project_root: Resolved path of the checkout the workers were started for.
+
+    Returns:
+        Process identifiers of the matching workers.
+    """
     process_table = subprocess.run(
         ["ps", "-axo", "pid=,args="],
         check=True,
@@ -24,6 +55,8 @@ def active_workers(project_root: Path) -> list[int]:
         fields = line.strip().split(maxsplit=1)
         if len(fields) != 2:
             continue
+        # Skip command lines that cannot be tokenised, such as ones with
+        # unbalanced quotes; they cannot be a well-formed worker invocation.
         try:
             argv = shlex.split(fields[1])
         except ValueError:
@@ -37,7 +70,18 @@ def active_workers(project_root: Path) -> list[int]:
 
 
 def main() -> int:
-    """Wait without fitting, then invoke the unchanged official resume command."""
+    """Wait without fitting, then invoke the unchanged official resume command.
+
+    Returns:
+        Exit status 0 once the run is complete.
+
+    Raises:
+        ValueError: If ``--poll-seconds`` is below 1 or the run directory is not
+            under the checkout's ``reports/robustness``.
+        subprocess.CalledProcessError: If the resume command fails.
+        RuntimeError: If the finished run stores fewer or more cells than it
+            planned.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--project-root", required=True, type=Path)
     parser.add_argument("--run-dir", required=True, type=Path)

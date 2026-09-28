@@ -1,4 +1,11 @@
-"""Public survival-evaluation interfaces."""
+"""Public survival-evaluation interfaces.
+
+``metrics`` holds the discrimination and prediction-error metrics and the
+training-only choice of evaluation horizons; ``calibration`` and
+``calibration_model`` hold the fixed-horizon calibration estimators. The
+confirmatory and robustness pipelines call them once per fitted model and
+validation fold.
+"""
 
 from .calibration import survival_calibration_curve, survival_calibration_summary
 from .metrics import (

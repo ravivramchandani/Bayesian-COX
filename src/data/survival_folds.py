@@ -1,4 +1,9 @@
-"""Deterministic event/time-stratified folds for nested survival validation."""
+"""Construct deterministic, event/time-stratified survival validation folds.
+
+``event_time_strata`` builds the labels used by ``repeated_survival_folds``.
+The nested-validation pipelines reuse the resulting indices across model
+families so comparisons use the same subjects in each training/validation pair.
+"""
 
 from __future__ import annotations
 
@@ -11,7 +16,15 @@ from sklearn.model_selection import StratifiedKFold
 
 @dataclass(frozen=True)
 class SurvivalFold:
-    """Indices and identifiers for one outer or inner validation fold."""
+    """Describe one training/validation split by its row positions and seed.
+
+    Args:
+        repeat: One-based repeat number.
+        fold: One-based fold number within the repeat.
+        seed: Seed used to shuffle that repeat's stratified splits.
+        train_indices: One-dimensional integer positions in the input arrays.
+        validation_indices: Held-out positions in the same input arrays.
+    """
 
     repeat: int
     fold: int
@@ -33,6 +46,21 @@ def event_time_strata(
     are tied. A time subdivision is used only when every resulting stratum can
     contribute at least one observation to every fold; otherwise the affected
     event group is stratified by event status alone.
+
+    Args:
+        times: Positive finite follow-up times, shape ``(n_subjects,)``, in
+            the cohort's own unit.
+        events: Aligned binary event indicators: 1 for event, 0 for censoring.
+        n_splits: Number of folds each stratum must support.
+        max_time_bins: Maximum quantile subdivisions within each event group.
+
+    Returns:
+        String labels of shape ``(n_subjects,)`` in the input row order.
+
+    Raises:
+        ValueError: Arrays are not aligned and one-dimensional, times are
+            invalid, converted event indicators are not binary, or either
+            event group contains fewer subjects than ``n_splits``.
     """
     time = np.asarray(times, dtype=float)
     event = np.asarray(events, dtype=int)
@@ -77,7 +105,27 @@ def repeated_survival_folds(
     base_seed: int = 42,
     max_time_bins: int = 4,
 ) -> list[SurvivalFold]:
-    """Return paired, deterministic repeated folds for all model families."""
+    """Return paired, deterministic repeated folds for all model families.
+
+    Each repeat shuffles the same event/time strata with seed
+    ``base_seed + 1009 * repeat_index``. Reusing this list across models
+    preserves the pairing required by the corrected comparison statistics.
+
+    Args:
+        times: Follow-up times of shape ``(n_subjects,)``, in cohort time units.
+        events: Aligned binary indicators, 1 for event and 0 for censoring.
+        n_splits: Number of validation folds per repeat; must be at least two.
+        n_repeats: Number of repeated partitions to construct.
+        base_seed: Seed for the first repeat; later seeds follow the rule above.
+        max_time_bins: Maximum time subdivisions passed to ``event_time_strata``.
+
+    Returns:
+        A repeat-major list of ``SurvivalFold`` records containing positions
+        relative to the supplied arrays, with one-based repeat/fold numbers.
+
+    Raises:
+        ValueError: Stratification inputs or the split count are invalid.
+    """
     strata = event_time_strata(
         times,
         events,

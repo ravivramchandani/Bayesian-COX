@@ -1,4 +1,13 @@
-"""Reject invalid post-hoc evidence even when outer hashes are recomputed."""
+"""Reject invalid post-hoc evidence even when outer hashes are recomputed.
+
+Covers ``verify_posthoc_run`` in ``src/utils/posthoc_evidence.py``,
+``_write_or_verify`` in ``src/pipelines/posthoc_sampler.py`` and the separate
+renderer ``scripts/render_horseshoe_sensitivity.py``. A constructed 75-cell run
+with no clinical data stands in for the ADR-032 sampler sensitivity. Each
+corruption is re-hashed, so only the content checks can catch it. Rendered
+numbers must trace to the verified run (INV-007), and the sensitivity must stay
+complete, separately labelled and acceptance-only (INV-009).
+"""
 
 from __future__ import annotations
 
@@ -17,6 +26,7 @@ from src.utils.reproducibility import canonical_json_hash, sha256_file
 
 
 def _write_hashed(path, record, field):
+    """Set ``record[field]`` to the record's fresh content hash, in place, and write it."""
     record.pop(field, None)
     record[field] = canonical_json_hash(record)
     write_json_atomic(path, record)
@@ -24,8 +34,14 @@ def _write_hashed(path, record, field):
 
 @pytest.fixture
 def sensitivity(tmp_path, monkeypatch):
+    """Build a valid post-hoc run and a stub confirmatory source.
+
+    Returns:
+        The post-hoc run directory and the source directory.
+    """
     source_dir, run = tmp_path / "source", tmp_path / "posthoc"
     source_dir.mkdir()
+    # Only the protocol keys that the sensitivity changes, set below 0.999.
     original_protocol = {
         "models": {
             "bayesian_cox": {
@@ -40,6 +56,7 @@ def sensitivity(tmp_path, monkeypatch):
     }
     write_json_atomic(source_dir / "manifest.json", source_manifest)
     write_json_atomic(source_dir / "completion.json", {"source": True})
+    # The full grid of 75 horseshoe folds: three cohorts, five repeats, five folds.
     keys = [
         (cohort, repeat, fold)
         for cohort in ("gbsg2", "metabric", "whas500")
@@ -67,12 +84,16 @@ def sensitivity(tmp_path, monkeypatch):
         relative = f"cells/{dataset}/repeat_{repeat:02d}_fold_{fold:02d}/bayesian_horseshoe.json"
         _write_hashed(source_dir / relative, original, "cell_content_sha256")
         source_cells.append((relative, original))
+        # The unchanged normal and spike-and-slab comparators exist only in the
+        # stubbed source record; the verifier never reads them from disk.
         for comparator in ("bayesian_normal", "bayesian_spike_slab"):
             comparator_cell = copy.deepcopy(original)
             comparator_cell["model_key"] = comparator
             source_cells.append(
                 (relative.replace("bayesian_horseshoe", comparator), comparator_cell)
             )
+        # The refit keeps the original fold lineage and adds the post-hoc labels,
+        # the source-cell hash and 0.999 acceptance.
         refit = copy.deepcopy(original)
         refit.update(
             {
@@ -99,6 +120,9 @@ def sensitivity(tmp_path, monkeypatch):
     }
     manifest = {"run_config": configuration, "config_sha256": canonical_json_hash(configuration)}
     _write_hashed(run / "manifest.json", manifest, "manifest_content_sha256")
+    # Nine primary contrasts (three prior pairs per cohort) on the integrated
+    # Brier score (IBS), each with all 25 paired folds, so the Holm family is
+    # complete.
     primary = [
         {
             "dataset": cohort,
@@ -137,6 +161,7 @@ def sensitivity(tmp_path, monkeypatch):
         "aggregate_sha256": {"inference.json": sha256_file(run / "inference.json")},
     }
     _write_hashed(run / "completion.json", completion, "completion_content_sha256")
+    # Replaces ``verify_frozen_run``, so no real 450-cell source run is needed.
     source = SimpleNamespace(
         mode="confirmatory",
         run_dir=source_dir,
@@ -149,6 +174,7 @@ def sensitivity(tmp_path, monkeypatch):
 
 
 def test_all75_posthoc_cells_verify(sensitivity):
+    """An intact 75-cell sensitivity verifies and returns every cell (INV-009)."""
     run, source = sensitivity
     assert len(verify_posthoc_run(run, source)["cells"]) == 75
 
@@ -167,6 +193,7 @@ def test_all75_posthoc_cells_verify(sensitivity):
     ],
 )
 def test_rehashed_corrupt_evidence_still_fails(sensitivity, corruption):
+    """Content corruptions fail verification even with every hash recomputed (INV-007, INV-009)."""
     run, source = sensitivity
     completion = json.loads((run / "completion.json").read_text())
     if corruption == "undeclared_method":
@@ -191,6 +218,8 @@ def test_rehashed_corrupt_evidence_still_fails(sensitivity, corruption):
             elif corruption == "acceptance":
                 cell["fit_attempts"][0]["target_accept"] = 0.99
             elif corruption == "failed_hidden_as_complete":
+                # The counts admit the failure, but the inference still claims
+                # 25 paired folds for every contrast.
                 cell["status"] = "failed_diagnostics"
                 completion["status_counts"] = {"complete": 74, "failed_diagnostics": 1}
             elif corruption == "unknown_status":
@@ -206,6 +235,7 @@ def test_rehashed_corrupt_evidence_still_fails(sensitivity, corruption):
 
 
 def test_partial_finalisation_reuses_equal_result_and_refuses_changed_result(tmp_path):
+    """Resumed finalisation leaves an equal result untouched and refuses a different one."""
     path = tmp_path / "inference.json"
     _write_or_verify(path, {"estimate": 0.1})
     original = path.read_bytes()
@@ -216,6 +246,7 @@ def test_partial_finalisation_reuses_equal_result_and_refuses_changed_result(tmp
 
 
 def test_posthoc_renderer_uses_recorded_interval_and_separate_labels(sensitivity, tmp_path):
+    """Stored intervals are rendered unchanged and outputs are labelled post-hoc (INV-007, INV-009)."""
     path = Path(__file__).resolve().parents[1] / "scripts/render_horseshoe_sensitivity.py"
     spec = importlib.util.spec_from_file_location("posthoc_renderer_test", path)
     renderer = importlib.util.module_from_spec(spec)
@@ -225,6 +256,7 @@ def test_posthoc_renderer_uses_recorded_interval_and_separate_labels(sensitivity
     rows = renderer.primary_rows(records["inference"])
     assert rows.lower_95.tolist() == [-0.0001] * 9
     assert rows.upper_95.tolist() == [0.0005] * 9
+    # Two renders of the same evidence must produce byte-identical files.
     first = renderer.render(run, source, tmp_path / "render_a")
     second = renderer.render(run, source, tmp_path / "render_b")
     assert {path.name: sha256_file(path) for path in first.iterdir()} == {

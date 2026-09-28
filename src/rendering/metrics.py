@@ -1,4 +1,30 @@
-"""Tabulate and render cohort flow, prediction metrics and paired prior contrasts."""
+"""Tabulate and render cohort flow, prediction metrics and paired prior contrasts.
+
+Each ``_render_*`` function is called by :func:`src.rendering.runner.render_run`
+and reads only verified content of the frozen run: the stored cells and
+``inference.json``. Nothing is recomputed from predictions; the tables
+reshape stored values, and summaries across folds are descriptive.
+
+Outputs (tables as CSV and LaTeX, figures as PDF and PNG):
+
+- ``_render_runtime``: ``tables/runtime_diagnostic_failures`` and
+  ``figures/runtime_diagnostic_failures``, the only output of a rehearsal.
+- ``_render_cohort_flow``: ``tables/cohort_flow_counts`` and
+  ``figures/cohort_flow_counts``.
+- ``_render_fold_metrics``: ``tables/fold_metrics_long``,
+  ``tables/fold_metric_summary``, ``tables/discrimination_summary``,
+  ``figures/fold_metric_distributions`` and ``figures/discrimination``.
+- ``_render_paired_ibs``: ``tables/paired_ibs_effects`` and
+  ``figures/paired_ibs_effects``.
+- ``_render_calibration``: ``tables/calibration_parameters``,
+  ``tables/calibration_curves``, ``figures/calibration_curves`` and
+  ``figures/calibration_parameters``.
+
+IBS is the integrated Brier score; IPCW is inverse probability of censoring
+weighting; AUC is the area under the time-dependent receiver operating
+characteristic (ROC) curve; R-hat, ESS
+(effective sample size) and BFMI (Bayesian fraction of missing information)
+are stored Markov chain Monte Carlo (MCMC) diagnostics."""
 
 from __future__ import annotations
 
@@ -7,6 +33,7 @@ from typing import Any
 
 import matplotlib
 
+# Select the non-interactive backend before pyplot is imported.
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
@@ -19,6 +46,14 @@ from .verification import FrozenRun, _finite, _source
 
 
 def _runtime_rows(run: FrozenRun) -> pd.DataFrame:
+    """Return one row per stored cell with its runtime, status and last-attempt diagnostics.
+
+    Diagnostics come from the last fit attempt and are empty for cells
+    without attempts, such as the non-Bayesian models.
+
+    Raises:
+        ValueError: If a cell's ``total_seconds`` is not finite.
+    """
     rows: list[dict[str, Any]] = []
     for relative, cell in run.cells:
         attempts = cell.get("fit_attempts")
@@ -52,6 +87,17 @@ def _runtime_rows(run: FrozenRun) -> pd.DataFrame:
 
 
 def _render_runtime(run: FrozenRun, registry: OutputRegistry, *, rehearsal: bool) -> None:
+    """Write the runtime and fit-status audit table and figure.
+
+    The figure shows total cell runtime by model on a log scale (cells with
+    positive runtime, whatever their status) and stacked counts of cell
+    status. For a rehearsal, titles and notes state that it is not evidence.
+
+    Args:
+        run: The verified run.
+        registry: Output registry.
+        rehearsal: Whether ``run`` is a rehearsal.
+    """
     table = _runtime_rows(run)
     sources = _cell_sources(
         run,
@@ -71,6 +117,8 @@ def _render_runtime(run: FrozenRun, registry: OutputRegistry, *, rehearsal: bool
     )
 
     figure, axes = plt.subplots(1, 2, figsize=(11, 4.5))
+    # Despite its name this keeps every cell with positive runtime, failed
+    # cells included; the log scale needs strictly positive values.
     complete_times = table.loc[table["total_seconds"] > 0]
     models = sorted(complete_times["model_key"].unique())
     data = [
@@ -127,6 +175,15 @@ def _render_runtime(run: FrozenRun, registry: OutputRegistry, *, rehearsal: bool
 
 
 def _cohort_rows(run: FrozenRun) -> pd.DataFrame:
+    """Return one row per dataset with subject, event and cell-status counts.
+
+    Subject and event totals are the training plus validation counts of each
+    cell, which every cell of a dataset must agree on. ``failed_cells``
+    includes both fit failures and diagnostic failures.
+
+    Raises:
+        RuntimeError: If cells of one dataset disagree on the totals.
+    """
     records: list[dict[str, Any]] = []
     for dataset in sorted({str(cell["dataset"]) for _, cell in run.cells}):
         cohort_cells = [cell for _, cell in run.cells if cell["dataset"] == dataset]
@@ -157,6 +214,7 @@ def _cohort_rows(run: FrozenRun) -> pd.DataFrame:
 
 
 def _render_cohort_flow(run: FrozenRun, registry: OutputRegistry) -> None:
+    """Write the cohort flow table and a figure of events, censoring and cell status."""
     table = _cohort_rows(run)
     sources = _cell_sources(
         run,
@@ -212,6 +270,15 @@ def _render_cohort_flow(run: FrozenRun, registry: OutputRegistry) -> None:
 
 
 def _metric_rows(run: FrozenRun) -> pd.DataFrame:
+    """Return the long metric table: one row per complete cell and metric.
+
+    The metrics are those in ``METRIC_LABELS``, read from each cell's stored
+    ``metrics`` mapping.
+
+    Raises:
+        ValueError: If a complete cell has no metrics mapping or a value is
+            not finite.
+    """
     rows: list[dict[str, Any]] = []
     for relative, cell in run.cells:
         if cell["status"] != "complete":
@@ -240,6 +307,19 @@ def _metric_rows(run: FrozenRun) -> pd.DataFrame:
 
 
 def _metric_summary(rows: pd.DataFrame) -> pd.DataFrame:
+    """Summarise a long metric table by dataset, model and metric.
+
+    Gives the fold count, mean, sample standard deviation, median and
+    quartiles. Outer folds share training subjects, so the standard deviation
+    describes spread across folds and is not a standard error.
+
+    Args:
+        rows: Output of :func:`_metric_rows`, or a subset of it.
+
+    Returns:
+        One row per ``(dataset, model_key, model, metric)``; an empty table
+        with the same columns when ``rows`` is empty.
+    """
     if rows.empty:
         return pd.DataFrame(
             columns=[
@@ -270,6 +350,12 @@ def _metric_summary(rows: pd.DataFrame) -> pd.DataFrame:
 
 
 def _render_fold_metrics(run: FrozenRun, registry: OutputRegistry) -> None:
+    """Write the fold-metric tables, box plots of every metric and the discrimination figure.
+
+    The discrimination figure shows, per dataset and model, the mean of Uno's
+    C-index, Harrell's C-index and mean time-dependent AUC with one fold
+    standard deviation as the error bar.
+    """
     rows = _metric_rows(run)
     summary = _metric_summary(rows)
     selected = [(relative, cell) for relative, cell in run.cells if cell["status"] == "complete"]
@@ -360,6 +446,7 @@ def _render_fold_metrics(run: FrozenRun, registry: OutputRegistry) -> None:
                 match = subset[(subset["model_key"] == model) & (subset["metric"] == metric)]
                 means.append(float(match["mean"].iloc[0]) if len(match) else np.nan)
                 sd = float(match["standard_deviation"].iloc[0]) if len(match) else np.nan
+                # A single fold has no standard deviation; draw no error bar.
                 errors.append(sd if math.isfinite(sd) else 0.0)
             axis.errorbar(
                 x + (metric_index - 1) * width,
@@ -388,6 +475,18 @@ def _render_fold_metrics(run: FrozenRun, registry: OutputRegistry) -> None:
 
 
 def _paired_ibs_rows(run: FrozenRun) -> pd.DataFrame:
+    """Return one row per primary prior contrast from ``inference.json``.
+
+    Every contrast is kept. One without an ``ibs`` effect (fewer paired folds
+    than planned) has empty estimates and, unless it records its own status,
+    the status ``unavailable``. ``mean_ibs_difference`` is model A minus model
+    B, so a negative value favours model A. The standard error and interval
+    are the Nadeau–Bengio corrected repeated cross-validation values, and
+    the Holm fields are present only when the whole family was estimable.
+
+    Raises:
+        ValueError: If ``inference.json`` has no primary contrast list.
+    """
     primary = run.inference.get("primary")
     if not isinstance(primary, list):
         raise ValueError("inference artifact has no primary contrast list")
@@ -435,6 +534,12 @@ def _paired_ibs_rows(run: FrozenRun) -> pd.DataFrame:
 
 
 def _render_paired_ibs(run: FrozenRun, registry: OutputRegistry) -> None:
+    """Write the primary paired IBS effect table and forest plot.
+
+    Estimable contrasts are drawn with their nominal 95% interval; the others
+    keep their row and are labelled as not estimable with their paired-fold
+    count.
+    """
     table = _paired_ibs_rows(run)
     sources = [_source(run, "inference.json", ["primary", "holm_family_complete"])]
     _write_table(
@@ -476,6 +581,8 @@ def _render_paired_ibs(run: FrozenRun, registry: OutputRegistry) -> None:
             for row in ordered.itertuples(index=False)
         ]
         axis.set_yticks(np.arange(len(ordered)), labels)
+        # The "/25" denominator is the frozen five-repeat, five-fold grid; it
+        # is written as a constant rather than read from the run.
         for row_index in np.flatnonzero(~available.to_numpy()):
             axis.text(
                 0.02,
@@ -499,6 +606,21 @@ def _render_paired_ibs(run: FrozenRun, registry: OutputRegistry) -> None:
 
 
 def _calibration_rows(run: FrozenRun) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Return the stored calibration parameters and curve bins of every complete cell.
+
+    ``horizon_index`` is the 1-based position of the horizon in the cell's
+    calibration list.
+
+    Returns:
+        A parameter table, one row per cell, horizon and parameter
+        (calibration-in-the-large, intercept, slope) with its stored
+        cell-level interval and bootstrap success count; and a curve table, one row per cell,
+        horizon and calibration bin with mean predicted and observed survival.
+
+    Raises:
+        ValueError: If a complete cell lacks a calibration list or a record
+            is malformed.
+    """
     parameters: list[dict[str, Any]] = []
     curves: list[dict[str, Any]] = []
     for relative, cell in run.cells:
@@ -551,6 +673,13 @@ def _calibration_rows(run: FrozenRun) -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def _render_calibration(run: FrozenRun, registry: OutputRegistry) -> None:
+    """Write the calibration tables, averaged curves and intercept/slope plots.
+
+    Curves average each bin's mean predicted and observed survival across
+    outer folds, per dataset, horizon and model. The parameter figure shows
+    every cell-horizon estimate with the model mean, against reference lines
+    at intercept 0 and slope 1.
+    """
     parameters, curves = _calibration_rows(run)
     selected = [(relative, cell) for relative, cell in run.cells if cell["status"] == "complete"]
     sources = _cell_sources(run, selected, ["metrics.calibration"])

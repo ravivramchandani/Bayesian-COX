@@ -1,4 +1,12 @@
-"""Fit one outer-validation cell and retain its complete result or explicit failure record."""
+"""Fit one outer-validation cell and retain its complete result or explicit failure record.
+
+A cell is one model on one outer fold of one cohort. :mod:`runner` calls
+:func:`run_cell` for every planned cell that is not yet stored. The cell
+preprocesses the fold, tunes and fits the model (:mod:`fitting`), scores it
+(:mod:`evaluation`), collects model details (:mod:`posterior`) and returns one
+cell mapping, possibly containing NumPy arrays, with a SHA-256 content hash. The runner writes that record
+once through the shared JSON writer; :mod:`aggregation` and :mod:`inference` read it back.
+"""
 
 from __future__ import annotations
 
@@ -37,20 +45,30 @@ def run_cell(
     """Fit, evaluate and serialise one model on one paired outer fold.
 
     Predictor processing and model selection use the outer-training rows only.
-    A diagnostic failure retains every permitted attempt; another exception
-    becomes an explicit failed record. Both retain the cell's identity and seed.
+    A diagnostic failure retains the completed attempts supplied by the fitter;
+    an execution exception inside the cell calculation becomes an explicit failed
+    record without those attempts. Both retain the cell's identity and seed.
+    The ``status`` field is ``"complete"``, ``"failed_diagnostics"`` or
+    ``"failed"``.
 
     Args:
+        dataset_key: Cohort key from ``config/datasets.yaml``.
+        model_key: One of :data:`~.options.MODEL_KEYS`.
         fold: Training and validation row indices from the frozen fold generator.
         raw: Unprocessed cohort frame; ``times``, ``events`` and ``subject_ids``
             follow the same row order.
+        times: Follow-up times in the cohort's own unit (days or months).
+        events: Event indicators (1 = event, 0 = censored).
+        subject_ids: Stable subject identifiers, stored so that paired cells
+            can be checked for identical validation subjects.
         feature_spec: Frozen predictor declaration for the fold-local processor.
         config: Frozen study protocol, including model and evaluation settings.
         options: Actual run controls, including the diagnostic-gate mode.
         data_sha256: Hash of the authoritative cohort CSV.
 
     Returns:
-        A complete or failed cell record with its content hash and elapsed time.
+        A complete or failed cell mapping with its content hash and elapsed time
+        in seconds. NumPy values are converted by the runner when it writes JSON.
     """
     started = time.perf_counter()
     base = _cell_metadata(
@@ -91,6 +109,11 @@ def run_cell(
             }
         )
     base["total_seconds"] = time.perf_counter() - started
+    # The hash covers the whole record as written, timings included, so any
+    # later edit to a stored cell is detected when it is loaded. Because
+    # wall-clock times differ between executions, a refit reproduces every
+    # field except the timings and this hash; the reproduction check compares
+    # all other fields.
     base["cell_content_sha256"] = canonical_json_hash(_json_safe(base))
     return base
 
@@ -106,6 +129,8 @@ def _cell_metadata(
     data_sha256: str,
 ) -> dict[str, Any]:
     """Build the unchanged identity, sample and seed fields shared by every cell status."""
+    # The seed depends only on the cell's identity, not on run order, so a
+    # cell refitted alone or in another process gets the same seed.
     cell_seed = deterministic_seed(
         int(config["validation"]["base_seed"]),
         dataset_key,
@@ -146,9 +171,19 @@ def _successful_cell(
     options: RunOptions,
     cell_seed: int,
 ) -> dict[str, Any]:
-    """Preprocess, tune, fit and score a cell before collecting its model details."""
+    """Preprocess, tune, fit and score a cell before collecting its model details.
+
+    Returns:
+        The fields added to a complete cell: selected hyperparameters, the
+        tuning record, fit attempts, preprocessing metadata, metrics,
+        validation predictions with the observed outcomes, the training
+        outcomes that define inverse probability of censoring weighting (IPCW),
+        and model details.
+    """
     from . import _fit_with_diagnostic_rule
 
+    # Imputation, encoding and scaling are fitted on the training rows only
+    # and then applied unchanged to the validation rows.
     processor = FoldFeaturePreprocessor(feature_spec)
     x_train = processor.fit_transform(raw.iloc[fold.train_indices])
     x_validation = processor.transform(raw.iloc[fold.validation_indices])
@@ -196,6 +231,8 @@ def _successful_cell(
             "subject_ids": subject_ids[fold.validation_indices],
             "observed_time": times[fold.validation_indices],
             "observed_event": events[fold.validation_indices],
+            # The paired bootstrap in ``inference`` recomputes the IBS from the
+            # stored cell alone; these training outcomes define its weights.
             "training_time": times[fold.train_indices],
             "training_event": events[fold.train_indices],
         },

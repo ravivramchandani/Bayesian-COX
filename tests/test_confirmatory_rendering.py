@@ -1,4 +1,12 @@
-"""Pure-renderer provenance, evidence-boundary and determinism tests."""
+"""Pure-renderer provenance, evidence-boundary and determinism tests.
+
+Protects ``scripts/render_confirmatory.py`` and the ``src/rendering`` package it
+delegates to. Each test writes a small hash-consistent toy run and checks that
+rendering is repeatable byte for byte, that ``lineage.json`` lists every output,
+that edited evidence is refused before any output exists, and that a rehearsal
+yields only a labelled runtime package (INV-007). Other test modules reuse
+``_make_run``.
+"""
 
 from __future__ import annotations
 
@@ -19,6 +27,7 @@ RENDERER_PATH = PROJECT_ROOT / "scripts" / "render_confirmatory.py"
 
 
 def _renderer() -> ModuleType:
+    """Load ``scripts/render_confirmatory.py`` as a module from its file path."""
     spec = importlib.util.spec_from_file_location("confirmatory_renderer", RENDERER_PATH)
     if spec is None or spec.loader is None:
         raise RuntimeError("could not load confirmatory renderer")
@@ -29,6 +38,8 @@ def _renderer() -> ModuleType:
 
 
 def _canonical(value: Any) -> str:
+    """Return the SHA-256 of the canonical JSON encoding used for content hashes."""
+    # Sorted keys and compact separators match the renderer's canonical_json_hash.
     payload = json.dumps(
         value,
         sort_keys=True,
@@ -42,12 +53,14 @@ def _canonical(value: Any) -> str:
 
 
 def _file_hash(path: Path) -> str:
+    """Return the SHA-256 of a file's bytes."""
     import hashlib
 
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:
+    """Write a mapping as indented, key-sorted JSON with a trailing newline."""
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
         json.dumps(value, indent=2, sort_keys=True, allow_nan=False) + "\n",
@@ -56,6 +69,12 @@ def _write_json(path: Path, value: dict[str, Any]) -> None:
 
 
 def _calibration(offset: float) -> list[dict[str, Any]]:
+    """Return a one-horizon calibration summary and two-bin curve.
+
+    Args:
+        offset: Amount added to every summary value and to each bin's mean
+            predicted survival, so the Bayesian and Cox cells differ.
+    """
     return [
         {
             "summary": {
@@ -103,6 +122,14 @@ def _calibration(offset: float) -> list[dict[str, Any]]:
 
 
 def _cell(model_key: str, *, mode: str) -> dict[str, Any]:
+    """Build one toy cell with its content hash for repeat 1, fold 1.
+
+    Args:
+        model_key: ``cox_ph`` or a ``bayesian_`` key; Bayesian cells carry
+            sampler diagnostics, predictive checks and a trace snapshot, while
+            Cox cells carry a proportional-hazards test table.
+        mode: ``confirmatory`` or ``rehearsal``; sets the evidence status.
+    """
     bayesian = model_key.startswith("bayesian_")
     offset = 0.01 if bayesian else 0.0
     cell: dict[str, Any] = {
@@ -127,6 +154,8 @@ def _cell(model_key: str, *, mode: str) -> dict[str, Any]:
         "selected_hyperparameters": {},
         "inner_tuning": {"tuned": False, "candidates": []},
         "preprocessing": {"feature_names": ["age"]},
+        # Harrell's and Uno's C-index, IBS (integrated Brier score) and time-dependent
+        # AUC at one horizon; the offset makes the Bayesian cell slightly better.
         "metrics": {
             "harrell_c_index": 0.65 + offset,
             "uno_c_index": 0.64 + offset,
@@ -140,6 +169,9 @@ def _cell(model_key: str, *, mode: str) -> dict[str, Any]:
         "total_seconds": 0.4 if bayesian else 0.1,
     }
     if bayesian:
+        # Values that satisfy the confirmatory gate: R-hat (potential scale reduction),
+        # bulk and tail ESS (effective sample size), no divergences, BFMI (Bayesian
+        # fraction of missing information) and no maximum tree-depth hits.
         diagnostics = {
             "converged": True,
             "r_hat_max": 1.0,
@@ -214,6 +246,7 @@ def _cell(model_key: str, *, mode: str) -> dict[str, Any]:
                     }
                 ],
             },
+            # Two chains of three retained draws for each sampled variable.
             "posterior_trace_snapshot": {
                 "purpose": "visualisation_only_full_trace_used_for_numeric_diagnostics",
                 "draw_indices": [0, 2, 4],
@@ -237,6 +270,7 @@ def _cell(model_key: str, *, mode: str) -> dict[str, Any]:
         }
     else:
         cell["fit_attempts"] = [{"attempt": 1, "fit_seconds": 0.08}]
+        # Cox proportional-hazards (PH) assumption test with a Holm-adjusted p-value.
         cell["model_details"] = {
             "ph_test": [
                 {
@@ -248,13 +282,26 @@ def _cell(model_key: str, *, mode: str) -> dict[str, Any]:
                 }
             ]
         }
+    # The content hash covers every other field; verifiers remove this key and rehash.
     cell["cell_content_sha256"] = _canonical(cell)
     return cell
 
 
 def _make_run(root: Path, *, mode: str = "confirmatory") -> Path:
+    """Write a complete, hash-consistent toy run and return its directory.
+
+    The run has one cohort, one outer fold and two models (Cox PH and the
+    normal-prior Bayesian Cox), with manifest, cells, aggregates and a
+    completion inventory whose hashes all agree.
+
+    Args:
+        root: Parent directory; the run is written to ``root / f"toy_{mode}"``.
+        mode: ``confirmatory`` or ``rehearsal``.
+    """
     run_dir = root / f"toy_{mode}"
     models = ["cox_ph", "bayesian_normal"]
+    # The verifier refuses a confirmatory run that limits folds or lacks the frozen
+    # design status; a rehearsal may limit folds.
     run_config = {
         "mode": mode,
         "datasets": ["toy"],
@@ -276,6 +323,7 @@ def _make_run(root: Path, *, mode: str = "confirmatory") -> Path:
         },
     }
     if mode == "confirmatory":
+        # Placeholder with the 64-hex-digit form the verifier requires.
         manifest["protocol_freeze_sha256"] = "f" * 64
     manifest["manifest_content_sha256"] = _canonical(manifest)
     _write_json(run_dir / "manifest.json", manifest)
@@ -298,12 +346,14 @@ def _make_run(root: Path, *, mode: str = "confirmatory") -> Path:
             }
         )
     pd.DataFrame(metric_rows).to_csv(run_dir / "fold_metrics.csv", index=False)
+    # OOF (out-of-fold) predictions; mtime=0 keeps the gzip bytes, and so the hash, fixed.
     with gzip.GzipFile(
         filename=str(run_dir / "out_of_fold_predictions.csv.gz"),
         mode="wb",
         mtime=0,
     ) as handle:
         handle.write(b"dataset,subject_id\ntoy,s8\n")
+    # With a single Bayesian prior there is no prior contrast, so the family is empty.
     inference = {
         "status": "incomplete",
         "holm_family_complete": False,
@@ -334,6 +384,7 @@ def _make_run(root: Path, *, mode: str = "confirmatory") -> Path:
 
 
 def test_renderer_has_no_model_import_or_fit_call() -> None:
+    """The renderer entry script imports no model or pipeline module and calls no ``fit``."""
     tree = ast.parse(RENDERER_PATH.read_text(encoding="utf-8"))
     imported = []
     fitted = []
@@ -356,6 +407,7 @@ def test_renderer_has_no_model_import_or_fit_call() -> None:
 def test_confirmatory_render_is_complete_lineaged_and_deterministic(
     tmp_path: Path,
 ) -> None:
+    """Two renders of one run are byte-identical and lineage lists every other output (INV-007)."""
     module = _renderer()
     run_dir = _make_run(tmp_path / "source")
     first = module.render_run(run_dir, tmp_path / "render_a")
@@ -382,9 +434,12 @@ def test_confirmatory_render_is_complete_lineaged_and_deterministic(
 
 
 def test_tampered_cell_is_rejected_before_output(tmp_path: Path) -> None:
+    """An edited cell file fails its inventory hash and no output is written (INV-007)."""
     module = _renderer()
     run_dir = _make_run(tmp_path / "source")
     cell_path = run_dir / "cells" / "toy" / "repeat_01_fold_01" / "cox_ph.json"
+    # A trailing space leaves the parsed JSON, and so its content hash, unchanged;
+    # only the completion inventory's file hash can detect the edit.
     cell_path.write_text(cell_path.read_text(encoding="utf-8") + " ", encoding="utf-8")
     output = tmp_path / "render"
     with pytest.raises(RuntimeError, match="file hash"):
@@ -395,10 +450,13 @@ def test_tampered_cell_is_rejected_before_output(tmp_path: Path) -> None:
 def test_verified_optional_explanation_is_rendered_and_tamper_is_rejected(
     tmp_path: Path,
 ) -> None:
+    """A hash-linked explanation result is rendered; an edited one is refused (INV-007)."""
     module = _renderer()
     run_dir = _make_run(tmp_path / "source")
     manifest = json.loads((run_dir / "manifest.json").read_text(encoding="utf-8"))
     completion = json.loads((run_dir / "completion.json").read_text(encoding="utf-8"))
+    # Minimal explanation result linked to the toy run by directory name and by the
+    # manifest and completion content hashes.
     artifact: dict[str, Any] = {
         "schema_version": "1.0.0",
         "analysis": "confirmatory_explainability_from_frozen_cells",
@@ -427,6 +485,8 @@ def test_verified_optional_explanation_is_rendered_and_tamper_is_rejected(
     assert (output / "tables" / "explanation_agreement.csv").is_file()
     assert (output / "figures" / "explanation_stability.pdf").is_file()
 
+    # Rewriting the gate status without recomputing the content hash imitates a
+    # hand-edited result that claims a passed gate.
     artifact_path.write_text(
         artifact_path.read_text(encoding="utf-8").replace("not_evaluable", "passed"),
         encoding="utf-8",
@@ -443,18 +503,21 @@ def test_verified_optional_explanation_is_rendered_and_tamper_is_rejected(
 def test_rehearsal_renders_runtime_only_and_optional_inputs_are_not_required(
     tmp_path: Path,
 ) -> None:
+    """A rehearsal renders without optional inputs and yields only a labelled runtime package."""
     module = _renderer()
     run_dir = _make_run(tmp_path / "source", mode="rehearsal")
     output = module.render_run(run_dir, tmp_path / "render")
     files = {str(path.relative_to(output)) for path in output.rglob("*") if path.is_file()}
     assert "RUNTIME_ONLY_README.txt" in files
     assert "figures/runtime_diagnostic_failures.pdf" in files
+    # No performance or calibration output may be rendered from a rehearsal.
     assert not any("calibration" in name or "fold_metric" in name for name in files)
     notice = (output / "RUNTIME_ONLY_README.txt").read_text(encoding="utf-8")
     assert "NOT CONFIRMATORY EVIDENCE" in notice
 
 
 def test_rehearsal_refuses_explanation_artifact(tmp_path: Path) -> None:
+    """A rehearsal render refuses an explanation artefact before reading it or writing output."""
     module = _renderer()
     run_dir = _make_run(tmp_path / "source", mode="rehearsal")
     with pytest.raises(ValueError, match="rehearsal rendering"):

@@ -1,4 +1,10 @@
-"""Fold-local preprocessing for the confirmatory survival analysis."""
+"""Transform survival predictors using state learned only from training rows.
+
+The pipelines call ``FoldFeaturePreprocessor.fit_transform`` for training
+data and ``transform`` for held-out data. ``metadata`` and ``from_metadata``
+preserve the learned medians, scaling, category order and content hash for
+saved predictions and explanation. No outcome-aware selection occurs here.
+"""
 
 from __future__ import annotations
 
@@ -15,6 +21,7 @@ UNKNOWN_CATEGORY = "__UNKNOWN__"
 
 
 def _as_category(series: pd.Series) -> pd.Series:
+    """Replace missing categories with a sentinel and stringify all values."""
     values = series.astype("object")
     values = values.where(values.notna(), MISSING_CATEGORY)
     return values.astype(str)
@@ -23,11 +30,18 @@ def _as_category(series: pd.Series) -> pd.Series:
 class FoldFeaturePreprocessor:
     """Fit imputation, encoding and scaling on one training fold only.
 
-    The input ``feature_spec`` is one complete feature-set entry from
-    ``config/datasets.yaml``. No outcome-aware selection occurs here.
+    Numeric and engineered columns use training medians and population
+    standard deviations. Ordinal columns use declared integer levels;
+    categorical columns use all but the first sorted training level.
+
+    Args:
+        feature_spec: A feature-set declaration from ``config/datasets.yaml``
+            with numeric/categorical names, ordered levels and optional
+            engineered expressions with their source-feature names.
     """
 
     def __init__(self, feature_spec: dict[str, Any]) -> None:
+        """Store the feature declaration and initialise empty learned state."""
         self.feature_spec = feature_spec
         self.numeric = list(feature_spec.get("numeric", []))
         self.categorical = list(feature_spec.get("categorical", []))
@@ -48,18 +62,32 @@ class FoldFeaturePreprocessor:
 
     @property
     def required_source_columns(self) -> list[str]:
+        """Return source-column names once each, in declaration order.
+
+        Returns:
+            Numeric, categorical, ordinal and engineered-source names, without
+            the derived columns created by the processor itself.
+        """
         columns = self.numeric + self.categorical + list(self.ordinal)
         for declaration in self.engineered:
             columns.extend(declaration.get("source_features", []))
         return list(dict.fromkeys(columns))
 
     def _check_columns(self, frame: pd.DataFrame) -> None:
+        """Reject frames missing any column declared as a source feature."""
         missing = [c for c in self.required_source_columns if c not in frame]
         if missing:
             raise ValueError(f"feature set requires missing source columns: {missing}")
 
     @staticmethod
     def _engineered_value(frame: pd.DataFrame, expression: str) -> pd.Series:
+        """Evaluate one supported log, threshold or product expression.
+
+        Args:
+            frame: Source columns aligned by subject index.
+            expression: Exact expression text from the feature declaration;
+                expressions are pattern-matched rather than evaluated as code.
+        """
         log_match = re.fullmatch(r"log1p\(([^)]+)\)", expression)
         if log_match:
             source = pd.to_numeric(frame[log_match.group(1)], errors="coerce")
@@ -107,6 +135,7 @@ class FoldFeaturePreprocessor:
         raise ValueError(f"unsupported engineered-feature expression: {expression!r}")
 
     def _add_engineered(self, frame: pd.DataFrame) -> pd.DataFrame:
+        """Copy required sources and append declared derived features in order."""
         self._check_columns(frame)
         result = frame[self.required_source_columns].copy()
         for declaration in self.engineered:
@@ -117,7 +146,23 @@ class FoldFeaturePreprocessor:
         return result
 
     def fit(self, frame: pd.DataFrame) -> FoldFeaturePreprocessor:
-        """Learn all preprocessing state from the supplied training rows."""
+        """Learn imputation, scaling and category order from training rows.
+
+        Missing or unknown ordinal levels receive -1 before scaling. Sorted
+        categorical levels fix both the reference category and output order;
+        a feature's encoded columns retain their source-group name.
+
+        Args:
+            frame: Training subjects as rows, with all required source columns.
+
+        Returns:
+            This processor with its learned state and content hash populated.
+
+        Raises:
+            ValueError: Sources are missing, an engineered expression is
+                unsupported or overwrites a source, a log source is negative,
+                a numeric median is non-finite, or ordinal levels repeat.
+        """
         work = self._add_engineered(frame)
         engineered_names = [item["name"] for item in self.engineered]
         numeric_outputs = self.numeric + engineered_names
@@ -130,6 +175,7 @@ class FoldFeaturePreprocessor:
             filled = values.fillna(median).to_numpy(dtype=float)
             mean = float(np.mean(filled))
             scale = float(np.std(filled, ddof=0))
+            # A constant predictor keeps its centred value without dividing by zero.
             if not np.isfinite(scale) or scale <= 1e-12:
                 scale = 1.0
             self.imputation_values[name] = median
@@ -183,7 +229,23 @@ class FoldFeaturePreprocessor:
         return self
 
     def transform(self, frame: pd.DataFrame) -> pd.DataFrame:
-        """Apply frozen training-fold state to new rows."""
+        """Apply learned training-fold state without changing it.
+
+        Unseen categorical levels produce zeros in every stored indicator
+        column, as does the reference level. Missing categories are explicit
+        only when the missing sentinel was present among training levels.
+
+        Args:
+            frame: New subjects with all required source columns.
+
+        Returns:
+            A float frame of shape ``(n_subjects, n_encoded_features)`` with
+            the original index and the learned ``feature_names`` order.
+
+        Raises:
+            RuntimeError: ``fit`` or ``from_metadata`` has not populated state.
+            ValueError: Sources or engineered-feature values are invalid.
+        """
         if not self._fitted:
             raise RuntimeError("preprocessor is not fitted")
         work = self._add_engineered(frame)
@@ -213,14 +275,37 @@ class FoldFeaturePreprocessor:
         return result[self.feature_names].astype(float)
 
     def fit_transform(self, frame: pd.DataFrame) -> pd.DataFrame:
-        """Fit on and transform a training fold."""
+        """Fit on and transform the same training subjects.
+
+        Args:
+            frame: Training rows with all declared source columns.
+
+        Returns:
+            The encoded float frame returned by ``transform``.
+
+        Raises:
+            ValueError: ``fit`` or ``transform`` rejects the supplied features.
+        """
         return self.fit(frame).transform(frame)
 
     @classmethod
     def from_metadata(
         cls, feature_spec: dict[str, Any], metadata: dict[str, Any]
     ) -> FoldFeaturePreprocessor:
-        """Restore a frozen transformer and verify its recorded state hash."""
+        """Restore learned state and verify its hash with the feature declaration.
+
+        Args:
+            feature_spec: The same declaration used by the fitted processor.
+            metadata: State returned by ``metadata``, including its hash.
+
+        Returns:
+            A fitted processor ready to transform rows without learning again.
+
+        Raises:
+            KeyError: A required state field is absent.
+            ValueError: Stored values cannot be converted or the reconstructed
+                state hash differs from ``training_state_sha256``.
+        """
         processor = cls(feature_spec)
         processor.imputation_values = {
             str(name): float(value)
@@ -261,7 +346,15 @@ class FoldFeaturePreprocessor:
         return processor
 
     def metadata(self) -> dict[str, Any]:
-        """Return serialisable state for result lineage and leakage audits."""
+        """Return learned state for result lineage and leakage audits.
+
+        Returns:
+            A mapping of medians, scaling, levels, feature order/groups and
+            the state hash. Its nested containers share this processor's state.
+
+        Raises:
+            RuntimeError: The processor has not been fitted or restored.
+        """
         if not self._fitted:
             raise RuntimeError("preprocessor is not fitted")
         return {

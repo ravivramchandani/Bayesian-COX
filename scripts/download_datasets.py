@@ -1,9 +1,34 @@
 """Build the three confirmatory benchmark cohorts in ``data/raw``.
 
+This is the primary pipeline's data-export step (Make target ``data``).
+Primary fitting stages read the raw CSV files it writes.
+
 Every input is downloaded from an immutable upstream revision and checked
 before it is parsed. There is deliberately no synthetic or unverified-data
-fallback. The exploratory 1,904-row METABRIC export is retained separately
-under ``data/external`` and is never used by this confirmatory exporter.
+fallback (ADR-005, INV-001). The exploratory 1,904-row METABRIC export is
+retained separately under ``data/external`` and is never used by this
+confirmatory exporter.
+
+Sources:
+    GBSG2 and WHAS500 come from Attribute-Relation File Format (ARFF) files
+    of scikit-survival 0.24.1 at a
+    pinned commit. METABRIC is rebuilt from the patient and sample clinical
+    tables of the cBioPortal DataHub ``brca_metabric`` study at a pinned
+    commit (ADR-016).
+
+Writes:
+    ``data/raw/gbsg2.csv`` (686 records, 299 events; time in days),
+    ``data/raw/whas500.csv`` (500 records, 215 deaths; time in days) and
+    ``data/raw/metabric.csv`` (1,980 records, 1,144 deaths; overall survival
+    in months).
+
+Each download must match its pinned SHA-256 digest, each cohort must have its
+published record and event counts, and each CSV must match its pinned digest
+before it is written. A rerun therefore rewrites byte-identical files or
+fails. Network access to GitHub is required.
+
+Example:
+    python scripts/download_datasets.py
 """
 
 from __future__ import annotations
@@ -20,6 +45,8 @@ from scipy.io import arff
 ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "data" / "raw"
 
+# Upstream revisions are pinned by commit so that the downloaded bytes, and
+# hence the digests below, cannot change.
 SKSURV_COMMIT = "3e887ed7307a60c08f3fafec8b00d57f7a2d4982"  # v0.24.1
 CBIOPORTAL_COMMIT = "165bd77077b03038f9c2ee104959eb474770b2a9"
 
@@ -54,12 +81,16 @@ SOURCES = {
     },
 }
 
+# Digests of the exact CSV bytes written to ``data/raw``.
 DERIVED_SHA256 = {
     "gbsg2": "2158b777d27ecfb69b187d3cbcad13fd1eb92d626935c528a4465fea6490ae5f",
     "whas500": "4bb01775c04eca11d7f06d6e5dfebd0a5cce75aa7e73fe4261732385be106fcc",
     "metabric": "731ea80ce0240cb6aa96ffb0f4a3bb379615202966c954512664bef02b29545c",
 }
 
+# Columns kept from each source, in output order. WHAS500 keeps variables that
+# the primary feature set excludes, such as ``los``, because the
+# ``published_full`` sensitivity feature set in ``config/datasets.yaml`` uses them.
 GBSG2_COLUMNS = [
     "age",
     "estrec",
@@ -116,10 +147,19 @@ METABRIC_COLUMNS = [
 
 
 def _sha256(content: bytes) -> str:
+    """Return the hexadecimal SHA-256 digest of ``content``."""
     return hashlib.sha256(content).hexdigest()
 
 
 def _download_verified(source_name: str) -> bytes:
+    """Download one pinned source and return its bytes after checking its digest.
+
+    Args:
+        source_name: A key of ``SOURCES``.
+
+    Raises:
+        ValueError: If the downloaded bytes do not match the pinned SHA-256.
+    """
     spec = SOURCES[source_name]
     request = Request(spec["url"], headers={"User-Agent": "bayesian-cox-data-export/1"})
     with urlopen(request, timeout=60) as response:  # noqa: S310 - pinned HTTPS URL
@@ -135,8 +175,11 @@ def _download_verified(source_name: str) -> bytes:
 
 
 def _decode_arff(content: bytes) -> pd.DataFrame:
+    """Parse an ARFF file into a data frame with nominal values as text."""
     records, _ = arff.loadarff(StringIO(content.decode("utf-8")))
     frame = pd.DataFrame(records)
+    # scipy returns ARFF nominal values as bytes; decode them so the CSV holds
+    # plain labels rather than ``b'...'`` literals.
     for column in frame.select_dtypes(include=["object", "string"]).columns:
         non_missing = frame[column].dropna()
         if not non_missing.empty and isinstance(non_missing.iloc[0], bytes):
@@ -145,6 +188,14 @@ def _decode_arff(content: bytes) -> pd.DataFrame:
 
 
 def _write_verified(frame: pd.DataFrame, dataset_name: str) -> Path:
+    """Write ``frame`` to ``data/raw/<dataset_name>.csv`` only if its bytes match the pin.
+
+    Returns:
+        The path written.
+
+    Raises:
+        ValueError: If the serialised CSV does not match ``DERIVED_SHA256``.
+    """
     content = frame.to_csv(index=False).encode("utf-8")
     expected = DERIVED_SHA256[dataset_name]
     if expected and _sha256(content) != expected:
@@ -159,6 +210,15 @@ def _write_verified(frame: pd.DataFrame, dataset_name: str) -> Path:
 
 
 def export_gbsg2() -> None:
+    """Build the GBSG2 cohort: all 686 records, 299 events, no missing values.
+
+    ``time`` is recurrence-free survival in days and ``cens`` is 1 for an
+    observed event.
+
+    Raises:
+        ValueError: If the counts differ, a value is missing or a follow-up
+            time is not positive.
+    """
     frame = _decode_arff(_download_verified("gbsg2"))[GBSG2_COLUMNS].copy()
     frame["cens"] = pd.to_numeric(frame["cens"], errors="raise").astype(int)
 
@@ -172,6 +232,14 @@ def export_gbsg2() -> None:
 
 
 def export_whas500() -> None:
+    """Build the WHAS500 cohort: all 500 records, 215 deaths, no missing values.
+
+    ``lenfol`` is follow-up in days from admission and ``fstat`` is 1 for death.
+
+    Raises:
+        ValueError: If the counts differ, a value is missing or a follow-up
+            time is not positive.
+    """
     frame = _decode_arff(_download_verified("whas500"))[WHAS500_COLUMNS].copy()
     frame["fstat"] = pd.to_numeric(frame["fstat"], errors="raise").astype(int)
 
@@ -185,11 +253,23 @@ def export_whas500() -> None:
 
 
 def _read_cbioportal_table(content: bytes) -> pd.DataFrame:
+    """Parse a cBioPortal tab-separated clinical table, skipping ``#`` metadata lines."""
     return pd.read_csv(StringIO(content.decode("utf-8")), sep="\t", comment="#")
 
 
 def export_metabric() -> None:
-    """Build the eligible OS cohort from the pinned cBioPortal study files."""
+    """Build the eligible OS cohort from the pinned cBioPortal study files.
+
+    OS is overall survival: ``duration`` is ``OS_MONTHS`` and ``event`` is 1
+    for ``1:DECEASED``. Patient and sample tables are joined one-to-one on
+    patient identifier. Of the 2,509 patients, 528 lack an OS time or status
+    and one has zero follow-up; the remaining 1,980 records with 1,144 deaths
+    are kept, with the lower-case column names listed in ``METABRIC_COLUMNS``.
+
+    Raises:
+        ValueError: If any source, merge or eligibility count differs from the
+            pinned values, or an unknown OS status appears.
+    """
     patients = _read_cbioportal_table(_download_verified("metabric_patient"))
     samples = _read_cbioportal_table(_download_verified("metabric_sample"))
 
@@ -236,6 +316,8 @@ def export_metabric() -> None:
     if unknown_status:
         raise ValueError(f"Unexpected METABRIC OS status values: {unknown_status}")
 
+    # Missing OS values become NaN here and are removed by the complete-outcome
+    # filter below; the expected counts make any other change fail.
     frame["duration"] = pd.to_numeric(frame["duration"], errors="coerce")
     frame["event"] = frame["os_status"].map(status_map)
     complete_outcome = frame.dropna(subset=["duration", "event"])
@@ -264,6 +346,7 @@ def export_metabric() -> None:
 
 
 def main() -> int:
+    """Export all three cohorts and return exit status 0."""
     RAW_DIR.mkdir(parents=True, exist_ok=True)
     export_gbsg2()
     export_whas500()

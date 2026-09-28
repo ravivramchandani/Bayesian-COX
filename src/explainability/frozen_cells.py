@@ -1,4 +1,16 @@
-"""Analyse immutable confirmatory cells through verification, sampling and explanation stages."""
+"""Analyse immutable confirmatory cells through verification, sampling and explanation stages.
+
+This is the orchestration layer of the explanation stage, called by
+``scripts/run_confirmatory_explainability.py``. :func:`analyze_frozen_run`
+verifies the source run, explains every interpretable Bayesian cell at every
+seed and budget, and returns the assembled result;
+:func:`write_explainability_result` saves it to a new file.
+
+Several helpers from the stage modules are re-exported here under their
+original names, some with a leading underscore, so existing imports and test
+patches of this module keep working. :func:`_explain_cell` looks up the
+cohort loader and the Shapley additive explanations (SHAP) function through this module for the same
+reason."""
 
 from __future__ import annotations
 
@@ -113,6 +125,9 @@ def write_explainability_result(path: Path, result: dict[str, Any]) -> None:
     Args:
         path: New result file outside the immutable source run.
         result: Explanation result mapping.
+
+    Raises:
+        FileExistsError: If ``path`` already exists.
     """
     if path.exists():
         raise FileExistsError(f"explainability result already exists: {path}")
@@ -127,7 +142,21 @@ def _explain_cell(
     records: ExplanationRecords,
     protocol: ExplanationProtocol,
 ) -> None:
-    """Verify one Bayesian cell and append its paired explanation records."""
+    """Verify one Bayesian cell and append its paired explanation records.
+
+    The raw data, subject lineage and preprocessing are checked first, the
+    fold's Cox cell is paired when it is complete (otherwise the reason is
+    recorded once per fold), and then every seed and budget selection is
+    explained with the Bayesian model and any usable Cox partner.
+
+    Args:
+        source: The verified run.
+        inventory: Cell roles, including the Cox cell of each fold.
+        path: The Bayesian cell's file.
+        cell: The parsed Bayesian cell.
+        records: Collected rows and lineage; updated in place.
+        protocol: Seeds, budgets and the top-five size.
+    """
     raw_hash = verify_raw_data(source, cell)
     cohort = load_cohort(source, str(cell["dataset"]), records.cohorts, loader=_load_raw_cohort)
     lineage = verify_cell_lineage(cell, cohort, records.fold_lineage)
@@ -146,6 +175,8 @@ def _explain_cell(
             },
         )
     else:
+        # A missing entry always has an unavailable reason, so the entry
+        # exists here; the assertion states that for the type checker.
         assert cox_entry is not None
         paired_cox = pair_cox_cell(
             source,
@@ -199,6 +230,12 @@ def analyze_frozen_run(
 
     Returns:
         Explanation comparisons, descriptive uncertainty, lineage and claim gates.
+
+    Raises:
+        ValueError: If a stored record, preprocessing state or coefficient
+            table fails a schema or state-hash check.
+        RuntimeError: If a content or file hash, subject-lineage or Cox
+            pairing check fails, or the run has no interpretable Bayesian cell.
     """
     protocol = protocol or ExplanationProtocol()
     source = verify_source_run(run_dir.resolve(), project_root.resolve())

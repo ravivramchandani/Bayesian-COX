@@ -1,4 +1,32 @@
-"""Paired effects from repeated cross-validation."""
+"""Paired effects from repeated cross-validation (CV) with the Nadeau-Bengio correction.
+
+The confirmatory inference stage (``src/pipelines/confirmatory/inference.py``)
+calls :func:`nadeau_bengio_paired_effect` for every model contrast: the
+primary integrated Brier score contrasts, the secondary metrics and the
+calibration parameters. Its p-values for the nine primary contrasts then go
+to Holm's procedure (``hypothesis_tests.holm_adjust``).
+
+Why a correction is needed
+    Repeated K-fold cross-validation gives n = R * K paired fold differences
+    ``d = score_a - score_b``. The naive standard error ``s / sqrt(n)``
+    treats them as independent, but any two training sets share most of
+    their subjects and every subject is validated once per repeat, so the
+    fold differences can be correlated, making the naive standard error
+    too small. Nadeau and Bengio (2003) inflate the variance by a term that
+    grows with the test-to-training size ratio:
+
+    ``SE = sqrt((1 / n + n_test / n_train) * s^2)``,
+
+    where ``s^2`` is the sample variance (denominator n - 1) of the n
+    differences. For K-fold splits ``n_test / n_train = 1 / (K - 1)``, 0.25
+    for the five-fold design. The statistic ``t = mean(d) / SE`` is referred
+    to a Student-t distribution with n - 1 degrees of freedom (24 for five
+    repeats of five folds), giving a two-sided p-value and the interval
+    ``mean(d) +/- t_{n-1, 1-alpha/2} * SE``.
+
+The correction accounts for overlap between training sets within one cohort;
+it does not make different cohorts exchangeable or justify pooling them.
+"""
 
 from dataclasses import asdict, dataclass
 
@@ -8,7 +36,13 @@ from scipy.stats import t as student_t
 
 @dataclass(frozen=True)
 class NadeauBengioResult:
-    """Corrected repeated-CV mean difference and two-sided inference."""
+    """Corrected repeated-CV mean difference and two-sided inference.
+
+    ``standard_deviation`` is the sample standard deviation of the paired
+    differences; ``corrected_standard_error`` is the Nadeau-Bengio standard
+    error; the confidence bounds and ``p_value`` use a Student-t reference
+    with ``degrees_of_freedom`` = n_repeats * n_folds - 1.
+    """
 
     mean_difference: float
     standard_deviation: float
@@ -24,7 +58,11 @@ class NadeauBengioResult:
     confidence_level: float
 
     def to_dict(self) -> dict[str, float | int]:
-        """Return a JSON-serialisable representation."""
+        """Return the recorded effect and design fields as a plain dictionary.
+
+        Returns:
+            JSON-serialisable scalar values keyed by the dataclass field names.
+        """
         return asdict(self)
 
 
@@ -43,10 +81,30 @@ def nadeau_bengio_paired_effect(
 
     ``SE = sqrt((1 / (R K) + n_test / n_train) * sample_variance)``.
 
-    For K-fold CV, ``n_test / n_train`` defaults to ``1 / (K - 1)``. Scores
-    must be paired in the same repeat/fold order. The correction addresses
-    overlap between training sets; it does not make different cohorts
-    exchangeable or justify pooling them.
+    For K-fold CV, ``n_test / n_train`` defaults to ``1 / (K - 1)``, which
+    is exact for equal-sized folds. Scores must be paired in the same
+    repeat/fold order. The correction addresses overlap between training
+    sets; it does not make different cohorts exchangeable or justify pooling
+    them.
+
+    Args:
+        scores_a: Metric of model A, one value per fold (R * K values).
+        scores_b: Metric of model B on the same folds, in the same order.
+        n_repeats: Number of cross-validation repeats R.
+        n_folds: Number of folds per repeat K.
+        test_train_ratio: Override for ``n_test / n_train``.
+        confidence_level: Level of the two-sided interval.
+
+    Returns:
+        The mean difference, its corrected standard error, interval,
+        t statistic and two-sided p-value, all effects retaining the
+        supplied metric scale. With zero variance, a zero mean gives
+        p=1; a non-zero mean gives infinite signed t and p=0.
+
+    Raises:
+        ValueError: The design arguments are invalid, the score vectors do
+            not hold R * K finite values, the ratio is non-finite or non-positive,
+            or the interval level is invalid.
     """
     if n_repeats < 1 or n_folds < 2:
         raise ValueError("n_repeats must be positive and n_folds must be at least 2.")
@@ -76,6 +134,8 @@ def nadeau_bengio_paired_effect(
         np.sqrt((1.0 / n + float(ratio)) * standard_deviation**2)
     )
 
+    # Identical differences in every fold give a zero standard error: the
+    # test is then decided by the sign of the mean alone.
     if corrected_se == 0:
         if mean_difference == 0:
             statistic = 0.0

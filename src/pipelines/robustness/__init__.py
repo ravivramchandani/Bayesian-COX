@@ -1,4 +1,38 @@
-"""Frozen robustness analysis with established public and helper import paths."""
+"""Prespecified robustness analysis of the three Bayesian priors.
+
+The robustness stage refits only the Bayesian models (normal, horseshoe and
+spike-and-slab priors) under planned perturbations of the confirmatory design,
+on selected outer folds, and summarises paired prior differences in the
+integrated Brier score (IBS). Its components are:
+
+- ``rq2``: research question 2 (RQ2), information-regime robustness. Training
+  subsets of 25, 50, 75 and 100 percent, and two administrative-censoring
+  truncations at full size, on outer folds 1 and 2 of every repeat.
+- ``design``: prior-scale scenarios and baseline-hazard resolution, one
+  factor at a time, compared on outer fold 1 of every repeat.
+- ``feature``: alternative feature sets and, for METABRIC, a five-imputation
+  sensitivity, compared on outer fold 1 of every repeat.
+- ``ph``: a pure summary of the proportional-hazards (PH) tests stored in the
+  confirmatory Cox cells; nothing is fitted.
+
+A run moves through these modules:
+
+1. ``protocol``: run options, the condition record and frozen constants.
+2. ``conditions`` and ``planning``: the de-duplicated condition plan, the
+   nested training subsets and truncation cutoffs, the fit counts and the
+   result-blind runtime projection.
+3. ``cells``, ``evaluation`` and ``imputation``: fit and score one Bayesian
+   model under one condition on one fold, applying the confirmatory
+   diagnostic gate in ``robustness`` mode, and store one content-hashed cell.
+4. ``inference``: paired IBS contrasts, RQ2 difference-in-differences with a
+   three-stage bootstrap, and the PH aggregation.
+5. ``runner`` and ``provenance``: orchestration, the run manifest and the
+   verification of a completed run without refitting.
+
+``scripts/run_robustness.py`` calls :func:`execute_robustness_run`. This
+initialiser re-exports the names that scripts and tests import, including the
+confirmatory helpers the robustness modules reuse.
+"""
 
 from src.pipelines.confirmatory import (
     DiagnosticFailure,

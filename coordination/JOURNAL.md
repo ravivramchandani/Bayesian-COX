@@ -991,3 +991,26 @@ maximum-tree-depth hits. The cell remains rejected by the unchanged gate.
 These checks do not close the running numerical grid or final visual and
 remote-restoration gates. Compact receipt:
 `coordination/recovery/2026-09-28-extension-failure-qa-verification.json`.
+
+
+## 2026-09-28 — Verified baseline documentation integration
+
+Preserved all 103 unfinished original worktree drafts, then reviewed and
+completed the four documentation packages in separate external candidates.
+Integrated only the 115 declared baseline Python paths; every one of the
+858 module/class/function definitions has a docstring. All 230 stripped-AST
+comparisons pass against f0cce64 and 0ba4c3d, and the independent working-tree
+gate reports 115/115 documentation-only changes. No import or executable
+statement changed. Reports correct overclaims about penalties, conditional
+prior checks, statistical assumptions, paired coverage, attempt retention
+and I/O behaviour; existing code limitations remain explicitly recorded.
+
+All 349 repository tests pass in 85.44 s; normal repository Ruff, schemas
+and diff checks pass. All 157 tested source/build/lock hashes stayed unchanged
+during verification. The original worktree files are untouched. The compact
+receipt and 269-member archive preserve original drafts, final sources,
+per-package correction ledgers, AST proofs, helpers and complete logs:
+`coordination/recovery/2026-09-28-documentation-pass-verification.json` and
+`2026-09-28-documentation-gates.tar.gz`. Step 12 is complete. Extension
+production, sealed commits and fitting settings remain unchanged; the
+1,625-cell grid and its subsequent gates are still pending.

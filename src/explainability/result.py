@@ -1,4 +1,14 @@
-"""Assemble the frozen explanation result and its descriptive claim gates."""
+"""Assemble the frozen explanation result and its descriptive claim gates.
+
+:func:`build_result` is the last step of
+:func:`src.explainability.frozen_cells.analyze_frozen_run`. It runs the
+convergence gates and bootstrap summaries over the collected comparison rows
+and returns one mapping with the source lineage, the protocol, every
+selection, every comparison, the gate and claim records, the excluded cells,
+the secondary Cox analysis, an explicit record that forest SHAP is
+unavailable, and fixed interpretation limits. The mapping is sealed with
+``result_content_sha256``, the canonical JSON hash of everything else, which
+``src.rendering.verification`` checks before rendering."""
 
 from __future__ import annotations
 
@@ -18,7 +28,15 @@ from src.utils.reproducibility import canonical_json_hash
 
 
 def _expected_outer_cells(source: SourceRun, comparisons: list[dict[str, Any]]) -> int:
-    """Read the planned outer grid, allowing a fold limit only for rehearsal evidence."""
+    """Read the planned outer grid, allowing a fold limit only for rehearsal evidence.
+
+    A confirmatory run must declare repeats and splits and may not limit
+    folds. A rehearsal without a declared grid falls back to the number of
+    distinct outer cells observed in the comparisons.
+
+    Raises:
+        ValueError: If a confirmatory run lacks its grid or limits folds.
+    """
     run_config = source.manifest.get("run_config", {})
     repeats = run_config.get("outer_repeats")
     splits = run_config.get("outer_splits")
@@ -68,7 +86,12 @@ def _cox_analysis(
     cox_convergence: dict[str, Any],
     inference_options: dict[str, Any],
 ) -> dict[str, Any]:
-    """Assemble the secondary paired Cox agreement summaries."""
+    """Assemble the secondary paired Cox agreement summaries.
+
+    ``status`` is ``complete`` when every Bayesian comparison row has a Cox
+    partner, ``partial`` when only some do and ``unavailable`` when none do.
+    ``paired_same_model_minus_cox`` holds the H3b estimates.
+    """
     cox = records.cox_comparisons
     return {
         "status": (
@@ -110,7 +133,13 @@ def _cox_analysis(
 
 
 def _secondary_analysis(inventory: CellInventory, cox_analysis: dict[str, Any]) -> dict[str, Any]:
-    """Record the Cox comparison and the explicitly unavailable forest explanation."""
+    """Record the Cox comparison and the explicitly unavailable forest explanation.
+
+    Forest SHAP is recorded as dropped rather than omitted: the frozen random
+    survival forest cells keep no fitted trees, and obtaining them again
+    would require a refit, which the explanation stage does not perform
+    (ADR-024).
+    """
     return {
         "available_cell_model_keys": inventory.secondary_models,
         "cox_ph": cox_analysis,
@@ -131,7 +160,11 @@ def build_result(
     records: ExplanationRecords,
     protocol: ExplanationProtocol,
 ) -> dict[str, Any]:
-    """Summarise comparison rows and preserve the result schema and content hash.
+    """Assemble the explanation result from its comparison rows and seal it with a hash.
+
+    The field names, fixed texts and ``schema_version`` are the result schema
+    read by ``src.rendering``; any change to them also changes the content
+    hash.
 
     Args:
         source: Verified frozen run.

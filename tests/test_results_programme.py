@@ -1,4 +1,13 @@
-"""Fail closed on broken child stages and altered completed output bundles."""
+"""Fail closed on broken child stages and altered completed output bundles.
+
+Covers ``scripts/complete_results_programme.py``, the coordinator that runs
+environment verification, the full refit reproduction, the post-hoc sampler
+sensitivity and both renderers as logged child processes. The checks cover
+child exit codes, the exclusive output lock, preservation of interrupted
+renders, immutable final results, and verification of rendered bundles against
+their recorded source and code hashes (INV-007). Stages are faked or replaced
+by short inline programs; nothing is fitted.
+"""
 
 from __future__ import annotations
 
@@ -16,6 +25,7 @@ from src.utils.reproducibility import canonical_json_hash, sha256_file
 
 @pytest.fixture
 def programme():
+    """Load the coordinator script from its file path as a fresh module."""
     path = Path(__file__).resolve().parents[1] / "scripts/complete_results_programme.py"
     spec = importlib.util.spec_from_file_location("results_programme_test", path)
     module = importlib.util.module_from_spec(spec)
@@ -24,6 +34,7 @@ def programme():
 
 
 def test_failed_child_stage_is_not_accepted(programme, tmp_path, monkeypatch):
+    """A child stage with a non-zero exit code raises instead of counting as complete."""
     monkeypatch.setattr(
         programme.subprocess, "run", lambda *args, **kwargs: SimpleNamespace(returncode=2)
     )
@@ -32,6 +43,7 @@ def test_failed_child_stage_is_not_accepted(programme, tmp_path, monkeypatch):
 
 
 def test_duplicate_coordinator_cannot_reuse_an_active_output(programme, tmp_path):
+    """A second coordinator cannot lock an output directory until the first releases it."""
     first = programme.acquire_programme_lock(tmp_path)
     try:
         with pytest.raises(RuntimeError, match="already owns this output"):
@@ -43,6 +55,7 @@ def test_duplicate_coordinator_cannot_reuse_an_active_output(programme, tmp_path
 
 
 def test_duplicate_coordinator_rejects_before_manifest_access(programme, tmp_path, monkeypatch):
+    """A duplicate coordinator stops at the lock before writing a manifest or failure record."""
     code = tmp_path / "code"
     code.mkdir()
     output = tmp_path / "output"
@@ -64,6 +77,8 @@ def test_duplicate_coordinator_rejects_before_manifest_access(programme, tmp_pat
             str(output),
         ],
     )
+    # Fake Git: ``symbolic-ref`` fails, as in a detached checkout, and
+    # ``status`` reports no tracked changes, so ``main`` reaches the lock.
     monkeypatch.setattr(
         programme.subprocess,
         "run",
@@ -81,9 +96,13 @@ def test_duplicate_coordinator_rejects_before_manifest_access(programme, tmp_pat
 
 
 def test_surviving_stage_holds_lock_after_coordinator_handle_closes(programme, tmp_path):
+    """A child stage that inherited the lock keeps the output locked after the parent closes it."""
     first = programme.acquire_programme_lock(tmp_path)
     ready = tmp_path / "child-ready"
     release = tmp_path / "child-release"
+    # The child checks that it inherited the lock descriptor, signals readiness
+    # and then waits for the release file, so the lock can be probed while only
+    # the child holds it.
     child = """
 import os
 import sys
@@ -113,6 +132,7 @@ while not Path(sys.argv[3]).exists():
                 if time.monotonic() >= deadline:
                     pytest.fail("stage did not report its inherited descriptor")
                 time.sleep(0.01)
+            # Only the child's inherited descriptor now holds the lock.
             first.close()
             with pytest.raises(RuntimeError, match="already owns this output"):
                 programme.acquire_programme_lock(tmp_path)
@@ -125,6 +145,7 @@ while not Path(sys.argv[3]).exists():
 
 
 def test_restarted_render_preserves_partial_files(programme, tmp_path):
+    """An interrupted render without lineage is moved aside, not deleted, before a retry."""
     render = tmp_path / "render"
     render.mkdir()
     (render / "partial.png").write_bytes(b"partial artefact")
@@ -136,6 +157,7 @@ def test_restarted_render_preserves_partial_files(programme, tmp_path):
 
 
 def test_verified_programme_result_can_resume_without_overwriting(programme, tmp_path):
+    """An equal final result is not rewritten on resume, and a different one is refused."""
     path = tmp_path / "verified.json"
     record = {"status": "verified", "cells": 450}
     programme.write_or_verify_result(path, record)
@@ -150,10 +172,14 @@ def test_verified_programme_result_can_resume_without_overwriting(programme, tmp
 def test_confirmatory_bundle_requires_verified_supplement_lineage(
     programme, tmp_path, monkeypatch, corruption
 ):
+    """A confirmatory bundle must cite the verified supplementary artefact and its hash (INV-007)."""
     source, root, output = tmp_path / "source", tmp_path / "code", tmp_path / "render"
     source.mkdir()
     root.mkdir()
     output.mkdir()
+    # A minimal bundle: one output whose lineage cites one supplementary
+    # artefact. "omitted_supplement" drops it from the bundle's optional
+    # sources; "output_source" records a different hash for it on the output.
     records = {"manifest": "m" * 64, "completion": "c" * 64}
     for name, digest in records.items():
         write_json_atomic(source / f"{name}.json", {f"{name}_content_sha256": digest})
@@ -183,6 +209,7 @@ def test_confirmatory_bundle_requires_verified_supplement_lineage(
         lineage["outputs"][0]["sources"][0]["sha256"] = "b" * 64
     lineage["lineage_content_sha256"] = canonical_json_hash(lineage)
     write_json_atomic(output / "lineage.json", lineage)
+    # Renderer code hashes are checked under PROJECT_ROOT.
     monkeypatch.setattr(programme, "PROJECT_ROOT", root)
     kwargs = {
         "source_dir": source,
@@ -200,6 +227,7 @@ def test_confirmatory_bundle_requires_verified_supplement_lineage(
 def test_posthoc_bundle_validation_covers_files_and_lineage(
     programme, tmp_path, monkeypatch, corruption
 ):
+    """Post-hoc bundle verification covers every output file, its sources and its code (INV-007)."""
     source, root, output = tmp_path / "source", tmp_path / "code", tmp_path / "render"
     source.mkdir()
     root.mkdir()
@@ -220,6 +248,7 @@ def test_posthoc_bundle_validation_covers_files_and_lineage(
     lineage["lineage_content_sha256"] = canonical_json_hash(lineage)
     write_json_atomic(output / "lineage.json", lineage)
     monkeypatch.setattr(programme, "PROJECT_ROOT", root)
+    # Each corruption happens after the lineage was written and is absent from it.
     if corruption == "output":
         (output / "table.csv").write_text("changed\n")
     elif corruption == "unexpected":

@@ -1,4 +1,13 @@
-"""Create fold-local multiple imputations and average their fitted predictions."""
+"""Create fold-local multiple imputations and average their fitted predictions.
+
+Used only by the METABRIC ``npi_plus_stage`` feature condition with
+``imputation_method="iterative_posterior_m5"``. :mod:`cells` calls
+:func:`multiple_imputed_fold_frames`, fits one Bayesian model per imputed
+training frame and scores the average of their predictions through
+:class:`_MultipleImputationPredictionEnsemble`. This is an imputation
+sensitivity: the five posteriors are not combined into one posterior that
+propagates imputation uncertainty.
+"""
 
 from __future__ import annotations
 
@@ -29,6 +38,26 @@ def multiple_imputed_fold_frames(
     imputer. Categorical and ordinal missing values use a mode learned from
     the same outer-training fold. Each returned validation frame is transformed
     by its corresponding fitted imputer without refitting.
+
+    ``sample_posterior=True`` makes each imputer draw imputed values from its
+    predictive distribution rather than use the conditional mean. The five
+    seeds allow completed data sets to differ where numeric values are missing.
+
+    Args:
+        raw_training: Unprocessed outer-training rows.
+        raw_validation: Unprocessed outer-validation rows.
+        feature_spec: The ``npi_plus_stage`` feature declaration.
+        seeds: Five distinct imputer seeds.
+
+    Returns:
+        Five ``(training frame, validation frame, metadata)`` triples, in
+        seed order.
+
+    Raises:
+        ValueError: The numeric features are not METABRIC age, Nottingham
+            prognostic index (NPI) and tumour stage, the seeds are not five
+            distinct values, or a categorical feature has no observed
+            training value.
     """
     numeric = [str(name) for name in feature_spec.get("numeric", [])]
     categorical = [str(name) for name in feature_spec.get("categorical", [])]
@@ -93,16 +122,41 @@ def multiple_imputed_fold_frames(
 
 
 class _MultipleImputationPredictionEnsemble:
-    """Average predictions from independently fitted imputation-specific models."""
+    """Average predictions from independently fitted imputation-specific models.
+
+    The ensemble is bound to one outer-validation fold: model ``m`` predicts
+    on its own imputed validation frame ``m``. The ``frame`` argument of the
+    prediction methods is used only to check the number of rows, so the
+    ensemble can be passed wherever a fitted model is expected.
+
+    Args:
+        models: Five fitted Bayesian models in imputation order.
+        validation_frames: Their corresponding processed validation frames;
+            rows must represent the same subjects in the same order.
+
+    Raises:
+        ValueError: The numbers of models and frames are not both five.
+    """
 
     def __init__(self, models: list[Any], validation_frames: list[pd.DataFrame]) -> None:
+        """Bind exactly five fitted models to their corresponding validation frames."""
         if len(models) != MULTIPLE_IMPUTATIONS or len(models) != len(validation_frames):
             raise ValueError("prediction ensemble requires all five imputations")
         self.models = models
         self.validation_frames = validation_frames
 
     def predict_risk(self, frame: pd.DataFrame) -> np.ndarray:
-        """Average imputation-specific posterior-mean risk scores."""
+        """Average imputation-specific posterior-mean linear-predictor scores.
+
+        Args:
+            frame: Frame with the bound fold's row count; its values are not used.
+
+        Returns:
+            An array of shape (validation subjects,) in the bound subject order.
+
+        Raises:
+            ValueError: ``frame`` has a different row count from the bound fold.
+        """
         if len(frame) != len(self.validation_frames[0]):
             raise ValueError("ensemble is bound to its outer-validation fold")
         values = [
@@ -112,7 +166,19 @@ class _MultipleImputationPredictionEnsemble:
         return np.mean(values, axis=0)
 
     def predict_survival(self, frame: pd.DataFrame, evaluation_times: np.ndarray) -> np.ndarray:
-        """Average survival probabilities across imputations."""
+        """Average survival probabilities across the bound imputations.
+
+        Args:
+            frame: Frame with the bound fold's row count; its values are not used.
+            evaluation_times: One-dimensional array of times in the cohort's unit,
+                passed unchanged to each fitted model.
+
+        Returns:
+            Survival probabilities of shape (validation subjects, evaluation times).
+
+        Raises:
+            ValueError: ``frame`` has a different row count from the bound fold.
+        """
         if len(frame) != len(self.validation_frames[0]):
             raise ValueError("ensemble is bound to its outer-validation fold")
         values = [

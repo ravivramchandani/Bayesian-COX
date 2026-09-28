@@ -1,0 +1,88 @@
+{
+  "all_module_class_function_docstrings_present": true,
+  "analysis_commit_unchanged": "8551d326b02bfe88915cfd9eb50c6ca8e5690e3a",
+  "artifact_sha256": {
+    "ast_equivalence.log": "c1bda155e9641e7aa155d346850ebb4d05ab1eb50493199dbe5bf96fe4d9b574",
+    "checks_status.json": "db2c606a806c0a32990402e1fe8a67d91c1eec272a354275334f9165c32754a5",
+    "diff_check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "full_tests.log": "901b6b5b7feb4283b154943a07ab5aa108404fcfc14a4c9ad5697f297a57c895",
+    "ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "schemas.log": "e5f1be16713585fe49e45d50305514da8003d5e161f45e6c3285d58c584eb770",
+    "tested_source.json": "8a7fdcaa07e5501ccb481b039ae2b3ed9ed5acee6d70bd5f0adede14110ed754"
+  },
+  "ast_comparisons_passed": 230,
+  "base_commit": "0ba4c3d3a73e7b5d46830787517764d33dfb6b16",
+  "checks": {
+    "ast_equivalence": {
+      "command": [
+        "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+        "/Users/macuser/bayes-cox-runs/harness/ast_equivalence.py",
+        ".",
+        "0ba4c3d3a73e7b5d46830787517764d33dfb6b16"
+      ],
+      "exit_code": 0,
+      "seconds": 2.396
+    },
+    "diff_check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.037
+    },
+    "full_tests": {
+      "command": [
+        "make",
+        "test",
+        "PYTHON=/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python"
+      ],
+      "exit_code": 0,
+      "seconds": 88.343
+    },
+    "ruff": {
+      "command": [
+        "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "seconds": 0.099
+    },
+    "schemas": {
+      "command": [
+        "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+        "tests/test_coordination_schemas.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.034
+    }
+  },
+  "documentation_receipt_sha256": "6fa7f8d0ac0f297bcf28e50c905e6e6482edeb01d6f4ea20ef4a46f2a214b771",
+  "evidence_archive": "coordination/recovery/2026-09-28-documentation-gates.tar.gz",
+  "evidence_archive_bytes": 1141676,
+  "evidence_archive_members": 269,
+  "evidence_archive_sha256": "fa9a4cbfadd801cd8d93ac0ad6f9aa0f145573dab145e9f49f42ef0605efb12b",
+  "evidence_status": "documentation_verified_numerical_grid_pending",
+  "files_documented": 115,
+  "nodes_documented": 858,
+  "original_drafts_preserved": 103,
+  "production_commit_unchanged": "119476fef55b1eeb690527f234c1423440720d45",
+  "remaining_gates": [
+    "complete 1625-cell accounting",
+    "full deep verification and aggregates",
+    "92 official exact refit receipts",
+    "32-page actual visual QA",
+    "private release and fresh remote science restoration"
+  ],
+  "repository_tests_passed": 349,
+  "repository_tests_seconds": 85.44,
+  "schema_version": 1,
+  "source_unchanged": true,
+  "tested_source_files": 157,
+  "validation_record_sha256": "2b1da9e498f3b6d5c72b062333885e72b1d551806525bf39c170f2ca66c90373",
+  "verified_utc": "2026-09-28T01:47:23.613492+00:00"
+}

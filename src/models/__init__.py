@@ -1,5 +1,10 @@
-"""
-Models package for Survival Models (Cox PH, Bayesian Cox, RSF, DeepSurv).
+"""Survival model families compared in the study.
+
+Each class wraps one model behind :class:`BaseSurvivalModel`: lifelines Cox
+proportional hazards (PH), the scikit-survival random survival forest (RSF),
+pycox DeepSurv, and the project's Bayesian piecewise-exponential PH model
+(``BayesianCoxModel``). The confirmatory and robustness pipelines fit one
+model per outer-training fold and score it on the matching validation fold.
 """
 
 from .base import BaseModel, BaseSurvivalModel

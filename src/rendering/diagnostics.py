@@ -1,4 +1,25 @@
-"""Render posterior checks, proportional-hazards tests and archived trace snapshots."""
+"""Render posterior checks, proportional-hazards tests and archived trace snapshots.
+
+Each ``_render_*`` function is called by :func:`src.rendering.runner.render_run`
+for a confirmatory run and reads only verified stored content:
+
+- ``_render_predictive_checks`` reads the prior and posterior predictive
+  summaries of complete Bayesian cells and writes
+  ``tables/prior_posterior_predictive_checks`` and
+  ``figures/prior_posterior_predictive_checks``.
+- ``_render_ph`` reads the proportional-hazards (PH) tests of complete Cox
+  cells, or the robustness run's ``ph_assessment.json`` when one was verified,
+  and writes ``tables/proportional_hazards_tests``,
+  ``tables/proportional_hazards_summary`` and
+  ``figures/proportional_hazards_assessment``.
+- ``_render_trace_snapshots`` reads the thinned posterior trace snapshots of
+  Bayesian cells and fit attempts and writes
+  ``tables/posterior_trace_snapshot_inventory`` plus one figure per rendered
+  variable under ``figures/traces/``.
+
+The trace snapshots hold up to 250 evenly spaced draws per chain for visual
+inspection only. Numerical Markov chain Monte Carlo (MCMC) diagnostics use every retained
+draw when the cell was fitted and are not recomputed here."""
 
 from __future__ import annotations
 
@@ -8,6 +29,7 @@ from typing import Any
 
 import matplotlib
 
+# Select the non-interactive backend before pyplot is imported.
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
@@ -20,6 +42,27 @@ from .verification import FrozenRun, _slug, _source
 
 
 def _predictive_check_rows(run: FrozenRun) -> pd.DataFrame:
+    """Return the archived predictive checks of complete Bayesian cells as one long table.
+
+    The ``check`` column takes four values:
+
+    - ``prior_predictive_baseline_survival``: prior median baseline survival
+      and its 95% interval at each stored time.
+    - ``prior_predictive_covariate_population_survival``: the full-model prior
+      survival over subjects and draws, with the share of draws near 0 or 1.
+    - ``posterior_predictive_replicated_event_count``: observed event counts
+      against replicated counts, in total and per baseline-hazard interval.
+    - ``posterior_fitted_survival_comparison_not_replicated_data``: fitted
+      posterior mean survival against the stored Kaplan–Meier estimate. This
+      compares fitted curves, not replicated data, and is labelled so.
+
+    Columns that do not apply to a check are NaN.
+
+    Raises:
+        ValueError: If a stored prior check lacks the covariate-population
+            part, or a posterior check lacks the replicated-event or
+            fitted-survival part.
+    """
     rows: list[dict[str, Any]] = []
     for relative, cell in run.cells:
         if cell["status"] != "complete" or not str(cell["model_key"]).startswith("bayesian_"):
@@ -152,6 +195,12 @@ def _predictive_check_rows(run: FrozenRun) -> pd.DataFrame:
 
 
 def _render_predictive_checks(run: FrozenRun, registry: OutputRegistry) -> None:
+    """Write the predictive-check table and a three-panel figure per dataset.
+
+    Panels: prior subject-draw median survival over scaled time; replicated
+    against observed total event counts; fitted against Kaplan–Meier
+    survival.
+    """
     table = _predictive_check_rows(run)
     selected = [
         (relative, cell)
@@ -268,6 +317,11 @@ def _render_predictive_checks(run: FrozenRun, registry: OutputRegistry) -> None:
 
 
 def _ph_rows_from_cells(run: FrozenRun) -> pd.DataFrame:
+    """Return the stored per-covariate PH test rows of every complete Cox cell.
+
+    Each row keeps the test statistic, p-value and the Holm decision stored
+    with the fit; nothing is recomputed.
+    """
     rows: list[dict[str, Any]] = []
     for relative, cell in run.cells:
         if cell["status"] != "complete" or cell["model_key"] != "cox_ph":
@@ -295,6 +349,21 @@ def _render_ph(
     *,
     robustness: dict[str, Any] | None,
 ) -> None:
+    """Write the PH test table, a per-covariate summary and its figure.
+
+    The summary gives, for each dataset and covariate, the number of outer
+    Cox fits and the fraction whose stored within-fit Holm decision rejected
+    proportional hazards. It is descriptive and is not used to select models.
+
+    Args:
+        run: The verified run.
+        registry: Output registry.
+        robustness: Verified robustness content; its ``ph_assessment`` is
+            used instead of the cell-level tests when present.
+
+    Raises:
+        ValueError: If a non-empty test table lacks ``holm_reject_0_05``.
+    """
     if robustness is not None and isinstance(robustness.get("ph_assessment"), dict):
         ph = robustness["ph_assessment"]
         table = pd.DataFrame(ph.get("covariate_tests", []))
@@ -367,6 +436,13 @@ def _render_ph(
 
 
 def _snapshot_records(run: FrozenRun) -> list[dict[str, Any]]:
+    """List every archived trace snapshot of the Bayesian cells.
+
+    A cell can hold a cell-level snapshot in ``model_details`` and one per fit
+    attempt; each becomes a record with its source key, cell status and the
+    diagnostics that belong to it. ``attempt`` is ``None`` for the cell-level
+    snapshot and the 1-based attempt number otherwise.
+    """
     records: list[dict[str, Any]] = []
     for relative, cell in run.cells:
         if not str(cell.get("model_key", "")).startswith("bayesian_"):
@@ -404,6 +480,18 @@ def _snapshot_records(run: FrozenRun) -> list[dict[str, Any]]:
 
 
 def _trace_array(variable: dict[str, Any]) -> tuple[np.ndarray, list[str]]:
+    """Return a stored variable as a ``(chain, draw, component)`` array.
+
+    Dimensions other than chain and draw are flattened into the component
+    axis.
+
+    Returns:
+        The array and the names of the flattened dimensions.
+
+    Raises:
+        ValueError: If chain or draw is not named, values are not finite, or
+            the stored dimensions do not match the values.
+    """
     dims = variable.get("dims")
     if not isinstance(dims, list) or "chain" not in dims or "draw" not in dims:
         raise ValueError("trace snapshot variable must identify chain and draw dimensions")
@@ -425,6 +513,13 @@ def _component_labels(
     n_components: int,
     cell: dict[str, Any],
 ) -> list[str]:
+    """Return a display label for each component of a trace variable.
+
+    Coefficients (``beta``) are named after their features, from the stored
+    coefficient summary or else the preprocessing feature names, when the
+    count matches. Otherwise a single component takes the variable name and
+    several take ``name[index]``.
+    """
     if variable_name == "beta":
         summary = cell.get("model_details", {}).get("coefficient_summary")
         if isinstance(summary, list):
@@ -445,6 +540,16 @@ def _render_trace_variable(
     variable_name: str,
     registry: OutputRegistry,
 ) -> list[Path]:
+    """Plot each component of a stored, thinned posterior variable.
+
+    Args:
+        record: Snapshot, cell and source-reference metadata from the verified run.
+        variable_name: Key in the snapshot's variable mapping.
+        registry: Output directory and exact source-lineage recorder.
+
+    Returns:
+        Written PDF and PNG paths. These plots do not recompute diagnostics.
+    """
     snapshot = record["snapshot"]
     variables = snapshot.get("variables")
     if not isinstance(variables, dict) or variable_name not in variables:
@@ -532,6 +637,11 @@ def _render_trace_variable(
 
 
 def _render_trace_snapshots(run: FrozenRun, registry: OutputRegistry) -> None:
+    """Inventory all snapshots and plot failed attempts plus one representative.
+
+    A complete representative is selected for each cohort/model pair; every
+    snapshot attached to a failed cell is rendered when its variables are valid.
+    """
     records = _snapshot_records(run)
     representatives: set[tuple[str, str]] = set()
     inventory_rows: list[dict[str, Any]] = []

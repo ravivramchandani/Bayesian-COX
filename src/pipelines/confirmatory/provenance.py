@@ -1,4 +1,17 @@
-"""Check the original live inputs and content-addressed protocol before confirmatory execution."""
+"""Check the original live inputs and content-addressed protocol before confirmatory execution.
+
+:mod:`runner` uses these functions to record every input file's SHA-256 hash
+in the run manifest, to refuse a resumed run whose inputs changed, and in
+confirmatory mode to check the protocol freeze (``config/protocol_freeze.json``,
+ADR-022) before the first fit and again around aggregation.
+
+These checks compare the live working tree with the recorded hashes. Under
+ADR-030 code and documentation may change after the freeze, so they pass only
+for a checkout whose inputs still match it: an unfinished confirmatory run can
+continue only on its original inputs. A completed run is verified instead
+against the blobs stored in the checkpoint commit, by
+:func:`src.utils.frozen_evidence.verify_frozen_evidence`.
+"""
 
 from __future__ import annotations
 
@@ -12,7 +25,21 @@ from .storage import _load_yaml
 
 
 def relevant_input_files(project_root: Path, datasets: tuple[str, ...]) -> list[str]:
-    """Return every code, configuration, environment and data input used here."""
+    """Return every code, configuration, environment and data input used here.
+
+    The fixed list mirrors the inventory recorded by the protocol freeze. It
+    still names the single-file modules ``src/pipelines/confirmatory.py`` and
+    ``src/pipelines/robustness.py``, which exist only at the checkpoint; a new
+    manifest records them as ``"MISSING"``. The current package modules are
+    covered by the ``src/**/*.py`` glob.
+
+    Args:
+        project_root: Repository root.
+        datasets: Cohort keys whose raw CSV files are added.
+
+    Returns:
+        Sorted, de-duplicated paths relative to ``project_root``.
+    """
     files = [
         "Makefile",
         "config/confirmatory.yaml",
@@ -68,7 +95,23 @@ def relevant_input_files(project_root: Path, datasets: tuple[str, ...]) -> list[
 
 
 def verify_protocol_freeze(project_root: Path, inputs: list[str]) -> dict[str, Any]:
-    """Verify the content-addressed protocol freeze before confirmatory fitting."""
+    """Verify the content-addressed protocol freeze before confirmatory fitting.
+
+    The freeze record must match its own content hash, every listed input
+    must still have its frozen hash in the live tree, and the record must
+    attest that no comparative effect was inspected before the freeze.
+
+    Args:
+        project_root: Repository root.
+        inputs: Input paths from :func:`relevant_input_files`.
+
+    Returns:
+        The freeze record.
+
+    Raises:
+        RuntimeError: The freeze file is missing, altered or lacks the
+            attestation, or any input differs from its frozen hash.
+    """
     freeze_path = project_root / "config" / "protocol_freeze.json"
     if not freeze_path.is_file():
         raise RuntimeError("config/protocol_freeze.json is required for confirmatory mode")
@@ -92,7 +135,24 @@ def verify_run_inputs_unchanged(
     *,
     label: str = "run manifest",
 ) -> None:
-    """Fail if any content-addressed run input changed since it was recorded."""
+    """Fail if any content-addressed run input changed since it was recorded.
+
+    Missing files hash as ``"MISSING"``, so a file that was recorded as
+    missing must still be missing.
+
+    Args:
+        project_root: Repository root.
+        expected: Recorded map from relative path to SHA-256 hash.
+        inputs: Paths to hash now; the resulting map must equal ``expected``
+            exactly, so an added or removed path also fails.
+        label: Name of the record, used in the error message.
+
+    Returns:
+        None when the complete input mapping agrees.
+
+    Raises:
+        RuntimeError: Any path differs; the message lists them.
+    """
     current = {
         relative: sha256_file(project_root / relative)
         if (project_root / relative).is_file()

@@ -1,4 +1,11 @@
-"""Tests for the result-blind protocol-freeze decision rule."""
+"""Tests for the result-blind protocol-freeze decision rule.
+
+Covers ``scripts/freeze_protocol.py`` and ``verify_protocol_freeze`` from
+``src/pipelines/confirmatory/provenance.py``. The checks cover the rule that
+keeps five outer repeats unless the planned five-repeat runtime exceeds the cap
+(ADR-029), the exact rehearsal workload, and the write-once, content-addressed
+freeze of every executed input (ADR-022).
+"""
 
 from __future__ import annotations
 
@@ -11,6 +18,7 @@ import pytest
 from src.pipelines.confirmatory import verify_protocol_freeze
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+# The script is not part of an importable package, so load it from its path.
 SPEC = importlib.util.spec_from_file_location(
     "freeze_protocol", PROJECT_ROOT / "scripts" / "freeze_protocol.py"
 )
@@ -21,11 +29,13 @@ SPEC.loader.exec_module(FREEZE_PROTOCOL)
 
 @pytest.mark.parametrize(
     ("projected_hours", "expected"),
+    # A projection of exactly 72 hours is not above the cap and keeps five.
     [(0.0, 5), (71.999, 5), (72.0, 5), (72.001, 3)],
 )
 def test_repeat_gate_uses_planned_five_repeat_projection(
     projected_hours: float, expected: int
 ) -> None:
+    """Three repeats apply only when the five-repeat projection exceeds the cap (ADR-029)."""
     assert (
         FREEZE_PROTOCOL.required_repeat_decision(
             planned_five_repeat_hours=projected_hours,
@@ -49,11 +59,13 @@ def test_repeat_gate_uses_planned_five_repeat_projection(
     ],
 )
 def test_repeat_gate_rejects_invalid_declarations(arguments: dict[str, float]) -> None:
+    """A negative projection, a non-positive cap or a reduction that is not smaller is rejected."""
     with pytest.raises(ValueError):
         FREEZE_PROTOCOL.required_repeat_decision(**arguments)
 
 
 def test_relevant_inputs_freeze_every_local_source_module() -> None:
+    """The frozen input list includes every Python module under src/ (ADR-022)."""
     inputs = set(FREEZE_PROTOCOL.relevant_input_files(PROJECT_ROOT, ("gbsg2",)))
     source_modules = {
         str(path.relative_to(PROJECT_ROOT))
@@ -66,6 +78,7 @@ def test_relevant_inputs_freeze_every_local_source_module() -> None:
 
 
 def test_protocol_freeze_rejects_a_changed_source_module(tmp_path: Path) -> None:
+    """Freeze verification fails once a frozen source module's bytes change (ADR-022)."""
     source = tmp_path / "src" / "module.py"
     source.parent.mkdir(parents=True)
     source.write_text("VALUE = 1\n", encoding="utf-8")
@@ -90,6 +103,7 @@ def test_protocol_freeze_rejects_a_changed_source_module(tmp_path: Path) -> None
 
 
 def test_protocol_freeze_is_write_once(tmp_path: Path) -> None:
+    """An existing protocol freeze is never overwritten (ADR-022)."""
     output = tmp_path / "protocol_freeze.json"
     record = {"freeze_content_sha256": "f" * 64}
 
@@ -103,6 +117,7 @@ def test_protocol_freeze_is_write_once(tmp_path: Path) -> None:
 
 
 def test_expected_rehearsal_controls_are_exact() -> None:
+    """The expected rehearsal controls equal the exact result-blind workload (ADR-029)."""
     config = {
         "datasets": ["a", "b", "c"],
         "validation": {"outer_splits": 5},

@@ -1,4 +1,35 @@
-"""Create the content-addressed confirmatory protocol freeze after rehearsal."""
+"""Create the content-addressed confirmatory protocol freeze after rehearsal.
+
+The freeze is the step between the result-blind rehearsal and the
+confirmatory run (ADR-022, ADR-029). It records the SHA-256 digest of every
+code, configuration, protocol, lock, manifest and data input the confirmatory
+run executes. The confirmatory runner then refuses to fit if any input differs
+from its frozen digest.
+
+Before writing, the script checks that the rehearsal is exactly the 18-cell
+result-blind workload (three cohorts by six models, one outer fold, the
+rehearsal sampler settings), that every cell completed, that every file matches
+the rehearsal's own hash records, and that no input has changed since the
+rehearsal. It then applies the compute gate: the approved five repeats may be
+reduced to three only when a deliberately conservative five-repeat runtime
+projection exceeds ``maximum_projected_hours`` in ``config/confirmatory.yaml``.
+The ``--repeat-decision`` flag must equal both the gate's answer and
+``validation.outer_repeats``. Only cell status and runtime are read; no
+prediction result is used.
+
+Reads:
+    ``config/confirmatory.yaml``, the rehearsal run directory and every frozen
+    input.
+
+Writes:
+    ``config/protocol_freeze.json``, created once. The file already exists in
+    this repository, so a rerun fails rather than overwrite it.
+
+Example:
+    python scripts/freeze_protocol.py \
+        --rehearsal-dir reports/confirmatory/<rehearsal run> --repeat-decision 5 \
+        --acknowledge-no-effects-inspected
+"""
 
 from __future__ import annotations
 
@@ -20,6 +51,11 @@ from src.utils.reproducibility import canonical_json_hash, sha256_file
 
 
 def _verify_content_hash(record: dict, field: str, *, label: str) -> None:
+    """Check that ``record[field]`` is the canonical hash of the rest of ``record``.
+
+    Raises:
+        ValueError: If the stored hash does not match, naming ``label``.
+    """
     claimed = record.get(field)
     unhashed = dict(record)
     unhashed.pop(field, None)
@@ -39,6 +75,22 @@ def required_repeat_decision(
     The projection is deliberately independent of the requested repeat count.
     This prevents the circular case where choosing three repeats changes the
     projection used to decide whether three repeats are permitted.
+
+    Args:
+        planned_five_repeat_hours: Conservative projected runtime of the full
+            planned design, in hours.
+        maximum_hours: Largest acceptable projected runtime, in hours.
+        planned_repeats: Approved number of outer repeats.
+        reduced_repeats: Number of repeats permitted when the gate fails.
+
+    Returns:
+        ``reduced_repeats`` if the projection exceeds ``maximum_hours``,
+        otherwise ``planned_repeats``.
+
+    Raises:
+        ValueError: If a repeat count is not positive, the reduction is not
+            smaller than the plan, the projection is negative or the cap is not
+            positive.
     """
     if planned_repeats <= 0 or reduced_repeats <= 0:
         raise ValueError("repeat counts must be positive")
@@ -54,7 +106,18 @@ def required_repeat_decision(
 
 
 def write_protocol_freeze_once(output: Path, freeze: dict) -> None:
-    """Create the protocol freeze exactly once and refuse any overwrite."""
+    """Create the protocol freeze exactly once and refuse any overwrite.
+
+    The file is opened in exclusive-creation mode, so an existing freeze is
+    never replaced, even by a concurrent writer.
+
+    Args:
+        output: New freeze file path; its parent must already exist.
+        freeze: Verified freeze record to write as finite JSON.
+
+    Raises:
+        FileExistsError: If ``output`` already exists.
+    """
     try:
         with output.open("x", encoding="utf-8") as handle:
             json.dump(freeze, handle, indent=2, sort_keys=True, allow_nan=False)
@@ -66,7 +129,18 @@ def write_protocol_freeze_once(output: Path, freeze: dict) -> None:
 
 
 def expected_rehearsal_controls(config: dict) -> dict[str, object]:
-    """Return the exact result-blind workload accepted by the runtime gate."""
+    """Return the exact result-blind workload accepted by the runtime gate.
+
+    These are the settings ``scripts/run_confirmatory.py`` applies in rehearsal
+    mode when no override flag is given; the rehearsal manifest's
+    ``run_config`` must match them key by key.
+
+    Args:
+        config: Confirmatory configuration supplying cohorts and outer-fold settings.
+
+    Returns:
+        The exact default rehearsal workload to compare with its manifest.
+    """
     return {
         "mode": "rehearsal",
         "datasets": list(config["datasets"]),
@@ -82,6 +156,11 @@ def expected_rehearsal_controls(config: dict) -> dict[str, object]:
 
 
 def parse_args() -> argparse.Namespace:
+    """Parse the command line.
+
+    Returns:
+        Parsed command-line option namespace.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("--rehearsal-dir", required=True, type=Path)
     parser.add_argument("--repeat-decision", required=True, type=int, choices=(3, 5))
@@ -94,6 +173,21 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Verify the rehearsal, apply the compute gate and write the freeze once.
+
+    Returns:
+        Exit status 0 once the freeze is written.
+
+    Raises:
+        RuntimeError: If the attestation flag is missing, the configuration is
+            not marked ``frozen_after_rehearsal``, the repeat decision disagrees
+            with the configuration or the gate, or an input changed after the
+            rehearsal.
+        FileNotFoundError: If the rehearsal manifest or completion is missing.
+        ValueError: If the rehearsal's content, cells or settings do not match
+            the expected result-blind workload.
+        FileExistsError: If the freeze already exists.
+    """
     args = parse_args()
     if not args.acknowledge_no_effects_inspected:
         raise RuntimeError("result-blind rehearsal attestation is required")
@@ -163,6 +257,8 @@ def main() -> int:
     if set(cell_hashes) != expected_cell_paths:
         raise ValueError("rehearsal cell paths do not match the exact cohort/model grid")
 
+    # Each cell must carry the dataset and model its path names, so that a
+    # renamed or copied file cannot stand in for a missing cell.
     cell_records: list[dict[str, object]] = []
     seen_keys: set[tuple[str, str]] = set()
     for relative in sorted(cell_hashes):
@@ -197,6 +293,8 @@ def main() -> int:
     if aggregate_hashes != completion.get("aggregate_sha256"):
         raise ValueError("rehearsal aggregate files differ from the completion manifest")
 
+    # The freeze records the live inputs, so they must be byte-identical to the
+    # inputs the rehearsal ran with.
     inputs = relevant_input_files(PROJECT_ROOT, tuple(config["datasets"]))
     current_input_hashes = {
         relative: sha256_file(PROJECT_ROOT / relative)

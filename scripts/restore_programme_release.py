@@ -3,6 +3,24 @@
 
 The original 450-cell private Release must already be restored separately.
 No download, publication, fitting or modification of that source is performed.
+
+This is the counterpart of ``package_programme_release.py``. Given a local
+directory of release assets (``--release-dir``) and the original run restored
+by ``restore_confirmatory_release.py`` (``--original-run``), it checks
+``SHA256SUMS``, the release manifest, the copied seal and visual quality
+assurance (QA) records, the original run's file inventory, and every archive
+member's size and hash. Archive members must be regular files with safe,
+declared, unique names, and no two archives may write the same file.
+
+Without ``--output-dir`` the script only verifies. With it, the five archives
+and a ``release_metadata/`` copy of the release records are extracted into a
+new directory outside the release and the original run; an existing directory
+is verified against the expected inventory and left unchanged.
+
+Example:
+    python scripts/restore_programme_release.py --release-dir <assets> \
+        --original-run reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651 \
+        --output-dir <new directory>
 """
 
 from __future__ import annotations
@@ -32,7 +50,20 @@ from scripts.package_programme_release import (
 
 
 def inspect_archive(path: Path, expected: dict[str, str], destination: Path | None = None) -> None:
-    """Verify every regular archive member, optionally extracting into a new directory."""
+    """Verify every regular archive member, optionally extracting into a new directory.
+
+    Args:
+        path: A ``.tar.gz`` release archive.
+        expected: Member name mapped to its SHA-256; the archive must contain
+            exactly these members.
+        destination: Directory to extract into, or ``None`` to verify only.
+            Existing files are never overwritten.
+
+    Raises:
+        ValueError: If a member is not a regular file, is repeated or
+            undeclared, cannot be read, or has the wrong size or hash, or a
+            declared member is missing.
+    """
     expected = validate_inventory(expected)
     seen = set()
     with tarfile.open(path, "r:gz") as archive:
@@ -68,6 +99,15 @@ def inspect_archive(path: Path, expected: dict[str, str], destination: Path | No
 
 
 def _verify_seal_copy(release: Path, manifest: dict[str, Any]) -> None:
+    """Check the release's copy of the seal against its manifest and archives.
+
+    The seal must be ``release_ready`` with passed visual QA, name the same
+    code revision and original run, match the copied report and QA files, and
+    list exactly the files in each archive and the sealed code files.
+
+    Raises:
+        ValueError: On any mismatch.
+    """
     seal = load_mapping(release / "programme_release_ready.json")
     if seal.get("status") != "release_ready":
         raise ValueError("release has no final release_ready seal")
@@ -97,7 +137,18 @@ def _verify_seal_copy(release: Path, manifest: dict[str, Any]) -> None:
 
 
 def verify_release(release: Path, original_run: Path) -> dict[str, Any]:
-    """Verify all asset hashes, safe member inventories, metadata and original source."""
+    """Verify all asset hashes, safe member inventories, metadata and original source.
+
+    Args:
+        release: Directory of release assets.
+        original_run: The restored original confirmatory run.
+
+    Returns:
+        The verified release manifest.
+
+    Raises:
+        ValueError: If any file, hash, inventory or seal check fails.
+    """
     manifest = load_mapping(release / "programme_release_manifest.json")
     verify_content_hash(manifest, "manifest_content_sha256")
     if manifest.get("status") != "private_supplementary_release":
@@ -140,7 +191,15 @@ def verify_release(release: Path, original_run: Path) -> dict[str, Any]:
 
 
 def restored_inventory(release: Path, manifest: dict[str, Any]) -> dict[str, str]:
-    """Describe the exact restored tree, including a copy of its release metadata."""
+    """Describe the exact restored tree, including a copy of its release metadata.
+
+    Args:
+        release: Verified local release-asset directory.
+        manifest: Verified manifest containing archive-member and metadata digests.
+
+    Returns:
+        Relative path of every file a restore creates mapped to its SHA-256.
+    """
     expected = {
         relative: digest for record in manifest["assets"].values()
         for relative, digest in record["files"].items()
@@ -151,7 +210,23 @@ def restored_inventory(release: Path, manifest: dict[str, Any]) -> dict[str, str
 
 
 def restore_release(release: Path, original_run: Path, destination: Path) -> Path:
-    """Restore verified assets into a new directory; an existing directory is verify-only."""
+    """Restore verified assets into a new directory; an existing directory is verify-only.
+
+    Files are extracted into a temporary directory beside ``destination``,
+    checked, and only then installed.
+
+    Args:
+        release: Local release assets to verify and extract.
+        original_run: Separately restored original confirmatory evidence.
+        destination: External output directory; an existing tree is verified without replacement.
+
+    Returns:
+        The resolved destination.
+
+    Raises:
+        ValueError: If the destination lies inside the release or the original
+            run, or any verification fails.
+    """
     manifest = verify_release(release, original_run)
     destination = destination.resolve()
     if (destination == original_run.resolve() or original_run.resolve() in destination.parents
@@ -171,6 +246,7 @@ def restore_release(release: Path, original_run: Path, destination: Path) -> Pat
         for name in set(manifest["metadata_sha256"]) | {"programme_release_manifest.json", "SHA256SUMS"}:
             shutil.copyfile(release / name, metadata / name)
         verify_inventory(stage, expected)
+        # Verify the source assets again, in case they changed during extraction.
         verify_release(release, original_run)
         publish_staged_directory(stage, destination)
         return destination
@@ -180,7 +256,11 @@ def restore_release(release: Path, original_run: Path, destination: Path) -> Pat
 
 
 def main() -> int:
-    """Verify local assets or restore them without contacting any external service."""
+    """Verify local assets or restore them without contacting any external service.
+
+    Returns:
+        Exit status 0 on success.
+    """
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--release-dir", required=True, type=Path)
     parser.add_argument("--original-run", required=True, type=Path)

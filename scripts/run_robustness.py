@@ -1,4 +1,54 @@
-"""Run result-blind rehearsal or frozen robustness analyses."""
+"""Run result-blind rehearsal or frozen robustness analyses.
+
+This is the entry point for the prespecified robustness plan, which refits the
+three Bayesian Cox priors on the frozen confirmatory folds under controlled
+perturbations. The work is done by
+``src.pipelines.robustness.execute_robustness_run``. There are four
+components:
+
+- ``rq2``: the information-regime analysis for research question 2 (RQ2):
+  25/50/75/100 per cent training subsets and two training-derived
+  administrative censoring cut-offs, not crossed with each other (ADR-023);
+- ``design``: prior-scale scenarios and alternative numbers of
+  baseline-hazard intervals, one factor at a time;
+- ``feature``: the primary and every sensitivity feature set declared in
+  ``config/datasets.yaml``, plus multiple imputation for the METABRIC
+  ``npi_plus_stage`` set;
+- ``ph``: an aggregate of the proportional-hazards (PH) tests already stored
+  in the confirmatory Cox cells. It fits nothing and needs the confirmatory
+  run.
+
+Modes:
+    ``rehearsal`` (the default) is a small result-blind workload (one outer
+    fold per cohort, 300 draws, 300 tuning steps, two chains, 30 bootstraps)
+    whose output is not evidence. ``robustness`` uses the frozen settings,
+    refuses any analysis override flag and requires ``design_status`` to be
+    ``frozen_after_rehearsal``.
+
+Reads:
+    ``config/confirmatory.yaml``, ``config/datasets.yaml``, the raw cohorts and
+    the completed confirmatory run. When ``--confirmatory-run`` is omitted the
+    script uses the only ``confirmatory_v1_confirmatory_*`` run with a
+    ``completion.json`` under ``reports/confirmatory/``; with none or several,
+    no run is supplied and the PH component records itself as unavailable.
+
+Writes:
+    A run directory ``<output-root>/<analysis_id>_robustness_<mode>_<hash>/``
+    with ``manifest.json``, one JSON file per cell under ``cells/``,
+    ``paired_ibs_inference.json``, ``analysis_availability.json``,
+    ``feasibility_plan.json``, ``ph_assessment.json`` when the PH component is
+    selected, and ``completion.json``. The path is printed as
+    ``run_artifact=<path relative to the repository>``.
+
+``--resume`` continues an unfinished run from the same code and settings, or
+verifies a completed one without refitting.
+
+Make targets: ``robustness`` and ``robustness-resume`` (both need
+``CONFIRMATORY_RUN``).
+
+Example:
+    python scripts/run_robustness.py --mode robustness --confirmatory-run reports/confirmatory/<run>
+"""
 
 from __future__ import annotations
 
@@ -19,6 +69,7 @@ COMPONENTS = ("rq2", "design", "feature", "ph")
 
 
 def _yaml(path: Path) -> dict:
+    """Return a YAML file's top-level mapping, rejecting any other content."""
     with path.open(encoding="utf-8") as handle:
         value = yaml.safe_load(handle)
     if not isinstance(value, dict):
@@ -27,6 +78,7 @@ def _yaml(path: Path) -> dict:
 
 
 def _discover_confirmatory_run() -> Path | None:
+    """Return the single completed confirmatory run, or ``None`` if not exactly one exists."""
     candidates = sorted(
         path.parent
         for path in (PROJECT_ROOT / "reports" / "confirmatory").glob(
@@ -39,6 +91,14 @@ def _discover_confirmatory_run() -> Path | None:
 
 
 def parse_args() -> argparse.Namespace:
+    """Parse the command line.
+
+    Analysis flags default to ``None`` so that robustness mode can reject any
+    supplied override.
+
+    Returns:
+        Parsed command-line option namespace.
+    """
     parser = argparse.ArgumentParser(
         description=(
             "Checkpointed Bayesian sensitivity analyses using the frozen "
@@ -66,6 +126,18 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Build the run options, execute the run and print its directory.
+
+    Returns:
+        Exit status 0 on success.
+
+    Raises:
+        ValueError: If robustness mode receives an analysis override, a cohort
+            is unknown, or the resolved settings have fewer than 20 bootstraps,
+            fewer than three outer folds or no repeat.
+        RuntimeError: If robustness mode is requested before the protocol is
+            frozen.
+    """
     args = parse_args()
     config = _yaml(PROJECT_ROOT / "config" / "confirmatory.yaml")
     datasets = _yaml(PROJECT_ROOT / "config" / "datasets.yaml")

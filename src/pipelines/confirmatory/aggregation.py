@@ -1,4 +1,21 @@
-"""Load immutable cell records and rebuild the fold metrics and out-of-fold prediction tables."""
+"""Load immutable cell records and rebuild the fold metrics and out-of-fold prediction tables.
+
+After every planned cell is stored, :mod:`runner` loads the cells with
+:func:`_load_cells`, which rejects any record whose content hash no longer
+matches, and writes two tables with :func:`_aggregate_tables`:
+
+- ``fold_metrics.csv``: one row per complete cell, with the scalar metrics,
+  the time-dependent area under the receiver operating characteristic
+  curve (AUC) and calibration estimates at each horizon, and the cell hash;
+- ``out_of_fold_predictions.csv.gz``: one row per validation subject per
+  complete cell, with the stored risk and survival predictions. Each stored row
+  comes from a subject excluded from that model's training fold, so it is an
+  out-of-fold (OOF) prediction. In the full fold partition each subject
+  belongs to exactly one validation fold per repeat.
+
+Failed cells are counted in the completion record but excluded from both
+tables.
+"""
 
 from __future__ import annotations
 
@@ -13,7 +30,10 @@ from src.utils.reproducibility import canonical_json_hash
 
 
 def _cell_path(run_dir: Path, dataset: str, fold: SurvivalFold, model: str) -> Path:
-    """Return the immutable checkpoint path for one model and outer fold."""
+    """Return the immutable checkpoint path for one model and outer fold.
+
+    The layout is ``cells/<dataset>/repeat_RR_fold_FF/<model_key>.json``.
+    """
     return (
         run_dir
         / "cells"
@@ -24,12 +44,19 @@ def _cell_path(run_dir: Path, dataset: str, fold: SurvivalFold, model: str) -> P
 
 
 def _load_cells(run_dir: Path) -> list[dict[str, Any]]:
-    """Read cells in path order and reject any invalid content hash."""
+    """Read cells in path order and reject any invalid content hash.
+
+    Raises:
+        RuntimeError: A stored cell differs from the content it was hashed
+            with, for example after an edit.
+    """
     cells = []
     for path in sorted((run_dir / "cells").glob("*/*/*.json")):
         with path.open(encoding="utf-8") as handle:
             cell = json.load(handle)
         claimed_hash = cell.get("cell_content_sha256")
+        # Recompute over every other field, timings included, exactly as the
+        # hash was computed when the cell was created.
         unhashed = dict(cell)
         unhashed.pop("cell_content_sha256", None)
         observed_hash = canonical_json_hash(unhashed)
@@ -40,7 +67,13 @@ def _load_cells(run_dir: Path) -> list[dict[str, Any]]:
 
 
 def _aggregate_tables(run_dir: Path, cells: list[dict[str, Any]]) -> None:
-    """Write metric and subject-prediction tables using accepted cells only."""
+    """Write metric and subject-prediction tables using accepted cells only.
+
+    Args:
+        run_dir: Run directory that receives the two tables.
+        cells: Hash-verified records from :func:`_load_cells`; only those
+            with status ``"complete"`` contribute rows.
+    """
     metrics_rows: list[dict[str, Any]] = []
     prediction_rows: list[dict[str, Any]] = []
     for cell in cells:
@@ -100,6 +133,8 @@ def _aggregate_tables(run_dir: Path, cells: list[dict[str, Any]]) -> None:
                 }
             )
     pd.DataFrame(metrics_rows).to_csv(run_dir / "fold_metrics.csv", index=False)
+    # A fixed gzip timestamp keeps the compressed bytes, and so the file hash
+    # in the completion record, identical when the table is regenerated.
     pd.DataFrame(prediction_rows).to_csv(
         run_dir / "out_of_fold_predictions.csv.gz",
         index=False,

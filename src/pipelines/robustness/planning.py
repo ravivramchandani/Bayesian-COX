@@ -1,4 +1,12 @@
-"""Count the frozen sensitivity fits and project their result-blind runtime."""
+"""Count the frozen sensitivity fits and project their result-blind runtime.
+
+:mod:`runner` calls both functions before any robustness fit. The fit counts
+are stored in the manifest and feasibility plan, and verification of a
+completed run recomputes them. In ``robustness`` mode the projected serial
+runtime must not exceed the protocol's ``maximum_projected_hours`` (72), or
+the run stops before fitting. The projection uses only recorded fit timings from the confirmatory cells;
+those source records, including their other fields, are hash-verified.
+"""
 
 from __future__ import annotations
 
@@ -28,7 +36,27 @@ def planned_fit_counts(
     outer_repeats: int,
     outer_splits: int,
 ) -> dict[str, Any]:
-    """Count checkpoint cells and underlying Bayesian fits before execution."""
+    """Count checkpoint cells and underlying Bayesian fits before execution.
+
+    Each condition contributes ``outer_repeats`` times its number of selected
+    folds cells per prior; the multiple-imputation condition needs five
+    Bayesian fits per cell. Refits after a failed diagnostic gate are not
+    counted.
+
+    Args:
+        plans: Condition plan per cohort, from
+            :func:`~.conditions.build_condition_plan`.
+        outer_repeats: Outer repeats in the frozen protocol.
+        outer_splits: Outer folds per repeat in the frozen protocol.
+
+    Returns:
+        Counts per cohort and prior, the totals, and the fold numbers used
+        by research question 2 (RQ2) and by the design and feature conditions.
+
+    Raises:
+        ValueError: A condition selects a fold number outside
+            ``1..outer_splits``.
+    """
     grouped: list[dict[str, Any]] = []
     total_cells = 0
     total_fits = 0
@@ -90,7 +118,34 @@ def projected_runtime_from_confirmatory(
     target_tune: int,
     target_chains: int,
 ) -> dict[str, Any]:
-    """Project serial runtime from result-blind confirmatory fit timings."""
+    """Project serial runtime from result-blind confirmatory fit timings.
+
+    For each cohort and prior, the median total fit time of the confirmatory
+    Bayesian cells (summed over their fit attempts) is scaled by the ratio of
+    Markov chain Monte Carlo (MCMC) work, (draws + tune) x chains, between the
+    target and the source run, and multiplied by the planned number of fits.
+    The group totals are summed and inflated by
+    :data:`~.protocol.RUNTIME_OVERHEAD_MULTIPLIER`. Cells without a positive
+    recorded fit time are skipped.
+
+    Args:
+        confirmatory_run_dir: Completed confirmatory run with timed cells.
+        fit_counts: Output of :func:`planned_fit_counts`.
+        maximum_hours: Feasibility limit in hours.
+        target_draws: Posterior draws per chain planned for robustness.
+        target_tune: Tuning steps per chain planned for robustness.
+        target_chains: Chains planned for robustness.
+
+    Returns:
+        The per-group projection, the total in hours, whether it is feasible,
+        the hashes of every timing source cell and the record's content hash.
+
+    Raises:
+        FileNotFoundError: The confirmatory manifest is missing.
+        ValueError: A source cell fails its content hash or a work count is
+            not positive.
+        RuntimeError: A cohort and prior has no usable timing.
+    """
     manifest_path = confirmatory_run_dir / "manifest.json"
     if not manifest_path.is_file():
         raise FileNotFoundError(f"runtime source manifest is missing: {manifest_path}")
@@ -105,6 +160,7 @@ def projected_runtime_from_confirmatory(
     timings: dict[tuple[str, str], list[float]] = {}
     source_hashes: dict[str, str] = {}
     for path in sorted(confirmatory_run_dir.glob("cells/*/*/bayesian_*.json")):
+        # Projection uses fit times only; verify the complete source record first.
         cell = read_mapping(path)
         claimed = cell.get("cell_content_sha256")
         unhashed = dict(cell)

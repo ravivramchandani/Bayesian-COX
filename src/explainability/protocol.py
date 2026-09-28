@@ -1,7 +1,11 @@
 """Frozen settings and seed derivation for the confirmatory explanation stage.
 
 The protocol records the sampling budgets, convergence thresholds and descriptive
-bootstrap controls copied into every explanation result."""
+bootstrap controls for Shapley additive explanations (SHAP), copied into every
+frozen explanation result. The frozen-cell
+pipeline combines :class:`ExplanationProtocol` with cohort, repeat and fold
+labels through :func:`_stable_seed` to select subjects and bootstrap draws
+reproducibly."""
 
 from __future__ import annotations
 
@@ -34,6 +38,12 @@ class ExplanationProtocol:
     larger one. The top-five rule and the overlap threshold of four are fixed
     by the study protocol and cannot be changed here.
 
+    The convergence gate asks whether a grouped SHAP ranking has settled: two
+    rankings agree when their Spearman correlation is at least
+    ``convergence_spearman`` (0.95) and they share at least
+    ``convergence_top_overlap`` (four) of their ``top_k`` (five) highest
+    groups. The rule is applied in :mod:`src.explainability.stability`.
+
     Attributes:
         seeds: The three explanation seeds.
         budgets: Nested subject and background budgets, smallest first.
@@ -59,6 +69,15 @@ class ExplanationProtocol:
     uncertainty_seed: int = 196613
 
     def __post_init__(self) -> None:
+        """Reject settings that depart from the frozen protocol.
+
+        Raises:
+            ValueError: If there are not three distinct non-negative seeds,
+                fewer than two budgets, a non-positive or non-increasing
+                budget, a top-five or overlap rule other than five and four,
+                a Spearman threshold outside ``[0, 1]`` or fewer than 100
+                bootstrap resamples.
+        """
         if len(self.seeds) != 3 or len(set(self.seeds)) != 3:
             raise ValueError("the confirmatory explanation protocol requires three seeds")
         if any(seed < 0 for seed in self.seeds):
@@ -94,7 +113,20 @@ def _stable_seed(base_seed: int, *parts: object) -> int:
 
 
 def protocol_record(protocol: ExplanationProtocol) -> dict[str, Any]:
-    """Return the protocol settings and a plain description of each estimand."""
+    """Return the protocol settings and a plain description of each estimand.
+
+    The descriptions are part of the hashed explanation result, so their text
+    is kept exactly as frozen. ``primary_intrinsic_estimand`` names the
+    per-term form ``E(|x_j beta_j|)``; the grouped score actually compared,
+    in which signed terms are summed within a source group before the
+    absolute value is taken, is described under ``grouping``.
+
+    Args:
+        protocol: Immutable explanation sampling and uncertainty controls.
+
+    Returns:
+        Plain settings and estimand descriptions included in the result hash.
+    """
     return {
         **asdict(protocol),
         "primary_intrinsic_estimand": "posterior expected absolute contribution E(|x_j beta_j|)",

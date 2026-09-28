@@ -4,6 +4,11 @@ A guided tour for a new reader. `docs/architecture.md` gives the complete
 module map. `docs/study_protocol.md` is the analysis plan. Formal terms are
 defined in `coordination/GLOSSARY.md`.
 
+The [baseline documentation review](../coordination/reviews/2026-09-28-documentation-pass.md)
+records the verified documentation scope, corrected descriptions and existing
+code limitations. Its retained evidence includes the original drafts and proof
+that executable statements and imports stayed unchanged.
+
 ## The study in one paragraph
 
 Three real cohorts are analysed: GBSG2 (breast cancer), WHAS500 (heart

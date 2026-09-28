@@ -1,4 +1,35 @@
-"""Render ADR-033's post-hoc bounds without supplying missing hypothesis tests."""
+"""Render ADR-033's post-hoc bounds without supplying missing hypothesis tests.
+
+The primary family has nine within-cohort Bayesian-prior contrasts in the
+integrated Brier score (IBS). Holm's step-down procedure controls the
+family-wise error rate: with the ``m`` p-values sorted,
+``p_(1) <= ... <= p_(m)``, the adjusted value of the k-th is
+
+    max over j <= k of min(1, (m - j + 1) * p_(j)),
+
+and a hypothesis is rejected at level ``alpha`` when its adjusted value is at
+most ``alpha``. The frozen inference applies Holm only when all nine
+contrasts are estimable, so an incomplete family has no adjusted values.
+
+ADR-033 adds a bound instead of a test. Holm-adjusted p-values never
+decrease when any p-value increases, so for each available contrast the two
+extreme completions of the missing p-values bracket every possible outcome:
+
+- *Best case*, every missing p-value 0: the missing hypotheses sort first
+  and contribute 0 to the running maximum, and the available contrast of
+  0-based rank ``r`` among ``n`` available gets multiplier ``n - r``. This
+  equals Holm applied to the available contrasts alone. If even this bound
+  exceeds ``alpha``, no completion can reject the contrast.
+- *Worst case*, every missing p-value 1: the missing hypotheses sort last
+  and do not affect earlier steps, and the same contrast gets multiplier
+  ``m - r``. If this bound is at most ``alpha``, every completion rejects it.
+
+The bounds are hypothetical and are labelled post-hoc; they do not supply the
+missing tests. :func:`render_holm_bounds` is called by
+:func:`src.rendering.runner.render_run` for confirmatory runs. It reads
+``inference.json`` (keys ``primary`` and ``holm_family_complete``) and writes
+``tables/posthoc_incomplete_holm_bounds`` when the family is incomplete and
+``tables/primary_contrasts_thesis`` always, each as CSV and LaTeX."""
 
 from __future__ import annotations
 
@@ -18,6 +49,20 @@ def incomplete_holm_bounds(primary: list[dict[str, Any]], *, alpha: float = 0.05
     The best case places all missing hypotheses first with p-values zero;
     the worst case places them last with p-values one. These are hypothetical
     mathematical bounds, not observed or imputed tests.
+
+    Args:
+        primary: The full primary contrast list from ``inference.json``. A
+            contrast is available when it has an ``ibs`` mapping with a
+            ``p_value``; the others count as missing.
+        alpha: Family-wise significance level.
+
+    Returns:
+        One row per available contrast, in ascending p-value order, with the
+        nominal p-value, family size, number missing, both adjusted-p bounds
+        and the ``rejection_possible`` and ``rejection_guaranteed`` decisions.
+
+    Raises:
+        ValueError: If an available p-value lies outside ``[0, 1]``.
     """
     family_size = len(primary)
     available = sorted(
@@ -31,6 +76,9 @@ def incomplete_holm_bounds(primary: list[dict[str, Any]], *, alpha: float = 0.05
         p_value = float(contrast["ibs"]["p_value"])
         if not 0 <= p_value <= 1:
             raise ValueError("Holm bound requires p-values in [0, 1]")
+        # Holm multipliers for this rank: missing hypotheses ranked ahead
+        # (best case) or behind (worst case). The running maximum keeps the
+        # adjusted values monotone, as in the step-down procedure.
         best_previous = min(1.0, max(best_previous, (len(available) - rank) * p_value))
         worst_previous = min(1.0, max(worst_previous, (family_size - rank) * p_value))
         rows.append(
@@ -52,7 +100,17 @@ def incomplete_holm_bounds(primary: list[dict[str, Any]], *, alpha: float = 0.05
 
 
 def render_holm_bounds(run: FrozenRun, registry: OutputRegistry) -> None:
-    """Write the separately labelled bound and a compact thesis results table."""
+    """Write the separately labelled bound and a compact thesis results table.
+
+    The thesis table lists every primary contrast, including unavailable
+    ones, with the paired fold count, the mean IBS difference (model A minus
+    model B), its nominal 95% Nadeau–Bengio interval and the unadjusted
+    p-value.
+
+    Args:
+        run: The verified frozen run.
+        registry: Output registry that records each file and its sources.
+    """
     sources = [_source(run, "inference.json", ["primary", "holm_family_complete"])]
     if not run.inference.get("holm_family_complete", False):
         bounds = incomplete_holm_bounds(run.inference["primary"])

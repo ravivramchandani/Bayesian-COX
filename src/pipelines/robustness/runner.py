@@ -1,4 +1,20 @@
-"""Orchestrate checkpointed robustness fitting and pure aggregate generation."""
+"""Orchestrate checkpointed robustness fitting and pure aggregate generation.
+
+:func:`execute_robustness_run` is the package entry point, called by
+``scripts/run_robustness.py``. It runs the stages in order:
+
+1. :func:`_prepare_run_configuration` builds each cohort's condition plan,
+   counts the planned fits and, in ``robustness`` mode, checks the
+   result-blind runtime projection against the protocol limit.
+2. :func:`~.provenance.initialise_run_directory` writes or re-checks the
+   manifest; a completed run is only verified and returned.
+3. :func:`_fit_dataset` fits every missing cell, fold by fold, condition by
+   condition and prior by prior. Each cell file is written once, so an
+   interrupted run resumes where it stopped.
+4. :func:`_complete_run` loads the validated cells, writes the paired integrated Brier score (IBS)
+   inference and the proportional-hazards (PH) assessment, and records every cell and aggregate
+   hash in ``completion.json``.
+"""
 
 from __future__ import annotations
 
@@ -44,6 +60,11 @@ def _write_aggregates(
     options: RobustnessOptions,
     config: dict[str, Any],
 ) -> None:
+    """Write ``paired_ibs_inference.json`` and, with the ``ph`` component, ``ph_assessment.json``.
+
+    Without a confirmatory source run the PH record states that no PH
+    finding is claimed.
+    """
     inference = paired_ibs_inference(
         cells,
         components=set(options.components) & {"rq2", "design", "feature"},
@@ -71,7 +92,21 @@ def _write_aggregates(
 def _prepare_run_configuration(
     config: dict[str, Any], dataset_config: dict[str, Any], options: RobustnessOptions
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
-    """Build the frozen condition grid, feasibility statement and actual run configuration."""
+    """Build the frozen condition grid, feasibility statement and actual run configuration.
+
+    The fit plan is always counted at the frozen protocol's repeats and
+    folds, whatever reduced controls a rehearsal uses.
+
+    Returns:
+        ``(plans, actual_config, multiple_imputation, feasibility)``: the
+        condition plan per cohort, the configuration whose hash identifies the
+        run, the multiple-imputation statement and the feasibility record.
+
+    Raises:
+        ValueError: Unknown mode or component.
+        RuntimeError: ``robustness`` mode without a confirmatory run, or a
+            projected runtime above the limit.
+    """
     if options.mode not in {"rehearsal", "robustness"}:
         raise ValueError("mode must be 'rehearsal' or 'robustness'")
     allowed_components = {"rq2", "design", "feature", "ph"}
@@ -178,7 +213,12 @@ def _fit_dataset(
     options: RobustnessOptions,
     run_dir: Path,
 ) -> int:
-    """Fit missing cells for one dataset in frozen fold, condition and prior order."""
+    """Fit missing cells for one dataset in frozen fold, condition and prior order.
+
+    Returns:
+        The number of cells planned for this cohort, whether fitted now or
+        already stored.
+    """
     total_planned = 0
     raw, times, events, subject_ids = load_analysis_dataset(project_root, dataset_key, cohort)
     folds = repeated_survival_folds(
@@ -196,6 +236,8 @@ def _fit_dataset(
     for fold in folds:
         relative_times = times[fold.train_indices]
         relative_events = events[fold.train_indices]
+        # The subset seed depends on cohort, repeat and fold only, so every
+        # condition and prior on this fold draws the same nested subsets.
         subset_seed = deterministic_seed(
             int(config["validation"]["base_seed"]),
             "robustness_subset",
@@ -222,6 +264,8 @@ def _fit_dataset(
             for model_key in BAYESIAN_MODEL_KEYS:
                 total_planned += 1
                 path = _cell_path(run_dir, dataset_key, fold, condition, model_key)
+                # A stored cell is never refitted or overwritten; each cell has
+                # its own seed, so skipping it changes no other cell.
                 if path.exists():
                     continue
                 cell = run_robustness_cell(
@@ -254,7 +298,11 @@ def _fit_dataset(
 def _complete_run(
     run_dir: Path, total_planned: int, config: dict[str, Any], options: RobustnessOptions
 ) -> Path:
-    """Render aggregates and write the original complete-cell inventory."""
+    """Aggregate validated cells and record all stored outcomes and file hashes.
+
+    Returns:
+        The run directory.
+    """
     cells = load_robustness_cells(run_dir)
     _write_aggregates(run_dir, cells, options=options, config=config)
     counts: dict[str, int] = {}
@@ -292,6 +340,11 @@ def execute_robustness_run(
 ) -> Path:
     """Execute selected robustness components without mixing different execution code.
 
+    Directory layout: ``manifest.json``, ``analysis_availability.json``,
+    ``feasibility_plan.json``, ``cells/<cohort>/repeat_RR_fold_FF/
+    <condition_id>/<model_key>.json``, ``paired_ibs_inference.json``,
+    ``ph_assessment.json`` (with the ``ph`` component) and ``completion.json``.
+
     Args:
         project_root: Checkout holding the live frozen study inputs.
         config: Frozen confirmatory and robustness protocol.
@@ -300,6 +353,13 @@ def execute_robustness_run(
 
     Returns:
         The new run directory, or a verified completed checkpoint directory.
+
+    Raises:
+        ValueError: The mode or a requested component is unknown, or a stored
+            cell is invalid.
+        RuntimeError: Production controls, frozen inputs, runtime feasibility
+            or resumed evidence fail verification.
+        FileExistsError: A run exists and ``resume`` is not set.
     """
     plans, actual_config, availability, feasibility = _prepare_run_configuration(
         config, dataset_config, options

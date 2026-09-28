@@ -1,4 +1,27 @@
-"""Pure publication rendering from frozen result files."""
+"""Pure publication rendering from frozen result files.
+
+``scripts/render_confirmatory.py`` calls :func:`render_run`, which verifies a
+completed confirmatory run (and, optionally, an explainability result and a
+robustness run), then writes tables and figures into a new, empty output
+directory together with ``lineage.json``. The renderer is pure: it reads only
+stored, hash-verified artefacts, never imports a model or pipeline module and
+never fits anything (a test in ``tests/test_holm_bounds.py`` enforces this).
+
+Modules:
+
+- ``verification``: hash and completeness checks on every source artefact.
+- ``outputs``: deterministic table and figure writers and the lineage record.
+- ``metrics``: cohort flow, fold metrics, paired IBS effects, calibration and
+  runtime.
+- ``holm_bounds``: the ADR-033 post-hoc bound on the incomplete Holm family.
+- ``diagnostics``: predictive checks, proportional-hazards tests and trace
+  snapshots.
+- ``supplemental``: explanation and robustness summaries.
+- ``runner``: the order in which the above are called.
+- ``constants``: shared labels, colours and fixed figure metadata.
+
+The names below, including private helpers, are re-exported so that
+``scripts/render_confirmatory.py`` and existing imports of it keep working."""
 
 from .constants import COLORS as COLORS
 from .constants import FIXED_PDF_DATE as FIXED_PDF_DATE

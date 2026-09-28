@@ -1,4 +1,11 @@
-"""Historical evidence must survive code changes and reject altered study inputs."""
+"""Historical evidence must survive code changes and reject altered study inputs.
+
+Covers ``verify_frozen_evidence`` in ``src/utils/frozen_evidence.py`` against a
+throwaway Git repository whose single commit stands in for the evidence
+checkpoint. Frozen inputs are read from that commit, so source files may change
+in the working tree, while the protocol, raw-data, lock and freeze files must
+keep their frozen bytes (INV-008, ADR-030).
+"""
 
 from __future__ import annotations
 
@@ -14,6 +21,13 @@ from src.utils.reproducibility import canonical_json_hash, sha256_file
 
 @pytest.fixture
 def frozen_checkout(tmp_path: Path) -> tuple[Path, str, dict[str, str]]:
+    """Commit a minimal frozen study to a new Git repository.
+
+    Returns:
+        The repository root, the commit hash and the recorded input hashes.
+    """
+    # One source module, which may later change, and one protocol, raw-data and
+    # lock file, which must keep their bytes in the live tree.
     contents = {
         "src/original.py": "VALUE = 1\n",
         "config/confirmatory.yaml": "analysis: original\n",
@@ -25,6 +39,8 @@ def frozen_checkout(tmp_path: Path) -> tuple[Path, str, dict[str, str]]:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text)
     hashes = {relative: sha256_file(tmp_path / relative) for relative in contents}
+    # The verifier accepts a freeze only with a valid self-hash and the
+    # result-blind attestation.
     freeze = {"frozen_input_sha256": hashes, "no_comparative_effects_inspected_before_freeze": True}
     freeze["freeze_content_sha256"] = canonical_json_hash(freeze)
     (tmp_path / "config/protocol_freeze.json").write_text(json.dumps(freeze))
@@ -51,6 +67,7 @@ def frozen_checkout(tmp_path: Path) -> tuple[Path, str, dict[str, str]]:
 
 
 def test_historical_evidence_survives_deleted_and_added_source(frozen_checkout) -> None:
+    """Deleted or added source files leave checkpoint-verified evidence valid (INV-008, ADR-030)."""
     root, commit, hashes = frozen_checkout
     (root / "src/original.py").unlink()
     (root / "src/refactored.py").write_text("VALUE = 1\n")
@@ -67,6 +84,7 @@ def test_historical_evidence_survives_deleted_and_added_source(frozen_checkout) 
     ],
 )
 def test_changed_live_study_input_is_rejected(frozen_checkout, relative: str) -> None:
+    """Changed live protocol, raw-data, lock or freeze bytes are rejected (INV-008, ADR-030)."""
     root, commit, hashes = frozen_checkout
     (root / relative).write_text("changed\n")
     with pytest.raises(RuntimeError, match="live"):
@@ -74,6 +92,7 @@ def test_changed_live_study_input_is_rejected(frozen_checkout, relative: str) ->
 
 
 def test_forged_manifest_input_map_is_rejected(frozen_checkout) -> None:
+    """A run's recorded input map must equal the checkpoint freeze's map exactly (INV-008)."""
     root, commit, hashes = frozen_checkout
     forged = {**hashes, "src/original.py": "0" * 64}
     with pytest.raises(RuntimeError, match="manifest inputs differ"):
@@ -81,6 +100,8 @@ def test_forged_manifest_input_map_is_rejected(frozen_checkout) -> None:
 
 
 def test_missing_checkpoint_is_rejected(frozen_checkout) -> None:
+    """A checkpoint commit absent from the repository fails verification (INV-008)."""
     root, _, hashes = frozen_checkout
+    # A well-formed 40-hex commit name that does not exist in the repository.
     with pytest.raises(RuntimeError, match="checkpoint input unavailable"):
         verify_frozen_evidence(root, hashes, checkpoint="0" * 40)

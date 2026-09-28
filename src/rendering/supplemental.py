@@ -17,6 +17,7 @@ from .outputs import OutputRegistry, _atomic_text, _save_figure, _write_table
 
 
 def _explanation_rows(result: dict[str, Any]) -> pd.DataFrame:
+    """Flatten stored same-model and paired Cox agreement estimates and gates."""
     rows: list[dict[str, Any]] = []
     for hypothesis, records in (
         ("H3a_same_model_agreement", result.get("agreement_uncertainty", [])),
@@ -83,6 +84,10 @@ def _explanation_rows(result: dict[str, Any]) -> pd.DataFrame:
 def _render_explanation(
     result: dict[str, Any], source_ref: dict[str, Any], registry: OutputRegistry
 ) -> None:
+    """Write descriptive explanation tables and a plot with the stored gate.
+
+    A failed convergence gate also writes an explicit claim-boundary notice.
+    """
     convergence = result.get("convergence", {}).get("summary", {})
     convergence_failed = convergence.get("status") == "failed"
     if convergence_failed:
@@ -176,6 +181,10 @@ def _render_explanation(
 
 
 def _robustness_effect_rows(result: dict[str, Any]) -> pd.DataFrame:
+    """Flatten stored IBS contrasts and difference-in-differences coverage.
+
+    IBS is the integrated Brier score; unavailable effects remain in the table.
+    """
     inference = result["paired_ibs_inference"]
     rows: list[dict[str, Any]] = []
     for kind, records in (
@@ -224,6 +233,7 @@ def _robustness_effect_rows(result: dict[str, Any]) -> pd.DataFrame:
 def _render_robustness(
     result: dict[str, Any], summary_ref: dict[str, Any], registry: OutputRegistry
 ) -> None:
+    """Write lineaged robustness effects, feasibility and cell-audit outputs."""
     table = _robustness_effect_rows(result)
     source_ref = result["source_refs"]["paired_ibs_inference.json"]
     _write_table(

@@ -1,4 +1,39 @@
-"""Render a publication package from verified frozen result files."""
+"""Render a publication package from verified frozen result files.
+
+This is the final reporting step for the confirmatory study. It turns a
+completed run into tables, figures and notices, and records where every
+number came from. It is a pure renderer: it imports no model and fits
+nothing. The work is done by ``src.rendering.render_run``, which verifies the
+run's hashes first.
+
+For a confirmatory run the package covers the cohort flow, fold metrics, the
+paired integrated Brier score (IBS) contrasts, the post-hoc bound on the
+incomplete Holm family (ADR-033), calibration, runtime, predictive checks,
+posterior trace snapshots and the proportional-hazards tests. The optional
+explainability result and robustness run add their own sections after they
+are verified against the same run. A rehearsal run yields only a
+runtime-and-failure package with a rehearsal-only notice, and accepts neither
+optional input.
+
+Reads:
+    ``--run-dir`` (a completed run), and optionally
+    ``--explainability-artifact`` (from
+    ``run_confirmatory_explainability.py``) and ``--robustness-dir`` (a
+    completed robustness run).
+
+Writes:
+    Every output into ``--output-dir``, by default
+    ``reports/rendered/<run name>/`` under the repository root. The directory
+    must be new or empty. ``lineage.json`` in it lists each output with its
+    source files, source keys and hashes, and the hashes of the renderer code.
+    Both paths are printed.
+
+Make targets: ``render-confirmatory`` (also ``figures`` and ``reports``).
+
+Example:
+    python scripts/render_confirmatory.py --run-dir reports/confirmatory/<run> \
+        --output-dir reports/rendered/<new directory>
+"""
 
 from __future__ import annotations
 
@@ -10,6 +45,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+# The renderer's helpers now live in ``src.rendering``. Before that they were
+# defined in this script, so they are re-exported here under their original
+# names for code that loads the script as a module.
 from src.rendering import COLORS as COLORS
 from src.rendering import FIXED_PDF_DATE as FIXED_PDF_DATE
 from src.rendering import METRIC_LABELS as METRIC_LABELS
@@ -61,6 +99,11 @@ from src.rendering import verify_robustness_run as verify_robustness_run
 
 
 def parse_args() -> argparse.Namespace:
+    """Parse the command line.
+
+    Returns:
+        Parsed command-line option namespace.
+    """
     parser = argparse.ArgumentParser(
         description=(
             "Pure renderer for a completed frozen confirmatory run. Rehearsals "
@@ -75,6 +118,11 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Render the package and print its directory and lineage file.
+
+    Returns:
+        Exit status 0 on success.
+    """
     args = parse_args()
     run_dir = args.run_dir.resolve()
     output_dir = (

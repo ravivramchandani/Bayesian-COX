@@ -1,4 +1,33 @@
-"""Run exact, paired explainability analysis from immutable cell artifacts."""
+"""Run exact, paired explainability analysis from immutable cell artefacts.
+
+This script answers research question 3 (RQ3, explanation) from a completed
+confirmatory run without refitting any model. For each stored Bayesian cell
+it ranks feature groups by the model's own posterior contribution and by
+exact linear SHAP (SHapley Additive exPlanations) values of the posterior-mean
+risk, and records how well the rankings agree (ADR-024). The fold's stored Cox
+coefficients give a secondary SHAP comparison where that Cox cell is
+available. The analysis is in
+``src.explainability.frozen_cells.analyze_frozen_run``, which verifies the
+run's source hashes, subject pairing and stored preprocessing before it
+interprets anything.
+
+Reads:
+    A completed run directory (``manifest.json``, ``completion.json`` and
+    ``cells/``) plus the frozen configuration and raw cohorts in this
+    repository.
+
+Writes:
+    One new JSON result, by default
+    ``reports/explainability/<run name>_explainability_v1.json`` under the
+    repository root. The output must lie outside the source run directory and
+    must not already exist. The script prints the output path, the evidence
+    status, the convergence-gate status and the number of comparisons.
+
+Run it after the confirmatory run has completed (Make target ``explain``).
+
+Example:
+    python scripts/run_confirmatory_explainability.py --run-dir reports/confirmatory/<run>
+"""
 
 from __future__ import annotations
 
@@ -19,6 +48,11 @@ from src.explainability.frozen_cells import (
 
 
 def parse_args() -> argparse.Namespace:
+    """Parse the command line.
+
+    Returns:
+        Parsed command-line option namespace.
+    """
     parser = argparse.ArgumentParser(
         description=(
             "Pure post-hoc analysis of frozen confirmatory cells. Models are never "
@@ -44,6 +78,16 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Analyse the run, write the result and print a one-line summary.
+
+    Returns:
+        Exit status 0 on success.
+
+    Raises:
+        FileNotFoundError: If the run directory does not exist.
+        ValueError: If the output path lies inside the source run directory.
+        FileExistsError: If the output file already exists.
+    """
     args = parse_args()
     run_dir = args.run_dir.resolve()
     if not run_dir.is_dir():

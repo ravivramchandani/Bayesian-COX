@@ -1,8 +1,22 @@
 """Fixed-horizon survival calibration for the outer-validation predictions.
 
-Descriptive curves compare predicted survival with Kaplan-Meier estimates.
-IPCW complementary-log-log models estimate calibration-in-the-large,
-intercept and slope, with event-stratified bootstrap intervals.
+The confirmatory evaluation stage calls both public functions at each of the
+three training-defined horizons, with the observed (not truncated)
+validation follow-up. Calibration asks whether predicted survival
+probabilities match observed survival.
+
+- :func:`survival_calibration_curve` is descriptive. Validation subjects are
+  sorted by predicted survival at the horizon and split into equal-frequency
+  groups (5 in the confirmatory run). Each group's mean prediction is
+  compared with its Kaplan-Meier survival at the horizon, which handles
+  censoring within the group.
+- :func:`survival_calibration_summary` estimates calibration-in-the-large,
+  intercept and slope with the complementary-log-log model described in
+  ``calibration_model.py``. The binary outcome "event by the horizon" is
+  unknown for subjects censored earlier, so it uses inverse probability of
+  censoring weights (IPCW) from the training censoring distribution ``G``.
+  Uncertainty comes from an event-stratified percentile bootstrap (500
+  replicates in the confirmatory run).
 """
 
 from typing import Any
@@ -22,6 +36,7 @@ from src.statistics.resampling import event_stratified_indices
 def _survival_array(
     time: np.ndarray, event: np.ndarray, *, name: str
 ) -> tuple[np.ndarray, np.ndarray]:
+    """Return float times and boolean events, or raise ``ValueError`` if invalid."""
     time_array = np.asarray(time, dtype=float)
     event_array = np.asarray(event)
     if time_array.ndim != 1 or event_array.ndim != 1:
@@ -36,6 +51,7 @@ def _survival_array(
 
 
 def _prediction_array(pred_survival: np.ndarray, n_samples: int) -> np.ndarray:
+    """Return one predicted survival probability in [0, 1] per subject."""
     predictions = np.asarray(pred_survival, dtype=float)
     if predictions.ndim != 1 or len(predictions) != n_samples:
         raise ValueError(f"pred_survival must be one-dimensional with length {n_samples}.")
@@ -45,23 +61,55 @@ def _prediction_array(pred_survival: np.ndarray, n_samples: int) -> np.ndarray:
 
 
 def _step_value(times: np.ndarray, values: np.ndarray, horizon: float, *, initial: float) -> float:
+    """Return a right-continuous step function at ``horizon``; ``initial`` before its first time."""
     index = int(np.searchsorted(times, horizon, side="right") - 1)
     return initial if index < 0 else float(values[index])
 
 
 class KaplanMeierSurvivalEstimator:
-    """Small compatibility wrapper around scikit-survival Kaplan-Meier."""
+    """Small compatibility wrapper around scikit-survival Kaplan-Meier.
+
+    Retained for older callers; the confirmatory evaluation does not use it.
+    """
 
     def __init__(self) -> None:
+        """Initialise empty Kaplan-Meier time and survival arrays."""
         self.times = np.array([], dtype=float)
         self.survival_probs = np.array([], dtype=float)
 
     def fit(self, y_time: np.ndarray, y_event: np.ndarray) -> "KaplanMeierSurvivalEstimator":
+        """Estimate Kaplan-Meier survival for the supplied sample.
+
+        Args:
+            y_time: Finite non-negative follow-up times of shape (n_subjects,),
+                in the cohort's own unit (days or months).
+            y_event: Matching binary event indicators (0/1).
+
+        Returns:
+            The fitted estimator with a time grid and survival probabilities.
+
+        Raises:
+            ValueError: Outcomes are invalid for Kaplan-Meier estimation.
+        """
         time, event = _survival_array(y_time, y_event, name="Evaluation")
         self.times, self.survival_probs = kaplan_meier_estimator(event, time)
         return self
 
     def predict(self, eval_times: np.ndarray) -> np.ndarray:
+        """Evaluate the retained right-continuous Kaplan-Meier curve.
+
+        Survival is 1 before the first observed time and constant after the
+        last. Before fitting, the empty curve returns 1 at every requested time.
+
+        Args:
+            eval_times: Finite times of shape (n_times,), in the fitted times' unit.
+
+        Returns:
+            Survival probabilities of shape (n_times,), in supplied time order.
+
+        Raises:
+            ValueError: Evaluation times are not finite and one-dimensional.
+        """
         horizons = np.asarray(eval_times, dtype=float)
         if horizons.ndim != 1 or not np.isfinite(horizons).all():
             raise ValueError("eval_times must be a finite one-dimensional array.")
@@ -86,10 +134,30 @@ def survival_calibration_curve(
 ) -> dict[str, Any]:
     """Quantile-binned survival calibration curve with Kaplan-Meier intervals.
 
-    Within each prediction bin, observed survival at ``horizon`` is estimated
-    by Kaplan-Meier. The log-log confidence interval is the one implemented by
-    scikit-survival. Bins are descriptive; formal calibration parameters are
-    provided by :func:`survival_calibration_summary`.
+    Subjects are sorted by predicted survival (a stable sort) and split into
+    ``n_bins`` groups whose sizes differ by at most one. Within each bin,
+    observed survival at ``horizon`` is estimated by Kaplan-Meier. The
+    log-log confidence interval is the one implemented by scikit-survival.
+    Bins are descriptive; formal calibration parameters are provided by
+    :func:`survival_calibration_summary`.
+
+    Args:
+        y_time: Validation times of shape (n_subjects,), in the cohort's unit.
+        y_event: Matching binary event indicators (0/1).
+        pred_survival: Finite probabilities in [0, 1] of shape (n_subjects,),
+            predicting survival at ``horizon``.
+        horizon: Finite positive time in the same unit as ``y_time``,
+            before the largest follow-up time.
+        n_bins: Number of groups, at least 2.
+        confidence_level: Interval level, strictly between 0 and 1.
+        min_bin_size: Smallest allowed group size, at least 2.
+
+    Returns:
+        ``horizon``, ``confidence_level`` and ``bins``, one row per group with
+        its size, mean predicted survival and observed survival with bounds.
+
+    Raises:
+        ValueError: An input is invalid or a bin would be too small.
     """
     time, event = _survival_array(y_time, y_event, name="Evaluation")
     predictions = _prediction_array(pred_survival, len(time))
@@ -143,7 +211,25 @@ def compute_calibration_curve(
     eval_time: float,
     n_bins: int = 5,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """Backward-compatible predicted/observed calibration curve arrays."""
+    """Return binned mean predicted and observed survival.
+
+    This compatibility wrapper uses :func:`survival_calibration_curve`
+    with bins of at least two subjects and discards confidence bounds.
+
+    Args:
+        y_time: Follow-up times of shape (n_subjects,), in the cohort's unit.
+        y_event: Matching binary event indicators (0/1).
+        pred_surv: Survival probabilities of shape (n_subjects,) at ``eval_time``.
+        eval_time: Finite positive time before the largest follow-up time.
+        n_bins: Number of quantile groups, at least two.
+
+    Returns:
+        ``(predicted, observed)`` arrays of shape (n_bins,), ordered by
+        increasing predicted survival.
+
+    Raises:
+        ValueError: Inputs are invalid or a group would contain fewer than two.
+    """
     result = survival_calibration_curve(
         y_time,
         y_event,
@@ -164,11 +250,17 @@ def _ipcw_binary_outcome(
     test_event: np.ndarray,
     horizon: float,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """IPCW event-by-horizon outcome and weights.
+    """Return the IPCW event-by-horizon outcome and weights.
 
-    Observed events by the horizon receive ``1/G(T-)``; subjects known to be
-    event-free beyond the horizon receive ``1/G(horizon)``; subjects censored
-    by the horizon have weight zero because their binary outcome is unknown.
+    Observed events by the horizon receive ``1/G(T-)``, the inverse
+    probability of still being uncensored just before the event; subjects
+    known to be event-free beyond the horizon receive ``1/G(horizon)``;
+    subjects censored by the horizon have weight zero because their binary
+    outcome is unknown. ``G`` is estimated on the training outcomes.
+
+    Raises:
+        UnsupportedCensoringError: ``G`` is zero or undefined at an event
+            time or at the horizon.
     """
     validate_ipcw_horizons(train_time, train_event, [horizon])
     estimator = CensoringDistributionEstimator().fit(
@@ -180,6 +272,8 @@ def _ipcw_binary_outcome(
     cases = (test_event) & (test_time <= horizon)
     controls = test_time > horizon
     if cases.any():
+        # G is right-continuous, so evaluating one float below the event time
+        # gives G(T-) and excludes censoring at the event time itself.
         just_before = np.nextafter(test_time[cases], -np.inf)
         try:
             case_g = np.asarray(estimator.predict_proba(just_before), dtype=float)
@@ -203,6 +297,7 @@ def _ipcw_binary_outcome(
     return y, weights
 
 
+# Private alias kept for existing imports.
 _event_stratified_indices = event_stratified_indices
 
 
@@ -214,6 +309,10 @@ def _calibration_point_estimate(
     pred_survival: np.ndarray,
     horizon: float,
 ) -> dict[str, float]:
+    """Fit the complementary-log-log calibration model to one sample, with ``x = log(-log S)``.
+
+    Predicted survival is clipped to ``[1e-12, 1 - 1e-12]`` so that ``x`` is finite.
+    """
     y, weights = _ipcw_binary_outcome(train_time, train_event, test_time, test_event, horizon)
     clipped_survival = np.clip(pred_survival, 1e-12, 1 - 1e-12)
     log_cumulative_hazard = np.log(-np.log(clipped_survival))
@@ -232,7 +331,7 @@ def survival_calibration_summary(
     confidence_level: float = 0.95,
     random_state: int = 42,
 ) -> dict[str, Any]:
-    """IPCW calibration-in-the-large, intercept, and slope with bootstrap CIs.
+    """Estimate IPCW calibration parameters with percentile bootstrap intervals.
 
     The complementary-log-log calibration model uses
     ``x = log(-log(predicted survival))``. Calibration-in-the-large is the
@@ -240,6 +339,44 @@ def survival_calibration_summary(
     are jointly estimated; ideal values are zero and one. Event-stratified
     bootstrap resampling is paired with predictions and resamples the training
     set separately so uncertainty in the censoring distribution is represented.
+
+    The point estimates use the original samples. Each bootstrap replicate
+    draws training subjects, then validation subjects (with their
+    predictions), each with replacement within event-status strata so the
+    numbers of events and censored subjects stay fixed, and re-estimates
+    ``G`` and the calibration parameters; model predictions stay fixed. A
+    replicate that cannot be estimated (for example too few known outcomes,
+    one outcome class, no convergence or no
+    censoring support) is skipped. The interval is the percentile interval
+    of the successful replicates.
+
+    Args:
+        train_time: Outer-training times of shape (n_train,), in the
+            cohort's own unit, used only for ``G``.
+        train_event: Matching binary training event indicators (0/1).
+        test_time: Validation times of shape (n_test,), in the same unit.
+        test_event: Matching binary validation event indicators (0/1).
+        pred_survival: Finite survival probabilities in [0, 1] of shape
+            (n_test,), predicting survival at ``horizon``.
+        horizon: Finite positive time in the same unit as follow-up,
+            before the largest validation follow-up time.
+        n_bootstraps: Bootstrap replicates, at least 20.
+        confidence_level: Percentile interval level, strictly between 0 and 1.
+        random_state: Seed of the bootstrap generator.
+
+    Returns:
+        ``horizon``, ``n``, ``n_known``, ``effective_weight``,
+        ``confidence_level``, ``n_bootstrap_successful`` and, for each of
+        ``calibration_in_the_large``, ``intercept`` and ``slope``, a mapping
+        with ``estimate``, ``lower`` and ``upper``. ``n_known`` counts
+        subjects with positive weights; ``effective_weight`` is their
+        total unnormalised weight.
+
+    Raises:
+        ValueError: An input is invalid or the point estimate cannot be fitted.
+        UnsupportedCensoringError: ``G`` does not support the point estimate.
+        RuntimeError: The point fit did not converge, or fewer than
+            ``max(20, ceil(0.8 * n_bootstraps))`` replicates succeeded.
     """
     train_t, train_e = _survival_array(train_time, train_event, name="Training")
     test_t, test_e = _survival_array(test_time, test_event, name="Evaluation")
@@ -261,6 +398,8 @@ def survival_calibration_summary(
         "slope": [],
     }
     for _ in range(n_bootstraps):
+        # Training indices are drawn before validation indices in every
+        # replicate; this order fixes the random stream.
         train_indices = _event_stratified_indices(train_e, rng)
         test_indices = _event_stratified_indices(test_e, rng)
         try:
@@ -278,6 +417,7 @@ def survival_calibration_summary(
             samples[key].append(estimate[key])
 
     successful = len(samples["slope"])
+    # The study protocol requires at least 80% of replicates to be estimable.
     required = max(20, int(np.ceil(0.8 * n_bootstraps)))
     if successful < required:
         raise RuntimeError(

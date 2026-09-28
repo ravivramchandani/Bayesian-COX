@@ -1,4 +1,12 @@
-"""Evaluate robustness predictions with the confirmatory IPCW truncation rule."""
+"""Evaluate robustness predictions with the confirmatory censoring-weight rule.
+
+:mod:`cells` calls these functions after fitting. They reuse the confirmatory
+horizons, integrated Brier score (IBS) grid and truncation of validation
+follow-up at the last horizon for the inverse-probability-of-censoring-
+weighted (IPCW) metrics, but skip calibration. They also split the IBS into
+per-subject contributions, which the paired bootstrap in :mod:`inference`
+resamples without recomputing censoring weights.
+"""
 
 from __future__ import annotations
 
@@ -22,6 +30,7 @@ from src.pipelines.confirmatory import (
 
 
 def _as_structured(times: np.ndarray, events: np.ndarray) -> np.ndarray:
+    """Return the ``(event, time)`` structured array that scikit-survival expects."""
     outcome = np.empty(len(times), dtype=[("event", "?"), ("time", "<f8")])
     outcome["event"] = np.asarray(events, dtype=bool)
     outcome["time"] = np.asarray(times, dtype=float)
@@ -36,7 +45,34 @@ def individual_integrated_brier_losses(
     survival_probabilities: np.ndarray,
     evaluation_times: np.ndarray,
 ) -> np.ndarray:
-    """Return subject contributions whose mean equals reference IPCW IBS."""
+    """Return subject contributions whose mean equals reference IPCW IBS.
+
+    At each grid time t, subject i contributes (Graf et al., 1999)
+
+    - ``S_i(t)**2 / G(T_i)`` if the event occurred by t (a case);
+    - ``(1 - S_i(t))**2 / G(t)`` if still event-free after t (a control);
+    - 0 if censored by t,
+
+    where G is the training Kaplan–Meier censoring survival. The
+    contributions are integrated over the grid by the trapezoidal rule and
+    divided by its time span, ``grid[-1] - grid[0]``, as scikit-survival does, so their mean is the
+    IBS. Validation follow-up is first truncated at the last grid time.
+
+    Args:
+        train_time: Training follow-up times in the cohort's unit, defining G.
+        train_event: Training event indicators.
+        validation_time: Validation follow-up times in the same unit.
+        validation_event: Validation event indicators.
+        survival_probabilities: Predicted survival, shape (subjects, grid).
+        evaluation_times: Increasing time grid in that unit, with at least two
+            entries.
+
+    Returns:
+        One IBS contribution per validation subject.
+
+    Raises:
+        ValueError: The shapes disagree or the grid is not increasing.
+    """
     train_t = np.asarray(train_time, dtype=float)
     train_e = np.asarray(train_event, dtype=int)
     valid_t = np.asarray(validation_time, dtype=float)
@@ -52,6 +88,8 @@ def individual_integrated_brier_losses(
     censoring = CensoringDistributionEstimator().fit(_as_structured(train_t, train_e))
     censoring_at_grid = censoring.predict_proba(grid)
     censoring_at_observation = censoring.predict_proba(valid_t)
+    # As in scikit-survival, a zero censoring survival makes the weight zero
+    # instead of infinite.
     censoring_at_grid[censoring_at_grid == 0] = np.inf
     censoring_at_observation[censoring_at_observation == 0] = np.inf
 
@@ -77,7 +115,31 @@ def summarize_imputation_predictions(
     ibs_grid: np.ndarray,
     horizons: np.ndarray,
 ) -> dict[str, Any]:
-    """Evaluate one imputation with the confirmatory IPCW truncation rule."""
+    """Evaluate one imputation with the confirmatory IPCW truncation rule.
+
+    Reports the IBS (as the mean of subject contributions), both C-indices and
+    the time-dependent area under the receiver operating characteristic curve
+    (AUC) for one imputation-specific model, on the horizons and grid of the
+    pooled prediction. These values are descriptive; the cell's headline
+    metrics come from the averaged prediction.
+
+    Args:
+        train_time: Training follow-up in the cohort's unit, after any cutoff.
+        train_event: Training event indicators (1 = event, 0 = censored).
+        validation_time: Validation follow-up in the same unit.
+        validation_event: Validation event indicators in corresponding row order.
+        risk: One imputation-specific posterior-mean linear predictor per subject.
+        survival_on_ibs_grid: Survival matrix, shape (validation subjects, grid).
+        ibs_grid: Increasing integrated-Brier time grid.
+        horizons: Increasing evaluation horizons; the last sets IPCW truncation.
+
+    Returns:
+        IBS, both C-indices, horizon-specific and mean AUC, and the truncation time.
+
+    Raises:
+        ValueError: Shapes or grid are invalid, or the censoring-weighted metrics
+            cannot be estimated on the supplied follow-up.
+    """
     horizon_values = np.asarray(horizons, dtype=float)
     tau = float(horizon_values[-1])
     ipcw_time, ipcw_event = administratively_truncate_for_ipcw(
@@ -132,6 +194,23 @@ def evaluate_robustness_predictions(
     Calibration belongs to the full 5x5 confirmatory analysis. Robustness cells
     preserve the primary IBS estimand plus discrimination descriptors and do
     not spend compute re-estimating calibration in every sensitivity cell.
+
+    Args:
+        model: A fitted model or imputation ensemble.
+        x_validation: Preprocessed validation features.
+        train_time: Training follow-up after the condition's cutoff.
+        train_event: Training event indicators after the cutoff.
+        validation_time: Validation follow-up after the condition's cutoff.
+        validation_event: Validation event indicators after the cutoff.
+        evaluation_config: The ``evaluation`` section of the protocol.
+
+    Returns:
+        ``(metrics, predictions)`` in the confirmatory layout; the
+        calibration entry only records that calibration was not re-estimated.
+
+    Raises:
+        ValueError: Training follow-up cannot support evaluation times, a
+            predicted survival matrix is invalid, or a metric is not estimable.
     """
     horizons, ibs_grid = _ibs_times(train_time, train_event, evaluation_config)
     prediction_times = np.unique(np.concatenate([horizons, ibs_grid]))

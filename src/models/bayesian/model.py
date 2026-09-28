@@ -1,15 +1,40 @@
 """Bayesian piecewise-exponential proportional-hazards model in PyMC.
 
-The confirmatory pipeline fits this model once per training fold and
-coefficient prior. The hazard of subject i in baseline interval m is
-``lambda_m * exp(x_i beta)``. Follow-up is cut into intervals at training
-event-time quantiles, and the likelihood is written in its equivalent Poisson
-form: every subject-interval pair with positive exposure is one Poisson count
-(1 if the subject's event falls in that interval, otherwise 0) with mean
-``exposure * lambda_m * exp(x_i beta)``. This is a full likelihood with an
-estimated piecewise-constant baseline hazard, not the Cox partial likelihood.
-The class keeps the name ``BayesianCoxModel`` because ``beta`` has the Cox
-meaning of log hazard ratios.
+The confirmatory pipeline fits this model once per outer-training fold and
+coefficient prior; ``src.pipelines`` builds it from
+``config/confirmatory.yaml``. The model has four parts.
+
+Time scale
+    Follow-up times are divided by the median training event time, so one
+    scaled unit is one median event time. The baseline prior is expressed in
+    the same relative time unit for cohorts measured in days (GBSG2, WHAS500)
+    and in months (METABRIC).
+
+Baseline hazard
+    The scaled axis is cut into ``n_intervals`` intervals (6 in the
+    confirmatory run) at quantiles of the training event times. The hazard
+    is constant within interval m, with ``log lambda_m ~ Normal(-2, 2^2)``
+    independently per interval (standard deviation 2, prior median hazard
+    ``exp(-2)``, about 0.14 per median event time).
+
+Proportional hazards
+    Subject i's hazard in interval m is ``lambda_m * exp(x_i beta)``. The
+    coefficient prior on ``beta`` is Normal, regularised horseshoe or
+    continuous spike-and-slab; :class:`BayesianCoxModel` gives each exactly.
+
+Likelihood
+    The likelihood is written in its equivalent Poisson form (see
+    ``piecewise.py``): every subject-interval pair with positive exposure is
+    one Poisson count (1 if the subject's event falls in that interval,
+    otherwise 0) with mean ``exposure * lambda_m * exp(x_i beta)``. This is a
+    full likelihood with an estimated piecewise-constant baseline hazard, not
+    the Cox partial likelihood. The class keeps the name ``BayesianCoxModel``
+    because ``beta`` has the Cox meaning of log hazard ratios.
+
+Markov chain Monte Carlo (MCMC) draws are obtained with the No-U-Turn
+Sampler (NUTS). Automatic
+differentiation variational inference (ADVI) is available for exploration
+and reports no convergence diagnostics.
 """
 
 import numpy as np
@@ -28,7 +53,7 @@ DRAW_CHUNK_SIZE = 256
 
 
 def _validate_training_data(X_mat: np.ndarray, y_time: np.ndarray, y_event: np.ndarray) -> None:
-    """Raise ``ValueError`` unless the training arrays can be fitted."""
+    """Check row counts, finite covariates/times, positive times and event count."""
     if len(X_mat) != len(y_time) or len(y_time) != len(y_event):
         raise ValueError("X, y_time and y_event must contain the same rows")
     if not np.isfinite(X_mat).all() or not np.isfinite(y_time).all():
@@ -44,38 +69,77 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
 
     Times are divided by the median training event time before fitting, so the
     baseline hazards ``lambda_m`` are per median event time. Their prior is
-    ``log lambda_m ~ Normal(-2, 2)``, independently per interval. With
-    ``noncentered_baseline=True`` the same prior is written as
-    ``log lambda_m = -2 + 2 * log_lambda_offset_m`` with a standard normal
-    offset; the confirmatory protocol uses this form only as its second
-    refit after failed diagnostics.
+    ``log lambda_m ~ Normal(-2, 2^2)`` (mean -2, standard deviation 2),
+    independently per interval. With ``noncentered_baseline=True`` the same
+    prior is written as ``log lambda_m = -2 + 2 * log_lambda_offset_m`` with a
+    standard normal offset; the confirmatory protocol uses this form only as
+    its second refit after failed diagnostics.
 
-    Coefficient priors (``coefficient_prior``), with the values the
-    confirmatory configuration passes in ``prior_params``:
+    Coefficient priors (``coefficient_prior``). The code defaults for
+    ``prior_params`` equal the primary values in ``config/confirmatory.yaml``,
+    which are the values shown. ``Normal(m, s^2)`` has standard deviation s.
 
-    - ``normal``: ``beta_j ~ Normal(mu, sigma)``, with mu = 0 and sigma = 1.
+    - ``normal``: ``beta_j ~ Normal(mu, sigma^2)``, with mu = 0 and sigma = 1.
     - ``horseshoe``: a regularised horseshoe (Piironen and Vehtari, 2017) in
-      non-centred form: global scale ``tau ~ half-t_2(tau0 = 0.1)``, local
-      scales ``lam_j ~ half-t_2(1)``, slab ``c2 ~ InvGamma(slab_df / 2,
-      slab_df * slab_scale^2 / 2) = InvGamma(2, 8)``,
-      ``lam_tilde_j^2 = c2 lam_j^2 / (c2 + tau^2 lam_j^2)``, and
-      ``beta_j = z_j * tau * lam_tilde_j`` with ``z_j ~ Normal(0, 1)``. The
-      local scales are half-t with 2 degrees of freedom, not half-Cauchy, so
-      in Piironen and Vehtari's terms this is regularised hierarchical
+      non-centred form:
+
+      - global scale ``tau ~ half-Student-t(2 df, scale tau0 = 0.1)``;
+      - local scales ``lam_j ~ half-Student-t(2 df, scale 1)``;
+      - slab ``c2 ~ InvGamma(slab_df / 2, slab_df * slab_scale^2 / 2)``, which
+        is ``InvGamma(2, 8)`` with slab_df = 4 and slab_scale = 2;
+      - ``lam_tilde_j^2 = c2 lam_j^2 / (c2 + tau^2 lam_j^2)``;
+      - ``beta_j = z_j * tau * lam_tilde_j`` with ``z_j ~ Normal(0, 1)``.
+
+      Small ``tau * lam_j`` leaves ``lam_tilde_j`` close to ``lam_j``, as in
+      the plain horseshoe; large ``tau * lam_j`` caps the coefficient scale
+      at ``sqrt(c2)``, so large coefficients are regularised by the slab.
+      The local scales are half-t with 2 degrees of freedom, not half-Cauchy,
+      so in Piironen and Vehtari's terms this is regularised hierarchical
       shrinkage rather than a strict horseshoe. ``tau0`` is fixed, not set by
       their effective-number-of-parameters rule.
     - ``spike_slab``: a continuous relaxation of spike-and-slab, because NUTS
       cannot sample a discrete inclusion indicator. The weight
-      ``gamma_j ~ Beta(alpha = 1, beta_conc = 1)`` mixes the spike and slab
-      variances, ``sd_j^2 = (1 - gamma_j) spike_sd^2 + gamma_j slab_sd^2``
-      with spike_sd = 0.05 and slab_sd = 2, and ``beta_j = z_j * sd_j`` with
+      ``gamma_j ~ Beta(alpha = 1, beta_conc = 1)`` (uniform on [0, 1]) mixes
+      the spike and slab variances,
+      ``sd_j^2 = (1 - gamma_j) spike_sd^2 + gamma_j slab_sd^2`` with
+      spike_sd = 0.05 and slab_sd = 2, and ``beta_j = z_j * sd_j`` with
       ``z_j ~ Normal(0, 1)``. The posterior mean of ``gamma_j`` is the
       auxiliary mixing signal; it is not a discrete inclusion probability.
+
+    The non-centred forms sample the standard normal ``z`` rather than
+    ``beta`` itself. This makes ``z`` independent of its prior scale and can
+    reduce the funnel-shaped geometry that NUTS explores poorly.
 
     The priors define the PyMC variables ``beta``, ``tau``, ``lam``, ``c2``,
     ``gamma``, ``z``, ``log_lambda`` and ``log_lambda_offset``. Their names,
     shapes and creation order are part of the frozen protocol, because
     seeding and the stored traces depend on them.
+
+    Args:
+        n_intervals: Number of baseline-hazard intervals; the confirmatory
+            run uses 6 and the robustness analysis also 4 and 10.
+        inference_method: ``"advi"`` selects ADVI; any other value runs NUTS.
+        n_advi_iterations: ADVI optimisation steps.
+        draws: Retained draws per chain (after warm-up).
+        tune: NUTS warm-up (tuning) iterations per chain, discarded.
+        chains: Number of MCMC chains.
+        cores: Number of chains run in parallel; 1 runs them sequentially.
+        target_accept: NUTS target acceptance probability. Higher values
+            encourage smaller steps and can reduce divergent transitions.
+        random_state: Seed for the prior predictive draws, the sampler and
+            the posterior predictive replicates.
+        coefficient_prior: ``"normal"``, ``"horseshoe"`` or ``"spike_slab"``
+            (case-insensitive).
+        prior_params: Hyperparameter overrides; absent keys use the defaults
+            above.
+        noncentered_baseline: Use the non-centred baseline form.
+
+    After :meth:`fit`, ``beta_samples`` has shape (n_pooled_draws,
+    n_features) and ``lambda_samples`` shape (n_pooled_draws, n_intervals),
+    with hazards on the scaled time axis. NUTS pools chains * draws
+    retained draws; ADVI produces draws from its approximation. ``cutoffs``
+    holds cut points in the cohort's own unit and ``cutoffs_scaled`` on the
+    scaled axis.
     """
 
     def __init__(
@@ -96,6 +160,7 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         prior_params: dict | None = None,
         noncentered_baseline: bool = False,
     ) -> None:
+        """Store prior/sampling settings and initialise posterior state."""
         self.n_intervals = n_intervals
         self.inference_method = inference_method.lower()
         self.n_advi_iterations = n_advi_iterations
@@ -124,20 +189,29 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         self.lambda_samples = None  # (n_draws, n_intervals), scaled-time hazards
 
     def fit(self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray) -> "BayesianCoxModel":
-        """Fit the model by NUTS (default) or ADVI and store posterior summaries.
+        """Fit NUTS (default) or ADVI and store posterior summaries.
 
         After fitting, ``diagnostics`` holds the convergence checks,
         ``prior_predictive_summary`` and ``posterior_predictive_summary`` hold
-        the model checks, and ``beta_samples`` and ``lambda_samples`` hold
-        the pooled posterior draws.
+        the model checks, and ``beta_samples``/``lambda_samples`` hold pooled
+        posterior draws. ADVI reports ``converged=None``. This method records
+        failed diagnostics; the enclosing pipeline decides on refits or exclusion.
 
         Args:
-            X: Preprocessed training covariates, one column per coefficient.
-            y_time: Strictly positive follow-up times.
-            y_event: Event indicators, 1 for an event and 0 for censoring.
+            X: Preprocessed covariates of shape (n_subjects, n_features).
+            y_time: Strictly positive follow-up times of shape (n_subjects,),
+                in the cohort's own unit (days or months).
+            y_event: Indicators of shape (n_subjects,), 1 for an observed
+                event and 0 for censoring; converted to integers internally.
 
         Returns:
-            The fitted model.
+            The fitted model with stored summaries and prediction arrays.
+
+        Raises:
+            ValueError: Row counts differ, covariates or times are non-finite,
+                times are non-positive, the integer event-indicator sum is
+                below two, the time scale cannot be derived, or the prior
+                name is unsupported.
         """
         self.feature_names = list(X.columns)
         X_mat = X.values.astype(float)
@@ -216,7 +290,7 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         return builders[self.coefficient_prior](n_features)
 
     def _normal_prior(self, n_features: int):
-        """Create ``beta ~ Normal(mu, sigma)``."""
+        """Create ``beta ~ Normal(mu, sigma^2)`` independently per coefficient."""
         return pm.Normal(
             "beta",
             mu=self.prior_params.get("mu", 0.0),
@@ -225,12 +299,10 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         )
 
     def _regularised_horseshoe_prior(self, n_features: int):
-        """Create the non-centred regularised horseshoe; return ``beta``.
+        """Create the non-centred regularised horseshoe and return ``beta``.
 
-        The plain horseshoe funnels badly under NUTS. The slab ``c2`` bounds
-        the tails of the local scales and can improve sampling geometry. The
-        prespecified diagnostics, not the prior form, decide whether a fit is
-        admissible.
+        The slab caps the conditional coefficient scale, regularising large
+        coefficients while small coefficients retain local/global shrinkage.
         """
         tau0 = self.prior_params.get("tau0", 0.1)
         slab_df = self.prior_params.get("slab_df", 4.0)
@@ -250,7 +322,11 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         return pm.Deterministic("beta", z * tau * lam_tilde)
 
     def _spike_and_slab_prior(self, n_features: int):
-        """Create the continuous spike-and-slab relaxation; return ``beta``."""
+        """Create the continuous spike-and-slab relaxation; return ``beta``.
+
+        A weight near 0 gives the coefficient the narrow spike scale
+        (concentrated near zero); a weight near 1 gives it the wide slab scale.
+        """
         spike_sd = self.prior_params.get("spike_sd", 0.05)
         slab_sd = self.prior_params.get("slab_sd", 2.0)
         gamma = pm.Beta(
@@ -264,14 +340,14 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         return pm.Deterministic("beta", z * sd)
 
     def _baseline_log_hazard(self, n_intervals: int):
-        """Create ``log_lambda ~ Normal(-2, 2)``, centred or non-centred."""
+        """Create ``log_lambda ~ Normal(-2, 2^2)``, centred or non-centred."""
         if self.noncentered_baseline:
             log_lambda_offset = pm.Normal("log_lambda_offset", mu=0.0, sigma=1.0, shape=n_intervals)
             return pm.Deterministic("log_lambda", -2.0 + 2.0 * log_lambda_offset)
         return pm.Normal("log_lambda", mu=-2.0, sigma=2.0, shape=n_intervals)
 
     def _sample_prior_predictive(self):
-        """Draw ``beta`` and ``log_lambda`` from the prior."""
+        """Draw ``beta`` and ``log_lambda`` from the prior (between 50 and 200 draws)."""
         return pm.sample_prior_predictive(
             draws=min(200, max(50, self.draws)),
             var_names=["beta", "log_lambda"],
@@ -280,7 +356,11 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         )
 
     def _sample_posterior(self):
-        """Return posterior draws from NUTS, or from a fitted ADVI approximation."""
+        """Return posterior draws from NUTS, or from a fitted ADVI approximation.
+
+        NUTS warm-up draws are discarded, so the returned trace and its
+        sampler statistics hold only the retained draws.
+        """
         if self.inference_method == "advi":
             approx = pm.fit(
                 method="advi",
@@ -309,7 +389,11 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         self.lambda_samples = np.exp(log_lambda_raw.reshape(-1, n_intervals))
 
     def _hazard_ratio_summary(self) -> pd.DataFrame:
-        """Tabulate posterior coefficient and hazard-ratio summaries per feature."""
+        """Tabulate posterior coefficient and hazard-ratio summaries per feature.
+
+        The 95% credible bounds are percentiles of the hazard-ratio draws.
+        Rows are sorted by posterior mean hazard ratio, largest first.
+        """
         records = []
         for j, feature in enumerate(self.feature_names):
             coefficient = self.beta_samples[:, j]
@@ -333,11 +417,9 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         )
 
     def _compute_diagnostics(self) -> dict:
-        """Return convergence diagnostics for every posterior variable.
+        """Return the all-variable convergence gate, or ``converged=None`` for ADVI.
 
-        NUTS fits report R-hat, bulk and tail ESS, MCSE, BFMI, divergences and
-        tree-depth hits (see :func:`check_convergence`). ADVI produces no NUTS
-        diagnostics and reports ``converged`` as ``None``.
+        NUTS diagnostics are defined in :mod:`src.models.bayesian.diagnostics`.
         """
         if self.inference_method == "advi":
             return {"method": "advi", "converged": None}
@@ -353,14 +435,23 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         return result
 
     def inclusion_signal(self) -> pd.DataFrame | None:
-        """Return the per-feature posterior signal used as built-in explanation.
+        """Return the per-feature prior-specific auxiliary signal.
 
         For the spike-and-slab prior this is the posterior mean of the
-        continuous inclusion weight ``gamma``. For the horseshoe it is a
-        local-scale shrinkage proxy, ``1 / (1 + lam^2)``. That is not the full
-        posterior shrinkage factor, which also depends on the global scale,
-        slab regularisation and likelihood. Returns ``None`` for the Normal
-        prior.
+        continuous inclusion weight ``gamma``, sorted from largest to
+        smallest. For the horseshoe it is the posterior mean of the
+        local-scale shrinkage proxy ``1 / (1 + lam^2)``, sorted from smallest
+        to largest proxy value. That proxy is not the full posterior
+        shrinkage factor, which also depends on the global scale, slab
+        regularisation and likelihood. The Normal prior has no auxiliary signal.
+
+        Returns:
+            A frame with ``feature`` and ``continuous_inclusion_weight`` or
+            ``local_scale_shrinkage_proxy``, according to the prior;
+            ``None`` for the Normal prior.
+
+        Raises:
+            RuntimeError: The model has not been fitted.
         """
         if self.idata is None:
             raise RuntimeError("Model is not fitted. Call fit() first.")
@@ -397,10 +488,22 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         return None
 
     def predict_risk(self, X: pd.DataFrame) -> np.ndarray:
-        """Return the posterior-mean linear predictor ``x E[beta]``.
+        """Return the posterior-mean linear predictor ``x E[beta]``, one per row.
 
         The score is on the log hazard-ratio scale (not exponentiated), with
-        no baseline term. Higher values mean higher hazard.
+        no baseline term: it compares each subject with one whose
+        preprocessed covariates are all zero. Because the predictor is linear
+        it equals the posterior mean of ``x beta``. Higher values mean higher
+        hazard.
+
+        Args:
+            X: Preprocessed covariates containing every fitted feature column.
+
+        Returns:
+            Log hazard-ratio scores of shape (n_subjects,).
+
+        Raises:
+            ValueError: The model has not been fitted.
         """
         if self.beta_samples is None:
             raise ValueError("Model must be fitted before calling predict_risk().")
@@ -411,8 +514,25 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
     def predict_survival(self, X: pd.DataFrame, eval_times: np.ndarray) -> np.ndarray:
         """Return posterior-mean survival ``S(t | x)`` of shape (n_samples, n_times).
 
-        Survival is averaged over all posterior draws and clipped to
-        ``[1e-6, 1]``. ``eval_times`` are in the original time units.
+        For each posterior draw, ``S(t | x) = exp(-H0(t) exp(x beta))``, where
+        ``H0`` is the piecewise-linear baseline cumulative hazard; beyond the
+        last cut point the last interval's hazard continues. The survival
+        curves, not the parameters, are averaged over all draws, and the
+        result is clipped to ``[1e-6, 1]``. The linear predictor is clipped to
+        ``[-30, 30]`` before exponentiation to avoid overflow. Draws are
+        processed in chunks of ``DRAW_CHUNK_SIZE`` to bound memory.
+
+        Args:
+            X: Preprocessed covariates containing every fitted feature column.
+            eval_times: Non-empty finite, non-negative times of shape
+                (n_times,) in the cohort's own unit; their order is retained.
+
+        Returns:
+            Mean survival probabilities of shape (n_subjects, n_times).
+
+        Raises:
+            ValueError: The model is not fitted, or ``eval_times`` is empty,
+                not one-dimensional, non-finite or negative.
         """
         if self.beta_samples is None or len(self.cutoffs) == 0:
             raise ValueError("Model must be fitted before calling predict_survival().")
@@ -441,7 +561,23 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         return np.clip(total / n_draws, 1e-6, 1.0)
 
     def posterior_expected_absolute_contribution(self, X: pd.DataFrame) -> pd.DataFrame:
-        """Return global feature importance ``mean_i |x_ij| * E|beta_j|``."""
+        """Return mean absolute posterior contribution for each model term.
+
+        For term j, ``|x_ij beta_j| = |x_ij| |beta_j|``, so the mean over
+        subjects of ``E|x_ij beta_j|`` is ``mean_i |x_ij| * E|beta_j|``.
+        Grouped importance is provided by
+        :meth:`posterior_expected_absolute_group_contribution`.
+
+        Args:
+            X: Preprocessed covariates to explain, containing all fitted columns.
+
+        Returns:
+            A frame with ``feature`` and ``expected_abs_contribution`` on
+            the log hazard-ratio scale, sorted by descending contribution.
+
+        Raises:
+            ValueError: The model has not been fitted.
+        """
         if self.beta_samples is None:
             raise ValueError("Model must be fitted before computing importance")
         x_abs_mean = np.abs(X[self.feature_names].to_numpy(dtype=float, copy=True)).mean(axis=0)
@@ -460,14 +596,22 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
     ) -> pd.DataFrame:
         """Return per-subject posterior ``E|sum_j x_j beta_j|`` for each feature group.
 
+        The signed contributions of a group's terms are summed within each
+        draw before the absolute value is taken, so indicator columns of one
+        categorical variable count as one source variable.
+
         Args:
             X: Covariates to explain, one row per subject.
             feature_groups: Source group of every model column, for example
-                all indicator columns of one categorical variable.
+                all indicator columns of one categorical variable. Extra
+                keys are ignored.
 
         Returns:
             A frame indexed like ``X`` with one column per group, in order of
             first appearance.
+
+        Raises:
+            ValueError: The model is not fitted, or a model column has no group.
         """
         if self.beta_samples is None:
             raise ValueError("Model must be fitted before computing importance")
@@ -497,14 +641,25 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
     def predict_survival_with_credible_intervals(
         self, X: pd.DataFrame, eval_times: np.ndarray
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-        """Return posterior-mean survival with 95% credible bounds.
+        """Return posterior-mean survival with pointwise 95% credible bounds.
 
-        Unlike :meth:`predict_survival`, this keeps every draw in memory and
-        does not clip the linear predictor.
+        The bounds are the 2.5th and 97.5th percentiles of the per-draw
+        survival at each subject and time. Unlike :meth:`predict_survival`,
+        this keeps every draw in memory (n_draws * n_samples * n_times values)
+        and does not clip the linear predictor.
+
+        Args:
+            X: Preprocessed covariates containing every fitted feature column.
+            eval_times: Finite, non-negative times of shape (n_times,) in
+                the cohort's own unit. This compatibility interface relies
+                on callers to supply valid times.
 
         Returns:
             ``(mean, lower_95, upper_95)``, each of shape (n_samples, n_times)
             and clipped to ``[1e-6, 1]``.
+
+        Raises:
+            ValueError: The model has not been fitted.
         """
         if self.beta_samples is None or len(self.cutoffs) == 0:
             raise ValueError("Model must be fitted before calling predict_survival().")
@@ -534,7 +689,14 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         """Return the legacy all-parameter summary with readable feature names.
 
         ``diagnostics`` is the confirmatory all-parameter gate. This method
-        retains the table interface used by older callers.
+        retains the table interface used by older callers: the full ArviZ
+        summary (posterior statistics and diagnostics, with ArviZ's default
+        rounding) plus a ``feature`` column that names each ``beta[j]`` row.
+        Returns an empty frame before fitting.
+
+        Returns:
+            A full ArviZ summary with ``parameter`` and ``feature`` columns,
+            or an empty data frame when no posterior is available.
         """
         import re
 
@@ -550,6 +712,7 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         summary.columns = ["parameter"] + list(summary.columns[1:])
 
         def map_param_name(param_str):
+            """Return the feature name for ``beta[j]``, or the label unchanged."""
             match = re.search(r"beta\[(\d+)\]", param_str)
             if match:
                 idx = int(match.group(1))
@@ -561,5 +724,11 @@ class BayesianCoxModel(_PredictiveChecksMixin, BaseSurvivalModel):
         return summary
 
     def get_summary(self) -> pd.DataFrame:
-        """Return the posterior hazard-ratio summary, one row per feature."""
+        """Return the stored posterior hazard-ratio summary.
+
+        Returns:
+            One row per feature with coefficient means, hazard-ratio means,
+            medians and standard deviations, percentile 95% credible bounds
+            and ``Prob(HR > 1)``. An empty frame is returned before fitting.
+        """
         return self.summary_df if self.summary_df is not None else pd.DataFrame()

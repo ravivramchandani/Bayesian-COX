@@ -1,4 +1,18 @@
-"""Orchestrate deterministic outer cells, write-once checkpoints and aggregate completion records."""
+"""Orchestrate deterministic outer cells, write-once checkpoints and aggregate completion records.
+
+:func:`execute_confirmatory_run` is the package entry point, called by
+``scripts/run_confirmatory.py``. It runs the stages in order:
+
+1. A completed confirmatory run requested with ``resume`` is only verified
+   (:func:`_verified_closed_run`); nothing is fitted or rewritten.
+2. :func:`_prepare_run` names the run directory by the hash of the run
+   configuration and writes, or re-checks, the manifest of input hashes.
+3. :func:`_execute_cohort_cells` builds each cohort's paired outer folds and
+   fits every missing cell, fold by fold and model by model. Each cell file is
+   written once, so an interrupted run resumes where it stopped.
+4. :func:`_write_completion` re-checks the inputs, aggregates the tables,
+   runs the paired inference and records the hash of every cell and output.
+"""
 
 from __future__ import annotations
 
@@ -33,6 +47,10 @@ def execute_confirmatory_run(
     artefact without rewriting them. An unfinished run requires unchanged live
     inputs and the original protocol freeze before any fitting or aggregation.
 
+    Directory layout: ``manifest.json``; ``cells/<cohort>/repeat_RR_fold_FF/
+    <model_key>.json``; ``fold_metrics.csv``; ``out_of_fold_predictions.csv.gz``;
+    ``inference.json``; ``completion.json``.
+
     Args:
         project_root: Repository containing code, configuration and cohort CSVs.
         config: Study settings from ``config/confirmatory.yaml``.
@@ -41,6 +59,11 @@ def execute_confirmatory_run(
 
     Returns:
         The directory containing the manifest, cells, tables and completion record.
+
+    Raises:
+        ValueError: Unknown mode, model or cohort.
+        RuntimeError: An input, configuration or protocol freeze check fails.
+        FileExistsError: The run directory exists and ``resume`` is not set.
     """
     if options.mode not in {"rehearsal", "confirmatory"}:
         raise ValueError("mode must be 'rehearsal' or 'confirmatory'")
@@ -62,7 +85,11 @@ def execute_confirmatory_run(
 
 
 def _actual_run_config(config: dict[str, Any], options: RunOptions) -> dict[str, Any]:
-    """Construct the unchanged content-addressed execution settings."""
+    """Construct the unchanged content-addressed execution settings.
+
+    Its hash names the run directory, so any change to the protocol or to a
+    run control other than ``resume`` or ``output_root`` starts a new run.
+    """
     return {
         "protocol": config,
         "mode": options.mode,
@@ -84,7 +111,17 @@ def _verified_closed_run(
     dataset_config: dict[str, Any],
     options: RunOptions,
 ) -> Path | None:
-    """Verify an already completed frozen run without fitting or rewriting it."""
+    """Verify an already completed frozen run without fitting or rewriting it.
+
+    Returns:
+        The run directory when a completed confirmatory run exists for these
+        settings and passes every check; ``None`` when there is nothing to
+        verify, so the caller continues with a normal run.
+
+    Raises:
+        RuntimeError: The completed run exists but does not match the
+            requested settings, the dataset settings or the frozen evidence.
+    """
     if options.mode != "confirmatory" or not options.resume:
         return None
     actual_config = _actual_run_config(config, options)
@@ -95,11 +132,17 @@ def _verified_closed_run(
     from src.rendering.verification import verify_frozen_run
     from src.utils.frozen_evidence import verify_frozen_evidence
 
+    # Every stored cell, table and record is checked against its recorded
+    # hash first.
     verified = verify_frozen_run(run_dir)
     if verified.manifest["config_sha256"] != digest:
         raise RuntimeError("completed run configuration differs from the requested settings")
     if dataset_config != read_mapping(project_root / "config/datasets.yaml"):
         raise RuntimeError("dataset settings differ from the frozen study inputs")
+    # ADR-030: the recorded code inputs are checked against the blobs in the
+    # checkpoint commit, not the working tree, so documentation and code can
+    # change without making the completed evidence unverifiable. Protocol,
+    # raw data and lock files must still match in the live tree.
     freeze = verify_frozen_evidence(project_root, verified.manifest["input_sha256"])
     if verified.manifest["protocol_freeze_sha256"] != freeze["freeze_content_sha256"]:
         raise RuntimeError("completed run refers to a different protocol freeze")
@@ -111,7 +154,17 @@ def _prepare_run(
     config: dict[str, Any],
     options: RunOptions,
 ) -> tuple[Path, Path, list[str]]:
-    """Create or verify a run manifest before the first cell is fitted."""
+    """Create or verify a run manifest before the first cell is fitted.
+
+    Returns:
+        ``(run_dir, manifest_path, inputs)``, where ``inputs`` are the paths
+        whose hashes the manifest records.
+
+    Raises:
+        RuntimeError: The protocol freeze fails (confirmatory mode), or an
+            existing manifest has a different configuration or inputs.
+        FileExistsError: The run exists and ``resume`` is not set.
+    """
     actual_config = _actual_run_config(config, options)
     run_hash = canonical_json_hash(actual_config)[:12]
     run_dir = options.output_root / f"{config['analysis_id']}_{options.mode}_{run_hash}"
@@ -131,6 +184,8 @@ def _prepare_run(
         manifest["manifest_content_sha256"] = canonical_json_hash(
             {key: value for key, value in manifest.items() if key != "manifest_content_sha256"}
         )
+    # Resuming continues only on identical configuration and inputs, so one
+    # run never mixes cells produced by different code, data or settings.
     if manifest_path.exists():
         existing = json.loads(manifest_path.read_text(encoding="utf-8"))
         if existing["config_sha256"] != manifest["config_sha256"]:
@@ -159,7 +214,12 @@ def _execute_cohort_cells(
     options: RunOptions,
     run_dir: Path,
 ) -> int:
-    """Execute missing cohort cells in the frozen fold-first, model-second order."""
+    """Execute missing cohort cells in the frozen fold-first, model-second order.
+
+    Returns:
+        The number of cells planned for this cohort, whether fitted now or
+        already stored.
+    """
     total_planned = 0
     if dataset_key not in dataset_config:
         raise ValueError(f"unknown dataset {dataset_key!r}")
@@ -168,6 +228,8 @@ def _execute_cohort_cells(
         project_root, dataset_key, cohort_config
     )
     feature_spec = _feature_spec(cohort_config, config["feature_set"])
+    # The folds depend only on the outcomes and the base seed, so every model
+    # sees the same training and validation subjects (paired folds).
     folds = repeated_survival_folds(
         times,
         events,
@@ -184,6 +246,8 @@ def _execute_cohort_cells(
         for model_key in options.models:
             total_planned += 1
             cell_path = _cell_path(run_dir, dataset_key, fold, model_key)
+            # A stored cell is never refitted or overwritten. Each cell has its
+            # own seed, so skipping it does not change any other cell.
             if cell_path.exists():
                 continue
             cell = run_cell(
@@ -219,7 +283,12 @@ def _write_completion(
     config: dict[str, Any],
     total_planned: int,
 ) -> None:
-    """Verify inputs around aggregation and record all cell and output hashes."""
+    """Verify inputs around aggregation and record all cell and output hashes.
+
+    Writes ``fold_metrics.csv``, ``out_of_fold_predictions.csv.gz``,
+    ``inference.json`` and finally ``completion.json``, which lists the file
+    hash of every stored cell and aggregate and its own content hash.
+    """
 
     recorded_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     verify_run_inputs_unchanged(

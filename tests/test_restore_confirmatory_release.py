@@ -1,4 +1,12 @@
-"""Adversarial tests for the confirmatory-release restoration boundary."""
+"""Adversarial tests for the confirmatory-release restoration boundary.
+
+Covers the private helpers of ``scripts/restore_confirmatory_release.py``, which
+restores the frozen 450-cell confirmatory run from its pinned private release
+archive. Small hand-built archives and directories check that extraction admits
+only regular files and directories under the exact run prefix, that the
+destination has no symbolic-link ancestor, that the restored inventory is exact,
+and that the checksum record matches the pinned digest.
+"""
 
 from __future__ import annotations
 
@@ -41,6 +49,7 @@ def _write_archive(
 def test_safe_extract_accepts_exact_prefix_directories_and_regular_files(
     tmp_path: Path,
 ) -> None:
+    """Directories and regular files under the exact run prefix are extracted intact."""
     prefix = restore.RUN_ARCHIVE_PREFIX.as_posix()
     archive_path = tmp_path / "release.tar.gz"
     _write_archive(
@@ -83,6 +92,7 @@ def test_safe_extract_rejects_paths_outside_exact_prefix(
     member_name: str,
     message: str,
 ) -> None:
+    """Absolute, traversing or differently prefixed member paths are rejected."""
     archive_path = tmp_path / "unsafe-path.tar.gz"
     _write_archive(
         archive_path,
@@ -94,6 +104,7 @@ def test_safe_extract_rejects_paths_outside_exact_prefix(
 
 
 def test_safe_extract_rejects_duplicate_member_names(tmp_path: Path) -> None:
+    """An archive that repeats a member name is rejected."""
     member_name = f"{restore.RUN_ARCHIVE_PREFIX.as_posix()}/result.json"
     archive_path = tmp_path / "duplicate.tar.gz"
     _write_archive(
@@ -123,6 +134,7 @@ def test_safe_extract_rejects_non_regular_member_types(
     tmp_path: Path,
     member_type: bytes,
 ) -> None:
+    """Symbolic links, hard links, named pipes (FIFOs) and device members are rejected."""
     member_name = f"{restore.RUN_ARCHIVE_PREFIX.as_posix()}/untrusted"
     archive_path = tmp_path / "unsupported-type.tar.gz"
     _write_archive(archive_path, [(member_name, member_type, None)])
@@ -134,6 +146,7 @@ def test_safe_extract_rejects_non_regular_member_types(
 def test_prepare_destination_creates_exact_parent_below_output_root(
     tmp_path: Path,
 ) -> None:
+    """The destination's parent is created at reports/confirmatory under the output root."""
     parent, destination = restore._prepare_destination(tmp_path)
 
     assert parent == tmp_path / "reports" / "confirmatory"
@@ -142,6 +155,7 @@ def test_prepare_destination_creates_exact_parent_below_output_root(
 
 
 def test_prepare_destination_rejects_symlinked_ancestor(tmp_path: Path) -> None:
+    """A symbolic link among the destination's ancestors is rejected."""
     outside = tmp_path / "outside"
     outside.mkdir()
     (tmp_path / "reports").symlink_to(outside, target_is_directory=True)
@@ -153,6 +167,7 @@ def test_prepare_destination_rejects_symlinked_ancestor(tmp_path: Path) -> None:
 def test_prepare_destination_rejects_symlinked_run_directory(
     tmp_path: Path,
 ) -> None:
+    """A symbolic link in place of the run directory itself is rejected."""
     parent = tmp_path / "reports" / "confirmatory"
     parent.mkdir(parents=True)
     outside = tmp_path / "outside"
@@ -169,6 +184,7 @@ def test_prepare_destination_rejects_symlinked_run_directory(
 def test_verify_exact_inventory_accepts_only_implied_directories(
     tmp_path: Path,
 ) -> None:
+    """An inventory passes when its only directories are parents of expected files."""
     run_path = tmp_path / "run"
     (run_path / "cells").mkdir(parents=True)
     (run_path / "manifest.json").write_text("{}\n", encoding="utf-8")
@@ -183,6 +199,7 @@ def test_verify_exact_inventory_accepts_only_implied_directories(
 def test_verify_exact_inventory_rejects_extra_empty_directory(
     tmp_path: Path,
 ) -> None:
+    """An empty directory that no expected file implies makes the inventory fail."""
     run_path = tmp_path / "run"
     run_path.mkdir()
     (run_path / "manifest.json").write_text("{}\n", encoding="utf-8")
@@ -196,6 +213,12 @@ def _checksum_fixture(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> tuple[Path, Path, str]:
+    """Write a stand-in archive and pin the module's expected name and digest to it.
+
+    Returns:
+        The checksum-record path (not yet written), the archive path and the
+        archive's SHA-256 digest.
+    """
     archive_name = "release.tar.gz"
     archive_path = tmp_path / archive_name
     archive_path.write_bytes(b"immutable release bytes")
@@ -209,6 +232,7 @@ def test_verify_checksum_accepts_matching_record_and_pinned_digest(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """One record naming the archive with its pinned digest is accepted."""
     checksum_path, archive_path, digest = _checksum_fixture(tmp_path, monkeypatch)
     checksum_path.write_text(f"{digest}  {archive_path.name}\n", encoding="utf-8")
 
@@ -229,6 +253,7 @@ def test_verify_checksum_rejects_invalid_checksum_records(
     monkeypatch: pytest.MonkeyPatch,
     record: str,
 ) -> None:
+    """Multiple records, a wrong archive name or a wrong recorded digest are rejected."""
     checksum_path, archive_path, digest = _checksum_fixture(tmp_path, monkeypatch)
     checksum_path.write_text(
         record.format(digest=digest, wrong_digest="0" * 64),
@@ -243,6 +268,7 @@ def test_verify_checksum_rejects_digest_that_differs_from_pinned_release(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """A self-consistent record is still rejected when the pinned release digest differs."""
     checksum_path, archive_path, digest = _checksum_fixture(tmp_path, monkeypatch)
     checksum_path.write_text(f"{digest}  {archive_path.name}\n", encoding="utf-8")
     monkeypatch.setattr(restore, "ARCHIVE_SHA256", "f" * 64)

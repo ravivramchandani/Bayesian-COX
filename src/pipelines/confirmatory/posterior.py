@@ -1,4 +1,9 @@
-"""Collect coefficients, posterior visualisation snapshots and model-specific details for stored cells."""
+"""Collect coefficients, posterior visualisation snapshots and model-specific details for stored cells.
+
+:mod:`cells` calls :func:`_model_details` after a successful fit, and
+:mod:`fitting` calls :func:`_posterior_trace_snapshot` for each
+Bayesian attempt that fails the diagnostic gate. Both read the fitted model only; nothing is refitted.
+"""
 
 from __future__ import annotations
 
@@ -16,6 +21,12 @@ def _posterior_trace_snapshot(model: BayesianCoxModel) -> dict[str, Any]:
 
     Numerical diagnostics always use every retained draw in ``model.idata``;
     this snapshot is only for trace and marginal plots in the supplement.
+    It keeps every chain and at most 250 evenly spaced draw indices of every
+    posterior variable.
+
+    Returns:
+        A mapping with the draw indices kept and, per variable, its dimension
+        names and thinned values (chains first, then kept draws).
     """
     posterior = model.idata.posterior
     n_draws = int(posterior.sizes["draw"])
@@ -44,7 +55,34 @@ def _model_details(
     x_validation: pd.DataFrame,
     feature_groups: dict[str, str],
 ) -> dict[str, Any]:
-    """Collect model-specific diagnostics and explanations without refitting."""
+    """Collect model-specific diagnostics and explanations without refitting.
+
+    - Cox proportional hazards (PH): the coefficient table and a per-covariate
+      PH test on scaled Schoenfeld residuals against rank-transformed time,
+      with Holm-adjusted p-values across the covariates of this fit.
+    - Random survival forest: the implementation name and feature count only;
+      the fitted forest is not stored.
+    - DeepSurv: the training configuration and per-epoch training log.
+    - Bayesian models: sampler diagnostics, prior and posterior predictive
+      summaries, the coefficient summary, posterior expected absolute
+      contributions (per feature, and per source-variable group for every
+      validation subject), the prior-specific auxiliary signal (``None`` for
+      the normal prior), posterior-mean coefficients and a thinned trace.
+
+    Args:
+        model: The fitted model.
+        model_key: One of :data:`~.options.MODEL_KEYS`.
+        x_train: Preprocessed outer-training features (used by the PH test).
+        train_time: Outer-training follow-up times (used by the PH test).
+        train_event: Outer-training event indicators (used by the PH test).
+        x_validation: Preprocessed validation features, the explanation target
+            for the Bayesian contributions.
+        feature_groups: Map from processed column to its source variable.
+
+    Returns:
+        A mapping for the cell writer, possibly containing NumPy arrays; empty
+        for an unknown model key.
+    """
     if model_key == "cox_ph":
         summary = model.summary().to_dict(orient="records")
         ph = model.proportional_hazards_test(x_train, train_time, train_event).to_dict(

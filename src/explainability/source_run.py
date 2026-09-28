@@ -1,7 +1,14 @@
 """Verify and load the immutable run read by the explanation stage.
 
 This module checks source hashes, classifies interpretable cells, restores raw
-cohorts, validates outer-fold lineage and reads the paired Cox coefficients."""
+cohorts, validates outer-fold lineage and reads the paired Cox coefficients.
+Cox PH denotes the Cox proportional-hazards model.
+
+It is the first stage called by :mod:`src.explainability.frozen_cells`:
+:func:`verify_source_run` and :func:`classify_cells` run once per analysis,
+and the remaining checks run once per Bayesian cell. Every check raises
+instead of repairing, so an explanation is only ever computed from cells,
+subjects, raw data and preprocessing that match the frozen record."""
 
 from __future__ import annotations
 
@@ -49,7 +56,14 @@ class SourceRun:
     feature_set: str
 
     def relative(self, path: Path) -> str:
-        """Return a cell path relative to the run directory."""
+        """Return a cell path relative to the run directory.
+
+        Args:
+            path: Cell file inside this run directory.
+
+        Returns:
+            Path relative to the run directory, as a string.
+        """
         return str(path.relative_to(self.run_dir))
 
 
@@ -168,9 +182,10 @@ def verify_source_run(run_dir: Path, project_root: Path) -> SourceRun:
 
     The manifest and completion record must match their own content hashes;
     the current ``config/datasets.yaml`` and ``config/confirmatory.yaml`` must
-    match the hashes the manifest recorded; the set of cell files must match
-    the completion inventory exactly; and each cell file must match both its
-    recorded file hash and its internal content hash.
+    match the hashes the manifest recorded for them, where it recorded one;
+    the set of cell files must match the completion inventory exactly; and
+    each cell file must match both its recorded file hash and its internal
+    content hash.
 
     Args:
         run_dir: Resolved run directory.
@@ -178,6 +193,11 @@ def verify_source_run(run_dir: Path, project_root: Path) -> SourceRun:
 
     Returns:
         The verified run.
+
+    Raises:
+        ValueError: If a hash field, the input-hash mapping, the cell
+            inventory or the feature-set name is missing.
+        RuntimeError: If any hash or the cell inventory does not match.
     """
     manifest_path = run_dir / "manifest.json"
     completion_path = run_dir / "completion.json"
@@ -214,7 +234,14 @@ def _is_bayesian(cell: dict[str, Any]) -> bool:
 
 
 def fold_key(cell: dict[str, Any]) -> FoldKey:
-    """Return the ``(dataset, repeat, fold)`` key of a cell's outer fold."""
+    """Return the ``(dataset, repeat, fold)`` key of a cell's outer fold.
+
+    Args:
+        cell: Stored cell with dataset, repeat and fold fields.
+
+    Returns:
+        Cohort key and integer repeat/fold numbers.
+    """
     return (str(cell["dataset"]), int(cell["repeat"]), int(cell["fold"]))
 
 
@@ -241,9 +268,21 @@ def classify_cells(source: SourceRun) -> CellInventory:
     """Sort the stored cells into interpretable Bayesian cells, exclusions and Cox cells.
 
     A Bayesian cell is interpreted only when it completed and, in a
-    confirmatory run, its MCMC convergence diagnostics passed. Every other
-    Bayesian cell is recorded as an exclusion with its reason, so no failed
-    cell disappears silently.
+    confirmatory run, its MCMC (Markov chain Monte Carlo) convergence
+    diagnostics passed. Every other Bayesian cell is recorded as an exclusion
+    with its reason, so no failed cell disappears silently. Cox cells are
+    collected whatever their status; an incomplete one is reported later as
+    an unavailable partner.
+
+    Args:
+        source: Verified manifest, completion record and stored cells.
+
+    Raises:
+        RuntimeError: If a fold has two Cox cells or no Bayesian cell is
+            interpretable.
+
+    Returns:
+        Interpretable cells, exclusions, Cox partners and secondary model keys.
     """
     secondary_models = sorted(
         {cell.get("model_key") for _, cell in source.cells if not _is_bayesian(cell)}
@@ -277,8 +316,16 @@ def classify_cells(source: SourceRun) -> CellInventory:
 def verify_raw_data(source: SourceRun, cell: dict[str, Any]) -> str:
     """Check a cell's raw data file against the cell and the manifest.
 
+    Args:
+        source: Verified run and dataset configuration.
+        cell: Cell whose raw-data hash is checked.
+
     Returns:
         The SHA-256 of the raw file.
+
+    Raises:
+        ValueError: If the dataset is not configured.
+        RuntimeError: If the file hash differs from the cell or the manifest.
     """
     dataset = str(cell["dataset"])
     if dataset not in source.dataset_configs:
@@ -294,7 +341,15 @@ def verify_raw_data(source: SourceRun, cell: dict[str, Any]) -> str:
 
 
 def feature_specification(dataset_config: dict[str, Any], feature_set: str) -> dict[str, Any]:
-    """Return the feature specification that a run's feature set names for a dataset."""
+    """Return the feature specification that a run's feature set names for a dataset.
+
+    Args:
+        dataset_config: Configured primary and sensitivity feature sets for a cohort.
+        feature_set: Primary or named sensitivity feature set recorded by the run.
+
+    Returns:
+        A shallow copy of the named feature specification.
+    """
     if feature_set == "primary":
         return dict(dataset_config["primary_features"])
     sensitivities = dataset_config.get("sensitivity_feature_sets", {})
@@ -313,6 +368,11 @@ def _load_raw_cohort(
     When the dataset has no identifier column, subjects are named
     ``<dataset>-<row number>`` with zero padding, which is the rule the
     confirmatory pipeline used when it stored the cells.
+
+    Raises:
+        ValueError: If outcome or identifier columns are missing, a survival
+            time is not finite and positive, the event indicator is not 0/1,
+            or identifiers repeat.
     """
     path = project_root / dataset_config["raw_file"]
     frame = pd.read_csv(path)
@@ -407,6 +467,17 @@ def verify_cell_lineage(
     order. The first Bayesian cell seen for an outer fold sets the fold's
     lineage in ``fold_lineage``; every later prior for that fold must match
     it, so all priors are explained on the same subjects and features.
+
+    Args:
+        cell: Bayesian cell with stored subject lists and predictions.
+        cohort: Raw cohort with its complete subject-ID set.
+        fold_lineage: Previously checked fold records; updated on the first cell of a fold.
+
+    Raises:
+        RuntimeError: If any of these checks fails.
+
+    Returns:
+        Verified ordered subjects and shared preprocessing lineage for the outer fold.
     """
     train_ids, validation_ids = _subject_id_lists(cell)
     if len(train_ids) != int(cell["n_train"]) or len(validation_ids) != int(cell["n_validation"]):
@@ -431,7 +502,14 @@ def verify_cell_lineage(
 
 
 def cox_unavailable_reason(cox_entry: StoredCell | None) -> str | None:
-    """Return why a fold has no usable Cox partner, or ``None`` if it has one."""
+    """Report an absent or incomplete Cox cell before separate pairing checks.
+
+    Args:
+        cox_entry: Stored Cox cell and path, or None when the outer fold has no partner.
+
+    Returns:
+        An absence or incomplete-status reason, or None for a complete cell.
+    """
     if cox_entry is None:
         return "no frozen Cox cell exists for the paired outer fold"
     status = cox_entry[1].get("status")
@@ -482,6 +560,12 @@ def pair_cox_cell(
 
     Returns:
         The Cox cell with its coefficients in the Bayesian feature order.
+
+    Raises:
+        RuntimeError: If the data hash, subjects, prediction order or
+            preprocessing hash differ from the Bayesian cell.
+        ValueError: If the Cox preprocessing fails its state-hash check or
+            its coefficient table does not match the features.
     """
     cox_path, cox_cell = cox_entry
     if cox_cell.get("dataset_sha256") != raw_hash:

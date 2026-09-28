@@ -2,7 +2,29 @@
 
 The bootstrap resamples repeats, folds within each repeat and one seed within
 each fold, preserving the frozen generator-consumption order. Its percentile
-intervals describe stability rather than independent-sample inference."""
+intervals describe stability rather than independent-sample inference.
+SHAP denotes Shapley additive explanations.
+
+The three-stage bootstrap follows the nesting of the design. Outer repeats
+are separate random partitions of the cohort; the folds of one repeat share
+training subjects; and each fold is explained with three seeds. One
+replicate draws the repeats with replacement, then, within each drawn repeat,
+its folds with replacement, then, within each drawn fold, one of its seed
+values, and averages all drawn values. The 2.5th and 97.5th percentiles of
+the replicate means form the interval. Because folds overlap in training data
+and the target is agreement within fitted models, the interval summarises
+variability across the design, not sampling uncertainty about a population.
+
+Two claim gates use it, both at the largest budget:
+
+- H3a (:func:`agreement_uncertainty`): positive agreement between the
+  intrinsic ranking and SHAP on the same posterior-mean model.
+- H3b (:func:`paired_cross_model_agreement_difference`): the paired
+  difference, same-model agreement minus agreement with Cox SHAP, computed
+  selection by selection before resampling.
+
+:func:`group_stability` summarises each group's rank and top-five frequency.
+All three are called by :mod:`src.explainability.result`."""
 
 from __future__ import annotations
 
@@ -16,6 +38,8 @@ from src.explainability.stability import model_convergence_status
 
 AGREEMENT_METRICS = ("spearman_rho", "kendall_tau", "top_k_jaccard")
 
+# (target label, comparison-row table key, score column) for each ranking
+# whose group-level stability is summarised.
 GROUP_STABILITY_TARGETS = (
     (
         "posterior_expected_absolute_contribution",
@@ -142,7 +166,12 @@ def _model_agreement_uncertainty(
     expected_outer_cells: int,
     confirmatory_evidence: bool,
 ) -> dict[str, Any]:
-    """Summarise one model's agreement and decide whether H3a support is permitted."""
+    """Summarise one model's agreement and decide whether H3a support is permitted.
+
+    Each metric gets its own bootstrap generator, seeded from the dataset,
+    model and metric. A model with any excluded cell has fewer outer cells
+    than planned and so cannot meet the complete-outer-cell gate.
+    """
     metric_rows = [
         {
             "repeat": row["repeat"],
@@ -308,6 +337,10 @@ def paired_cross_model_agreement_difference(
 
     Returns:
         One summary per ``(dataset, model_key)``, in sorted order.
+
+    Raises:
+        RuntimeError: If two rows with the same key were computed on
+            different selections.
     """
     final_budget = len(protocol.budgets)
     same_lookup = _final_budget_lookup(same_model, final_budget)
@@ -404,7 +437,11 @@ def _group_rank_summary(
     group: str,
     protocol: ExplanationProtocol,
 ) -> dict[str, Any]:
-    """Summarise one group's importance, rank and top-five frequency."""
+    """Summarise one group's importance, rank and top-five frequency.
+
+    ``mean_importance`` is a plain mean over cell-seed rows; the rank and the
+    top-five frequency each get a three-stage bootstrap interval.
+    """
     return {
         "dataset": dataset,
         "model_key": model_key,
@@ -436,6 +473,11 @@ def group_stability(
 
     This is done separately for the grouped posterior contribution and the
     grouped SHAP ranking of every model.
+
+    Args:
+        comparisons: Bayesian comparison rows with ``grouped_intrinsic`` and
+            ``grouped_shap`` tables.
+        protocol: Budgets, top-five size, bootstrap size and seed.
 
     Returns:
         One summary per ``(dataset, model_key, target, group)``.

@@ -1,4 +1,15 @@
-"""Fit, evaluate and validate individual immutable robustness cells."""
+"""Fit, evaluate and validate individual immutable robustness cells.
+
+A robustness cell is one Bayesian prior under one condition on one outer fold.
+:mod:`runner` calls :func:`run_robustness_cell` for every planned cell not yet
+stored and writes the record once. The cell applies the condition's training
+subset and administrative cutoff, fits with the confirmatory diagnostic rule
+(:func:`src.pipelines.confirmatory.fitting._fit_with_diagnostic_rule`), scores
+the integrated Brier score (IBS) and discrimination, and stores per-subject IBS contributions for the
+paired bootstrap. :func:`load_robustness_cells` and
+:func:`validate_robustness_cell` read cells back only after checking their
+schema and content hash.
+"""
 
 from __future__ import annotations
 
@@ -63,9 +74,49 @@ def run_robustness_cell(
     options: RobustnessOptions,
     data_sha256: str,
 ) -> dict[str, Any]:
-    """Fit and evaluate one content-addressed Bayesian robustness cell."""
+    """Fit and evaluate one content-addressed Bayesian robustness cell.
+
+    The cell status is ``"complete"``, ``"failed_diagnostics"``, ``"failed"``,
+    or ``"unavailable_minimum_training_events"`` when the condition leaves
+    fewer training events than ``robustness.minimum_training_events`` (20).
+    Model hyperparameters are not tuned; the Bayesian settings come from the
+    condition's protocol.
+
+    Invalid outcome or cutoff inputs fail before the fitting-error wrapper.
+
+    Args:
+        dataset_key: Cohort key.
+        model_key: One of :data:`~.protocol.BAYESIAN_MODEL_KEYS`.
+        fold: The outer fold; its validation rows are used unchanged.
+        condition: The planned perturbation.
+        raw: Unprocessed cohort frame, aligned with ``times``, ``events`` and
+            ``subject_ids``.
+        times: Follow-up times in the cohort's own unit.
+        events: Event indicators (1 = event, 0 = censored).
+        subject_ids: Stable subject identifiers.
+        feature_spec: The condition's feature declaration.
+        train_indices: Cohort row positions of the condition's training
+            subset.
+        censoring_cutoff: Administrative cutoff applied to training and
+            validation follow-up, or ``None``.
+        config: Frozen protocol.
+        options: Robustness run controls.
+        data_sha256: Hash of the cohort's raw CSV.
+
+    Returns:
+        The cell mapping with its content hash and total elapsed seconds. NumPy
+        values are converted by the runner when writing JSON. A diagnostic
+        failure retains the failing fitter's attempts; an execution failure
+        does not retain earlier fit records.
+
+    Raises:
+        ValueError: Follow-up, event arrays or the administrative cutoff are
+            invalid before fitting starts.
+    """
     started = time.perf_counter()
     validation_indices = fold.validation_indices
+    # The same cutoff censors training and validation follow-up, so the
+    # condition changes the censoring the model is fitted on and scored on.
     train_time, train_event = apply_administrative_censoring(
         times[train_indices], events[train_indices], censoring_cutoff
     )
@@ -116,6 +167,9 @@ def run_robustness_cell(
         "events_validation": int(validation_event.sum()),
         "processed_feature_degrees_of_freedom": None,
         "effective_information_events_per_degree_of_freedom": None,
+        # The untruncated validation events define the bootstrap strata, so a
+        # truncated condition and the full-follow-up reference resample the
+        # same strata in the RQ2 difference-in-differences.
         "original_events_validation": events[validation_indices],
         "administrative_cutoff": censoring_cutoff,
     }
@@ -137,6 +191,8 @@ def run_robustness_cell(
 
     try:
         fit_config = _condition_config(config, condition)
+        # Robustness mode maps to confirmatory fitting so that the same
+        # diagnostic gate and refit ladder apply to every sensitivity fit.
         confirmatory_options = RunOptions(
             mode="confirmatory" if options.mode == "robustness" else "rehearsal",
             datasets=(dataset_key,),
@@ -186,6 +242,8 @@ def run_robustness_cell(
                         options=confirmatory_options,
                     )
                 except DiagnosticFailure as exc:
+                    # One failed imputation fails the whole cell; its attempts
+                    # are labelled with the imputation number.
                     tagged = [{"imputation": number, **attempt} for attempt in exc.attempts]
                     raise DiagnosticFailure(tagged) from exc
                 models.append(model)
@@ -317,6 +375,8 @@ def run_robustness_cell(
             predictions["survival_on_ibs_grid"],
             predictions["ibs_grid"],
         )
+        # Defensive: the bootstrap resamples these contributions, so their
+        # mean must reproduce the reference IBS.
         if not np.isclose(float(np.mean(losses)), float(metrics["ibs"]), atol=1e-12):
             raise RuntimeError("individual IBS contributions do not match reference IBS")
         ipcw_time, ipcw_event = administratively_truncate_for_ipcw(
@@ -366,12 +426,28 @@ def run_robustness_cell(
             }
         )
     base["total_seconds"] = time.perf_counter() - started
+    # As for confirmatory cells, the hash covers every field including the
+    # timings, so any later edit to the stored file is detected.
     base["cell_content_sha256"] = canonical_json_hash(_json_safe(base))
     return base
 
 
 def validate_robustness_cell(cell: dict[str, Any]) -> None:
-    """Validate the common schema and content hash of a stored cell."""
+    """Validate the common schema and content hash of a stored cell.
+
+    A complete cell must also carry an events-per-degree-of-freedom ratio
+    consistent with its stored counts.
+
+    Args:
+        cell: Deserialised cell mapping, including its declared content hash.
+
+    Returns:
+        None when the checked fields and content hash agree.
+
+    Raises:
+        ValueError: A required field is missing, the model key is unknown,
+            the content hash differs or the ratio is inconsistent.
+    """
     required = {
         "schema_version",
         "analysis_id",
@@ -430,6 +506,7 @@ def _cell_path(
     condition: RobustnessCondition,
     model_key: str,
 ) -> Path:
+    """Return ``cells/<dataset>/repeat_RR_fold_FF/<condition_id>/<model_key>.json``."""
     return (
         run_dir
         / "cells"
@@ -441,7 +518,18 @@ def _cell_path(
 
 
 def load_robustness_cells(run_dir: Path) -> list[dict[str, Any]]:
-    """Load cells only after validating their declared content hashes."""
+    """Load cells in path order after validating their schema and content hashes.
+
+    Args:
+        run_dir: Run directory containing ``cells/<cohort>/<fold>/<condition>``.
+
+    Returns:
+        Cell mappings for every stored status, sorted by their relative paths.
+        An absent or empty cell directory gives an empty list.
+
+    Raises:
+        ValueError: A stored cell fails :func:`validate_robustness_cell`.
+    """
     cells: list[dict[str, Any]] = []
     for path in sorted((run_dir / "cells").glob("*/*/*/*.json")):
         cell = read_mapping(path)

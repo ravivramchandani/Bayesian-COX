@@ -1,4 +1,9 @@
-"""Reading and writing the JSON and YAML files used by every pipeline stage."""
+"""Read and write the stored mappings shared by pipeline stages.
+
+``json_safe`` converts results into JavaScript Object Notation (JSON) types;
+``write_json_atomic`` replaces a completed destination file, and
+``read_mapping`` loads JSON or YAML (YAML Ain't Markup Language) configuration.
+"""
 
 from __future__ import annotations
 
@@ -16,9 +21,16 @@ def json_safe(value: Any) -> Any:
     """Convert a nested value into plain JSON types.
 
     Dictionary keys become strings, tuples and arrays become lists, NumPy
-    scalars become Python numbers, and non-finite floats (NaN, infinity)
+    scalars become Python numbers, and non-finite floats (not-a-number or infinity)
     become ``None``. Anything else is stored as its ``str()`` form. Booleans
     are checked before integers because ``bool`` is a subclass of ``int``.
+
+    Args:
+        value: A scalar or nested dictionary, list, tuple or NumPy array.
+
+    Returns:
+        A corresponding value suitable for JSON encoding with non-finite
+        numbers replaced by ``None``.
     """
     if isinstance(value, dict):
         return {str(key): json_safe(item) for key, item in value.items()}
@@ -39,15 +51,25 @@ def json_safe(value: Any) -> Any:
 
 
 def write_json_atomic(path: Path, value: Any, *, overwrite: bool = True) -> None:
-    """Write ``value`` as indented, key-sorted JSON without leaving partial files.
+    """Write complete, indented, key-sorted JSON and replace the destination atomically.
 
     The content goes to ``<path>.tmp`` first and is then renamed over
-    ``path``, so a reader never sees a half-written file.
+    ``path``, so readers of the destination see either version in full.
+    Callers must serialise writes to the same path: its temporary name is shared.
 
     Args:
         path: Destination file. Parent directories are created.
         value: Any value accepted by :func:`json_safe`.
-        overwrite: When ``False``, refuse to replace an existing file.
+        overwrite: When ``False``, check for an existing destination before
+            writing; this is not an exclusive-create operation.
+
+    Returns:
+        None.
+
+    Raises:
+        FileExistsError: ``overwrite`` is false and the destination already exists.
+        OSError: Creating, writing or replacing a file fails; the temporary
+            file can remain after a failed operation.
     """
     if not overwrite and path.exists():
         raise FileExistsError(f"refusing to overwrite existing result: {path}")
@@ -61,7 +83,20 @@ def write_json_atomic(path: Path, value: Any, *, overwrite: bool = True) -> None
 
 
 def read_mapping(path: Path) -> dict[str, Any]:
-    """Read a YAML (``.yaml``/``.yml``) or JSON file that must hold a mapping."""
+    """Read a YAML or JSON file that must hold a mapping.
+
+    Args:
+        path: Input file; ``.yaml`` and ``.yml`` select safe YAML loading,
+            while any other suffix selects JSON loading.
+
+    Returns:
+        The decoded dictionary, without changing its keys or nested values.
+
+    Raises:
+        OSError: The file cannot be opened or read.
+        ValueError: The decoded value is not a mapping or JSON is malformed.
+        yaml.YAMLError: YAML syntax is malformed.
+    """
     with path.open(encoding="utf-8") as handle:
         value = yaml.safe_load(handle) if path.suffix in {".yaml", ".yml"} else json.load(handle)
     if not isinstance(value, dict):

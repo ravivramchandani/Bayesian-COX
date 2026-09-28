@@ -1,8 +1,36 @@
-"""Repeated nested-validation study, from fold-local fitting to paired inference.
+"""Confirmatory repeated nested cross-validation, from fold-local fitting to paired inference.
 
-The package keeps the original import surface for scripts and the robustness
-stage. Cohort loading, evaluation, fitting, cell records, aggregation, inference
-and run orchestration live in separate modules.
+Six models are compared on paired outer folds of each cohort: Cox
+proportional hazards (PH), random survival forest, DeepSurv, and the Bayesian
+piecewise-exponential PH model under normal, horseshoe and spike-and-slab
+coefficient priors. One *cell* is one model fitted and scored on one outer
+fold. A run moves through these modules:
+
+1. ``options``: model roster, run controls and per-cell seeds.
+2. ``runner``: plans the fold-by-model grid, skips cells already stored, and
+   orchestrates the stages below.
+3. ``fitting``: builds each model, tunes the forest and DeepSurv by inner
+   cross-validation, and applies the Bayesian diagnostic gate with its
+   prespecified refits.
+4. ``evaluation``: chooses training-derived horizons and the integrated Brier
+   score (IBS) grid, and scores the outer-validation fold.
+5. ``cells`` and ``posterior``: assemble one content-hashed JSON record per
+   cell.
+6. ``aggregation``: checks every cell hash and writes the fold-metric and
+   out-of-fold (OOF) prediction tables.
+7. ``inference``: paired Nadeau–Bengio (NB) contrasts, Holm adjustment and the
+   event-stratified paired OOF bootstrap.
+8. ``provenance``: the input inventory and protocol-freeze checks.
+   ``storage`` holds the YAML reader they share.
+
+``scripts/run_confirmatory.py`` calls :func:`execute_confirmatory_run`. This
+initialiser re-exports the names that scripts, tests and the robustness
+package import, including private helpers under their original aliases (for
+example ``_ibs_times`` for :func:`evaluation_horizons_and_grid`). ``fitting``
+and ``cells`` look up ``_model_from_parameters``, ``_posterior_trace_snapshot``
+and ``_fit_with_diagnostic_rule`` in this namespace at call time, so a
+replacement made here takes effect; the diagnostic-failure tests rely on this
+for the first two.
 """
 
 from src.data.cohorts import load_analysis_dataset as load_analysis_dataset

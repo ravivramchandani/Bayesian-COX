@@ -63,7 +63,7 @@ inventory size/free space before one fresh remote restoration. The portable
 directly repeats all 92 stored trace comparisons without fitting.
 Production/analysis commits and running worker ownership remain as above.
 
-The first clinical METABRIC cells contain execution failures before sampling:
+The first clinical METABRIC cells contain execution failures before outer sampling:
 rare training categories were absent from a frozen synthetic draw, producing
 zero encoded columns and rank rejection. Independent reconstruction confirms
 the cause; the encoder preserves valid whole categories. The addendum has no
@@ -98,6 +98,21 @@ not claim complete scientific restoration. The compact receipt is
 `coordination/recovery/2026-09-28-extension-native-path-verification.json`;
 full logs are in `~/bayes-cox-runs/extensions-20260928/transfer_validation_v3`.
 Preserve all three validation versions through the final transfer.
+
+The baseline documentation pass is complete and integrated: 115 Python files,
+858 module/class/function docstrings, and 230 successful stripped-AST
+comparisons against both `f0cce64` and integration base `0ba4c3d`. All 349
+repository tests pass in 85.44 s; normal repository Ruff, schemas and diff
+checks pass. Original 103 worktree drafts remain unchanged and are preserved
+with review ledgers, source hashes, helpers and complete gate logs in
+`coordination/recovery/2026-09-28-documentation-gates.tar.gz` (269 members).
+The compact receipt is
+`coordination/recovery/2026-09-28-documentation-pass-verification.json` and
+the review is `coordination/reviews/2026-09-28-documentation-pass.md`.
+Full current-integration logs are additionally retained in
+`~/bayes-cox-runs/extensions-20260928/transfer_validation_v4_documentation`.
+Preserve this fourth validation version in the final transfer. No executable
+statement, import, running worker or sealed scientific source changed.
 
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
@@ -447,13 +462,18 @@ Completed integration gates and their evidence locations are in
 
     Paper drafting and submission are deferred until after the thesis.
 
-12. [ ] Documentation pass (owner instruction 2026-09-28). Brief:
-    `coordination/briefs/2026-09-28-documentation-pass.md`. Four worktree
-    branches, one per package: pipelines; models, evaluation, statistics,
-    data and utils; explanation and rendering; scripts and tests.
-    - Gate: `~/bayes-cox-runs/harness/ast_equivalence.py` proves each edit
-      is documentation-only against base `f0cce64`.
-    - The reading guide `docs/code_guide.md` is added.
+12. [x] Documentation pass (owner instruction 2026-09-28). Brief:
+    `coordination/briefs/2026-09-28-documentation-pass.md`. Preserved the four
+    original worktree drafts, reviewed independent candidate packages, and
+    integrated all 115 baseline files: pipelines; models, evaluation,
+    statistics, data and utils; explanation and rendering; scripts and tests.
+    - Gate: 230 stripped-AST matches against `f0cce64` and `0ba4c3d`;
+      all 349 repository tests, normal Ruff, schemas and diff checks pass.
+    - Every module/class/function in the declared baseline scope is documented;
+      the reading guide `docs/code_guide.md` maps the active extension separately.
+    - Review, exact source hashes, unchanged original drafts and full gate logs:
+      `coordination/reviews/2026-09-28-documentation-pass.md` and
+      `coordination/recovery/2026-09-28-documentation-pass-verification.json`.
 
 Tick each box when its step is complete, and record where its outputs are.
 

@@ -3,6 +3,9 @@
 All 75 original horseshoe folds are refitted. Only target acceptance changes,
 to 0.999 on every attempt; the original folds, seeds, likelihood, priors and
 diagnostic gate are retained. These outputs never replace confirmatory cells.
+``scripts/run_horseshoe_sampler_sensitivity.py`` calls
+:func:`execute_sampler_sensitivity`; it writes separate cell, inference and
+completion records, each labelled as post-hoc sampler sensitivity.
 """
 
 from __future__ import annotations
@@ -27,7 +30,16 @@ EVIDENCE_STATUS = "posthoc_sampler_sensitivity"
 
 
 def sensitivity_protocol(original: dict[str, Any]) -> dict[str, Any]:
-    """Copy the frozen protocol and change only acceptance on the remedy ladder."""
+    """Copy the frozen protocol and change acceptance on the horseshoe remedy ladder.
+
+    Args:
+        original: Frozen confirmatory protocol, with Bayesian priors and the
+            failed-fit rule.
+
+    Returns:
+        A deep copy setting the horseshoe initial target acceptance and every
+        refit's target acceptance to 0.999; the input is unchanged.
+    """
     protocol = copy.deepcopy(original)
     bayesian = protocol["models"]["bayesian_cox"]
     bayesian["priors"]["horseshoe"]["target_accept"] = TARGET_ACCEPT
@@ -54,6 +66,7 @@ def _options(settings: dict[str, Any], output: Path) -> confirmatory.RunOptions:
 
 
 def _cell_path(run_dir: Path, key: tuple[str, int, int]) -> Path:
+    """Return the stored horseshoe cell path for a ``(cohort, repeat, fold)`` key."""
     dataset, repeat, fold = key
     return (
         run_dir
@@ -161,7 +174,36 @@ def execute_sampler_sensitivity(
     workers: int = 1,
     resume: bool = False,
 ) -> Path:
-    """Run all 75 post-hoc refits and write explicitly labelled paired inference."""
+    """Complete all 75 post-hoc refits and write explicitly labelled paired inference.
+
+    The verified confirmatory source supplies the original folds, seeds and
+    non-horseshoe cells. Missing horseshoe cells are fitted in worker processes;
+    existing cells are verified before reuse. The resulting inference mixes all
+    75 sensitivity cells with the unchanged source comparators and retains the
+    original confirmatory outcome separately.
+
+    Args:
+        project_root: Checkout containing the frozen protocol, cohort data,
+            locked environment declarations and recorded source code.
+        source_dir: Completed, immutable confirmatory run with all 75 original
+            horseshoe cells, including any failed cells.
+        output_root: Parent of the separate sensitivity directory; it must not
+            place the run inside the source run.
+        workers: Positive maximum number of fitting worker processes.
+        resume: Verify and reuse an existing sensitivity run; otherwise an
+            existing run is refused.
+
+    Returns:
+        The verified sensitivity run directory, containing the manifest, all
+        refit cells, paired inference and completion record.
+
+    Raises:
+        ValueError: Workers are not positive, the source is not confirmatory,
+            or the output would lie inside the source run.
+        FileExistsError: The run exists and ``resume`` is false.
+        RuntimeError: Source membership, frozen inputs, saved evidence or the
+            recorded runtime fail verification.
+    """
     from src.rendering.verification import verify_frozen_run
     from src.utils.posthoc_evidence import verify_posthoc_run
 

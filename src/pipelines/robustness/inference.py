@@ -1,4 +1,19 @@
-"""Compute paired IBS sensitivity summaries and aggregate frozen Cox PH tests."""
+"""Compute paired Brier-score sensitivities and Cox proportional-hazards summaries.
+
+This is the aggregation stage of a robustness run; :mod:`runner` calls both
+entry points after every cell is stored and validated, then writes their
+returned mappings to separate aggregate files.
+
+- :func:`paired_ibs_inference` returns ``paired_ibs_inference.json`` content:
+  for conditions represented by complete cells, the paired integrated Brier
+  score (IBS) difference between priors, and for research question 2 (RQ2),
+  difference-in-differences against the full-size, observed-follow-up
+  condition. Intervals use a three-stage bootstrap, are descriptive and
+  form no multiplicity-controlled family.
+- :func:`aggregate_ph_tests` returns ``ph_assessment.json`` content: a summary
+  of proportional-hazards (PH) tests stored in the confirmatory Cox cells.
+  Nothing is refitted.
+"""
 
 from __future__ import annotations
 
@@ -27,6 +42,7 @@ from .protocol import (
 
 
 def _cell_analysis_names(cell: dict[str, Any]) -> set[tuple[str, str]]:
+    """Return the ``(component, condition)`` analyses a stored cell serves."""
     return {
         (str(item["component"]), str(item["condition"])) for item in cell["condition"]["analyses"]
     }
@@ -41,6 +57,34 @@ def _bootstrap_contributions(
     confidence_level: float,
     seed: int,
 ) -> dict[str, Any]:
+    """Three-stage paired bootstrap of the mean per-subject IBS difference.
+
+    Each replicate resamples, with replacement, (1) the outer repeats, (2) the
+    folds within each sampled repeat, and (3) the validation subjects within
+    each sampled fold and event stratum. It then averages the per-subject
+    differences within each fold and the fold means across folds. Resampling
+    repeats and folds as well as subjects represents split-to-split
+    variation, not only subject-level variation. Because each value is
+    already a paired difference, both priors always share the same resampled
+    subjects.
+
+    Args:
+        fold_contributions: Per-subject IBS differences, or
+            differences-in-differences, one array per fold.
+        fold_events: Untruncated validation event indicators, one array per
+            fold, defining the event strata.
+        fold_ids: ``{"repeat", "fold"}`` identifiers, one per fold.
+        n_bootstraps: Number of replicates; at least 20.
+        confidence_level: Coverage of the percentile interval.
+        seed: Seed of the single generator used for all replicates.
+
+    Returns:
+        The observed mean of fold means, the bootstrap mean, standard error
+        and percentile interval, and the counts of repeats and folds.
+
+    Raises:
+        ValueError: Too few replicates, or misaligned inputs.
+    """
     if n_bootstraps < 20:
         raise ValueError("sensitivity bootstrap requires at least 20 replicates")
     if (
@@ -57,6 +101,10 @@ def _bootstrap_contributions(
     if len(repeats) == 0:
         raise ValueError("at least one outer repeat is required")
     observed = float(np.mean([np.mean(values) for values in fold_contributions]))
+    # One generator is consumed in a fixed order within each replicate:
+    # repeats, then folds for each sampled repeat, then subjects for each
+    # sampled fold, censored before events. Changing this order changes every
+    # replicate and so the stored intervals.
     rng = np.random.default_rng(seed)
     samples = np.empty(n_bootstraps, dtype=float)
     for bootstrap in range(n_bootstraps):
@@ -107,7 +155,40 @@ def paired_ibs_inference(
     confidence_level: float,
     seed: int,
 ) -> dict[str, Any]:
-    """Compute paired IBS contrasts and RQ2 difference-in-differences."""
+    """Compute paired IBS contrasts and RQ2 difference-in-differences.
+
+    Every contrast is IBS(model_a) minus IBS(model_b), computed per subject
+    from the stored contributions and paired by cohort, component, condition,
+    repeat and fold. Design and feature contrasts use only the folds in
+    :data:`~.protocol.DESIGN_FEATURE_FOLD_NUMBERS_PER_REPEAT`, even for a
+    condition that was also fitted on further folds for RQ2.
+
+    The RQ2 difference-in-differences for condition c is, per subject,
+    ``[IBS_a(c) - IBS_b(c)] - [IBS_a(full) - IBS_b(full)]`` with ``full`` the
+    100-percent, observed-follow-up condition. It estimates how much the prior
+    difference changes when training information falls or censoring rises,
+    and uses the four cells of the same fold, which share validation
+    subjects.
+
+    Conditions with no complete cells produce no contrast rows. A contrast
+    marked ``"complete"`` has an estimate from at least one usable fold pair;
+    this status does not attest that all planned folds contributed. Its paired
+    fold count and identifiers describe the actual coverage.
+
+    Args:
+        cells: Validated robustness cells; only complete cells are used.
+        components: Components to summarise (``"rq2"``, ``"design"`` and/or
+            ``"feature"``).
+        n_bootstraps: Replicates per contrast.
+        confidence_level: Interval coverage.
+        seed: Base seed; each contrast derives its own.
+
+    Returns:
+        The content of ``paired_ibs_inference.json``.
+
+    Raises:
+        ValueError: Paired cells do not share validation subjects or strata.
+    """
     complete = [cell for cell in cells if cell.get("status") == "complete"]
     datasets = sorted({str(cell["dataset"]) for cell in cells})
     requested = set(components)
@@ -120,6 +201,8 @@ def paired_ibs_inference(
         for component, condition in _cell_analysis_names(cell):
             if component not in requested:
                 continue
+            # Non-primary design and feature conditions exist only on fold 1,
+            # so the primary anchor is restricted to the same folds.
             if (
                 component in {"design", "feature"}
                 and int(cell["fold"]) not in DESIGN_FEATURE_FOLD_NUMBERS_PER_REPEAT
@@ -190,6 +273,8 @@ def paired_ibs_inference(
                 record["status"] = "incomplete_no_paired_cells"
             contrasts.append(record)
 
+    # The RQ2 reference: full training size with observed follow-up. Each
+    # other RQ2 condition is compared with it on the same fold and subjects.
     full_condition = "fraction_100_observed"
     differences_in_differences: list[dict[str, Any]] = []
     rq2_conditions = sorted(
@@ -276,7 +361,26 @@ def paired_ibs_inference(
 
 
 def aggregate_ph_tests(confirmatory_run_dir: Path) -> dict[str, Any]:
-    """Purely aggregate stored Cox PH test details with within-fit Holm control."""
+    """Purely aggregate stored Cox PH test details with within-fit Holm control.
+
+    Each complete confirmatory Cox cell stores one scaled Schoenfeld residual
+    test per covariate (rank-transformed time). Holm's adjustment is applied
+    across the covariates of each fit, a fit is flagged as a departure when
+    any adjusted p-value is at most 0.05, and rejection rates are summarised
+    per cohort and covariate over the outer fits. The frozen response to a
+    departure is to report it as a design limitation; no model is changed.
+
+    Args:
+        confirmatory_run_dir: Completed confirmatory run directory.
+
+    Returns:
+        The content of ``ph_assessment.json``, including the hash of every
+        source cell and its own content hash.
+
+    Raises:
+        FileNotFoundError: No Cox cells were found.
+        ValueError: A Cox cell fails its content hash.
+    """
     cell_paths = sorted((confirmatory_run_dir / "cells").glob("*/*/cox_ph.json"))
     if not cell_paths:
         raise FileNotFoundError(

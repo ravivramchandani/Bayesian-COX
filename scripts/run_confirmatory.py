@@ -1,4 +1,47 @@
-"""Run the result-blind rehearsal or the frozen confirmatory nested CV."""
+"""Run the result-blind rehearsal or the frozen confirmatory nested CV.
+
+This is the entry point for the primary analysis: repeated nested
+cross-validation (CV) of six survival models on the GBSG2, WHAS500 and
+METABRIC cohorts. The work is done by
+``src.pipelines.confirmatory.execute_confirmatory_run``; this script only reads
+the study configuration, applies the mode's defaults and checks the command
+line.
+
+Modes:
+    ``rehearsal`` (the default) is a result-blind compute check. It fits one
+    outer fold per cohort with 300 draws, 300 tuning steps, two chains and 30
+    calibration bootstraps, unless flags override these. Its cells are
+    labelled ``rehearsal_only`` and are never confirmatory evidence.
+
+    ``confirmatory`` runs every setting from ``config/confirmatory.yaml``
+    (five repeats of five outer folds). It refuses any analysis override flag
+    and refuses to start unless ``design_status`` is
+    ``frozen_after_rehearsal``. The runner then checks every input against
+    ``config/protocol_freeze.json`` before fitting.
+
+Reads:
+    ``config/confirmatory.yaml``, ``config/datasets.yaml`` and the raw cohort
+    files in ``data/raw/``.
+
+Writes:
+    A run directory ``<output-root>/<analysis_id>_<mode>_<hash>/``, where the
+    12-character hash is taken from the resolved run settings. It holds
+    ``manifest.json``, one JSON file per (cohort, repeat, fold, model) cell
+    under ``cells/``, ``fold_metrics.csv``, ``out_of_fold_predictions.csv.gz``,
+    ``inference.json`` and ``completion.json``. The path is printed as
+    ``run_artifact=<path relative to the repository>``.
+
+``--resume`` continues an unfinished run with the same settings and inputs,
+skipping cells whose files already exist. For a completed confirmatory run it only
+verifies the stored evidence and rewrites nothing. Without ``--resume`` an
+existing run directory is an error.
+
+Make targets: ``confirmatory-rehearsal``, ``confirmatory`` and
+``confirmatory-resume``.
+
+Example:
+    python scripts/run_confirmatory.py --mode rehearsal --datasets gbsg2
+"""
 
 from __future__ import annotations
 
@@ -17,11 +60,21 @@ from src.pipelines.confirmatory import MODEL_KEYS, RunOptions, execute_confirmat
 
 
 def _yaml(path: Path):
+    """Return the parsed contents of a YAML file."""
     with path.open(encoding="utf-8") as handle:
         return yaml.safe_load(handle)
 
 
 def parse_args() -> argparse.Namespace:
+    """Parse the command line.
+
+    Every analysis flag defaults to ``None`` so that ``main`` can tell a
+    supplied override from an omitted one; confirmatory mode rejects any
+    supplied override.
+
+    Returns:
+        Parsed command-line option namespace.
+    """
     parser = argparse.ArgumentParser(
         description=(
             "Checkpointed repeated nested-CV analysis. Rehearsal outputs are "
@@ -50,6 +103,18 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
+    """Build the run options, execute the run and print its directory.
+
+    Returns:
+        Exit status 0 on success.
+
+    Raises:
+        ValueError: If confirmatory mode receives an analysis override, or if
+            the resolved settings have fewer than 20 calibration bootstraps,
+            fewer than three outer folds or no repeat.
+        RuntimeError: If confirmatory mode is requested before the protocol
+            is frozen.
+    """
     args = parse_args()
     config = _yaml(PROJECT_ROOT / "config" / "confirmatory.yaml")
     datasets = _yaml(PROJECT_ROOT / "config" / "datasets.yaml")
@@ -81,6 +146,8 @@ def main() -> int:
                 "sets design_status to frozen_after_rehearsal"
             )
 
+    # Rehearsal defaults are a small, fixed workload for timing the pipeline;
+    # confirmatory defaults are the frozen protocol settings.
     default_rehearsal_limit = 1 if args.mode == "rehearsal" else None
     default_rehearsal_repeats = 1 if args.mode == "rehearsal" else int(
         validation["outer_repeats"]

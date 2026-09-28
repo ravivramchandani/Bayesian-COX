@@ -1,5 +1,11 @@
-"""
-Statistical Tests, Resampling Methods, Confidence Intervals, and Permutation Tests.
+"""Statistical inference for paired model comparisons.
+
+The confirmatory analysis uses ``repeated_cv`` for the Nadeau-Bengio (NB)
+corrected paired intervals and tests, ``hypothesis_tests.holm_adjust`` for
+Holm's multiplicity adjustment, and ``resampling`` for the event-stratified
+subject resampling shared with calibration. ``bootstrap``,
+``confidence_intervals``, ``permutation`` and the rank tests in
+``hypothesis_tests`` are general or legacy tools.
 """
 
 from .bootstrap import (

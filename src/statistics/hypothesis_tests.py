@@ -1,8 +1,21 @@
 """Holm correction for paired inference and legacy rank-test interfaces.
 
-The confirmatory analysis calls ``holm_adjust`` on its prespecified family.
+The confirmatory analysis calls ``holm_adjust`` on its prespecified family of
+nine primary tests (three prior pairs in each of three cohorts), and on the
+per-covariate proportional-hazards tests of each Cox fit.
+
+Holm's step-down procedure controls the family-wise error rate, the
+probability of at least one false rejection, at ``alpha`` under any
+dependence between the tests. With m p-values sorted as
+``p_(1) <= ... <= p_(m)``, it compares ``p_(1)`` with ``alpha / m``,
+``p_(2)`` with ``alpha / (m - 1)``, and so on, rejecting each hypothesis in
+turn and stopping at the first that is not rejected. The equivalent adjusted
+p-value is ``max_{j <= i} min(1, (m - j + 1) p_(j))``, and a hypothesis is
+rejected when its adjusted p-value is at most ``alpha``. It is at least as
+powerful as Bonferroni, which multiplies every p-value by m.
+
 The class retains Wilcoxon, Friedman, Bonferroni and Benjamini-Hochberg
-interfaces for older callers; they do not replace corrected repeated-CV tests.
+interfaces for older callers; they do not replace corrected repeated cross-validation (CV) tests.
 """
 
 import numpy as np
@@ -20,6 +33,11 @@ def holm_adjust(
 
     Returns:
         Adjusted p-values and rejection flags in the original input order.
+        Tied p-values receive the same adjusted value.
+
+    Raises:
+        ValueError: The p-values are empty or outside [0, 1], or ``alpha``
+            is not in (0, 1).
     """
     values = np.asarray(p_values, dtype=float)
     if values.ndim != 1 or len(values) == 0:
@@ -32,6 +50,8 @@ def holm_adjust(
     count = len(values)
     order = np.argsort(values, kind="stable")
     ordered = values[order]
+    # Multiply the i-th smallest p-value by m - i + 1, then take the running
+    # maximum so adjusted values never decrease along the step-down order.
     adjusted_ordered = np.maximum.accumulate(ordered * np.arange(count, 0, -1, dtype=float))
     adjusted_ordered = np.minimum(adjusted_ordered, 1.0)
     adjusted = np.empty(count, dtype=float)
@@ -40,17 +60,45 @@ def holm_adjust(
 
 
 class SurvivalHypothesisTests:
-    """Hypothesis testing for survival group differences and model benchmark validation."""
+    """Legacy rank tests and p-value corrections for model score vectors.
+
+    The rank tests treat fold scores as independent, which repeated
+    cross-validation does not satisfy; confirmatory contrasts use
+    :mod:`src.statistics.repeated_cv` instead.
+    """
 
     @staticmethod
     def wilcoxon_signed_rank(scores_a: np.ndarray, scores_b: np.ndarray) -> tuple[float, float]:
-        """Perform a paired Wilcoxon signed-rank test."""
+        """Run SciPy's two-sided paired Wilcoxon signed-rank test.
+
+        Args:
+            scores_a: Model A scores of shape (n_pairs,).
+            scores_b: Model B scores on the same observations and score scale.
+
+        Returns:
+            Test statistic and two-sided p-value, using SciPy's default
+            method and zero-difference handling.
+
+        Raises:
+            ValueError: The supplied samples are unsupported by SciPy's test.
+        """
         stat, p_val = wilcoxon(scores_a, scores_b)
         return float(stat), float(p_val)
 
     @staticmethod
     def friedman_test(*args: np.ndarray) -> tuple[float, float]:
-        """Performs Friedman test across multiple model score vectors."""
+        """Run SciPy's Friedman test across matched score vectors.
+
+        Args:
+            *args: At least three model score vectors of equal length,
+                aligned on the same observations and score scale.
+
+        Returns:
+            Friedman statistic and its chi-square-reference p-value.
+
+        Raises:
+            ValueError: The number or lengths of samples are unsupported.
+        """
         stat, p_val = friedmanchisquare(*args)
         return float(stat), float(p_val)
 
@@ -58,9 +106,24 @@ class SurvivalHypothesisTests:
     def multiple_comparison_correction(
         p_values: list[float], method: str = "bonferroni"
     ) -> list[float]:
-        """
-        Applies multiple-testing p-value correction.
-        Supported methods: 'bonferroni', 'holm', 'fdr_bh' (Benjamini-Hochberg).
+        """Return multiplicity-adjusted p-values in their original order.
+
+        ``"bonferroni"`` and ``"holm"`` control family-wise error under
+        arbitrary dependence. ``"fdr_bh"`` is the Benjamini-Hochberg procedure;
+        its false discovery rate guarantee assumes independent or suitable
+        positively dependent tests. A single valid p-value is returned unchanged
+        before the method name is checked.
+
+        Args:
+            p_values: Non-empty one-dimensional finite p-values in [0, 1].
+            method: ``"bonferroni"``, ``"holm"`` or ``"fdr_bh"``.
+
+        Returns:
+            Adjusted p-values in [0, 1], without rejection flags.
+
+        Raises:
+            ValueError: The p-values are invalid, or more than one p-value
+                is supplied with an unknown method.
         """
         p_arr = np.asarray(p_values, dtype=float)
         m = len(p_arr)
