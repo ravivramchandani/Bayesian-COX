@@ -58,11 +58,11 @@ def survival_horseshoe_scale(
 ) -> dict[str, Any]:
     """Choose the horseshoe global scale ``tau0`` from the training data.
 
-    Piironen and Vehtari choose ``tau0`` so that the prior expects about
-    ``p0`` clearly non-zero coefficients. Their formula is written for
-    Gaussian regression, where each coefficient's information is n / sigma^2.
-    This survival adaptation replaces that with the curvature (Fisher
-    information) of the PWE log-likelihood for each coefficient, as follows:
+    This training-only adaptation calibrates the approximate expected
+    effective dimension of the underlying unregularised horseshoe at fixed
+    ``tau = tau0`` to ``p0``. The Gaussian-regression information n / sigma^2
+    is replaced by diagonal, baseline-prior-adjusted profiled PWE local
+    curvature, as follows:
 
     1. For each baseline interval, find the posterior-mode log hazard at
        ``beta = 0`` under the frozen N(-2, 2^2) baseline prior. That is the
@@ -75,7 +75,10 @@ def survival_horseshoe_scale(
     3. Solve ``sum_j tau0 * sqrt(h_j) / (1 + tau0 * sqrt(h_j)) = p0`` for
        ``tau0``, with ``p0 = p / 2`` when p <= 5, otherwise 5.
 
-    This is a declared approximation, not an exact survival result.
+    Predictor correlations are omitted. The finite-slab expected dimension
+    is recorded separately; neither it nor the complexity averaged over the
+    global-scale hyperprior is calibrated to ``p0``. The curvature includes
+    the baseline prior and is not pure likelihood Fisher information.
 
     Args:
         design: Preprocessed training covariates, shape (n, p).
@@ -202,9 +205,11 @@ class ExtensionBayesianCox(CompactBayesianCox):
         fixed at c = 2, so c^2 = 4 in
         ``lambda_tilde^2 = c^2 lambda^2 / (c^2 + tau^2 lambda^2)``.
 
-        Catalytic: ``beta`` gets a flat base measure plus a Potential equal to
-        ``tau * q(beta)``, which gives the catalytic density ``exp(tau * q)``.
-        Fixed variant: tau = p. Adaptive variant: tau gets its own prior.
+        Catalytic: ``beta`` gets a flat base measure. The fixed variant adds
+        Potential ``p * q(beta)``. The adaptive variant uses
+        ``tau ~ Gamma(p + 2, rate=1)`` and Potential
+        ``tau * (q(beta) - kappa)``, giving joint log kernel
+        ``(p + 1) * log(tau) + tau * (q(beta) - kappa - 1)``.
         """
         if self.variant == "pv_horseshoe":
             self.details = survival_horseshoe_scale(

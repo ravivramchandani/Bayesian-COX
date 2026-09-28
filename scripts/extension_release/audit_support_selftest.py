@@ -244,7 +244,7 @@ class AuditSupportTests(unittest.TestCase):
         self.assert_failed_cleanly("implementation environment/tests receipt differs")
 
     def test_altered_domain_download_link_rejected_after_pin_passes(self) -> None:
-        """A wrong source download link is rejected even when the file hashes match."""
+        """A changed download size is rejected even after its file hash pin is refreshed."""
         name = "metabric/download_manifest.json"
         data = json.loads(self.fixture.source(name).read_text())
         data[0]["downloaded_size"] += 1

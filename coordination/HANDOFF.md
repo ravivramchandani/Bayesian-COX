@@ -82,9 +82,12 @@ full logs and 157 unchanged source hashes are in
 `~/bayes-cox-runs/extensions-20260928/transfer_validation_v2`. Preserve both
 validation versions in the final transfer. The latest stager now also
 requires `--failure-audit`: run its current `audit_rank_failures.py` against
-the original production code and the finished source grid. The resumable
-audit output is `~/bayes-cox-runs/extensions-20260928/failure_provenance_v1`;
-its present partial snapshots are supplemental provenance, not completion.
+the original production code and the finished source grid. Preserve the
+partial `~/bayes-cox-runs/extensions-20260928/failure_provenance_v1` and its
+original helper bytes. The later documentation pass changed the helper's byte
+identity, so the finished-grid audit must use the reviewed current helper in
+a fresh `failure_provenance_v2`; case bindings cannot mix helper versions.
+Partial snapshots are supplemental provenance, not completion.
 Staging/restoration bind every reviewed PDF/PNG/table, retained review form,
 inventory, 32 page renders and four contact sheets to the original passed
 receipt. Fresh restoration additionally repeats the rank reconstruction.
@@ -123,6 +126,36 @@ commits are checked; all 157 tested source hashes remain unchanged. Receipt:
 `coordination/recovery/2026-09-28-extension-receiving-guide-verification.json`.
 The tag/digest placeholders remain pending actual publication; syntax checking
 does not constitute a downloaded complete-package restoration.
+
+The extension documentation follow-up has now been independently reviewed and
+corrected. All 25 changed Python files match the stripped executable AST at
+`b4300fc`; all 140 changed Python files match `0ba4c3d`. All 153 Python modules
+and 1,051 class/function definitions are documented. All 349 repository tests
+pass in 88.60 s; normal Ruff, schemas and diff checks pass. All 157 tested
+source/build/lock hashes stayed unchanged during these gates, and both sealed
+scientific checkouts remain clean. Full logs are retained in
+`~/bayes-cox-runs/extensions-20260928/transfer_validation_v5_extension_documentation`.
+Preserve this fifth validation version with the earlier four. The review and
+compact source-bound receipt are
+`coordination/reviews/2026-09-28-extension-documentation-pass.md` and
+`coordination/recovery/2026-09-28-extension-documentation-verification.json`.
+The original analysis checkout's renderer/QA helper still owns final rendering
+and the actual review receipt; current clone documentation cannot substitute
+its different helper bytes for that binding.
+
+The owner attached `/Volumes/SSD980`. Its ExFAT filesystem failed the actual
+atomic no-replace preflight. A task-owned 200 GiB APFS sparse image now mounts
+at `/Volumes/BayesCoxExtensions20260928`; actual atomic commit and existing-
+destination preservation passed. No drive was reformatted or unrelated file
+changed. Keep this image mounted: clone staging remains on the source internal
+APFS volume, while package creation, the fresh remote download and one full
+restore use the external APFS image. Measure both actual package requirements
+and available space before transfer. The exact historical probe helper hash,
+paths and capacity are recorded in
+`coordination/recovery/2026-09-28-extension-external-storage-verification.json`;
+it is a filesystem preflight, not completed science restoration. The receiving
+guide's APFS prose and unchanged template are bound by
+`2026-09-28-extension-receiving-guide-apfs-verification.json`.
 
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
@@ -332,13 +365,16 @@ in the 2026-08-16 sequence below:
   of acceptance or of no further reviewer-requested analysis.
 - Do not edit the Overleaf thesis until the owner instructs.
 - Only one agent works on the repository at a time.
-- **Current state: core code/results programme complete and remotely verified.**
+- **Current state: baseline programme remotely verified; extensions active.**
   - The latest owner instruction requests everything Ravi needs on GitHub.
-    Evidence, full QA/log audit, restore guide and current plans are released.
-  - The coordinator and numerical stages exited successfully. Do not launch
-    a duplicate coordinator, robustness finisher or sampler run.
-  - New ADR-035 analyses and the ADR-038 catalytic arm remain planned.
-    T-180's actual addendum/freeze must precede their own results.
+    Baseline evidence, full QA/log audit and its restore guide are released.
+    Extension evidence still requires the full completion gates listed above.
+  - The baseline coordinator and numerical stages exited successfully.
+    Do not restart that completed programme or duplicate the active extension
+    workers, selected refits or coordinator.
+  - ADR-035–ADR-039 extensions run from sealed production `119476f` with
+    separately sealed analysis `8551d32`. T-180 was frozen before their own
+    outer-validation results; its frozen record remains unchanged.
   - The documentation-only pass is tracked in step 12; its worktree edits
     are separate from the sealed numerical code identity.
 
@@ -367,9 +403,9 @@ Completed integration gates and their evidence locations are in
   resume, robustness provenance and evidence verification. Original code is
   verified against checkpoint `44b6085`; live protocol, raw data, manifest and
   lock files retain their frozen bytes. New runs record every current source
-  and script file. Unfinished frozen robustness continues only in its
-  unchanged original checkout and runtime; current code cannot mix into its
-  cells.
+  and script file. Frozen robustness completed in its unchanged original
+  checkout and runtime; current code never mixed into its cells. Its complete
+  verified evidence is in the baseline releases listed above.
 - Primary results: the five estimable contrasts have maximum |ΔIBS| approximately 0.00034 and
   p ≥ 0.49. The smallest available p exceeds 0.05/5. Under Holm's
   step-down procedure, no estimable contrast can therefore be rejected,
@@ -488,8 +524,10 @@ Completed integration gates and their evidence locations are in
       extension files are now documented too. They cover the catalytic and
       calibrated-horseshoe priors, penalised Cox, decision curves, the
       release, transfer and audit scripts, and their tests. Every module and
-      all 1,051 definitions now have docstrings. Each commit passed the
-      stripped-AST gate; 349 tests pass and Ruff is clean.
+      all 1,051 class/function definitions and 153 modules have docstrings.
+      The independent correction review and source-bound fifth validation
+      version above supersede the initial wording. All 25 extension files
+      pass the stripped-AST gate; 349 tests pass and Ruff is clean.
 
 Tick each box when its step is complete, and record where its outputs are.
 
@@ -564,7 +602,9 @@ The inferential evidence is deliberately incomplete. `inference.json` records
 contrasts have all 25 paired folds, while the two GBSG2 and two METABRIC
 horseshoe contrasts have no confirmatory inference. No complete-family
 superiority, equivalence or multiplicity-controlled claim is accepted.
-Robustness production is running from the unchanged frozen worktree.
+Frozen robustness is complete and independently verified: 825 cells, with
+770 diagnostic passes and 55 failures, released separately from the primary
+record. The active extension production is the separate run listed above.
 Confirmatory explanation production completed, but its convergence gate
 failed and it permits no RQ3 claim. See the recovery checkpoint above.
 

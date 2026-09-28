@@ -115,7 +115,8 @@ def main() -> None:
     - the 92 selected reproduction refits and their receipts;
     - the rendered bundle (32 figures, 6 tables).
 
-    It then writes a staging record with every source commit and hash.
+    It then records both code commits and key source, review and audit hashes.
+    The package inventory later hashes every staged member.
     """
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("production-code", "analysis-code", "matched", "matched-manifest", "raw-source",

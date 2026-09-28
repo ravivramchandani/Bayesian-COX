@@ -137,8 +137,9 @@ command downloads only the five files it needs. The release also preserves
 the executed reference scripts, source/alignment audits and preparation logs
 as 55 separately labelled audit files. Supply their original reference root
 and preparation directory through `--reference-root` and `--preparation-dir`;
-later integration logs belong in the separate optional `--validation-logs`
-directory. The support helper rechecks their pinned hashes and domain links
+Supply all retained integration-validation versions through the separate
+`--validation-logs` directory for this programme's final transfer. The support
+helper rechecks their pinned hashes and domain links
 before copying, then rehashes every copy and records its inventory digest.
 The standard-library packer in
 `scripts/extension_release/` creates bounded tar.gz shards and an exact

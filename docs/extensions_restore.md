@@ -14,6 +14,13 @@ results and all 92 refits without fitting; the retained visual receipt describes
 the original review. Preserve failed outcomes and frozen files. Do not start
 duplicate numerical workers while the active host owns the extension run.
 
+Choose an APFS destination on the receiving Mac. The atomic final-directory
+commit failed its preflight on an ExFAT external volume on the active host.
+An ExFAT drive can hold a task-owned APFS disk image without reformatting the
+drive; both the image capacity and the underlying drive need enough free space.
+The active host has verified this arrangement. Its package, download and restore
+use the APFS image; clone staging stays on the original internal APFS volume.
+
 The following is a **template for use only after publication**. Replace every
 angle-bracket placeholder with the value from the committed release receipt.
 Run inside the latest clone after the baseline handoff has restored its evidence.

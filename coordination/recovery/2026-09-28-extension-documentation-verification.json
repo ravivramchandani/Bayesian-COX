@@ -1,0 +1,45 @@
+{
+  "archive": "coordination/recovery/2026-09-28-extension-documentation-gates.tar.gz",
+  "archive_bytes": 164322,
+  "archive_member_inventory_sha256": "45424644268af0fabf0006af807005b8955a88c6da2dee9c910d851a3dd118e7",
+  "archive_members_verified": 57,
+  "archive_sha256": "2007ff0a5a5a7bedf6651c95c1ed975ca02f70cadb250b44fc406d5630f85aad",
+  "baseline_and_extension_stripped_ast_matches": 140,
+  "documented_ast_nodes": 1204,
+  "documented_class_function_definitions": 1051,
+  "documented_modules": 153,
+  "extension_python_files": 25,
+  "extension_stripped_ast_matches": 25,
+  "external_validation_path": "/Users/macuser/bayes-cox-runs/extensions-20260928/transfer_validation_v5_extension_documentation",
+  "failure_audit_current_helper_sha256": "98cc7563c466e01d5bc72b8ba72a5beda771dceee16aeb3224a9639e1c1030fe",
+  "failure_audit_original_helper_sha256": "6b6655dd5d24a0f4b36efb55c945dcec2c32d6307eb1e94e906b44e9120883bc",
+  "final_failure_audit_output": "failure_provenance_v2",
+  "frozen_checkouts": [
+    {
+      "clean": true,
+      "expected_commit": "119476fef55b1eeb690527f234c1423440720d45",
+      "observed_commit": "119476fef55b1eeb690527f234c1423440720d45",
+      "path": "/Users/macuser/bayes-cox-runs/extensions-code-20260928-119476f",
+      "status": ""
+    },
+    {
+      "clean": true,
+      "expected_commit": "8551d326b02bfe88915cfd9eb50c6ca8e5690e3a",
+      "observed_commit": "8551d326b02bfe88915cfd9eb50c6ca8e5690e3a",
+      "path": "/Users/macuser/bayes-cox-runs/extensions-analysis-code-20260928-8551d32",
+      "status": ""
+    }
+  ],
+  "full_programme_gates": "1625-cell accounting, deep verification, 92 exact refits, actual visual QA, private release and fresh science restore remain pending",
+  "independent_corrections_receipt_sha256": "e29b1819f22b966d52b881a5af7bbc29b9f89d03d35c39af2992b16f7f737de7",
+  "repository_tests_passed": 349,
+  "repository_tests_seconds": 88.6,
+  "ruff_schemas_diff_checks": "passed",
+  "schema_version": 1,
+  "source_unchanged_during_and_after_validation": true,
+  "status": "extension_documentation_verified_scientific_completion_pending",
+  "tested_source_files": 157,
+  "tested_source_sha256": "3849ab7498cfce430c290ba17555d886be33c70c5d4f4d6153796d96a85963b1",
+  "validation_sha256": "371ad390920464208ed6348c252aaf13fb98be7a77b125bd4cbb645bb8304540",
+  "verified_utc": "2026-09-28T02:33:29.783185+00:00"
+}

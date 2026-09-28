@@ -201,8 +201,9 @@ def verify_and_restore(
     against the inventory. It is then read member by member in the recorded
     order: every path is checked for safety, every header for the fixed metadata
     written by ``package.py``, and every extracted file's size and SHA-256
-    against the inventory. The finished tree is published atomically, so a
-    failed restore leaves nothing behind.
+    against the inventory. The accepted tree is published atomically after
+    verification. The final cleanup removes temporary extraction and scratch
+    directories.
 
     Args:
         package_dir: Directory holding ``inventory.json`` and the shards.

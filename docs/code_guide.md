@@ -5,9 +5,11 @@ module map. `docs/study_protocol.md` is the analysis plan. Formal terms are
 defined in `coordination/GLOSSARY.md`.
 
 The [baseline documentation review](../coordination/reviews/2026-09-28-documentation-pass.md)
-records the verified documentation scope, corrected descriptions and existing
+records the verified baseline scope, corrected descriptions and existing
 code limitations. Its retained evidence includes the original drafts and proof
 that executable statements and imports stayed unchanged.
+The [extension documentation review](../coordination/reviews/2026-09-28-extension-documentation-pass.md)
+records the additional extension scope and corrected method descriptions.
 
 ## The study in one paragraph
 
@@ -45,8 +47,8 @@ Follow these steps in order. They are the core of the code.
    does the work for one fold and one model:
    - `FoldFeaturePreprocessor` (`src/data/fold_preprocessing.py`) learns
      imputation values, category levels and scaling from the **training
-     rows only**, then applies them to the validation rows. Nothing about the
-     validation patients leaks into the model.
+     rows only**, then applies them to the validation rows. Validation rows
+     do not determine the transform parameters.
    - `tune_candidate` (`src/pipelines/confirmatory/fitting.py`) picks the RSF
      and DeepSurv hyperparameters by inner three-fold cross-validation inside
      the training fold. Cox and the Bayesian models have nothing to tune.

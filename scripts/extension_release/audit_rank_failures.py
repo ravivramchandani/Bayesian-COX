@@ -144,9 +144,10 @@ def array_bytes(values: np.ndarray) -> bytes:
 def matrix_audit(values: np.ndarray, names: list[str]) -> dict[str, Any]:
     """Explain why a synthetic design matrix is rank-deficient.
 
-    Reports the rank, the columns that are identically zero, pairs of identical
-    non-zero clinical columns, and the smallest singular values. It also says
-    whether removing the zero columns restores full rank.
+    Reports the rank, columns whose maximum absolute value is at most
+    ``1e-12``, identical non-zero clinical columns and the smallest singular
+    values. It also says whether removing those numerical-zero columns
+    restores full rank.
     """
     singular = np.linalg.svd(values, compute_uv=False)
     rank = int(np.linalg.matrix_rank(values))

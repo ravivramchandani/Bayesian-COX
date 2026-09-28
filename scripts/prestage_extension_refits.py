@@ -18,8 +18,10 @@ def main() -> None:
 
     The selected cells are those with repeat 1 and fold 1. Before fitting, it
     checks that the production commit, manifest, matched data and every source
-    file are unchanged. Each refit is written once and compared with the source
-    cell's scientific content and traces. The worker waits for source cells that
+    file are unchanged. Each newly created refit is written once and compared
+    with the source cell's scientific content and traces. Existing refit cells
+    receive a content check here; the official verifier later repeats their
+    scientific and trace comparisons. The worker waits for source cells that
     do not exist yet, and stops when all its cells are prestaged.
     """
     parser = argparse.ArgumentParser(description=__doc__)

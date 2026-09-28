@@ -25,7 +25,7 @@ class ArchiveError(Exception):
 
 
 def canonical_bytes(value: Any) -> bytes:
-    """Encode a value as compact, key-sorted UTF-8 JSON, so equal values give identical bytes (and hashes)."""
+    """Encode a value as compact, key-sorted UTF-8 JSON for stable hashing."""
     return json.dumps(
         value, sort_keys=True, separators=(",", ":"), ensure_ascii=False,
         allow_nan=False,

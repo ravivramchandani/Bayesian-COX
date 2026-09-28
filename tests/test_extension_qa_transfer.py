@@ -105,7 +105,7 @@ def mutate(evidence, filename, change, *, rebind=False):
     """Edit one QA JSON file in place.
 
     With ``rebind=True``, also recompute the review and receipt hashes, so the
-    edit is consistently re-signed. This tests that the deeper checks still
+    edit is consistently rehashed and rebound. This tests that the deeper checks still
     catch it.
     """
     qa = evidence["qa"]
@@ -189,21 +189,21 @@ def test_missing_or_extra_review_image_is_rejected(evidence, kind):
 
 
 def test_rehashed_inventory_cannot_omit_contact_sheet(evidence):
-    """A re-signed inventory still cannot drop the contact sheet."""
+    """A rehashed inventory still cannot drop the contact sheet."""
     mutate(evidence, "qa_inventory.json", lambda value: value["contact_sheets"].pop(), rebind=True)
     with pytest.raises(ValueError, match="four indexed contact sheets"):
         verify(evidence)
 
 
 def test_rehashed_inventory_cannot_escape_page_render_directory(evidence):
-    """A re-signed inventory cannot point outside the page-render directory."""
+    """A rehashed inventory cannot point outside the page-render directory."""
     mutate(evidence, "qa_inventory.json", lambda value: value["figures"][0].update(page_render="../escaped.png"), rebind=True)
     with pytest.raises(ValueError, match="page-render path differs"):
         verify(evidence)
 
 
 def test_rehashed_inventory_cannot_duplicate_figure(evidence):
-    """A re-signed inventory cannot list the same figure twice."""
+    """A rehashed inventory cannot list the same figure twice."""
     def duplicate(value):
         """Replace the second figure entry with a copy of the first."""
         value["figures"][1] = copy.deepcopy(value["figures"][0])
@@ -214,7 +214,7 @@ def test_rehashed_inventory_cannot_duplicate_figure(evidence):
 
 @pytest.mark.parametrize("verdict", ["pending", "fail"])
 def test_consistently_rebound_nonpass_verdict_is_rejected(evidence, verdict):
-    """A review verdict other than pass is rejected, even when every hash is consistently re-signed."""
+    """A review verdict other than pass is rejected, even when every hash binding is refreshed."""
     mutate(evidence, "review.json", lambda value: value["figures"][0].update(verdict=verdict, issue="fixture issue"), rebind=True)
     review = json.loads((evidence["qa"] / "review.json").read_text())
     mutate(evidence, "visual_qa_receipt.json", lambda value: value.update(figures=review["figures"]))
@@ -227,7 +227,7 @@ def test_consistently_rebound_nonpass_verdict_is_rejected(evidence, verdict):
     {"reviewed_at_utc": "2026-09-28T03:00:00"},
 ])
 def test_rebound_missing_attestation_or_aware_timestamp_is_rejected(evidence, change):
-    """A review missing its attestation or a time-zone-aware timestamp is rejected, even when re-signed."""
+    """A review missing its attestation or timestamp time zone is rejected after rehashing."""
     mutate(evidence, "review.json", lambda value: value.update(change), rebind=True)
     receipt_change = {key: value for key, value in change.items()}
     mutate(evidence, "visual_qa_receipt.json", lambda value: value.update(receipt_change))
@@ -268,7 +268,7 @@ def test_contact_sheet_symlink_is_rejected(evidence):
 
 
 def test_rehashed_inventory_cannot_remove_table(evidence):
-    """A re-signed inventory cannot drop a table."""
+    """A rehashed inventory cannot drop a table."""
     mutate(evidence, "qa_inventory.json", lambda value: value["tables"].pop(), rebind=True)
     with pytest.raises(ValueError, match="inventory/order differs"):
         verify(evidence)

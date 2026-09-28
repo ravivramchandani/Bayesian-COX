@@ -1,0 +1,12 @@
+{
+  "bash_syntax_exit_code": 0,
+  "embedded_python_blocks_parsed": 2,
+  "external_volume_preflight_sha256": "405d19a19f6e6f4dc299d4114cc7cbcf3d55d2e18af4c6d1afbbd9d9bb9c8464",
+  "final_tag_and_digest": "pending publication",
+  "guide_sha256": "95bc4b4ec70cb9e556b32c5bc60a5dbd2fd5095f51fef2a0d3f7fb48ec1c290e",
+  "schema_version": 1,
+  "scope": "updated APFS destination prose, unchanged receiving template, syntax and actual external preflight bindings; no completed extension restoration claim",
+  "template_sha256": "69cc8daa0762bcaf1bb0a123dae2cf124f96cb468fe82e3dec02ce12108968d9",
+  "template_unchanged_from_v1": true,
+  "verified_utc": "2026-09-28T02:28:33.571206+00:00"
+}

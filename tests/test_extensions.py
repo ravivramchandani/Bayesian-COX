@@ -94,10 +94,11 @@ def prior_data() -> CatalyticData:
 
 
 def test_catalytic_prior_matches_executed_R() -> None:
-    """The catalytic kernel, its gradient, kappa and the adaptive joint density match the authors' R code (ADR-038 parity check).
+    """Prior arithmetic matches the executed R harness derived from the paper and Stan formulas.
 
     The fixture ``catalytic_r_reference.json`` holds values computed by executing
-    the reference R implementation on a small fixed case.
+    that harness on a small fixed case. Author/CRAN R weighted-mixture
+    implementation parity is checked separately.
     """
     data = prior_data()
     kappa, _ = catalytic_kappa(data)
@@ -192,9 +193,9 @@ def test_duplicate_gene_collapse_is_within_sample() -> None:
 def test_survival_scale_uses_actual_information_and_is_deterministic() -> None:
     """The horseshoe ``tau0`` calibration meets its target, is deterministic and scales correctly.
 
-    The expected number of non-zero coefficients must equal p0 (2 here), and
-    doubling the covariates must halve ``tau0``, because the information scales
-    with the square of the covariates.
+    The approximate underlying horseshoe effective dimension at fixed
+    ``tau = tau0`` must equal p0 (2 here). Doubling the covariates must halve
+    ``tau0``, because the curvature scales with their square.
     """
     rng = np.random.default_rng(37)
     x, t, e = rng.normal(size=(50, 4)), np.linspace(0.2, 4, 50), np.array([0, 1] * 25)
@@ -348,7 +349,7 @@ def test_pairing_rejects_different_patient_order() -> None:
 
 
 def test_saved_forecast_requires_shared_time_agreement() -> None:
-    """Rescoring stored predictions requires the requested times to match the saved horizons or grid."""
+    """Survival values agree where saved horizon and integration-grid times overlap."""
     p = {"risk": [1], "ibs_grid": [1, 2], "horizons": [1, 3],
          "survival_on_ibs_grid": [[0.8, 0.7]], "survival_at_horizons": [[0.8, 0.5]]}
     forecast = SavedForecast(p)

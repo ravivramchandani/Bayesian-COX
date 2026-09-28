@@ -1,0 +1,21 @@
+{
+  "atomic_no_replace_directory_commit": "passed",
+  "disk_usage_bytes": {
+    "free": 214404161536,
+    "total": 214538608640,
+    "used": 134447104
+  },
+  "existing_destination_preserved": "passed",
+  "filesystem": "APFS",
+  "helper_sha256": "23f2899de340ea88dfc4916817123a81d609f6586cc807307a6b21c5a4d5f38d",
+  "image": "/Volumes/SSD980/bayesian-cox-extensions-20260928/BayesCoxExtensions20260928.sparsebundle",
+  "image_capacity_bytes": 214748364800,
+  "mount_point": "/Volumes/BayesCoxExtensions20260928",
+  "other_external_files": "untouched",
+  "physical_filesystem": "ExFAT",
+  "physical_volume": "/Volumes/SSD980",
+  "schema_version": 1,
+  "scope": "actual mounted task-owned APFS-image path/space/atomic rename; not complete scientific restoration",
+  "staging_plan": "native APFS clone staging stays on original internal volume; package, fresh remote download and one full restore on external backed APFS image",
+  "verified_utc": "2026-09-28T02:09:43.211498+00:00"
+}

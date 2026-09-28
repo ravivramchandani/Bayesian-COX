@@ -1029,3 +1029,33 @@ syntax pass; sealed commits and all 157 tested Python/build/lock files are
 unchanged. Final tag/digest values remain pending the completed private release.
 Compact syntax/source receipt:
 `coordination/recovery/2026-09-28-extension-receiving-guide-verification.json`.
+
+## 2026-09-28 — Independently verified extension documentation corrections
+
+Reviewed the subsequent 25-file documentation follow-up against fixed Git
+blobs, then corrected seven method descriptions and six test/self-test finding
+groups. Independent rereading confirms all corrections and unchanged
+executable ASTs. The full gate confirms all 153 modules and 1,051 class/function
+definitions are documented, 25 extension and 140 combined files preserve
+executable syntax, and all 157 tested source/build/lock hashes remain unchanged
+during verification. All 349 tests pass in 88.60 s; normal Ruff, schemas and
+diff checks pass. Both sealed scientific checkouts remain clean.
+
+The source-bound fifth validation, exact reviewed hashes/patches, final
+sources, helpers and independent receipts are preserved in the 57-member
+`coordination/recovery/2026-09-28-extension-documentation-gates.tar.gz` and
+compact `2026-09-28-extension-documentation-verification.json`. The original
+rank-audit helper is retained separately; its changed documentation byte
+identity requires a fresh final `failure_provenance_v2`, preserving partial
+version 1. Renderer and actual visual-QA bindings still use analysis `8551d32`.
+
+The attached ExFAT SSD failed the actual atomic no-replace directory preflight.
+A task-owned 200 GiB APFS sparse image passed atomic commit and preservation
+of an existing destination. No drive reformat or unrelated-file change was
+performed. Package/download/fresh restore use that external APFS image; native
+clone staging remains on the source internal APFS volume. The receiving guide
+now states this requirement; its shell and two Python blocks remain unchanged
+and syntax-checked. Corrected unqualified stale baseline-running statements
+and made preservation of all validation versions explicit for final transfer.
+The numerical extension grid and its downstream completion gates remain active
+and pending; this documentation verification does not close them.

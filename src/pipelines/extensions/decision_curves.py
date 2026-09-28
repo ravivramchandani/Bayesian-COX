@@ -16,7 +16,7 @@ horizon, so their true status is unknown. Inverse probability of censoring
 weighting (IPCW) handles this. Patients whose status is known are
 up-weighted by 1 / (probability of remaining uncensored), estimated from the
 *training* fold with the reverse Kaplan–Meier method. Patients censored
-before the horizon get weight 0 but stay in the denominator n.
+at or before the horizon get weight 0 but stay in the denominator n.
 
 Everything is computed from the saved out-of-fold predictions; no model is
 refitted. The intervals are descriptive: they are conditional on the saved
@@ -42,7 +42,7 @@ def ipcw_state_weights(
     (the reverse Kaplan–Meier estimate). A validation patient with an event
     at time Y <= horizon gets event weight 1 / G(Y-), using G just before Y.
     A patient still event-free after the horizon gets event-free weight
-    1 / G(horizon). A patient censored before the horizon gets 0 in both.
+    1 / G(horizon). A patient censored at or before the horizon gets 0 in both.
 
     Args:
         training_time, training_event: Training-fold follow-up, used only to
@@ -60,7 +60,8 @@ def ipcw_state_weights(
 
     Raises:
         ValueError: The horizon is not supported by the training follow-up,
-            or G falls below ``minimum_g``.
+            G falls below ``minimum_g``, or fewer than ``minimum_at_risk``
+            training patients remain at risk at the horizon.
     """
     if horizon <= 0 or horizon >= np.max(training_time):
         raise ValueError("decision horizon outside training follow-up support")
@@ -95,7 +96,7 @@ def decision_contributions(
     """Return each patient's net-benefit contribution at each threshold.
 
     If treated, a patient contributes ``event_weight - p_t / (1 - p_t) *
-    event_free_weight``. The model's strategy treats a patient when their
+    free_weight``. The model's strategy treats a patient when their
     predicted risk (probability of an event by the horizon) is at least the
     threshold, and contributes 0 otherwise. Averaging contributions over
     patients gives net benefit.
@@ -103,7 +104,7 @@ def decision_contributions(
     Args:
         risk: Predicted absolute risk by the horizon, one value per patient,
             in [0, 1].
-        event_weight, event_free_weight: IPCW weights from
+        event_weight, free_weight: IPCW weights from
             :func:`ipcw_state_weights`.
         thresholds: Risk thresholds strictly between 0 and 1.
 
@@ -136,8 +137,9 @@ def patient_cluster_intervals(
     Args:
         contributions: Strategy name to array of shape
             (n_patients, n_repeats, n_thresholds), all in the same patient
-            and repeat order. Include ``"all"`` and ``"none"`` to get
-            differences against the defaults.
+            and repeat order. When any model strategy is present, both
+            ``"all"`` and ``"none"`` are required because both paired
+            differences are always constructed.
         n_bootstraps: Number of bootstrap draws (at least 20).
         seed: Random seed.
         cluster_ids: Optional labels; rows with the same label are resampled

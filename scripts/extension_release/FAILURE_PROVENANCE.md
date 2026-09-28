@@ -14,11 +14,16 @@ Use the latest clone's helper with the original production checkout:
   --production-code "$extension_code" \
   --run "$extension_home/run" \
   --matched "$extension_home/prepared/matched_metabric.parquet" \
-  --output "$extension_home/failure_provenance_v1"
+  --output "$extension_home/failure_provenance_v2"
 ```
 
 `extension_tools` is the current Git clone; `extension_code` is the sealed
 fitting checkout. The output must be outside production code/results.
+The helper's exact bytes are part of each case binding. If those bytes change,
+including a documentation-only edit, use a new output version and preserve the
+earlier audit. The active host retains its partial `failure_provenance_v1` with
+the original helper; the finished-grid audit uses the reviewed current helper
+in a fresh `failure_provenance_v2`. Neither version changes the frozen generator.
 The helper verifies fitted source hashes, memberships, seeds, outer
 preprocessing and Python/NumPy/pandas identity. Restored code archives without
 Git metadata are supported. Run it separately from a process that has already

@@ -76,7 +76,7 @@ def failure_module():
 
 
 def test_failure_transfer_preserves_supplemental_classification(failure_module, tmp_path):
-    """Transferred failure provenance keeps its supplemental (not thesis-evidence) classification."""
+    """Transferred failure provenance retains its supplemental classification."""
     args = failure_fixture(tmp_path, failure_module)
     before = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in tmp_path.rglob("*") if p.is_file()}
     result = failure_module["verify_failure_transfer"](*args)

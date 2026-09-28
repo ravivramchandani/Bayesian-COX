@@ -26,10 +26,12 @@ class PenalizedCox(BaseSurvivalModel):
 
     The penalty is on the per-subject (mean) scale of the log partial
     likelihood. Lasso and elastic net use scikit-survival's
-    ``CoxnetSurvivalAnalysis``, which works on that scale. Ridge uses
-    ``CoxPHSurvivalAnalysis``, whose objective sums over subjects, so the
-    penalty is multiplied by the number of training subjects to match. Tied
-    event times use the Breslow approximation.
+    ``CoxnetSurvivalAnalysis``, which uses the penalty directly on that scale.
+    Ridge's ``CoxPHSurvivalAnalysis`` minimises
+    ``-ell_B / n + alpha * ||beta||^2 / (2 * n)``. Setting
+    ``alpha = n * penalty`` therefore gives the intended mean-likelihood
+    objective with penalty ``penalty * ||beta||^2 / 2``. Tied event times
+    use the Breslow approximation.
     """
 
     def __init__(self, kind: str, penalty: float) -> None:
@@ -67,7 +69,11 @@ class PenalizedCox(BaseSurvivalModel):
         return self
 
     def predict_risk(self, X: pd.DataFrame) -> np.ndarray:
-        """Return the linear predictor ``x beta`` (log relative hazard); higher is riskier."""
+        """Return the estimator's log relative-risk score; higher is riskier.
+
+        Ridge returns ``x beta``. Lasso and elastic net subtract Coxnet's
+        training-centering offset from ``x beta``.
+        """
         return np.asarray(self.estimator.predict(X), dtype=float)
 
     def predict_survival(self, X: pd.DataFrame, eval_times: np.ndarray) -> np.ndarray:
