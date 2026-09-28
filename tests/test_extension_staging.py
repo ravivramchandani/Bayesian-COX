@@ -53,6 +53,7 @@ def source_fixture(tmp_path: Path, broken_field: str | None = None) -> tuple:
 
 @pytest.fixture
 def staging_module(monkeypatch):
+    """Load ``stage_extensions.py`` as a module namespace for testing."""
     directory = Path(__file__).resolve().parents[1] / "scripts/extension_release"
     monkeypatch.syspath_prepend(str(directory))
     return runpy.run_path(str(directory / "stage_extensions.py"))
@@ -60,10 +61,12 @@ def staging_module(monkeypatch):
 
 @pytest.fixture
 def source_verifier(staging_module):
+    """Return the staging script's ``verify_source_inputs`` function."""
     return staging_module["verify_source_inputs"]
 
 
 def test_frozen_source_inventory_is_bound(source_verifier, tmp_path):
+    """The staged source inventory is bound to its frozen hashes."""
     args = source_fixture(tmp_path)
     hashes = source_verifier(*args)
     assert hashes["data/matched_metabric.parquet"] == sha256_file(args[2])
@@ -73,6 +76,7 @@ def test_frozen_source_inventory_is_bound(source_verifier, tmp_path):
 
 @pytest.mark.parametrize("target", ["matched", "preparation", "report", "raw", "analysis"])
 def test_altered_transfer_source_is_rejected(source_verifier, tmp_path, target):
+    """An altered measured-source file is rejected before assembly."""
     args = source_fixture(tmp_path)
     root, _, matched, prep, raw, report = args
     analysis = tmp_path / "analysis"
@@ -86,12 +90,14 @@ def test_altered_transfer_source_is_rejected(source_verifier, tmp_path, target):
 
 @pytest.mark.parametrize("field", ["matched_sha256", "clinical_sha256", "known_pairs_sha256", "source_sha256"])
 def test_inconsistent_frozen_preparation_is_rejected(source_verifier, tmp_path, field):
+    """An inconsistent frozen preparation record is rejected."""
     with pytest.raises(ValueError):
         source_verifier(*source_fixture(tmp_path, field))
 
 
 @pytest.mark.skipif(sys.platform != "darwin", reason="native clonefile is macOS-specific")
 def test_native_clone_is_independent_and_refuses_overwrite(staging_module, tmp_path):
+    """A copy-on-write clone is independent of its source and never overwrites an existing file."""
     source, target = tmp_path / "original", tmp_path / "clone"
     source.write_bytes(b"immutable input" * 1024)
     staging_module["copy_file"](source, target, clone=True)
@@ -106,6 +112,7 @@ def test_native_clone_is_independent_and_refuses_overwrite(staging_module, tmp_p
 
 @pytest.mark.skipif(sys.platform != "darwin", reason="native clonefile is macOS-specific")
 def test_native_clone_tree_preserves_separate_files(staging_module, tmp_path):
+    """Cloning a directory tree keeps every file as a separate copy."""
     source, target = tmp_path / "original_tree", tmp_path / "cloned_tree"
     (source / "nested").mkdir(parents=True)
     (source / "nested/a").write_bytes(b"a")

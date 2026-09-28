@@ -55,6 +55,7 @@ FIXTURE = json.loads((Path(__file__).parent / "fixtures/extensions/catalytic_r_r
 
 
 def test_cell_identity_checks_condition_seed_and_missing_nullable_metadata() -> None:
+    """A stored extension cell is rejected if its condition, seed or required (possibly null) metadata differ from the plan."""
     raw = pd.DataFrame({"subject_id": ["a", "b", "c"]})
     job = SimpleNamespace(cell_id="fixture", dataset="gbsg2", model="ridge", repeat=1, fold=1,
                           setting="clinical", condition="full", gene_budget=0, censoring_cutoff=None,
@@ -73,6 +74,7 @@ def test_cell_identity_checks_condition_seed_and_missing_nullable_metadata() -> 
 
 
 def test_trace_verifier_accepts_recorded_nuts_metadata_but_rejects_alterations() -> None:
+    """The trace verifier accepts the NUTS metadata as recorded and rejects any altered value."""
     trace = SimpleNamespace(posterior=SimpleNamespace(sizes={"chain": 4, "draw": 2000}))
     observed = {"converged": True, "max_rhat": 1.001}
     recorded = {**observed, "method": "nuts", "n_chains": 4, "n_draws": 2000}
@@ -85,12 +87,18 @@ def test_trace_verifier_accepts_recorded_nuts_metadata_but_rejects_alterations()
 
 
 def prior_data() -> CatalyticData:
+    """Build the catalytic synthetic data stored in the R reference fixture."""
     i = FIXTURE["inputs"]
     return CatalyticData(np.array(i["synthetic"]["X"]), np.array(i["synthetic"]["time"]),
                         i["prior"]["hazard_constant"])
 
 
 def test_catalytic_prior_matches_executed_R() -> None:
+    """The catalytic kernel, its gradient, kappa and the adaptive joint density match the authors' R code (ADR-038 parity check).
+
+    The fixture ``catalytic_r_reference.json`` holds values computed by executing
+    the reference R implementation on a small fixed case.
+    """
     data = prior_data()
     kappa, _ = catalytic_kappa(data)
     assert_allclose(kappa, FIXTURE["prior"]["kappa_without_log_h0"], atol=1e-9)
@@ -104,6 +112,11 @@ def test_catalytic_prior_matches_executed_R() -> None:
 
 
 def test_weighted_mixture_matches_executed_R_and_valid_survival() -> None:
+    """The weighted mixture estimator reproduces the R coefficients and optimum, gives valid survival curves, and does not depend on the time unit.
+
+    Valid means finite, non-increasing and equal to 1 at time 0. Rescaling times
+    by 10 must give identical coefficients and the same curves.
+    """
     i = FIXTURE["inputs"]
     model = WeightedMixtureCox(prior_data(), i["wme"]["tau"])
     model.fit(pd.DataFrame(i["observed"]["X"]), np.array(i["observed"]["time"]), np.array(i["observed"]["event"]))
@@ -121,6 +134,7 @@ def test_weighted_mixture_matches_executed_R_and_valid_survival() -> None:
 
 @pytest.mark.parametrize("variant", ["catalytic_fixed", "catalytic_adaptive"])
 def test_pymc_joint_prior_matches_density_differences(variant: str) -> None:
+    """The catalytic prior as built in PyMC has the same log-density differences as the reference kernel, for both the fixed and adaptive variants."""
     model = ExtensionBayesianCox(variant, synthetic=prior_data())
     with pm.Model() as graph:
         model._coefficient_prior(3)
@@ -139,6 +153,7 @@ def test_pymc_joint_prior_matches_density_differences(variant: str) -> None:
 
 
 def test_synthetic_source_categories_and_training_only_gene_selection() -> None:
+    """Synthetic covariates use only observed source categories, and genes are selected from training rows alone."""
     frame = pd.DataFrame({"z": np.arange(30), "group": ["A", "B", "C"] * 10,
                           "gene:1": np.arange(30) * 2, "gene:2": np.arange(30) / 5})
     p = ExtensionPreprocessor({"numeric": ["z"], "categorical": ["group"]}, 1).fit(frame)
@@ -159,11 +174,13 @@ def test_synthetic_source_categories_and_training_only_gene_selection() -> None:
 
 
 def test_prior_data_rejects_dependent_columns() -> None:
+    """Synthetic prior data with linearly dependent columns (a rank-deficient design) are rejected."""
     with pytest.raises(ValueError, match="rank"):
         CatalyticData(np.ones((20, 2)), np.ones(20), 1)
 
 
 def test_duplicate_gene_collapse_is_within_sample() -> None:
+    """Duplicate gene probes are combined within each sample, never across samples."""
     raw = pd.DataFrame({"Hugo_Symbol": ["A", "alias", "B"], "Entrez_Gene_Id": [1, 1, 2],
                         "sample1": [2, 4, 8], "sample2": [4, np.nan, 12]})
     result = collapse_expression(raw)
@@ -173,6 +190,12 @@ def test_duplicate_gene_collapse_is_within_sample() -> None:
 
 
 def test_survival_scale_uses_actual_information_and_is_deterministic() -> None:
+    """The horseshoe ``tau0`` calibration meets its target, is deterministic and scales correctly.
+
+    The expected number of non-zero coefficients must equal p0 (2 here), and
+    doubling the covariates must halve ``tau0``, because the information scales
+    with the square of the covariates.
+    """
     rng = np.random.default_rng(37)
     x, t, e = rng.normal(size=(50, 4)), np.linspace(0.2, 4, 50), np.array([0, 1] * 25)
     scale = survival_horseshoe_scale(x, t, e, np.array([0, 1, 2, 5]))
@@ -186,6 +209,7 @@ def test_survival_scale_uses_actual_information_and_is_deterministic() -> None:
 
 @pytest.mark.parametrize("kind", ["ridge", "lasso", "elastic_net"])
 def test_penalized_cox_produces_finite_survival(kind: str) -> None:
+    """Each penalised Cox model gives finite survival probabilities."""
     i = FIXTURE["inputs"]["observed"]
     x, t, e = pd.DataFrame(i["X"]), np.array(i["time"], float), np.array(i["event"])
     model = PenalizedCox(kind, 0.1).fit(x, t, e)
@@ -195,6 +219,7 @@ def test_penalized_cox_produces_finite_survival(kind: str) -> None:
 
 
 def test_decision_curve_reduces_to_binary_utility_without_censoring() -> None:
+    """Without censoring, IPCW net benefit equals the ordinary binary-outcome net benefit."""
     training_t = np.arange(1, 31, dtype=float)
     u, v, _ = ipcw_state_weights(training_t, np.ones(30, int), np.array([2, 12, 15]),
                                 np.ones(3, int), 10)
@@ -204,6 +229,7 @@ def test_decision_curve_reduces_to_binary_utility_without_censoring() -> None:
 
 
 def test_decision_curve_censoring_retains_denominator_and_support_gate() -> None:
+    """Early-censored patients stay in the net-benefit denominator, and a horizon without censoring support is refused."""
     t, e = np.arange(1, 31, dtype=float), np.ones(30, int)
     u, v, meta = ipcw_state_weights(t, e, np.array([2, 12, 3]), np.array([1, 0, 0]), 10)
     _, all_utility = decision_contributions(np.ones(3), u, v, np.array([0.5]))
@@ -214,6 +240,7 @@ def test_decision_curve_censoring_retains_denominator_and_support_gate() -> None
 
 
 def test_decision_bootstrap_clusters_repeats_and_pairs_defaults() -> None:
+    """The decision bootstrap averages each patient's repeats first and uses the same draws for the model and the default strategies."""
     v = np.array([[[1], [0]], [[0], [-1]], [[1], [1]]], dtype=float)
     result = patient_cluster_intervals({"model": v, "all": v, "none": np.zeros_like(v)},
                                       n_bootstraps=100, seed=51)
@@ -224,6 +251,7 @@ def test_decision_bootstrap_clusters_repeats_and_pairs_defaults() -> None:
 
 
 def test_compact_likelihood_and_gradient_equal_frozen_interval_expansion() -> None:
+    """The compact likelihood gives the same log density and gradient as the frozen subject-interval expansion."""
     x = np.array(FIXTURE["inputs"]["observed"]["X"], float)
     t = np.array(FIXTURE["inputs"]["observed"]["time"], float)
     e = np.array(FIXTURE["inputs"]["observed"]["event"])
@@ -247,11 +275,17 @@ def test_compact_likelihood_and_gradient_equal_frozen_interval_expansion() -> No
 
 
 def test_catalytic_prior_sampler_has_no_real_likelihood_and_no_parent_collision(monkeypatch) -> None:
+    """Catalytic prior draws come from a separate, data-free PyMC model sampled with NUTS.
+
+    Forward prior sampling must never be called, because it ignores the Potential
+    term that defines the catalytic prior.
+    """
     import arviz as az
     model = ExtensionBayesianCox("catalytic_adaptive", synthetic=prior_data())
     model.feature_names = ["a", "b", "c"]
     model.cutoffs_scaled = np.array([0, 1, 2])
     def fake_sample(**kwargs):
+        """Stand-in for ``pm.sample``: assert that the active model has no parent and no observed data."""
         current = pm.modelcontext(None)
         assert current.parent is None and not current.observed_RVs
         return az.from_dict(posterior={"beta": np.zeros((4, 10, 3)), "log_lambda": np.zeros((4, 10, 2))})
@@ -265,6 +299,7 @@ def test_catalytic_prior_sampler_has_no_real_likelihood_and_no_parent_collision(
 
 
 def test_full_grid_has_correct_distinct_fits_and_reuses_full_rq2_anchors() -> None:
+    """The planned extension grid has the expected number of distinct fits and reuses the full-data RQ2 anchor cells."""
     from src.data.cohorts import load_analysis_dataset
     root = Path(__file__).resolve().parents[1]
     specs = read_mapping(root / "config/datasets.yaml")
@@ -282,6 +317,7 @@ def test_full_grid_has_correct_distinct_fits_and_reuses_full_rq2_anchors() -> No
 
 
 def test_checkpoint_rejects_tampering(tmp_path: Path) -> None:
+    """A saved extension checkpoint whose content was altered is rejected."""
     cell = {"cell_id": "unit_fixture", "status": "failed", "message": "known failure"}
     cell["cell_content_sha256"] = canonical_json_hash(cell)
     path = tmp_path / "cell.json"
@@ -294,6 +330,7 @@ def test_checkpoint_rejects_tampering(tmp_path: Path) -> None:
 
 
 def test_incomplete_families_never_gain_holm_rejection_claims() -> None:
+    """A contrast family with missing members never reports a Holm rejection (ADR-033 principle)."""
     families = extension_families([], [])
     assert {k: v["expected_contrasts"] for k, v in families.items()} == {
         "penalized_vs_original_priors": 27, "calibrated_vs_adr032_horseshoe": 3,
@@ -303,6 +340,7 @@ def test_incomplete_families_never_gain_holm_rejection_claims() -> None:
 
 
 def test_pairing_rejects_different_patient_order() -> None:
+    """Paired comparisons refuse predictions stored in a different patient order."""
     a = {"repeat": 1, "fold": 1, "status": "complete", "predictions": {"subject_ids": ["a", "b"]}}
     b = {**a, "predictions": {"subject_ids": ["b", "a"]}}
     with pytest.raises(ValueError, match="subject_ids"):
@@ -310,6 +348,7 @@ def test_pairing_rejects_different_patient_order() -> None:
 
 
 def test_saved_forecast_requires_shared_time_agreement() -> None:
+    """Rescoring stored predictions requires the requested times to match the saved horizons or grid."""
     p = {"risk": [1], "ibs_grid": [1, 2], "horizons": [1, 3],
          "survival_on_ibs_grid": [[0.8, 0.7]], "survival_at_horizons": [[0.8, 0.5]]}
     forecast = SavedForecast(p)
@@ -322,9 +361,12 @@ def test_saved_forecast_requires_shared_time_agreement() -> None:
 
 
 def test_later_fit_exception_retains_earlier_failed_diagnostics(monkeypatch) -> None:
+    """When a later fit attempt crashes, the diagnostics of the earlier failed attempt are kept."""
     def factory(*args, **kwargs):
+        """Build a fake model whose second attempt raises."""
         attempt = kwargs["attempt"]
         def fit(*args):
+            """Raise on attempt index 1; succeed otherwise."""
             if attempt == 1:
                 raise RuntimeError("sampler crashed on second attempt")
         return SimpleNamespace(fit=fit, diagnostics={"converged": False}, target_accept=0.999,
@@ -339,15 +381,20 @@ def test_later_fit_exception_retains_earlier_failed_diagnostics(monkeypatch) -> 
 
 
 def test_nested_tuning_rejects_early_termination_warning_by_category(monkeypatch) -> None:
+    """An inner-CV candidate that warns of early optimiser termination is recorded as failed and not selected."""
     i = FIXTURE["inputs"]["observed"]
     frame = pd.DataFrame(i["X"], columns=["x", "b", "c"])
     class Model:
+        """Fake penalised model that warns for penalty 0.1 and predicts constant survival."""
         def __init__(self, penalty):
+            """Remember the penalty."""
             self.penalty = penalty
         def fit(self, *args):
+            """Emit a convergence warning for the penalty 0.1 only."""
             if self.penalty == 0.1:
                 warnings.warn("Optimization terminated early", ConvergenceWarning, stacklevel=2)
         def predict_survival(self, x, grid):
+            """Return survival 0.8 for every subject and time."""
             return np.ones((len(x), len(grid))) * 0.8
     monkeypatch.setattr("src.pipelines.extensions.fitting.make_model",
                         lambda key, params, *a, **kw: Model(params["penalty"]))
@@ -362,6 +409,7 @@ def test_nested_tuning_rejects_early_termination_warning_by_category(monkeypatch
 
 
 def test_biological_aliases_are_bootstrapped_together() -> None:
+    """Rows that are the same biological patient are resampled together in the decision bootstrap."""
     values = np.array([[[1]], [[-1]], [[0.3]], [[0.3]]])
     result = patient_cluster_intervals({"model": values, "all": values, "none": np.zeros_like(values)},
                                       n_bootstraps=100, seed=61, cluster_ids=["same", "same", "other", "other"])
@@ -370,12 +418,14 @@ def test_biological_aliases_are_bootstrapped_together() -> None:
 
 
 def test_initializer_creates_nested_output_before_exclusive_manifest_claim(tmp_path: Path, monkeypatch) -> None:
+    """Run initialisation creates the output directories before exclusively claiming the manifest."""
     import src.pipelines.extensions.runner as runner
     from src.pipelines.extensions.runner import initialize_extension_run
     freeze = {"sha256": {}}
     freeze["content_sha256"] = canonical_json_hash(freeze)
     config = {"base_seed": 260817}
     def mappings(path):
+        """Stand-in configuration reader returning minimal freeze, extension and dataset mappings."""
         if path.name == "extension_protocol_freeze.json":
             return freeze
         if path.name == "extensions.yaml":

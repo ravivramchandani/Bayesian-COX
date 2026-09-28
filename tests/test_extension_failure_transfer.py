@@ -70,11 +70,13 @@ def failure_fixture(tmp_path: Path, module: dict) -> tuple[Path, Path, Path]:
 
 @pytest.fixture
 def failure_module():
+    """Load ``failure_transfer.py`` as a module namespace for testing."""
     path = Path(__file__).resolve().parents[1] / "scripts/extension_release/failure_transfer.py"
     return runpy.run_path(str(path))
 
 
 def test_failure_transfer_preserves_supplemental_classification(failure_module, tmp_path):
+    """Transferred failure provenance keeps its supplemental (not thesis-evidence) classification."""
     args = failure_fixture(tmp_path, failure_module)
     before = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in tmp_path.rglob("*") if p.is_file()}
     result = failure_module["verify_failure_transfer"](*args)
@@ -85,6 +87,7 @@ def test_failure_transfer_preserves_supplemental_classification(failure_module, 
 
 @pytest.mark.parametrize("broken", ["array", "case", "helper", "source", "missing_case", "extra_case"])
 def test_failure_transfer_rejects_changed_or_missing_provenance(failure_module, tmp_path, broken):
+    """Changed or missing failure provenance is rejected."""
     run, audit, helper = failure_fixture(tmp_path, failure_module)
     case = audit / "cases/fixture_0000"
     if broken == "missing_case":
@@ -100,6 +103,7 @@ def test_failure_transfer_rejects_changed_or_missing_provenance(failure_module, 
 
 
 def test_failure_transfer_requires_complete_source_grid(failure_module, tmp_path):
+    """Failure transfer requires the complete planned source grid."""
     run, audit, helper = failure_fixture(tmp_path, failure_module)
     (run / "cells/fixture_0001.json").unlink()
     with pytest.raises(ValueError, match="complete original grid"):

@@ -19,15 +19,18 @@ expected_names, verify_visual_transfer = module["expected_names"], module["verif
 
 
 def digest(path: Path) -> str:
+    """Return the SHA-256 of a file."""
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def write(path: Path, value: dict) -> None:
+    """Write indented, key-sorted JSON to ``path``."""
     path.write_text(json.dumps(value, sort_keys=True, indent=2) + "\n")
 
 
 @pytest.fixture
 def evidence(tmp_path):
+    """Build a small, self-consistent set of run, rendered and visual-QA files with matching hashes."""
     run, rendered, qa = (tmp_path / name for name in ("run", "rendered", "qa"))
     for root in (run, rendered, qa):
         root.mkdir()
@@ -93,11 +96,18 @@ def evidence(tmp_path):
 
 
 def verify(evidence):
+    """Run the transfer verifier on the fixture's evidence."""
     return verify_visual_transfer(evidence["qa"], evidence["rendered"], evidence["run"],
                                   qa_helper=evidence["helper"], renderer=evidence["renderer"])
 
 
 def mutate(evidence, filename, change, *, rebind=False):
+    """Edit one QA JSON file in place.
+
+    With ``rebind=True``, also recompute the review and receipt hashes, so the
+    edit is consistently re-signed. This tests that the deeper checks still
+    catch it.
+    """
     qa = evidence["qa"]
     value = json.loads((qa / filename).read_text())
     change(value)
@@ -114,6 +124,7 @@ def mutate(evidence, filename, change, *, rebind=False):
 
 
 def test_relocated_paths_pass_without_opening_original_host(evidence):
+    """Evidence moved to new paths still verifies, without reading anything on the original machine."""
     result = verify(evidence)
     assert result["status"] == "preserved_visual_qa_transfer_verified"
     assert (result["figure_count"], result["table_count"], result["page_render_count"], result["contact_sheet_count"]) == (32, 6, 32, 4)
@@ -121,6 +132,7 @@ def test_relocated_paths_pass_without_opening_original_host(evidence):
 
 
 def test_repeated_validation_is_read_only_and_reproducible(evidence):
+    """Running the verifier twice changes no file and gives the same result."""
     parent = evidence["qa"].parent
     before = {str(p.relative_to(parent)): digest(p) for p in parent.rglob("*") if p.is_file()}
     first, second = verify(evidence), verify(evidence)
@@ -131,6 +143,7 @@ def test_repeated_validation_is_read_only_and_reproducible(evidence):
 
 @pytest.mark.parametrize("filename", ["qa_inventory.json", "review.json", "visual_qa_receipt.json"])
 def test_missing_bound_record_is_rejected(evidence, filename):
+    """Missing a hash-bound record is rejected."""
     (evidence["qa"] / filename).unlink()
     with pytest.raises(ValueError, match="missing or linked regular file"):
         verify(evidence)
@@ -138,6 +151,7 @@ def test_missing_bound_record_is_rejected(evidence, filename):
 
 @pytest.mark.parametrize("filename", ["qa_inventory.json", "review.json"])
 def test_record_edit_after_receipt_is_rejected(evidence, filename):
+    """A record edited after the receipt was issued is rejected."""
     mutate(evidence, filename, lambda value: value.update(unbound_note="changed"))
     with pytest.raises(ValueError, match="hash binding differs"):
         verify(evidence)
@@ -145,6 +159,7 @@ def test_record_edit_after_receipt_is_rejected(evidence, filename):
 
 @pytest.mark.parametrize("key", ["helper", "renderer"])
 def test_code_binding_rejects_changed_helper_or_renderer(evidence, key):
+    """A changed QA helper or renderer script breaks the code binding."""
     evidence[key].write_text("# changed code\n")
     with pytest.raises(ValueError, match="QA source binding differs"):
         verify(evidence)
@@ -152,6 +167,7 @@ def test_code_binding_rejects_changed_helper_or_renderer(evidence, key):
 
 @pytest.mark.parametrize("kind", ["page", "sheet", "pdf", "png", "csv"])
 def test_changed_reviewed_artifact_is_rejected(evidence, kind):
+    """Changing a reviewed figure or table is rejected."""
     name = expected_names()[0]
     paths = {"page": evidence["qa"] / f"page_renders/01_{name}.png",
              "sheet": evidence["qa"] / "contact_sheets/sheet_01.png",
@@ -164,6 +180,7 @@ def test_changed_reviewed_artifact_is_rejected(evidence, kind):
 
 @pytest.mark.parametrize("kind", ["page", "sheet"])
 def test_missing_or_extra_review_image_is_rejected(evidence, kind):
+    """A missing or unexpected review image is rejected."""
     directory = evidence["qa"] / ("page_renders" if kind == "page" else "contact_sheets")
     next(directory.iterdir()).unlink()
     (directory / "extra.png").write_bytes(b"extra")
@@ -172,19 +189,23 @@ def test_missing_or_extra_review_image_is_rejected(evidence, kind):
 
 
 def test_rehashed_inventory_cannot_omit_contact_sheet(evidence):
+    """A re-signed inventory still cannot drop the contact sheet."""
     mutate(evidence, "qa_inventory.json", lambda value: value["contact_sheets"].pop(), rebind=True)
     with pytest.raises(ValueError, match="four indexed contact sheets"):
         verify(evidence)
 
 
 def test_rehashed_inventory_cannot_escape_page_render_directory(evidence):
+    """A re-signed inventory cannot point outside the page-render directory."""
     mutate(evidence, "qa_inventory.json", lambda value: value["figures"][0].update(page_render="../escaped.png"), rebind=True)
     with pytest.raises(ValueError, match="page-render path differs"):
         verify(evidence)
 
 
 def test_rehashed_inventory_cannot_duplicate_figure(evidence):
+    """A re-signed inventory cannot list the same figure twice."""
     def duplicate(value):
+        """Replace the second figure entry with a copy of the first."""
         value["figures"][1] = copy.deepcopy(value["figures"][0])
     mutate(evidence, "qa_inventory.json", duplicate, rebind=True)
     with pytest.raises(ValueError, match="inventory/order differs"):
@@ -193,6 +214,7 @@ def test_rehashed_inventory_cannot_duplicate_figure(evidence):
 
 @pytest.mark.parametrize("verdict", ["pending", "fail"])
 def test_consistently_rebound_nonpass_verdict_is_rejected(evidence, verdict):
+    """A review verdict other than pass is rejected, even when every hash is consistently re-signed."""
     mutate(evidence, "review.json", lambda value: value["figures"][0].update(verdict=verdict, issue="fixture issue"), rebind=True)
     review = json.loads((evidence["qa"] / "review.json").read_text())
     mutate(evidence, "visual_qa_receipt.json", lambda value: value.update(figures=review["figures"]))
@@ -205,6 +227,7 @@ def test_consistently_rebound_nonpass_verdict_is_rejected(evidence, verdict):
     {"reviewed_at_utc": "2026-09-28T03:00:00"},
 ])
 def test_rebound_missing_attestation_or_aware_timestamp_is_rejected(evidence, change):
+    """A review missing its attestation or a time-zone-aware timestamp is rejected, even when re-signed."""
     mutate(evidence, "review.json", lambda value: value.update(change), rebind=True)
     receipt_change = {key: value for key, value in change.items()}
     mutate(evidence, "visual_qa_receipt.json", lambda value: value.update(receipt_change))
@@ -214,7 +237,9 @@ def test_rebound_missing_attestation_or_aware_timestamp_is_rejected(evidence, ch
 
 @pytest.mark.parametrize("value", [True, None])
 def test_test_only_or_missing_classification_is_rejected(evidence, value):
+    """A receipt marked test-only, or missing that classification, is rejected."""
     def change(receipt):
+        """Remove the ``test_only`` field, or set it to the parametrised value."""
         if value is None:
             receipt.pop("test_only")
         else:
@@ -225,12 +250,14 @@ def test_test_only_or_missing_classification_is_rejected(evidence, value):
 
 
 def test_receipt_cannot_omit_one_verdict(evidence):
+    """A receipt missing any single figure verdict is rejected."""
     mutate(evidence, "visual_qa_receipt.json", lambda value: value["figures"].pop())
     with pytest.raises(ValueError, match="explicit bound pass verdicts"):
         verify(evidence)
 
 
 def test_contact_sheet_symlink_is_rejected(evidence):
+    """A contact sheet that is a symbolic link is rejected."""
     sheet = evidence["qa"] / "contact_sheets/sheet_01.png"
     copy = evidence["qa"] / "copied_sheet.png"
     copy.write_bytes(sheet.read_bytes())
@@ -241,18 +268,21 @@ def test_contact_sheet_symlink_is_rejected(evidence):
 
 
 def test_rehashed_inventory_cannot_remove_table(evidence):
+    """A re-signed inventory cannot drop a table."""
     mutate(evidence, "qa_inventory.json", lambda value: value["tables"].pop(), rebind=True)
     with pytest.raises(ValueError, match="inventory/order differs"):
         verify(evidence)
 
 
 def test_receipt_table_hash_must_match_retained_inventory(evidence):
+    """The receipt's table hash must match the retained inventory."""
     mutate(evidence, "visual_qa_receipt.json", lambda value: value["tables"][0].update(csv_sha256="0" * 64))
     with pytest.raises(ValueError, match="receipt table hashes differ"):
         verify(evidence)
 
 
 def test_source_completion_changes_are_rejected(evidence):
+    """Any change to the source run's completion record is rejected."""
     value = json.loads((evidence["run"] / "completion.json").read_text())
     write(evidence["run"] / "completion.json", value | {"extra": "changed"})
     with pytest.raises(ValueError, match="QA source binding differs"):
