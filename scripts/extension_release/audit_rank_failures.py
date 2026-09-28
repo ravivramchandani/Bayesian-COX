@@ -36,15 +36,18 @@ RANK_MESSAGE = 'synthetic design is not full column rank'
 
 
 def require(condition: bool, message: str) -> None:
+    """Raise ``ValueError(message)`` when ``condition`` is false."""
     if not condition:
         raise ValueError(message)
 
 
 def sha(data: bytes) -> str:
+    """Return the SHA-256 hex digest of ``data``."""
     return hashlib.sha256(data).hexdigest()
 
 
 def file_hash(path: Path) -> str:
+    """Hash a regular, non-linked file and reject it if its stat signature changes during the read."""
     require(path.is_file() and not path.is_symlink(), f'missing or linked audit input: {path}')
     before = path.stat()
     digest = hashlib.sha256()
@@ -59,16 +62,19 @@ def file_hash(path: Path) -> str:
 
 
 def canonical_hash(value: Any) -> str:
+    """Return the SHA-256 of a value's compact, key-sorted JSON encoding."""
     return sha(json.dumps(value, sort_keys=True, separators=(',', ':'),
                           ensure_ascii=False, allow_nan=False).encode('utf-8'))
 
 
 def json_bytes(value: Any) -> bytes:
+    """Encode a value as indented, key-sorted UTF-8 JSON with a trailing newline."""
     return (json.dumps(value, sort_keys=True, indent=2, ensure_ascii=False,
                        allow_nan=False) + '\n').encode('utf-8')
 
 
 def read_json(path: Path) -> tuple[dict[str, Any], str]:
+    """Read a JSON file, confirming it did not change during the read; return the value and the file hash."""
     before = file_hash(path)
     value = json.loads(path.read_bytes())
     require(file_hash(path) == before, f'audit JSON changed during read: {path}')
@@ -76,6 +82,12 @@ def read_json(path: Path) -> tuple[dict[str, Any], str]:
 
 
 def write_once(path: Path, payload: bytes) -> None:
+    """Publish ``payload`` at ``path`` unless it already exists with identical bytes.
+
+    The bytes are written to a temporary file and hard-linked into place, which
+    never replaces an existing file. An existing or concurrently written file
+    must have exactly the same hash, which makes the audit safe to resume.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
     require(not any(p.is_symlink() for p in path.parents), 'linked audit-output ancestor refused')
     if path.exists() or path.is_symlink():
@@ -97,6 +109,7 @@ def write_once(path: Path, payload: bytes) -> None:
 
 
 def publish_directory(source: Path, target: Path) -> None:
+    """Rename ``source`` to ``target`` atomically, failing instead of replacing an existing target (macOS and Linux only)."""
     if sys.platform == 'darwin':
         libc = ctypes.CDLL(None, use_errno=True)
         rename = libc.renamex_np
@@ -121,6 +134,7 @@ def publish_directory(source: Path, target: Path) -> None:
 
 
 def array_bytes(values: np.ndarray) -> bytes:
+    """Serialise an array as little-endian float64 ``.npy`` bytes, without pickling, for reproducible hashing."""
     buffer = io.BytesIO()
     np.lib.format.write_array(buffer, np.asarray(values, dtype='<f8'), version=(2, 0),
                               allow_pickle=False)
@@ -128,6 +142,12 @@ def array_bytes(values: np.ndarray) -> bytes:
 
 
 def matrix_audit(values: np.ndarray, names: list[str]) -> dict[str, Any]:
+    """Explain why a synthetic design matrix is rank-deficient.
+
+    Reports the rank, the columns that are identically zero, pairs of identical
+    non-zero clinical columns, and the smallest singular values. It also says
+    whether removing the zero columns restores full rank.
+    """
     singular = np.linalg.svd(values, compute_uv=False)
     rank = int(np.linalg.matrix_rank(values))
     zero = np.flatnonzero(np.max(np.abs(values), axis=0) <= 1e-12)
@@ -246,10 +266,12 @@ class Audit:
         saved_transform = processor.__dict__.get('transform')
 
         def capture_transform(frame: pd.DataFrame) -> pd.DataFrame:
+            """Record the synthetic covariate frame before passing it to the original preprocessing transform."""
             captured['synthetic'] = frame.copy()
             return original_transform(frame)
 
         def capture_constructor(design: np.ndarray, prior_time: np.ndarray, hazard: float) -> Any:
+            """Record the synthetic design, times and hazard before passing them to the original constructor."""
             captured.update(design=design.copy(), time=prior_time.copy(), hazard=float(hazard))
             return original_constructor(design, prior_time, hazard)
 
@@ -394,6 +416,7 @@ class Audit:
         target = parent / identity
 
         def verify() -> None:
+            """Check that an already-published case holds exactly the expected files, each with identical bytes."""
             require(target.is_dir() and not target.is_symlink(), 'existing case is not a regular audit tree')
             actual = set()
             for p in target.rglob('*'):
@@ -479,6 +502,7 @@ def write_failure_provenance(production: Path, run: Path, matched: Path,
 
 
 def main() -> None:
+    """Command-line entry point: reconstruct the rank-failure provenance and print the JSON result."""
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ('production-code', 'run', 'matched', 'output'):
         parser.add_argument(f'--{name}', type=Path, required=True)

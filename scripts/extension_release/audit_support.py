@@ -102,16 +102,19 @@ EXCLUDED_NAME = "data_mrna_illumina_microarray_zscores_ref_diploid_samples.txt"
 
 
 def _require(condition: bool, message: str) -> None:
+    """Raise ``ValueError(message)`` when ``condition`` is false."""
     if not condition:
         raise ValueError(message)
 
 
 def _canonical_hash(value: Any) -> str:
+    """Return the SHA-256 of a value's compact, key-sorted JSON encoding."""
     return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"),
                                      allow_nan=False).encode("utf-8")).hexdigest()
 
 
 def _relative(value: str) -> str:
+    """Return ``value`` if it is a safe, normalised, relative POSIX path; raise otherwise."""
     path = PurePosixPath(value)
     _require(isinstance(value, str) and value and not path.is_absolute()
              and value == path.as_posix() and all(p not in {"", ".", ".."} for p in path.parts)
@@ -120,6 +123,7 @@ def _relative(value: str) -> str:
 
 
 def _regular_path(path: Path, *, directory: bool = False) -> Path:
+    """Return the absolute path after checking that no component is a link and the target is a regular file (or a directory when ``directory`` is true)."""
     path = path.absolute()
     _require(".." not in path.parts, f"parent traversal refused: {path}")
     chain = list(reversed(path.parents)) + [path]
@@ -134,6 +138,7 @@ def _regular_path(path: Path, *, directory: bool = False) -> Path:
 
 
 def _fresh_target(path: Path) -> Path:
+    """Return the absolute path after checking that it does not exist yet and that its existing ancestors are real directories."""
     path = path.absolute()
     _require(".." not in path.parts, f"parent traversal refused: {path}")
     for item in reversed(path.parents):
@@ -148,11 +153,13 @@ def _fresh_target(path: Path) -> Path:
 
 
 def _signature(info: os.stat_result) -> tuple[int, int, int, int, int]:
+    """Return the stat fields (device, inode, size, modification and change times) used to detect a changed or replaced file."""
     return info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns
 
 
 @dataclass(frozen=True)
 class Snapshot:
+    """A file's path, size, SHA-256 and stat signature, recorded when it was validated."""
     path: Path
     size: int
     sha256: str
@@ -160,6 +167,7 @@ class Snapshot:
 
 
 def _open_snapshot(path: Path, expected: Snapshot | None = None) -> tuple[int, tuple[int, int, int, int, int]]:
+    """Open a regular file read-only without following links; if ``expected`` is given, require that the file is unchanged since that snapshot."""
     path = _regular_path(path)
     before = _signature(path.stat())
     if expected is not None:
@@ -175,12 +183,14 @@ def _open_snapshot(path: Path, expected: Snapshot | None = None) -> tuple[int, t
 
 
 def _check_unchanged(path: Path, fd: int, before: tuple[int, int, int, int, int]) -> None:
+    """Raise ``ValueError`` if the file changed while it was being read."""
     _regular_path(path)
     _require(_signature(os.fstat(fd)) == before and _signature(path.stat()) == before,
              f"source changed during streaming: {path}")
 
 
 def _snapshot(path: Path) -> Snapshot:
+    """Stream a file once, returning its size, hash and signature, and reject it if it changes during the read."""
     path = path.absolute()
     fd, before = _open_snapshot(path)
     digest = hashlib.sha256()
@@ -198,6 +208,7 @@ def _snapshot(path: Path) -> Snapshot:
 
 
 def _read_bytes(source: Snapshot, limit: int = 4 * 1024 * 1024) -> bytes:
+    """Return a small file's bytes after confirming they still match its validated snapshot."""
     _require(source.size <= limit, f"metadata exceeds bounded size: {source.path}")
     fd, before = _open_snapshot(source.path, source)
     try:
@@ -217,7 +228,9 @@ def _read_bytes(source: Snapshot, limit: int = 4 * 1024 * 1024) -> bytes:
 
 
 def _json(source: Snapshot) -> Any:
+    """Parse a validated snapshot as JSON, rejecting duplicate keys and non-finite numbers."""
     def no_duplicates(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        """JSON object hook that rejects duplicate keys."""
         obj: dict[str, Any] = {}
         for name, value in pairs:
             _require(name not in obj, f"duplicate JSON key: {source.path}: {name}")
@@ -225,6 +238,7 @@ def _json(source: Snapshot) -> Any:
         return obj
 
     def no_nonfinite(token: str) -> None:
+        """Reject ``NaN`` and ``Infinity`` literals."""
         raise ValueError(f"nonfinite JSON value: {source.path}: {token}")
 
     return json.loads(_read_bytes(source), object_pairs_hook=no_duplicates,
@@ -232,10 +246,12 @@ def _json(source: Snapshot) -> Any:
 
 
 def _hash_value(value: Any, digits: int = 64) -> bool:
+    """Return True if ``value`` is a lowercase hexadecimal digest with ``digits`` characters."""
     return isinstance(value, str) and re.fullmatch(rf"[0-9a-f]{{{digits}}}", value) is not None
 
 
 def _copy_snapshot(source: Snapshot, target: Path) -> None:
+    """Copy a validated file to a new ``target`` (never overwriting), checking the copied bytes against the snapshot hash."""
     target.parent.mkdir(parents=True, exist_ok=True)
     source_fd, before = _open_snapshot(source.path, source)
     target_fd: int | None = None
@@ -294,6 +310,16 @@ def _atomic_new_directory(source: Path, target: Path) -> None:
 def _validate_domain(sources: dict[str, Snapshot], production: dict[str, Snapshot],
                      external_report: Snapshot, freeze: dict[str, Any],
                      receipt: dict[str, Any]) -> dict[str, Any]:
+    """Check that the audit artefacts describe the pinned official METABRIC source.
+
+    Confirms the source report names the official cBioPortal study and pinned
+    commit, performed no model fits or outcome analysis, and agrees with the
+    recorded Git commit, directory listing and file hashes, and with the
+    production matched-cohort manifest.
+
+    Returns:
+        A summary of the validated source facts for the staging record.
+    """
     report = _json(external_report)
     matched = _json(production[MATCHED_MANIFEST])
     _require(report["study_id"] == "brca_metabric" and report["repository"] == REPOSITORY
@@ -401,6 +427,7 @@ def _validate_domain(sources: dict[str, Snapshot], production: dict[str, Snapsho
 
 
 def _verify_copies(root: Path, expected: dict[str, Snapshot], *, manifest: Snapshot | None = None) -> None:
+    """Check that a staged directory holds exactly the expected files, each identical to its source snapshot."""
     names = set(expected)
     if manifest is not None:
         names.add(MANIFEST_NAME)
@@ -543,6 +570,7 @@ def stage_audit_support(production: Path, reference_root: Path, preparation: Pat
 
 
 def main() -> None:
+    """Command-line entry point: stage the audit and preparation artefacts and print the JSON result."""
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("production", "reference-root", "preparation", "target"):
         parser.add_argument(f"--{name}", type=Path, required=True)
