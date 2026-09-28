@@ -484,6 +484,12 @@ Completed integration gates and their evidence locations are in
     - Review, exact source hashes, unchanged original drafts and full gate logs:
       `coordination/reviews/2026-09-28-documentation-pass.md` and
       `coordination/recovery/2026-09-28-documentation-pass-verification.json`.
+    - Extension follow-up (commits `c3175dc` to `9acef2e`): the post-baseline
+      extension files are now documented too. They cover the catalytic and
+      calibrated-horseshoe priors, penalised Cox, decision curves, the
+      release, transfer and audit scripts, and their tests. Every module and
+      all 1,051 definitions now have docstrings. Each commit passed the
+      stripped-AST gate; 349 tests pass and Ruff is clean.
 
 Tick each box when its step is complete, and record where its outputs are.
 
