@@ -33,11 +33,13 @@ class LimitedReader:
     """Cap inflated tar bytes before tarfile can parse oversized PAX records."""
 
     def __init__(self, stream, maximum: int):
+        """Wrap ``stream`` and allow at most ``maximum`` bytes to be read from it."""
         self.stream = stream
         self.maximum = maximum
         self.count = 0
 
     def read(self, length: int = -1) -> bytes:
+        """Read from the stream, raising ``ArchiveError`` once the byte allowance is exceeded."""
         remaining = self.maximum - self.count
         if length < 0 or length > remaining + 1:
             length = remaining + 1
@@ -53,6 +55,12 @@ class LimitedReader:
 def expanded_tar_budget(members: list[dict]) -> int:
     # Size is declared and checked per member. The allowance covers tar/PAX
     # headers, even for long UTF-8 path names, plus the final 10 KiB record.
+    """Return the largest plausible uncompressed tar size for these members.
+
+    This caps decompression, so a corrupted or malicious shard cannot expand
+    without limit: file data rounded up to 512-byte tar blocks, a generous
+    allowance for headers and long path names, and the final 10 KiB tar record.
+    """
     return 10240 + sum(
         ((member["size"] + 511) // 512) * 512
         + 8192 + 2 * len(member["path"].encode("utf-8"))
@@ -61,6 +69,7 @@ def expanded_tar_budget(members: list[dict]) -> int:
 
 
 def unique_object(pairs):
+    """JSON object hook that rejects duplicate keys instead of silently keeping the last one."""
     result = {}
     for key, value in pairs:
         if key in result:
@@ -70,15 +79,26 @@ def unique_object(pairs):
 
 
 def expect_keys(value, keys, label):
+    """Raise ``ArchiveError`` unless ``value`` is a dict with exactly the keys ``keys``."""
     if not isinstance(value, dict) or set(value) != set(keys):
         raise ArchiveError(f"Invalid {label} fields")
 
 
 def valid_hash(value):
+    """Return True if ``value`` is a 64-character lowercase hexadecimal SHA-256 string."""
     return isinstance(value, str) and HEX_SHA256.fullmatch(value) is not None
 
 
 def load_inventory(package_dir: Path) -> dict:
+    """Read ``inventory.json`` and check its structure and canonical hash.
+
+    Rejects duplicate keys, non-finite numbers, unexpected fields, an
+    unsupported format version, unsafe member paths and a canonical SHA-256
+    that does not match the content.
+
+    Raises:
+        ArchiveError: The inventory is missing, malformed or inconsistent.
+    """
     path = package_dir / "inventory.json"
     if path.is_symlink() or not path.is_file():
         raise ArchiveError("Missing or symlinked inventory.json")
@@ -175,6 +195,27 @@ def load_inventory(package_dir: Path) -> dict:
 def verify_and_restore(
     package_dir: Path, destination: Path, expected_sha256: str | None = None,
 ) -> dict:
+    """Verify every shard of a package and restore its tree into a new ``destination``.
+
+    Each shard is copied to scratch space while its size and SHA-256 are checked
+    against the inventory. It is then read member by member in the recorded
+    order: every path is checked for safety, every header for the fixed metadata
+    written by ``package.py``, and every extracted file's size and SHA-256
+    against the inventory. The finished tree is published atomically, so a
+    failed restore leaves nothing behind.
+
+    Args:
+        package_dir: Directory holding ``inventory.json`` and the shards.
+        destination: New directory to create; must not exist.
+        expected_sha256: Optional inventory hash received through a separate
+            trusted channel; it must match.
+
+    Returns:
+        The verified inventory.
+
+    Raises:
+        ArchiveError: Any integrity, safety or consistency check fails.
+    """
     package_dir = package_dir.absolute()
     destination = destination.absolute()
     if package_dir.is_symlink() or not package_dir.is_dir():
@@ -289,6 +330,7 @@ def verify_and_restore(
 
 
 def main() -> int:
+    """Command-line entry point: verify and restore a package and print a JSON summary; return 0 on success, 1 on failure."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("package", type=Path, help="Directory containing inventory and shards")
     parser.add_argument("destination", type=Path, help="New restore directory")

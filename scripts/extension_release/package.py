@@ -31,12 +31,15 @@ BUFFER_SIZE = 1024 * 1024
 
 
 class HashingReader:
+    """File-like wrapper that hashes and counts every byte read through it."""
     def __init__(self, stream):
+        """Wrap ``stream`` with an empty SHA-256 digest and a zero byte count."""
         self.stream = stream
         self.digest = hashlib.sha256()
         self.count = 0
 
     def read(self, length: int = -1) -> bytes:
+        """Read up to ``length`` bytes, updating the digest and count."""
         chunk = self.stream.read(length)
         self.digest.update(chunk)
         self.count += len(chunk)
@@ -44,6 +47,11 @@ class HashingReader:
 
 
 def tar_info(member: dict) -> tarfile.TarInfo:
+    """Build a tar header with fixed metadata so identical content gives identical archives.
+
+    Modification time, owner and group are zeroed and permissions fixed (0o755
+    for directories, 0o644 for files), which makes the shards byte-reproducible.
+    """
     info = tarfile.TarInfo(member["path"])
     info.type = tarfile.DIRTYPE if member["type"] == "dir" else tarfile.REGTYPE
     info.size = member["size"]
@@ -58,6 +66,15 @@ def tar_info(member: dict) -> tarfile.TarInfo:
 
 
 def write_archive(root: Path, members: list[dict], path: Path) -> None:
+    """Write ``members`` of ``root`` to one gzip-compressed PAX tar at ``path``.
+
+    Each source entry is re-checked against the signature recorded when it was
+    listed, and each file's streamed bytes are hashed, so a file that changes
+    during packaging is rejected instead of being archived silently.
+
+    Raises:
+        ArchiveError: A source entry changed or its bytes do not match the listing.
+    """
     with path.open("wb") as output:
         with gzip.GzipFile(
             filename="", mode="wb", fileobj=output, mtime=0, compresslevel=6
@@ -115,6 +132,25 @@ def initial_groups(members: list[dict], max_bytes: int) -> list[list[dict]]:
 
 
 def package_tree(source: Path, destination: Path, max_bytes: int) -> dict:
+    """Package ``source`` into deterministic, size-capped shards in a new ``destination``.
+
+    Steps: snapshot and hash the source tree; group members into shards, halving
+    any group whose compressed size exceeds ``max_bytes``; confirm the source did
+    not change; write ``inventory.json`` (members, shards and a canonical hash);
+    then publish the staging directory atomically.
+
+    Args:
+        source: Directory to package; must be a real directory, not a link.
+        destination: New package directory; must not exist or lie inside ``source``.
+        max_bytes: Largest allowed compressed shard size (1 KiB to 500 MiB).
+
+    Returns:
+        The inventory dictionary that was written.
+
+    Raises:
+        ArchiveError: Invalid arguments, a changing source, or a single member
+            too large for one shard.
+    """
     if max_bytes < 1024 or max_bytes > MAX_SHARD_BYTES:
         raise ArchiveError("Shard cap must be 1 KiB to 500 MiB")
     source = source.absolute()
@@ -132,6 +168,7 @@ def package_tree(source: Path, destination: Path, max_bytes: int) -> dict:
     assignments: dict[str, str] = {}
     try:
         def place(group: list[dict]) -> None:
+            """Write ``group`` as the next shard, or split it in half and retry if it is too large."""
             candidate = stage / "candidate.tar.gz"
             write_archive(source, group, candidate)
             byte_count = candidate.stat().st_size
@@ -179,6 +216,7 @@ def package_tree(source: Path, destination: Path, max_bytes: int) -> dict:
 
 
 def main() -> int:
+    """Command-line entry point: package a directory and print a JSON summary; return 0 on success, 1 on failure."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path, help="Directory tree to package")
     parser.add_argument("destination", type=Path, help="New package directory")
