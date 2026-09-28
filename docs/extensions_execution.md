@@ -107,7 +107,19 @@ GitHub release. `scripts/extension_release/stage_extensions.py` checks the
 complete cell, receipt, figure, table, source-license and visual-QA inventories
 before assembling the transfer tree. It includes both exact Git code archives,
 the measured cBioPortal source and its license, matched Parquet, all run and
-refit traces, logs, rendered outputs and QA record. The standard-library packer in
+refit traces, logs, rendered outputs and QA record. The source report and
+preparation manifest must match their original freeze hashes, and the
+matched Parquet must match both preparation and production. Every file
+referenced by the freeze is checked in both code checkouts. Supply the full
+ten-file measured-source directory to `--raw-source`; the fitting preparation
+command downloads only the five files it needs. The release also preserves
+the executed reference scripts, source/alignment audits and preparation logs
+as 55 separately labelled audit files. Supply their original reference root
+and preparation directory through `--reference-root` and `--preparation-dir`;
+later integration logs belong in the separate optional `--validation-logs`
+directory. The support helper rechecks their pinned hashes and domain links
+before copying, then rehashes every copy and records its inventory digest.
+The standard-library packer in
 `scripts/extension_release/` creates bounded tar.gz shards and an exact
 member/hash inventory from a stable, symlink-free staging tree; its verifier
 requires the independently recorded canonical inventory digest. Include
@@ -115,3 +127,36 @@ checksums and an exact member inventory, then download and restore into a
 fresh clone/directory before claiming Ravi has the full
 extension evidence remotely. Public publication, paper drafting, DOI and
 Overleaf changes remain deferred.
+
+On this APFS Mac, use `--clone-staging` for an independent copy-on-write
+transfer tree. It requires native `clonefile`, refuses existing files and
+fails if the volume cannot clone; it never silently makes a full duplicate.
+Copied bytes still pass the same hashes. Before packaging and restoration,
+measure actual sizes/free space, including retained failed attempts. Perform
+one fresh remote restore. Its free-space gate includes all inventory file
+bytes, the largest compressed shard, filesystem overhead and a 5 GiB
+operating reserve. Once a complete fresh download matches the independently
+recorded hashes, the task-created upload package is a recoverable duplicate
+if space needs reclaiming; preserve the scientific source, staged evidence,
+receipts and fresh download.
+
+Download only `inventory.json` and `part-*.tar.gz` into the directory passed
+to the generic verifier; it rejects extra release metadata in that directory.
+Use the canonical inventory digest from the committed release receipt.
+Extract the two trusted code archives into fresh directories outside the
+restored evidence tree. They contain the original raw clinical data and
+freeze inputs, so independent rescoring needs no original-host source path.
+They contain no `.git` directory; archived code can verify evidence, while
+new fitting still requires a clean detached Git checkout.
+
+After transfer verification and code extraction, use the latest clone's
+`scripts/extension_release/verify_restored_science.py` with `--production-code`,
+`--analysis-code`, `--restored`, `--primary`, `--sampler` and `--robustness`.
+It verifies the exact environment, frozen sources and all cells, recalculates
+the three stored aggregates, and directly re-compares the scientific content
+and actual trace arrays of all 92 saved refits. It launches no fits and
+preserves identical finalized files. Its optional new `--report` must be
+outside the restored evidence tree. The copied visual-QA receipt attests to
+the original inspection; preserved host paths are provenance and do not
+claim a second visual review on the receiving laptop. The actual extension
+release tag and digest remain pending until all production gates pass.

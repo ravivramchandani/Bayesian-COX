@@ -50,6 +50,19 @@ checkpoint, not a live progress claim.
 `caffeinate -dimsu -w 71385` is active as PID 71386, bound to the
 coordinator lifetime so idle sleep does not interrupt this Mac's computation.
 
+The later transfer-only update passes 310 repository tests, 16 audit-support
+integrity tests, the exact environment, schemas and Ruff. Its compact receipt
+is `coordination/recovery/2026-09-28-extension-transfer-verification.json`;
+complete logs/source hashes are in
+`~/bayes-cox-runs/extensions-20260928/transfer_validation_v1` and must be
+staged through `--validation-logs`. The latest clone's stager additionally
+requires `--reference-root` and `--preparation-dir` for 55 pinned supporting
+artifacts. Use `--clone-staging` on this APFS volume, then measure actual
+inventory size/free space before one fresh remote restoration. The portable
+`verify_restored_science.py` rechecks frozen sources/all-cell science and
+directly repeats all 92 stored trace comparisons without fitting.
+Production/analysis commits and running worker ownership remain as above.
+
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
 No extension outer-validation result existed before the freeze. All

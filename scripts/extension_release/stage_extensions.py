@@ -4,14 +4,18 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
 import json
+import os
 import shutil
 import subprocess
 import sys
 import tempfile
+from functools import partial
 from pathlib import Path
 
 from archive_common import atomic_new_directory
+from audit_support import stage_audit_support
 
 
 def commit(root: Path) -> str:
@@ -21,26 +25,94 @@ def commit(root: Path) -> str:
     return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
 
 
-def copy_file(source: Path, target: Path) -> None:
+def copy_file(source: Path | str, target: Path | str, *, clone: bool = False) -> str:
+    """Copy a regular file, optionally requiring native independent APFS cloning."""
+    source, target = Path(source), Path(target)
     target.parent.mkdir(parents=True, exist_ok=True)
     if source.is_symlink() or not source.is_file():
         raise ValueError(f"missing or linked source file: {source}")
-    shutil.copy2(source, target)
+    if clone:
+        if sys.platform != "darwin":
+            raise ValueError("strict clone staging requires macOS clonefile")
+        libc = ctypes.CDLL(None, use_errno=True)
+        clonefile = libc.clonefile
+        clonefile.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_int]
+        clonefile.restype = ctypes.c_int
+        if clonefile(os.fsencode(source), os.fsencode(target), 0):
+            code = ctypes.get_errno()
+            raise OSError(code, os.strerror(code), str(target))
+    else:
+        shutil.copy2(source, target)
+    return str(target)
 
 
-def copy_tree(source: Path, target: Path) -> None:
+def copy_tree(source: Path, target: Path, *, clone: bool = False) -> None:
+    """Copy a link-free tree using the same checked regular-file operation."""
     if source.is_symlink() or not source.is_dir() or any(p.is_symlink() for p in source.rglob("*")):
         raise ValueError(f"missing or linked source tree: {source}")
-    shutil.copytree(source, target)
+    shutil.copytree(source, target, copy_function=partial(copy_file, clone=clone))
+
+
+def verify_source_inputs(production: Path, manifest: dict, matched: Path,
+                         matched_manifest: Path, raw_source: Path, source_report: Path,
+                         *, analysis: Path | None = None) -> dict[str, str]:
+    """Bind transferred preparation and measured sources to the original freeze."""
+    from src.utils.io import read_mapping
+    from src.utils.reproducibility import canonical_json_hash, sha256_file
+
+    freeze = read_mapping(production / "coordination/extension_protocol_freeze.json")
+    if (canonical_json_hash({k: v for k, v in freeze.items() if k != "content_sha256"}) != freeze["content_sha256"]
+            or manifest["freeze_sha256"] != freeze["content_sha256"]):
+        raise ValueError("source evidence refers to another extension freeze")
+    for name, expected in freeze["sha256"].items():
+        for root in {production, analysis} - {None}:
+            if sha256_file(root / name) != expected:
+                raise ValueError(f"frozen extension input changed: {root}/{name}")
+    paths = {
+        "data/metabric_source_report.json": (source_report, "coordination/extension_sources/metabric_source_report.json"),
+        "data/matched_metabric_manifest.json": (matched_manifest, "coordination/extension_sources/matched_metabric_manifest.json"),
+    }
+    hashes = {}
+    for target, (source, name) in paths.items():
+        expected = freeze["sha256"][name]
+        if sha256_file(source) != expected:
+            raise ValueError(f"supplied source evidence differs from freeze: {name}")
+        hashes[target] = expected
+    preparation = read_mapping(matched_manifest)
+    hashes["data/matched_metabric.parquet"] = sha256_file(matched)
+    if hashes["data/matched_metabric.parquet"] != preparation["matched_sha256"] or preparation["matched_sha256"] != manifest["matched_sha256"]:
+        raise ValueError("matched data differs from frozen preparation")
+    if preparation["clinical_sha256"] != manifest["input_sha256"]["data/raw/metabric.csv"]:
+        raise ValueError("matched preparation refers to another clinical source")
+    if preparation["known_pairs_sha256"] != freeze["sha256"]["tests/fixtures/extensions/metabric_known_accession_pairs.csv"]:
+        raise ValueError("matched preparation refers to another known-pair audit")
+    report = read_mapping(source_report)
+    source_files = {row["name"]: row for row in report["data_files"]}
+    if (len(source_files) != len(report["data_files"]) or "LICENSE" not in source_files
+            or {p.name for p in raw_source.iterdir()} != set(source_files)):
+        raise ValueError("METABRIC source/license inventory differs")
+    for name, expected in preparation["source_sha256"].items():
+        if source_files[name]["downloaded_sha256"] != expected:
+            raise ValueError(f"matched preparation and source report disagree: {name}")
+    for name, row in source_files.items():
+        path = raw_source / name
+        if path.is_symlink() or not path.is_file() or sha256_file(path) != row["downloaded_sha256"]:
+            raise ValueError(f"METABRIC measured source changed: {name}")
+        hashes[f"data/metabric_raw/{name}"] = row["downloaded_sha256"]
+    return hashes
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("production-code", "analysis-code", "matched", "matched-manifest", "raw-source",
                  "source-report", "run", "reproduction", "rendered", "qa-dir", "worker-logs",
-                 "prestage-helper", "coordinator-helper", "output"):
+                 "prestage-helper", "coordinator-helper", "reference-root", "preparation-dir", "output"):
         parser.add_argument(f"--{name}", type=Path, required=True)
+    parser.add_argument("--validation-logs", type=Path, help="completed current-integration logs, kept separate from frozen preparation")
+    parser.add_argument("--clone-staging", action="store_true", help="require APFS copy-on-write staging; never silently fall back to full copies")
     args = parser.parse_args()
+    copy_payload = partial(copy_file, clone=args.clone_staging)
+    copy_directory = partial(copy_tree, clone=args.clone_staging)
     production, analysis = args.production_code.resolve(), args.analysis_code.resolve()
     sys.path.insert(0, str(analysis))
     from src.pipelines.extensions.runner import verified_cell
@@ -114,13 +186,8 @@ def main() -> None:
     for table in lineage["tables"]:
         if sha256_file(args.rendered / f"{table['name']}.csv") != table["csv_sha256"]:
             raise ValueError(f"table changed: {table['name']}")
-    report = read_mapping(args.source_report)
-    source_files = {row["name"]: row for row in report["data_files"]}
-    if "LICENSE" not in source_files or {p.name for p in args.raw_source.iterdir()} != set(source_files):
-        raise ValueError("METABRIC source/license inventory differs")
-    for name, row in source_files.items():
-        if sha256_file(args.raw_source / name) != row["downloaded_sha256"]:
-            raise ValueError(f"METABRIC measured source changed: {name}")
+    source_hashes = verify_source_inputs(production, manifest, args.matched, args.matched_manifest,
+                                       args.raw_source, args.source_report, analysis=analysis)
 
     out.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix=".extension-stage-", dir=out.parent))
@@ -130,20 +197,25 @@ def main() -> None:
             target.parent.mkdir(parents=True, exist_ok=True)
             subprocess.run(["git", "archive", "--format=tar.gz", f"--output={target}", "HEAD"],
                            cwd=root, check=True)
-        copy_file(args.matched, stage / "data/matched_metabric.parquet")
-        copy_file(args.matched_manifest, stage / "data/matched_metabric_manifest.json")
-        copy_tree(args.raw_source, stage / "data/metabric_raw")
-        copy_file(args.source_report, stage / "data/metabric_source_report.json")
-        copy_tree(args.run, stage / "evidence/run")
-        copy_tree(args.reproduction, stage / "evidence/reproduction")
-        copy_tree(args.rendered, stage / "rendered")
-        copy_tree(args.qa_dir, stage / "visual_qa")
-        copy_tree(args.worker_logs, stage / "execution/worker_logs")
-        copy_file(args.prestage_helper, stage / "execution/prestage_refits.py")
-        copy_file(args.coordinator_helper, stage / "execution/coordinate_after_fits.py")
-        copy_file(Path(__file__), stage / "execution/stage_extensions.py")
-        if sha256_file(stage / "data/matched_metabric.parquet") != manifest["matched_sha256"]:
-            raise ValueError("staged matched data changed")
+        copy_payload(args.matched, stage / "data/matched_metabric.parquet")
+        copy_payload(args.matched_manifest, stage / "data/matched_metabric_manifest.json")
+        copy_directory(args.raw_source, stage / "data/metabric_raw")
+        copy_payload(args.source_report, stage / "data/metabric_source_report.json")
+        copy_directory(args.run, stage / "evidence/run")
+        copy_directory(args.reproduction, stage / "evidence/reproduction")
+        copy_directory(args.rendered, stage / "rendered")
+        copy_directory(args.qa_dir, stage / "visual_qa")
+        copy_directory(args.worker_logs, stage / "execution/worker_logs")
+        copy_payload(args.prestage_helper, stage / "execution/prestage_refits.py")
+        copy_payload(args.coordinator_helper, stage / "execution/coordinate_after_fits.py")
+        for name in ("stage_extensions.py", "audit_support.py", "verify_restored_science.py", "archive_common.py"):
+            copy_payload(Path(__file__).with_name(name), stage / "execution" / name)
+        audit = stage_audit_support(production, args.reference_root, args.preparation_dir, stage / "audit")
+        if args.validation_logs:
+            copy_directory(args.validation_logs, stage / "execution/current_integration_validation")
+        for name, expected in source_hashes.items():
+            if sha256_file(stage / name) != expected:
+                raise ValueError(f"staged frozen source evidence changed: {name}")
         for identity in planned_ids:
             if sha256_file(stage / "evidence/run/cells" / f"{identity}.json") != completion["cell_sha256"][f"cells/{identity}.json"]:
                 raise ValueError(f"staged production cell changed: {identity}")
@@ -156,7 +228,11 @@ def main() -> None:
                         "production_completion_sha256": sha256_file(stage / "evidence/run/completion.json"),
                         "reproduction_receipts": 92, "figure_pairs": 32, "tables": 6,
                         "visual_qa_receipt_sha256": sha256_file(stage / "visual_qa/visual_qa_receipt.json"),
-                        "metabric_source_report_sha256": sha256_file(stage / "data/metabric_source_report.json")}
+                        "metabric_source_report_sha256": sha256_file(stage / "data/metabric_source_report.json"),
+                        "frozen_source_sha256": source_hashes, "audit_support": audit,
+                        "staging_copy_mode": "strict_native_clonefile" if args.clone_staging else "copy2",
+                        "transfer_tool_sha256": {name: sha256_file(stage / "execution" / name)
+                                                 for name in ("stage_extensions.py", "audit_support.py", "verify_restored_science.py", "archive_common.py")}}
         write_json_atomic(stage / "release_stage.json", stage_record, overwrite=False)
         atomic_new_directory(stage, out)
     except Exception:

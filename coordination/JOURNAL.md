@@ -904,3 +904,35 @@ Only the sleeping continuation coordinator was replaced to use that checkout;
 the six production and two refit processes continued uninterrupted. The old
 coordinator source and log are preserved, and the new monitor/sleep assertion
 are recorded in HANDOFF.
+
+The current evidence note and Ravi's guide now reflect the frozen active
+extension programme rather than a pending addendum. A separate transfer
+gate binds the source report, preparation manifest, matched Parquet and
+all ten measured-source files to the original freeze, and rechecks copied
+bytes. It also checks every freeze-linked file in both sealed code versions.
+Ten focused checks cover coherent sources, altered transfer files and
+inconsistent frozen preparation; the actual 13-file source set passed.
+The portable restore helper verifies the exact environment and all-cell
+science, recomputes stored aggregates and directly repeats the 92 stored
+scientific/trace comparisons. Its full programme execution remains pending
+the completed numerical grid and remote transfer. Download instructions
+exclude extra metadata from the strictly inventoried shard directory.
+
+The release now includes exactly 55 audited reference/preparation/source-
+provenance files (39,229,087 bytes), with an independently checked manifest.
+The support helper's 16 integrity tests pass; original 295/296-test logs
+retain their original role, while later integration logs stay separate.
+Storage preparation measured current traces and the 527-coefficient
+expression profile. Strict native APFS clone staging avoids another full
+physical evidence copy; scratch clone isolation and overwrite refusal pass.
+One actual fresh remote restoration is required. Space is checked against
+the actual final inventory before extraction, including a reserve; no
+original evidence or completed baseline input is removed.
+
+The integrated transfer changes pass all 310 repository tests in 74.83 s,
+16 support-integrity tests, exact environment verification, coordination
+schemas, Ruff and diff checks. Detailed source/log hashes are retained
+outside Git with the later validation logs; compact receipt:
+`coordination/recovery/2026-09-28-extension-transfer-verification.json`.
+These checks certify implementation and transfer preparation, not the still-
+running numerical grid or pending final visual review/remote restoration.

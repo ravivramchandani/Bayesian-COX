@@ -13,7 +13,7 @@ their claim rules. It does not assert submission review or supervisor sign-off.
 | C-011: Bayesian convergence | 205 of 225 original Bayesian cells passed; 20 horseshoe cells failed the frozen diagnostic gate. | An all-fit convergence claim is false. Preserve and report diagnostic attrition. |
 | C-012: horseshoe advantage | Five primary prior contrasts are estimable; four horseshoe contrasts are unavailable. No available unadjusted p-value is below 0.49. | Do not infer superiority or equivalence. The confirmatory Holm family remains incomplete. |
 | C-016: stable explanations | The original explanation artifact has 1,845 comparisons. Of 1,640 evaluable convergence comparisons, 102 fail the prespecified rule. Global claim permission is false. | Descriptive explanation results may be labelled as such; an explanation-stability claim is not permitted. |
-| C-021: robustness | Frozen-code production and aggregates completed. Strict verification accepted 825 cells: 770 pass diagnostics and 55 fail. Coverage and review are complete: 121/129 direct estimates (95 fully paired); 45/45 difference-in-differences estimates (33 fully paired). | Report intervals and attrition; grid completion alone does not establish general robustness. Completion alone does not establish general robustness. |
+| C-021: robustness | Frozen-code production and aggregates completed. Strict verification accepted 825 cells: 770 pass diagnostics and 55 fail. Coverage and review are complete: 121/129 direct estimates (95 fully paired); 45/45 difference-in-differences estimates (33 fully paired). | Report intervals and attrition; grid completion alone does not establish general robustness. |
 
 ADR-033 allows a separately labelled mathematical bound: none of the five
 estimable primary contrasts can be rejected by Holm for any values of the
@@ -48,15 +48,22 @@ original-host result files. See [Ravi's handoff](ravi_handoff.md) and the
 [close-out review](../coordination/reviews/2026-09-28-programme-closeout.md).
 The earlier numerical checkpoint is preserved unchanged as historical state.
 
-ADR-036/ADR-037 make the four new post-hoc analyses planned thesis evidence:
-tuned penalised Cox, a precisely specified Piironen–Vehtari variant, survival
-decision curves and matched METABRIC clinical/expression comparisons. They
-have not produced results and are not queued by the current core coordinator.
-T-180's actual addendum and hash freeze remain pending. It must precede their
-own results and preserve the actual earlier ADR-032/ADR-033 chronology.
-The new plan does not change any permitted primary or explanation claim.
-ADR-038 additionally plans a post-hoc Cox catalytic-prior arm; it has not
-started and also requires the new addendum before its own results.
+ADR-036–ADR-039 authorize separate post-hoc thesis analyses: tuned penalised
+Cox, a precisely specified Piironen–Vehtari variant, survival decision
+curves, matched METABRIC clinical/expression comparisons and three catalytic
+variants. T-180 was frozen before any of their outer-validation results,
+under content hash
+`50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
+Production is actively filling the 1,625-fit grid from sealed commit
+`119476f`; completed individual cells remain incomplete programme evidence.
+The separately sealed analysis verifier is `8551d32`. Full deep verification,
+92 selected exact refits, rendering, actual visual QA and private remote
+restoration are still required before extension conclusions are recorded.
+See [extension execution](extensions_execution.md) and the active state in
+[HANDOFF](../coordination/HANDOFF.md). This programme preserves the actual
+earlier ADR-032/ADR-033 chronology and changes no permitted primary or
+explanation claim. No first-evaluation or external-preregistration claim is
+established.
 
 The authoritative production evidence is
 `confirmatory_v1_confirmatory_cdcdcee84651`, with completion content hash

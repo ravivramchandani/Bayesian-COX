@@ -1,0 +1,27 @@
+{
+  "analysis_code_commit": "8551d326b02bfe88915cfd9eb50c6ca8e5690e3a",
+  "audit_support_tests": 16,
+  "classification": "transfer implementation validation; numerical production still active",
+  "content_sha256": "fb5220044c033dc658599591130fb23537e96eb09349146be7c11117195afe0e",
+  "coordination_schemas": "passed",
+  "detailed_validation_sha256": "ac64ca31a274d85b08b6c53ebbd4e0d5874fe880cc56532e651a3f02534cf856",
+  "diff_check": "passed",
+  "lock_sha256": "1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57",
+  "log_sha256": {
+    "audit_support_tests.log": "86e42e28934b1001b5e31eb0c2f350f429bf9e7130d14acca6cd81dd2443d5db",
+    "diff_check.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "environment.json": "cc6fc42b01e2a273c31e4c85acff93c4090e289d1b8dd924438e5c7e211475e7",
+    "full_tests.log": "d88337435f792a3e236a03f5f4c3b542770df9250d0e157d64c8bf782ad63812",
+    "ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "schemas.log": "e5f1be16713585fe49e45d50305514da8003d5e161f45e6c3285d58c584eb770"
+  },
+  "production_code_commit": "119476fef55b1eeb690527f234c1423440720d45",
+  "ruff": "passed",
+  "source_tree_sha256": "ea95cc32ecdf47a195c3a7037d430844e2dc4796c82a15047b6e455538c27cdc",
+  "tests": {
+    "passed": 310,
+    "seconds": 74.83
+  },
+  "verification_limit": "complete1625-cell run,92official receipts, final32PDFreview and remote restore pending",
+  "verified_utc": "2026-09-28T00:16:53.347897+00:00"
+}

@@ -139,13 +139,16 @@ p-values of 1.0 and corrected intervals containing zero. Read the
 and [close-out review](../coordination/reviews/2026-09-28-programme-closeout.md).
 A new result always goes in a separate directory.
 
-The next planned work is T-180: specify and freeze the post-hoc extension
-addendum before results of the new analyses exist. It covers penalised Cox
-(T-182), the precisely specified Piironen–Vehtari variant (T-183), survival
-decision curves (T-184), matched METABRIC clinical/expression comparisons
-(T-185), and the catalytic-prior arm/reference-parity checks (T-189).
-Follow the dependencies and acceptance criteria in TODO, then render and
-verify the separate extension bundle under T-186.
+T-180 is now frozen, and the separate 1,625-fit post-hoc extension grid is
+running from sealed commit `119476f`. It covers penalised Cox (T-182), the
+precisely specified Piironen–Vehtari variant (T-183), survival decision
+curves (T-184), matched METABRIC clinical/expression comparisons (T-185), and
+the catalytic-prior variants/reference-parity checks (T-189). Do not start
+duplicate workers on a receiving laptop while the active host owns this run.
+The extension transfer is pending its complete-grid, deep verification,
+92-refit, final PDF-QA and fresh remote-restoration gates. Follow
+[extension execution](extensions_execution.md) and the current HANDOFF;
+T-186 is checked only after its separate evidence bundle passes.
 
 The original 20 horseshoe failures, incomplete original primary contrast
 family and failed explanation-convergence gate remain part of the evidence.
