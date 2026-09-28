@@ -1,5 +1,18 @@
 # JOURNAL
 
+## 2026-09-28 — portable temporary-path correction
+
+The independent release review found that macOS exposes its temporary
+directory beneath the `/var` system symlink. The restored-science replay
+now resolves that root before the strict relative-file gate; the gate still
+rejects symlinks within retained evidence. An actual replay of the 42
+currently recorded rank failures verified all 104 reconstructed array
+paths/bytes under the resolved native temporary directory. Its scope is
+the partial grid, not final restoration. All 349 repository tests, schemas,
+Ruff and unchanged tested-source hashes passed. Full logs and the compact
+receipt are recorded in HANDOFF. Production, selected fits and the analysis
+checkout remain unchanged.
+
 Append-only record of findings and results. Facts and numbers, not process
 narration.
 

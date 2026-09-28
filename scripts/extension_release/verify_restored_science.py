@@ -76,7 +76,7 @@ def main() -> None:
         assert_scientific_equal(scientific_content(source), scientific_content(refit), identity)
         compare_traces(run, refits, source, refit)
     with tempfile.TemporaryDirectory(prefix="extension-rank-restore-") as temporary:
-        repeated_audit = Path(temporary) / "failure_provenance"
+        repeated_audit = (Path(temporary) / "failure_provenance").resolve()
         subprocess.run([sys.executable, str(failure_helper), "--production-code", str(production),
                         "--run", str(run), "--matched", str(restored / "data/matched_metabric.parquet"),
                         "--output", str(repeated_audit)], check=True)

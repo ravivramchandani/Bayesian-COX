@@ -90,6 +90,15 @@ inventory, 32 page renders and four contact sheets to the original passed
 receipt. Fresh restoration additionally repeats the rank reconstruction.
 No numerical worker, sampling rule or analysis checkout changed.
 
+The subsequent portable-path correction resolves the Mac's temporary replay
+directory before applying the strict symlink gate. All 349 repository tests,
+schemas, Ruff and an actual 42-case generator replay passed; the latter
+checks 104 retained array paths/bytes on the current partial grid. It does
+not claim complete scientific restoration. The compact receipt is
+`coordination/recovery/2026-09-28-extension-native-path-verification.json`;
+full logs are in `~/bayes-cox-runs/extensions-20260928/transfer_validation_v3`.
+Preserve all three validation versions through the final transfer.
+
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
 No extension outer-validation result existed before the freeze. All

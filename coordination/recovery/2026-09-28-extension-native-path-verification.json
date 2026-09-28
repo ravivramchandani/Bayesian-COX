@@ -1,0 +1,40 @@
+{
+  "base_commit": "6883e13951642766b43ba1fc1dc9972ab50c14b8",
+  "checks": {
+    "diff_check": 0,
+    "ruff": 0,
+    "schemas": 0
+  },
+  "evidence_status": "portable_path_fix_verified_numerical_grid_pending",
+  "external_validation_path": "~/bayes-cox-runs/extensions-20260928/transfer_validation_v3",
+  "external_validation_sha256": "81bbc179e608867d7e305d1c309d2abb73a9a18df1cdfa7e8944a9147128a5d3",
+  "native_temporary_replay": {
+    "array_files_verified": 104,
+    "audit_helper_sha256": "6b6655dd5d24a0f4b36efb55c945dcec2c32d6307eb1e94e906b44e9120883bc",
+    "cases": 42,
+    "native_unresolved_system_symlink_rejected": true,
+    "resolved_root_passes": true,
+    "scope": "current partial-grid generator replay and retained-byte paths; not complete scientific restoration",
+    "snapshot_content_sha256": "38478b093a23c2ddd36167cad06ed83f90e663c6785e8b6a6ad97cf5360e1a5d",
+    "source_grid_counts": {
+      "planned": 1625,
+      "stored": 730
+    },
+    "status": "native_resolved_temporary_replay_verified",
+    "verified_utc": "2026-09-28T01:15:46.514685+00:00",
+    "verifier_sha256": "c35d9f7e563335870be549e2a5016dde07550ad5eb3acfaeb0fd673a1a083830"
+  },
+  "remaining_gates": [
+    "complete 1625-cell accounting",
+    "full deep verification and aggregates",
+    "92 official exact refit receipts",
+    "32-page actual visual QA",
+    "private release and fresh remote science restoration"
+  ],
+  "repository_tests_passed": 349,
+  "repository_tests_seconds": 87.54,
+  "schema_version": 1,
+  "source_unchanged": true,
+  "tested_source_files": 157,
+  "verified_utc": "2026-09-28T01:18:35.227855+00:00"
+}
