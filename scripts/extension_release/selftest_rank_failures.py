@@ -19,22 +19,28 @@ args, unittest_args = parser.parse_known_args()
 
 
 class FocusedTests(unittest.TestCase):
+    """Integrity checks for the rank-failure audit helpers, using temporary synthetic files."""
     def setUp(self) -> None:
+        """Create a fresh temporary working directory."""
         self.temporary = tempfile.TemporaryDirectory(prefix='rank-audit-selftest-')
         self.root = Path(self.temporary.name).resolve()
 
     def tearDown(self) -> None:
+        """Remove the temporary working directory."""
         self.temporary.cleanup()
 
     def source_cell(self) -> dict:
+        """Return a minimal failed-cell record carrying the pre-fit synthetic-rank error."""
         return {'status': 'failed', 'message': audit.RANK_MESSAGE, 'error_type': 'ValueError',
                 'traceback': 'generate_catalytic_data -> __post_init__'}
 
     def test_unicode_canonical_hash_uses_utf8(self) -> None:
+        """Canonical hashes encode non-ASCII text as UTF-8."""
         expected = hashlib.sha256('{"label":"Δ"}'.encode()).hexdigest()
         self.assertEqual(audit.canonical_hash({'label': 'Δ'}), expected)
 
     def test_npy_is_deterministic_and_round_trips_without_pickle(self) -> None:
+        """Array serialisation is byte-deterministic and loads back without pickling."""
         values = audit.np.asarray([[1, 2], [3, 4]], dtype=float)
         first = audit.array_bytes(values)
         self.assertEqual(first, audit.array_bytes(values))
@@ -42,6 +48,7 @@ class FocusedTests(unittest.TestCase):
         audit.np.testing.assert_array_equal(restored, values)
 
     def test_matrix_audit_distinguishes_zero_and_duplicate_directions(self) -> None:
+        """The matrix audit separates rank loss from zero columns and from duplicate columns."""
         independent = audit.np.asarray([[1, 0, 0], [0, 1, 0], [1, 1, 0]], dtype=float)
         record = audit.matrix_audit(independent, ['one', 'two', 'empty'])
         self.assertEqual(record['zero_columns'], ['empty'])
@@ -52,6 +59,7 @@ class FocusedTests(unittest.TestCase):
         self.assertEqual(record['identical_nonzero_column_pairs'], [['one', 'duplicate']])
 
     def test_write_once_refuses_changed_payload(self) -> None:
+        """A write-once file cannot be replaced with different content."""
         path = self.root / 'receipt.json'
         audit.write_once(path, b'original\n')
         audit.write_once(path, b'original\n')
@@ -60,6 +68,7 @@ class FocusedTests(unittest.TestCase):
         self.assertEqual(path.read_bytes(), b'original\n')
 
     def test_write_once_refuses_symlink(self) -> None:
+        """Write-once publication refuses a linked destination."""
         path = self.root / 'original'
         path.write_bytes(b'original\n')
         alias = self.root / 'alias'
@@ -68,6 +77,7 @@ class FocusedTests(unittest.TestCase):
             audit.write_once(alias, b'original\n')
 
     def test_wrong_error_type_cannot_claim_pre_fit_rank_failure(self) -> None:
+        """Only the expected error type can be classified as a pre-fit rank failure."""
         instance = object.__new__(audit.Audit)
         cell = self.source_cell()
         cell['error_type'] = 'RuntimeError'
@@ -75,6 +85,7 @@ class FocusedTests(unittest.TestCase):
             instance.reconstruct(cell, '0' * 64)
 
     def test_fit_or_prediction_fields_cannot_claim_pre_fit_failure(self) -> None:
+        """A cell that reached fitting or prediction cannot be classified as failing before the fit."""
         instance = object.__new__(audit.Audit)
         for field in ['metrics', 'predictions', 'fit_attempts']:
             with self.subTest(field=field):
@@ -83,6 +94,7 @@ class FocusedTests(unittest.TestCase):
                     instance.reconstruct(cell, '0' * 64)
 
     def test_missing_constructor_traceback_cannot_claim_pre_fit_failure(self) -> None:
+        """A failure without the synthetic-data constructor in its traceback is not a pre-fit rank failure."""
         instance = object.__new__(audit.Audit)
         cell = self.source_cell()
         cell['traceback'] = 'an unrelated error'
@@ -90,6 +102,7 @@ class FocusedTests(unittest.TestCase):
             instance.reconstruct(cell, '0' * 64)
 
     def test_cached_case_is_rehashed_and_corruption_rejected(self) -> None:
+        """A resumed audit rehashes cached cases and rejects corrupted ones."""
         instance = object.__new__(audit.Audit)
         instance.output = self.root
         payloads = {'case.json': b'{"artificial": true}\n', 'draws/outer/X.npy': b'artificial array\n'}
@@ -102,6 +115,7 @@ class FocusedTests(unittest.TestCase):
             instance.publish_case('artificial_case', payloads)
 
     def test_existing_extra_case_artifact_rejected(self) -> None:
+        """An existing case directory with an unexpected extra file is rejected."""
         instance = object.__new__(audit.Audit)
         instance.output = self.root
         payloads = {'case.json': b'{}\n'}
@@ -111,6 +125,7 @@ class FocusedTests(unittest.TestCase):
             instance.publish_case('artificial_case', payloads)
 
     def test_existing_publish_target_is_not_overwritten(self) -> None:
+        """Publishing never overwrites an existing target directory."""
         stage, target = self.root / 'stage', self.root / 'target'
         stage.mkdir()
         target.mkdir()
@@ -121,6 +136,7 @@ class FocusedTests(unittest.TestCase):
 
     @unittest.skipIf(args.sidecars is None, 'pass --sidecars to check reconstructed artifacts')
     def test_real_sidecar_content_and_exact_array_inventory(self) -> None:
+        """When real sidecars are supplied, every case has the required classification and exactly the expected arrays."""
         root = args.sidecars.resolve(strict=True)
         cases = sorted((root / 'cases').iterdir())
         self.assertGreater(len(cases), 0)

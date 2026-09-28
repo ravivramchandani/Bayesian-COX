@@ -14,19 +14,23 @@ import audit_support as support
 
 
 def sha(data: bytes) -> str:
+    """Return the SHA-256 hex digest of ``data``."""
     return hashlib.sha256(data).hexdigest()
 
 
 def write(path: Path, data: bytes) -> None:
+    """Write bytes to ``path``, creating parent directories."""
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(data)
 
 
 def write_json(path: Path, data: object) -> None:
+    """Write indented, key-sorted JSON to ``path``."""
     write(path, (json.dumps(data, sort_keys=True, indent=2) + "\n").encode())
 
 
 def git_blob(data: bytes) -> str:
+    """Return the Git blob SHA-1 of ``data``, as Git computes it for a committed file."""
     return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
 
 
@@ -34,6 +38,7 @@ class Fixture:
     """Tiny coherent synthetic source documents, never measured patient data."""
 
     def __init__(self, root: Path):
+        """Create the synthetic production, reference and preparation trees, and record the hash of each captured file."""
         self.production = root / "production-code"
         self.reference = root / "reference"
         self.preparation = root / "preparation"
@@ -154,38 +159,46 @@ class Fixture:
         self.pins = {name: sha(self.source(name).read_bytes()) for name in support.CAPTURE_SHA256}
 
     def source(self, name: str) -> Path:
+        """Return the fixture path of a captured artefact name."""
         prefix, rest = name.split("/", 1)
         return (self.preparation / rest if prefix == "preparation"
                 else self.reference / prefix / rest)
 
     def refresh_pin(self, name: str) -> None:
+        """Re-record a captured file's hash after a test deliberately edits it."""
         self.pins[name] = sha(self.source(name).read_bytes())
 
     def stage(self) -> dict:
         # Only the artificial-test runtime changes the internal capture pins.
         # The public API/CLI exposes no expected-hash override.
+        """Run the staging helper with this fixture's hashes in place of the real capture hashes."""
         with patch.object(support, "CAPTURE_SHA256", self.pins):
             return support.stage_audit_support(self.production, self.reference,
                                                self.preparation, self.target)
 
 
 class AuditSupportTests(unittest.TestCase):
+    """Behaviour of the audit-support staging helper on coherent and deliberately altered fixtures."""
     def setUp(self) -> None:
+        """Build a fresh fixture in a temporary directory."""
         self.temporary = tempfile.TemporaryDirectory(prefix="audit-support-selftest-")
         # macOS exposes /var as an OS symlink; resolve this trusted test base,
         # while source/target symlinks within fixtures remain explicitly refused.
         self.fixture = Fixture(Path(self.temporary.name).resolve())
 
     def tearDown(self) -> None:
+        """Remove the temporary directory."""
         self.temporary.cleanup()
 
     def assert_failed_cleanly(self, text: str) -> None:
+        """Staging must fail with ``text`` and leave neither a target nor staging leftovers."""
         with self.assertRaisesRegex(ValueError, text):
             self.fixture.stage()
         self.assertFalse(self.fixture.target.exists())
         self.assertEqual(list(self.fixture.target.parent.glob(".audit-support-*")), [])
 
     def test_coherent_success_exact_inventory_and_hashes(self) -> None:
+        """A coherent fixture stages exactly the expected files with matching hashes."""
         result = self.fixture.stage()
         self.assertEqual(result["file_count"], 55)
         self.assertEqual(sorted(result["category_counts"].values()), [9, 18, 28])
@@ -208,18 +221,22 @@ class AuditSupportTests(unittest.TestCase):
         self.assertFalse(any("r-env/" in p or "raw/" in p or "preflight" in p for p in actual))
 
     def test_altered_registry_pinned_artifact_rejected(self) -> None:
+        """A changed hash-pinned artefact is rejected."""
         write(self.fixture.reference / "catalytic/execute_reference.R", b"altered\n")
         self.assert_failed_cleanly("pinned audit artifact changed: catalytic/execute_reference.R")
 
     def test_altered_fixed_capture_rejected(self) -> None:
+        """A changed fixed capture file is rejected."""
         write(self.fixture.preparation / "implementation_full_tests.log", b"altered\n")
         self.assert_failed_cleanly("pinned audit artifact changed: preparation/implementation_full_tests.log")
 
     def test_altered_frozen_metadata_rejected(self) -> None:
+        """Changed frozen metadata is rejected."""
         write(self.fixture.production / "config/extensions.yaml", b"altered\n")
         self.assert_failed_cleanly("frozen production metadata changed")
 
     def test_altered_receipt_environment_binding_rejected(self) -> None:
+        """A receipt bound to a different environment is rejected."""
         path = self.fixture.production / support.VALIDATION
         receipt = json.loads(path.read_text())
         receipt["environment_verification_sha256"] = "0" * 64
@@ -227,6 +244,7 @@ class AuditSupportTests(unittest.TestCase):
         self.assert_failed_cleanly("implementation environment/tests receipt differs")
 
     def test_altered_domain_download_link_rejected_after_pin_passes(self) -> None:
+        """A wrong source download link is rejected even when the file hashes match."""
         name = "metabric/download_manifest.json"
         data = json.loads(self.fixture.source(name).read_text())
         data[0]["downloaded_size"] += 1
@@ -235,12 +253,14 @@ class AuditSupportTests(unittest.TestCase):
         self.assert_failed_cleanly("download manifest differs")
 
     def test_altered_domain_audit_rejected_after_pin_passes(self) -> None:
+        """An altered domain audit is rejected even when the file hashes match."""
         name = "metabric/schema_alignment_audit.json"
         write_json(self.fixture.source(name), {"artificial_alignment": {"n_samples": 999}})
         self.fixture.refresh_pin(name)
         self.assert_failed_cleanly("source report and audit disagree")
 
     def test_altered_domain_lfs_binding_rejected_after_pin_passes(self) -> None:
+        """A wrong Git LFS binding is rejected even when the file hashes match."""
         name = "metabric/lfs_pointers/data_mrna_illumina_microarray.txt"
         path = self.fixture.source(name)
         data = path.read_bytes()
@@ -253,9 +273,11 @@ class AuditSupportTests(unittest.TestCase):
         self.assert_failed_cleanly("LFS pointer Git/OID/size binding differs")
 
     def test_altered_copied_artifact_rejected_before_publication(self) -> None:
+        """A copy that differs from its source is caught before anything is published."""
         original = support._copy_snapshot
 
         def corrupt(source: support.Snapshot, target: Path) -> None:
+            """Copy normally, then corrupt one copied file."""
             original(source, target)
             if target.name == "execute_reference.R":
                 target.write_bytes(target.read_bytes() + b"corruption\n")
@@ -264,9 +286,11 @@ class AuditSupportTests(unittest.TestCase):
             self.assert_failed_cleanly("copied audit artifact differs: catalytic/execute_reference.R")
 
     def test_source_changed_after_validation_rejected(self) -> None:
+        """A source file edited after validation is rejected."""
         original = support._copy_snapshot
 
         def mutate(source: support.Snapshot, target: Path) -> None:
+            """Edit one source file just before it is copied."""
             if source.path.name == "execute_reference.R":
                 source.path.write_bytes(source.path.read_bytes() + b"changed\n")
             original(source, target)
@@ -275,6 +299,7 @@ class AuditSupportTests(unittest.TestCase):
             self.assert_failed_cleanly("source changed since validation")
 
     def test_linked_source_rejected(self) -> None:
+        """A source that is a symbolic link is rejected."""
         path = self.fixture.source("catalytic/r-env-install.log")
         original = path.with_name("saved-install.log")
         path.rename(original)
@@ -282,6 +307,7 @@ class AuditSupportTests(unittest.TestCase):
         self.assert_failed_cleanly("linked path refused")
 
     def test_existing_target_refused_without_overwrite(self) -> None:
+        """An existing target is refused and left unchanged."""
         self.fixture.target.mkdir(parents=True)
         sentinel = self.fixture.target / "existing.txt"
         sentinel.write_bytes(b"preserve\n")
@@ -290,9 +316,11 @@ class AuditSupportTests(unittest.TestCase):
         self.assertEqual(sentinel.read_bytes(), b"preserve\n")
 
     def test_target_created_during_publish_refused_without_overwrite(self) -> None:
+        """A target that appears during publication is refused and not overwritten."""
         original = support._atomic_new_directory
 
         def race(source: Path, target: Path) -> None:
+            """Create the target just before the atomic rename, simulating a race."""
             target.mkdir()
             (target / "existing.txt").write_bytes(b"preserve\n")
             original(source, target)
@@ -304,11 +332,13 @@ class AuditSupportTests(unittest.TestCase):
         self.assertEqual(list(self.fixture.target.parent.glob(".audit-support-*")), [])
 
     def test_target_parent_traversal_cannot_bypass_overlap_check(self) -> None:
+        """A target path using ``..`` cannot escape the source/target overlap check."""
         self.fixture.target = self.fixture.production.parent / "missing/../production-code/audit"
         self.assert_failed_cleanly("parent traversal refused")
         self.assertFalse((self.fixture.production / "audit").exists())
 
     def test_linked_target_ancestor_rejected_before_creation(self) -> None:
+        """A target whose ancestor is a link is rejected before anything is created."""
         alias = self.fixture.production.parent / "linked-output"
         alias.symlink_to(self.fixture.production, target_is_directory=True)
         self.fixture.target = alias / "new/audit"
@@ -316,6 +346,7 @@ class AuditSupportTests(unittest.TestCase):
         self.assertFalse((self.fixture.production / "new").exists())
 
     def test_case_alias_cannot_bypass_overlap_check(self) -> None:
+        """On a case-insensitive volume, an upper-case alias of a source root cannot bypass the overlap check."""
         alias = self.fixture.production.with_name(self.fixture.production.name.upper())
         if not alias.is_dir() or not alias.samefile(self.fixture.production):
             self.skipTest("case-insensitive volume required")
