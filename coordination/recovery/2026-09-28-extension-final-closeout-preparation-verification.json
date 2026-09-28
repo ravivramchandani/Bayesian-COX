@@ -1,0 +1,57 @@
+{
+  "actual_result_claim_helper_invoked": false,
+  "actual_validation_bundle_assembled": false,
+  "archive": "coordination/recovery/2026-09-28-extension-final-closeout-preparation.tar.gz",
+  "archive_bytes": 134673,
+  "archive_inventory_sha256": "fa22ca9fe4aaea68dc946e9848d83588773dd7f6c767fa3202da8a4e0ad5c488",
+  "archive_members_verified": 39,
+  "archive_sha256": "ea23e0919b5eb1d9180c0122698cd16e7c1bd85b1c0e6a0c24b27faece328acc",
+  "bundle_helper_pure_checks": 43,
+  "claim_helper_pure_checks": 21,
+  "dated_partial_checkpoint": {
+    "candidate_refits": 66,
+    "markers": {
+      "analysis_prepared.json": false,
+      "coordinator_failure.json": false,
+      "postfit_support_failure_v1.json": false,
+      "postfit_support_prepared_v1.json": false
+    },
+    "observed_utc": "2026-09-28T03:47:56.760161+00:00",
+    "official_refit_receipts": 0,
+    "planned_cells": 1625,
+    "scope": "Dated stored-cell accounting only; numerical and transfer completion unassessed",
+    "settings": {
+      "gbsg2/clinical": 325,
+      "metabric/clinical": 202,
+      "whas500/clinical": 325
+    },
+    "statuses": {
+      "complete": 736,
+      "failed": 106,
+      "failed_diagnostics": 10
+    },
+    "stored_cells": 852
+  },
+  "historical_archive_members_verified": 6,
+  "historical_input_files_verified": 359,
+  "historical_manifest_sha256": "170874703c5397e21672569f18c82667972fb61e65833b4050b549a1aa59ff98",
+  "models_fitted": false,
+  "preparations": {
+    "final_claim_review_preparation_v1": {
+      "bound_files_verified": 18,
+      "receipt_sha256": "6c71cfa31b97ed0e50f285150bf07caf3c149bfb48be7dfed26d27f47ce46ed0"
+    },
+    "final_validation_bundle_preparation_v1": {
+      "bound_files_verified": 15,
+      "receipt_sha256": "b3a9ad2eaf7663a95ffc8d1987918567586bffbfd899445316ee49fae0da7dab"
+    }
+  },
+  "release_download_restore_executed": false,
+  "reviewer": "root",
+  "schema_version": 1,
+  "status": "preparation_reviewed_actual_completion_gates_pending",
+  "tested_source_files_unchanged": 157,
+  "tested_source_sha256": "3849ab7498cfce430c290ba17555d886be33c70c5d4f4d6153796d96a85963b1",
+  "verified_utc": "2026-09-28T03:47:56.762531+00:00",
+  "visual_qa_certified": false
+}

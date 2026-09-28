@@ -1094,3 +1094,27 @@ byte and binds the review, sources, process ownership, partial rank snapshot
 and dated 837-cell checkpoint. All 157 previously tested source/build/lock
 bytes remain unchanged. Compact receipt:
 `coordination/recovery/2026-09-28-extension-postfit-preparation-verification.json`.
+
+## 2026-09-28 — Final factual review and supporting-bundle preparation
+
+Prepared a read-only factual summary helper with 21 passed pure schema checks
+and independent review. It requires finished numerical, exact reproduction,
+rendering and actual visual-QA evidence. It preserves unavailable paired
+contrasts, descriptive RQ2 coverage and the original negative explanation
+finding; publication and restoration are separate gates. No actual extension
+result invocation has run.
+
+The separate supporting-bundle assembler passed 43 pure guards and independent
+review. It pins 359 historical files and six archived members, retains all
+77 original v1/v2 bundle files, and requires completed support outputs plus
+root's actual findings/stable-log review. The pending review contract has
+eight fields and 16 required byte bindings. No review was fabricated and no
+final supporting bundle has been assembled.
+
+Root reverified all prepared file bytes, both canonical preparation receipts,
+all 359 historical files, six archived members and all 157 tested source files.
+The 39-member recovery archive round-trips every retained byte. Its dated
+03:47:56 UTC checkpoint has 852 of 1,625 stored cells, 66 candidate refits
+and no official comparison receipts. Numerical workers and downstream gates
+remain active. Compact receipt:
+`coordination/recovery/2026-09-28-extension-final-closeout-preparation-verification.json`.

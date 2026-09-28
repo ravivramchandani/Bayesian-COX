@@ -426,6 +426,10 @@ and a fresh remote download/scientific restoration. Supplemental audits do
 not alter the frozen generator, acceptance rules or original failed findings.
 Current post-fit and numerical ownership are recorded in `HANDOFF.md`;
 prepared transfer commands do not close these gates.
+The prepared factual claim helper and supporting-bundle assembler require
+actual finished-grid receipts, findings review and visual QA as appropriate.
+Their passed pure checks and remote recovery archive preserve preparation;
+they do not close numerical, scientific or transfer tasks.
 
 - [x] T-180 (T; no dependency) — Write and freeze
   `docs/protocol_addendum_extensions.md` before results of the four new

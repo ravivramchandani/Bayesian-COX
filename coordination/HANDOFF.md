@@ -215,6 +215,31 @@ checks. The 50-member recovery archive verifies all retained bytes, and all
 157 previously tested source files remain unchanged. Compact receipt:
 `coordination/recovery/2026-09-28-extension-postfit-preparation-verification.json`.
 
+Final factual claim review is prepared in
+`~/bayes-cox-runs/extensions-20260928/final_claim_review_preparation_v1`.
+Its read-only helper requires the complete, deeply verified 1,625-cell grid,
+92 official comparison receipts and actual passed figure QA before producing
+source-bound counts. It retains incomplete comparison families, descriptive
+RQ2 coverage and the original failed explanation claim. It cannot certify
+publication or restoration. Its 21 pure schema checks and independent review
+passed; it has not been invoked on actual extension results.
+
+The supporting bundle assembler is prepared in
+`~/bayes-cox-runs/extensions-20260928/final_validation_bundle_preparation_v1`.
+It pins 359 historical files and six archive members, verifies the finished
+support companion's actual rank/trace outputs and stable logs, and requires
+`completed_support_review_v1.json` with eight fields and 16 actual byte
+bindings. Root must inspect the findings after companion exit before writing
+that review. Complete audits with findings remain reviewable; this review
+approves preservation only. The assembler passed 43 pure guards and independent
+review. No final bundle has been assembled. Both prepared tools, reviews and
+contracts are preserved in the 39-member
+`coordination/recovery/2026-09-28-extension-final-closeout-preparation.tar.gz`.
+Its receipt verifies the historical inputs and all 157 unchanged tested
+source files. The dated 2026-09-28 03:47:56 UTC checkpoint has 852 source
+cells (736 complete, 106 execution failures, ten diagnostic failures),
+66 candidate refits and no official receipts. These remain partial counts.
+
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
 No extension outer-validation result existed before the freeze. All
