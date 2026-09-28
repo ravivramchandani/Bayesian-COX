@@ -936,3 +936,45 @@ outside Git with the later validation logs; compact receipt:
 `coordination/recovery/2026-09-28-extension-transfer-verification.json`.
 These checks certify implementation and transfer preparation, not the still-
 running numerical grid or pending final visual review/remote restoration.
+
+The first clinical METABRIC catalytic cells include rank-rejected synthetic
+draws before any sampling. Independent reconstruction of the first adaptive
+full cell gives outer seed 759204084, M=1,000, p=19 and rank 17: the HER2 and
+menopausal-state missing-category columns are zero. Each relevant missing
+category occurs once among 1,584 training rows. An independent first-fold
+audit confirms the rejected matrices and distinguishes inner WME failures
+from outer generation failures. The frozen generator makes one draw and has
+no rank-recovery rule; no failed cell, seed, setting or worker was changed.
+Downstream verification/aggregation handles these records as execution
+failures and retains unavailable comparisons. Original synthetic metadata
+was not returned after rank rejection, so its later reconstruction is a
+separately labelled supplemental audit, not an alteration of cell evidence.
+
+The supplemental helper now calls the actual sealed generator and unchanged
+rank validator in an isolated audit process. It verifies source inputs,
+memberships, seeds and saved outer preprocessing, captures only reached
+inner/outer draws, and writes immutable relative-path array/state sidecars.
+Its first root-run snapshot reconstructs 34 rank failures. The transfer gate
+requires exact complete-grid failure coverage and every retained hash;
+fresh scientific restoration repeats the original generator without fitting.
+The 55 preparation artifacts retain their separate classification.
+
+A visual-transfer gap is corrected: the stager now binds the original
+review form, inventory and receipt to all 32 passed verdicts, six tables,
+32 page renders and four contact sheets before and after copying. The
+portable science verifier requires the same retained evidence through
+supplied paths, without following original host paths or claiming a new
+inspection. Thirty-one focused rejection/relocation tests pass.
+The README and code/architecture guides now map the active extension rather
+than describing it as merely planned.
+
+All 349 repository tests pass in 83.84 s; 16 support-integrity and 12 rank-
+audit tests, exact environment verification, schemas, Ruff and diff checks
+also pass. Complete logs/source hashes are retained in transfer validation
+version 2, separately from earlier validation. The first diagnostic-failure
+cell's six saved traces independently reproduce its diagnostics: all three
+posterior attempts pass, while their joint-prior traces retain 2, 4 and 3
+maximum-tree-depth hits. The cell remains rejected by the unchanged gate.
+These checks do not close the running numerical grid or final visual and
+remote-restoration gates. Compact receipt:
+`coordination/recovery/2026-09-28-extension-failure-qa-verification.json`.

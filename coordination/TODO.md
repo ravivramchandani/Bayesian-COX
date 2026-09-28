@@ -482,6 +482,9 @@ estimate compute from actual monitored fits and resource use.
     exist for the 25 outer folds of each cohort, the RQ2 conditions and the
     T-185 clinical-only and expression settings; Bayesian cells use the unchanged
     diagnostic gate, point-estimate cells use optimizer and prediction checks;
+  - rank-rejected synthetic draws remain execution failures before sampling,
+    with explicit failure counts and independently reconstructed provenance;
+    the frozen generator has no redraw remedy and failed cells are immutable;
   - paired contrasts against the other priors and comparators are recorded.
 - [ ] T-186 (T; depends T-181–T-185, T-189) — Render the extension bundle with the
   same verified renderer and lineage rules. Acceptance: every thesis number

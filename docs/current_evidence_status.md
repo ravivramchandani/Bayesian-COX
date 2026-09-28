@@ -59,6 +59,11 @@ Production is actively filling the 1,625-fit grid from sealed commit
 The separately sealed analysis verifier is `8551d32`. Full deep verification,
 92 selected exact refits, rendering, actual visual QA and private remote
 restoration are still required before extension conclusions are recorded.
+Early clinical METABRIC rank rejections are execution failures before
+sampling: rare training categories were absent from the specified synthetic
+draw. Their seeds and failed outcomes are retained, and a supplemental
+reconstruction is being audited. They are not MCMC diagnostic failures or
+accepted predictions; the frozen addendum supplies no redraw remedy.
 See [extension execution](extensions_execution.md) and the active state in
 [HANDOFF](../coordination/HANDOFF.md). This programme preserves the actual
 earlier ADR-032/ADR-033 chronology and changes no permitted primary or

@@ -53,5 +53,12 @@ tool-assisted visual inspection; no visual pass is inferred by the helper.
 The helper's absolute paths identify the reviewed checkout on this computer.
 Remote packaging should include the script, inventory, page renders, contact
 sheets, review form and receipt, and independently check their archive hashes
-after restore. The generated synthetic fixture is explicitly `test_only` and
+after restore. The shared `qa_transfer.py` gate additionally binds the retained
+`review.json`, inventory and receipt, all 32 explicit pass verdicts, six tables,
+32 page renders and four contact sheets to the original helper/renderer and
+source hashes. Staging checks it before and after copying; scientific
+restoration checks it using supplied restored paths. Preserved absolute paths
+remain provenance and are never required for verification. This verifies the
+original inspection evidence without claiming another visual review.
+The generated synthetic fixture is explicitly `test_only` and
 its receipt can never be a final evidence receipt.

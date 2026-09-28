@@ -8,8 +8,8 @@ defined in `coordination/GLOSSARY.md`.
 
 Three real cohorts are analysed: GBSG2 (breast cancer), WHAS500 (heart
 attack) and METABRIC (breast cancer). Each is split into five folds, five
-times over, giving 25 training/validation pairs per cohort. On every pair,
-six models are fitted:
+times over, giving 25 training/validation pairs per cohort. The frozen
+primary study fitted six models on every pair:
 
 - Cox proportional hazards;
 - a random survival forest (RSF);
@@ -68,6 +68,8 @@ Follow these steps in order. They are the core of the code.
 | Explanation (RQ3) | `scripts/run_confirmatory_explainability.py` | `src/explainability/` | No; uses stored coefficients and posterior summaries |
 | Horseshoe sampler sensitivity (ADR-032) | `scripts/run_horseshoe_sampler_sensitivity.py` | `src/pipelines/posthoc_sampler.py` | Yes; the 75 horseshoe cells, post-hoc |
 | Tables and figures | `scripts/render_confirmatory.py` | `src/rendering/` | No; pure renderer that checks every source hash |
+| Post-hoc extensions (ADR-039) | `scripts/run_extensions.py` | `src/pipelines/extensions/` | Yes; a separate frozen 1,625-fit grid |
+| Extension verification and figures | `scripts/finalize_extensions.py`, `render_extensions.py` | `src/pipelines/extensions/verification.py`, `analysis.py`, `rq2.py`, `decision_curves.py` | No; reconstructs jobs and uses stored traces/predictions |
 
 ## Suggested reading order
 
@@ -84,6 +86,40 @@ Follow these steps in order. They are the core of the code.
 6. `src/rendering/`: how the results become thesis tables and figures.
 7. `src/explainability/` and `src/pipelines/robustness/`: the RQ3 and RQ2/RQ4
    stages.
+8. `src/pipelines/extensions/planning.py`, `preprocessing.py` and `fitting.py`:
+   the separately specified post-hoc grid, matched genomic predictors and
+   nested comparator selection. Then read `verification.py` and `analysis.py`.
+
+## The post-hoc extension code
+
+The extension reuses the primary folds and scoring rules but writes a new
+manifest and result tree. It has 325 cells for each original clinical cohort
+and 650 matched METABRIC cells: thirteen models in each of two feature
+settings, on the same 25 folds. The matched cohort has 1,979 patients; its
+expression arm adds 512 genes selected inside each relevant training split.
+
+| Component | Where |
+| --- | --- |
+| Pinned source alignment and within-sample Entrez collapse | `scripts/prepare_extensions.py`, `src/pipelines/extensions/genomics.py` |
+| Complete cell identities and information-regime memberships | `src/pipelines/extensions/planning.py` |
+| Training-only gene selection/scaling and synthetic source-variable generation | `src/pipelines/extensions/preprocessing.py` |
+| Ridge, lasso and elastic-net Cox | `src/models/penalized_cox.py` |
+| Calibrated horseshoe, catalytic Bayesian priors and compact PWE likelihood | `src/models/bayesian/extensions.py` |
+| Catalytic kernels and weighted-mixture estimator | `src/models/catalytic.py` |
+| Inner selection, attempt recording and source cells | `src/pipelines/extensions/fitting.py`, `runner.py` |
+| Independent jobs, trace diagnostics and rescoring | `src/pipelines/extensions/verification.py` |
+| Four paired families, information-regime effects and conditional IPCW decision curves | `src/pipelines/extensions/analysis.py`, `rq2.py`, `decision_curves.py` |
+| The frozen selection of 92 exact refits | `scripts/reproduce_extensions.py` |
+| Lineaged six tables and 32 PDF/PNG figure pairs | `scripts/render_extensions.py` |
+| Source/audit staging, visual review, sharded transfer and fresh scientific verification | `scripts/extension_release/` |
+
+An execution failure can occur before sampling; it has no accepted trace or
+prediction. A diagnostic failure contains actual attempted traces rejected
+by the unchanged gate. Both remain in the complete cell inventory, and
+unavailable pairs/curves remain explicit. The extension never replaces failed
+primary findings. Use [extension execution](extensions_execution.md) for
+sealed code identities and commands; the code map alone does not authorize a
+second worker programme.
 
 ## Where each idea lives
 

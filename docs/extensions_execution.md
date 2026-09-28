@@ -95,11 +95,32 @@ decision-curve uncertainty, inherited clinical METABRIC duplicate-pair
 exposure and upstream expression normalization. The original negative and
 missing primary findings remain visible.
 
+Distinguish execution failures before sampling from failed MCMC diagnostics.
+In clinical METABRIC, a training category can occur only once and be absent
+from the single frozen empirical-marginal synthetic draw. Its encoded column
+is then zero and the full-column-rank check rejects that draw. The addendum
+specifies no regeneration remedy. Preserve the cell, seed, error and missing
+predictions; do not redraw until rank passes or count the cell as a diagnostic
+failure. A later reconstruction of the rejected matrix is supplemental
+failure provenance, not metadata saved by the original fit. Report its source
+cell hashes and exclude unavailable pairs/curves under the existing rules.
+Use [the supplemental failure procedure](../scripts/extension_release/FAILURE_PROVENANCE.md)
+with the latest clone's helper and the original sealed production checkout.
+Supply the resulting directory through `--failure-audit` when staging. Its
+complete snapshot covers every frozen rank failure and remains separate from
+the 55 preparation artifacts. The transfer gate checks its source/case/array
+hashes; fresh scientific restoration independently replays the original
+generator without fitting or changing failed cells.
+
 Use [the visual-QA procedure](../scripts/extension_release/PDF_QA.md) on the
 final 32 PDF pages and six lineaged CSVs. Its automated checks prepare full-
 size page images and contact sheets but leave the verdict pending. A named
 reviewer must inspect every PDF page and record each pass/fail finding before
 the write-once visual-QA receipt can pass.
+Staging and restoration also require the retained `review.json`, its exact
+receipt/inventory bindings, all 32 passed verdicts, all page renders and four
+contact sheets. The portable gate uses supplied paths and preserves the
+original review claim.
 
 Package code, inputs/source metadata, all attempted cells/traces, aggregates,
 92 reproduction receipts/traces, plots/tables and actual QA in a new private
@@ -154,8 +175,10 @@ After transfer verification and code extraction, use the latest clone's
 `--analysis-code`, `--restored`, `--primary`, `--sampler` and `--robustness`.
 It verifies the exact environment, frozen sources and all cells, recalculates
 the three stored aggregates, and directly re-compares the scientific content
-and actual trace arrays of all 92 saved refits. It launches no fits and
-preserves identical finalized files. Its optional new `--report` must be
+and actual trace arrays of all 92 saved refits. It launches no fits, repeats
+the supplemental rank-failure reconstruction, checks every retained visual-
+review artifact and preserves identical finalized files. Its optional new
+`--report` must be
 outside the restored evidence tree. The copied visual-QA receipt attests to
 the original inspection; preserved host paths are provenance and do not
 claim a second visual review on the receiving laptop. The actual extension

@@ -64,6 +64,24 @@ prespecified robustness  frozen-cell explanation  separate post-hoc sampler refi
   ADR-033 mathematical bound. `scripts/render_horseshoe_sensitivity.py`
   produces a separate post-hoc bundle. Neither renderer imports a model or
   fits one.
+- `scripts/prepare_extensions.py` and `src/pipelines/extensions/genomics.py`
+  align the pinned METABRIC expression source to the clinical records.
+  `planning.py` builds the separate 1,625-fit post-hoc grid; `preprocessing.py`
+  learns clinical state and the fixed gene-selection rule from training rows.
+  `fitting.py` performs nested comparator selection and recorded attempts;
+  `runner.py` binds every cell/trace to the frozen code, inputs and addendum.
+  The model implementations are `penalized_cox.py`, `catalytic.py` and
+  `bayesian/extensions.py`. Bayesian variants use the algebraically checked
+  compact PWE likelihood; the catalytic weighted-mixture comparator uses
+  weighted Breslow partial likelihood.
+- `scripts/finalize_extensions.py` independently verifies the rebuilt grid,
+  stored diagnostics and accepted scores, then computes separate paired
+  families, RQ2 effects and conditional IPCW decision curves. The analysis
+  checkout may differ only in the verifier, finalizer and renderer; it checks
+  every original production input against the fitting manifest.
+  `reproduce_extensions.py` uses the original sealed fitting code for exactly
+  92 selected cells. `render_extensions.py` reads the verified cells and
+  aggregates without fitting, leaving actual visual review pending.
 
 ## Evidence and execution identity
 
@@ -103,6 +121,16 @@ code and creates five deterministic private archives. The original confirmatory
 release is referenced unchanged. `scripts/restore_programme_release.py` verifies
 the package and its separately restored original run; optional extraction uses
 a new directory and rejects unsafe entries, collisions and overwrites.
+
+`scripts/extension_release/` handles the separate extension transfer. Its
+project stager requires the complete 1,625-cell grid, 92 refit receipts,
+lineaged figures/tables, frozen measured sources and a passed actual visual
+review. It preserves both fitting and analysis code archives. The generic
+shard verifier checks each transferred byte against an independently recorded
+inventory digest; the portable science verifier independently rechecks all
+cells/aggregates and directly repeats the 92 stored trace comparisons.
+Transfer integrity, scientific verification and actual visual review have
+separate receipts. Their completed status is recorded in Ravi's handoff.
 
 ## Historical artefacts
 

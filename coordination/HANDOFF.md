@@ -63,6 +63,33 @@ inventory size/free space before one fresh remote restoration. The portable
 directly repeats all 92 stored trace comparisons without fitting.
 Production/analysis commits and running worker ownership remain as above.
 
+The first clinical METABRIC cells contain execution failures before sampling:
+rare training categories were absent from a frozen synthetic draw, producing
+zero encoded columns and rank rejection. Independent reconstruction confirms
+the cause; the encoder preserves valid whole categories. The addendum has no
+redraw remedy. Keep these failed cells and all candidate refits unchanged.
+Supplemental matrix reconstruction is being recorded separately because the
+original generator raised before returning its synthetic metadata. Final
+verification must report execution and diagnostic failures separately, with
+unavailable contrasts/curves retained. These findings do not restart workers
+or alter the frozen fitting implementation.
+
+The later failure-provenance/visual-transfer update passes 349 repository
+tests in 83.84 s, 16 support-integrity tests, 12 rank-audit tests, exact
+environment verification, schemas and Ruff. Its compact receipt is
+`coordination/recovery/2026-09-28-extension-failure-qa-verification.json`;
+full logs and 157 unchanged source hashes are in
+`~/bayes-cox-runs/extensions-20260928/transfer_validation_v2`. Preserve both
+validation versions in the final transfer. The latest stager now also
+requires `--failure-audit`: run its current `audit_rank_failures.py` against
+the original production code and the finished source grid. The resumable
+audit output is `~/bayes-cox-runs/extensions-20260928/failure_provenance_v1`;
+its present partial snapshots are supplemental provenance, not completion.
+Staging/restoration bind every reviewed PDF/PNG/table, retained review form,
+inventory, 32 page renders and four contact sheets to the original passed
+receipt. Fresh restoration additionally repeats the rank reconstruction.
+No numerical worker, sampling rule or analysis checkout changed.
+
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
 No extension outer-validation result existed before the freeze. All

@@ -24,8 +24,11 @@ review. Original failed cells and incomplete primary inference are unchanged.
 
 All completed results, exact code, tables, figures and audit records are in
 private GitHub Releases and have been downloaded and restored independently.
-New extension experiments remain planned. Overleaf edits and paper submission
-are outside this completed code/results handoff.
+The separate post-hoc extension implementation is frozen and actively filling
+its 1,625-fit grid. Its complete verification, rendering, visual review and
+remote restoration remain pending. Follow [extension execution](docs/extensions_execution.md)
+and the current HANDOFF before running anything. Overleaf edits and paper
+submission remain outside this code/results programme.
 
 ## Start here — Ravi's handoff
 
@@ -58,6 +61,15 @@ partial likelihood. Its confirmatory diagnostics cover every sampled
 parameter and include prior- and posterior-predictive checks. The continuous
 spike-and-slab weight is an inclusion signal, not a discrete posterior
 inclusion probability.
+
+The post-hoc extension adds ridge, lasso and elastic-net Cox, a survival-
+calibrated horseshoe specification, fixed/adaptive catalytic coefficient
+priors and a catalytic weighted-mixture point estimator. The Bayesian
+variants retain the PWE likelihood and full diagnostic gate; the weighted
+mixture uses weighted Breslow partial likelihood and optimizer checks.
+Both matched METABRIC feature settings include all thirteen models. The
+settings, gene budget, comparison families and decision-curve rules are in
+the [frozen extension addendum](docs/protocol_addendum_extensions.md).
 
 ## Cohorts
 

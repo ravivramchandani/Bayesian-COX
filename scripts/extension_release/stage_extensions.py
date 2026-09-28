@@ -16,6 +16,8 @@ from pathlib import Path
 
 from archive_common import atomic_new_directory
 from audit_support import stage_audit_support
+from failure_transfer import verify_failure_transfer
+from qa_transfer import verify_visual_transfer
 
 
 def commit(root: Path) -> str:
@@ -106,7 +108,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("production-code", "analysis-code", "matched", "matched-manifest", "raw-source",
                  "source-report", "run", "reproduction", "rendered", "qa-dir", "worker-logs",
-                 "prestage-helper", "coordinator-helper", "reference-root", "preparation-dir", "output"):
+                 "prestage-helper", "coordinator-helper", "reference-root", "preparation-dir",
+                 "failure-audit", "output"):
         parser.add_argument(f"--{name}", type=Path, required=True)
     parser.add_argument("--validation-logs", type=Path, help="completed current-integration logs, kept separate from frozen preparation")
     parser.add_argument("--clone-staging", action="store_true", help="require APFS copy-on-write staging; never silently fall back to full copies")
@@ -188,6 +191,11 @@ def main() -> None:
             raise ValueError(f"table changed: {table['name']}")
     source_hashes = verify_source_inputs(production, manifest, args.matched, args.matched_manifest,
                                        args.raw_source, args.source_report, analysis=analysis)
+    failure_audit = verify_failure_transfer(args.run, args.failure_audit,
+                                            Path(__file__).with_name("audit_rank_failures.py"))
+    visual_transfer = verify_visual_transfer(args.qa_dir, args.rendered, args.run,
+                                            qa_helper=analysis / "scripts/extension_release/extension_pdf_qa.py",
+                                            renderer=analysis / "scripts/render_extensions.py")
 
     out.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix=".extension-stage-", dir=out.parent))
@@ -205,10 +213,14 @@ def main() -> None:
         copy_directory(args.reproduction, stage / "evidence/reproduction")
         copy_directory(args.rendered, stage / "rendered")
         copy_directory(args.qa_dir, stage / "visual_qa")
+        copy_directory(args.failure_audit, stage / "failure_provenance")
         copy_directory(args.worker_logs, stage / "execution/worker_logs")
         copy_payload(args.prestage_helper, stage / "execution/prestage_refits.py")
         copy_payload(args.coordinator_helper, stage / "execution/coordinate_after_fits.py")
-        for name in ("stage_extensions.py", "audit_support.py", "verify_restored_science.py", "archive_common.py"):
+        transfer_tools = ("stage_extensions.py", "audit_support.py", "verify_restored_science.py",
+                          "archive_common.py", "audit_rank_failures.py", "failure_transfer.py", "qa_transfer.py",
+                          "audit_support_selftest.py", "selftest_rank_failures.py")
+        for name in transfer_tools:
             copy_payload(Path(__file__).with_name(name), stage / "execution" / name)
         audit = stage_audit_support(production, args.reference_root, args.preparation_dir, stage / "audit")
         if args.validation_logs:
@@ -222,6 +234,13 @@ def main() -> None:
             verified_cell(stage / "evidence/run/cells" / f"{identity}.json")
         for identity in selected_ids:
             verified_cell(stage / "evidence/reproduction/cells" / f"{identity}.json")
+        if verify_failure_transfer(stage / "evidence/run", stage / "failure_provenance",
+                                   stage / "execution/audit_rank_failures.py") != failure_audit:
+            raise ValueError("staged supplemental failure provenance differs")
+        if verify_visual_transfer(stage / "visual_qa", stage / "rendered", stage / "evidence/run",
+                                  qa_helper=analysis / "scripts/extension_release/extension_pdf_qa.py",
+                                  renderer=analysis / "scripts/render_extensions.py") != visual_transfer:
+            raise ValueError("staged visual-review evidence differs")
         stage_record = {"evidence_status": "post_hoc_extension_verified_transfer",
                         "production_code_commit": production_commit, "analysis_code_commit": analysis_commit,
                         "production_manifest_sha256": sha256_file(stage / "evidence/run/manifest.json"),
@@ -230,9 +249,11 @@ def main() -> None:
                         "visual_qa_receipt_sha256": sha256_file(stage / "visual_qa/visual_qa_receipt.json"),
                         "metabric_source_report_sha256": sha256_file(stage / "data/metabric_source_report.json"),
                         "frozen_source_sha256": source_hashes, "audit_support": audit,
+                        "failure_provenance": failure_audit,
+                        "visual_qa_transfer": visual_transfer,
                         "staging_copy_mode": "strict_native_clonefile" if args.clone_staging else "copy2",
                         "transfer_tool_sha256": {name: sha256_file(stage / "execution" / name)
-                                                 for name in ("stage_extensions.py", "audit_support.py", "verify_restored_science.py", "archive_common.py")}}
+                                                 for name in transfer_tools}}
         write_json_atomic(stage / "release_stage.json", stage_record, overwrite=False)
         atomic_new_directory(stage, out)
     except Exception:

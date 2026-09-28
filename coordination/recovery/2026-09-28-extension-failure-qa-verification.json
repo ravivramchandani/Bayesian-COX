@@ -1,0 +1,33 @@
+{
+  "analysis_code_commit": "8551d326b02bfe88915cfd9eb50c6ca8e5690e3a",
+  "audit_support_tests_passed": 16,
+  "evidence_status": "code_and_transfer_verification_numerical_grid_pending",
+  "independently_checked_failure_traces": 6,
+  "overleaf_changed": false,
+  "production_code_commit": "119476fef55b1eeb690527f234c1423440720d45",
+  "rank_failure_snapshot": {
+    "programme_completion": "not_assessed",
+    "rank_failed_cells_audited": 34,
+    "snapshot_content_sha256": "eec6cba19ac41ae166d59d760481a8bd37e66c41bbf03c3eae6b905c75f00fc4",
+    "snapshot_sha256": "a0f236035d99ed75a81ca1a1284659a1d7a6d1c7e425846636d5667eea48995a",
+    "source_grid_counts": {
+      "planned": 1625,
+      "stored": 716
+    }
+  },
+  "rank_failure_tests_passed": 12,
+  "remaining_gates": [
+    "complete 1625-cell accounting",
+    "full deep verification and aggregates",
+    "92 official exact refit receipts",
+    "32-page actual visual QA",
+    "private release and fresh remote science restoration"
+  ],
+  "repository_tests_passed": 349,
+  "repository_tests_seconds": 83.84,
+  "schema_version": 1,
+  "tested_source_files": 157,
+  "tested_source_sha256": "c668ad68b6a1d6bca270ce7ae1081724ac3a235cebbac6fddadf60b0278a0407",
+  "validation_sha256": "c9c827408238154d73a20341340dc69b321395aeddd66d44d2c35c6cd03e3b05",
+  "verified_utc": "2026-09-28T01:06:25.146018+00:00"
+}
