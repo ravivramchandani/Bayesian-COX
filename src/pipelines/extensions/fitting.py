@@ -136,6 +136,7 @@ class FitExecutionFailure(RuntimeError):
     """A fit/write failure carrying every earlier and current attempt record."""
 
     def __init__(self, message: str, attempts: list[dict[str, Any]]) -> None:
+        """Keep the error message and the records of every fit attempt made so far."""
         super().__init__(message)
         self.attempts = attempts
 

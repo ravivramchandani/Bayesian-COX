@@ -1,4 +1,27 @@
-"""IPCW decision curves for saved fold-specific survival forecasts."""
+"""Decision curve analysis for the stored survival predictions (ADR-035, T-184).
+
+Decision curve analysis asks whether acting on a model's predicted risk,
+for example treating every patient whose risk of an event by the horizon
+exceeds a threshold ``p_t``, does more good than harm. It compares this with
+two defaults: treat everyone ("all") and treat no one ("none"). The measure
+is **net benefit**:
+
+    net benefit = (true positives - false positives * p_t / (1 - p_t)) / n
+
+The weight ``p_t / (1 - p_t)`` is the harm of an unnecessary treatment
+relative to the benefit of a necessary one, as implied by the threshold.
+
+Survival data add censoring: some patients leave follow-up before the
+horizon, so their true status is unknown. Inverse probability of censoring
+weighting (IPCW) handles this. Patients whose status is known are
+up-weighted by 1 / (probability of remaining uncensored), estimated from the
+*training* fold with the reverse Kaplan–Meier method. Patients censored
+before the horizon get weight 0 but stay in the denominator n.
+
+Everything is computed from the saved out-of-fold predictions; no model is
+refitted. The intervals are descriptive: they are conditional on the saved
+predictions, horizons and censoring estimates.
+"""
 
 from __future__ import annotations
 
@@ -13,16 +36,37 @@ def ipcw_state_weights(
     observed_time: np.ndarray, observed_event: np.ndarray, horizon: float,
     *, minimum_g: float = 0.1, minimum_at_risk: int = 10,
 ) -> tuple[np.ndarray, np.ndarray, dict[str, Any]]:
-    """Estimate event/event-free utility weights using training reverse KM.
+    """Return the IPCW weights for patients with an event and patients event-free at the horizon.
 
-    Event weights use G(Y-); event-free weights use G(h). Reverse KM applies
-    the censoring/event tie convention from the reference survival library.
-    Early-censored patients contribute zero and remain in the denominator.
+    G(t) is the training-fold probability of still being uncensored at t
+    (the reverse Kaplan–Meier estimate). A validation patient with an event
+    at time Y <= horizon gets event weight 1 / G(Y-), using G just before Y.
+    A patient still event-free after the horizon gets event-free weight
+    1 / G(horizon). A patient censored before the horizon gets 0 in both.
+
+    Args:
+        training_time, training_event: Training-fold follow-up, used only to
+            estimate G.
+        observed_time, observed_event: Validation-fold follow-up.
+        horizon: Decision time point, inside the training follow-up.
+        minimum_g: Smallest acceptable G, which caps the largest weight at
+            1 / minimum_g.
+        minimum_at_risk: Minimum number of training patients still at risk
+            at the horizon.
+
+    Returns:
+        ``(event_weight, event_free_weight, metadata)``: two per-patient
+        arrays and a summary that includes the weights' effective sample size.
+
+    Raises:
+        ValueError: The horizon is not supported by the training follow-up,
+            or G falls below ``minimum_g``.
     """
     if horizon <= 0 or horizon >= np.max(training_time):
         raise ValueError("decision horizon outside training follow-up support")
     km_t, km_g = kaplan_meier_estimator(training_event.astype(bool), training_time, reverse=True)
     def evaluate(values: np.ndarray, side: str) -> np.ndarray:
+        """Look up the reverse-KM step function; ``side="left"`` gives G(t-)."""
         index = np.searchsorted(km_t, values, side=side)
         return np.r_[1.0, km_g][index]
     gh = float(evaluate(np.array([horizon]), "right")[0])
@@ -48,7 +92,25 @@ def ipcw_state_weights(
 def decision_contributions(
     risk: np.ndarray, event_weight: np.ndarray, free_weight: np.ndarray, thresholds: np.ndarray,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """Threshold absolute risk before computing patient utility contributions."""
+    """Return each patient's net-benefit contribution at each threshold.
+
+    If treated, a patient contributes ``event_weight - p_t / (1 - p_t) *
+    event_free_weight``. The model's strategy treats a patient when their
+    predicted risk (probability of an event by the horizon) is at least the
+    threshold, and contributes 0 otherwise. Averaging contributions over
+    patients gives net benefit.
+
+    Args:
+        risk: Predicted absolute risk by the horizon, one value per patient,
+            in [0, 1].
+        event_weight, event_free_weight: IPCW weights from
+            :func:`ipcw_state_weights`.
+        thresholds: Risk thresholds strictly between 0 and 1.
+
+    Returns:
+        ``(model_contributions, treat_all_contributions)``, each of shape
+        (n_patients, n_thresholds).
+    """
     if not np.isfinite(risk).all() or np.any((risk < 0) | (risk > 1)):
         raise ValueError("decision risk must be an absolute probability")
     if np.any((thresholds <= 0) | (thresholds >= 1)):
@@ -62,11 +124,28 @@ def patient_cluster_intervals(
     contributions: dict[str, np.ndarray], *, n_bootstraps: int, seed: int,
     cluster_ids: list[str] | None = None,
 ) -> dict[str, Any]:
-    """Bootstrap matched patients, after averaging all their repeat utilities.
+    """Return net benefit with bootstrap intervals, resampling whole patients.
 
-    Each input is patient × repeat × threshold in identical ID/repeat order.
-    The same patient draw is used for every model/default strategy. Intervals
-    are conditional on saved forecasts, horizons and censoring estimates.
+    Every patient appears once in each of the 5 cross-validation repeats, so
+    their contributions are first averaged over repeats. Patients (or
+    ``cluster_ids`` groups) are then resampled with replacement. The same
+    resampled patients are used for every strategy, which keeps the
+    differences between strategies paired. The intervals are pointwise
+    2.5%–97.5% percentiles for each threshold.
+
+    Args:
+        contributions: Strategy name to array of shape
+            (n_patients, n_repeats, n_thresholds), all in the same patient
+            and repeat order. Include ``"all"`` and ``"none"`` to get
+            differences against the defaults.
+        n_bootstraps: Number of bootstrap draws (at least 20).
+        seed: Random seed.
+        cluster_ids: Optional labels; rows with the same label are resampled
+            together.
+
+    Returns:
+        Per strategy: net benefit and its interval, plus (for model
+        strategies) its difference from "all" and "none", with intervals.
     """
     if not contributions or n_bootstraps < 20:
         raise ValueError("decision bootstrap requires models and at least 20 draws")

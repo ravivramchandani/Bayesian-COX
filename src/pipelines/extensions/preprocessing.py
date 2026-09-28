@@ -20,6 +20,14 @@ class ExtensionPreprocessor:
     """
 
     def __init__(self, feature_spec: dict[str, Any], gene_budget: int = 0) -> None:
+        """Set up the clinical preprocessor and the number of expression genes to keep.
+
+        Args:
+            feature_spec: Clinical feature specification, as used by the
+                confirmatory ``FoldFeaturePreprocessor``.
+            gene_budget: Number of highest-variance genes, ranked on training
+                rows, to add as predictors; 0 means clinical predictors only.
+        """
         self.clinical = FoldFeaturePreprocessor(feature_spec)
         self.gene_budget = int(gene_budget)
         self.genes: list[str] = []

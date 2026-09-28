@@ -1,8 +1,25 @@
-"""Survival-calibrated horseshoe and correctly normalized catalytic priors.
+"""New coefficient priors for the post-hoc extension experiments (ADR-037, ADR-038).
 
-These subclasses do not change the frozen model's sampling or variable order.
-The catalytic likelihood-free prior is sampled by NUTS: PyMC forward sampling
-ignores Potentials and would yield invalid prior predictive draws here.
+All models here keep the frozen piecewise-exponential (PWE) likelihood and
+baseline-hazard prior of ``BayesianCoxModel``. Only the prior on the
+coefficients ``beta`` changes:
+
+- ``pv_horseshoe``: a regularised horseshoe in the form recommended by
+  Piironen and Vehtari (2017), with half-Cauchy scales and a global scale
+  ``tau0`` calibrated from the training fold (``survival_horseshoe_scale``);
+- ``catalytic_fixed``: the Cox catalytic prior with total synthetic weight
+  ``tau = p``;
+- ``catalytic_adaptive``: the catalytic prior with ``tau`` itself given a
+  prior (Li and Huang's adaptive version).
+
+``CompactBayesianCox`` evaluates the same likelihood faster; the frozen class
+and its source are left untouched.
+
+The catalytic prior has no simple sampling formula. It enters PyMC as a
+``Potential`` (an extra log-density term), and PyMC's forward
+``sample_prior_predictive`` ignores Potentials. So prior predictive draws for
+the catalytic variants are made by running NUTS on a model that holds only
+the priors.
 """
 
 from __future__ import annotations
@@ -22,6 +39,15 @@ from src.models.catalytic import CatalyticData, catalytic_kappa
 
 
 def _add_compact_likelihood(x, rows, subject, interval, beta, log_lambda) -> None:
+    """Add the PWE Poisson likelihood, computing ``x beta`` once per subject.
+
+    The frozen implementation multiplies the covariates of every
+    subject-interval row by ``beta``. Here the product is computed once per
+    subject and indexed, which gives the same values with less work.
+    ``subject`` and ``interval`` come from ``np.where`` on the same exposure
+    matrix as ``_poisson_rows``, so they line up with ``rows`` element by
+    element.
+    """
     eta = pm.math.dot(x, beta)
     mu = pm.math.exp(rows.log_exposure + log_lambda[interval] + eta[subject])
     pm.Poisson("obs", mu=mu, observed=rows.events)
@@ -30,11 +56,39 @@ def _add_compact_likelihood(x, rows, subject, interval, beta, log_lambda) -> Non
 def survival_horseshoe_scale(
     design: np.ndarray, time: np.ndarray, event: np.ndarray, cutoffs: np.ndarray,
 ) -> dict[str, Any]:
-    """Calibrate the underlying HS with diagonal profiled PWE information.
+    """Choose the horseshoe global scale ``tau0`` from the training data.
 
-    The Schur complement includes the specified baseline prior precision 1/4.
-    Its diagonal approximation omits correlations; this is a declared survival
-    adaptation, not the Gaussian noise formula or an exact survival theorem.
+    Piironen and Vehtari choose ``tau0`` so that the prior expects about
+    ``p0`` clearly non-zero coefficients. Their formula is written for
+    Gaussian regression, where each coefficient's information is n / sigma^2.
+    This survival adaptation replaces that with the curvature (Fisher
+    information) of the PWE log-likelihood for each coefficient, as follows:
+
+    1. For each baseline interval, find the posterior-mode log hazard at
+       ``beta = 0`` under the frozen N(-2, 2^2) baseline prior. That is the
+       root of ``d - a * exp(theta) - (theta + 2) / 4 = 0``, where d is the
+       interval's event count and a its total exposure.
+    2. Compute each coefficient's information, subtracting the part explained
+       by the baseline hazards (a Schur complement that includes the
+       baseline prior precision 1/4). Only the diagonal is kept; correlations
+       between predictors are ignored.
+    3. Solve ``sum_j tau0 * sqrt(h_j) / (1 + tau0 * sqrt(h_j)) = p0`` for
+       ``tau0``, with ``p0 = p / 2`` when p <= 5, otherwise 5.
+
+    This is a declared approximation, not an exact survival result.
+
+    Args:
+        design: Preprocessed training covariates, shape (n, p).
+        time: Training follow-up times on the model's scaled axis.
+        event: Training event indicators.
+        cutoffs: Scaled interval cut points, starting at 0.
+
+    Returns:
+        ``tau0``, ``p0``, the fixed slab scale (2.0), the per-coefficient
+        information and diagnostics describing the calibration.
+
+    Raises:
+        ValueError: A coefficient has zero or invalid training information.
     """
     exposure = np.clip(np.minimum(time[:, None], cutoffs[1:]) - cutoffs[:-1], 0, None)
     counts = np.sum((event[:, None] == 1) & (time[:, None] > cutoffs[:-1])
@@ -66,14 +120,21 @@ def survival_horseshoe_scale(
 
 
 class CompactBayesianCox(BayesianCoxModel):
-    """The same PWE model with one design product per subject, not interval.
+    """``BayesianCoxModel`` with a faster, algebraically identical likelihood.
 
-    Only new post-hoc fits use this algebraically equivalent implementation.
-    Original likelihood code and all frozen source hashes stay unchanged.
+    Only the new post-hoc fits use this class. The frozen confirmatory model
+    and its source files are unchanged, so the original evidence still
+    verifies.
     """
 
     def fit(self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray) -> CompactBayesianCox:
-        """Fit the common PWE likelihood without repeated dense design products."""
+        """Fit the PWE model with the compact likelihood.
+
+        The steps follow ``BayesianCoxModel.fit``: scale times, set cut
+        points, build the priors and likelihood, then draw prior predictive
+        samples, sample the posterior, compute diagnostics and store the
+        posterior summaries.
+        """
         self.feature_names = list(X.columns)
         x = X.to_numpy(float)
         t, e = np.asarray(y_time, float), np.asarray(y_event, int)
@@ -102,9 +163,17 @@ class CompactBayesianCox(BayesianCoxModel):
 
 
 class ExtensionBayesianCox(CompactBayesianCox):
-    """Keep the common PWE likelihood while changing only its coefficient prior."""
+    """The PWE model with one of the extension coefficient priors.
+
+    Args:
+        variant: ``"pv_horseshoe"``, ``"catalytic_fixed"`` or
+            ``"catalytic_adaptive"``.
+        synthetic: Synthetic prior data; required by the catalytic variants.
+        **kwargs: Passed to ``BayesianCoxModel`` (sampler settings, seed).
+    """
 
     def __init__(self, variant: str, *, synthetic: CatalyticData | None = None, **kwargs: Any) -> None:
+        """Validate the variant and keep the synthetic data for the catalytic priors."""
         if variant not in {"pv_horseshoe", "catalytic_fixed", "catalytic_adaptive"}:
             raise ValueError("unknown extension Bayesian prior")
         super().__init__(**kwargs)
@@ -113,7 +182,12 @@ class ExtensionBayesianCox(CompactBayesianCox):
         self.prior_diagnostics: dict[str, Any] = {}
 
     def fit(self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray) -> ExtensionBayesianCox:
-        """Prepare training-only prior calibration and fit the common likelihood."""
+        """Keep the training data for prior calibration, then fit.
+
+        The horseshoe calibration needs the training design, times and
+        events. They are stored before fitting because the prior is built
+        inside the parent ``fit``.
+        """
         self.training_design = X.to_numpy(float)
         self.training_time = np.asarray(y_time, float)
         self.training_event = np.asarray(y_event, int)
@@ -121,6 +195,17 @@ class ExtensionBayesianCox(CompactBayesianCox):
         return self
 
     def _coefficient_prior(self, n_features: int):
+        """Create the ``beta`` prior for the chosen variant inside the active PyMC model.
+
+        pv_horseshoe: ``beta_j = z_j * tau * lambda_tilde_j`` (non-centred),
+        with tau ~ HalfCauchy(tau0) and lambda_j ~ HalfCauchy(1). The slab is
+        fixed at c = 2, so c^2 = 4 in
+        ``lambda_tilde^2 = c^2 lambda^2 / (c^2 + tau^2 lambda^2)``.
+
+        Catalytic: ``beta`` gets a flat base measure plus a Potential equal to
+        ``tau * q(beta)``, which gives the catalytic density ``exp(tau * q)``.
+        Fixed variant: tau = p. Adaptive variant: tau gets its own prior.
+        """
         if self.variant == "pv_horseshoe":
             self.details = survival_horseshoe_scale(
                 self.training_design, self.training_time / self.time_scale,
@@ -133,6 +218,8 @@ class ExtensionBayesianCox(CompactBayesianCox):
             return pm.Deterministic("beta", z * pm.math.sqrt(variance))
         if self.synthetic is None or self.synthetic.design.shape[1] != n_features:
             raise ValueError("catalytic prior requires matching synthetic training design")
+        # kappa and the prior mode depend only on the synthetic data, so they
+        # are computed once and reused if the prior is built again.
         if not hasattr(self, "kappa"):
             self.kappa, self.prior_mode = catalytic_kappa(self.synthetic)
         beta = pm.Flat("beta", shape=n_features, initval=self.prior_mode)
@@ -154,6 +241,13 @@ class ExtensionBayesianCox(CompactBayesianCox):
         return beta
 
     def _sample_prior_predictive(self):
+        """Draw from the prior; NUTS is used for the catalytic variants.
+
+        The horseshoe variant uses the parent's forward sampling. The
+        catalytic priors are defined through a Potential, so their draws come
+        from NUTS on a separate model that contains the priors but no data.
+        That run's convergence diagnostics are kept in ``prior_diagnostics``.
+        """
         if self.variant == "pv_horseshoe":
             prior = super()._sample_prior_predictive()
             return prior

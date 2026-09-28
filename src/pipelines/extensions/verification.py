@@ -25,6 +25,7 @@ class SavedForecast:
     """Read exactly saved grid/horizon forecasts for independent rescoring."""
 
     def __init__(self, predictions: dict[str, Any]) -> None:
+        """Wrap a stored cell's ``predictions`` block so it can be scored like a model."""
         self.p = predictions
 
     def predict_risk(self, X: pd.DataFrame) -> np.ndarray:

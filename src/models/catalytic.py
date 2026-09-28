@@ -1,4 +1,27 @@
-"""Cox catalytic kernels and the authors' weighted-mixture point estimator."""
+"""Building blocks of the Cox catalytic prior (Li and Huang, 2026, ADR-038).
+
+A catalytic prior expresses prior belief through *synthetic data* instead of
+a formula on the coefficients. Synthetic patients are generated from a very
+simple model: resampled covariates and exponential survival times with one
+constant hazard. Their likelihood, down-weighted to a total weight ``tau``,
+then acts as the prior on the Cox coefficients ``beta``. With little real
+data, the fit is pulled towards the simple model; with more real data, the
+synthetic rows matter less and less.
+
+This module provides:
+
+- ``CatalyticData``: the synthetic rows for one training fold;
+- ``catalytic_kernel``: the average synthetic log-likelihood that defines
+  the prior density (Li and Huang, Eq. 7);
+- ``catalytic_kappa``: its maximum, needed by the adaptive-tau prior;
+- ``adaptive_log_kernel``: the joint prior on (tau, beta) (their Eq. 10–11);
+- ``WeightedMixtureCox``: the authors' weighted mixture estimator, a Cox fit
+  on the real rows (weight 1) plus the synthetic rows (weight tau / M each).
+
+Reference: Li W., Huang D. (2026) Bayesian inference for Cox regression
+models using catalytic prior distributions. Biometrics 82(1), ujag004,
+doi:10.1093/biomtc/ujag004.
+"""
 
 from __future__ import annotations
 
@@ -14,13 +37,27 @@ from src.models.base import BaseSurvivalModel
 
 @dataclass(frozen=True)
 class CatalyticData:
-    """Explicit synthetic prior data, never evaluation observations."""
+    """Synthetic prior data for one training fold; never used for evaluation.
+
+    Attributes:
+        design: Synthetic covariates, shape (M, p), on the same preprocessed
+            scale as the real training design.
+        time: Synthetic uncensored survival times, shape (M,), on the model's
+            scaled time axis.
+        hazard: The constant "surrogate" baseline hazard h0+ used to write the
+            synthetic exponential likelihood (fitted to the training fold).
+    """
 
     design: np.ndarray
     time: np.ndarray
     hazard: float
 
     def __post_init__(self) -> None:
+        """Reject shapes and values that would make the prior improper or undefined.
+
+        A full-column-rank synthetic design is what makes the catalytic prior
+        proper (integrable) in Li and Huang's Theorem 2.
+        """
         x, t = self.design, self.time
         if x.ndim != 2 or len(x) != len(t) or x.shape[1] < 1:
             raise ValueError("invalid synthetic prior-data dimensions")
@@ -33,10 +70,21 @@ class CatalyticData:
 
 
 def catalytic_kernel(beta: np.ndarray, data: CatalyticData) -> tuple[float, np.ndarray]:
-    """Return mean synthetic exponential log likelihood and its gradient.
+    """Return the average synthetic log-likelihood and its gradient in ``beta``.
 
-    The beta-independent log(hazard) is omitted in both this kernel and kappa.
-    No linear-predictor clipping changes the density.
+    Each synthetic row is an uncensored exponential observation with hazard
+    ``h0+ * exp(x beta)``, so its log-likelihood is
+    ``x beta + log(h0+) - h0+ * t * exp(x beta)``. The mean over the M rows,
+    ``q(beta)``, is the kernel: the catalytic prior density is proportional to
+    ``exp(tau * q(beta))``. The constant ``log(h0+)`` does not depend on
+    ``beta`` and is left out here and in ``catalytic_kappa`` alike.
+
+    Args:
+        beta: Coefficient vector, shape (p,).
+        data: The synthetic prior data.
+
+    Returns:
+        ``(q, gradient)``: the mean log-likelihood and its gradient, shape (p,).
     """
     eta = data.design @ np.asarray(beta, dtype=float)
     with np.errstate(over="ignore"):
@@ -45,7 +93,20 @@ def catalytic_kernel(beta: np.ndarray, data: CatalyticData) -> tuple[float, np.n
 
 
 def catalytic_kappa(data: CatalyticData) -> tuple[float, np.ndarray]:
-    """Compute the concave kernel's supremum with a checked finite optimum."""
+    """Return the maximum of the kernel and the ``beta`` that attains it.
+
+    ``kappa = max_beta q(beta)`` appears in the adaptive prior's
+    normalisation (Li and Huang, Eq. 11). The kernel is concave, so a
+    gradient optimiser finds the global maximum; the result is rejected
+    unless the optimiser reports success and the gradient is essentially zero.
+
+    Returns:
+        ``(kappa, beta_mode)``. ``beta_mode`` is also the prior mode, used as
+        the NUTS starting point.
+
+    Raises:
+        RuntimeError: The optimiser did not converge to a finite optimum.
+    """
     result = minimize(
         lambda b: tuple(-v for v in catalytic_kernel(b, data)),
         np.zeros(data.design.shape[1]), jac=True, method="L-BFGS-B",
@@ -61,7 +122,17 @@ def adaptive_log_kernel(
     beta: np.ndarray, tau: float, data: CatalyticData, kappa: float,
     *, alpha: float = 2, gamma: float = 1,
 ) -> float:
-    """Evaluate the joint adaptive prior, including its tau normalization."""
+    """Return the log density (up to a constant) of the adaptive prior on (tau, beta).
+
+    Instead of fixing the synthetic weight, the adaptive version treats
+    ``tau`` as unknown with density proportional to
+    ``tau**(p + alpha - 1) * exp(-tau * (kappa + 1/gamma))`` times the
+    catalytic kernel ``exp(tau * q(beta))``. Here p is the number of
+    coefficients. Li and Huang use ``(alpha, gamma) = (2, 1)``, the defaults.
+
+    Returns:
+        The log density, or ``-inf`` outside the valid parameter range.
+    """
     if tau <= 0 or alpha <= 0 or gamma <= 0:
         return -np.inf
     q, _ = catalytic_kernel(beta, data)
@@ -73,10 +144,23 @@ def weighted_breslow_objective(
     beta: np.ndarray, design: np.ndarray, time: np.ndarray,
     event: np.ndarray, weight: np.ndarray,
 ) -> tuple[float, np.ndarray]:
-    """Return weighted Cox Breslow log partial likelihood and score.
+    """Return the weighted Cox log partial likelihood (Breslow ties) and its gradient.
 
-    Case weights enter both event counts and risk-set denominators, including
-    at tied events. Sorting is stable and ties share one risk set.
+    Each row's weight multiplies both its contribution as an event and its
+    contribution to the risk sets of earlier event times. Rows with tied
+    times share one risk set (the Breslow approximation). The linear predictor
+    is shifted by its maximum before exponentiating to avoid overflow; the
+    shift cancels mathematically.
+
+    Args:
+        beta: Coefficients, shape (p,).
+        design: Covariates, shape (n, p).
+        time: Follow-up times, shape (n,).
+        event: Event indicators (1 event, 0 censored), shape (n,).
+        weight: Non-negative case weights, shape (n,).
+
+    Returns:
+        ``(log partial likelihood, score vector)``.
     """
     order = np.argsort(time, kind="stable")
     x, t, d, w = design[order], time[order], event[order], weight[order]
@@ -97,13 +181,27 @@ def weighted_breslow_objective(
 
 
 class WeightedMixtureCox(BaseSurvivalModel):
-    """Breslow Cox fit on observed and synthetic rows with weights 1 and tau/M.
+    """The authors' weighted mixture estimator (WME) as a survival model.
 
-    Absolute survival uses a weighted merged-data Breslow baseline, an
-    explicit extension to the authors' linear-risk prediction interface.
+    The real training rows (weight 1 each) and the M synthetic rows (weight
+    ``tau / M`` each, so ``tau`` in total) are pooled into one weighted Cox
+    fit. With ``tau`` near 0 this is ordinary Cox regression; a larger
+    ``tau`` pulls the coefficients towards the simple synthetic model.
+
+    Li and Huang define only the coefficient estimate. To produce survival
+    curves for evaluation, this class adds a weighted Breslow baseline hazard
+    estimated from the same pooled rows.
     """
 
     def __init__(self, synthetic: CatalyticData, tau: float, time_scale: float = 1) -> None:
+        """Store the synthetic rows, the total synthetic weight and the time scale.
+
+        Args:
+            synthetic: Synthetic prior data on the scaled time axis.
+            tau: Total weight given to all synthetic rows together.
+            time_scale: Divisor that puts real follow-up times on the same
+                scaled axis as the synthetic times.
+        """
         if not np.isfinite(tau) or tau <= 0:
             raise ValueError("mixture tau must be positive")
         if not np.isfinite(time_scale) or time_scale <= 0:
@@ -112,7 +210,14 @@ class WeightedMixtureCox(BaseSurvivalModel):
         self.details: dict = {}
 
     def fit(self, X: pd.DataFrame, y_time: np.ndarray, y_event: np.ndarray) -> WeightedMixtureCox:
-        """Fit without a penalty or a fabricated MCMC diagnostic."""
+        """Maximise the pooled weighted partial likelihood and build the baseline.
+
+        There is no penalty term and no sampling; the fit is accepted only if
+        the optimiser succeeds and the score is close to zero.
+
+        Raises:
+            RuntimeError: The optimiser failed to converge.
+        """
         x = np.vstack([X.to_numpy(float), self.synthetic.design])
         t = np.r_[y_time / self.time_scale, self.synthetic.time]
         d = np.r_[y_event, np.ones(len(self.synthetic.time), dtype=int)]
@@ -128,6 +233,8 @@ class WeightedMixtureCox(BaseSurvivalModel):
         self.beta = result.x
         self.event_times = np.unique(t[d == 1])
         eta = x @ self.beta
+        # Weighted Breslow increments: weighted events at u divided by the
+        # weighted risk-set sum at u, accumulated over event times.
         self.baseline = np.cumsum([
             np.sum(w[(t == u) & (d == 1)]) * np.exp(-logsumexp(eta[t >= u], b=w[t >= u]))
             for u in self.event_times
@@ -139,11 +246,20 @@ class WeightedMixtureCox(BaseSurvivalModel):
         return self
 
     def predict_risk(self, X: pd.DataFrame) -> np.ndarray:
-        """Return the linear log-hazard score."""
+        """Return the linear predictor ``x beta`` (log relative hazard); higher is riskier."""
         return X.to_numpy(float) @ self.beta
 
     def predict_survival(self, X: pd.DataFrame, eval_times: np.ndarray) -> np.ndarray:
-        """Evaluate the fitted weighted Breslow survival step function."""
+        """Return survival probabilities S(t | x) = exp(-H0(t) * exp(x beta)).
+
+        Args:
+            X: Covariates, shape (n, p).
+            eval_times: Times in the cohort's original unit; they are scaled
+                before looking up the step-function baseline H0.
+
+        Returns:
+            Array of shape (n, len(eval_times)).
+        """
         index = np.searchsorted(self.event_times, eval_times / self.time_scale, side="right")
         h = np.r_[0, self.baseline][index]
         with np.errstate(over="ignore"):
