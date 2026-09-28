@@ -1,0 +1,62 @@
+{
+  "actual_reporting_or_claim_helpers_invoked": false,
+  "actual_validation_bundle_assembled": false,
+  "archive": "coordination/recovery/2026-09-28-extension-bundle-v2-preparation.tar.gz",
+  "archive_bytes": 78238,
+  "archive_inventory_sha256": "ca9f3932f41575b1e4b2ddf7999f1176df4592770575f407a26c6c22dc717ffc",
+  "archive_members_verified": 27,
+  "archive_sha256": "8ec38d046bfc10ba57866a31108379cc1838684fca3b892fed09a51222436059",
+  "assembler_sha256": "866739127dff7500e9d2046015b36661b70a8addbf4d354366ce35478087db15",
+  "dated_partial_checkpoint": {
+    "candidate_refits": 66,
+    "markers": {
+      "analysis_prepared.json": false,
+      "coordinator_failure.json": false,
+      "postfit_support_failure_v1.json": false,
+      "postfit_support_prepared_v1.json": false
+    },
+    "observation_started_utc": "2026-09-28T05:02:04.658834+00:00",
+    "observed_utc": "2026-09-28T05:02:06.424330+00:00",
+    "official_refit_receipts": 0,
+    "planned_cells": 1625,
+    "scope": "Partial stored-cell accounting while workers run; completion unassessed",
+    "settings": {
+      "gbsg2/clinical": 325,
+      "metabric/clinical": 276,
+      "whas500/clinical": 325
+    },
+    "statuses": {
+      "complete": 774,
+      "failed": 140,
+      "failed_diagnostics": 12
+    },
+    "stored_cells": 926
+  },
+  "historical_archive_members_verified": 6,
+  "historical_files_verified": 359,
+  "independent_review_sha256": "b6e1209dfc4f2af1387da597f32489526629d043bdd0091da914927694c9e3cf",
+  "mocked_capture_io_checks_passed": 20,
+  "models_fitted": false,
+  "new_static_reporting_recovery_files_verified": 20,
+  "original_v1_bound_files_unchanged": 15,
+  "original_v1_receipt_sha256": "b3a9ad2eaf7663a95ffc8d1987918567586bffbfd899445316ee49fae0da7dab",
+  "original_v1_total_files_unchanged": 16,
+  "preparation_bound_files_verified": 21,
+  "preparation_receipt_sha256": "aea4062eb6bb7f4b29610b1c8135b0ba9a83a10853709894ebfcba436309ed75",
+  "release_download_restore_executed": false,
+  "reviewed_invocation": [
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/preserve_bundle_v2_preparation.py",
+    "--reviewed-receipt-sha256",
+    "aea4062eb6bb7f4b29610b1c8135b0ba9a83a10853709894ebfcba436309ed75"
+  ],
+  "reviewer": "root",
+  "root_review": "Read wrapper, captures, IO, contract, README and review; verified staging namespace compatibility",
+  "schema_version": 1,
+  "scientific_completion_certified": false,
+  "status": "bundle_v2_preparation_reviewed_actual_outputs_and_transfer_pending",
+  "syntax_sources_checked": 6,
+  "synthetic_metadata_checks_passed": 43,
+  "tested_source_files_unchanged": 157,
+  "tested_source_sha256": "3849ab7498cfce430c290ba17555d886be33c70c5d4f4d6153796d96a85963b1",
+  "verified_utc": "2026-09-28T05:02:06.425233+00:00"
+}

@@ -95,6 +95,26 @@ decision-curve uncertainty, inherited clinical METABRIC duplicate-pair
 exposure and upstream expression normalization. The original negative and
 missing primary findings remain visible.
 
+The final reporting tables must also show p, p/n and events/p for every
+planned cell, preserving unavailable predictor counts. Generate the separate
+123-row descriptive catalytic-versus-comparator table from verified stored
+predictions, retaining missing pairs and linking the 27 existing formal
+clinical contrasts. Complete 25-pair rows use the frozen corrected 95%
+interval; partial rows report their observed mean without that interval.
+These descriptive rows add no test or multiplicity family.
+
+The prepared reporting helper, fixed roster and instructions are retained in
+`coordination/recovery/2026-09-28-extension-reporting-preparation.tar.gz`.
+Actual invocation requires finished numerical, reproduction and figure-QA
+evidence. Its five-file output and a successful source replay belong in the
+final supporting bundle with their source and invocation records. After the
+remote restore, run a second read-only replay using the restored extension
+evidence and the separately restored original baseline. Keep that new receipt
+outside the immutable restored payload and require it to pass before release
+publication. The final receiving guide supplies the pinned invocation paths.
+The reviewed bundle/capture source and filled receiving addendum are retained
+in `coordination/recovery/2026-09-28-extension-bundle-v2-preparation.tar.gz`.
+
 Distinguish execution failures before sampling from failed MCMC diagnostics.
 In clinical METABRIC, a training category can occur only once and be absent
 from the single frozen empirical-marginal synthetic draw. Its encoded column

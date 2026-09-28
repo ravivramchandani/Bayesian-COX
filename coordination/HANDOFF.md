@@ -266,14 +266,35 @@ failures and 11 diagnostic failures. Clinical METABRIC has 250 cells;
 matched production has no stored cells. The 66 candidate refits have no
 official comparison receipts yet. These are partial dated counts.
 
+Use the reviewed
+`~/bayes-cox-runs/extensions-20260928/final_validation_bundle_preparation_v2`
+for final bundle v3 assembly. It preserves every original v1 file and reuses
+the pinned support gates/copier while adding the reporting preparation,
+actual five-file tables, source replay and factual claim records. The source
+capture records actual commands, zero exits and 111 current metadata/official
+receipt hashes. The portable receiving driver keeps fresh replay receipts
+outside immutable evidence and requires their pass before publication.
+Its 43 synthetic metadata checks, 20 mocked capture/I/O checks, six syntax
+checks and independent source reviews passed. The complete 22-file preparation
+and root verification are preserved in the 27-member
+`coordination/recovery/2026-09-28-extension-bundle-v2-preparation.tar.gz`.
+Root verified all 359 historical files, six archived members, 20 new static
+inputs and all 157 unchanged tested source files. No actual reporting/claim
+invocation, completed support review or final bundle assembly has run.
+The 2026-09-28 05:02:06 UTC checkpoint has 926 stored cells (774 complete,
+140 execution failures and 12 diagnostic failures), with 276 clinical
+METABRIC cells and no matched cells. There are still 66 candidate refits
+and no official receipts. Numerical/coordinator ownership is unchanged.
+
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
 No extension outer-validation result existed before the freeze. All
 extension outputs are post-hoc and remain separate from the closed primary
 record. The remaining gates are complete 1,625-cell accounting, deep
 diagnostic/score verification, separate RQ2/four-family/DCA aggregates,
-92 exact refits, rendering and actual PDF QA, private release, fresh download
-and restore, and factual plan/handoff close-out. Original results remain
+92 exact refits, rendering and actual PDF QA, verified reporting tables/source
+replay, private release, fresh download/scientific restore/reporting replay,
+and factual plan/handoff close-out. Original results remain
 available below. Overleaf and paper/DOI work are deferred.
 
 ## Completed baseline programme — Ravi can restore it

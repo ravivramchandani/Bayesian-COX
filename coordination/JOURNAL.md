@@ -1159,3 +1159,33 @@ Its 04:33:35 UTC checkpoint has 900 of 1,625 stored source cells, 66 candidate
 refits and no official receipts. Scientific, actual figure review and final
 private release/restoration gates remain pending. Compact receipt:
 `coordination/recovery/2026-09-28-extension-reporting-preparation-verification.json`.
+
+## 2026-09-28 — Reviewed final supporting/reporting bundle preparation
+
+Prepared the v2 wrapper around the byte-pinned v1 assembler, retaining its
+support review, historical inputs and copier. Twenty static additions bind
+the reporting preparation and both recovery archives. Actual five-file tables,
+source replay and claim stdout/invocation records remain required later inputs.
+The original 16-file preparation and initial v2 manifest are unchanged.
+
+The capture helpers record genuine process boundaries, exit codes and raw
+stdout bytes. The claim invocation binds 19 compact metadata files and all
+92 official receipts. Failed commands retain separate diagnostics; successful
+outputs use closed/fsynced pending bytes and exclusive links. The receiving
+driver uses restored reporting source/tables and a separately restored primary;
+both new replay receipts remain outside immutable evidence before publication.
+
+All 43 synthetic metadata guards, 20 mocked capture/I/O guards and six syntax
+checks passed. Independent source review is clean. Root read the wrapper,
+capture/IO sources, contract, README and review, confirmed staging namespace
+compatibility, and reverified all 21 bound preparation files, 359 historical
+files, six archived members, 20 additions and all 157 unchanged tested files.
+The 27-member recovery archive passed exact byte roundtrip. No actual data
+helper, support review, v3 assembly or transfer was invoked.
+
+At 05:02:06 UTC, 926 source cells are stored: 774 complete, 140 execution
+failures and 12 diagnostic failures. Clinical METABRIC has 276 cells; matched
+production has no stored cells. Candidate refits remain 66 and official
+receipts remain zero. The original numerical workers and coordinators continue.
+Compact receipt:
+`coordination/recovery/2026-09-28-extension-bundle-v2-preparation-verification.json`.
