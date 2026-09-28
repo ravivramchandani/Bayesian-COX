@@ -419,6 +419,14 @@ The strengthened analysis-only verifier is separately sealed at `8551d32` and ca
 cells. Unmeasured two-hour and ten-hour runtime estimates are withdrawn;
 estimate compute from actual monitored fits and resource use.
 
+Programme close-out also requires reviewed finished-grid rank reconstruction
+and inspection of all referenced retained traces, all 92 official exact
+refit comparisons, actual visual QA, the private extension evidence release
+and a fresh remote download/scientific restoration. Supplemental audits do
+not alter the frozen generator, acceptance rules or original failed findings.
+Current post-fit and numerical ownership are recorded in `HANDOFF.md`;
+prepared transfer commands do not close these gates.
+
 - [x] T-180 (T; no dependency) — Write and freeze
   `docs/protocol_addendum_extensions.md` before results of the four new
   analyses exist. Acceptance: grids and inner-CV objectives, precise variant

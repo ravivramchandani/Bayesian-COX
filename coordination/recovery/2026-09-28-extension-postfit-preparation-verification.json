@@ -1,0 +1,78 @@
+{
+  "archive": "coordination/recovery/2026-09-28-extension-postfit-preparation.tar.gz",
+  "archive_bytes": 126957,
+  "archive_member_inventory_sha256": "ce2b8b01e76233759b8a19b763d20b959f84f34dd84a73e3b5ca7e54e4e33c82",
+  "archive_members_verified": 50,
+  "archive_sha256": "4d8b7bcc1a0584205d8e938a11a9c6093b6b4c946127b7ac40ae2ecc6dc5dcee",
+  "full_boundary_driver_sha256": "20a7e53880c223fafedac7a4ea400399262a28fafba8d908fdced0d1d2841a7b",
+  "models_fitted_by_preserver": false,
+  "partial_checkpoint": {
+    "candidate_refit_cells": 66,
+    "manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+    "markers": {
+      "analysis_prepared.json": false,
+      "coordinator_failure.json": false,
+      "postfit_support_failure_v1.json": false,
+      "postfit_support_prepared_v1.json": false
+    },
+    "observed_utc": "2026-09-28T03:14:35.519915+00:00",
+    "official_refit_receipts": 0,
+    "planned_source_cells": 1625,
+    "schema_version": 1,
+    "scope": "Dated stored-cell accounting only; not deep science verification or completion",
+    "stored_dataset_setting_counts": {
+      "gbsg2/clinical": 325,
+      "metabric/clinical": 187,
+      "whas500/clinical": 325
+    },
+    "stored_source_cells": 837,
+    "stored_status_counts": {
+      "complete": 730,
+      "failed": 99,
+      "failed_diagnostics": 8
+    }
+  },
+  "rank_partial_cases": 73,
+  "rank_partial_retained_arrays_rechecked": 184,
+  "rank_partial_snapshot_sha256": "d6e3dc9c2637ecd1e756df96e87d42a70308a9d658b47027950ceaab8150d599",
+  "remaining": "Finished 1625-cell accounting/deep analysis, 92 exact comparisons, reviewed full support audits, actual visual QA, private release and fresh remote science restore",
+  "schema_version": 1,
+  "scientific_completion": "not_assessed",
+  "status": "postfit_preparation_reviewed_scientific_and_transfer_completion_pending",
+  "support_process": {
+    "caffeinate_bound_to_support_pid": 98854,
+    "caffeinate_pid": 98855,
+    "completion": "pending",
+    "fitting_pids_unchanged": [
+      62025,
+      62026,
+      62027,
+      62028,
+      62029,
+      62030
+    ],
+    "log": "/Users/macuser/bayes-cox-runs/extensions-20260928/worker_logs/postfit_support_companion_v1.log",
+    "numerical_coordinator_unchanged": 71385,
+    "ownership": "Only rank reconstruction v2 and referenced full-grid diagnostic boundary audit after existing fitting workers exit; no fits, finalization, rendering or visual approval",
+    "prelaunch_review_sha256": "3a747a7a9132a2483efdd9efeed1d22cfd9727ade8335c4df1b2991e81d918b4",
+    "schema_version": 1,
+    "started_utc": "2026-09-28T02:51:06.321230+00:00",
+    "support_command": [
+      "nice",
+      "-n",
+      "15",
+      "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+      "-u",
+      "/Users/macuser/bayes-cox-runs/extensions-20260928/complete_postfit_support_v1.py"
+    ],
+    "support_pid": 98854,
+    "support_script_sha256": "7d4f7dc22caa93391cfa918d27266d3a16c6a0d48348fd533ba4b1f291a05ada"
+  },
+  "support_review_sha256": "3a747a7a9132a2483efdd9efeed1d22cfd9727ade8335c4df1b2991e81d918b4",
+  "tested_source_files_unchanged": 157,
+  "tested_source_sha256": "3849ab7498cfce430c290ba17555d886be33c70c5d4f4d6153796d96a85963b1",
+  "transfer_executed_by_preserver": false,
+  "transfer_runbook_v1_review_sha256": "47fdd4b2589b8ec3e87b77f2eb0a08028485a56cf24fdf351fb596be7b282498",
+  "transfer_runbook_v2_review_sha256": "1e70b786f527413502138a5d98cb7c22885e5ef4a2d3a4491b09655c26623688",
+  "verified_utc": "2026-09-28T03:14:35.754487+00:00"
+}

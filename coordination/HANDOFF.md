@@ -157,6 +157,64 @@ it is a filesystem preflight, not completed science restoration. The receiving
 guide's APFS prose and unchanged template are bound by
 `2026-09-28-extension-receiving-guide-apfs-verification.json`.
 
+Transfer tools are now pinned in a clean detached `2b701a8` checkout at
+`~/bayes-cox-runs/extensions-transfer-code-20260928-2b701a8`. All 157 source
+bytes match the fifth validation receipt. Its rank helper has SHA-256
+`98cc7563c466e01d5bc72b8ba72a5beda771dceee16aeb3224a9639e1c1030fe`.
+The partial second reconstruction records 73 rank failures on a dated
+795-cell snapshot. All 184 retained synthetic-array hashes verify; all 86
+arrays across the 34 earlier cases remain identical. Both versions and
+the original helper are retained. This is supplemental provenance, not a
+finished-grid audit or a new fitting remedy.
+
+At 2026-09-28 02:51 UTC, reviewed post-fit companion
+`~/bayes-cox-runs/extensions-20260928/complete_postfit_support_v1.py` started
+as PID 98854, with `caffeinate` PID 98855 bound to its lifetime. It waits
+for the original six fitting workers, requires all 1,625 source cells,
+finishes rank reconstruction in `failure_provenance_v2`, and audits all
+referenced full-grid traces using the pinned diagnostic-boundary driver.
+Only exact byte-bound earlier trace inspections may be reused. Findings
+remain reviewable separately from frozen acceptance rules; orphan trace
+bytes are inventoried without inventing new diagnostic comparisons.
+The original primary traces are still limited to their retained thinned
+draws; this audit cannot recover missing full primary energies or latents.
+The companion writes `postfit_support_prepared_v1.json` or
+`postfit_support_failure_v1.json`. A prepared marker requires root review
+and does not approve science, visual QA or transfer. Numerical coordinator
+71385 alone still owns finalization, official refit comparison and rendering.
+Do not duplicate either process. Inspect current commands and markers before
+resuming after a stopped session.
+
+The corrected transfer commands are prepared in
+`~/bayes-cox-runs/extensions-20260928/final_transfer_runbook_v2`.
+The earlier runbook and its two review findings remain unchanged. The new
+version refreshes the package-plus-restore space budget after the fresh
+clone and immediately before download, retaining the earlier budget receipt.
+Its private draft guard and dependent commands share an exit-on-failure
+subshell. Archive and scientific verification execute from the byte-matched
+fresh clone. No stage, package, extension release, download or complete
+restore has run. The reviewed source, launch ownership, partial provenance
+and corrected preparation are retained in
+`coordination/recovery/2026-09-28-extension-postfit-preparation.tar.gz`
+and its compact verification receipt. Final validation bundle v3 must retain
+all five validation versions, original and current support histories,
+both runbooks/reviews, complete support audit results and storage receipts.
+Seal it only after the finished audits are reviewed; preserve earlier
+bundles unchanged.
+
+The dated 2026-09-28 03:14:35 UTC checkpoint contains 837 of 1,625 source
+cells: 730 complete, 99 execution failures and eight diagnostic failures.
+GBSG2 and WHAS500 each contain all 325 cells; clinical METABRIC contains 187.
+Matched clinical/expression production has not written cells at this
+checkpoint. There are 66 candidate refits and no official comparison
+receipts yet. All six fitting workers, both pre-stagers and both coordinators
+are active, with no failure marker. These are dated counts, not completion.
+The corrected runbook passed independent review with no unresolved findings;
+its actual publication target/tag and asset bytes still require execution
+checks. The 50-member recovery archive verifies all retained bytes, and all
+157 previously tested source files remain unchanged. Compact receipt:
+`coordination/recovery/2026-09-28-extension-postfit-preparation-verification.json`.
+
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
 No extension outer-validation result existed before the freeze. All

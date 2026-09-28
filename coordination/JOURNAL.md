@@ -1059,3 +1059,38 @@ and syntax-checked. Corrected unqualified stale baseline-running statements
 and made preservation of all validation versions explicit for final transfer.
 The numerical extension grid and its downstream completion gates remain active
 and pending; this documentation verification does not close them.
+
+## 2026-09-28 — Post-fit support and transfer preparation
+
+A clean detached transfer checkout at `2b701a8` matches all 157 tested
+source/build/lock files. The current helper's separate partial reconstruction
+records 73 rank failures on 795 available source cells. All 184 retained
+synthetic-array hashes verify; all 86 arrays across the 34 earlier cases are
+unchanged. Original and current helper identities remain separate. No fitting
+remedy, seed, source cell or frozen acceptance rule changed.
+
+The independently reviewed support companion has 15 passed pure guard checks.
+Its source hash and launch ownership are retained. It waits for the original
+six workers and then requires the complete grid before finished rank
+reconstruction and inspection of all referenced full-grid traces. The earlier
+752-cell trace audit is reusable only under exact input-byte bindings.
+Orphan traces remain a separate byte inventory, and unretained full primary
+energies or latent draws remain unavailable. The numerical coordinator keeps
+finalization, official reproduction and rendering ownership.
+
+The initial transfer rehearsal review identified a stale pre-download space
+measurement and a publication privacy test without dependent-command exit
+control. Separate version 2 preserves all ten original files and adds a new
+measurement immediately before downloading after the fresh clone, an
+exit-on-failure private draft sequence, and verifier execution from the
+byte-matched fresh clone. Shell/Python syntax and pure control-flow checks
+pass. These are prepared operations; no extension package, release or fresh
+restoration exists yet. Scientific, visual and remote transfer gates remain
+pending.
+
+Independent version-2 review resolves both initial findings and reports no
+unresolved issue. The 50-member recovery archive verifies every retained
+byte and binds the review, sources, process ownership, partial rank snapshot
+and dated 837-cell checkpoint. All 157 previously tested source/build/lock
+bytes remain unchanged. Compact receipt:
+`coordination/recovery/2026-09-28-extension-postfit-preparation-verification.json`.
