@@ -157,3 +157,11 @@ them. Preserve the actual earlier Holm-bound and sampler-probe chronology.
 
 Overleaf editing still requires the owner's instruction. Paper drafting,
 submission and DOI minting are deferred until after thesis submission.
+
+## Post-hoc extension evidence
+
+The active 1,625-cell extension programme remains separate from the released
+baseline above. Its final release is pending numerical, visual and remote-transfer
+verification. The [extension restoration guide](extensions_restore.md) gives the
+receiving-Mac procedure and baseline dependencies; replace its remaining tag and
+digest placeholders only after the verified release receipt is committed.

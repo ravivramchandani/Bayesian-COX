@@ -114,6 +114,16 @@ Full current-integration logs are additionally retained in
 Preserve this fourth validation version in the final transfer. No executable
 statement, import, running worker or sealed scientific source changed.
 
+The receiving-Mac procedure is now in `docs/extensions_restore.md`, cross-linked
+from Ravi's baseline handoff. It explicitly restores the three baseline runs
+separately, downloads only inventory/numeric shards, checks canonical identity
+and a measured disk budget, extracts both commit-identified code archives, and
+uses the latest clone's scientific verifier. Shell/Python syntax and both sealed
+commits are checked; all 157 tested source hashes remain unchanged. Receipt:
+`coordination/recovery/2026-09-28-extension-receiving-guide-verification.json`.
+The tag/digest placeholders remain pending actual publication; syntax checking
+does not constitute a downloaded complete-package restoration.
+
 T-180 is frozen: content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
 No extension outer-validation result existed before the freeze. All

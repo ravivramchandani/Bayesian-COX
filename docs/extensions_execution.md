@@ -154,7 +154,7 @@ transfer tree. It requires native `clonefile`, refuses existing files and
 fails if the volume cannot clone; it never silently makes a full duplicate.
 Copied bytes still pass the same hashes. Before packaging and restoration,
 measure actual sizes/free space, including retained failed attempts. Perform
-one fresh remote restore. Its free-space gate includes all inventory file
+one fresh remote restore. The receiving-workflow free-space check includes all inventory file
 bytes, the largest compressed shard, filesystem overhead and a 5 GiB
 operating reserve. Once a complete fresh download matches the independently
 recorded hashes, the task-created upload package is a recoverable duplicate
@@ -183,3 +183,9 @@ outside the restored evidence tree. The copied visual-QA receipt attests to
 the original inspection; preserved host paths are provenance and do not
 claim a second visual review on the receiving laptop. The actual extension
 release tag and digest remain pending until all production gates pass.
+
+Use [the receiving-Mac guide](extensions_restore.md) for the baseline dependencies,
+filtered download, explicit disk preflight, source-archive extraction and latest
+scientific verifier. The generic archive verifier does not enforce a disk budget;
+the guide runs that check before extraction. Final tag/digest values remain
+unavailable until the completed extension release is verified and published.

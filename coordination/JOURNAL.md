@@ -1014,3 +1014,18 @@ per-package correction ledgers, AST proofs, helpers and complete logs:
 `2026-09-28-documentation-gates.tar.gz`. Step 12 is complete. Extension
 production, sealed commits and fitting settings remain unchanged; the
 1,625-cell grid and its subsequent gates are still pending.
+
+
+## 2026-09-28 — Receiving-Mac extension procedure prepared
+
+The receiving audit verified actual CLI interfaces and baseline dependencies.
+Added `docs/extensions_restore.md` with a filtered release download, manual
+space preflight, canonical inventory comparison, Git archive PAX commit checks,
+source extraction and the current scientific verifier. The original confirmatory,
+ADR-032 sampler and robustness runs are restored separately. The generic archive
+verifier has no automatic disk-budget gate; the receiving workflow now states
+and performs that check explicitly. Both embedded Python blocks and the shell
+syntax pass; sealed commits and all 157 tested Python/build/lock files are
+unchanged. Final tag/digest values remain pending the completed private release.
+Compact syntax/source receipt:
+`coordination/recovery/2026-09-28-extension-receiving-guide-verification.json`.

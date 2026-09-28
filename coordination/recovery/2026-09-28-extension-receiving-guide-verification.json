@@ -1,0 +1,18 @@
+{
+  "analysis_commit": "8551d326b02bfe88915cfd9eb50c6ca8e5690e3a",
+  "baseline_dependencies": [
+    "original confirmatory",
+    "ADR-032 sampler",
+    "robustness"
+  ],
+  "bash_syntax_exit_code": 0,
+  "disk_preflight": "manual workflow gate; archive verifier does not enforce budget",
+  "embedded_python_blocks_parsed": 2,
+  "final_tag_and_digest": "pending publication",
+  "guide_sha256": "5b3509a8cac9f8b6b1fef4524f80f48ae3b110daf5e6915460cbbf1802ee2e51",
+  "production_commit": "119476fef55b1eeb690527f234c1423440720d45",
+  "schema_version": 1,
+  "scope": "receiving-template syntax and frozen commit/source checks; not a downloaded complete extension package",
+  "tested_python_source_files_unchanged": 157,
+  "verified_utc": "2026-09-28T02:00:43.654278+00:00"
+}

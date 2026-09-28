@@ -16,3 +16,10 @@ Compressed shards are at most 500 MiB (500 × 1,048,576 bytes). A single file wh
 Source file contents are preserved byte-for-byte. File modes are normalized to 0644 and directory modes to 0755 in the archive; source mtimes, uid/gid and ownership are not preserved. No source/package absolute path, creation time, or random staging name enters the package bytes. Identical input generates identical bytes with the same Python/zlib implementation; cross-version or cross-platform DEFLATE byte identity is not guaranteed. macOS was exercised here; Linux and Windows no-replace publication paths were not exercised.
 
 The workflow does not validate scientific correctness, Parquet schemas, software environments, or whether the source tree contains every intended result; check that upstream before packaging. Package and restore should run on stable local storage while no process edits the source. Changes observed during hashing or streaming fail the run.
+
+The thesis receiving workflow is documented in
+[the extension restoration guide](../../docs/extensions_restore.md). It restores
+the three baseline runs separately and checks available space before extraction.
+The generic verifier does not enforce that workflow's disk budget. Use the latest
+clone's scientific verifier after archive restoration; its required environment
+and scientific checks are additional to this standard-library transfer format.
