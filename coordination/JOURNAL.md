@@ -1405,3 +1405,46 @@ scientific approvals remain pending. At 13:22 UTC, independent replay had
 170 failed and 26 failed diagnostics. All original/continuation/observer owners
 remained present. Exact recovery archives are linked in
 `coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json`.
+
+## 2026-09-29 — Verified document mirror and regular pushed checkpoints
+
+Remote main was verified at `0234061` before mirroring exactly six disjoint
+coordination/guide documents into the original IDE checkout at 13:40 UTC.
+The actual subprocess returned zero. All six target bytes matched that
+published commit; 135 scoped non-target files, all 141 preserved prior files,
+24 selected shared-Git administrative files and 634 resident implementation
+files remained unchanged. No original Git synchronization or numerical-owner
+action occurred. The mirror capture and actual preservation-push records
+were then committed and remote-verified at `cffe27b`; resident main was clean
+and had zero ahead/behind counts at 13:53 UTC.
+
+The transfer compatibility review confirms that existing v3 can preserve the
+guard history's complete corrected-run tree and individually retained external
+files. It does not invoke guard semantics. Actual source and fresh receiving
+semantic-verifier subprocess captures therefore remain separately required;
+generic transport success cannot replace them. Empty external directories are
+not retained by the extra-file route. No scientific approval was supplied.
+
+At 14:05 UTC, a read-only metadata check found 495 independently verified
+first-draw receipts and 1,110 original outcomes: 914 complete, 170 failed and
+26 failed diagnostics. No arrays or traces were read. These are dated progress
+counts, not a complete grid, corrected freeze or verified final release.
+
+## 2026-09-29 — Preserved first guarded-dispatch runtime; material review findings
+
+The first sealed carrier has 40 bound files and 41 total members, receipt
+`54b1eaa4…`. Actual captured unit checks passed 23 fictional methods; Ruff
+and five-source compile checks passed with identical source bytes before/
+after. All failed check attempts remain in the carrier. Root read the full
+runtime, tests and interface. Finished-source review identified three material
+gaps in additional selection-input protection, rejection of the actual
+controller's numerical references in no-fit envelopes, and binding of account
+pass rows. The carrier is archived and is not adopted; a separate corrected
+variant and its finished reviews/portable integration remain pending.
+
+At 14:13 UTC, the actual read-only checkpoint had 513 independent first-draw
+receipts and 1,110 original outcomes: 914 complete, 170 failed and 26 failed
+diagnostics. All 15 selected original/continuation/observer processes were
+present. All 634 resident implementation files equal the earlier successful
+998-test capture and all 20 original design source pins are unchanged. No
+actual corrected reviews, selection, freeze, fit or final release was created.

@@ -109,9 +109,16 @@ collisions match published main. The [preservation record](../coordination/recov
 links the exact archives and actual backup-process capture. Integration
 continues in the resident checkout. General original-checkout Git
 synchronization is deferred while active frozen worktrees use its shared Git
-administration; the six disjoint guide/coordination files may be mirrored
-separately after a verified push. The prospective launch-guard design is prepared;
-finished implementation tests and actual pre-score approvals remain pending.
+administration. At 13:40 UTC the six disjoint guide/coordination files were
+mirrored from remote-verified `0234061`, with all other scoped files and
+selected Git administration unchanged. The
+[actual mirror record](../coordination/recovery/2026-09-29-generator-correction-document-mirror.json)
+is published in remote-verified `cffe27b`. The first sealed launch safeguard
+passed 23 fictional tests, lint and compile checks. Finished-source review
+found three gaps in input-tree protection and no-fit/account-pass validation;
+it is preserved and not adopted. A separately corrected version, verified
+integration and actual pre-score reviews remain pending. See the
+[guard-preparation record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-preparation-review.json).
 
 At 13:22 UTC on 29 September, the current replay had 403 verified contexts;
 the original grid had 1,105 stored outcomes: 909 complete, 170 failed and
@@ -119,6 +126,9 @@ the original grid had 1,105 stored outcomes: 909 complete, 170 failed and
 registered all nine original processes and records future exits. Registration
 does not certify finished numerical work. The interrupted replay, partial
 child and storage recovery remain preserved for the final private release.
+At 14:13 UTC a fresh metadata check found 513 verified input receipts and
+1,110 original outcomes: 914 complete, 170 failed and 26 failed diagnostics.
+All 15 selected numerical/continuation/observer processes were present.
 
 The [completed-preflight record](../coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json)
 and metadata archive are pushed. Full proposal arrays remain on the owner's

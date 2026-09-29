@@ -23,8 +23,13 @@ and compressed archive collisions match resident main exactly. Six older
 document variants remain preserved. The source-only dependency audit found
 that four live-route worktrees share original main's Git administration.
 General Git synchronization is deferred while those owners are active;
-no stash, fetch or merge has occurred. The six disjoint coordination/guide
-documents may be mirrored separately after the verified resident push.
+no stash, fetch or merge has occurred. At 13:40 UTC the six disjoint
+coordination/guide documents were mirrored from remote-verified `0234061`.
+All six matched published bytes; 135 other scoped files, the 141-file backup,
+24 selected shared-Git administrative files and 634 resident implementation
+files remained unchanged. The actual mirror capture and preservation-push
+records were subsequently published in remote-verified `cffe27b`. See
+`coordination/recovery/2026-09-29-generator-correction-document-mirror.json`.
 
 ## Next action — validate the catalytic generator correction
 
@@ -316,11 +321,25 @@ separate external implementation preparation. It preserves the existing
 scientific source pins and requires the actual selected scope before any
 corrected pilot/remaining dispatch, a zero-attempt first introduction, fixed
 resume bindings, genuine parent/child captures and separate source/fresh
-receiving semantic verification. Finished runtime tests, independent review,
-root review and all actual scientific approvals remain pending. The five
+receiving semantic verification. The first sealed runtime passed 23 fictional
+tests, Ruff and five-source compile checks, but finished-source review found
+three material gaps: output protection omitted additional selection inputs,
+no-fit envelopes did not reject the real controller's numerical references,
+and account-pass rows could be unbound. It is preserved and is not adopted.
+A separate corrected version is being prepared; its finished reviews,
+portable tests, root integration and actual scientific approvals remain
+pending. The five
 actual review requirements, design, checkout audit, exact local backup and
 actual backup-process capture are archived. The compact preservation record is
 `coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json`.
+
+At 14:13 UTC the read-only checkpoint found 513 independently verified input
+receipts and 1,110 original outcomes: 914 complete, 170 failed and 26 failed
+diagnostics. All 15 selected original/continuation/observer processes were
+present. The 634 implementation files still equal the 998-test successful
+capture, and all 20 original design source pins are unchanged. The compact
+guard-preparation record retains actual captures and the non-adoption finding;
+passing fictional tests do not certify actual dispatch or scientific results.
 
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its

@@ -388,8 +388,17 @@ reproduction source pins. A first introduction must refuse every prior
 corrected attempt, including empty/orphan attempt directories; later resumes
 must retain the original selection. Genuine parent/child capture history and
 separate read-only source/fresh receiving semantic verification are required.
-Design preparation does not supply tested runtime or any actual scientific
-approval. See the [preservation record](../coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json)
+The first sealed runtime passed 23 fictional tests, Ruff and five-source
+compile checks. Finished-source review identified three material omissions
+in protection of additional selection inputs, actual numerical references
+inside no-fit records, and account-pass row bindings. That version is preserved
+and not adopted. A separately corrected version must pass finished source,
+portable and root integration checks before actual use. Passing preparation
+tests supplies no scientific approval. Existing v3 transports the guard's
+records but does not invoke its semantic verification; genuine source and
+fresh receiving subprocess captures remain separately required before final
+release completion. See the [guard-preparation record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-preparation-review.json)
+and [preservation record](../coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json)
 for the design and exact original-checkout backup.
 
 1. Independently verify original first proposals and enumerate exact reuse,

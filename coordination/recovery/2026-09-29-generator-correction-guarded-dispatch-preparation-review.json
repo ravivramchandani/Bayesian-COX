@@ -1,0 +1,80 @@
+{
+  "actual_check_source_start_equals_finish": true,
+  "actual_checkpoint_at_utc": "2026-09-29T14:13:37.258313+00:00",
+  "actual_unit_methods_passed": 23,
+  "actual_unit_ruff_compile_exit_codes": {
+    "compile_attempt2": 0,
+    "ruff_attempt3": 0,
+    "unit_attempt5": 0
+  },
+  "all_15_selected_owners_present": true,
+  "archives": {
+    "preparation": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-preparation.tar.gz",
+      "bytes": 46280,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "preparation_receipt.json",
+      "preparation_receipt_sha256": "54b1eaa4b4da20719a63c55c2ad67b91fbd936b650dba16dfa52091ba1b5942b",
+      "regular_members": 41,
+      "sha256": "ba547b0d302251e443431742e84aba413cd82048a94acf4396d5c9903dfe58c0"
+    },
+    "root_checkpoint": {
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-preparation-root-checkpoint.tar.gz",
+      "bytes": 171734,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "regular_members": 21,
+      "sha256": "44babdc4d323b573c180e4846d95e269675f194900ee8f474fd103a6f8398b27"
+    },
+    "transfer_compatibility_review": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-dispatch-guard-transfer-compatibility-review.tar.gz",
+      "bytes": 120958,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "receipt.json",
+      "preparation_receipt_sha256": "c53553f635dccd53c5725d88ca11b7bdc4187dd4db66ebbeafbe8759a6438c83",
+      "regular_members": 28,
+      "sha256": "348d5001e5b7d2c162f3c28cb2b11b972339c7658108dad76ce0b64f16e69208"
+    }
+  },
+  "bound_files": 40,
+  "corrected_actual_reviews_freeze_selection_fits_release_complete": false,
+  "current_634_source_files_equal_998_full_test_capture": true,
+  "implementation_adopted": false,
+  "independent_first_draw_receipts": 513,
+  "independent_review_counterexamples": "pending separate sealed record",
+  "material_findings": [
+    {
+      "finding": "additional immutable selection paths are omitted from launcher protection; corrected output can overlap original_reproduction",
+      "id": "GD-R1",
+      "scope": "prewrite_output_separation"
+    },
+    {
+      "finding": "actual controller numerical references corrected_cell child_receipt_path invocation_path observations_path are not all refused",
+      "id": "GD-R2",
+      "scope": "initial_account_envelopes"
+    },
+    {
+      "finding": "fit_dispatched false arm accepts foreign or otherwise unbound current_pass rows",
+      "id": "GD-R3",
+      "scope": "initial_account_pass_rows"
+    }
+  ],
+  "old_release_v3_invokes_guard_semantics": false,
+  "original_20_design_source_pins_unchanged": true,
+  "original_outcome_status_counts": {
+    "complete": 914,
+    "failed": 170,
+    "failed_diagnostics": 26
+  },
+  "original_stored_cells": 1110,
+  "programme_complete": false,
+  "recorded_at_utc": "2026-09-29T14:17:19.201900+00:00",
+  "root_full_source_review_completed": true,
+  "schema_version": 1,
+  "sealed_preparation_receipt_sha256": "54b1eaa4b4da20719a63c55c2ad67b91fbd936b650dba16dfa52091ba1b5942b",
+  "separate_actual_source_and_fresh_receiving_semantic_captures_required": true,
+  "separate_v2_preparation": "in_progress",
+  "status": "first_guard_preparation_preserved_not_adopted",
+  "total_carrier_files": 41
+}

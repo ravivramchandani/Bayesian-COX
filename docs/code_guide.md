@@ -90,6 +90,16 @@ Follow these steps in order. They are the core of the code.
 | Corrected reporting and visual QA | `scripts/catalytic_correction/reporting/` | Verified mixed cells, frozen descriptive comparisons and explicit actual figure review | No; renders reports/pages and verifies completed review evidence |
 | Corrected private transfer | `scripts/catalytic_correction/release/`, `release_v3/` | Genuine source/fresh receiving capture, complete evidence trees and actual reporting/QA/replay proofs; v3 separately retains ADR-042 location plans and per-entry trees | No; captures, stages and verifies transported evidence after completed scientific gates |
 
+Before corrected pilot or remaining fits, a separately reviewed launch
+safeguard must enforce ADR-041's actual selection and scope in addition to
+the existing five-review freeze. The first 23-test preparation is preserved
+with three material review findings and is not adopted; its corrected version
+and repository integration remain pending. Existing v3 can transport its
+records, but separate actual source and fresh receiving semantic captures
+are still required. Follow the
+[current preparation record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-preparation-review.json)
+and [execution guide](catalytic_correction_execution.md).
+
 ## Suggested reading order
 
 1. `src/data/cohorts.py`, `survival_folds.py` and `fold_preprocessing.py`:
