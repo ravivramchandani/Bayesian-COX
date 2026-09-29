@@ -84,8 +84,18 @@ scientific approval or a release. ADR-042 preserves distinct per-entry
 outputs if missing inherited producer evidence actually requires new work;
 the subset and execution remain pending actual complete-input checks.
 
-At 11:28 UTC on 29 September, the current replay had 219 verified contexts;
-the original grid had 1,095 stored outcomes. The read-only exit observer
+The exact 44-file per-entry implementation is now integrated with 54 passing
+portable checks and 32 subtests. The full locked suite passed 965 tests and
+140 subtests without skips at 12:35 UTC on 29 September. All captured
+implementation bytes and all 157 original source/build/lock files remain
+unchanged. The [per-entry integration record](../coordination/recovery/2026-09-29-generator-correction-per-entry-io-integration.json)
+preserves the actual checks. Any new original-law work still requires the
+actual missing subset, a reviewed location plan and separately pinned
+release wiring before execution.
+
+At 12:39 UTC on 29 September, the current replay had 323 verified contexts;
+the original grid had 1,103 stored outcomes: 908 complete, 169 failed and
+26 failed diagnostics. The read-only exit observer
 registered all nine original processes and records future exits. Registration
 does not certify finished numerical work. The interrupted replay, partial
 child and storage recovery remain preserved for the final private release.

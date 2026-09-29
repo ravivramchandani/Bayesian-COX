@@ -1,0 +1,111 @@
+{
+  "no_module_imports_or_execution": true,
+  "reviewed_files": {
+    "original119/scripts/reproduce_extensions.py": {
+      "expected_sha256": "1c16387ecf8cafb01488840229f51f727dbe741614c9c91996c98a1a53781428",
+      "expected_sha256_match": true,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-code-20260928-119476f/scripts/reproduce_extensions.py",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "1c16387ecf8cafb01488840229f51f727dbe741614c9c91996c98a1a53781428",
+      "size_bytes": 5314
+    },
+    "prior_metadata_audit/receipt.json": {
+      "expected_sha256": "dce1598a2f65b7683b711b497f92061a7fd7e04c3003b412628f6cbef8e215de",
+      "expected_sha256_match": true,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_evidence_audit_v1/receipt.json",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "dce1598a2f65b7683b711b497f92061a7fd7e04c3003b412628f6cbef8e215de",
+      "size_bytes": 1694
+    },
+    "producer_completion/interface_contract.json": {
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/interface_contract.json",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "09cbce615fd3fe15e4724895d429cbc552d274b9ed7cf8c69a17ed1631425786",
+      "size_bytes": 3069
+    },
+    "producer_completion/preparation_receipt.json": {
+      "expected_sha256": "2a8530662d20936ac9f84a93db83b558abf6c1651a4df5039925cc616df72ea1",
+      "expected_sha256_match": true,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/preparation_receipt.json",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "2a8530662d20936ac9f84a93db83b558abf6c1651a4df5039925cc616df72ea1",
+      "size_bytes": 5451
+    },
+    "producer_completion/producer_capture.py": {
+      "expected_sha256": "c8c10daace6f44ebcfd0305cbd48954d1db4afedae442103b69d736053ffb95e",
+      "expected_sha256_match": true,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/producer_capture.py",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "c8c10daace6f44ebcfd0305cbd48954d1db4afedae442103b69d736053ffb95e",
+      "size_bytes": 24565
+    },
+    "producer_completion/test_original_capture.py": {
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/test_original_capture.py",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "8740c3f7e2851a54a7bc34af2e7a7341109bb92e901755b61599ae4f6d93ed69",
+      "size_bytes": 20612
+    },
+    "receiving/interface_contract.json": {
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_restore_v1/interface_contract.json",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "42d8493f21fd3f956a7e4587b086d6db09b6a9c7fc3e829cc520d61198c68484",
+      "size_bytes": 5464
+    },
+    "receiving/preparation_receipt.json": {
+      "expected_sha256": "fe0662adacbf29bc356d7c19f7abd40b2b6304cb9f683673fce1e7ae39f1e1ba",
+      "expected_sha256_match": true,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_restore_v1/preparation_receipt.json",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "fe0662adacbf29bc356d7c19f7abd40b2b6304cb9f683673fce1e7ae39f1e1ba",
+      "size_bytes": 7504
+    },
+    "receiving/receiving_core.py": {
+      "expected_sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f",
+      "expected_sha256_match": true,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_restore_v1/receiving_core.py",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f",
+      "size_bytes": 63832
+    },
+    "selected_reproduction/interface_contract.json": {
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/interface_contract.json",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "5f3d42ec05e9093edca8511ebb04dc53c49af505641f0f4b411e2940d0b672ba",
+      "size_bytes": 9001
+    },
+    "selected_reproduction/preparation_receipt.json": {
+      "expected_sha256": "43f2dba209a4d068df7122a3be956d295f7810601272b271fa996ad5a27aa95b",
+      "expected_sha256_match": true,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/preparation_receipt.json",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "43f2dba209a4d068df7122a3be956d295f7810601272b271fa996ad5a27aa95b",
+      "size_bytes": 9202
+    },
+    "selected_reproduction/reproduction_core.py": {
+      "expected_sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5",
+      "expected_sha256_match": true,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/reproduction_core.py",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5",
+      "size_bytes": 30615
+    },
+    "selected_reproduction/run_reproduction.py": {
+      "expected_sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c",
+      "expected_sha256_match": true,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/run_reproduction.py",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c",
+      "size_bytes": 36376
+    },
+    "selected_reproduction/test_reproduction.py": {
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/test_reproduction.py",
+      "scope": "source_contract_test_or_sealed_small_metadata_only",
+      "sha256": "516282c3b79a500fa1d1f3bd692f9a9021c321be2ac36d7bd7269e856e9a7bac",
+      "size_bytes": 51282
+    }
+  },
+  "schema_version": 1,
+  "selected_test_scope": "relevant resolution/producer/plan-order/path fixtures only; not a full new test run",
+  "status": "source_only_design_review_bindings",
+  "test_files_read_only_not_executed": true
+}

@@ -1,0 +1,87 @@
+{
+  "actual_acquisition_schema": {
+    "add_location_plan_sha256": "byte SHA of reviewed prospective plan",
+    "all_existing_evidence_fields_and_gates_preserved": true,
+    "completion_only_after_actual_checks_and_root_reviews": true,
+    "each_completed_entry_adds_reproduction_location": {
+      "historical_reproduction_root": "exact planned root, equal every producer --output/reproduction_output witness",
+      "location_plan_sha256": "same prospective plan byte SHA",
+      "original_cell_id": "exact entry identity"
+    },
+    "fresh_root_tree_inventory": "complete actual output/capture trees including failures/orphans, retained separately; binds actual new files after execution without circular prospective hashes",
+    "retain_existing_bindings": [
+      "scope_definition_sha256",
+      "original_manifest_sha256",
+      "entries",
+      "content_sha256"
+    ],
+    "use_existing_status": "reviewed_original_numerical_evidence_resolution"
+  },
+  "actual_cell_ids": null,
+  "actual_refit_subset": null,
+  "compatibility": {
+    "already_complete_records": "remain immutable; extend provenance by separate append-only acquisition/pass or use a fresh selected evidence run, never overwrite",
+    "original_selection_scope_and_scientific_inputs_unchanged": true,
+    "retained_failed_or_orphan_attempts": "no automatic retry or removal; separately reviewed fresh attempt paths only",
+    "v1_selection_pin_mismatch_must_not_be_bypassed": "new wrapper loads/pins unmodified v1 modules from their original preparation, checks the original selection there, and binds the separately reviewed I/O adapter; do not claim modified copied sources match original implementation_source_sha256",
+    "verified_but_actually_unproven_base_entry": "existing pending-only resolution refuses replacement. Root must first resolve documentary classification explicitly and append history; this design does not authorize or automatically weaken that law"
+  },
+  "fresh_original_numeric_provenance_label": "fresh original-law upstream numerical execution for a previously unproven inherited identity; not a new corrected fit and not an old cached refit proof",
+  "location_plan_schema": {
+    "actual_producer_audit": "root-chosen factual audit/actual gate-review path and byte SHA; cannot infer missing subset from metadata markers alone",
+    "content_sha256": "canonical content seal; explicit root review is a distinct externally supplied prerequisite",
+    "each_entry": {
+      "capture_root": "separate fresh owned absolute capture directory",
+      "current_input_witness_sha256": "actual frozen witness proving reuse_original_outcome for this identity",
+      "historical_reproduction_root": "explicit fresh absent absolute root, distinct per identity and outside original/sealed/corrected/restored roots",
+      "original_cell_id": "key exactly; member of original92 and frozen selected union",
+      "original_plan_selected_index": "recomputed exact original plan-order index, 0..91",
+      "pending_base_entry_sha256": "canonical hash of original pending evidence entry",
+      "producer_route": "official_fresh_refit using unchanged119 official script",
+      "workers": 92
+    },
+    "entry_locations": "dict keyed only by root-reviewed genuinely unproven inherited original92 identities",
+    "input_inventory_sha256": "same frozen correction input inventory SHA",
+    "io_adapter_source_sha256": "separately reviewed adapter implementation pins; original v1 pins remain honest and unchanged",
+    "original_manifest_sha256": "exact frozen original manifest SHA",
+    "original_numerical_evidence_sha256": "exact base evidence inventory SHA",
+    "root_missing_producer_choice": "existing root-reviewed missing-proof choice path and byte SHA",
+    "scope_definition_sha256": "unchanged sealed scope definition hash",
+    "selection_sha256": "exact original prospective selection byte SHA",
+    "status": "root-reviewed status supplied by root, never emitted as an approval by an execution tool"
+  },
+  "method_or_scope_approval_created": false,
+  "no_new_historical_environment_checker_gate": true,
+  "pending_actual_work": [
+    "root determines genuinely unproven inherited subset from actual final inventory and producer gate evidence",
+    "root reviews exact per-entry locations and separate adapter implementation before any new numerical launch",
+    "independent implementation/tests/review, genuine execution captures, scientific/trace comparisons and root reviews remain required"
+  ],
+  "recommended_surface": "new separately reviewed I/O adapter plus append-only per-entry location plan; sealed v1 remains unchanged",
+  "route_statuses_unchanged": [
+    "reused_verified_original_numerical_reproduction",
+    "new_corrected_numerical_reproduction",
+    "terminal_no_fit_recipe_replay"
+  ],
+  "routing_rule": {
+    "alternate": "only pending inherited identity with exact reviewed plan plus completed actual evidence, never a fallback search",
+    "default": "unchanged root for original proved entries and every identity absent from reviewed plan",
+    "historical_text_is_not_rewritten": true,
+    "mapping_law_unchanged": "distinct historical roots map to distinct fully inventoried receiving trees; no equal-target aliases, symlinks, file-copy equivalence or global-root repointing",
+    "receiving_consumers": [
+      "historical per-entry producer root argument",
+      "resolver-resolved refit/claims/receipt/trace root",
+      "same exact numerical evidence/location resolution",
+      "selected pass/record location binding and external tree inventories"
+    ],
+    "source_side_consumers": [
+      "completion capture request/output precondition",
+      "controller inherited owner/claims barrier",
+      "inherited official receipt/refit cell/trace comparison roots",
+      "verify_old_numerical_producer reproduction parameter",
+      "selected record/pass external provenance and resume recheck"
+    ]
+  },
+  "schema_version": 1,
+  "status": "design_only_not_implemented_or_approved"
+}

@@ -1,0 +1,51 @@
+{
+  "content_sha256": "810d288ee9075fd18fb1509b54cffe768e0422c633705b38d529d22665e08734",
+  "files": {
+    "capture_at_location.py": {
+      "ast_parse": "passed",
+      "sha256": "6eac7cda2a452552ee1e9c3b3aa9ee5909601729a841a75844eea43e9d43ff8d"
+    },
+    "capture_original_at_location.py": {
+      "ast_parse": "passed",
+      "sha256": "2a482751500025c73f7204c280f8e897d786eec54513520acca43adbd57cb8fe"
+    },
+    "fictional_support.py": {
+      "ast_parse": "passed",
+      "sha256": "943d5104e1778de25a3253918b2a5c857dcde197bcbd57522f93c4bcd60b0b88"
+    },
+    "location_core.py": {
+      "ast_parse": "passed",
+      "sha256": "e2103480646cb5f26d30e0fbab6a740e53ba52778616c08c0b30fb5fb4cd17f0"
+    },
+    "receiving_at_locations.py": {
+      "ast_parse": "passed",
+      "sha256": "6c56ceb15b19cc19204bf5139c7c9bbb28cb156faed5a5767e18ec53b6ad14b3"
+    },
+    "run_selected_at_locations.py": {
+      "ast_parse": "passed",
+      "sha256": "d444de262d568107db6a822a6c37142e81249810fa5f75e9d947902730fcd616"
+    },
+    "selected_at_locations.py": {
+      "ast_parse": "passed",
+      "sha256": "4c26d2ede68554aee6ad80af3b372a5f5d09e6fb78525dcb0846c294ae7156dd"
+    },
+    "test_capture_locations.py": {
+      "ast_parse": "passed",
+      "sha256": "8966de4b62dd5e1a526fadba010b68cff1c6c0e58bd39956a866a23ef091da03"
+    },
+    "test_locations.py": {
+      "ast_parse": "passed",
+      "sha256": "5eb256e751c9ae99fe2b4d986aee4923b8852ad04f0fd4f66cb73e4b01b306af"
+    },
+    "verification_io.py": {
+      "ast_parse": "passed",
+      "sha256": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8"
+    },
+    "verify_restored_at_locations.py": {
+      "ast_parse": "passed",
+      "sha256": "e8e51e236d96687c549219091d6b2ca89e9c9a219cf49b48481c6485b51b525f"
+    }
+  },
+  "module_import_or_science_execution": false,
+  "status": "ast_syntax_source_only_passed"
+}

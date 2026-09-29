@@ -1,0 +1,109 @@
+{
+  "actual_final_visual_review_release_or_fresh_remote_restore": false,
+  "actual_missing_subset_location_plan_or_adapter_adoption": false,
+  "all_399_current_implementation_files_equal_tested_bytes": true,
+  "corrected_programme_complete": false,
+  "created_at_utc": "2026-09-29T12:42:16.545398+00:00",
+  "curated_storage_archive_excludes_private_unfiltered_raw_metadata": true,
+  "dated_progress": {
+    "array_or_trace_bytes_read": false,
+    "collection_is_not_atomic": true,
+    "corrected_freeze_fits_release_complete": false,
+    "created_at_utc": "2026-09-29T12:39:49.742649+00:00",
+    "independent_first_draw_receipts": 323,
+    "internal_available_bytes": 82910556160,
+    "last_progress_line": {
+      "accounted": 323,
+      "context_id": "gbsg2__clinical__r04f02__catalytic_wme__fraction_0.50::inner_02",
+      "stage": "independent_first_draw_replay"
+    },
+    "original_expected_cells": 1625,
+    "original_outcome_status_counts": {
+      "complete": 908,
+      "failed": 169,
+      "failed_diagnostics": 26
+    },
+    "original_stored_cells": 1103,
+    "receipt_status_counts": {
+      "independent_original_first_draw_verified": 323
+    },
+    "status": "dated_metadata_checkpoint_not_completion"
+  },
+  "first_guide_review_capture_race_preserved_with_separate_bound_v2_review": true,
+  "focused_locked_test": {
+    "actual_exit_code": 0,
+    "passed_subtests": 32,
+    "passed_tests": 54
+  },
+  "full_locked_test": {
+    "actual_exit_code": 0,
+    "elapsed_seconds": 2204.236110708007,
+    "finished_at_utc": "2026-09-29T12:35:28.664242+00:00",
+    "invocation": {
+      "bytes": 1723,
+      "sha256": "8840a992ef8bf62b684d72b7b923c44120faefb03d151e3872e03d428109430a"
+    },
+    "passed_subtests": 140,
+    "passed_tests": 965,
+    "skips": 0,
+    "source_before_equals_after": true
+  },
+  "original_157_source_build_lock_files_unchanged": true,
+  "prior_349_implementation_files_unchanged": true,
+  "prior_exact_archives": {
+    "per-entry-io-preparation": {
+      "archive": "2026-09-29-generator-correction-per-entry-io-preparation.tar.gz",
+      "bytes": 65004,
+      "regular_members": 44,
+      "sha256": "ec743c345e74b95c149e92731ce2eca5e1c16773f726fc8b8d7a1a0b44847bdb"
+    },
+    "per-entry-io-review": {
+      "archive": "2026-09-29-generator-correction-per-entry-io-review.tar.gz",
+      "bytes": 24117,
+      "regular_members": 10,
+      "sha256": "a53bb10b40ced6329038555618436e43f5d5dcf2557d2d0502ea8e1896aed68d"
+    },
+    "per-entry-repository-test-preparation": {
+      "archive": "2026-09-29-generator-correction-per-entry-repository-test-preparation.tar.gz",
+      "bytes": 27881,
+      "regular_members": 23,
+      "sha256": "42ced7778fdb70b41e9a7a660082790ec7c037f5a64d011de19223effa0f7813"
+    },
+    "recovered-guides-review-v2": {
+      "archive": "2026-09-29-generator-correction-recovered-guides-review-v2.tar.gz",
+      "bytes": 96081,
+      "regular_members": 28,
+      "sha256": "0dbeebe13431ca891284aa4261e9bb1c5d371c330132c0f722348c37f4e02196"
+    },
+    "storage-headroom-checkpoint-v2": {
+      "archive": "2026-09-29-generator-correction-storage-headroom-checkpoint-v2.tar.gz",
+      "bytes": 12248,
+      "regular_members": 11,
+      "sha256": "e4056ed166c006841e7ca2c59e7058fd203a7d4f1537b0917ceb1fcc02aea32d"
+    }
+  },
+  "root_copy_SHA_transcription_and_archival_filename_schema_errors_retained": true,
+  "root_engineering_review": {
+    "actual_missing_subset_location_plan_adapter_adoption_or_execution": false,
+    "additional_full_carrier_dependency_and_isolated_import_guard": true,
+    "checked_at_utc": "2026-09-29T12:42:16.451203+00:00",
+    "exact_44_carrier_files_installed": true,
+    "original_fictional_test_methods_preserved": 53,
+    "peer_review_sha256": "af971b9dc4b3a9e016110e3cf8cab4996dd5f0444ea0ab5009856a28744091d5",
+    "per_entry_preparation_sha256": "6670b27e78fb05f7c266cc52b72241a4b477f5d9a27213e8882bdcbd1038f366",
+    "portable_test_and_fixture_files": 6,
+    "separate_release_v3_integration_pending": true
+  },
+  "ruff_and_coordination_schemas_actual_exit_code": 0,
+  "schema_version": 1,
+  "source_metadata_residency_repair_changed_no_scientific_code_flags_data_or_owners": true,
+  "staged_diff_check_actual_exit_code": 0,
+  "status": "verified_per_entry_io_implementation_integration_not_scientific_execution",
+  "validation_archive": {
+    "archive": "2026-09-29-generator-correction-per-entry-io-integration-validation.tar.gz",
+    "bytes": 240428,
+    "exact_member_roundtrip_and_source_before_after_verified": true,
+    "regular_members": 57,
+    "sha256": "7837a5f43608196fccddb38a6c715043850c073aced8f5662a507d5cb8728cf8"
+  }
+}

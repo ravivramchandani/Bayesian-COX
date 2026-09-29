@@ -1,0 +1,171 @@
+{
+  "fixed_root_sites": [
+    {
+      "effect": "inherited refit cell, official relative receipt, claims barrier, producer output identity, comparison and trace roots all use selection.paths.original_reproduction",
+      "lines": [
+        194,
+        235
+      ],
+      "source": "selected_reproduction/run_reproduction.py"
+    },
+    {
+      "effect": "record waits on claims under the same global root before inherited execution",
+      "lines": [
+        329,
+        330
+      ],
+      "source": "selected_reproduction/run_reproduction.py"
+    },
+    {
+      "effect": "producer invocation reproduction_output and actual --output must equal the reproduction argument; existing source/env/actual rc0/official-comparison/lineage checks are independent of location",
+      "lines": [
+        264,
+        406
+      ],
+      "source": "selected_reproduction/reproduction_core.py"
+    },
+    {
+      "effect": "receiving uses the resolved global root and passes the original historical global root to verify_producer",
+      "lines": [
+        552,
+        588
+      ],
+      "source": "receiving/receiving_core.py"
+    },
+    {
+      "effect": "fresh capture refuses a request output differing from selection.paths.original_reproduction",
+      "lines": [
+        260,
+        265
+      ],
+      "source": "producer_completion/producer_capture.py"
+    }
+  ],
+  "historical_environment_checker_argv_or_rc_is_not_an_existing_extra_gate": true,
+  "official_single_cell_index": "original manifest plan order filtered repeat==fold==1, workers92, worker=index; official source reconstructs selected job order and selects i % workers == worker",
+  "pending_resolution_law": "only originally pending base evidence may be completed; known evidence cannot be replaced",
+  "root_decision_actual_subset_not_examined_or_defined": true,
+  "schema_version": 1,
+  "scientific_scope": "sorted unique original repeat1/fold1 92 union fixed full-budget pilot IDs",
+  "scope_hash_excludes_io_paths": true,
+  "selection_bytes_still_bind_implementation_sources_and_paths": true,
+  "source_anchors": [
+    {
+      "definition": "original_selection",
+      "first_line": 46,
+      "last_line": 57,
+      "source_role": "selected_reproduction/reproduction_core.py",
+      "source_sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    {
+      "definition": "scope_definition",
+      "first_line": 60,
+      "last_line": 67,
+      "source_role": "selected_reproduction/reproduction_core.py",
+      "source_sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    {
+      "definition": "validate_scope",
+      "first_line": 70,
+      "last_line": 82,
+      "source_role": "selected_reproduction/reproduction_core.py",
+      "source_sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    {
+      "definition": "load_selection",
+      "first_line": 85,
+      "last_line": 134,
+      "source_role": "selected_reproduction/reproduction_core.py",
+      "source_sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    {
+      "definition": "verify_old_numerical_producer",
+      "first_line": 264,
+      "last_line": 406,
+      "source_role": "selected_reproduction/reproduction_core.py",
+      "source_sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    {
+      "definition": "numerical_inventory",
+      "first_line": 116,
+      "last_line": 130,
+      "source_role": "selected_reproduction/run_reproduction.py",
+      "source_sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    {
+      "definition": "inherited",
+      "first_line": 194,
+      "last_line": 235,
+      "source_role": "selected_reproduction/run_reproduction.py",
+      "source_sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    {
+      "definition": "record",
+      "first_line": 299,
+      "last_line": 396,
+      "source_role": "selected_reproduction/run_reproduction.py",
+      "source_sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    {
+      "definition": "run",
+      "first_line": 398,
+      "last_line": 426,
+      "source_role": "selected_reproduction/run_reproduction.py",
+      "source_sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    {
+      "definition": "Resolver",
+      "first_line": 114,
+      "last_line": 208,
+      "source_role": "receiving/receiving_core.py",
+      "source_sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f"
+    },
+    {
+      "definition": "verify_producer",
+      "first_line": 284,
+      "last_line": 386,
+      "source_role": "receiving/receiving_core.py",
+      "source_sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f"
+    },
+    {
+      "definition": "original_evidence",
+      "first_line": 461,
+      "last_line": 472,
+      "source_role": "receiving/receiving_core.py",
+      "source_sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f"
+    },
+    {
+      "definition": "inherited",
+      "first_line": 552,
+      "last_line": 588,
+      "source_role": "receiving/receiving_core.py",
+      "source_sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f"
+    },
+    {
+      "definition": "run",
+      "first_line": 727,
+      "last_line": 762,
+      "source_role": "receiving/receiving_core.py",
+      "source_sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f"
+    },
+    {
+      "definition": "original_selected",
+      "first_line": 96,
+      "last_line": 108,
+      "source_role": "producer_completion/producer_capture.py",
+      "source_sha256": "c8c10daace6f44ebcfd0305cbd48954d1db4afedae442103b69d736053ffb95e"
+    },
+    {
+      "definition": "capture",
+      "first_line": 184,
+      "last_line": 365,
+      "source_role": "producer_completion/producer_capture.py",
+      "source_sha256": "c8c10daace6f44ebcfd0305cbd48954d1db4afedae442103b69d736053ffb95e"
+    }
+  ],
+  "status": "current_sealed_contract_observations_only",
+  "unchanged_source_functions_available_with_explicit_root_arguments": [
+    "verify_old_numerical_producer",
+    "compare_cells"
+  ]
+}

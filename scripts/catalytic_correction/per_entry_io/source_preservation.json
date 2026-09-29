@@ -1,0 +1,107 @@
+{
+  "content_sha256": "359e81bce3ea64985224cebc2a21a8fc4389b6b8dbe0f5d09e2542fcbdbcebb1",
+  "dependencies": [
+    {
+      "bytes": 30615,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/reproduction_core.py",
+      "role": "selected",
+      "sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    {
+      "bytes": 36376,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/run_reproduction.py",
+      "role": "selected",
+      "sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    {
+      "bytes": 19483,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/terminal_replay_child.py",
+      "role": "selected",
+      "sha256": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    },
+    {
+      "bytes": 9202,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/preparation_receipt.json",
+      "role": "selected_preparation",
+      "sha256": "43f2dba209a4d068df7122a3be956d295f7810601272b271fa996ad5a27aa95b"
+    },
+    {
+      "bytes": 63832,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_restore_v1/receiving_core.py",
+      "role": "receiving",
+      "sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f"
+    },
+    {
+      "bytes": 2722,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_restore_v1/verify_restored_reproduction.py",
+      "role": "receiving",
+      "sha256": "9387aae83e348515999843963ace0acba0cacef2501fbdacbb0cef85bd5ad33e"
+    },
+    {
+      "bytes": 7504,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_restore_v1/preparation_receipt.json",
+      "role": "receiving_preparation",
+      "sha256": "fe0662adacbf29bc356d7c19f7abd40b2b6304cb9f683673fce1e7ae39f1e1ba"
+    },
+    {
+      "bytes": 24565,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/producer_capture.py",
+      "role": "capture",
+      "sha256": "c8c10daace6f44ebcfd0305cbd48954d1db4afedae442103b69d736053ffb95e"
+    },
+    {
+      "bytes": 3422,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/capture_original_producer.py",
+      "role": "capture",
+      "sha256": "71ce704199512379024a53b5de3add15ca74be5ea73dc093e2ae4685d5af35e3"
+    },
+    {
+      "bytes": 6991,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/verification_io.py",
+      "role": "capture",
+      "sha256": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8"
+    },
+    {
+      "bytes": 5451,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/preparation_receipt.json",
+      "role": "capture_preparation",
+      "sha256": "2a8530662d20936ac9f84a93db83b558abf6c1651a4df5039925cc616df72ea1"
+    }
+  ],
+  "design_preserved_directory": "preserved_design_review_v1",
+  "design_review_receipt_sha256": "c26ce94c2c5fe12477060053d6fc822a18d04b3ce99751e399e612fc541e665d",
+  "implementation_source_sha256": {
+    "capture_at_location.py": "6eac7cda2a452552ee1e9c3b3aa9ee5909601729a841a75844eea43e9d43ff8d",
+    "capture_original_at_location.py": "2a482751500025c73f7204c280f8e897d786eec54513520acca43adbd57cb8fe",
+    "location_core.py": "e2103480646cb5f26d30e0fbab6a740e53ba52778616c08c0b30fb5fb4cd17f0",
+    "receiving_at_locations.py": "6c56ceb15b19cc19204bf5139c7c9bbb28cb156faed5a5767e18ec53b6ad14b3",
+    "run_selected_at_locations.py": "d444de262d568107db6a822a6c37142e81249810fa5f75e9d947902730fcd616",
+    "selected_at_locations.py": "4c26d2ede68554aee6ad80af3b372a5f5d09e6fb78525dcb0846c294ae7156dd",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_at_locations.py": "e8e51e236d96687c549219091d6b2ca89e9c9a219cf49b48481c6485b51b525f"
+  },
+  "no_legacy_source_or_preparation_written": true,
+  "scientific_data_or_helpers_executed": false,
+  "status": "source_only_legacy_and_design_byte_preservation_checked",
+  "unchanged_legacy_preparation_receipt_sha256": {
+    "capture": "2a8530662d20936ac9f84a93db83b558abf6c1651a4df5039925cc616df72ea1",
+    "receiving": "fe0662adacbf29bc356d7c19f7abd40b2b6304cb9f683673fce1e7ae39f1e1ba",
+    "selected": "43f2dba209a4d068df7122a3be956d295f7810601272b271fa996ad5a27aa95b"
+  },
+  "unchanged_legacy_source_sha256": {
+    "capture": {
+      "capture_original_producer.py": "71ce704199512379024a53b5de3add15ca74be5ea73dc093e2ae4685d5af35e3",
+      "producer_capture.py": "c8c10daace6f44ebcfd0305cbd48954d1db4afedae442103b69d736053ffb95e",
+      "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8"
+    },
+    "receiving": {
+      "receiving_core.py": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f",
+      "verify_restored_reproduction.py": "9387aae83e348515999843963ace0acba0cacef2501fbdacbb0cef85bd5ad33e"
+    },
+    "selected": {
+      "reproduction_core.py": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5",
+      "run_reproduction.py": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c",
+      "terminal_replay_child.py": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    }
+  }
+}

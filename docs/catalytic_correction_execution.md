@@ -271,6 +271,14 @@ The archived preparation and clean source review do not choose a subset,
 approve execution or make release-v2 accept a new wrapper. Any adoption
 requires separately pinned source and receiving release wiring.
 
+The reviewed implementation is available in `per_entry_io/`. Before any
+execution, an actual prospective location plan must bind every fresh numerical
+and capture root. Capture, selected-controller ownership/comparison, producer
+validation and receiving resolution must agree on that entry's declared
+historical numerical root. The original sealed modules retain their original
+pins; the wrappers have separate implementation pins. Installing or testing
+these wrappers supplies neither a missing subset nor an approved location plan.
+
 Changed accepted inputs require fresh full-budget refits with the identical
 corrected freeze, seeds and gates. Unchanged reused outcomes require actual
 original numerical-refit receipts and reviewed producer/source/environment/
@@ -319,23 +327,33 @@ source-only reviews are preserved in
 Restored input locations use explicit path bindings; immutable historical
 paths and recorded bytes are preserved.
 
-The integrated `reporting/` adapters require the completed mixed certificate,
+The final reporting and reporting-replay adapters require the completed mixed certificate,
 selected reproduction, frozen descriptive comparisons and actual named
 visual review. Their [contract](../scripts/catalytic_correction/reporting/interface_contract.json)
 preserves all failed denominators and complete-pair requirements. Partial
-comparisons cannot acquire a confidence interval. Rendering includes all 32
-PDF pages, four indexed contact sheets and six CSV tables. Root must inspect
+comparisons report observed means without confidence intervals. The fixed
+roster has 1,625 dimension rows, 123 descriptive comparisons and links to the
+27 existing formal contrasts. Only a comparison with all 25 paired folds may
+receive its existing corrected interval.
+
+Before that actual review, `reporting/corrected_pdf_qa.py prepare` renders all 32 PDF pages, four indexed
+contact sheets and a blank review record. It separately binds the six table
+inventories. Root must inspect
 every actual page at full size and the contact sheets before supplying the
 required attestation; an implementation test or generated image supplies
-no review.
+no review. Source and fresh receiving reporting replay compare all four
+deterministic reporting artifacts. Actual review evidence and genuine source
+and receiving process exits are retained separately.
 
-The complete `release/` v2 preparation is retained unchanged. Its
+The complete 100-file `release/` v2 preparation is retained unchanged, including
+the original preparation, review findings and every earlier failed capture
+attempt. Its
 [contract](../scripts/catalytic_correction/release/interface_contract.json)
 requires genuine source/fresh receiving captures, complete distinct evidence
 trees and actual reporting/review/replay proof. Whole trees retain failures,
 orphans and empty directories. Only the four explicitly specified capture
-roles may be flat four-file groups. Actual stage, package and fresh remote
-restore remain separate completion gates.
+roles may be flat four-file groups. Actual stage, package, remote download and
+fresh receiving verification remain separate completion gates.
 
 Final private retention must include every file in the preserved 1,339-file
 forensic sparsebundle, including the interrupted first replay and partial

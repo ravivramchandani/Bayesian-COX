@@ -1331,3 +1331,29 @@ scientific reviews and release wiring remain pending.
 
 Compact record:
 `coordination/recovery/2026-09-29-generator-correction-reporting-release-integration.json`.
+
+## 2026-09-29 — Verified per-entry reproduction implementation
+
+Integrated all 44 sealed per-entry I/O files and six portable test/fixture
+files. Focused checks passed 54 tests and 32 subtests. Full locked make test
+passed 965 tests and 140 subtests with no skips at 12:35 UTC; Ruff and schemas
+passed. All 399 captured implementation files, the previous 349-file
+checkpoint and all 157 original source/build/lock files remain unchanged.
+Actual subset selection, location-plan adoption, original-law execution and
+separately pinned release wiring remain pending completed input evidence.
+
+Scoped Finder downloads restored offloaded Git metadata used by the frozen
+production worktree. Its original-fixture test completed naturally; fresh
+Git checks return the expected commit and clean tree. No source, numerical
+owner, package, compiler/BLAS setting or scientific gate changed. Actual test
+diagnostics and root archival filename/schema lookup errors are retained.
+The original and recovered execution/code-guide variants were preserved
+before reconciling their useful operational details. The first guide review's
+capture race remains retained beside the separately bound snapshot review.
+
+At 12:39 UTC, independent replay had 323 verified context receipts; original
+production had 1,103 outcomes: 908 complete, 169 failed and 26 failed
+diagnostics. Internal availability returned to about 83 GB without project
+relocation or deletion; the cause is unknown. The compact integration record
+and byte-verified validation, guide-review and curated storage archives are
+in `coordination/recovery/2026-09-29-generator-correction-per-entry-io-integration.json`.

@@ -618,8 +618,15 @@ reporting replay remains a separate pre-publication gate.
   remain pending completed scientific evidence. ADR-042 I/O preparation
   does not choose missing identities, alter selection or approve execution.
   The separate 44-member I/O preparation passed independent source review;
-  its ten-member report is archived. Actual adoption and separately pinned
-  release wiring remain pending.
+  its ten-member report is archived. Its exact implementation and portable
+  tests are integrated: focused checks passed 54 tests/32 subtests; full
+  locked make test passed 965 tests/140 subtests without skips at 12:35 UTC.
+  Ruff and schemas passed, with all 399 captured implementation files,
+  the prior 349 files and all 157 original source/build/lock files unchanged.
+  The separate per-entry integration record retains actual commands, raw
+  diagnostics, restored guide variants and root archival lookup errors.
+  Actual missing-subset selection, plan adoption, execution and separately
+  pinned release wiring remain pending.
   The read-only observer registered all nine original owners at 11:16 UTC
   to capture future genuine exits; it supplies no past return code or numerical
   approval. The 52-member curated incident preparation preserves the exact

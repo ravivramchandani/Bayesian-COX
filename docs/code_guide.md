@@ -86,8 +86,9 @@ Follow these steps in order. They are the core of the code.
 | Selected corrected reproduction (ADR-041) | `scripts/catalytic_correction/reproduction/run_reproduction.py` | Frozen original-92/pilot union, actual producer proofs, `terminal_replay_child.py` and exact original comparators | Fresh full-budget fits for changed accepted inputs; inherited original refits and terminal no-fit recipe replay remain separate |
 | Mixed correction verification | `scripts/catalytic_correction/verification/verify_mixed_extensions.py` | Complete input/trace/child lineage, pinned original diagnostic/scoring/reducer functions | No; independently verifies 1,625 outcomes and produces its own mixed certificate |
 | Receiving selected reproduction | `scripts/catalytic_correction/receiving/verify_restored_reproduction.py` | Explicit trusted path maps, complete selected pass and actual recorded producer/child proofs | No; compares transported stored evidence without dispatch, resume or repair |
+| Separate original-refit locations (ADR-042) | `scripts/catalytic_correction/per_entry_io/` | Prospective reviewed per-entry roots, original plan-order worker index and separately pinned capture/controller/receiving wrappers | Original-law capture only for actually approved missing identities; read-only receiving never refits |
 | Corrected reporting and visual QA | `scripts/catalytic_correction/reporting/` | Verified mixed cells, frozen descriptive comparisons and explicit actual figure review | No; renders reports/pages and verifies completed review evidence |
-| Corrected private transfer | `scripts/catalytic_correction/release/` | Genuine source/receiving captures, complete distinct evidence trees and actual reporting/QA/replay proofs | No; stages and verifies transported evidence after completed scientific gates |
+| Corrected private transfer | `scripts/catalytic_correction/release/` | Genuine source capture, fresh receiving capture, complete distinct evidence trees and actual reporting/QA/replay proofs | No; captures, stages and verifies transported evidence after completed scientific gates |
 
 ## Suggested reading order
 

@@ -7,13 +7,17 @@ Updated: 2026-09-30 (New Zealand; dated checkpoints below use UTC)
 Current integration checkout:
 `~/bayes-cox-runs/ravi-main-integration-20260929`. macOS offloaded the original
 repository's Git metadata and several documents to iCloud; scoped downloads
-are underway. The new clone started from remote-verified `dc081c0`, and every
-one of its 349 code/build/lock files matches the actual successful full-suite
-capture. The original repository and all original numerical owners/evidence
-remain preserved. Two offloaded documentation variants remain in the old
-checkout; the new execution/code guides were updated from the same remote
-base and reviewed against the integrated contracts. Reconcile those variants
-once their actual bytes return, before switching the original checkout.
+restored the metadata used by the frozen production worktree. The new clone
+started from remote-verified `dc081c0`; its
+pushed `f9f3d02` checkpoint matched all 349 implementation files in the actual
+successful full-suite capture. The original repository and all original
+numerical owners/evidence
+remain preserved. The two original execution/code-guide variants have now
+returned and were byte-preserved before reconciliation. Their useful root,
+reporting and transfer details are retained in the resident guides alongside
+the later incident safeguards. Fresh production-worktree Git checks return
+the expected `119476f` and a clean tree. Synchronizing the original main
+checkout remains pending preservation and reconciliation of its local state.
 
 ## Next action — validate the catalytic generator correction
 
@@ -243,9 +247,29 @@ must bind any new adapter explicitly. Final private retention also includes
 the unchanged 1,339-file forensic image with the stopped first replay attempt.
 The separate 44-member per-entry I/O preparation and its ten-member
 independent source review are archived; no material finding remains within
-that contract. It is not adopted runtime or an actual missing subset. Separate
-release wiring remains necessary before its use. The reviewed preparation
+that contract. Its exact implementation is now installed at
+`scripts/catalytic_correction/per_entry_io/`, with 54 passing portable checks
+and 32 subtests. Full locked `make test` passed 965 tests and 140 subtests,
+with no skips, at 12:35 UTC. Ruff passed. All 399 captured implementation
+files, the prior 349-file checkpoint and all 157 original source/build/lock
+files remain unchanged. The stalled original-fixture Git check completed
+naturally after scoped metadata downloads; no test, numerical worker or
+scientific setting was changed. Actual commands, raw diagnostics and root
+archival lookup errors are retained in the separate validation archive.
+This is implementation integration, not actual adapter adoption, a missing
+subset or an approved location plan. Separate release wiring remains
+necessary before its use. The reviewed preparation
 record is `coordination/recovery/2026-09-29-generator-correction-per-entry-io-reviewed-preparation.json`.
+The integration record is
+`coordination/recovery/2026-09-29-generator-correction-per-entry-io-integration.json`.
+
+At 12:39 UTC the current replay had 323 independently verified contexts.
+Original production had 1,103 stored outcomes: 908 complete, 169 failed and
+26 failed diagnostics. This dated metadata checkpoint is not a completed
+grid or corrected result. Internal storage showed about 83 GB free after
+an earlier low reading; no further project files were relocated or deleted.
+The free-space fluctuation's cause is unknown. The curated storage checkpoint
+and both original/recovered guide variants are preserved in recovery archives.
 
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its

@@ -1,0 +1,47 @@
+{
+  "actual_subset_determined": false,
+  "artifacts": {
+    "REPORT.md": {
+      "sha256": "088fa7701b66ce357850ff461bbb3d6b6f8e7f7274ab33f7d309f6292a2a043e",
+      "size_bytes": 9475
+    },
+    "document_consistency_checks.json": {
+      "sha256": "32f277b060395968f594fd29cd00c427c1f960549af7c417bdfa5ccdf044c65d",
+      "size_bytes": 334
+    },
+    "observed_contracts.json": {
+      "sha256": "37d4f82493f3cf9b3f8ea55ef16bcb61b83de106031ac76a3682eb3bebdbd9f8",
+      "size_bytes": 6276
+    },
+    "preserved_gates_and_required_tests.json": {
+      "sha256": "869d52225bdbabf8446e6f324ea03c1d0d0fe4d1b33bc38b15411b0cac23a331",
+      "size_bytes": 3289
+    },
+    "proposed_io_extension.json": {
+      "sha256": "887923ab7df45df7be83e1d1eb106b0396885144cfc803a881566788f8c1c056",
+      "size_bytes": 6015
+    },
+    "scope.json": {
+      "sha256": "e9a7b97a74d699d05c051657f948e03c9549f541ac455a61054a7b0ea880f72f",
+      "size_bytes": 550
+    },
+    "source_bindings.json": {
+      "sha256": "36e0ab855a38d2c38ad8494a7b02f89ffb4c20e3dd0e9f080885496c0313f631",
+      "size_bytes": 6620
+    }
+  },
+  "content_sha256": "6d701dd7bbb3f6c0b65a87891758aa8a5c0117d44c343e9e718e5160a9c1a523",
+  "created_at_utc": "2026-09-29T10:35:32.094855+00:00",
+  "historical_environment_checker_argv_rc_requirement_added": false,
+  "implementation_prepared": false,
+  "method_or_scope_or_run_approval_created": false,
+  "read_only_source_review_only": true,
+  "real_data_arrays_traces_processes_or_scientific_execution": false,
+  "review_directory": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_mapping_design_review_v1",
+  "reviewed_source_bindings_sha256": "36e0ab855a38d2c38ad8494a7b02f89ffb4c20e3dd0e9f080885496c0313f631",
+  "root_integration_and_actual_decision_pending": true,
+  "schema_version": 1,
+  "scope": "smallest per-entry I/O mapping design; preserve frozen92 union pilots and every existing producer/scientific/receiving gate",
+  "sealed_or_main_files_modified": false,
+  "status": "corrected_reproduction_per_entry_io_mapping_design_review_complete"
+}

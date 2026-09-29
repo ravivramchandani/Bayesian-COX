@@ -1,0 +1,18 @@
+{
+  "actual_data_or_science_executed": false,
+  "captured_attempts": [
+    "synthetic_tests_attempt3.invocation.json",
+    "ruff_attempt3.invocation.json",
+    "synthetic_tests_attempt4.invocation.json",
+    "ruff_attempt4.invocation.json"
+  ],
+  "content_sha256": "9bea99fb4d2025b24e88e9b2edc865ae864f64d12337ea89882494ee5d5f9ae2",
+  "notes": [
+    "Initial fictional capture fixture compared an unsealed in-memory dictionary with a sealed pinned preparation. The fixture now reads the actual sealed temporary document; no production gate was relaxed.",
+    "Initial style exploration reported broad E501 findings and one unavailable system-Python Ruff module. Scoped new config selects E,F,I,UP,B and ignores only E501, preserving unchanged original IO bytes. Import/unused-name findings were fixed in new code/tests.",
+    "synthetic_tests_attempt3 retains one failure: expected exception regex did not match the correct changed-byte rejection. Only the test regex was fixed. Source/artifact guard behavior unchanged.",
+    "Append-only history now pins each exact earlier plan role and preserves first-introducing entry SHA; old immutable selected records are verified against retained history, not rewritten.",
+    "Synthetic checks do not dispatch an actual scientific checker/model/generator/optimizer or inspect actual data/trace arrays; actual reviews and subset/location selection remain pending."
+  ],
+  "status": "preparation_history_not_scientific_results"
+}
