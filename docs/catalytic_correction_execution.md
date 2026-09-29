@@ -392,12 +392,19 @@ The first sealed runtime passed 23 fictional tests, Ruff and five-source
 compile checks. Finished-source review identified three material omissions
 in protection of additional selection inputs, actual numerical references
 inside no-fit records, and account-pass row bindings. That version is preserved
-and not adopted. A separately corrected version must pass finished source,
-portable and root integration checks before actual use. Passing preparation
+and not adopted. V2 closes those three gaps and passes 34 fictional methods;
+its portable adapter passes 35 tests and 133 subtests. Independent review
+demonstrated four impossible original-reuse decision mutations accepted by
+V2, so it is also preserved and unadopted. A narrow v3 correction must pass
+finished source, portable and root integration checks before actual use. Its
+no-fit decisions must agree with the original classifier: reused outcomes
+have no missing/changed roles, generator failures or tuning-reuse marker;
+terminal input failures also have no tuning-reuse marker, while their
+missing/changed roles may legitimately remain. Passing preparation
 tests supplies no scientific approval. Existing v3 transports the guard's
 records but does not invoke its semantic verification; genuine source and
 fresh receiving subprocess captures remain separately required before final
-release completion. See the [guard-preparation record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-preparation-review.json)
+release completion. See the [v2 review record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json)
 and [preservation record](../coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json)
 for the design and exact original-checkout backup.
 

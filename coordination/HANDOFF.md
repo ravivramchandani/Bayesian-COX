@@ -23,13 +23,13 @@ and compressed archive collisions match resident main exactly. Six older
 document variants remain preserved. The source-only dependency audit found
 that four live-route worktrees share original main's Git administration.
 General Git synchronization is deferred while those owners are active;
-no stash, fetch or merge has occurred. At 13:40 UTC the six disjoint
-coordination/guide documents were mirrored from remote-verified `0234061`.
+no stash, fetch or merge has occurred. At 14:21 UTC the six disjoint
+coordination/guide documents were mirrored from remote-verified `fe1c26d`.
 All six matched published bytes; 135 other scoped files, the 141-file backup,
-24 selected shared-Git administrative files and 634 resident implementation
-files remained unchanged. The actual mirror capture and preservation-push
-records were subsequently published in remote-verified `cffe27b`. See
-`coordination/recovery/2026-09-29-generator-correction-document-mirror.json`.
+six preceding published document variants, 24 selected shared-Git
+administrative files and 634 resident implementation files remained unchanged.
+The actual mirror and parent capture are preserved in
+`coordination/recovery/2026-09-29-generator-correction-document-mirror-v2.json`.
 
 ## Next action — validate the catalytic generator correction
 
@@ -326,19 +326,25 @@ tests, Ruff and five-source compile checks, but finished-source review found
 three material gaps: output protection omitted additional selection inputs,
 no-fit envelopes did not reject the real controller's numerical references,
 and account-pass rows could be unbound. It is preserved and is not adopted.
-A separate corrected version is being prepared; its finished reviews,
-portable tests, root integration and actual scientific approvals remain
+A separate v2 closed those three gaps and passed 34 fictional methods;
+its portable adapter passed 35 tests and 133 subtests. Independent review
+demonstrated one residual decision-consistency gap: impossible changed,
+missing, failed-generator or tuning-reuse metadata could accompany original
+reuse. Root checked the exact probe and old classifier. V2 is preserved and
+not adopted; a separate narrow v3 correction is being prepared. Finished v3
+reviews, portable/root integration and actual scientific approvals remain
 pending. The five
 actual review requirements, design, checkout audit, exact local backup and
 actual backup-process capture are archived. The compact preservation record is
 `coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json`.
 
-At 14:13 UTC the read-only checkpoint found 513 independently verified input
-receipts and 1,110 original outcomes: 914 complete, 170 failed and 26 failed
+At 14:43 UTC the read-only checkpoint found 582 independently verified input
+receipts and 1,111 original outcomes: 914 complete, 170 failed and 27 failed
 diagnostics. All 15 selected original/continuation/observer processes were
 present. The 634 implementation files still equal the 998-test successful
 capture, and all 20 original design source pins are unchanged. The compact
-guard-preparation record retains actual captures and the non-adoption finding;
+v2 review record retains actual captures and the non-adoption finding:
+`coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json`;
 passing fictional tests do not certify actual dispatch or scientific results.
 
 Use a specified full-budget pilot under that new freeze to measure compute

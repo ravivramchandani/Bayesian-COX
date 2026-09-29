@@ -1,154 +1,65 @@
 # Ravi: restore the results and continue the work
 
-The newly authorised post-hoc extensions are a separate active programme.
-See [extension execution](extensions_execution.md) for its frozen settings,
-complete fit grid and verification gates. The released baseline below stays
-unchanged; extension results are not yet remotely complete.
+The baseline code and results programme is complete and remotely verified.
+The separate 1,625-cell post-hoc extension and catalytic correction are still
+active. Their final results are not yet available as a verified remote release.
 
-The generator correction is proceeding separately under ADR-040/T-190.
-The original extension run continues. Corrected fits have not started; their
-scope and reusable results require training-input preflight and exact
-compatibility checks first. Read the current HANDOFF/TODO before launching
-anything on another Mac. A later correction keeps the original failed records
-and has its own specification, results and verified transfer; the original
-release receipts do not certify it.
+Read [HANDOFF](../coordination/HANDOFF.md) and [TODO](../coordination/TODO.md)
+before launching extension work on another Mac. The owner's existing jobs
+still own the original run and input replay; do not start overlapping workers.
+A clone supplies code and plans. Completed results are restored from the
+private releases below.
 
-The tested candidate and real training-preflight runner are now implemented
-and pushed at `cc231a0`; see
-[correction execution](catalytic_correction_execution.md). The actual
-1,650-context audit has completed on the owner's Mac: 1,400 contexts accepted
-their original draw and 250 accepted a rank-conditioned redraw, with no
-terminal outcome. Root's saved-record audit passed at 2026-09-29 09:05 UTC,
-verifying all 12,446 artifact bindings and seed histories. This establishes
-training-input feasibility; optimizer, MCMC and exact reuse/refit verification
-remain pending before any corrected numerical freeze. Do not
-start a duplicate audit. The recovery archives preserve the original
-candidate, recipe inventory, runner and selective-fit-contract preparation
-receipts, plus the independently reviewed arithmetic preparation. They do
-not contain completed corrected fits or a completed
-extension release.
+The correction's full training-input preflight is complete: 1,400 of 1,650
+contexts accepted the original draw and 250 accepted a rank-conditioned
+redraw, with no terminal outcome. The
+[completed-preflight record](../coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json)
+binds all 12,446 artifacts and seed histories. Independent original-draw/input
+replay and arithmetic must complete before the five actual execution reviews,
+freeze and full-budget pilot. The detached continuation stops before fitting.
 
-The next-stage replay, arithmetic-accounting and selective-fit scripts are
-also integrated with focused injected tests and separate source reviews.
-The full locked integration suite passed 553 tests and 57 subtests; exact
-environment, schema and lint checks passed.
-These scripts require actual complete input evidence and the reviewed
-corrected freeze before fitting. A Git checkout alone does not supply the
-pending numerical results. Ravi should use the final private release and
-its verified restore instructions once those gates are complete.
+The first launch safeguard passed 23 fictional tests, but
+[independent probes](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v1-independent-review.json)
+confirmed three material gaps. V2 closes those gaps and passes 34 fictional
+methods, with 35 portable tests and 133 subtests. Its
+[independent review](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json)
+found contradictory reuse decisions accepted, so both versions remain
+preserved and unadopted. A narrow v3 correction and finished source/portable/
+root integration checks are being prepared. Actual ADR-041 selection and
+scope approval must be checked before any corrected score; preparation
+tests do not supply those approvals.
 
-One detached continuation on the owner's Mac verified the full preflight
-and started independent original replay at 08:55 UTC. It runs the complete
-replay/reuse inventory and changed-input
-arithmetic serially. It stops before the actual reviews, corrected freeze
-and full-budget pilot. Inspect its launch receipt and logs in the current
-HANDOFF; do not start overlapping work on another laptop. ADR-041 fixes
-selected correction reproduction before corrected scores to the original
-92 identities plus input-selected pilots. It distinguishes fresh corrected
-refits, inherited original numerical reproduction and terminal no-fit recipe
-replay. Those actual evidence checks and the corrected release remain pending.
+The current implementation includes the reviewed freeze, selective-fitting,
+mixed deep verification, selected reproduction, reporting and release-v3
+components. The latest full locked suite passed 998 tests and 157 subtests;
+all 634 captured files remained unchanged at the 14:43 UTC checkpoint.
+Exact validation history is linked from the
+[v3 integration record](../coordination/recovery/2026-09-29-generator-correction-release-v3-integration.json).
+The final extension transfer still requires completed numerical evidence,
+selected reproduction, actual figure review and a fresh remote restore.
+Guard history additionally requires separately captured source and fresh
+receiving semantic verification; existing release-v3 only transports those
+records.
 
-The first continuation exited during an external-storage I/O incident at
-about 09:44 UTC. Root preserved the complete disk image, passed a read-only
-APFS check and reverified every preflight artifact plus the 76 completed
-replay contexts. A new captured continuation resumed those checkpoints at
-09:55 UTC on `BayesCoxTransfer20260929`; the old attempt remains read-only.
-The current owner and exact output paths are in HANDOFF. Keep SSD980 and its
-two mounted images available while the owner's work continues.
+At 14:43 UTC on 29 September, metadata showed 582 verified input receipts and
+1,111 original outcomes: 914 complete, 170 failed and 27 failed diagnostics.
+These are dated progress counts. Original successes/failures and the
+interrupted storage/replay evidence remain preserved. Keep SSD980 and its
+two mounted images available while the owner's jobs continue. Owner-side
+integration uses the resident checkout; only the six published guides and
+coordination documents are mirrored into the original IDE checkout while
+live worktrees depend on its shared Git metadata. The
+[latest mirror record](../coordination/recovery/2026-09-29-generator-correction-document-mirror-v2.json)
+binds that document-only update from remote-verified `fe1c26d`.
 
-The reviewed freeze builder, mixed deep verifier and selected reproduction
-controller are integrated too. With the separate read-only receiving verifier,
-the receiving integration suite passed 792 tests and 70 subtests with no skips;
-exact environment, schema and lint checks
-passed, and all 157 original source/build/lock files are unchanged. The
-[dated integration record](../coordination/recovery/2026-09-29-generator-correction-verification-reproduction-integration.json)
-contains the earlier checks and preserved validation history. The
-[receiving integration record](../coordination/recovery/2026-09-29-generator-correction-receiving-integration.json)
-records that check. These checks do not
-supply corrected numerical outcomes or a completed handoff. Correction-aware
-reporting, actual figure review and fresh receiving verification remain
-required before the corrected private release is complete.
-
-The reporting/visual-QA implementation is now integrated with 51 passing
-portable checks and three subtests. It requires the completed mixed
-certificate, selected reproduction and an actual named review of every
-figure. The separately reviewed v2 transfer implementation now passes
-68 portable checks and 35 subtests, and retains its full 100-file preparation.
-It resolves the process-capture and archive-completeness findings while
-preserving the original failed preparation. The resulting full locked suite
-passed 911 tests and 108 subtests with no skips at 11:22 UTC on 29 September.
-The [reporting/release integration record](../coordination/recovery/2026-09-29-generator-correction-reporting-release-integration.json)
-retains the successful commands and both earlier cancelled attempts. The
-original code, scientific settings and gates remain unchanged. These checks do not supply final reports,
-scientific approval or a release. ADR-042 preserves distinct per-entry
-outputs if missing inherited producer evidence actually requires new work;
-the subset and execution remain pending actual complete-input checks.
-
-The exact 44-file per-entry implementation is now integrated with 54 passing
-portable checks and 32 subtests. The full locked suite passed 965 tests and
-140 subtests without skips at 12:35 UTC on 29 September. All captured
-implementation bytes and all 157 original source/build/lock files remain
-unchanged. The [per-entry integration record](../coordination/recovery/2026-09-29-generator-correction-per-entry-io-integration.json)
-preserves the actual checks. Any new original-law work still requires the
-actual missing subset, a reviewed location plan and separately pinned
-release wiring before execution.
-
-The separately pinned release-v3 implementation is integrated with its full
-233-file preparation and unchanged predecessor evidence. Its focused checks
-passed 33 tests and 17 subtests; the expanded full locked suite passed 998
-tests and 157 subtests without skips at 12:50 UTC on 29 September. The
-[v3 integration record](../coordination/recovery/2026-09-29-generator-correction-release-v3-integration.json)
-retains exact archives and validation. Actual source capture, release and
-fresh receiving verification remain pending completed scientific evidence.
-ADR-041's actual selection and scope review must be frozen and checked before
-any corrected pilot score; the numerical freeze alone does not enforce that
-additional gate. The current continuation stops before fitting.
-
-The original checkout's 141 local files are now preserved, and all untracked
-collisions match published main. The [preservation record](../coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json)
-links the exact archives and actual backup-process capture. Integration
-continues in the resident checkout. General original-checkout Git
-synchronization is deferred while active frozen worktrees use its shared Git
-administration. At 13:40 UTC the six disjoint guide/coordination files were
-mirrored from remote-verified `0234061`, with all other scoped files and
-selected Git administration unchanged. The
-[actual mirror record](../coordination/recovery/2026-09-29-generator-correction-document-mirror.json)
-is published in remote-verified `cffe27b`. The first sealed launch safeguard
-passed 23 fictional tests, lint and compile checks. Finished-source review
-found three gaps in input-tree protection and no-fit/account-pass validation;
-it is preserved and not adopted. A separately corrected version, verified
-integration and actual pre-score reviews remain pending. See the
-[guard-preparation record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-preparation-review.json).
-
-At 13:22 UTC on 29 September, the current replay had 403 verified contexts;
-the original grid had 1,105 stored outcomes: 909 complete, 170 failed and
-26 failed diagnostics. The read-only exit observer
-registered all nine original processes and records future exits. Registration
-does not certify finished numerical work. The interrupted replay, partial
-child and storage recovery remain preserved for the final private release.
-At 14:13 UTC a fresh metadata check found 513 verified input receipts and
-1,110 original outcomes: 914 complete, 170 failed and 26 failed diagnostics.
-All 15 selected numerical/continuation/observer processes were present.
-
-The [completed-preflight record](../coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json)
-and metadata archive are pushed. Full proposal arrays remain on the owner's
-APFS workspace for the pending private evidence release. A
-[storage receipt](../coordination/recovery/2026-09-29-generator-correction-storage-verification.json)
-records the reversible relocation of inactive duplicate compressed caches;
-the original scientific inputs, results, traces and running owners are intact.
-Ravi should not launch overlapping original or correction jobs while this
-owner-side programme is active.
-
-This guide describes the handoff for an Apple Silicon Mac. The authoritative
-task state is in [HANDOFF](../coordination/HANDOFF.md) and
-[TODO](../coordination/TODO.md). Read [the code guide](code_guide.md) for the
-pipeline and [the evidence status](current_evidence_status.md) for permitted
-scientific claims.
-
-All completed baseline-programme evidence is available remotely. Both result releases were
-downloaded and verified through a fresh clone and fresh restore directories
-on this Apple Silicon Mac. Ravi must verify the locked environment on his
-own Mac; a second physical laptop was not tested.
+Use [the code guide](code_guide.md),
+[correction execution](catalytic_correction_execution.md) and
+[extension execution](extensions_execution.md) for component and run details.
+The [evidence status](current_evidence_status.md) defines permitted scientific
+claims. This guide targets an Apple Silicon Mac: completed baseline releases
+were checked through a fresh clone and restore on this Mac, while Ravi must
+verify the frozen environment on his own laptop. A second physical laptop was
+not tested.
 
 ## What is on GitHub
 

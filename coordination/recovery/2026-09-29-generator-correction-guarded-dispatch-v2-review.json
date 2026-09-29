@@ -1,0 +1,172 @@
+{
+  "actual_corrected_reviews_freeze_scope_fits_or_final_release_created": false,
+  "created_at_utc": "2026-09-29T14:49:06.933726+00:00",
+  "dated_progress": {
+    "actual_corrected_reviews_freeze_selection_fits_release_complete": false,
+    "actual_owner_presence_query": {
+      "argv": [
+        "/bin/ps",
+        "-p",
+        "62025,62026,62027,62028,62029,62030,64406,71385,98854,29118,29119,29120,29125,48620,48621",
+        "-o",
+        "pid=,ppid=,stat=,etime=,comm="
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "29118     1 SNs     04:48:04 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n29119     1 Ss      04:48:03 /usr/bin/caffeinate\n29120 29118 SN      04:48:03 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n29125 29120 SN      04:48:03 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n48620     1 SNs     03:27:30 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n48621 48620 SN      03:27:30 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62025     1 Rs   01-16:42:01 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62026     1 Rs   01-16:42:01 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62027     1 Rs   01-16:42:01 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62028     1 Rs   01-16:42:01 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62029     1 Rs   01-16:42:01 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62030     1 Rs   01-16:42:01 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n64406     1 Rs   01-16:26:06 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n71385     1 Ss   01-15:21:35 /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python\n98854     1 SNs  01-11:52:50 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n"
+    },
+    "arrays_or_traces_read": false,
+    "checked_at_utc": "2026-09-29T14:43:56.584828+00:00",
+    "collection_is_not_atomic": true,
+    "current_634_files_equal_successful_998_full_test_capture": true,
+    "design_source_reference": {
+      "binding": {
+        "bytes": 5399,
+        "sha256": "54886a0120c12e02bfe71d470d56d37f6e3483e1ba0c4f6a6f5004f5aa58af56"
+      },
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_design_v1/source_bindings_before.json"
+    },
+    "independent_first_draw_receipts": 582,
+    "independent_receipt_status_counts": {
+      "independent_original_first_draw_verified": 582
+    },
+    "numerical_owners_modified": false,
+    "original_20_design_source_pins_unchanged": true,
+    "original_expected_cells": 1625,
+    "original_outcome_status_counts": {
+      "complete": 914,
+      "failed": 170,
+      "failed_diagnostics": 27
+    },
+    "original_stored_cells": 1111,
+    "status": "dated_metadata_checkpoint_not_completion",
+    "successful_test_reference": {
+      "binding": {
+        "bytes": 112639,
+        "sha256": "f592e8a7251d390c3f131515bb3ae7f61b1602a4d50370955b7885a830c9acfc"
+      },
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_release_v3_integration_validation_v1/make_test.tested_source_after.json"
+    }
+  },
+  "guard_v2_adopted": false,
+  "independent_review": {
+    "actual_probe_exit_code": 0,
+    "actual_unit_exit_code": 0,
+    "all_154_sources_current_equal_before_after": true,
+    "four_reuse_decision_contradictions_observed": true,
+    "independent_unit_methods": 34,
+    "receipt_sha256": "459403799a2ce70aebb805ddfd0b0a706fd8a1db69776f596884bf44adea5c06",
+    "terminal_null_tuning_conclusion": "source_only"
+  },
+  "new_archives": {
+    "guarded-dispatch-independent-runtime-review-v2": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-independent-runtime-review-v2.tar.gz",
+      "bytes": 57738,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "receipt.json",
+      "preparation_receipt_sha256": "459403799a2ce70aebb805ddfd0b0a706fd8a1db69776f596884bf44adea5c06",
+      "regular_members": 15,
+      "sha256": "41646697ed75c66e6d872bf5d704d436001c89342a5edcef372d94cc3741afa6"
+    },
+    "guarded-dispatch-portable-adapter-v2": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-portable-adapter-v2.tar.gz",
+      "bytes": 160631,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "preparation_receipt.json",
+      "preparation_receipt_sha256": "a1ae7162f038e30e1073bbe38492183715be51ee1b36c4f421720a809c0061ab",
+      "regular_members": 111,
+      "sha256": "1b1d4c6c80750ff2304380ad1ce99fbd32223450605e541ea30cc49a0b3ccadf"
+    },
+    "guarded-dispatch-preparation-v2": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-preparation-v2.tar.gz",
+      "bytes": 123189,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "preparation_receipt.json",
+      "preparation_receipt_sha256": "46a95785348e9f54379178caaf728fd863cccef3d133b2f5a3c8116aa5d9e9cc",
+      "regular_members": 79,
+      "sha256": "8290961ca95906cc138596a8209476069d1ed776f032ce89abc2bb7f68e6146f"
+    },
+    "guarded-dispatch-v2-root-checkpoint": {
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-v2-root-checkpoint.tar.gz",
+      "bytes": 120862,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "regular_members": 18,
+      "sha256": "341029302d0b4827120e62afca47e9d65d7dfbc7a8bfbe0b7a4a7c70230099a4"
+    }
+  },
+  "new_v3_preparation_pending": true,
+  "read_attempt_notes": [
+    {
+      "actual": "reuse_probe.stdout.log",
+      "missing": "probe.stdout.log"
+    },
+    {
+      "actual": "capture_delta_checks.py",
+      "missing": "capture_review_checks.py"
+    }
+  ],
+  "root_review": {
+    "actual_controller_or_scientific_dispatch": false,
+    "actual_freeze_or_scope_or_execution_review_approval": false,
+    "actual_preparation_checks": {
+      "compile_attempt1": {
+        "actual_exit_code": 0,
+        "invocation": {
+          "bytes": 3570,
+          "sha256": "6e2d4eb244c4f736a08278b5f72d4fd8739e89afffb763d360cac147f6337c18"
+        }
+      },
+      "ruff_attempt2": {
+        "actual_exit_code": 0,
+        "invocation": {
+          "bytes": 3505,
+          "sha256": "41bf4529e054a8ca002f83a6f82d04c12e027c7f0608617c52e4deba158c42ab"
+        }
+      },
+      "unit_attempt2": {
+        "actual_exit_code": 0,
+        "invocation": {
+          "bytes": 2832,
+          "sha256": "efaba019a617484b78e2b556d39c09115cfcef864eca388962c0cef6c27e9479"
+        }
+      }
+    },
+    "additional_regression_methods": 11,
+    "all_20_original_pins_unchanged": true,
+    "carrier_receipt": {
+      "bytes": 30359,
+      "sha256": "46a95785348e9f54379178caaf728fd863cccef3d133b2f5a3c8116aa5d9e9cc"
+    },
+    "checked_at_utc": "2026-09-29T14:46:15.713295+00:00",
+    "complete_carrier_directories": [
+      "preserved_v1",
+      "preserved_v1_review"
+    ],
+    "complete_carrier_files": 79,
+    "engineering_adoption": false,
+    "independent_residual_reuse_contradiction": "verified source grammar; independent sealed probe pending",
+    "original_23_test_method_ASTs_unchanged": true,
+    "read_only_path_error": {
+      "actual_contract_classify_source_read": true,
+      "requested_missing": "scripts/catalytic_correction/contracts.py",
+      "resolved_actual": "scripts/catalytic_correction/correction_fit_contracts.py",
+      "source_modified": false
+    },
+    "root_read": [
+      "entire_current_guard_core",
+      "entire_current_launcher",
+      "unchanged_readonly_entrypoint",
+      "V2_DELTA.json",
+      "interface_contract.json",
+      "all_11_regressions",
+      "changed_Fixture_builders",
+      "capture_preparation_checks.py",
+      "actual_final_check_invocations"
+    ],
+    "status": "root_checked_unadopted_v2_preparation"
+  },
+  "status": "root_checked_unadopted_guard_v2_review_checkpoint"
+}

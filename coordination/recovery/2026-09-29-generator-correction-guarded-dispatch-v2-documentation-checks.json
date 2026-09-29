@@ -1,0 +1,58 @@
+{
+  "actual_baseline_read": {
+    "argv": [
+      "git",
+      "show",
+      "fe1c26de2c71e91fd026474e412e72343a0153e8:docs/ravi_handoff.md"
+    ],
+    "cwd": "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929",
+    "exit_code": 0,
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "07c74f42997394c57f9b55bba69688e0aad01e818029d0ac8e6973501261f40e"
+  },
+  "actual_schema_exit_code": 0,
+  "actual_scientific_reviews_freeze_selection_fits_or_release_approval": false,
+  "archive": {
+    "archive": "2026-09-29-generator-correction-guarded-dispatch-v2-documentation-checks.tar.gz",
+    "bytes": 59841,
+    "exact_member_roundtrip_and_source_before_after_verified": true,
+    "regular_members": 9,
+    "sha256": "4f424998adfe8202041552777bfec8c697e7da4c8b022baf2feb2357b5ebb810"
+  },
+  "completed_baseline_restore_body_unchanged": true,
+  "created_at_utc": "2026-09-29T14:52:31.759298+00:00",
+  "guard_adopted": false,
+  "ravi_front_local_links_checked": 11,
+  "resident_634_files_equal_successful_998_test_capture": true,
+  "schema_invocation": {
+    "bytes": 1730,
+    "sha256": "217e0786469e6920485d5a3efea86554c7fc8e47c22981ea65588c658cc047ff"
+  },
+  "six_document_bindings": {
+    "coordination/HANDOFF.md": {
+      "bytes": 77773,
+      "sha256": "5ace04903e5d3783ec3ac4c35c9da3d2fc4621032f7620e333388543c4742f5b"
+    },
+    "coordination/JOURNAL.md": {
+      "bytes": 86729,
+      "sha256": "29f5ff80654cfa9ca073b7595cce0485fd5a737034212e236029532bc36cc49e"
+    },
+    "coordination/TODO.md": {
+      "bytes": 46252,
+      "sha256": "58d1a8361636aadd5c3affaf165dfebf03c26b256a9bc22ef5ee93ad25f4989f"
+    },
+    "docs/catalytic_correction_execution.md": {
+      "bytes": 24644,
+      "sha256": "6044cd2a74f5e059a686278bdee24fc8b932e02322155bfd3cf04d8a42060896"
+    },
+    "docs/code_guide.md": {
+      "bytes": 15602,
+      "sha256": "57e49c58fb634d98dd1c4f9fb674b7a6e365031d95319d4817a1caedbbea811f"
+    },
+    "docs/ravi_handoff.md": {
+      "bytes": 12164,
+      "sha256": "b6db163d14c9ab2fffdf7d77f2647deb8f482c658bb17ae9cda4f2a05d20595d"
+    }
+  },
+  "status": "root_checked_v2_review_documents_before_push"
+}

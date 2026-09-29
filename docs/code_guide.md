@@ -93,11 +93,13 @@ Follow these steps in order. They are the core of the code.
 Before corrected pilot or remaining fits, a separately reviewed launch
 safeguard must enforce ADR-041's actual selection and scope in addition to
 the existing five-review freeze. The first 23-test preparation is preserved
-with three material review findings and is not adopted; its corrected version
-and repository integration remain pending. Existing v3 can transport its
+with three material review findings and is not adopted. V2 closes those gaps
+but independent probes found contradictory original-reuse decisions accepted;
+it remains unadopted. A narrow v3 correction and repository integration remain
+pending. Existing release-v3 can transport guard
 records, but separate actual source and fresh receiving semantic captures
 are still required. Follow the
-[current preparation record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-preparation-review.json)
+[current review record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json)
 and [execution guide](catalytic_correction_execution.md).
 
 ## Suggested reading order

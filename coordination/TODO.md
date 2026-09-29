@@ -642,18 +642,21 @@ reporting replay remains a separate pre-publication gate.
   implementation preparation. Its first sealed version passed 23 fictional
   tests, Ruff and five-source compile checks; finished-source review found
   three material input-protection/account-envelope/pass-row gaps, so that
-  version is preserved and not adopted. A separate corrected version and
-  its finished review, portable tests and root integration remain pending.
+  version is preserved and not adopted. V2 closes those gaps and passes
+  34 fictional methods; its portable adapter passes 35 tests/133 subtests.
+  Independent review demonstrated impossible decision metadata accepted
+  alongside original reuse. V2 remains unadopted; a narrow v3 correction,
+  finished review, portable tests and root integration remain pending.
   Preserve all old scientific pins and require genuine source/fresh
   receiving verification of its capture history before release completion.
   The original checkout's 141 scoped local files are byte-backed up, with all
   untracked collisions verified against published main. Its synchronization
   is deferred while active owners depend on shared Git administration; no
-  stash, fetch or merge occurred. At 13:40 UTC six disjoint guide/coordination
-  documents were mirrored from remote-verified `0234061`; all six published
-  byte bindings and 135 other scoped files, the complete backup and 24 selected
-  shared-Git administrative files were verified unchanged. The actual mirror
-  and preservation-push records are published in remote-verified `cffe27b`.
+  stash, fetch or merge occurred. At 14:21 UTC six disjoint guide/coordination
+  documents were mirrored from remote-verified `fe1c26d`; all six published
+  byte bindings and 135 other scoped files, both sets of prior document backups
+  and 24 selected shared-Git administrative files were verified unchanged.
+  The actual mirror and parent capture are retained in the v2 mirror record.
   The read-only observer registered all nine original owners at 11:16 UTC
   to capture future genuine exits; it supplies no past return code or numerical
   approval. The 52-member curated incident preparation preserves the exact

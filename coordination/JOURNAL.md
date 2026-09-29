@@ -1448,3 +1448,35 @@ diagnostics. All 15 selected original/continuation/observer processes were
 present. All 634 resident implementation files equal the earlier successful
 998-test capture and all 20 original design source pins are unchanged. No
 actual corrected reviews, selection, freeze, fit or final release was created.
+
+## 2026-09-29 — Second dispatch preparation review and preserved portable checks
+
+The regular checkpoint was committed, pushed and remote-verified at `fe1c26d`
+at 14:18 UTC, with zero ahead/behind counts and a clean resident tree. At
+14:21 UTC the six published documents were mirrored into the original IDE
+checkout. The actual mirror process returned zero; all six matched that
+commit. The 135 non-target files, original 141-file backup, six preceding
+published document backups, 24 selected shared-Git administrative files and
+634 resident implementation files stayed unchanged. General original Git
+synchronization and original scientific-owner changes remain excluded.
+
+V2 closes the three V1 counterexamples and preserves its complete carrier
+and review. Actual producer and independent checks each pass all 34 fictional
+methods; its portable adapter passes 35 tests and 133 subtests. Root checked
+the complete 79-file/two-directory preparation, current runtime, regressions,
+capture controls and exact original classifier. The independent reviewer
+demonstrated four impossible reuse decisions accepted after resealing just
+one dependent field: changed roles, missing roles, generator failures, or a
+non-null tuning-reuse marker. All 154 review inputs remained byte-identical.
+V2 is preserved and not adopted. The terminal-input marker must also be null
+according to the unchanged classifier, but missing/changed roles can
+legitimately coexist with generator failure. A separate narrow v3 preparation
+is pending; no actual scientific approval or corrected dispatch was supplied.
+
+At 14:43 UTC the read-only checkpoint recorded 582 independently verified
+first-draw receipts and 1,111 original outcomes: 914 complete, 170 failed and
+27 failed diagnostics. All 15 selected owners were present; all 634 resident
+implementation files still matched the successful 998-test capture, and all
+20 original design pins were unchanged. The exact preparations, probes,
+portable captures and root checks are linked from
+`coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json`.

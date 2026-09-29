@@ -1,0 +1,36 @@
+{
+  "actual_parent_exit_code": 0,
+  "all135_scoped_non_target_files_unchanged": true,
+  "all141_prior_versions_remain_preserved": true,
+  "all6_previous_published_document_versions_separately_preserved": true,
+  "all_target_bytes_equal_published_main": true,
+  "archives": {
+    "actual_parent_capture": {
+      "archive": "2026-09-29-generator-correction-document-mirror-v2-actual-capture.tar.gz",
+      "bytes": 57462,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "regular_members": 7,
+      "sha256": "67df83a2cc05a452faf1996c37118cfc8ce7f0c35475818db53fdcf1b5c45a1b"
+    },
+    "mirror": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-original-checkout-document-mirror-actual-v2.tar.gz",
+      "bytes": 190309,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "receipt.json",
+      "preparation_receipt_sha256": "8e7189da88a13ae2809a93ef383e9652f92f454074d7947c820337f2eabe9005",
+      "regular_members": 31,
+      "sha256": "5029c25a85641108d661d74d12666c8b829958f5794f5d6d4f82146a23a6bcef"
+    }
+  },
+  "completed_at_utc": "2026-09-29T14:21:30.460361+00:00",
+  "documents_mirrored": 6,
+  "numerical_owners_source_data_or_results_modified": false,
+  "original_git_synchronization_performed": false,
+  "remote_verified_main": "fe1c26de2c71e91fd026474e412e72343a0153e8",
+  "resident634_implementation_files_unchanged": true,
+  "schema_version": 1,
+  "scientific_completion_certified": false,
+  "selected24_shared_git_admin_metadata_before_after_unchanged": true,
+  "status": "six_published_documents_mirrored_to_original_ide_checkout"
+}
