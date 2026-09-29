@@ -1,0 +1,47 @@
+{
+  "current_rank_count": {
+    "count": 160,
+    "provenance": "Root task message reported known rank rejections at this preparation request. Not independently refreshed here.",
+    "scope": "current observation; not final full-grid total"
+  },
+  "document_binding_scope": "Observed documentation bytes; no claim that every file equals the observed Git HEAD. No cell/trace/source-data audit performed.",
+  "document_bindings_content_sha256": "c7a57ece21a08cb5f79badb4f586e92df4905a99eaef0961341d512fd8787a7d",
+  "documents": {
+    "coordination/DECISIONS.md": {
+      "absolute_path": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/coordination/DECISIONS.md",
+      "bytes": 50790,
+      "sha256": "7be0e507c468b32a8c0de3bba0add865e82fdb467e202a07a9c31ebad88d5dfe"
+    },
+    "coordination/HANDOFF.md": {
+      "absolute_path": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/coordination/HANDOFF.md",
+      "bytes": 52450,
+      "sha256": "dc0c1acb7e8763d8dd4cf9affd6a45703f4a312ebfcbd4bd3b5ada77242daf7a"
+    },
+    "coordination/TODO.md": {
+      "absolute_path": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/coordination/TODO.md",
+      "bytes": 35383,
+      "sha256": "53a2bbba99d108bc0bc8a993338b2e177dd2207635c5499b0f1c1dd36fbd9b76"
+    },
+    "docs/extensions_execution.md": {
+      "absolute_path": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/docs/extensions_execution.md",
+      "bytes": 13198,
+      "sha256": "0b38399d977c163fb195deb4f34ee554d649a075b7245cbf17c0539d565f4cc2"
+    },
+    "docs/protocol_addendum_extensions.md": {
+      "absolute_path": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/docs/protocol_addendum_extensions.md",
+      "bytes": 14358,
+      "sha256": "8210560a7d60f34b16246ea2b9ed00ecf991e63b0f0006933b1fc6d3e24451e0"
+    }
+  },
+  "git_head_observed": "16fabf151cfcfbc336e9ea43de90b76cfc8b8e6f",
+  "observed_utc": "2026-09-29T02:38:19.384904+00:00",
+  "original_protocol_freeze_content_sha256_as_recorded_in_TODO": "50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f",
+  "previous_rank_audit": {
+    "provenance": "HANDOFF164-169 dated checkpoint, plus root task identification of zero-column cases; original audit not rerun here.",
+    "scope": "historical supporting snapshot",
+    "source_cells": 795,
+    "zero_column_cases": 73
+  },
+  "schema_version": 1,
+  "status": "standing_scope_and_plan_document_bindings"
+}

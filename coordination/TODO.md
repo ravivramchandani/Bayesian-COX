@@ -15,7 +15,16 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
-## Current programme — 2026-09-28
+## Current programme — 2026-09-29
+
+ADR-040 adds targeted catalytic-generator correction work under T-190 after
+the original rank failures were inspected. The original 1,625-cell extension
+programme continues unchanged. Corrected fitting has not started. First
+validate all catalytic training inputs, establish exact input compatibility
+and a justified reuse/refit inventory, then freeze and pilot the separate
+post-hoc correction. Existing source or transfer receipts do not certify this
+new version. Full-budget gene-expression timings supersede short-profile
+completion estimates; no reliable total completion date is recorded.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:
@@ -336,6 +345,8 @@ or explanation stability.
   Scope includes the ADR-036/ADR-037 thesis experiments (T-180–T-186), with
   effects, uncertainty, paired coverage and diagnostic attrition. The original
   incomplete primary family and failed explanation gate remain explicit;
+  include the separately labelled T-190 correction if executed and retain
+  the original generator-failure findings alongside it;
   Overleaf editing starts only on owner instruction.
 - [ ] T-154 (T, W9–10, owners R/PS/SS; depends T-147) — Draft discussion and
   conclusion. Acceptance: each RQ is answered at its supported strength;
@@ -515,17 +526,46 @@ reporting replay remains a separate pre-publication gate.
     with explicit failure counts and independently reconstructed provenance;
     the frozen generator has no redraw remedy and failed cells are immutable;
   - paired contrasts against the other priors and comparators are recorded.
-- [ ] T-186 (T; depends T-181–T-185, T-189) — Render the extension bundle with the
+- [ ] T-190 (T; depends T-180/T-189 implementation and prepared T-185 data,
+  not completion of the original fits) — Validate and implement the separately
+  specified catalytic-generator correction under ADR-040. Acceptance:
+  - whole-block training-only preflight covers all 825 catalytic outer jobs
+    and all WME inner splits, with rare-category support, finite inputs,
+    ranks, seeds and hashes; no MCMC or validation-score selection;
+  - rare/singleton and structural-dependency tests, first-proposal
+    compatibility, cap exhaustion and non-rank error preservation pass;
+    mathematical/prior implications and changed-input arithmetic are reviewed;
+  - reviewed scope and exact input/model/fit/evaluation witnesses enumerate
+    reusable successes/failures, changed inputs and unresolved jobs; 375/825
+    scope positions are not assumed refit counts;
+  - a distinct addendum/code/input freeze precedes every corrected score;
+    the specified full-budget pilot measures compute, preserves every outcome
+    and passes the reviewed launch criteria before the remaining correction
+    grid is scheduled; the original acceptance gates are unchanged;
+  - original failures, optimizer/tuning and MCMC outcomes remain separately
+    accounted for; corrected and reused evidence has explicit lineage and
+    independently verified reproduction/metrics/diagnostics;
+  - affected inference/RQ2/DCA and reporting are regenerated, actually visually
+    reviewed, privately released and freshly restored/replayed; Ravi receives
+    the exact original/corrected boundaries and remaining tasks.
+  Original proposal:
+  `coordination/recovery/2026-09-29-generator-correction-proposal/PROPOSAL.md`.
+  Correction implementation, whole-block preflight, new freeze, reuse/refit
+  inventory and corrected numerical results remain pending.
+- [ ] T-186 (T; depends T-181–T-185, T-189, T-190) — Render the extension bundle with the
   same verified renderer and lineage rules. Acceptance: every thesis number
   traces to generated evidence, with actual visual QA and separate primary/
   post-hoc lineage. Preserve the negative original explanation finding and
   unavailable original contrasts; no retrospective equivalence claim.
+  The frozen original version may finish its own rendering/transfer first;
+  complete updated thesis evidence additionally requires the separately
+  verified corrective version and its explicit original-outcome comparison.
 
 ## Hard scope controls
 
 - No unprespecified model family, prior, real dataset or analysis after
   protocol freeze at the end of Week 5, except the post-hoc thesis
-  analyses named in ADR-035/ADR-036 and refined by ADR-037–ADR-039, specified in the
+  analyses named in ADR-035/ADR-036 and refined by ADR-037–ADR-040, specified in the
   frozen addendum before their own results. Existing ADR-032/ADR-033 evidence
   retains its earlier specification and actual chronology.
 - Rotterdam transport and ADEMP simulation are already dropped and cannot be

@@ -1,0 +1,99 @@
+{
+  "WME_candidates_share_split_draw": true,
+  "WME_inner_folds_required_per_job": 3,
+  "WME_outer_inputs_separate": true,
+  "actual_preflight_performed": false,
+  "candidate_admissibility_rule": null,
+  "candidate_attempt_cap": null,
+  "candidate_method": "bounded conditional rejection with original first draw preserved; separate mathematics review pending",
+  "candidate_scopes": {
+    "METABRIC": {
+      "clinical": 75,
+      "existing_selected_rule_positions": 24,
+      "matched": 150,
+      "nonfull_RQ2": 150,
+      "outer_jobs": 375
+    },
+    "global_catalytic": {
+      "clinical": 225,
+      "existing_selected_rule_positions": 60,
+      "matched": 150,
+      "nonfull_RQ2": 450,
+      "outer_jobs": 825
+    }
+  },
+  "candidate_seed_schedule": null,
+  "historical_robustness_jobs_separate": 825,
+  "method_mathematically_approved": false,
+  "new_correction_implemented": false,
+  "new_freeze_created": false,
+  "new_generated_scientific_data_created": false,
+  "new_numerical_rerun_started_here": false,
+  "original_analysis_code": "8551d326b02bfe88915cfd9eb50c6ca8e5690e3a",
+  "original_catalytic_outer_jobs": 825,
+  "original_distinct_grid_jobs": 1625,
+  "original_production_code": "119476fef55b1eeb690527f234c1423440720d45",
+  "original_programme_completion_assessed": false,
+  "pending_checklist": [
+    {
+      "id": "method_chronology",
+      "requirement": "Review bounded conditional rejection/first-draw preservation, exact cap/seeds/admissibility and mathematical/prior validity.",
+      "status": "pending"
+    },
+    {
+      "id": "whole_block_preflight",
+      "requirement": "Later training-input-only825-job preflight with all WME inner folds and outer inputs, rare levels, rank, hashes and exclusions.",
+      "status": "pending"
+    },
+    {
+      "id": "scope_inventory",
+      "requirement": "Choose scope from actual input/method evidence, then enumerate changed/equal/unresolved inputs and required new fits/reproductions.",
+      "status": "pending"
+    },
+    {
+      "id": "compatibility_reuse",
+      "requirement": "Require exact complete input/model/fit/evaluation equality and byte-bound original lineage; preserve equal failed as well as successful outcomes.",
+      "status": "pending"
+    },
+    {
+      "id": "new_input_arithmetic",
+      "requirement": "Validate fixed/adaptive prior and WME arithmetic on new accepted inputs as well as fixed reference fixtures.",
+      "status": "pending"
+    },
+    {
+      "id": "unchanged_gates",
+      "requirement": "Keep optimizer/prediction and Bayesian prior/posterior diagnostic gates/remedies distinct; never redraw to achieve fitting success.",
+      "status": "pending"
+    },
+    {
+      "id": "new_reviewed_lineage",
+      "requirement": "Create reviewed genuinely new correction specification/code/input manifest before corrected fits; original freeze and helper certification stay original.",
+      "status": "pending"
+    },
+    {
+      "id": "results_inference",
+      "requirement": "Refresh affected metrics/RQ2 anchors/matched effects/coverage and existing four families while retaining original failure findings.",
+      "status": "pending"
+    },
+    {
+      "id": "dca_reporting_qa",
+      "requirement": "Refresh dependent forecasts/DCA/horizons/support/uncertainty, dimension ratios/descriptive123/formal27, figures and actual QA.",
+      "status": "pending"
+    },
+    {
+      "id": "transfer_handoff",
+      "requirement": "Verify corrected/reused evidence/reproductions, source/fresh-restored reporting replay, separate private transfer and handoff; original evidence and Overleaf stay unchanged.",
+      "status": "pending"
+    }
+  ],
+  "required_new_fit_count": null,
+  "required_new_selected_reproduction_count": null,
+  "reused_full_RQ2_anchors": 90,
+  "reviewer_approval_obtained": false,
+  "root_review_required": "Root reviews actual pending correction proposal and separate method findings; this preparation supplies no reviewer approval.",
+  "schema_version": 1,
+  "scope_decision": null,
+  "selected_positions_are_not_required_new_refit_counts": true,
+  "status": "proposal_pending_root_review",
+  "whole_block_input_preflight_jobs_required": 825
+}

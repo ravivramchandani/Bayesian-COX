@@ -2,7 +2,35 @@
 
 State needed to resume work in a new session or on another machine.
 
-Updated: 2026-09-28
+Updated: 2026-09-29
+
+## Next action — validate the catalytic generator correction
+
+ADR-040/T-190 records corrective work after the observed synthetic-rank
+failures. The original numerical programme continues from its sealed code;
+no corrected numerical run has started. Do not alter current workers,
+their inputs or saved cells. The immediate step is training-only generator
+preflight across all 825 catalytic jobs and every WME inner split, followed
+by exact first-proposal/input compatibility and a justified reuse/refit
+inventory. Original accepted and failed outcomes are both retained when
+complete inputs/model/fit/evaluation identity is proved.
+
+The preserved proposal is
+`coordination/recovery/2026-09-29-generator-correction-proposal/PROPOSAL.md`.
+Its four original files match the external preparation bytes and its five
+source-document bindings match base commit `16fabf1`. It is a historical
+pending proposal, not a corrected method freeze, preflight result or fit.
+The candidate method is bounded rejection on synthetic rank only, preserving
+the original first draw. Conditioning changes its sampling law; a separate
+addendum and actual method/implementation review are required before fitting.
+Existing source and private transfer checks do not certify corrected evidence.
+
+Use a specified full-budget pilot under that new freeze to measure compute
+and execution before scheduling the necessary correction fits. Preserve its
+failed outcomes too. Refresh dependent analyses/QA and verify a fresh remote
+restore before declaring the corrected handoff complete. The original
+clinical/robustness/sampler releases and unaffected comparators need no
+restart. Do not promise a total completion time from the earlier short profile.
 
 ## Active post-hoc extension production — authorised 2026-09-28
 

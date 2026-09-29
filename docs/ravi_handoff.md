@@ -5,6 +5,14 @@ See [extension execution](extensions_execution.md) for its frozen settings,
 complete fit grid and verification gates. The released baseline below stays
 unchanged; extension results are not yet remotely complete.
 
+The generator correction is being prepared separately under ADR-040/T-190.
+The original extension run continues. Corrected fits have not started; their
+scope and reusable results require training-input preflight and exact
+compatibility checks first. Read the current HANDOFF/TODO before launching
+anything on another Mac. A later correction keeps the original failed records
+and has its own specification, results and verified transfer; the original
+release receipts do not certify it.
+
 This guide describes the handoff for an Apple Silicon Mac. The authoritative
 task state is in [HANDOFF](../coordination/HANDOFF.md) and
 [TODO](../coordination/TODO.md). Read [the code guide](code_guide.md) for the

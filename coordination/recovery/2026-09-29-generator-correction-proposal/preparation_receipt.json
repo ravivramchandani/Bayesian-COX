@@ -1,0 +1,56 @@
+{
+  "actual_new_generated_scientific_data_created": false,
+  "coordination_or_transfer_bundles_edited": false,
+  "correction_implemented": false,
+  "file_count_excluding_receipt": 3,
+  "files": {
+    "PROPOSAL.md": {
+      "bytes": 6917,
+      "sha256": "fc91ade0ae4c8052e39d500619a491a6a52b0a125acecb9a35093f36da52c295"
+    },
+    "pending_checklist.json": {
+      "bytes": 4171,
+      "sha256": "3be15f5d73d2b5b587ab84c886c535a3b37dc74b5168729caea7cebe2fab6c0a"
+    },
+    "source_document_bindings.json": {
+      "bytes": 2550,
+      "sha256": "3370e19ddb440b3ddb53369bc7ed6630d2eeb69157641b7ff5a78a0a45efb92e"
+    }
+  },
+  "files_content_sha256": "6c4b163099874a7d45947a17beeb9f2d639b68afde605977e4f0cb77d6fc7af2",
+  "independent_document_scope_reading": "Peer confirmed count arithmetic, standing frozen no-redraw preservation, post-hoc chronology and downstream obligations; this is not a scientific/method approval.",
+  "known_rank_rejections": {
+    "basis": "Root observation in task message, not independently reaudited.",
+    "count": 160
+  },
+  "main_repo_or_running_sealed_sources_edited": false,
+  "method_mathematics_review": "pending with root/catalytic_method_review; not performed or approved by this preparation",
+  "new_freeze_created": false,
+  "new_numerical_rerun_started_by_task": false,
+  "original_or_corrected_completion_certified": false,
+  "output": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_preparation_v1",
+  "pending_checklist_items": 10,
+  "prepared_utc": "2026-09-29T02:40:41.452809+00:00",
+  "previous_audited_zero_column_cases": {
+    "basis": "Dated HANDOFF checkpoint plus root identification; not a full-grid claim.",
+    "count": 73,
+    "snapshot_cells": 795
+  },
+  "receipt_content_sha256": "6d5029d7dda889b5f772f8e35904577b307e09256bb37bc6da59110722d7e166",
+  "reviewer_approval_created": false,
+  "root_review_status": "pending",
+  "schema_version": 1,
+  "scientific_or_reporting_helper_invoked": false,
+  "scope_arithmetic_checked": {
+    "METABRIC_jobs": 375,
+    "actual_required_new_fits": null,
+    "actual_required_new_reproductions": null,
+    "existing_selected_positions_METABRIC": 24,
+    "existing_selected_positions_global": 60,
+    "global_catalytic_jobs": 825,
+    "reused_full_RQ2_anchors": 90
+  },
+  "source_or_trace_audit_run": false,
+  "standing_scope_documents_read": 5,
+  "status": "corrective_proposal_prepared_root_review_pending"
+}

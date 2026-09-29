@@ -913,3 +913,66 @@ Format:
   explanation results and existing released evidence remain immutable. New
   code, manifests, attempted cells, verification and rendered outputs have
   their own lineage and private remote release.
+
+## ADR-040 — Prepare a separately verified catalytic generator correction
+
+- Status: ACCEPTED for corrective engineering; corrected numerical production
+  remains subject to the gates below
+- Date: 2026-09-29
+- Context: The owner requested complete verified code/results and asked how to
+  recover from the observed extension failures. At the 2026-09-28 19:01 UTC
+  checkpoint, 160 cells rejected a rank-deficient synthetic design, six failed
+  optimization/tuning and 19 failed sampling diagnostics. All 73 earlier
+  reconstructed rank failures were explained by zero synthetic columns after
+  rare-category omission. The pre-production generator fixture used balanced
+  categories; supplied full-rank reference inputs and one short expression
+  profile did not establish feasibility across the real training splits.
+- Decision:
+  - Prepare a distinct post-hoc generator correction within the existing
+    three catalytic variants. Preserve the original T-180 specification,
+    sealed production, all successes/failures and current worker ownership.
+    The original programme continues; no full benchmark restart is required.
+  - First validate generation using training inputs across all 825 planned
+    catalytic outer jobs and every WME inner split, including splits not
+    reached after a failure. Record memberships, preprocessing/gene selection,
+    actual p/M, times/rate, seeds, rank, category omissions and proposal hashes.
+    No held-out scores or sampling success may select a proposal.
+  - Evaluate a bounded rank-conditioned candidate that preserves the original
+    first proposal exactly. Specify retry seeds, joint covariate/time proposal
+    order, rank tolerance, attempt cap and terminal failure. These details are
+    candidate settings until the actual preflight and implementation review;
+    this decision creates no new numerical freeze.
+  - Full-rank accepted designs satisfy the finite-design properness condition
+    in Li and Huang (2026), Section 5.1. Conditioning on rank changes the
+    generator distribution and couples rows; it does not inherit the original
+    iid stability or asymptotic claims. This is a methodological sensitivity
+    proposed after failures were known, not externally preregistered evidence.
+  - Determine scope and required fits from a reviewed input inventory. The
+    METABRIC block has 375 outer positions; the global catalytic block has
+    825. These are assessment scopes, not established rerun counts. Preserve
+    an outcome, including a failure, only with exact synthetic/real input,
+    model, fitting seed/configuration and evaluation compatibility. WME reuse
+    additionally requires all inner-generation and tuning inputs to match.
+    Keep separate reuse provenance; never relabel original cells as new fits.
+  - Revalidate prior/WME arithmetic on changed accepted inputs. Freeze a new
+    explicit addendum, reviewed implementation and input manifest before any
+    corrected outer-validation score. Run a specified full-budget pilot after
+    that freeze to measure compute and test execution. Keep every pilot
+    outcome under the new specification; never relax acceptance gates or
+    select a generator from performance. A pilot failure triggers review, not
+    a silent protocol alteration or a selectively discarded result.
+  - Refresh affected scores, paired effects, RQ2 anchors, decision curves,
+    reporting, actual visual QA, reproduction/verification and private
+    restore/replay evidence. Keep original and corrected versions distinct.
+    The frozen-version transfer helpers certify only their original scope;
+    corrected/reused provenance needs explicit verification support.
+- Consequences: T-190 is required corrective work. Generator feasibility and
+  input-equivalence checking begin before further corrected fitting. A rank
+  repair does not remedy optimizer or MCMC failures automatically. Their
+  separate causes and retained outcomes still require assessment. Compute
+  estimates come from full-budget execution, not the previous short profile.
+  Overleaf and paper/DOI scope remain as instructed. The original preparation
+  proposal is retained byte-for-byte in
+  `coordination/recovery/2026-09-29-generator-correction-proposal/`; its pending
+  flags describe that historical proposal, not completed corrective gates.
+  Method source: [Li and Huang (2026), Section 5.1](https://academic.oup.com/biometrics/article/82/1/ujag004/8455879).
