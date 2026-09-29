@@ -7,3 +7,7 @@ extend = "pyproject.toml"
 # This byte-pinned callback is invoked synchronously within each context's
 # replay_recipe call and never escapes the loop iteration.
 "scripts/catalytic_correction/reproduction/terminal_replay_child.py" = ["B023"]
+# Keep the exact historical reporting helper: adjacent-grid zip deliberately
+# stops at the shorter vector; paired-score lengths are checked before zip.
+# The typing imports also remain byte-identical to the reviewed source.
+"scripts/catalytic_correction/reporting/frozen_reporting.py" = ["B905", "UP035"]

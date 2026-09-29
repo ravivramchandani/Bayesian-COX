@@ -1,0 +1,131 @@
+test_active_owner_refuses (test_release_adapters.GuardTests.test_active_owner_refuses) ... ok
+test_actual_capture_injected_rc0_and_nonzero_failure (test_release_adapters.GuardTests.test_actual_capture_injected_rc0_and_nonzero_failure) ... ok
+test_alias_refused_distinct_retained_file_supported (test_release_adapters.GuardTests.test_alias_refused_distinct_retained_file_supported) ... ok
+test_capture_link_failure_preserves_closed_temp (test_release_adapters.GuardTests.test_capture_link_failure_preserves_closed_temp) ... ok
+test_changed_byte_refuses (test_release_adapters.GuardTests.test_changed_byte_refuses) ... ok
+test_complete_three_route_fixture_and_failure_bytes_stage (test_release_adapters.GuardTests.test_complete_three_route_fixture_and_failure_bytes_stage) ... ok
+test_extra_actual_tree_file_refuses_even_when_all_declared_exist (test_release_adapters.GuardTests.test_extra_actual_tree_file_refuses_even_when_all_declared_exist) ... ok
+test_legacy_qa_or_missing_named_review_refuses (test_release_adapters.GuardTests.test_legacy_qa_or_missing_named_review_refuses) ... ok
+test_malformed_stdout_capture_refuses (test_release_adapters.GuardTests.test_malformed_stdout_capture_refuses) ... ok
+test_missing_or_tampered_failed_trace_refuses (test_release_adapters.GuardTests.test_missing_or_tampered_failed_trace_refuses) ... ok
+test_missing_report_row_or_duplicate_cell_refuses (test_release_adapters.GuardTests.test_missing_report_row_or_duplicate_cell_refuses) ... ok
+test_missing_source_gate_rc0_cannot_be_reconstructed (test_release_adapters.GuardTests.test_missing_source_gate_rc0_cannot_be_reconstructed) ... ok
+test_omitted_external_numerical_producer_bytes_refuse (test_release_adapters.GuardTests.test_omitted_external_numerical_producer_bytes_refuse) ... ok
+test_output_overlap_and_overwrite_refuse (test_release_adapters.GuardTests.test_output_overlap_and_overwrite_refuse) ... ok
+test_partial_grid_refuses_before_destination (test_release_adapters.GuardTests.test_partial_grid_refuses_before_destination) ... ok
+test_partial_selected_or_failure_not_promoted (test_release_adapters.GuardTests.test_partial_selected_or_failure_not_promoted) ... ok
+test_publication_failure_retains_pending_attempt_no_final_destination (test_release_adapters.GuardTests.test_publication_failure_retains_pending_attempt_no_final_destination) ... ok
+test_relocated_role_mapping_exact_bytes_and_no_guessing (test_release_adapters.GuardTests.test_relocated_role_mapping_exact_bytes_and_no_guessing) ... ok
+test_source_change_during_copy_refuses (test_release_adapters.GuardTests.test_source_change_during_copy_refuses) ... ok
+test_staged_test_payload_never_certifies_actual_restore (test_release_adapters.GuardTests.test_staged_test_payload_never_certifies_actual_restore) ... ok
+test_symlink_duplicate_json_and_nonfinite_refuse (test_release_adapters.GuardTests.test_symlink_duplicate_json_and_nonfinite_refuse) ... ok
+test_unreviewed_figure_refuses (test_release_adapters.GuardTests.test_unreviewed_figure_refuses) ... ok
+test_changed_immutable_payload_stops_before_next_child (test_receiving_adapters.ReceivingTests.test_changed_immutable_payload_stops_before_next_child) ... ERROR
+test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) ... 
+  test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='verify_mixed_extensions.py') ... ERROR
+  test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='verify_restored_reproduction.py') ... ERROR
+  test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='report_replay.py') ... ERROR
+test_production_policy_refuses_injected_replay (test_receiving_adapters.ReceivingTests.test_production_policy_refuses_injected_replay) ... ok
+test_three_read_only_replays_positive_and_exact_inventory (test_receiving_adapters.ReceivingTests.test_three_read_only_replays_positive_and_exact_inventory) ... ERROR
+test_unknown_replay_file_refuses_final_receipt (test_receiving_adapters.ReceivingTests.test_unknown_replay_file_refuses_final_receipt) ... ERROR
+test_all_three_fixed_read_only_entrypoints (test_source_capture.SourceCaptureTests.test_all_three_fixed_read_only_entrypoints) ... ok
+test_arbitrary_execution_mode_refused (test_source_capture.SourceCaptureTests.test_arbitrary_execution_mode_refused) ... ok
+test_claim_changed_primary_findings_refused (test_source_capture.SourceCaptureTests.test_claim_changed_primary_findings_refused) ... ok
+test_nonzero_retains_logs_without_success_receipt (test_source_capture.SourceCaptureTests.test_nonzero_retains_logs_without_success_receipt) ... ok
+test_output_overlap_missing_roles_and_overwrite (test_source_capture.SourceCaptureTests.test_output_overlap_missing_roles_and_overwrite) ... ok
+test_production_api_rejects_injection (test_source_capture.SourceCaptureTests.test_production_api_rejects_injection) ... ok
+test_unreviewed_helper_receipt_refused_before_invocation (test_source_capture.SourceCaptureTests.test_unreviewed_helper_receipt_refused_before_invocation) ... ok
+
+======================================================================
+ERROR: test_changed_immutable_payload_stops_before_next_child (test_receiving_adapters.ReceivingTests.test_changed_immutable_payload_stops_before_next_child)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 206, in test_changed_immutable_payload_stops_before_next_child
+    vr.science(request, output, python, fixture.pins, c.Pins(), deps, policy=fixture.policy)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 180, in science
+    validate_remapping(restored, manifest, bindings, pins)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 51, in validate_remapping
+    core.require(set(bindings["roots"]) == core.ROOTS and set(bindings["files"]) == core.FILES
+                     ~~~~~~~~^^^^^^^^^
+KeyError: 'roots'
+
+======================================================================
+ERROR: test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='verify_mixed_extensions.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 175, in test_each_actual_child_failure_retains_rc_and_stops
+    vr.science(request, output, python, fixture.pins, c.Pins(), deps, policy=fixture.policy)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 180, in science
+    validate_remapping(restored, manifest, bindings, pins)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 51, in validate_remapping
+    core.require(set(bindings["roots"]) == core.ROOTS and set(bindings["files"]) == core.FILES
+                     ~~~~~~~~^^^^^^^^^
+KeyError: 'roots'
+
+======================================================================
+ERROR: test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='verify_restored_reproduction.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 175, in test_each_actual_child_failure_retains_rc_and_stops
+    vr.science(request, output, python, fixture.pins, c.Pins(), deps, policy=fixture.policy)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 180, in science
+    validate_remapping(restored, manifest, bindings, pins)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 51, in validate_remapping
+    core.require(set(bindings["roots"]) == core.ROOTS and set(bindings["files"]) == core.FILES
+                     ~~~~~~~~^^^^^^^^^
+KeyError: 'roots'
+
+======================================================================
+ERROR: test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='report_replay.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 175, in test_each_actual_child_failure_retains_rc_and_stops
+    vr.science(request, output, python, fixture.pins, c.Pins(), deps, policy=fixture.policy)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 180, in science
+    validate_remapping(restored, manifest, bindings, pins)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 51, in validate_remapping
+    core.require(set(bindings["roots"]) == core.ROOTS and set(bindings["files"]) == core.FILES
+                     ~~~~~~~~^^^^^^^^^
+KeyError: 'roots'
+
+======================================================================
+ERROR: test_three_read_only_replays_positive_and_exact_inventory (test_receiving_adapters.ReceivingTests.test_three_read_only_replays_positive_and_exact_inventory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 145, in test_three_read_only_replays_positive_and_exact_inventory
+    result = vr.science(request, output, python, fixture.pins, c.Pins(), deps, policy=fixture.policy)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 180, in science
+    validate_remapping(restored, manifest, bindings, pins)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 51, in validate_remapping
+    core.require(set(bindings["roots"]) == core.ROOTS and set(bindings["files"]) == core.FILES
+                     ~~~~~~~~^^^^^^^^^
+KeyError: 'roots'
+
+======================================================================
+ERROR: test_unknown_replay_file_refuses_final_receipt (test_receiving_adapters.ReceivingTests.test_unknown_replay_file_refuses_final_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 192, in test_unknown_replay_file_refuses_final_receipt
+    vr.science(request, output, python, fixture.pins, c.Pins(), deps, policy=fixture.policy)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 180, in science
+    validate_remapping(restored, manifest, bindings, pins)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verify_restored_correction.py", line 51, in validate_remapping
+    core.require(set(bindings["roots"]) == core.ROOTS and set(bindings["files"]) == core.FILES
+                     ~~~~~~~~^^^^^^^^^
+KeyError: 'roots'
+
+----------------------------------------------------------------------
+Ran 34 tests in 20.175s
+
+FAILED (errors=6)

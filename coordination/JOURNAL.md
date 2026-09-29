@@ -1283,3 +1283,51 @@ Compact record:
 `coordination/recovery/2026-09-29-generator-correction-receiving-integration.json`.
 No actual scientific receiving check, corrected fit completion, private
 release or fresh restore is supplied by these implementation checks.
+
+## 2026-09-29 — Verified reporting and private-transfer implementation
+
+Integrated the exact reviewed reporting/visual-QA runtime and complete
+100-file private-transfer v2 preparation. Focused checks passed 51 tests/three
+subtests and 68 tests/35 subtests respectively. The independent transfer
+review's process-injection and whole-tree-retention findings are resolved
+in v2; original findings and preparation remain preserved. Genuine source
+capture, failed/orphan file retention, actual figure review and fresh receiving
+verification remain mandatory.
+
+Full locked make test passed 911 tests and 108 subtests with no skips at
+11:22 UTC. Exact environment, schemas and Ruff passed. All 349 captured
+implementation files were unchanged through the successful check, and all
+157 original source/build/lock files were reverified unchanged. Two cancelled
+attempts, their genuine nonzero returns, source captures and compiler-probe
+diagnostics remain in the 208-member validation archive. No compiler/BLAS
+setting, package, numerical gate or test was disabled. These implementation
+checks certify no corrected score, scientific approval or release.
+
+At about 09:44 UTC a backing-drive interruption ended the first pre-fit replay;
+its exit code remains unknown. The byte-verified full sparsebundle copy,
+read-only old attempt and partial child are preserved. A new 400 GiB APFS
+workspace resumed only the 76 complete verified replay checkpoints at 09:55
+UTC. At 11:28 UTC, 219 independent first-draw receipts were present. Original
+production had 1,095 outcomes: 901 complete, 169 failed and 25 failed diagnostics.
+All original numerical owners, settings, inputs and results remained unchanged.
+
+The 52-member curated incident archive retains exact checkpoint 2's incorrect
+zero count and checkpoint 3's correction, dated partial logs and saved image
+inventory. Its prospective 1,384-file retention map includes all 1,339
+forensic-image files; current image rehash and actual staging remain pending.
+Unfiltered global user/app stdout is excluded, with original hashes and
+invocation bindings retained.
+
+A source-reviewed read-only observer registered all nine existing original
+processes at 11:16 UTC. Its actual request, identities, wrapper/child launch
+and subscriptions are preserved in a 23-member dated archive. It records
+future genuine kernel exits without controlling jobs; no exit event was
+present in that snapshot and missing historical return codes remain unknown.
+ADR-042 and its separately archived 44-member I/O preparation preserve
+distinct prospective per-entry roots if actual original producer proof is
+missing. Its independent source review found no material blocker and is
+preserved in a separate ten-member archive. Actual subset, adoption,
+scientific reviews and release wiring remain pending.
+
+Compact record:
+`coordination/recovery/2026-09-29-generator-correction-reporting-release-integration.json`.

@@ -2,7 +2,18 @@
 
 State needed to resume work in a new session or on another machine.
 
-Updated: 2026-09-29
+Updated: 2026-09-30 (New Zealand; dated checkpoints below use UTC)
+
+Current integration checkout:
+`~/bayes-cox-runs/ravi-main-integration-20260929`. macOS offloaded the original
+repository's Git metadata and several documents to iCloud; scoped downloads
+are underway. The new clone started from remote-verified `dc081c0`, and every
+one of its 349 code/build/lock files matches the actual successful full-suite
+capture. The original repository and all original numerical owners/evidence
+remain preserved. Two offloaded documentation variants remain in the old
+checkout; the new execution/code guides were updated from the same remote
+base and reviewed against the integrated contracts. Reconcile those variants
+once their actual bytes return, before switching the original checkout.
 
 ## Next action — validate the catalytic generator correction
 
@@ -93,12 +104,13 @@ attempts are retained; the first exposed a test-isolation issue, fixed by
 checking tool imports in a fresh process. The compact receipt is
 `coordination/recovery/2026-09-29-generator-correction-execution-integration.json`.
 
-A single detached pre-fit continuation was launched at 2026-09-29 07:48 UTC,
+The first detached pre-fit continuation was launched at 2026-09-29 07:48 UTC,
 PID 97059. It verified PID 81194's exit and complete, byte-bound
 preflight evidence with no remaining live claims. At 08:55 UTC it started the actual
 independent first-draw/reuse pass and complete changed-input arithmetic,
 serially, from clean detached pushed commit `d332013`. It stops before the
-five execution reviews, corrected freeze or pilot. Do not duplicate it.
+five execution reviews, corrected freeze or pilot. This attempt later exited
+during the storage incident recorded below; it is preserved, not the current owner.
 Its code is `scripts/catalytic_correction/continue_prefit.py`; the live
 external helper is separately pinned and must not be edited. The APFS parent
 contains `continuation_v1_request.json`, `continuation_v1_launch.json`,
@@ -144,6 +156,96 @@ schemas and Ruff passed, and all 157 original source/build/lock files remain
 unchanged. Compact record:
 `coordination/recovery/2026-09-29-generator-correction-receiving-integration.json`.
 This is tested implementation, not an actual fresh receiving check or release.
+
+At about 09:44 UTC the backing SSD980 mount became unavailable and the
+mounted correction image returned I/O errors. The original pre-fit
+continuation and replay process exited; no exit code was recovered or
+invented. Root preserved an unchanged, byte-verified copy of all 1,339 disk
+image files (5,559,317,478 bytes), normally detached the stale image and
+reattached it read-only. The APFS check passed with exit code zero. All
+12,446 preflight artifact bytes, all 1,650 completion-bound context receipts
+and 76 complete replay contexts were independently rehashed successfully.
+One uncommitted next child and its claims remain in the old attempt.
+
+The current pre-fit owner is continuation PID 29120, launched at 09:55 UTC
+through owned capture PID 29118. The unchanged helper and pinned `d332013`
+code resume the 76 verified checkpoints in a new witness root:
+`/Volumes/BayesCoxTransfer20260929/correction-20260929/reuse_v2`.
+Its arithmetic and orchestration outputs are sibling `arithmetic_v2` and
+`continuation_v2`. The new 400 GiB APFS image is backed by
+`/Volumes/SSD980/bayesian-cox-extensions-20260928/BayesCoxTransfer20260929.sparsebundle`.
+The original image stays read-only; original numerical owners, code, data,
+traces and results remain unchanged. At 10:38 UTC, 130 independently verified
+context receipts were present and the original grid contained 1,095 cells:
+901 complete, 169 failed and 25 failed diagnostics. These are dated
+checkpoints. The retained 10:23 checkpoint incorrectly counted a nonexistent
+`first_draw` directory as zero; the 10:38 checkpoint uses the actual
+`replay/contexts` receipts and explicitly records that counting error.
+
+The request, actual wrapper/child launch and raw logs are retained in
+`~/bayes-cox-runs/extensions-20260928/correction_storage_incident_20260929_v1/`.
+The wrapper records the eventual genuine continuation return code on the
+internal disk. The new attempt still stops before the five actual execution
+reviews, freeze, pilot or corrected fits. Keep SSD980 connected and both
+images mounted; do not start another replay or edit either attempt.
+
+Correction-aware reporting/QA is integrated at
+`scripts/catalytic_correction/reporting/`. Its reviewed runtime and copied
+historical support bytes are unchanged, and 51 portable checks plus three
+subtests passed. Actual reports, figure inspection and receiving replay still
+require completed mixed evidence. Independent review found two transfer
+preparation defects: unmarked injected mixed-verifier capture and unrestricted
+filtered capture-group roles. The original preparation and finding record
+are preserved. The separately reviewed v2 transfer implementation is now
+integrated at `scripts/catalytic_correction/release/`; its full 100-file
+preparation is retained and 68 portable checks plus 35 subtests passed.
+Actual source mixed verification must use its `capture_mixed_source.py`.
+Whole evidence trees retain failed/orphan files; only four specified capture
+roles may be flat four-file groups. Independent follow-up review found no
+remaining material defect within that implementation contract.
+
+The expanded full locked suite passed 911 tests and 108 subtests with no
+skips at 11:22 UTC. All 349 captured implementation files were unchanged
+through the successful check, and all 157 original source/build/lock files
+were reverified unchanged. Exact 259-package verification, schemas and Ruff
+passed. The default-cache run retained the correct original-source path and
+unchanged numerical, compiler and BLAS settings. Both earlier cancelled
+test attempts and their genuine nonzero returns remain preserved; they are
+not scientific fit failures or successful checks. The 208-member validation
+archive retains the actual commands, source captures, logs and diagnostic
+limits. Compact record:
+`coordination/recovery/2026-09-29-generator-correction-reporting-release-integration.json`.
+This validates implementation, not completed scientific results or a release.
+
+At 11:28 UTC the new replay had 219 independently verified first-draw
+receipts; original production still had the 1,095 outcomes recorded above.
+The unchanged partial first replay remains retained in the forensic image.
+The curated storage-incident preparation contains 1,384 prospective retained
+files, including all 1,339 forensic-image files. Root checked the small-file
+bytes and exact saved inventory mapping; a current image rehash and actual
+staging remain required. Its 52-member archive preserves the checkpoint
+error/correction and dated partial logs without unfiltered global user paths.
+
+A separately reviewed read-only Darwin observer registered all nine existing
+original processes at 11:16 UTC. Observer child PID 48621, captured by wrapper
+PID 48620, records genuine future kernel exit statuses without controlling
+the jobs. Its launch/request/identity/subscription evidence is retained in
+the 23-member dated archive. No exit event or finished-observer receipt was
+present at that snapshot. Earlier unavailable return codes remain unknown;
+subscriptions and later exits do not supply numerical or comparison approval.
+
+ADR-042 specifies separate per-entry I/O support if actual inherited
+producer evidence is missing. The actual subset, location plan, adapter
+adoption and any new original-law execution remain pending complete reuse
+and producer evidence. Do not rerun all 92 cells automatically or copy a
+new refit into an old historical root. Source and receiving release wiring
+must bind any new adapter explicitly. Final private retention also includes
+the unchanged 1,339-file forensic image with the stopped first replay attempt.
+The separate 44-member per-entry I/O preparation and its ten-member
+independent source review are archived; no material finding remains within
+that contract. It is not adopted runtime or an actual missing subset. Separate
+release wiring remains necessary before its use. The reviewed preparation
+record is `coordination/recovery/2026-09-29-generator-correction-per-entry-io-reviewed-preparation.json`.
 
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its
@@ -667,6 +769,8 @@ in the 2026-08-16 sequence below:
   of acceptance or of no further reviewer-requested analysis.
 - Do not edit the Overleaf thesis until the owner instructs.
 - Only one agent works on the repository at a time.
+- Commit and push regularly at completed, verified milestones; confirm the
+  remote branch contains the commit before reporting that it is pushed.
 - **Current state: baseline programme remotely verified; extensions active.**
   - The latest owner instruction requests everything Ravi needs on GitHub.
     Baseline evidence, full QA/log audit and its restore guide are released.

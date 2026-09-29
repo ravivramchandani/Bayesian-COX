@@ -548,6 +548,9 @@ reporting replay remains a separate pre-publication gate.
   - ADR-041's fixed original-92/pilot union and actual scope review are frozen
     before corrected scores; new refits, inherited original numerical
     reproduction and terminal no-fit recipe replay remain distinct;
+  - any ADR-042 missing-producer acquisition uses a prospectively reviewed
+    distinct per-entry root and separately pinned source/receiving adapters;
+    historical paths and all original evidence gates remain unchanged;
   - affected inference/RQ2/DCA and reporting are regenerated, actually visually
     reviewed, privately released and freshly restored/replayed; Ravi receives
     the exact original/corrected boundaries and remaining tasks.
@@ -596,6 +599,31 @@ reporting replay remains a separate pre-publication gate.
   preserved remotely with the plans. The full actual proposal arrays and
   pending numerical results require the final private release; the Git
   recovery archives do not supply a complete corrected handoff.
+  A storage interruption at about 09:44 UTC ended the first replay attempt.
+  Root preserved the full image, passed the read-only APFS check and rehashed
+  all preflight evidence plus 76 complete replay contexts. Continuation PID
+  29120 resumed verified checkpoints at 09:55 UTC on the new 400 GiB APFS
+  image; the old attempt and partial child remain read-only. Corrected fits
+  are still unapproved. Reporting/QA implementation passed 51 portable checks
+  and three subtests; actual results/review/replay remain pending. Transfer
+  v2 implementation is integrated with its full 100-file preparation and
+  68 passing portable checks/35 subtests. Independent review resolved the
+  process-injection and whole-tree-retention findings; both original findings
+  remain preserved. The expanded full locked suite passed 911 tests and
+  108 subtests without skips at 11:22 UTC; all 349 captured implementation
+  files and all 157 original source/build/lock files remained unchanged.
+  Both earlier cancelled checks are retained in the 208-member validation
+  archive and reporting/release integration record. Actual source capture,
+  package and fresh receiving replay
+  remain pending completed scientific evidence. ADR-042 I/O preparation
+  does not choose missing identities, alter selection or approve execution.
+  The separate 44-member I/O preparation passed independent source review;
+  its ten-member report is archived. Actual adoption and separately pinned
+  release wiring remain pending.
+  The read-only observer registered all nine original owners at 11:16 UTC
+  to capture future genuine exits; it supplies no past return code or numerical
+  approval. The 52-member curated incident preparation preserves the exact
+  checkpoint error/correction and prospective complete forensic-image mapping.
 - [ ] T-186 (T; depends T-181–T-185, T-189, T-190) — Render the extension bundle with the
   same verified renderer and lineage rules. Acceptance: every thesis number
   traces to generated evidence, with actual visual QA and separate primary/

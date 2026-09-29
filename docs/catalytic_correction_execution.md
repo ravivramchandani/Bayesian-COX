@@ -263,6 +263,14 @@ resolution records and never changes the frozen selection or prior proof.
 The execution/resume controller is not a read-only receiving checker; a
 separate path-mapped receiving adapter must preserve restored evidence.
 
+ADR-042 permits separately reviewed per-entry I/O only after actual complete
+reuse and producer checks identify genuinely missing inherited-original
+proof. It preserves the frozen selection and requires fresh distinct
+numerical/capture roots, actual execution and official comparison evidence.
+The archived preparation and clean source review do not choose a subset,
+approve execution or make release-v2 accept a new wrapper. Any adoption
+requires separately pinned source and receiving release wiring.
+
 Changed accepted inputs require fresh full-budget refits with the identical
 corrected freeze, seeds and gates. Unchanged reused outcomes require actual
 original numerical-refit receipts and reviewed producer/source/environment/
@@ -298,14 +306,46 @@ for. It delegates the unchanged four-family, RQ2 and decision-curve reducers
 to the pinned original scientific source and preserves baseline findings.
 
 The verifier has its own mixed-lineage certificate. It does not inherit the
-original extension certificate. `capture_verification.py` binds actual return
-code zero, raw logs and completion before `render_verified_mix.py` can render.
+original extension certificate. Actual release-v2 source verification must
+use `release/capture_mixed_source.py`, binding the unchanged ten verifier
+sources/preparation, the locked interpreter, actual return code zero, raw
+logs and completed outputs before `render_verified_mix.py` can render.
+The older generic capture API alone does not supply release-v2's genuine
+producer proof. Injection is test-only and cannot certify actual science.
 Rendering leaves actual visual QA, selected reproduction, the reporting
 sidecar and fresh private restoration pending. The exact tested runtime and
 source-only reviews are preserved in
 `coordination/recovery/2026-09-29-generator-correction-verification-v2.tar.gz`.
 Restored input locations use explicit path bindings; immutable historical
 paths and recorded bytes are preserved.
+
+The integrated `reporting/` adapters require the completed mixed certificate,
+selected reproduction, frozen descriptive comparisons and actual named
+visual review. Their [contract](../scripts/catalytic_correction/reporting/interface_contract.json)
+preserves all failed denominators and complete-pair requirements. Partial
+comparisons cannot acquire a confidence interval. Rendering includes all 32
+PDF pages, four indexed contact sheets and six CSV tables. Root must inspect
+every actual page at full size and the contact sheets before supplying the
+required attestation; an implementation test or generated image supplies
+no review.
+
+The complete `release/` v2 preparation is retained unchanged. Its
+[contract](../scripts/catalytic_correction/release/interface_contract.json)
+requires genuine source/fresh receiving captures, complete distinct evidence
+trees and actual reporting/review/replay proof. Whole trees retain failures,
+orphans and empty directories. Only the four explicitly specified capture
+roles may be flat four-file groups. Actual stage, package and fresh remote
+restore remain separate completion gates.
+
+Final private retention must include every file in the preserved 1,339-file
+forensic sparsebundle, including the interrupted first replay and partial
+child. The curated incident preparation supplies a prospective 1,384-file
+mapping, exact saved inventory and dated partial logs; it is not a current
+image rehash or a staged payload. Actual staging must recheck all source
+bytes, regular-file/no-link status and destination collisions. The exact
+checkpoint count error and later correction remain unchanged. Unfiltered
+global user/app stdout is excluded with original hashes and invocation
+bindings preserved. No standalone raw filesystem-check capture is available.
 
 ## Subsequent stages
 

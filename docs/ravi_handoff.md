@@ -48,18 +48,47 @@ selected correction reproduction before corrected scores to the original
 refits, inherited original numerical reproduction and terminal no-fit recipe
 replay. Those actual evidence checks and the corrected release remain pending.
 
+The first continuation exited during an external-storage I/O incident at
+about 09:44 UTC. Root preserved the complete disk image, passed a read-only
+APFS check and reverified every preflight artifact plus the 76 completed
+replay contexts. A new captured continuation resumed those checkpoints at
+09:55 UTC on `BayesCoxTransfer20260929`; the old attempt remains read-only.
+The current owner and exact output paths are in HANDOFF. Keep SSD980 and its
+two mounted images available while the owner's work continues.
+
 The reviewed freeze builder, mixed deep verifier and selected reproduction
 controller are integrated too. With the separate read-only receiving verifier,
-the latest full locked suite passed 792 tests and 70 subtests with no skips;
+the receiving integration suite passed 792 tests and 70 subtests with no skips;
 exact environment, schema and lint checks
 passed, and all 157 original source/build/lock files are unchanged. The
 [dated integration record](../coordination/recovery/2026-09-29-generator-correction-verification-reproduction-integration.json)
 contains the earlier checks and preserved validation history. The
 [receiving integration record](../coordination/recovery/2026-09-29-generator-correction-receiving-integration.json)
-records the latest suite. These checks do not
+records that check. These checks do not
 supply corrected numerical outcomes or a completed handoff. Correction-aware
 reporting, actual figure review and fresh receiving verification remain
 required before the corrected private release is complete.
+
+The reporting/visual-QA implementation is now integrated with 51 passing
+portable checks and three subtests. It requires the completed mixed
+certificate, selected reproduction and an actual named review of every
+figure. The separately reviewed v2 transfer implementation now passes
+68 portable checks and 35 subtests, and retains its full 100-file preparation.
+It resolves the process-capture and archive-completeness findings while
+preserving the original failed preparation. The resulting full locked suite
+passed 911 tests and 108 subtests with no skips at 11:22 UTC on 29 September.
+The [reporting/release integration record](../coordination/recovery/2026-09-29-generator-correction-reporting-release-integration.json)
+retains the successful commands and both earlier cancelled attempts. The
+original code, scientific settings and gates remain unchanged. These checks do not supply final reports,
+scientific approval or a release. ADR-042 preserves distinct per-entry
+outputs if missing inherited producer evidence actually requires new work;
+the subset and execution remain pending actual complete-input checks.
+
+At 11:28 UTC on 29 September, the current replay had 219 verified contexts;
+the original grid had 1,095 stored outcomes. The read-only exit observer
+registered all nine original processes and records future exits. Registration
+does not certify finished numerical work. The interrupted replay, partial
+child and storage recovery remain preserved for the final private release.
 
 The [completed-preflight record](../coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json)
 and metadata archive are pushed. Full proposal arrays remain on the owner's
@@ -109,6 +138,13 @@ Prerequisites: Apple Silicon, macOS 14 or newer, Git, authenticated GitHub CLI
 (`gh`), and an arm64 conda installation. Use the exact environment described
 in [environment_lock.md](environment_lock.md). Install the lock tool in its
 own environment; do not regenerate the scientific lock.
+
+The pending extension/correction receiving checks also require equality with
+the complete frozen environment report. That report records arm64,
+macOS 26.6 and Python 3.11.15, with all 259 locked packages. The baseline
+installation minimum above does not certify extension replay on another OS
+version. Verify the actual report before running the final extension checks;
+keep any mismatch explicit and preserve the frozen environment requirements.
 
 Run these commands in Terminal, using fresh destination directories:
 

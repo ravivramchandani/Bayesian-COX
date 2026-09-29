@@ -1,0 +1,153 @@
+{
+  "actual_external_rc_capture": {
+    "claims_capture_status": "corrected_claim_review_actual_rc0_captured",
+    "fresh_capture_must_be_outside_payload": true,
+    "output_receipt_is_separate_from_real_process_capture": true,
+    "owner": "root using thin release adapter capture_process or equivalently byte-bound owned process capture",
+    "self_written_receipt_never_proves_rc0": true,
+    "source_replay_capture_status": "corrected_reporting_replay_actual_rc0_captured"
+  },
+  "actual_visual_review": {
+    "attestation": "I examined every rendered PDF page at full size and the indexed contact sheets.",
+    "figures": "exact32 ordered explicit pass/fail verdicts; failures require issue",
+    "qa_prepare_autoattests": false,
+    "reviewed_at_utc": "actual timezone-aware timestamp",
+    "reviewer_name": "actual nonblank named reviewer",
+    "reviewer_role": "root"
+  },
+  "artifacts": [
+    "dimension_ratios.csv",
+    "descriptive_catalytic_pairs.csv",
+    "report.json",
+    "lineage.json",
+    "receipt.json"
+  ],
+  "claims_status": "corrected_factual_claim_inputs_verified",
+  "no_actual_execution_or_completion_by_preparation": true,
+  "qa_request": {
+    "files": [
+      "mixed_completion",
+      "source_capture",
+      "renderer",
+      "renderer_adapter"
+    ],
+    "new_qa_path_equals_output": true,
+    "receipt_additional_file": "review; actual sealed completed external root review, not template",
+    "roots": [
+      "mixed_verified",
+      "rendered",
+      "qa"
+    ],
+    "status": "corrected_visual_qa_inputs_bound"
+  },
+  "qa_source_bindings": [
+    "mixed_completion_sha256",
+    "original_renderer_lineage_sha256",
+    "mixed_correction_lineage_sha256",
+    "renderer_sha256",
+    "renderer_adapter_sha256",
+    "actual_verifier_capture_sha256",
+    "qa_helper_sha256"
+  ],
+  "qa_status": "corrected_automated_checks_passed_visual_review_pending",
+  "receiving_request": {
+    "additional_digest_fields": [
+      "sidecar_receipt_sha256"
+    ],
+    "additional_files": [
+      "claim_stdout"
+    ],
+    "additional_roots": [
+      "sidecar",
+      "payload"
+    ],
+    "cli": [
+      "--request",
+      "--request-sha256",
+      "--output",
+      "--python"
+    ],
+    "exact_output_files": [
+      "claim_replay_summary.json",
+      "preserved_visual_qa.json",
+      "reporting_replay_receipt.json"
+    ],
+    "fresh_output": "new external directory outside all roots, own preparation, request; exactly3 JSON metadata files",
+    "inherits": "reporting_request",
+    "receipt_artifacts": [
+      "claim_replay_summary.json",
+      "preserved_visual_qa.json"
+    ],
+    "source_replay_status": "corrected_reporting_source_replay_verified",
+    "status": "corrected_reporting_read_only_replay_request",
+    "stdout_receipt_binding_fields": [
+      "receipt_path",
+      "receipt_sha256"
+    ],
+    "test_only": false
+  },
+  "reporting_request": {
+    "files": [
+      "mixed_completion",
+      "source_capture",
+      "renderer",
+      "renderer_adapter",
+      "selection",
+      "selected_pass",
+      "correction_manifest",
+      "explanation"
+    ],
+    "roots": [
+      "mixed_verified",
+      "reproduction",
+      "rendered",
+      "qa",
+      "primary",
+      "sampler",
+      "robustness"
+    ],
+    "status": "corrected_reporting_source_inputs_bound",
+    "top_digest_fields": [
+      "mixed_completion_sha256",
+      "selection_sha256",
+      "selected_pass_sha256",
+      "visual_qa_receipt_sha256",
+      "mixed_correction_lineage_sha256"
+    ]
+  },
+  "reporting_roster": {
+    "complete_interval_pairs": 25,
+    "confidence_level": 0.95,
+    "descriptive_rows": 123,
+    "formal_links": 27,
+    "new_inference_test_family_gate": false,
+    "ratios": 1625
+  },
+  "reporting_source_bindings": [
+    "mixed_completion_sha256",
+    "selection_sha256",
+    "selected_pass_sha256",
+    "visual_qa_receipt_sha256",
+    "mixed_correction_lineage_sha256"
+  ],
+  "request_common": {
+    "content_sha256": "canonical internal content seal",
+    "files": "each exact {path,sha256}",
+    "preparation_receipt": {
+      "path": "explicit own preparation_receipt.json",
+      "sha256": "actual byte SHA"
+    },
+    "roots": "explicit absolute current roles; historical paths inside evidence never reopened",
+    "schema_version": 1,
+    "test_only": false
+  },
+  "schema_version": 1,
+  "source_generation_status": "corrected_reporting_sidecar_generated",
+  "status": "preparation_contract_only_actual_numerical_reproduction_render_and_review_pending",
+  "support_entrypoints": {
+    "claim_helper": "summarize_corrected_claims.py",
+    "qa_helper": "corrected_pdf_qa.py",
+    "report_replay": "replay_corrected_reporting.py",
+    "reporting_helper": "generate_corrected_reporting.py"
+  }
+}

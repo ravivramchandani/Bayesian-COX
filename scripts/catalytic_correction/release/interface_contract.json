@@ -1,0 +1,368 @@
+{
+  "actual_scientific_review_freeze_fit_report_QA_transport_release_pending": true,
+  "common_cli": [
+    "--preparation-receipt",
+    "--preparation-receipt-sha256",
+    "--request",
+    "--request-sha256",
+    "--python"
+  ],
+  "dependency_injection": "programmatic fictional-test seam only, never CLI; actual source proofs reject injection",
+  "evidence_status": "post_hoc_rank_conditioned_correction_after_original_failures_known",
+  "external_roots": [
+    "analysis",
+    "primary",
+    "production",
+    "robustness",
+    "sampler"
+  ],
+  "fixed_layout": {
+    "arithmetic": "correction/arithmetic",
+    "candidate_module": "code/correction/candidate/rank_conditioned_candidate.py",
+    "claim_capture": "reporting/final_claims",
+    "context_inventory": "correction/context_inventory",
+    "contracts": "code/correction/fit_contracts/correction_fit_contracts.py",
+    "corrected_run": "evidence/corrected_run",
+    "correction_addendum": "correction/protocol_addendum_catalytic_correction.md",
+    "correction_config": "correction/catalytic_correction.yaml",
+    "fit_code": "code/correction/fit_runner",
+    "freeze": "correction/freeze.json",
+    "matched": "data/matched_metabric.parquet",
+    "matched_manifest": "data/matched_metabric_manifest.json",
+    "metabric_source": "data/metabric_source",
+    "mixed_verified": "evidence/mixed_verified",
+    "original_reproduction": "evidence/original_reproduction",
+    "original_run": "evidence/original_run",
+    "pilot_review": "correction/reviews/pilot.json",
+    "preflight": "correction/preflight",
+    "preflight_code": "code/correction/preflight_runner",
+    "qa": "visual_qa/corrected",
+    "receiving_reproduction_preparation": "code/correction/receiving_reproduction",
+    "release_adapter_preparation": "code/correction/release_adapter",
+    "rendered": "rendered/corrected",
+    "reporting": "reporting/corrected_sidecar",
+    "reproduction": "evidence/corrected_reproduction",
+    "reproduction_capture": "execution/source_reproduction_verification",
+    "reproduction_preparation": "code/correction/reproduction",
+    "resolution_review": "correction/reviews/original_resolution.json",
+    "reuse_code": "code/correction/reuse_runner",
+    "review_arithmetic": "correction/reviews/arithmetic.json",
+    "review_freeze": "correction/reviews/freeze.json",
+    "review_implementation": "correction/reviews/implementation.json",
+    "review_input_witness": "correction/reviews/input_witness.json",
+    "review_method": "correction/reviews/method.json",
+    "source_capture": "execution/source_verification",
+    "source_report": "data/metabric_source_report.json",
+    "source_reporting_capture": "reporting/source_replay",
+    "source_reporting_review": "reporting/source_replay_review",
+    "source_reproduction_review": "execution/source_reproduction_review",
+    "source_verification_bindings": "execution/source_verification_bindings.json",
+    "support": "code/correction/reporting_qa_support",
+    "verification_preparation": "code/correction/verification_v2",
+    "witness_root": "correction/witness"
+  },
+  "fixed_scope": {
+    "contact_sheets": 4,
+    "descriptive_rows": 123,
+    "figures": 32,
+    "formal_links": 27,
+    "input_contexts": 1650,
+    "mixed_logical_cells": 1625,
+    "new_inference_or_scientific_acceptance_gates": false,
+    "original_selected_reproduction_cells": 92,
+    "ratio_rows": 1625,
+    "selected_scope": "sorted unique original92 union frozen pilots",
+    "tables": 6
+  },
+  "implementation_entrypoints": [
+    "capture_corrected_source.py",
+    "stage_corrected_extensions.py",
+    "verify_restored_correction.py",
+    "capture_mixed_source.py"
+  ],
+  "mixed_source_capture": {
+    "actual_science_pending": true,
+    "child": "unchanged sealed verification_v2 verify_mixed_extensions.py",
+    "cli": [
+      "--preparation-receipt",
+      "--preparation-receipt-sha256",
+      "--verification-preparation",
+      "--verification-preparation-sha256",
+      "--input-bindings",
+      "--input-bindings-sha256",
+      "--output",
+      "--capture-prefix",
+      "--python"
+    ],
+    "historical_receiving_proof": "preserved argv/source/input/numeric/interpreter/rc/raw-log metadata revalidated through explicit retained role maps; no rewrite",
+    "injected_status": "synthetic_mixed_verifier_capture_fixture_passed",
+    "operation": "actual_bound_mixed_verifier_child_capture_v2",
+    "producer": "capture_mixed_source.py",
+    "required_noninjection": "attempt and receipt test_only_dependency_injection must both be explicit false",
+    "scientific_sources_unchanged": true,
+    "source_pin_surface": "all10 original implementations plus original preparation and bindings; separately all6 release_v2 implementations plus producer preparation",
+    "status": "mixed_verification_actual_rc0_captured"
+  },
+  "new_method_or_scientific_approval": false,
+  "numeric_thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "originals_preserved": true,
+  "reporting_source_bindings": [
+    "mixed_completion_sha256",
+    "mixed_correction_lineage_sha256",
+    "selected_pass_sha256",
+    "selection_sha256",
+    "visual_qa_receipt_sha256"
+  ],
+  "revision": 2,
+  "schema_version": 1,
+  "science_request": {
+    "actual_capture_files": [
+      "<prefix>.stdout.log",
+      "<prefix>.stderr.log",
+      "<prefix>.attempt.json",
+      "<prefix>.receipt.json"
+    ],
+    "additional_cli": [
+      "--mode science",
+      "--output"
+    ],
+    "exact_restored_reporting_roots": [
+      "mixed_verified",
+      "reproduction",
+      "rendered",
+      "qa",
+      "sidecar",
+      "payload"
+    ],
+    "fields": [
+      "restored",
+      "stage_manifest_sha256",
+      "verification_bindings",
+      "external_roots",
+      "transport_capture",
+      "trusted_inventory_canonical_sha256",
+      "reproduction_bindings",
+      "reporting_replay_request"
+    ],
+    "final_status": "corrected_private_restore_source_and_science_replay_verified",
+    "ordered_children": [
+      "sealed mixed-v2 --verify-existing",
+      "sealed receiving-only reproduction comparison",
+      "sealed corrected reporting/claim replay"
+    ],
+    "outputs": [
+      "fresh mixed replay/environment metadata",
+      "three child capture groups",
+      "fresh reproduction review tree",
+      "three reporting replay JSONs",
+      "external receipt.json with exact output inventory"
+    ],
+    "programme_complete": false,
+    "receiving_reproduction_bindings": "sealed receiving adapter interface_contract.json; full exact immutable inventories and explicit historical prefix maps",
+    "remote_publication_identity": "root records separately",
+    "reproduction_mapping": "only exact explicit staged historical root/file pairs + verified external roots; no file aliases",
+    "separate_verified_baseline_roots": [
+      "primary",
+      "sampler",
+      "robustness"
+    ],
+    "status": "corrected_private_restore_verification_request",
+    "test_only": false
+  },
+  "source_capture_request": {
+    "execution_or_resume_controller_allowed": false,
+    "fields": [
+      "schema_version",
+      "mode",
+      "test_only",
+      "helper_preparation",
+      "input_request",
+      "immutable_roots",
+      "immutable_files",
+      "capture_prefix",
+      "evidence_output"
+    ],
+    "modes": {
+      "claims": {
+        "capture_status": "corrected_claim_review_actual_rc0_captured",
+        "entrypoint": "summarize_corrected_claims.py",
+        "evidence_output": null,
+        "input_flag": "--request"
+      },
+      "reporting": {
+        "capture_status": "corrected_reporting_replay_actual_rc0_captured",
+        "entrypoint": "replay_corrected_reporting.py",
+        "input_flag": "--request",
+        "proof": "reporting_replay_receipt.json"
+      },
+      "reproduction": {
+        "capture_status": "corrected_readonly_reproduction_actual_rc0_captured",
+        "entrypoint": "verify_restored_reproduction.py",
+        "input_flag": "--bindings",
+        "proof": "receipt.json"
+      }
+    },
+    "no_outer_scientific_completion_from_rc_alone": true,
+    "status": "corrected_read_only_source_capture_request"
+  },
+  "stage_request": {
+    "asset_kind_law": {
+      "file": [
+        "candidate_module",
+        "contracts",
+        "correction_addendum",
+        "correction_config",
+        "matched",
+        "source_verification_bindings",
+        "freeze",
+        "matched_manifest",
+        "source_report",
+        "review_method",
+        "review_arithmetic",
+        "review_input_witness",
+        "review_implementation",
+        "review_freeze",
+        "resolution_review",
+        "pilot_review"
+      ],
+      "filtered_tree_groups_refused": true,
+      "group": [
+        "source_capture",
+        "reproduction_capture",
+        "source_reporting_capture",
+        "claim_capture"
+      ],
+      "group_exact_four_flat_members": true,
+      "tree": [
+        "arithmetic",
+        "context_inventory",
+        "corrected_run",
+        "fit_code",
+        "metabric_source",
+        "mixed_verified",
+        "original_reproduction",
+        "original_run",
+        "preflight",
+        "preflight_code",
+        "qa",
+        "receiving_reproduction_preparation",
+        "release_adapter_preparation",
+        "rendered",
+        "reporting",
+        "reproduction",
+        "reproduction_preparation",
+        "reuse_code",
+        "source_reporting_review",
+        "source_reproduction_review",
+        "support",
+        "verification_preparation",
+        "witness_root"
+      ],
+      "whole_tree_orphans_and_empty_directories_retained": true
+    },
+    "assets": "exact required fixed-layout tree/file/group roles; optional review assets only when verified bindings include them; full tree files+directories or exact flat capture group",
+    "external_baselines": "primary/sampler/robustness: trusted canonical inventory SHA + manifest/completion file pins",
+    "external_retained_file_bindings": "exact five external roles; current file byte/size pins; source files must be Git-tracked for clean archives",
+    "fields": [
+      "verification_bindings",
+      "assets",
+      "release_adapter_preparation_sha256",
+      "mixed_completion_sha256",
+      "source_capture",
+      "selection_sha256",
+      "reproduction_pass",
+      "reproduction_capture",
+      "receiving_reproduction_preparation_sha256",
+      "source_reproduction_bindings",
+      "support_source_sha256",
+      "support_paths",
+      "source_reporting_capture",
+      "claim_capture",
+      "source_reporting_request",
+      "source_claim_request",
+      "strict_native_clone",
+      "transport_code",
+      "external_baselines",
+      "retained_files",
+      "external_retained_file_bindings"
+    ],
+    "file_records": "exact {path:absolute,sha256:byte SHA}, content-sealed JSON except explicit legacy records",
+    "outputs": [
+      "corrected_release_stage.json",
+      "exact full private payload tree",
+      "clean119 production.tar.gz",
+      "clean855 analysis.tar.gz"
+    ],
+    "remote_completed": false,
+    "retained_files": "distinct exact {source,target,binding:{sha256,bytes}} under execution/retained_external",
+    "schema_version": 1,
+    "status": "corrected_private_payload_staged_with_separate_actual_source_gates",
+    "test_only": false,
+    "unsupported_historical_file_aliases": "nonempty alias/deduplication maps refused; never emitted to receiving reader"
+  },
+  "status": "corrected_release_adapter_contract_preparation_only",
+  "transport_request": {
+    "additional_cli": [
+      "--mode transport",
+      "--output"
+    ],
+    "fields": [
+      "transport_code",
+      "package",
+      "restored",
+      "trusted_inventory_canonical_sha256"
+    ],
+    "scientific_completion": false,
+    "status": "corrected_transport_restore_request",
+    "unchanged_pinned_verify_delegate": true
+  },
+  "verification_bindings": {
+    "files": [
+      "arithmetic_accounting",
+      "definition",
+      "freeze",
+      "inventory",
+      "manifest"
+    ],
+    "optional_reviews": [
+      "resolution_review",
+      "pilot_review"
+    ],
+    "review_paths": [
+      "arithmetic",
+      "freeze",
+      "implementation",
+      "input_witness",
+      "method"
+    ],
+    "roots": [
+      "analysis",
+      "candidate_module",
+      "context_inventory",
+      "contracts",
+      "corrected_run",
+      "correction_addendum",
+      "correction_config",
+      "fit_code",
+      "matched",
+      "original_run",
+      "preflight",
+      "preflight_code",
+      "primary",
+      "production",
+      "reuse_code",
+      "robustness",
+      "sampler",
+      "witness_root"
+    ],
+    "unchanged_historical_absolute_paths": true
+  },
+  "visual_review": "existing named actual root attestation +32 figure verdicts/full page renders+4 contacts+6 CSV/source inventory hashes; no new table verdict",
+  "write_once": "unchanged IO SHA389c09c0; no replacement; diagnostic residue retained; exact published inventories required"
+}

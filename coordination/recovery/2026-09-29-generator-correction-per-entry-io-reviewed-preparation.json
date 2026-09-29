@@ -1,0 +1,20 @@
+{
+  "actual_missing_subset_location_plan_or_execution_approved": false,
+  "archive": {
+    "all_receipt_artifact_hashes_verified": true,
+    "archive": "2026-09-29-generator-correction-per-entry-io-review.tar.gz",
+    "bytes": 24117,
+    "exact_member_roundtrip_and_source_before_after_verified": true,
+    "preparation_receipt": "receipt.json",
+    "preparation_receipt_sha256": "af971b9dc4b3a9e016110e3cf8cab4996dd5f0444ea0ab5009856a28744091d5",
+    "regular_members": 10,
+    "sha256": "a53bb10b40ced6329038555618436e43f5d5dcf2557d2d0502ea8e1896aed68d"
+  },
+  "material_findings": 0,
+  "peer_receipt_sha256": "af971b9dc4b3a9e016110e3cf8cab4996dd5f0444ea0ab5009856a28744091d5",
+  "preparation_receipt_sha256": "6670b27e78fb05f7c266cc52b72241a4b477f5d9a27213e8882bdcbd1038f366",
+  "runtime_adopted": false,
+  "schema_version": 1,
+  "separate_release_wiring_pending": true,
+  "status": "root_read_clean_independent_per_entry_preparation_review"
+}

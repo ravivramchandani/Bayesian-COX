@@ -1,0 +1,16 @@
+{
+  "archive": {
+    "archive": "2026-09-29-generator-correction-resident-checkout-validation.tar.gz",
+    "bytes": 25381,
+    "exact_member_roundtrip_and_source_before_after_verified": true,
+    "regular_members": 3,
+    "sha256": "ae3ec34a87f5ed232fed26ce5dbcf7bb162f2d3222b3b360f81bd012be0c6a1c"
+  },
+  "original157_unchanged": true,
+  "original_checkout_and_offloaded_docs_preserved": true,
+  "programme_completed": false,
+  "schema_and_diff_checks_tool_observed_passed": true,
+  "schema_version": 1,
+  "source349_equivalence": true,
+  "status": "resident_checkout_code_equivalence_and_documentation_checks"
+}

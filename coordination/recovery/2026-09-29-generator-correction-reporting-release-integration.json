@@ -1,0 +1,198 @@
+{
+  "cancelled_attempts_retained_not_classified_as_scientific_failures": true,
+  "corrected_programme_complete": false,
+  "created_at_utc": "2026-09-29T11:28:52.535383+00:00",
+  "dated_progress": {
+    "array_or_trace_bytes_read": false,
+    "collection_is_not_atomic": true,
+    "corrected_freeze_fits_release_complete": false,
+    "created_at_utc": "2026-09-29T11:28:52.102664+00:00",
+    "independent_first_draw_receipts": 219,
+    "last_progress_line": {
+      "accounted": 219,
+      "context_id": "gbsg2__clinical__r03f02__catalytic_wme__full::outer",
+      "stage": "independent_first_draw_replay"
+    },
+    "original_complete_grid_present": false,
+    "original_expected_cells": 1625,
+    "original_outcome_status_counts": {
+      "complete": 901,
+      "failed": 169,
+      "failed_diagnostics": 25
+    },
+    "original_stored_cells": 1095,
+    "receipt_status_counts": {
+      "independent_original_first_draw_verified": 219
+    },
+    "status": "dated_metadata_checkpoint_not_completion",
+    "volume_available_bytes": {
+      "/Users/macuser": 19420901376,
+      "/Volumes/BayesCoxTransfer20260929": 429041979392,
+      "/Volumes/SSD980": 987829501952
+    }
+  },
+  "final_fresh_remote_restore_or_actual_QA_completed": false,
+  "full_locked_test": {
+    "actual_exit_code": 0,
+    "finished_at_utc": "2026-09-29T11:22:00.335585+00:00",
+    "invocation": {
+      "bytes": 1765,
+      "sha256": "49447a68c2bea4998f4165cdaacb18ab293b5c94c511abdb368e9f275e3ca2c9"
+    },
+    "passed_subtests": 108,
+    "passed_tests": 911,
+    "skips": 0,
+    "source_before_equals_after": true
+  },
+  "new_archives": {
+    "original-exit-observer-actual-launch": {
+      "archive": "2026-09-29-generator-correction-original-exit-observer-actual-launch.tar.gz",
+      "bytes": 12092,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "regular_members": 23,
+      "sha256": "b892486164a419d30b94e50705546c56470079e91f61fe0b65cfd413eec26083"
+    },
+    "original-exit-observer-v3-preparation": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-original-exit-observer-v3-preparation.tar.gz",
+      "bytes": 133112,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "preparation_receipt.json",
+      "preparation_receipt_sha256": "459c721257b1eb5f0b7b4ae2dde4082efa966c114b4fc54db8f60a21f442a1b3",
+      "regular_members": 42,
+      "sha256": "082025a2fd020ad37fb4e9563f42b794cfd095f1f9aad0806e0d318f7c8611e8"
+    },
+    "original-exit-observer-v3-review": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-original-exit-observer-v3-review.tar.gz",
+      "bytes": 8271,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "receipt.json",
+      "preparation_receipt_sha256": "4364d0d52bb7a17a43ff3c72f100fdb465f8b2a3f95d3ba22a615e2251225d89",
+      "regular_members": 7,
+      "sha256": "82d81c8a932c0d5deac461894569101f8aaa46e16fe53b04eae275cf2eda1beb"
+    },
+    "per-entry-io-preparation": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-per-entry-io-preparation.tar.gz",
+      "bytes": 65004,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "preparation_receipt.json",
+      "preparation_receipt_sha256": "6670b27e78fb05f7c266cc52b72241a4b477f5d9a27213e8882bdcbd1038f366",
+      "regular_members": 44,
+      "sha256": "ec743c345e74b95c149e92731ce2eca5e1c16773f726fc8b8d7a1a0b44847bdb"
+    },
+    "reporting-release-integration-validation": {
+      "archive": "2026-09-29-generator-correction-reporting-release-integration-validation.tar.gz",
+      "bytes": 1071660,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "regular_members": 208,
+      "sha256": "a37c94b7c03026918b149d1b1c0af7e9470bf5f947cc964969a1667dda6c1529"
+    },
+    "storage-incident-preparation": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-storage-incident-preparation.tar.gz",
+      "bytes": 202925,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "preparation_receipt.json",
+      "preparation_receipt_sha256": "50c724ffdcaf6876061c81bf00d4f87dc0534e7527f453e2ae185ccc8262d0ea",
+      "regular_members": 52,
+      "sha256": "c98526235f6fbd50db7f4ad2c6b4e31f73f2e34fd33272fdd1be128276326746"
+    }
+  },
+  "observer_registered_nine_original_processes": true,
+  "observer_snapshot_supplies_no_past_exit_code_or_scientific_completion": true,
+  "original_157_unchanged": true,
+  "per_entry_io_actual_adoption_or_subset_selection": false,
+  "prior_preparation_archives": {
+    "original-producer": {
+      "all_stored_sha_size_bindings_and_roundtrip_verified": true,
+      "archive": "2026-09-29-generator-correction-original-producer-preparation.tar.gz",
+      "archive_bytes": 24789,
+      "archive_sha256": "2ede7e0a14154386cd6a1a080a2121e0ea9b2ebfafdee8000159862d603083f2",
+      "existing_partial_audit_archive_retained": true,
+      "receipt_name": "preparation_receipt.json",
+      "receipt_sha256": "2a8530662d20936ac9f84a93db83b558abf6c1651a4df5039925cc616df72ea1",
+      "regular_members": 25,
+      "source": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1"
+    },
+    "original-producer-review": {
+      "all_stored_sha_size_bindings_and_roundtrip_verified": true,
+      "archive": "2026-09-29-generator-correction-original-producer-review-preparation.tar.gz",
+      "archive_bytes": 8105,
+      "archive_sha256": "d0929952ae01ff4cd3dda4bb9457b74af22b0cab970187ac578607775f4d5090",
+      "existing_partial_audit_archive_retained": true,
+      "receipt_name": "receipt.json",
+      "receipt_sha256": "ef8a268298079860e68a2c780c8a458bb2066330fc0fa71ba8fd9be49af7c3ec",
+      "regular_members": 6,
+      "source": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_peer_review_v1"
+    },
+    "per-entry-io-design": {
+      "all_stored_sha_size_bindings_and_roundtrip_verified": true,
+      "archive": "2026-09-29-generator-correction-per-entry-io-design-preparation.tar.gz",
+      "archive_bytes": 10483,
+      "archive_sha256": "b683dd5416ac22c0930276cf4c1e047bfe5ef660c46b0b7fe4b34d031922b95f",
+      "existing_partial_audit_archive_retained": false,
+      "receipt_name": "receipt.json",
+      "receipt_sha256": "c26ce94c2c5fe12477060053d6fc822a18d04b3ce99751e399e612fc541e665d",
+      "regular_members": 8,
+      "source": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_mapping_design_review_v1"
+    },
+    "release-v2": {
+      "all_stored_sha_size_bindings_and_roundtrip_verified": true,
+      "archive": "2026-09-29-generator-correction-release-v2-preparation.tar.gz",
+      "archive_bytes": 158787,
+      "archive_sha256": "013c9d61671505d354abab823c8919db4fa7ed9db99908f4279d0dc89aef8c30",
+      "existing_partial_audit_archive_retained": true,
+      "receipt_name": "preparation_receipt.json",
+      "receipt_sha256": "9e567639359328d958e73c476a2d16ec8b0ab408e17c1fb016c37c3234713c1d",
+      "regular_members": 100,
+      "source": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v2"
+    },
+    "release-v2-review": {
+      "all_stored_sha_size_bindings_and_roundtrip_verified": true,
+      "archive": "2026-09-29-generator-correction-release-v2-review-preparation.tar.gz",
+      "archive_bytes": 8805,
+      "archive_sha256": "72dd9e4a5a20d6c075482255234d65283149a8c8bda78e52622e5d74c812fc51",
+      "existing_partial_audit_archive_retained": true,
+      "receipt_name": "receipt.json",
+      "receipt_sha256": "5ad94575bb74ba9ff747afdcd709b05b30ce63b28527868801816a64fed93471",
+      "regular_members": 6,
+      "source": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_peer_review_v2"
+    },
+    "reporting": {
+      "all_stored_sha_size_bindings_and_roundtrip_verified": true,
+      "archive": "2026-09-29-generator-correction-reporting-preparation.tar.gz",
+      "archive_bytes": 71701,
+      "archive_sha256": "4dd1c90c884d762e4d374c16674eab8f934135d49d4bb74603d4837cdb089be5",
+      "existing_partial_audit_archive_retained": true,
+      "receipt_name": "preparation_receipt.json",
+      "receipt_sha256": "70604211ceeab2c257ce1c6610cf07b140ee700c84b28b54df48d3652ee65add",
+      "regular_members": 37,
+      "source": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reporting_qa_v1"
+    },
+    "reporting-review": {
+      "all_stored_sha_size_bindings_and_roundtrip_verified": true,
+      "archive": "2026-09-29-generator-correction-reporting-review-preparation.tar.gz",
+      "archive_bytes": 6990,
+      "archive_sha256": "9b070fbb77d22a72bc83981965c0887c843aaaaedb5a4e3da345c2eadbd7bb21",
+      "existing_partial_audit_archive_retained": true,
+      "receipt_name": "receipt.json",
+      "receipt_sha256": "78ad45b4e7651e0b8729b677ca2e375cd553fcf3b71f7f55939c263edbb54160",
+      "regular_members": 7,
+      "source": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reporting_qa_review_v1"
+    }
+  },
+  "release_focused": {
+    "subtests": 35,
+    "tests": 68
+  },
+  "reporting_focused": {
+    "subtests": 3,
+    "tests": 51
+  },
+  "runtime_and_dependency_sources_are_exact_reviewed_bytes": true,
+  "schema_version": 1,
+  "source_349_current_equal_tested_bytes": true,
+  "status": "root_checked_reporting_release_implementation_and_archival_records"
+}

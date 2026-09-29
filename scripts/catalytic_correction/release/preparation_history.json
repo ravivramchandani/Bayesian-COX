@@ -1,0 +1,21 @@
+{
+  "actual_science_executed": false,
+  "all_actual_science_reviews_QA_package_remote_handoff_pending": true,
+  "earlier_checks_retained": true,
+  "fixes": [
+    "Separate default-subprocess capture wrapper; injected tests use only synthetic statuses; exact original10 plus bindings/preparation pins and separately exact new producer pins",
+    "Both mixed source documents require explicit injectionFalse; exact original argv/runtime/rc/log/completion binds",
+    "Exact role-kind law; full evidence/code trees preserve failed/orphan bytes and empty directories; only four exact flat capture groups",
+    "Receiving revalidates retained source capture metadata through fixed explicit restored roles without rewriting historic absolute paths",
+    "Fresh-output refusal repeated at capture entry immediately before dispatch"
+  ],
+  "initial_Ruff_findings": "nine fictional-test loop-binding warnings fixed without changing scientific code",
+  "material_findings_preserved": [
+    "release-v1-mixed-capture-injection-provenance",
+    "release-v1-filtered-group-for-whole-evidence-role"
+  ],
+  "original_producer_completion_draft_separate_and_unsealed": true,
+  "preserved_v1_receipt_sha256": "4a02cf6f7013263c7ec86529f4abb26e8d66c40a1c3529518a03935f8112e788",
+  "preserved_v1_review_receipt_sha256": "7f8b299ea2c291ee1bbf4747ea1c0ba276efeb51c33c84bce69ec8e17c8c902c",
+  "status": "preparation_history_only"
+}

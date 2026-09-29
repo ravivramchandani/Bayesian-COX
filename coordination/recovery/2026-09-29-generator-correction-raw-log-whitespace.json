@@ -1,0 +1,25 @@
+{
+  "created_at_utc": "2026-09-29T11:50:38.274570+00:00",
+  "full_staged_diff_check_observed_exit_code": 2,
+  "full_staged_diff_check_only_findings": "one historical unittest progress line ends with a space in each of the three unchanged sealed raw logs",
+  "only_exact_bound_historical_files_excluded_from_followup_whitespace_check": {
+    "scripts/catalytic_correction/release/preserved_v1/synthetic_attempt4.stderr.txt": {
+      "bytes": 5735,
+      "sha256": "77e23b9883def09ff937463eca6abcd0957d0fa4e715dcaf0ba4deb7629357b5"
+    },
+    "scripts/catalytic_correction/release/preserved_v1/synthetic_attempt6.stderr.txt": {
+      "bytes": 41589,
+      "sha256": "c0836c35b46d10acb50b46bdb6de671dba6494e2ca60ca05ffa2e745d96a5a04"
+    },
+    "scripts/catalytic_correction/release/preserved_v1/synthetic_attempt7.stderr.txt": {
+      "bytes": 13231,
+      "sha256": "4a1ece47f1db29611e7af08bb5eb630d147754437787e59bb6ce3deb14369719"
+    }
+  },
+  "raw_log_bytes_edited": false,
+  "remaining_staged_diff_check_observed_exit_code": 0,
+  "schema_version": 1,
+  "scientific_gates_changed": false,
+  "status": "immutable_raw_log_whitespace_retained",
+  "test_source_or_numeric_settings_changed": false
+}

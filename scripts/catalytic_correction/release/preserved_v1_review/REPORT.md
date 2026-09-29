@@ -1,0 +1,9 @@
+The sealed release adapter v1 source review found two material implementation gaps. No runtime, tests, scientific inputs, real traces, process probes, checker, package, capture or restore was executed by this reviewer. The sealed implementation and original owners remain unchanged.
+
+1. Mixed capture injection provenance: release_core.py:342–364 accepts the original mixed capture without an explicit non-injection field. The pinned verification_v2 capture producer accepts an injected invoke function and emits the same actual-operation schema without marking that injection (capture_verification.py:42–84). A separate preserved producer revision and release acceptance check are needed before a production capture.
+
+2. Complete-tree retention: release_core.py:174–217 allows a filtered group for every asset role. It pins selected files rather than the full source tree; stage_corrected_extensions.py:344–346 and384–386 recheck only tree kinds. Restrict kinds by role so whole evidence/code/source trees cannot omit unreferenced diagnostic or failed-attempt files/directories.
+
+All53 target artifacts and54 archival members match the exact preparation receipt. Five generic transport source pins and five preparation/dependency receipt pins were independently byte-checked. Other reviewed boundaries are recorded in review.json; no additional material finding was found. The producer-reported43 fictional/injected tests were read, not rerun.
+
+This review adds no scientific, inferential, table-verdict, historical259-checker argv/rc or method-approval requirement. Unknown original numerical producer evidence stays pending under the existing sealed rules; a cached official comparison alone remains insufficient. Root retains integration, independent actual reviews, freezing and launch authority.

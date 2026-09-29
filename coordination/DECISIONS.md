@@ -1022,3 +1022,43 @@ Format:
   selected reproduction, visual QA and fresh private release restoration
   remain separate completion gates. ADR-040's generation, pilot and
   acceptance rules are unchanged; no running specification is rewritten.
+
+## ADR-042 — Preserve distinct locations for any missing inherited refit proof
+
+- Status: ACCEPTED for the engineering design; actual identities and execution remain pending
+- Date: 2026-09-29
+- Context: The sealed selected-reproduction adapters use one original refit
+  root. A genuinely missing inherited producer proof may require fresh
+  original-law execution. Its new output cannot be copied into that old root
+  and presented as historical execution. No corrected score has been produced.
+- Decision:
+  - Determine any missing subset from the completed reuse inventory and actual
+    producer gates. Do not rerun all 92 identities automatically or infer a
+    producer's return code from a stored cell, marker or cached comparison.
+  - Permit a separately reviewed I/O adapter and prospective, root-reviewed
+    per-entry location plan. Only genuinely unproven inherited original-92
+    identities with exact current reuse witnesses may enter that plan.
+    Each entry has distinct fresh numerical and capture directories, the
+    original plan-order index and the unchanged workers=92 selection rule.
+  - Bind the same historical root through capture, controller ownership and
+    scientific comparisons, producer validation and receiving resolution.
+    Receiving locations use explicit complete inventories. Historical JSON
+    paths stay immutable; aliases, global-root repointing and file-copy
+    equivalence do not establish numerical execution.
+  - Keep the original sealed modules and preparation pins unchanged. New
+    wrappers have their own reviewed implementation pins. Actual execution,
+    exact source/input/environment/thread/interpreter evidence, typed return
+    codes, raw logs, official comparisons and lineage reviews remain required.
+    A later owner observation is not an original launch receipt or proof of
+    an unavailable past exit code.
+  - Acquire completed evidence through append-only reviewed resolution.
+    Existing pending-only resolution rules remain in force. A valid proved
+    entry is unchanged; any factual reclassification requires explicit root
+    review and retained history. Freeze and selected identities are unchanged.
+  - Review release and receiving wiring separately before adopting a new
+    adapter. A wrapper or additional evidence tree cannot silently satisfy
+    an older entrypoint or preparation binding.
+- Consequences: This decision changes file I/O only. It creates no actual
+  missing subset, location plan, scientific approval, corrected freeze or
+  numerical result. ADR-040/ADR-041's scope, seeds, budgets, acceptance gates,
+  full mixed verification and fresh-restore requirements remain unchanged.
