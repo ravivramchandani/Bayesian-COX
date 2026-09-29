@@ -9,9 +9,9 @@ Updated: 2026-09-29
 ADR-040/T-190 records corrective work after the observed synthetic-rank
 failures. The original numerical programme continues from its sealed code;
 no corrected numerical run has started. Do not alter current workers,
-their inputs or saved cells. Training-only generator preflight is running
-across all 825 catalytic jobs and every WME inner split, followed
-by exact first-proposal/input compatibility and a justified reuse/refit
+their inputs or saved cells. Training-only generator preflight is complete
+across all 825 catalytic jobs and every WME inner split. Independent
+first-proposal/input replay is running before a justified reuse/refit
 inventory. Original accepted and failed outcomes are both retained when
 complete inputs/model/fit/evaluation identity is proved.
 
@@ -46,17 +46,25 @@ corrected fit freeze. See
 
 The real preflight started at 2026-09-29 06:22 UTC from clean detached commit
 `cc231a0daed2614a087e9889e5d93556351a7fc2`, which is pushed and remote-verified.
-PID 81194 uses one low-priority worker and one numerical thread. Its output is
+PID 81194 used one low-priority worker and one numerical thread and has exited. Its output is
 `/Volumes/BayesCoxExtensions20260928/correction-20260929/preflight_v1`; the
 separate launch receipt is `preflight_v1_launch.json` in its parent directory
-and logs are in the sibling `worker_logs` directory. At 08:36 UTC, 1,536 of
-1,650 contexts were recorded: 1,291 accepted the original first draw and 245
-accepted a rank-conditioned redraw. The largest accepted attempt index was
-87. No terminal outcome had yet been recorded; the completion marker was
-absent. This does not establish whole-grid feasibility.
-The first saved context's artifact bindings and all 259 locked packages were
-checked. Inspect the completion marker and context receipts before advancing;
-do not duplicate or edit this running checkout.
+and logs are in the sibling `worker_logs` directory. Completion accounts for
+all 1,650 contexts: 1,400 accepted the original first draw and 250 accepted a
+rank-conditioned redraw, with no terminal outcome. The largest accepted
+attempt index was 87. Root's actual saved-record audit passed at 09:05 UTC:
+12,446 artifact bindings (2,309,258,335 bytes), all receipt/seed histories and
+118 original input bindings verified; there were no within-context retry-seed
+collisions or omitted training categories in accepted proposals. These are
+training-input feasibility results, not optimizer, MCMC or reuse certification.
+Redraws touch 168 outer identities; this is not an actual refit count.
+The complete-preflight verification JSON and 18-member metadata/audit archive
+are in `coordination/recovery/2026-09-29-generator-correction-complete-preflight-*`.
+The full proposal arrays remain on APFS and must be included in the final
+private release. The retained first root audit attempt incorrectly fixed
+synthetic M at 1,000; the passing audit follows the unchanged source formula
+`max(1000, 4*p)`, including M=2,108 for p=527. No scientific evidence changed.
+Do not duplicate the completed audit or edit its source checkout.
 
 The independent arithmetic helpers are integrated at
 `scripts/catalytic_correction/{independent_arithmetic,bound_arithmetic}.py`.
@@ -86,8 +94,8 @@ checking tool imports in a fresh process. The compact receipt is
 `coordination/recovery/2026-09-29-generator-correction-execution-integration.json`.
 
 A single detached pre-fit continuation was launched at 2026-09-29 07:48 UTC,
-PID 97059. It waits for PID 81194 to exit and requires complete, byte-bound
-preflight evidence with no remaining live claims. It then runs the actual
+PID 97059. It verified PID 81194's exit and complete, byte-bound
+preflight evidence with no remaining live claims. At 08:55 UTC it started the actual
 independent first-draw/reuse pass and complete changed-input arithmetic,
 serially, from clean detached pushed commit `d332013`. It stops before the
 five execution reviews, corrected freeze or pilot. Do not duplicate it.
@@ -97,7 +105,8 @@ contains `continuation_v1_request.json`, `continuation_v1_launch.json`,
 `continuation_v1/` and sibling `worker_logs/continuation_v1.*` logs. Failure
 or an incomplete upstream stage is retained and stops advancement.
 Source-only peer review and 12 injected guards passed; neither constitutes
-actual completed replay or arithmetic.
+actual completed replay or arithmetic. At 09:07 UTC, 19 independent first-draw
+contexts were recorded; whole replay and arithmetic completion remain pending.
 
 ADR-041 prospectively fixes selected reproduction to the sorted union of
 the original 92 repeat-one/fold-one identities and input-selected pilots.
@@ -122,6 +131,20 @@ These are implementation checks; actual correction evidence and completion
 remain pending. Correction-aware reporting/QA and receiving transfer adapters
 are being prepared separately before use.
 
+The separate read-only selected-reproduction receiving verifier is integrated
+at `scripts/catalytic_correction/receiving/verify_restored_reproduction.py`.
+It preserves historical JSON paths with explicit trusted receiving mappings,
+checks all three completed evidence routes, actual producer/child/environment
+proofs and stored science/sample/terminal arrays, and writes only a fresh
+external verification directory. It cannot dispatch, resume or repair work.
+Original sealed runtime bytes and all 42 preparation files are preserved;
+portable integration tests passed 65 checks and 13 subtests. The full locked
+suite passed 792 tests and 70 subtests with no skips at 09:23 UTC; environment,
+schemas and Ruff passed, and all 157 original source/build/lock files remain
+unchanged. Compact record:
+`coordination/recovery/2026-09-29-generator-correction-receiving-integration.json`.
+This is tested implementation, not an actual fresh receiving check or release.
+
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its
 failed outcomes too. Refresh dependent analyses/QA and verify a fresh remote
@@ -129,14 +152,29 @@ restore before declaring the corrected handoff complete. The original
 clinical/robustness/sampler releases and unaffected comparators need no
 restart. Do not promise a total completion time from the earlier short profile.
 
-At 2026-09-29 08:36 UTC the original run had 1,090 recorded outcomes:
-898 complete, 168 execution failures and 24 diagnostic failures. All six
+At 2026-09-29 09:07 UTC the original run had 1,092 stored cells. All six
 production workers and the remaining pre-stage worker were active. Original
-completion/final-analysis markers were absent. At 08:00 UTC, internal free
-space was about 35 GiB and the mounted APFS image had 199 GiB free. These dated
-counts are a checkpoint, not a live progress claim. New preflight evidence
-uses that APFS image with one low-priority worker; current original
-outputs and workers remain in place.
+completion/final-analysis markers were absent. At 09:07 UTC, internal free
+space was about 38 GiB and the mounted APFS image had about 195 GiB free.
+These dated counts are checkpoints, not a live progress claim. Correction
+evidence uses that APFS image; current original outputs and workers remain
+in place.
+
+At 08:50 UTC, 12 inactive duplicate compressed release/download cache files
+were copied, independently rehashed and relocated to
+`/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/`.
+They retain their original parent-directory basenames and total 2.690 GiB.
+Global open-file and current helper-reference checks found no active use.
+The source copies were removed only after both sets matched the historical
+release hashes; external bytes were checked again afterward. Raw inputs,
+results/traces, old restored evidence, historical manifests/checksums and
+all numerical owners remain unchanged. The mapping and receipts are in
+`coordination/recovery/2026-09-29-generator-correction-storage-verification.json`
+and its 19-member recovery archive. Copy the explicitly mapped external
+file back if an old compressed cache is needed; the remote baseline release
+assets remain available. The conditional budget is not an exact future
+allocation or certified selective-refit count. Refresh actual sizes before
+final release/download/fresh-restore staging.
 
 ## Active post-hoc extension production — authorised 2026-09-28
 

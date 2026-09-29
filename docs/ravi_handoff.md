@@ -16,11 +16,11 @@ release receipts do not certify it.
 The tested candidate and real training-preflight runner are now implemented
 and pushed at `cc231a0`; see
 [correction execution](catalytic_correction_execution.md). The actual
-1,650-context audit is running on the owner's Mac using one low-priority
-worker. At 2026-09-29 08:36 UTC, 1,536 contexts were accounted for: 1,291
-accepted their original draw and 245 accepted a rank-conditioned redraw.
-No terminal outcome had yet been recorded and the full completion marker
-was absent. The whole-grid assessment and complete reuse/refit verification
+1,650-context audit has completed on the owner's Mac: 1,400 contexts accepted
+their original draw and 250 accepted a rank-conditioned redraw, with no
+terminal outcome. Root's saved-record audit passed at 2026-09-29 09:05 UTC,
+verifying all 12,446 artifact bindings and seed histories. This establishes
+training-input feasibility; optimizer, MCMC and exact reuse/refit verification
 remain pending before any corrected numerical freeze. Do not
 start a duplicate audit. The recovery archives preserve the original
 candidate, recipe inventory, runner and selective-fit-contract preparation
@@ -37,8 +37,9 @@ corrected freeze before fitting. A Git checkout alone does not supply the
 pending numerical results. Ravi should use the final private release and
 its verified restore instructions once those gates are complete.
 
-One detached continuation on the owner's Mac waits for the full preflight,
-then runs the independent original replay/reuse inventory and changed-input
+One detached continuation on the owner's Mac verified the full preflight
+and started independent original replay at 08:55 UTC. It runs the complete
+replay/reuse inventory and changed-input
 arithmetic serially. It stops before the actual reviews, corrected freeze
 and full-budget pilot. Inspect its launch receipt and logs in the current
 HANDOFF; do not start overlapping work on another laptop. ADR-041 fixes
@@ -48,14 +49,26 @@ refits, inherited original numerical reproduction and terminal no-fit recipe
 replay. Those actual evidence checks and the corrected release remain pending.
 
 The reviewed freeze builder, mixed deep verifier and selected reproduction
-controller are integrated too. The latest full locked suite passed 727 tests
-and 57 subtests with no skips; exact environment, schema and lint checks
+controller are integrated too. With the separate read-only receiving verifier,
+the latest full locked suite passed 792 tests and 70 subtests with no skips;
+exact environment, schema and lint checks
 passed, and all 157 original source/build/lock files are unchanged. The
 [dated integration record](../coordination/recovery/2026-09-29-generator-correction-verification-reproduction-integration.json)
-contains the checks and preserved validation history. These checks do not
+contains the earlier checks and preserved validation history. The
+[receiving integration record](../coordination/recovery/2026-09-29-generator-correction-receiving-integration.json)
+records the latest suite. These checks do not
 supply corrected numerical outcomes or a completed handoff. Correction-aware
 reporting, actual figure review and fresh receiving verification remain
 required before the corrected private release is complete.
+
+The [completed-preflight record](../coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json)
+and metadata archive are pushed. Full proposal arrays remain on the owner's
+APFS workspace for the pending private evidence release. A
+[storage receipt](../coordination/recovery/2026-09-29-generator-correction-storage-verification.json)
+records the reversible relocation of inactive duplicate compressed caches;
+the original scientific inputs, results, traces and running owners are intact.
+Ravi should not launch overlapping original or correction jobs while this
+owner-side programme is active.
 
 This guide describes the handoff for an Apple Silicon Mac. The authoritative
 task state is in [HANDOFF](../coordination/HANDOFF.md) and
@@ -63,7 +76,7 @@ task state is in [HANDOFF](../coordination/HANDOFF.md) and
 pipeline and [the evidence status](current_evidence_status.md) for permitted
 scientific claims.
 
-All completed evidence is available remotely. Both result releases were
+All completed baseline-programme evidence is available remotely. Both result releases were
 downloaded and verified through a fresh clone and fresh restore directories
 on this Apple Silicon Mac. Ravi must verify the locked environment on his
 own Mac; a second physical laptop was not tested.

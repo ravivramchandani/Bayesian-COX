@@ -72,8 +72,12 @@ established.
 
 ADR-040 separately specifies a rank-conditioned generator sensitivity after
 the original failures were observed. Its real 1,650-context training-only
-preflight is active; whole-grid feasibility, exact reuse/refit scope and
-changed-input arithmetic are not yet complete. It changes no original cell
+preflight is complete: all contexts were accepted by the unchanged original
+rank guard, 1,400 on their first draw and 250 after rank-conditioned redraws.
+The actual saved-record audit verified all artifact/seed bindings. This
+establishes training-input feasibility; exact reuse/refit scope, optimizer/
+MCMC outcomes and changed-input arithmetic are not yet complete. Independent
+normal-import replay is active. It changes no original cell
 or acceptance gate. Tested preparation tools and source reviews do not
 certify corrected numerical results. A distinct actual evidence freeze and
 full-budget pilot precede corrected fitting. ADR-041 fixes selected

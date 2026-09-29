@@ -275,6 +275,20 @@ refit, and the selected union does not claim an all-grid numerical rerun.
 
 ## Mixed verification and reporting
 
+The separate read-only selected-reproduction receiving entry point is
+`receiving/verify_restored_reproduction.py`. Supply a byte-pinned receiving
+bindings file, the same locked interpreter and a new external output path.
+Its [contract](../scripts/catalytic_correction/receiving/interface_contract.json)
+requires trusted complete tree/file inventories and explicit historical-to-
+receiving maps. Historical documents are unchanged. The receiving checker
+loads the exact sealed reproduction preparation, including its original
+test-source pin, from its transported evidence role; adapted repository tests
+do not substitute for that preparation. All three existing evidence routes,
+actual execution proofs and stored arrays are rechecked. It never launches
+missing numerical work, resumes a claim or turns a pending proof into success.
+Capture its actual process exit code separately from its output receipt.
+No actual receiving check is certified by implementation tests.
+
 `verification/verify_mixed_extensions.py` requires all 1,625 original and
 resolved corrected outcomes and the actual reviewed freeze. It independently
 reconstructs all input roles, checks generation-use/tuning/seed/child lineage,

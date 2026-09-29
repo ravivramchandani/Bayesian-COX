@@ -1,0 +1,118 @@
+{
+  "accepted_category_omission_count": 0,
+  "actual_invocation_capture_sha256": "337c775fcad2566229c83b3f211db363fe69e211925cb88e8f7d22d73153b14d",
+  "actual_root_audit_exit_code": 0,
+  "actual_selective_refit_count_certified": false,
+  "archive": {
+    "bytes": 872655,
+    "name": "2026-09-29-generator-correction-complete-preflight-audit.tar.gz",
+    "regular_members": 18,
+    "sha256": "f5522d23f4974ad301a7e1bb02b04b20a8d5a526b80cea2a1e12598acd73106b"
+  },
+  "archived_checkpoint_count_field": "evidence_status; post_hoc_extension is the evidence classification, not an outcome status",
+  "archived_checkpoint_counts_are_not_outcome_counts": true,
+  "arithmetic_review_completed": false,
+  "audit_receipt_sha256": "f5c516b67a017f04e013a55ec57477f48f5aade0d6a02224beb83779924b256f",
+  "changed_outer_identity_positions": 168,
+  "completion_content_sha256": "c713082527a6dcfbf70832bc45b5f55c22aeff28a50c5787c6d111ec289218e7",
+  "completion_sha256": "f914c34e18d5c63ecc8a0dfa21988e022bb86d08c535f04799e9518857dece62",
+  "content_sha256": "70451efe5dd732abcdad7bb0ac81a93c3e3542d66a9e982cdc21553f538dd77f",
+  "corrected_fit_freeze_created": false,
+  "corrected_fits_started": false,
+  "failed_prior_audit_attempt_preserved": true,
+  "fit_reuse_certified": false,
+  "full_preflight_array_location": "/Volumes/BayesCoxExtensions20260928/correction-20260929/preflight_v1",
+  "full_preflight_arrays_in_git_archive": false,
+  "independent_numeric_replay_completed": false,
+  "live_checkpoint": {
+    "apfs_free_bytes": 208911171584,
+    "arithmetic_accounting_present": false,
+    "changed_outer_identity_positions_from_redraw_contexts": 168,
+    "changed_positions_are_not_actual_refit_count": true,
+    "checked_at_utc": "2026-09-29T09:07:20.726255+00:00",
+    "complete_replay_marker_present": false,
+    "content_sha256": "e524cfb0359d531274dd82c7e5b120fc14d53c56cd74a1504836ec0ea386e741",
+    "continuation_actual_replay_started_at_utc": "2026-09-29T08:55:21.700180+00:00",
+    "continuation_launch_sha256": "438f1c65ac8fa8bb64efad143d56e2a92226ecc2e0c5f132e9e95bd0ca2947d5",
+    "continuation_live_helper_sha256": "4bd349a85748a257cc48944b87eaa41aa336784e056183d7fe2652ad845419c2",
+    "continuation_preflight_ready_sha256": "cf5d4d132b63cc8b64916f3e9e0ab3db91e4eac6eff0a27a1dfc8d6702f840c9",
+    "continuation_request_sha256": "cd94b1fcd9ee9bb4856b664d52cd2dc34ec4142b94c7e341c01edb340b05c1b3",
+    "internal_free_bytes": 40958984192,
+    "last_replay_stdout_event": {
+      "accounted": 19,
+      "context_id": "gbsg2__clinical__r01f01__catalytic_fixed__fraction_0.75::outer",
+      "stage": "independent_first_draw_replay"
+    },
+    "live_process_ps_exit_code": 0,
+    "live_process_ps_stdout": "62025 Rs   01-11:05:25  90.5 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python scripts/run_extensions.py --matched /Users/macuser/bayes-cox-runs/extension-preparation-20260928/matched_metabric.parquet --output /Users/macuser/bayes-cox-runs/extensions-20260928/run --workers 6 --worker 0\n62026 Rs   01-11:05:25  75.8 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python scripts/run_extensions.py --matched /Users/macuser/bayes-cox-runs/extension-preparation-20260928/matched_metabric.parquet --output /Users/macuser/bayes-cox-runs/extensions-20260928/run --workers 6 --worker 1\n62027 Rs   01-11:05:25  76.0 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python scripts/run_extensions.py --matched /Users/macuser/bayes-cox-runs/extension-preparation-20260928/matched_metabric.parquet --output /Users/macuser/bayes-cox-runs/extensions-20260928/run --workers 6 --worker 2\n62028 Rs   01-11:05:25  76.3 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python scripts/run_extensions.py --matched /Users/macuser/bayes-cox-runs/extension-preparation-20260928/matched_metabric.parquet --output /Users/macuser/bayes-cox-runs/extensions-20260928/run --workers 6 --worker 3\n62029 Rs   01-11:05:25  76.0 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python scripts/run_extensions.py --matched /Users/macuser/bayes-cox-runs/extension-preparation-20260928/matched_metabric.parquet --output /Users/macuser/bayes-cox-runs/extensions-20260928/run --workers 6 --worker 4\n62030 Rs   01-11:05:25  74.9 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python scripts/run_extensions.py --matched /Users/macuser/bayes-cox-runs/extension-preparation-20260928/matched_metabric.parquet --output /Users/macuser/bayes-cox-runs/extensions-20260928/run --workers 6 --worker 5\n64406 Rs   01-10:49:30  79.2 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -u /Users/macuser/bayes-cox-runs/extensions-20260928/prestage_refits.py --production-code /Users/macuser/bayes-cox-runs/extensions-code-20260928-119476f --matched /Users/macuser/bayes-cox-runs/extension-preparation-20260928/matched_metabric.parquet --source /Users/macuser/bayes-cox-runs/extensions-20260928/run --output /Users/macuser/bayes-cox-runs/extensions-20260928/reproduction --workers 2 --worker 0\n71385 Ss   01-09:44:59   0.0 /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python -u /Users/macuser/bayes-cox-runs/extensions-20260928/coordinate_after_fits_v2.py\n97059 SNs     01:19:05   0.0 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -B /Users/macuser/bayes-cox-runs/extensions-20260928/correction_continuation_v1.py --request /Volumes/BayesCoxExtensions20260928/correction-20260929/continuation_v1_request.json --request-sha256 cd94b1fcd9ee9bb4856b664d52cd2dc34ec4142b94c7e341c01edb340b05c1b3\n98854 SNs  01-06:16:14   0.6 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -u /Users/macuser/bayes-cox-runs/extensions-20260928/complete_postfit_support_v1.py\n",
+    "original_completion_present": false,
+    "original_status_counts": {
+      "post_hoc_extension": 1092
+    },
+    "original_stored_cells": 1092,
+    "programme_complete": false,
+    "schema_version": 1
+  },
+  "manifest_sha256": "9b3533aa97ad88038e635c4e2cbbe3cc3b001c7e270a21307d8df69b57f6f5be",
+  "max_accepted_attempt_index": 87,
+  "original_input_bindings_verified": 118,
+  "outcome_counts": {
+    "accepted_original_first_draw": 1400,
+    "accepted_rank_conditioned_redraw": 250
+  },
+  "preflight_arrays_required_for_final_private_release": true,
+  "preflight_owner_exited": true,
+  "prior_root_audit_failure": "saved-record audit assumed M=1000 for expression; corrected audit follows unchanged source rule max(1000,4*p)",
+  "programme_complete": false,
+  "rank_rejected_proposals_retained": 2923,
+  "scheduled_contexts": 1650,
+  "schema_version": 1,
+  "status": "complete_actual_preflight_record_and_artifacts_audited",
+  "stored_contexts": 1650,
+  "strata": {
+    "gbsg2::clinical::0": {
+      "accepted_original_first_draw": 450,
+      "max_accepted_attempt_index": 0,
+      "max_n_train": 549,
+      "max_p": 8,
+      "max_training_matrix_elements": 4392
+    },
+    "metabric::clinical::0": {
+      "accepted_original_first_draw": 209,
+      "accepted_rank_conditioned_redraw": 241,
+      "max_accepted_attempt_index": 87,
+      "max_n_train": 1584,
+      "max_p": 19,
+      "max_training_matrix_elements": 30096
+    },
+    "metabric_matched::clinical::0": {
+      "accepted_original_first_draw": 142,
+      "accepted_rank_conditioned_redraw": 8,
+      "max_accepted_attempt_index": 2,
+      "max_n_train": 1584,
+      "max_p": 15,
+      "max_training_matrix_elements": 23760
+    },
+    "metabric_matched::expression::512": {
+      "accepted_original_first_draw": 149,
+      "accepted_rank_conditioned_redraw": 1,
+      "max_accepted_attempt_index": 1,
+      "max_n_train": 1584,
+      "max_p": 527,
+      "max_training_matrix_elements": 834768
+    },
+    "whas500::clinical::0": {
+      "accepted_original_first_draw": 450,
+      "max_accepted_attempt_index": 0,
+      "max_n_train": 400,
+      "max_p": 9,
+      "max_training_matrix_elements": 3600
+    }
+  },
+  "total_generated_proposals": 4573,
+  "verified_artifact_bytes": 2309258335,
+  "verified_artifact_inventory_sha256": "feb36d5ca69f033938ce735b97c84fde34d7a1a26c2872aee810e313a4192eb7",
+  "verified_at_utc": "2026-09-29T09:05:09.280866+00:00",
+  "verified_unique_artifacts": 12446,
+  "within_context_retry_seed_collision_count": 0
+}

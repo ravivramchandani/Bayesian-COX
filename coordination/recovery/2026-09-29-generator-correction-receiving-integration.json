@@ -1,0 +1,129 @@
+{
+  "actual_checks": {
+    "diff": {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-29T09:20:08.695446+00:00",
+      "started_at_utc": "2026-09-29T09:20:08.664058+00:00",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "environment": {
+      "argv": [
+        "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+        "-B",
+        "scripts/verify_environment.py",
+        "--lock-file",
+        "conda-lock.yml",
+        "--hash-file",
+        "conda-lock.yml.sha256"
+      ],
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-29T09:20:08.439022+00:00",
+      "started_at_utc": "2026-09-29T09:19:53.624752+00:00",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "cc6fc42b01e2a273c31e4c85acff93c4090e289d1b8dd924438e5c7e211475e7"
+    },
+    "ruff": {
+      "argv": [
+        "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+        "-B",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-29T09:20:08.663952+00:00",
+      "started_at_utc": "2026-09-29T09:20:08.504484+00:00",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "schemas": {
+      "argv": [
+        "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+        "-B",
+        "tests/test_coordination_schemas.py"
+      ],
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-29T09:20:08.504389+00:00",
+      "started_at_utc": "2026-09-29T09:20:08.439596+00:00",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e5f1be16713585fe49e45d50305514da8003d5e161f45e6c3285d58c584eb770"
+    },
+    "unchanged_original_source": {
+      "differences": [],
+      "files": 157,
+      "reference_sha256": "3849ab7498cfce430c290ba17555d886be33c70c5d4f4d6153796d96a85963b1",
+      "verified": true
+    }
+  },
+  "actual_make_test": {
+    "argv": [
+      "nice",
+      "-n",
+      "15",
+      "make",
+      "test",
+      "PYTHON=/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python"
+    ],
+    "cwd": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project",
+    "exit_code": 0,
+    "finished_at_utc": "2026-09-29T09:23:36.641892+00:00",
+    "numeric_thread_environment": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    },
+    "source_bytes_unchanged": true,
+    "source_differences": [],
+    "source_files": 206,
+    "started_at_utc": "2026-09-29T09:19:01.457935+00:00",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "c76587d9296a426eb440c5793f61717fb9542a1cbea9fa365dedc5b24f813897",
+    "wall_seconds": 275.15210566599853
+  },
+  "actual_scientific_reproduction_receiving_check_completed": false,
+  "all157_original_source_build_lock_files_unchanged": true,
+  "content_sha256": "425dafa5ebfc2eb899818b88360490844077070e91d76987232d3bff5fba6eb5",
+  "corrected_fit_freeze_created": false,
+  "corrected_fits_completed": false,
+  "correction_control_bytes_unchanged": {
+    "config/catalytic_correction.yaml": "65329d7d5ce8895267d137eeb8a589c0eaf2b628139646c126a9c57b82250914",
+    "docs/protocol_addendum_catalytic_correction.md": "1e031951c8b680d4595be35118c07089acacaaf5e2bf22a9e235bda5a33664da",
+    "src/pipelines/extensions/correction_generator.py": "64963c33b067c3c67f5406037a3782820d99c1d687598a9536c72225e6939f11"
+  },
+  "focused_subtests": 13,
+  "focused_tests": 65,
+  "full_locked_skipped_tests": 0,
+  "full_locked_subtests": 70,
+  "full_locked_tests": 792,
+  "historical_runtime_test_bytes_preserved": true,
+  "portable_integration_test_sha256": "8641130ae3086a886e503020750b646b554210ffa21321e9e99d5b0b35a381a3",
+  "preparation_archive": {
+    "name": "2026-09-29-generator-correction-reproduction-receiving.tar.gz",
+    "regular_members": 42,
+    "sha256": "a864e663e361dc828a85d2718d9b18e429f0bccae5ce21b00a5205c7d770e10b"
+  },
+  "programme_complete": false,
+  "release_or_fresh_restore_completed": false,
+  "root_source_only_review_sha256": "448535a80a4dcd63ee7aa9b26257af9eb4b346713b0933c8b6b37408a2e82191",
+  "schema_version": 1,
+  "sealed_cli_sha256": "9387aae83e348515999843963ace0acba0cacef2501fbdacbb0cef85bd5ad33e",
+  "sealed_preparation_receipt_sha256": "fe0662adacbf29bc356d7c19f7abd40b2b6304cb9f683673fce1e7ae39f1e1ba",
+  "sealed_receiving_core_sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f",
+  "status": "read_only_selected_reproduction_receiving_implementation_integrated_and_tested",
+  "validation_archive": {
+    "bytes": 14608,
+    "name": "2026-09-29-generator-correction-receiving-integration-validation.tar.gz",
+    "regular_members": 23,
+    "sha256": "3a2d4c246d207ff95dab11656e70286552fa88d298632d96768200ae5c718060"
+  },
+  "verified_at_utc": "2026-09-29T09:30:54.104711+00:00"
+}

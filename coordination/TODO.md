@@ -559,10 +559,14 @@ reporting replay remains a separate pre-publication gate.
   archives. Cap 256, exact rank-only retry seeds and prospective pilot
   selection are specified in the correction addendum/config. Full locked
   repository testing passed 391 tests/21 subtests, schemas and Ruff. Actual
-  whole-block preflight is active from pinned, pushed commit `cc231a0`;
-  at 2026-09-29 08:36 UTC it had recorded 1,536/1,650 contexts: 1,291 first
-  draws and 245 accepted redraws, with no terminal outcome yet. The complete
-  preflight marker was absent; this is not whole-grid feasibility.
+  whole-block preflight completed from pinned, pushed commit `cc231a0`:
+  all 1,650 contexts were accounted for, with 1,400 accepted first draws,
+  250 accepted redraws and no terminal outcome. Root's actual record/byte
+  audit passed at 2026-09-29 09:05 UTC, covering 12,446 artifacts and all
+  seed histories. Redraw contexts touch 168 outer identities; actual
+  selective-refit counts remain unapproved pending complete reuse evidence.
+  Independent normal-import replay started at 08:55 UTC; complete replay,
+  current reuse witnesses and changed-input arithmetic are still pending.
   Independent arithmetic helpers are integrated with 29 passing synthetic
   tests; the resulting full locked suite passed 420 tests and 21 subtests.
   The complete replay/reuse builder, arithmetic accounting coordinator and
@@ -580,9 +584,18 @@ reporting replay remains a separate pre-publication gate.
   all 157 original source/build/lock files remain unchanged. The dated
   verification/reproduction integration receipt retains failed validation
   attempts. Actual science and completion are not certified by these checks.
+  The read-only receiving verifier is integrated separately with exact runtime
+  bytes and 65 portable checks/13 subtests. The resulting full locked suite
+  passed 792 tests/70 subtests without skips, exact environment, schemas and
+  Ruff, with all 157 original source/build/lock files unchanged. Actual fresh
+  receiving verification and the release still depend on completed evidence.
   Complete-input replay/reuse inventory, actual changed-input
   arithmetic, corrected numerical freeze/pilot/fits and downstream transfer
   remain pending. See `docs/catalytic_correction_execution.md`.
+  The complete-preflight metadata/audit archive and storage verification are
+  preserved remotely with the plans. The full actual proposal arrays and
+  pending numerical results require the final private release; the Git
+  recovery archives do not supply a complete corrected handoff.
 - [ ] T-186 (T; depends T-181–T-185, T-189, T-190) — Render the extension bundle with the
   same verified renderer and lineage rules. Acceptance: every thesis number
   traces to generated evidence, with actual visual QA and separate primary/

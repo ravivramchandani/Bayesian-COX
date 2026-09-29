@@ -1,0 +1,161 @@
+{
+  "conditional_budget_GiB": {
+    "corrected_all825_selected60_plus_upto6_extra_Bayesian_pilots": 22.938,
+    "original_three_attempt_remaining": 32.597
+  },
+  "content_sha256": "685b0bf8c4f5d39bb80f23eb3a6c51211f2970a68390358b7bc0d8465dce7010",
+  "exact_future_allocation_or_actual_selective_refit_count_certified": false,
+  "metadata_report_sha256": "dbe28cade067dc71a5567b910ab1c4d1affbaba252c3a06a31548546a22ad002",
+  "old_restore_and_protected_live_scientific_paths_not_moved": true,
+  "ownership_snapshot_sha256": "f3388736d40b1e26df0d3e909b39d87f67a4e7612ded6d52019395d0b5205730",
+  "preparation_receipt_sha256": "2252fb11f78525d0ecbf675f416586b2fd0864052325d04aca5959146a5586e8",
+  "preservation_archive": {
+    "bytes": 348027,
+    "sha256": "d04df18c6d20b56bd53e21f60f329bc4a666b1ac735c8210357666b1340b5fbc"
+  },
+  "programme_complete": false,
+  "regular_members": 19,
+  "relocation": {
+    "archive_copy_recovery_root": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1",
+    "archive_files_relocated": 12,
+    "completed_at_utc": "2026-09-29T08:50:09.187478+00:00",
+    "copy_receipt_sha256": "5f5676be574972833ec994a686ea195857bc4a34c08116118cf329fb6eba8149",
+    "files": [
+      {
+        "bytes": 4520362,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-release-20260927/programme-committed-code.tar.gz",
+        "destination_sha256": "09693f23c2246fbc35f4e6514fe53c3dc661cd9abe427e0435ff8015efd85091",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-release-20260927/programme-committed-code.tar.gz",
+        "source_inode": 83341564,
+        "source_mtime_ns": 1790539207872039416,
+        "source_sha256": "09693f23c2246fbc35f4e6514fe53c3dc661cd9abe427e0435ff8015efd85091"
+      },
+      {
+        "bytes": 588287486,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-release-20260927/programme-confirmatory-reports.tar.gz",
+        "destination_sha256": "008f31e2b6d5c33930a79156a850a31afc574f53909d8a1d67c4f1d93662ce15",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-release-20260927/programme-confirmatory-reports.tar.gz",
+        "source_inode": 83341722,
+        "source_mtime_ns": 1790539347581246630,
+        "source_sha256": "008f31e2b6d5c33930a79156a850a31afc574f53909d8a1d67c4f1d93662ce15"
+      },
+      {
+        "bytes": 39068079,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-release-20260927/programme-posthoc-sensitivity.tar.gz",
+        "destination_sha256": "7445abe7fb28c85a559566ad54cb4e5cf70e663250dd3b4f25a4d4ff55ce69ee",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-release-20260927/programme-posthoc-sensitivity.tar.gz",
+        "source_inode": 83341742,
+        "source_mtime_ns": 1790539362187915753,
+        "source_sha256": "7445abe7fb28c85a559566ad54cb4e5cf70e663250dd3b4f25a4d4ff55ce69ee"
+      },
+      {
+        "bytes": 137615973,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-release-20260927/programme-reproduction.tar.gz",
+        "destination_sha256": "4f5b684dad73ebe1c6fbc612ce95a51648ab11d05524c7ca970e47392ec96826",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-release-20260927/programme-reproduction.tar.gz",
+        "source_inode": 83341565,
+        "source_mtime_ns": 1790539258588663276,
+        "source_sha256": "4f5b684dad73ebe1c6fbc612ce95a51648ab11d05524c7ca970e47392ec96826"
+      },
+      {
+        "bytes": 178642618,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-release-20260927/programme-robustness.tar.gz",
+        "destination_sha256": "05918c159acf84367cdcbb8d9fdd5cf8a6ceeb1bf6d72fb56d9a4ab09f7ea7e4",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-release-20260927/programme-robustness.tar.gz",
+        "source_inode": 83341604,
+        "source_mtime_ns": 1790539324712757808,
+        "source_sha256": "05918c159acf84367cdcbb8d9fdd5cf8a6ceeb1bf6d72fb56d9a4ab09f7ea7e4"
+      },
+      {
+        "bytes": 4520362,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-download-20260927/programme-committed-code.tar.gz",
+        "destination_sha256": "09693f23c2246fbc35f4e6514fe53c3dc661cd9abe427e0435ff8015efd85091",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-download-20260927/programme-committed-code.tar.gz",
+        "source_inode": 83352205,
+        "source_mtime_ns": 1790539797665514559,
+        "source_sha256": "09693f23c2246fbc35f4e6514fe53c3dc661cd9abe427e0435ff8015efd85091"
+      },
+      {
+        "bytes": 588287486,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-download-20260927/programme-confirmatory-reports.tar.gz",
+        "destination_sha256": "008f31e2b6d5c33930a79156a850a31afc574f53909d8a1d67c4f1d93662ce15",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-download-20260927/programme-confirmatory-reports.tar.gz",
+        "source_inode": 83352202,
+        "source_mtime_ns": 1790539865830118842,
+        "source_sha256": "008f31e2b6d5c33930a79156a850a31afc574f53909d8a1d67c4f1d93662ce15"
+      },
+      {
+        "bytes": 39068079,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-download-20260927/programme-posthoc-sensitivity.tar.gz",
+        "destination_sha256": "7445abe7fb28c85a559566ad54cb4e5cf70e663250dd3b4f25a4d4ff55ce69ee",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-download-20260927/programme-posthoc-sensitivity.tar.gz",
+        "source_inode": 83352204,
+        "source_mtime_ns": 1790539799861238070,
+        "source_sha256": "7445abe7fb28c85a559566ad54cb4e5cf70e663250dd3b4f25a4d4ff55ce69ee"
+      },
+      {
+        "bytes": 137615973,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-download-20260927/programme-reproduction.tar.gz",
+        "destination_sha256": "4f5b684dad73ebe1c6fbc612ce95a51648ab11d05524c7ca970e47392ec96826",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-download-20260927/programme-reproduction.tar.gz",
+        "source_inode": 83352203,
+        "source_mtime_ns": 1790539806898353663,
+        "source_sha256": "4f5b684dad73ebe1c6fbc612ce95a51648ab11d05524c7ca970e47392ec96826"
+      },
+      {
+        "bytes": 178642618,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-download-20260927/programme-robustness.tar.gz",
+        "destination_sha256": "05918c159acf84367cdcbb8d9fdd5cf8a6ceeb1bf6d72fb56d9a4ab09f7ea7e4",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-download-20260927/programme-robustness.tar.gz",
+        "source_inode": 83352201,
+        "source_mtime_ns": 1790539833272032591,
+        "source_sha256": "05918c159acf84367cdcbb8d9fdd5cf8a6ceeb1bf6d72fb56d9a4ab09f7ea7e4"
+      },
+      {
+        "bytes": 496134676,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-audit-20260928/programme-audit-evidence.tar.gz",
+        "destination_sha256": "583715eb92b4c0142898bd268038630a7aa37b39df442f3325db1b04d37ef0ed",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-audit-20260928/programme-audit-evidence.tar.gz",
+        "source_inode": 83341209,
+        "source_mtime_ns": 1790539006812301823,
+        "source_sha256": "583715eb92b4c0142898bd268038630a7aa37b39df442f3325db1b04d37ef0ed"
+      },
+      {
+        "bytes": 496134676,
+        "destination": "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-audit-download-20260928/programme-audit-evidence.tar.gz",
+        "destination_sha256": "583715eb92b4c0142898bd268038630a7aa37b39df442f3325db1b04d37ef0ed",
+        "matches_historical_sha256": true,
+        "source": "/Users/macuser/bayes-cox-runs/private-programme-audit-download-20260928/programme-audit-evidence.tar.gz",
+        "source_inode": 83341545,
+        "source_mtime_ns": 1790539210893571886,
+        "source_sha256": "583715eb92b4c0142898bd268038630a7aa37b39df442f3325db1b04d37ef0ed"
+      }
+    ],
+    "historical_manifests_checksums_and_receipts_unchanged": true,
+    "internal_free_bytes_after": 41352720384,
+    "internal_free_bytes_before": 38461427712,
+    "logical_bytes_preserved_on_external_apfs": 2888538388,
+    "observed_free_byte_increase_with_concurrent_jobs": 2891292672,
+    "programme_complete": false,
+    "protected_scientific_inputs_results_or_owners_changed": false,
+    "status": "verified_inactive_archive_cache_relocated"
+  },
+  "relocation_receipt": {
+    "bytes": 8266,
+    "sha256": "a3095648cf0e8ab8d47dffbea32106507f97c76b8304c5a7a97be61bbb2f87e7"
+  },
+  "schema_version": 1,
+  "status": "reviewed_conditional_budget_and_verified_inactive_archive_cache_relocation",
+  "verified_at_utc": "2026-09-29T08:53:26.795630+00:00"
+}

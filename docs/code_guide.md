@@ -85,6 +85,7 @@ Follow these steps in order. They are the core of the code.
 | Corrected freeze assembly | `scripts/catalytic_correction/build_freeze.py` | Complete existing input/arithmetic evidence and five supplied actual reviews | No; emits an unapproved proposal first and never creates its own reviews |
 | Selected corrected reproduction (ADR-041) | `scripts/catalytic_correction/reproduction/run_reproduction.py` | Frozen original-92/pilot union, actual producer proofs, `terminal_replay_child.py` and exact original comparators | Fresh full-budget fits for changed accepted inputs; inherited original refits and terminal no-fit recipe replay remain separate |
 | Mixed correction verification | `scripts/catalytic_correction/verification/verify_mixed_extensions.py` | Complete input/trace/child lineage, pinned original diagnostic/scoring/reducer functions | No; independently verifies 1,625 outcomes and produces its own mixed certificate |
+| Receiving selected reproduction | `scripts/catalytic_correction/receiving/verify_restored_reproduction.py` | Explicit trusted path maps, complete selected pass and actual recorded producer/child proofs | No; compares transported stored evidence without dispatch, resume or repair |
 
 ## Suggested reading order
 

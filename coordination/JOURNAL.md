@@ -1218,3 +1218,68 @@ failures, 24 diagnostic failures). Detached continuation waits for preflight
 completion before actual replay and arithmetic. No corrected fit freeze,
 score, selected reproduction, mixed result, QA or private restore is certified
 by this implementation validation. Receiving/reporting adapters remain pending.
+
+## 2026-09-29 — Completed actual generator preflight and storage preservation
+
+The pinned preflight owner exited after accounting for all 1,650 contexts:
+1,400 accepted original first draws and 250 accepted rank-conditioned redraws,
+with no terminal outcome and maximum accepted index 87. Root's actual
+saved-record audit passed at 09:05 UTC: 12,446 artifact bindings totaling
+2,309,258,335 bytes, all receipt and seed histories, and 118 original input
+bindings. It found no within-context seed collisions or accepted category
+omissions. All 4,573 proposals, including 2,923 rank rejections, remain retained.
+Redraw contexts touch 168 outer identities; this is not a certified refit count.
+
+The first root audit incorrectly assumed synthetic M=1,000 for every setting
+and stopped with exit 1. Its source/logs are retained. The successful separate
+audit uses the unchanged source rule max(1000,4*p), including M=2,108 at p=527.
+No original or correction array, generator, source input or scientific gate
+was changed. The complete marker and saved record certify training-input
+feasibility only. At 08:55 UTC, the existing detached continuation started
+independent normal-import first-draw replay. It will build complete input/
+fit/evaluation witnesses and run changed-input arithmetic, stopping before
+the five actual bound reviews, freeze and full-budget pilot. At 09:07 UTC,
+19 replay contexts were recorded and original production had 1,092 stored
+cells; both complete numerical and downstream gates remain pending.
+
+The 18-member complete-preflight metadata/audit archive passed byte roundtrip;
+full proposal arrays remain on APFS for the final private release. Compact
+record: `coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json`.
+
+The reviewed conditional storage calculation prompted relocation of 12
+inactive duplicate compressed release/download caches, 2.690 GiB, at 08:50 UTC.
+Global open-file and current-helper-reference checks found no active use.
+Root independently rehashed every source and external copy against historical
+release hashes before removing only the redundant source cache copies, then
+verified external bytes again. Raw results/traces/inputs, restored evidence,
+small historical manifests/checksums and all live owners remain unchanged.
+The explicit reversible mapping and all copy/removal checks are preserved
+in the 19-member recovery archive and
+`coordination/recovery/2026-09-29-generator-correction-storage-verification.json`.
+At 09:07 UTC, internal space was about 38 GiB and mounted APFS about 195 GiB
+free. These measurements and conditional projections do not certify exact
+future allocation or final transfer capacity.
+
+## 2026-09-29 — Integrated read-only selected-reproduction receiving verifier
+
+Integrated the separate receiving verifier with unchanged sealed runtime
+bytes. It uses explicit trusted historical-to-receiving maps and complete
+immutable inventories, verifies the three completed evidence routes and
+actual producer/child/environment proofs, and writes only fresh external
+verification evidence. Missing original producer proof cannot become success;
+it cannot dispatch, resume or repair numerical work. Exact original stored
+science/sample/terminal-array comparisons and prospective selected scope
+remain mandatory.
+
+All 42 original preparation files are preserved in their byte-verified
+recovery archive. The adapted repository tests use exact historical Git blobs
+as fixtures, integrated helper paths and a fresh-process import check. Focused
+checks passed 65 tests/13 subtests. Full locked make test passed 792 tests and
+70 subtests with no skips at 09:23 UTC. Exact environment, schemas, Ruff and
+diff checks passed; all 157 original source/build/lock files and existing
+correction definition bytes remain unchanged. Its 23-member validation
+archive preserves actual invocations, logs, source captures and root review.
+Compact record:
+`coordination/recovery/2026-09-29-generator-correction-receiving-integration.json`.
+No actual scientific receiving check, corrected fit completion, private
+release or fresh restore is supplied by these implementation checks.
