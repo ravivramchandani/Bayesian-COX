@@ -1,0 +1,7 @@
+{
+  "operation": "preparation bundle seal",
+  "status": "retained_preparation_metadata_error",
+  "type": "FileNotFoundError",
+  "message": "Release design review receipt filename was assumed preparation_receipt.json; inspect actual external review artifact names before retry. No scientific/evidence/source code mutation occurred.",
+  "time_utc": "2026-09-29T09:10:12.948525+00:00"
+}

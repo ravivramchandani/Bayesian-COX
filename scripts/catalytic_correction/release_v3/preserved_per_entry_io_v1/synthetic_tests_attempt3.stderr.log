@@ -1,0 +1,70 @@
+test_active_original_owner_refuses_before_dispatch (test_capture_locations.OriginalCaptureTests.test_active_original_owner_refuses_before_dispatch) ... ok
+test_alternate_root_differs_from_default_but_same_declared_root_is_used (test_capture_locations.OriginalCaptureTests.test_alternate_root_differs_from_default_but_same_declared_root_is_used) ... ok
+test_atomic_receipt_publication_failure_has_no_reported_success (test_capture_locations.OriginalCaptureTests.test_atomic_receipt_publication_failure_has_no_reported_success) ... ok
+test_changed_bytes_after_numerical_child_prevent_producer_proof (test_capture_locations.OriginalCaptureTests.test_changed_bytes_after_numerical_child_prevent_producer_proof) ... ok
+test_changed_manifest_source_and_matched_bytes_refuse (test_capture_locations.OriginalCaptureTests.test_changed_manifest_source_and_matched_bytes_refuse) ... ok
+test_changed_own_capture_implementation_pin_refuses (test_capture_locations.OriginalCaptureTests.test_changed_own_capture_implementation_pin_refuses) ... ok
+test_dirty_source_refuses_before_output_creation (test_capture_locations.OriginalCaptureTests.test_dirty_source_refuses_before_output_creation) ... ok
+test_environment_mismatch_prevents_numerical_child (test_capture_locations.OriginalCaptureTests.test_environment_mismatch_prevents_numerical_child) ... ok
+test_existing_outputs_and_capture_collision_refuse (test_capture_locations.OriginalCaptureTests.test_existing_outputs_and_capture_collision_refuse) ... ok
+test_launch_error_retains_none_rc_without_success (test_capture_locations.OriginalCaptureTests.test_launch_error_retains_none_rc_without_success) ... ok
+test_nonselected_identity_and_changed_scope_refuse (test_capture_locations.OriginalCaptureTests.test_nonselected_identity_and_changed_scope_refuse) ... ok
+test_numerical_failure_retains_rc_and_logs_no_success_receipt (test_capture_locations.OriginalCaptureTests.test_numerical_failure_retains_rc_and_logs_no_success_receipt) ... ok
+test_output_overlap_and_symlink_refuse (test_capture_locations.OriginalCaptureTests.test_output_overlap_and_symlink_refuse) ... ok
+test_production_api_refuses_dependency_injection (test_capture_locations.OriginalCaptureTests.test_production_api_refuses_dependency_injection) ... ok
+test_receipt_or_stdout_mismatch_is_not_completion (test_capture_locations.OriginalCaptureTests.test_receipt_or_stdout_mismatch_is_not_completion) ... ok
+test_reserved_output_race_cannot_become_cached_refit (test_capture_locations.OriginalCaptureTests.test_reserved_output_race_cannot_become_cached_refit) ... ok
+test_single_fixed_identity_synthetic_capture_retains_failures_without_reviews (test_capture_locations.OriginalCaptureTests.test_single_fixed_identity_synthetic_capture_retains_failures_without_reviews) ... ok
+test_sorted_scope_position_is_not_official_plan_order (test_capture_locations.OriginalCaptureTests.test_sorted_scope_position_is_not_official_plan_order) ... ok
+test_source_mutation_after_child_and_unknown_output_refuse (test_capture_locations.OriginalCaptureTests.test_source_mutation_after_child_and_unknown_output_refuse) ... ok
+test_source_score_selection_and_automatic_all92_choice_refuse (test_capture_locations.OriginalCaptureTests.test_source_score_selection_and_automatic_all92_choice_refuse) ... ok
+test_wrong_numeric_or_interpreter_runtime_refuses (test_capture_locations.OriginalCaptureTests.test_wrong_numeric_or_interpreter_runtime_refuses) ... ok
+test_append_only_new_pending_identity_without_replacing_old (test_locations.LocationGuards.test_append_only_new_pending_identity_without_replacing_old) ... ok
+test_append_only_preserves_prior_root_and_scope (test_locations.LocationGuards.test_append_only_preserves_prior_root_and_scope) ... ok
+test_bool_worker_wrong_index_wrong_count_and_wrong_route_refuse (test_locations.LocationGuards.test_bool_worker_wrong_index_wrong_count_and_wrong_route_refuse) ... ok
+test_changed_plan_bytes_witness_bytes_and_preparation_fail_rechecks (test_locations.LocationGuards.test_changed_plan_bytes_witness_bytes_and_preparation_fail_rechecks) ... ok
+test_changed_terminal_unresolved_inputs_refuse (test_locations.LocationGuards.test_changed_terminal_unresolved_inputs_refuse) ... ok
+test_clis_have_no_injection_arbitrary_command_resume_or_review_creation_flags (test_locations.LocationGuards.test_clis_have_no_injection_arbitrary_command_resume_or_review_creation_flags) ... ok
+test_default_active_owner_prevents_capture_not_hidden_by_alternate (test_locations.LocationGuards.test_default_active_owner_prevents_capture_not_hidden_by_alternate) ... ok
+test_entire_tree_keeps_failed_orphan_files_and_empty_dirs (test_locations.LocationGuards.test_entire_tree_keeps_failed_orphan_files_and_empty_dirs) ... ok
+test_known_verified_evidence_is_not_replaceable (test_locations.LocationGuards.test_known_verified_evidence_is_not_replaceable) ... ok
+test_loaded_append_history_preserves_first_introducing_sha_and_old_record (test_locations.LocationGuards.test_loaded_append_history_preserves_first_introducing_sha_and_old_record) ... ok
+test_loaded_prior_plan_historical_role_and_changed_prior_bytes_refuse (test_locations.LocationGuards.test_loaded_prior_plan_historical_role_and_changed_prior_bytes_refuse) ... ok
+test_missing_or_wrong_root_review_does_not_authorise_paths (test_locations.LocationGuards.test_missing_or_wrong_root_review_does_not_authorise_paths) ... ok
+test_only_original92_not_pilot_only_or_arbitrary_can_move (test_locations.LocationGuards.test_only_original92_not_pilot_only_or_arbitrary_can_move) ... ok
+test_overlap_with_frozen_or_default_root_refused_even_when_plan_is_pinned (test_locations.LocationGuards.test_overlap_with_frozen_or_default_root_refused_even_when_plan_is_pinned) ... ok
+test_overlapping_duplicate_relative_or_symlink_locations_refuse (test_locations.LocationGuards.test_overlapping_duplicate_relative_or_symlink_locations_refuse) ... ok
+test_preparation_false_actual_scope_flags_and_honest_exact_eight_sources (test_locations.LocationGuards.test_preparation_false_actual_scope_flags_and_honest_exact_eight_sources) ... ok
+test_production_receiving_api_refuses_injection_before_any_io (test_locations.LocationGuards.test_production_receiving_api_refuses_injection_before_any_io) ... ok
+test_receiving_relocates_only_io_preserving_plan_metadata (test_locations.LocationGuards.test_receiving_relocates_only_io_preserving_plan_metadata) ... ok
+test_recheck_refuses_added_or_removed_orphan_and_empty_directory (test_locations.LocationGuards.test_recheck_refuses_added_or_removed_orphan_and_empty_directory) ... FAIL
+test_record_envelope_unknown_plan_changed_sources_or_rewritten_selection_refuse (test_locations.LocationGuards.test_record_envelope_unknown_plan_changed_sources_or_rewritten_selection_refuse) ... ok
+test_resolution_requires_exact_location_and_known_default_has_no_alias (test_locations.LocationGuards.test_resolution_requires_exact_location_and_known_default_has_no_alias) ... ok
+test_root_not_declared_is_not_fallback_or_copy_equivalence (test_locations.LocationGuards.test_root_not_declared_is_not_fallback_or_copy_equivalence) ... ok
+test_scientific_selection_definition_inventory_scope_and_legacy_pins_refuse (test_locations.LocationGuards.test_scientific_selection_definition_inventory_scope_and_legacy_pins_refuse) ... ok
+test_source_score_or_automatic_all92_refuse (test_locations.LocationGuards.test_source_score_or_automatic_all92_refuse) ... ok
+test_synthetic_capture_never_completes_acquisition (test_locations.LocationGuards.test_synthetic_capture_never_completes_acquisition) ... ok
+test_valid_pending_only_plan_keeps_order_and_default (test_locations.LocationGuards.test_valid_pending_only_plan_keeps_order_and_default) ... ok
+test_wrong_witness_and_pending_hash_refuse (test_locations.LocationGuards.test_wrong_witness_and_pending_hash_refuse) ... ok
+test_publishing_lineage_adds_no_scientific_changes_and_overwrite_refuses (test_locations.RoutingGuards.test_publishing_lineage_adds_no_scientific_changes_and_overwrite_refuses) ... ok
+test_receiving_restores_path_views_when_legacy_science_rejects (test_locations.RoutingGuards.test_receiving_restores_path_views_when_legacy_science_rejects) ... ok
+test_receiving_uses_historical_producer_root_and_restored_array_root (test_locations.RoutingGuards.test_receiving_uses_historical_producer_root_and_restored_array_root) ... ok
+test_source_inherited_delegates_same_exact_root_and_restores_on_raise (test_locations.RoutingGuards.test_source_inherited_delegates_same_exact_root_and_restores_on_raise) ... ok
+
+======================================================================
+FAIL: test_recheck_refuses_added_or_removed_orphan_and_empty_directory (test_locations.LocationGuards.test_recheck_refuses_added_or_removed_orphan_and_empty_directory)
+----------------------------------------------------------------------
+_per_entry_location_io.VerificationFailure: bound source/input/outcome changed during verification
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_io_v1/test_locations.py", line 304, in test_recheck_refuses_added_or_removed_orphan_and_empty_directory
+    with self.assertRaisesRegex(ValueError,'byte binding'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "byte binding" does not match "bound source/input/outcome changed during verification"
+
+----------------------------------------------------------------------
+Ran 52 tests in 7.547s
+
+FAILED (failures=1)

@@ -1,0 +1,36 @@
+F401 [*] `re` imported but unused
+  --> receiving_core.py:14:8
+   |
+12 | import json
+13 | import os
+14 | import re
+   |        ^^
+15 | import subprocess
+16 | import sys
+   |
+help: Remove unused import: `re`
+   |
+13 | import os
+   - import re
+14 | import subprocess
+   |
+
+F401 [*] `subprocess` imported but unused
+  --> receiving_core.py:15:8
+   |
+13 | import os
+14 | import re
+15 | import subprocess
+   |        ^^^^^^^^^^
+16 | import sys
+17 | from dataclasses import replace
+   |
+help: Remove unused import: `subprocess`
+   |
+14 | import re
+   - import subprocess
+15 | import sys
+   |
+
+Found 2 errors.
+[*] 2 fixable with the `--fix` option.

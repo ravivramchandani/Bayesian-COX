@@ -1,0 +1,36 @@
+test_capture_collision_refuses_without_invoke (__main__.Fixture.test_capture_collision_refuses_without_invoke) ... ok
+test_changed_command_or_producer_is_refused (__main__.Fixture.test_changed_command_or_producer_is_refused) ... ok
+test_controller_argv_keeps_explicit_optional_reviews (__main__.Fixture.test_controller_argv_keeps_explicit_optional_reviews) ... ok
+test_controller_capture_binds_actual_written_pass_not_invented_stdout (__main__.Fixture.test_controller_capture_binds_actual_written_pass_not_invented_stdout) ... ok
+test_controller_foreign_written_pass_refused (__main__.Fixture.test_controller_foreign_written_pass_refused) ... ok
+test_controller_input_changed_during_actual_capture_refused (__main__.Fixture.test_controller_input_changed_during_actual_capture_refused) ... ok
+test_core_proxy_preserves_old_predicate_identity (__main__.Fixture.test_core_proxy_preserves_old_predicate_identity) ... ok
+test_duplicate_nonfinite_and_nonobject_json_refused (__main__.Fixture.test_duplicate_nonfinite_and_nonobject_json_refused) ... ok
+test_exact_distinct_tree_role_names (__main__.Fixture.test_exact_distinct_tree_role_names) ... ok
+test_fictional_capture_raw_exit_and_injection_flag (__main__.Fixture.test_fictional_capture_raw_exit_and_injection_flag) ... ok
+test_final_stage_cannot_publish_without_extension (__main__.Fixture.test_final_stage_cannot_publish_without_extension) ... ok
+test_full_tree_and_prior_history_are_retained_or_refused (__main__.Fixture.test_full_tree_and_prior_history_are_retained_or_refused) ... ok
+test_immutable_input_overlap_refuses_before_mock_dispatch (__main__.Fixture.test_immutable_input_overlap_refuses_before_mock_dispatch) ... ok
+test_injected_capture_cannot_pass_production_command_gate (__main__.Fixture.test_injected_capture_cannot_pass_production_command_gate) ... ok
+test_launch_exception_retains_actual_unavailable (__main__.Fixture.test_launch_exception_retains_actual_unavailable) ... ok
+test_legacy_alias_restored_even_after_exception (__main__.Fixture.test_legacy_alias_restored_even_after_exception) ... ok
+test_linked_preparation_and_adapter_refused (__main__.Fixture.test_linked_preparation_and_adapter_refused) ... ok
+test_new_receiving_command_is_read_only_and_separately_named (__main__.Fixture.test_new_receiving_command_is_read_only_and_separately_named) ... ok
+test_nonzero_and_boolean_exit_do_not_install_success (__main__.Fixture.test_nonzero_and_boolean_exit_do_not_install_success) ... ok
+test_old_asset_optional_roles_are_decided_by_unchanged_gate (__main__.Fixture.test_old_asset_optional_roles_are_decided_by_unchanged_gate) ... ok
+test_old_maps_cannot_be_rebranded_as_new_receiving (__main__.Fixture.test_old_maps_cannot_be_rebranded_as_new_receiving) ... ok
+test_old_reproduction_failure_is_never_bypassed (__main__.Fixture.test_old_reproduction_failure_is_never_bypassed) ... ok
+test_pinned_import_namespace_and_changed_source (__main__.Fixture.test_pinned_import_namespace_and_changed_source) ... ok
+test_predecessor_small_byte_pins (__main__.Fixture.test_predecessor_small_byte_pins) ... ok
+test_preparation_member_content_and_traversal_refused (__main__.Fixture.test_preparation_member_content_and_traversal_refused) ... ok
+test_production_injection_is_refused_before_launch (__main__.Fixture.test_production_injection_is_refused_before_launch) ... ok
+test_python_runtime_thread_guards_remain_original (__main__.Fixture.test_python_runtime_thread_guards_remain_original) ... ok
+test_receiver_changes_only_exact_read_only_entrypoint (__main__.Fixture.test_receiver_changes_only_exact_read_only_entrypoint) ... ok
+test_receiver_final_version_pins_cannot_change (__main__.Fixture.test_receiver_final_version_pins_cannot_change) ... ok
+test_receiver_keeps_mixed_and_reporting_commands_unchanged (__main__.Fixture.test_receiver_keeps_mixed_and_reporting_commands_unchanged) ... ok
+test_restored_distinct_tree_directory_maps_required (__main__.Fixture.test_restored_distinct_tree_directory_maps_required) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 1.897s
+
+OK

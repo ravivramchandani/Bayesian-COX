@@ -1357,3 +1357,27 @@ diagnostics. Internal availability returned to about 83 GB without project
 relocation or deletion; the cause is unknown. The compact integration record
 and byte-verified validation, guide-review and curated storage archives are
 in `coordination/recovery/2026-09-29-generator-correction-per-entry-io-integration.json`.
+
+## 2026-09-29 — Verified release-v3 per-entry wiring
+
+Integrated the complete 233-file release-v3 carrier with all 196 predecessor
+files unchanged and two portable test files. Separate runtime and test-adapter
+source reviews found no material blocker. Focused checks passed 33 tests and
+17 subtests. Full locked make test passed 998 tests and 157 subtests without
+skips at 12:50 UTC; Ruff and schemas passed. All 634 captured implementation
+files, previous 399/349-file checkpoints and all 157 original source/build/
+lock files remain unchanged. Actual source captures, location-plan adoption,
+selected reproduction, staging, release and fresh receiving remain pending.
+
+Four exact preparation/review archives preserve every earlier failed capture.
+Five historical raw log/patch files retain their byte-pinned whitespace;
+all other staged files pass the diff check. Root's initial incomplete
+whitespace-exception roster and optional-config lookup error are retained.
+The separate integration record is
+`coordination/recovery/2026-09-29-generator-correction-release-v3-integration.json`.
+
+At 12:51 UTC the current replay had 342 verified contexts; original production
+still had 1,103 outcomes. Source inspection identified that the five-review
+freeze does not itself enforce ADR-041's pre-score selection/scope review.
+That existing requirement must be validated before corrected pilot dispatch.
+Current continuation remains prefit-only; no corrected score exists.

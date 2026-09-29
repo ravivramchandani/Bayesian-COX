@@ -1,0 +1,10 @@
+{
+  "json_documents_checked": 5,
+  "matched_expected_prior_pins": 9,
+  "no_actual_subset_or_approval": true,
+  "no_scientific_tests_or_data_or_process_checks_executed": true,
+  "schema_version": 1,
+  "source_anchors_count": 16,
+  "source_file_byte_size_checks": 14,
+  "status": "pure_document_and_source_binding_consistency_passed"
+}

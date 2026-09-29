@@ -1,0 +1,154 @@
+{
+  "all_target_artifact_byte_size_and_content_seals_verified": true,
+  "confirmed_boundaries": [
+    "three fixed read-only source-capture entrypoints, no execution/resume receiving controller",
+    "explicit alias refusal and distinct external-file retention",
+    "frozen original92 union pilots scope and three route statuses remain independent of whole-grid numerical reproduction",
+    "actual named existing QA attestation and32 figure verdicts/4 contact sheets/6 table hashes, no added table-verdict gate",
+    "both original renderer and corrected lineage and complete1625/1650 source/input surfaces",
+    "fresh receiving role maps must point to immutable payload or explicit byte-pinned baseline/source exceptions",
+    "samefile locked runtime/numeric5, separate actual captures/output receipts and whole receiving payload recheck",
+    "original generic transport source pins unchanged; source/private-download identity and overall completion remain root-owned pending",
+    "sealed historical numerical producer rules unchanged; missing old checker argv/rc does not add a new gate"
+  ],
+  "content_sha256": "f14f6179f9f78766a353d113aeb7c067955e444bae64b40cafbdd917794d24a0",
+  "material_findings": [
+    {
+      "effect": "Actual mixed-verifier rc0 provenance cannot be distinguished from the producer synthetic seam at this acceptance boundary.",
+      "followup": "Preserve sealed v1 and verification v2. Use a separately sealed reviewed capture revision with explicit injection provenance, then require False at release acceptance; add injected/missing/true provenance rejection fixtures.",
+      "historical_numerical_producer_environment_gate_changed": false,
+      "id": "release-v1-mixed-capture-injection-provenance",
+      "issue": "The original_mixed branch omits an explicit non-injection check. The sealed mixed capture producer accepts invoke injection but does not record whether it was used in attempt/receipt. Mocked rc0 captures therefore share production schema and can satisfy staging operation/argv/source/log/summary checks.",
+      "line_end": 364,
+      "line_start": 342,
+      "related_lines": [
+        [
+          42,
+          44
+        ],
+        [
+          54,
+          84
+        ]
+      ],
+      "related_source": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_verification_v2/capture_verification.py",
+      "related_source_sha256": "2331916a66ccd11aebfc9f5e9ac7d19eea8c47950ca0ac64e6946721356831ed",
+      "severity": "material",
+      "sha256": "ad4dfb925c164e02184f06140dd106d807e90c10324331bd3b00591f190dd177",
+      "source": "release_core.py"
+    },
+    {
+      "effect": "The stated complete retained-tree boundary can be bypassed; payload checks then attest only the already-filtered shipped set.",
+      "followup": "Preserve v1 and add explicit role-to-kind law: whole evidence/code/source roles require tree, fixed single-file roles file, and group only permitted flat capture roles with basename-only members and a defined complete group inventory; add omitted diagnostic/empty-directory fixtures.",
+      "id": "release-v1-filtered-group-for-whole-evidence-role",
+      "issue": "Asset kind is not constrained by role. group verifies only caller-listed files with declared empty directories, and even nested file keys are accepted. A whole original/preflight/witness/code evidence role may be a filtered group, omitting unreferenced failed logs, attempt metadata and directories while required cell/trace/proof subsets pass. Whole-tree rechecks apply only to kind tree.",
+      "line_end": 217,
+      "line_start": 174,
+      "related_lines": [
+        [
+          309,
+          324
+        ],
+        [
+          344,
+          346
+        ],
+        [
+          384,
+          386
+        ]
+      ],
+      "related_source": "stage_corrected_extensions.py",
+      "related_source_sha256": "282d70dfd9d61135be736497bc3f88bdcc232778f186b63cd63d23f749da107b",
+      "severity": "material",
+      "sha256": "ad4dfb925c164e02184f06140dd106d807e90c10324331bd3b00591f190dd177",
+      "source": "release_core.py"
+    }
+  ],
+  "other_material_findings": [],
+  "preparation_receipt_content_sha256": "20d3c659dfc74d5be7f31a0237a7ca61cdf38c26ee3a864f1b074189006008d3",
+  "preparation_receipt_sha256": "4a02cf6f7013263c7ec86529f4abb26e8d66c40a1c3529518a03935f8112e788",
+  "related_mixed_capture_source": {
+    "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_verification_v2/capture_verification.py",
+    "sha256": "2331916a66ccd11aebfc9f5e9ac7d19eea8c47950ca0ac64e6946721356831ed"
+  },
+  "reviewed_at_utc": "2026-09-29T09:59:51.045973+00:00",
+  "reviewed_files": {
+    "README.md": {
+      "bytes": 9228,
+      "sha256": "a3c6fa2fcafe874b89d662c86e4b9dcb65ca5201b137d05a05045ad320747eb5"
+    },
+    "capture_corrected_source.py": {
+      "bytes": 9489,
+      "sha256": "d966a0492b608e6b23c4abf163c2030a2adf34f400327c4ea3a9d73d7d33a3ba"
+    },
+    "dependency_binding_checks.json": {
+      "bytes": 1986,
+      "sha256": "662e16346e0063ab32d57c372beae0d72131a0e43ebc132c456dd751e10985dc"
+    },
+    "final_preparation_checks.json": {
+      "bytes": 1031,
+      "sha256": "0ad3ece9197ae73b173605c6999f0d6c97f114abe346a68f814e3a741ca6f680"
+    },
+    "interface_contract.json": {
+      "bytes": 10403,
+      "sha256": "7e346e91c6cb2d6e704e9bc4e712c4240b0510d7b1e9d588116455bf2649ef60"
+    },
+    "preparation_receipt.json": {
+      "bytes": 10410,
+      "sha256": "4a02cf6f7013263c7ec86529f4abb26e8d66c40a1c3529518a03935f8112e788"
+    },
+    "release_core.py": {
+      "bytes": 46114,
+      "sha256": "ad4dfb925c164e02184f06140dd106d807e90c10324331bd3b00591f190dd177"
+    },
+    "source_pins.json": {
+      "bytes": 1140,
+      "sha256": "67c9e8e6702bfd3c3bacd5130d872f52d866770d551d104633c9fe5b95eae5af"
+    },
+    "stage_corrected_extensions.py": {
+      "bytes": 31973,
+      "sha256": "282d70dfd9d61135be736497bc3f88bdcc232778f186b63cd63d23f749da107b"
+    },
+    "test_receiving_adapters.py": {
+      "bytes": 16729,
+      "sha256": "e41fb27edcd29a3204f618d2cbc3a75abef0cee61ba18e229e5f25c6a1515470"
+    },
+    "test_release_adapters.py": {
+      "bytes": 50840,
+      "sha256": "8e60bf622fe5aee240b7a7dc71a04aa94506d4e0665d9886de6b5517410eac80"
+    },
+    "test_source_capture.py": {
+      "bytes": 8378,
+      "sha256": "7a1d2135dc90b2e7335b9fdda3bf80a01735bca41390c372cda48fafd8a9d448"
+    },
+    "test_transport_delegate.py": {
+      "bytes": 3427,
+      "sha256": "65242ca9cc420c020eb4a4351c25c8f255614c7dd4002f8d823647d7df255819"
+    },
+    "verification_io.py": {
+      "bytes": 6991,
+      "sha256": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8"
+    },
+    "verify_restored_correction.py": {
+      "bytes": 29546,
+      "sha256": "035a87b1ea0521be92f4027c2b6b6069aac96d3b2a34a7cf2a17f49109cb093d"
+    }
+  },
+  "schema_version": 1,
+  "scope": {
+    "historical_259_checker_argv_or_rc_requirement_added": false,
+    "live_process_metadata_or_kernel_subscription": false,
+    "method_freeze_visual_scientific_or_launch_approval_created": false,
+    "packaging_restore_staging_captures_download_upload_or_publication_executed": false,
+    "repo_sealed_sources_original_owners_or_evidence_modified": false,
+    "scientific_data_arrays_traces_scores_or_results_read": false,
+    "source_only": true,
+    "target_imports_tests_or_helper_functions_executed": false,
+    "target_reported_43_test_run_not_independently_rerun": true
+  },
+  "status": "source_only_peer_review_completed_material_followup_required",
+  "target": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1",
+  "target_archival_files": 54,
+  "target_bound_artifacts": 53
+}

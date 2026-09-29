@@ -1,0 +1,13 @@
+{
+  "actual_subset_or_method_or_selection_or_release_approval": false,
+  "created_at_utc": "2026-09-29T10:33:15.297229+00:00",
+  "imports_or_tests_or_checkers_or_scientific_computations": false,
+  "pilot_count_or_actual_reuse_refit_counts": null,
+  "process_queries_or_target_observation": false,
+  "result_cells_arrays_traces_read": false,
+  "schema_version": 1,
+  "sealed_preparations_or_main_edited": false,
+  "selected_original_count_contract": 92,
+  "status": "bounded_source_only_design_review",
+  "writes": "new external review folder only"
+}

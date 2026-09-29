@@ -1,0 +1,100 @@
+B023 Function definition does not bind loop variable `mode`
+   --> test_v2_provenance.py:126:24
+    |
+124 |                     result = self.child(argv, **kwargs)
+125 |                     path = self.output / "completion.json"
+126 |                     if mode == "missing":
+    |                        ^^^^
+127 |                         path.unlink()
+128 |                     elif mode == "partial":
+    |
+
+B023 Function definition does not bind loop variable `mode`
+   --> test_v2_provenance.py:128:26
+    |
+126 |                     if mode == "missing":
+127 |                         path.unlink()
+128 |                     elif mode == "partial":
+    |                          ^^^^
+129 |                         save(path, {"status": core.MIXED_STATUS, "verified_logical_cells": 1624})
+130 |                     else:
+    |
+
+B023 Function definition does not bind loop variable `mode`
+   --> test_v2_provenance.py:132:45
+    |
+130 |                     else:
+131 |                         summary = json.loads(result.stdout)
+132 |                         summary["status" if mode == "foreign" else "verify_existing"] = "foreign" if mode == "foreign" else True
+    |                                             ^^^^
+133 |                         result.stdout = (json.dumps(summary) + "\n").encode()
+134 |                     return result
+    |
+
+B023 Function definition does not bind loop variable `mode`
+   --> test_v2_provenance.py:132:102
+    |
+130 |                     else:
+131 |                         summary = json.loads(result.stdout)
+132 |                         summary["status" if mode == "foreign" else "verify_existing"] = "foreign" if mode == "foreign" else True
+    |                                                                                                      ^^^^
+133 |                         result.stdout = (json.dumps(summary) + "\n").encode()
+134 |                     return result
+    |
+
+B023 Function definition does not bind loop variable `role`
+   --> test_v2_provenance.py:202:41
+    |
+200 |                 fixture = Fixture(root)
+201 |                 def change(attempt, receipt):
+202 |                     record = attempt if role == "attempt" else receipt
+    |                                         ^^^^
+203 |                     if replacement is None:
+204 |                         del record["test_only_dependency_injection"]
+    |
+
+B023 Function definition does not bind loop variable `replacement`
+   --> test_v2_provenance.py:203:24
+    |
+201 |                 def change(attempt, receipt):
+202 |                     record = attempt if role == "attempt" else receipt
+203 |                     if replacement is None:
+    |                        ^^^^^^^^^^^
+204 |                         del record["test_only_dependency_injection"]
+205 |                     else:
+    |
+
+B023 Function definition does not bind loop variable `replacement`
+   --> test_v2_provenance.py:206:68
+    |
+204 |                         del record["test_only_dependency_injection"]
+205 |                     else:
+206 |                         record["test_only_dependency_injection"] = replacement
+    |                                                                    ^^^^^^^^^^^
+207 |                 self.mutate_source(fixture, change)
+208 |                 with self.assertRaisesRegex(ValueError, "genuine mixed"):
+    |
+
+B023 Function definition does not bind loop variable `mode`
+   --> test_v2_provenance.py:226:24
+    |
+224 |                 def change(attempt, receipt):
+225 |                     producer = copy.deepcopy(attempt["capture_producer"])
+226 |                     if mode == "entrypoint":
+    |                        ^^^^
+227 |                         producer["entrypoint"]["sha256"] = "f" * 64
+228 |                     elif mode == "preparation":
+    |
+
+B023 Function definition does not bind loop variable `mode`
+   --> test_v2_provenance.py:228:26
+    |
+226 |                     if mode == "entrypoint":
+227 |                         producer["entrypoint"]["sha256"] = "f" * 64
+228 |                     elif mode == "preparation":
+    |                          ^^^^
+229 |                         producer["preparation_receipt"]["sha256"] = "f" * 64
+230 |                     else:
+    |
+
+Found 9 errors.

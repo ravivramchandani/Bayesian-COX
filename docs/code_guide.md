@@ -88,7 +88,7 @@ Follow these steps in order. They are the core of the code.
 | Receiving selected reproduction | `scripts/catalytic_correction/receiving/verify_restored_reproduction.py` | Explicit trusted path maps, complete selected pass and actual recorded producer/child proofs | No; compares transported stored evidence without dispatch, resume or repair |
 | Separate original-refit locations (ADR-042) | `scripts/catalytic_correction/per_entry_io/` | Prospective reviewed per-entry roots, original plan-order worker index and separately pinned capture/controller/receiving wrappers | Original-law capture only for actually approved missing identities; read-only receiving never refits |
 | Corrected reporting and visual QA | `scripts/catalytic_correction/reporting/` | Verified mixed cells, frozen descriptive comparisons and explicit actual figure review | No; renders reports/pages and verifies completed review evidence |
-| Corrected private transfer | `scripts/catalytic_correction/release/` | Genuine source capture, fresh receiving capture, complete distinct evidence trees and actual reporting/QA/replay proofs | No; captures, stages and verifies transported evidence after completed scientific gates |
+| Corrected private transfer | `scripts/catalytic_correction/release/`, `release_v3/` | Genuine source/fresh receiving capture, complete evidence trees and actual reporting/QA/replay proofs; v3 separately retains ADR-042 location plans and per-entry trees | No; captures, stages and verifies transported evidence after completed scientific gates |
 
 ## Suggested reading order
 

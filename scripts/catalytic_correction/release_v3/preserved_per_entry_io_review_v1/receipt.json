@@ -1,0 +1,62 @@
+{
+  "actual_subset_selection_reviews_or_capture_created": false,
+  "artifact_count_excluding_receipt": 9,
+  "artifacts": {
+    "REPORT.md": {
+      "bytes": 5169,
+      "sha256": "92bbf7394bda746043c8613c870dbdc176f371ca0a44aa5e89a5df0eee7096db"
+    },
+    "artifact_checks.json": {
+      "bytes": 46107,
+      "sha256": "0177b47e12d07182e9f0dd4f33b348588af6b2057393e28929c55ffcb138fa51"
+    },
+    "capture_ast_delta.json": {
+      "bytes": 1154,
+      "sha256": "3f4701f6cbd0e26bc7edc3a3ef4179a079cd431d24e5ff9ae638fc01e6b4282f"
+    },
+    "capture_source_delta.patch": {
+      "bytes": 10431,
+      "sha256": "3fc9309781e0cb4efebf91a501d52775e60464a6d865cca644f83535a79d800a"
+    },
+    "retained_test_evidence_checks.json": {
+      "bytes": 1367,
+      "sha256": "44c2d43cbdcb9e10cb22c2bbb62ec29f87bdb4692030b7420a6c071852778eac"
+    },
+    "review.json": {
+      "bytes": 9011,
+      "sha256": "426cbbb7d3fca85e4fbe466762a52e9c40fb3fdb441e44a998752a9099fadd7a"
+    },
+    "scope.json": {
+      "bytes": 1034,
+      "sha256": "572035cdf4e5a46e1bd27ff2ea0534a7bbfd75b2ead11ec4fdacfd963203eac2"
+    },
+    "static_source_inventory.json": {
+      "bytes": 6538,
+      "sha256": "63028e88dda264012ebc0b211f33db2589a1fe11e4fbcadfac1be27ae712e009"
+    },
+    "transport_predecessor_checks.json": {
+      "bytes": 26022,
+      "sha256": "840375f056b4b191baa8a61e5ffde3a5033ffa3cbc255de32c0ac4f8dc5f97f3"
+    }
+  },
+  "content_sha256": "9e73cc5b0721328c43227dc608cde4d73866dcdabc29853f3114a99da554fe24",
+  "engineering_review_only": true,
+  "material_findings_count": 0,
+  "one_of_five_scientific_root_approvals": false,
+  "schema_version": 1,
+  "sealed_at_utc": "2026-09-29T11:29:42.349758+00:00",
+  "status": "independent_source_only_per_entry_io_peer_review_sealed",
+  "target_import_tests_science_or_process_queries": false,
+  "target_or_predecessor_modified": false,
+  "target_preparation_receipt_sha256": "6670b27e78fb05f7c266cc52b72241a4b477f5d9a27213e8882bdcbd1038f366",
+  "target_source_sha256": {
+    "capture_at_location.py": "6eac7cda2a452552ee1e9c3b3aa9ee5909601729a841a75844eea43e9d43ff8d",
+    "capture_original_at_location.py": "2a482751500025c73f7204c280f8e897d786eec54513520acca43adbd57cb8fe",
+    "location_core.py": "e2103480646cb5f26d30e0fbab6a740e53ba52778616c08c0b30fb5fb4cd17f0",
+    "receiving_at_locations.py": "6c56ceb15b19cc19204bf5139c7c9bbb28cb156faed5a5767e18ec53b6ad14b3",
+    "run_selected_at_locations.py": "d444de262d568107db6a822a6c37142e81249810fa5f75e9d947902730fcd616",
+    "selected_at_locations.py": "4c26d2ede68554aee6ad80af3b372a5f5d09e6fb78525dcb0846c294ae7156dd",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_at_locations.py": "e8e51e236d96687c549219091d6b2ca89e9c9a219cf49b48481c6485b51b525f"
+  }
+}

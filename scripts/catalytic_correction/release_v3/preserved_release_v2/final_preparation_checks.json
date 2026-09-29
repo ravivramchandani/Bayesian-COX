@@ -1,0 +1,21 @@
+{
+  "AST_compile_source_count": 12,
+  "Ruff_exit_code": 0,
+  "actual_synthetic_tests": 67,
+  "final_checks": {
+    "ruff_final": {
+      "exit_code": 0,
+      "invocation_sha256": "7ba3d687228099ed314d7ca4ed308571d003c716d916af879ca1c953f5506878",
+      "tested_source_bytes_match_current": true
+    },
+    "synthetic_final": {
+      "exit_code": 0,
+      "invocation_sha256": "086a6a970f54a4f02083995a43a47eba5c2aa33225e8c37f8a50e9640905a17a",
+      "tested_source_bytes_match_current": true
+    }
+  },
+  "focused_original_v1_and_v2_tests": true,
+  "peer_followup_pending": true,
+  "real_scientific_operations": false,
+  "status": "preparation_check_evidence_passed"
+}

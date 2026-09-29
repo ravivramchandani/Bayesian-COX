@@ -1,0 +1,67 @@
+{
+  "bounded_seams": [
+    {
+      "new": "old validator receives its unchanged roles/optional reviews; additional exact file/group/whole-tree roles bound afterward",
+      "old": "stage/release_core.validate_assets"
+    },
+    {
+      "new": "old selected-union/completed-pass/owner/outcome predicates run first; exact retained Locations acquisitions/current-prior history/full failed-empty trees and genuine controller capture added afterward",
+      "old": "stage/release_core.validate_reproduction"
+    },
+    {
+      "new": "only this exact declared source read-only seam verifies separately typed actual verify_restored_at_locations.py command, own producer+rc/runtime/raw logs+plan+eight-source map; mixed and report predicates unchanged",
+      "old": "stage/release_core.captured_command verify_restored_reproduction.py"
+    },
+    {
+      "new": "only this exact prospective read-only child command is replaced; original summary validation then per-entry source/plan/maps apply; actual command/own producer rc retained separately",
+      "old": "receiver/release_core.capture_process old receiving child"
+    },
+    {
+      "new": "adds honest revision3 metadata; old prep and source maps remain their literal original values",
+      "old": "stage/receiver final seal"
+    },
+    {
+      "new": "stdlib only, exact old module source bytes/origin; restored in finally on every path",
+      "old": "temporary release_core import alias"
+    }
+  ],
+  "caller_supplied_actual_evidence_required": true,
+  "content_sha256": "a23f50f6d775c82f78357f80aac9bccf0c3c5f09b82d66ea897029dca403c996",
+  "independent_v3_review": "pending_root_arrangement_after_preparation_seal",
+  "legacy_preparations_unchanged": {
+    "per_entry_io_v1": "6670b27e78fb05f7c266cc52b72241a4b477f5d9a27213e8882bdcbd1038f366",
+    "receiving_v1": "fe0662adacbf29bc356d7c19f7abd40b2b6304cb9f683673fce1e7ae39f1e1ba",
+    "release_v2": "9e567639359328d958e73c476a2d16ec8b0ab408e17c1fb016c37c3234713c1d"
+  },
+  "no_actual_data_science_producers_receiving_staging_or_publication": true,
+  "no_old_source_or_protocol_mutation": true,
+  "own_transport_classes": {
+    "CoreView": [
+      "__init__",
+      "__getattr__",
+      "seal",
+      "validate_assets",
+      "validate_reproduction",
+      "load_locations",
+      "producer",
+      "check_controller",
+      "captured_command",
+      "check_capture_request",
+      "check_receiving_bindings"
+    ],
+    "ReceivingView": [
+      "__init__",
+      "capture_process",
+      "check_restored_maps"
+    ]
+  },
+  "preparation_not_root_or_method_or_producer_approval": true,
+  "runtime_source_sha256": {
+    "capture_per_entry_source_v3.py": "c58a66cc22e668fc2377530d114ed16fceb07f58f23cc2b5df0d385ee89412ae",
+    "release_v3_core.py": "448c32dde298b98ba75218df1b5c6a9a0a09c3e85fa8108d06e38f11ce206068",
+    "stage_corrected_extensions_v3.py": "91d0430405ec0841c3b1b37d85567c2a0c92abf5585addf2d7bad29d6b75acd4",
+    "verify_restored_correction_v3.py": "9c6f5372edb32b937f2a8e926fad62a5d75ea1f1f7477dad0a78803d0ee11dea"
+  },
+  "schema_version": 3,
+  "status": "prospective_release_v3_pinned_compatibility_map"
+}

@@ -1,0 +1,129 @@
+{
+  "content_sha256": "a3cb1be9fd9268dbcf4064afac78af9be545ab7137bd27eefd835431c7ab1932",
+  "sources": {
+    "capture_at_location.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 12,
+      "source_sha256": "6eac7cda2a452552ee1e9c3b3aa9ee5909601729a841a75844eea43e9d43ff8d",
+      "test_methods": []
+    },
+    "capture_original_at_location.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 1,
+      "source_sha256": "2a482751500025c73f7204c280f8e897d786eec54513520acca43adbd57cb8fe",
+      "test_methods": []
+    },
+    "fictional_support.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 2,
+      "source_sha256": "943d5104e1778de25a3253918b2a5c857dcde197bcbd57522f93c4bcd60b0b88",
+      "test_methods": []
+    },
+    "location_core.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 20,
+      "source_sha256": "e2103480646cb5f26d30e0fbab6a740e53ba52778616c08c0b30fb5fb4cd17f0",
+      "test_methods": []
+    },
+    "receiving_at_locations.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 4,
+      "source_sha256": "6c56ceb15b19cc19204bf5139c7c9bbb28cb156faed5a5767e18ec53b6ad14b3",
+      "test_methods": []
+    },
+    "run_selected_at_locations.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 2,
+      "source_sha256": "d444de262d568107db6a822a6c37142e81249810fa5f75e9d947902730fcd616",
+      "test_methods": []
+    },
+    "selected_at_locations.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 11,
+      "source_sha256": "4c26d2ede68554aee6ad80af3b372a5f5d09e6fb78525dcb0846c294ae7156dd",
+      "test_methods": []
+    },
+    "test_capture_locations.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 35,
+      "source_sha256": "8966de4b62dd5e1a526fadba010b68cff1c6c0e58bd39956a866a23ef091da03",
+      "test_methods": [
+        "test_single_fixed_identity_synthetic_capture_retains_failures_without_reviews",
+        "test_production_api_refuses_dependency_injection",
+        "test_sorted_scope_position_is_not_official_plan_order",
+        "test_nonselected_identity_and_changed_scope_refuse",
+        "test_changed_manifest_source_and_matched_bytes_refuse",
+        "test_changed_own_capture_implementation_pin_refuses",
+        "test_existing_outputs_and_capture_collision_refuse",
+        "test_output_overlap_and_symlink_refuse",
+        "test_alternate_root_differs_from_default_but_same_declared_root_is_used",
+        "test_active_original_owner_refuses_before_dispatch",
+        "test_wrong_numeric_or_interpreter_runtime_refuses",
+        "test_environment_mismatch_prevents_numerical_child",
+        "test_numerical_failure_retains_rc_and_logs_no_success_receipt",
+        "test_changed_bytes_after_numerical_child_prevent_producer_proof",
+        "test_dirty_source_refuses_before_output_creation",
+        "test_reserved_output_race_cannot_become_cached_refit",
+        "test_source_score_selection_and_automatic_all92_choice_refuse",
+        "test_launch_error_retains_none_rc_without_success",
+        "test_receipt_or_stdout_mismatch_is_not_completion",
+        "test_source_mutation_after_child_and_unknown_output_refuse",
+        "test_atomic_receipt_publication_failure_has_no_reported_success"
+      ]
+    },
+    "test_locations.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 49,
+      "source_sha256": "5eb256e751c9ae99fe2b4d986aee4923b8852ad04f0fd4f66cb73e4b01b306af",
+      "test_methods": [
+        "test_valid_pending_only_plan_keeps_order_and_default",
+        "test_scientific_selection_definition_inventory_scope_and_legacy_pins_refuse",
+        "test_known_verified_evidence_is_not_replaceable",
+        "test_changed_terminal_unresolved_inputs_refuse",
+        "test_wrong_witness_and_pending_hash_refuse",
+        "test_only_original92_not_pilot_only_or_arbitrary_can_move",
+        "test_missing_or_wrong_root_review_does_not_authorise_paths",
+        "test_source_score_or_automatic_all92_refuse",
+        "test_bool_worker_wrong_index_wrong_count_and_wrong_route_refuse",
+        "test_overlapping_duplicate_relative_or_symlink_locations_refuse",
+        "test_append_only_preserves_prior_root_and_scope",
+        "test_append_only_new_pending_identity_without_replacing_old",
+        "test_loaded_append_history_preserves_first_introducing_sha_and_old_record",
+        "test_loaded_prior_plan_historical_role_and_changed_prior_bytes_refuse",
+        "test_record_envelope_unknown_plan_changed_sources_or_rewritten_selection_refuse",
+        "test_changed_plan_bytes_witness_bytes_and_preparation_fail_rechecks",
+        "test_overlap_with_frozen_or_default_root_refused_even_when_plan_is_pinned",
+        "test_default_active_owner_prevents_capture_not_hidden_by_alternate",
+        "test_root_not_declared_is_not_fallback_or_copy_equivalence",
+        "test_resolution_requires_exact_location_and_known_default_has_no_alias",
+        "test_receiving_relocates_only_io_preserving_plan_metadata",
+        "test_entire_tree_keeps_failed_orphan_files_and_empty_dirs",
+        "test_recheck_refuses_added_or_removed_orphan_and_empty_directory",
+        "test_empty_retained_root_cannot_be_replaced_by_a_symlink",
+        "test_synthetic_capture_never_completes_acquisition",
+        "test_production_receiving_api_refuses_injection_before_any_io",
+        "test_preparation_false_actual_scope_flags_and_honest_exact_eight_sources",
+        "test_clis_have_no_injection_arbitrary_command_resume_or_review_creation_flags",
+        "test_source_inherited_delegates_same_exact_root_and_restores_on_raise",
+        "test_receiving_uses_historical_producer_root_and_restored_array_root",
+        "test_receiving_restores_path_views_when_legacy_science_rejects",
+        "test_publishing_lineage_adds_no_scientific_changes_and_overwrite_refuses"
+      ]
+    },
+    "verification_io.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 20,
+      "source_sha256": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+      "test_methods": []
+    },
+    "verify_restored_at_locations.py": {
+      "ast_parse": "passed_without_execution",
+      "function_count": 2,
+      "source_sha256": "e8e51e236d96687c549219091d6b2ca89e9c9a219cf49b48481c6485b51b525f",
+      "test_methods": []
+    }
+  },
+  "status": "target_python_ast_parsed_without_import_or_execution",
+  "target_test_execution": false,
+  "test_methods": 53
+}

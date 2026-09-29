@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "test_receiving.py"
+  ],
+  "exit_code": 1,
+  "started_at_utc": "2026-09-29T08:51:29.904753+00:00",
+  "elapsed_seconds": 5.674241833999986,
+  "scope": "invented/injected only; source-only comparison ASTs; no actual checker/cohort/generator/SVD/model/optimizer/fit/score/traces"
+}

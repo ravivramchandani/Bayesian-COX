@@ -1,0 +1,14 @@
+E731 Do not assign a `lambda` expression, use a `def`
+   --> release_v3_core.py:658:9
+    |
+656 |         view.check_receiving_bindings(inputs, request["location_plan"], Path(inputs["location_receiving_code"]), prepared)
+657 |         argv = receiving_argv(str(python), root, request["input_request"], request["location_plan"], output)
+658 |         checked = lambda summary: source_summary(summary, inputs, prepared)
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+659 |         helper, status = "verify_restored_at_locations.py", "corrected_readonly_reproduction_actual_rc0_captured"
+660 |     else:
+    |
+help: Rewrite `checked` as a `def`
+
+Found 1 error.
+No fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).

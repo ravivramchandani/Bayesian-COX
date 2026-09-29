@@ -257,8 +257,8 @@ naturally after scoped metadata downloads; no test, numerical worker or
 scientific setting was changed. Actual commands, raw diagnostics and root
 archival lookup errors are retained in the separate validation archive.
 This is implementation integration, not actual adapter adoption, a missing
-subset or an approved location plan. Separate release wiring remains
-necessary before its use. The reviewed preparation
+subset or an approved location plan. Actual use must explicitly bind the
+separate release wiring. The reviewed preparation
 record is `coordination/recovery/2026-09-29-generator-correction-per-entry-io-reviewed-preparation.json`.
 The integration record is
 `coordination/recovery/2026-09-29-generator-correction-per-entry-io-integration.json`.
@@ -270,6 +270,33 @@ grid or corrected result. Internal storage showed about 83 GB free after
 an earlier low reading; no further project files were relocated or deleted.
 The free-space fluctuation's cause is unknown. The curated storage checkpoint
 and both original/recovered guide variants are preserved in recovery archives.
+
+The separately named `scripts/catalytic_correction/release_v3/` implementation
+now retains its complete 233-file carrier, including all 196 predecessor
+files. Its four runtime files have distinct pins; original v2, receiving and
+per-entry source/preparation identities remain unchanged. Genuine source
+controller/read-only captures bind the actual written selected pass, while
+fresh receiving uses only the new read-only selected entrypoint and retains
+the original mixed/reporting command gates. Whole distinct evidence trees,
+all current/prior location plans and failed attempts remain mandatory.
+Focused checks passed 33 tests and 17 subtests. Full locked make test passed
+998 tests and 157 subtests without skips at 12:50 UTC; Ruff and schemas passed.
+All 634 captured implementation files, the previous 399/349-file checkpoints
+and all 157 original source/build/lock files are unchanged. Exact historical
+logs and a source-delta patch retain their whitespace; other staged files
+pass the diff check. Actual preparation, peer review, portable test review and
+validation records are archived. Compact record:
+`coordination/recovery/2026-09-29-generator-correction-release-v3-integration.json`.
+This completes tested release wiring, not actual adapter/plan adoption,
+source capture, staging, release or fresh receiving verification.
+
+At 12:51 UTC the current replay had 342 independently verified contexts;
+original production still had the 1,103 outcomes above. Before any corrected
+pilot score, root must validate and freeze ADR-041's actual original-92/pilot
+selection and supplied scope review. The five-review numerical freeze alone
+does not enforce that additional selection gate. Current continuation stops
+before fitting; no corrected score or selection-gate violation exists.
+Predispatch enforcement is the next implementation check.
 
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its

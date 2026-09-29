@@ -1,0 +1,42 @@
+{
+  "actual_science_or_producer_invoked": false,
+  "argv": [
+    "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+    "-I",
+    "-B",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v3/test_release_v3.py"
+  ],
+  "content_sha256": "fe8a3a63431b9cf306effc124eff8c10a3e82bba83f1877820b5b53183188fd6",
+  "cwd": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease",
+  "exit_code": 1,
+  "finished_at_utc": "2026-09-29T11:56:43.444361+00:00",
+  "numeric_thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "schema_version": 1,
+  "source_sha256_after": {
+    "capture_per_entry_source_v3.py": "c58a66cc22e668fc2377530d114ed16fceb07f58f23cc2b5df0d385ee89412ae",
+    "release_v3_core.py": "bebae77916e9ee9e7ddc9096699f3c5266894e774d5af7cceaf08d0e4e6fcb3b",
+    "stage_corrected_extensions_v3.py": "91d0430405ec0841c3b1b37d85567c2a0c92abf5585addf2d7bad29d6b75acd4",
+    "test_release_v3.py": "893d3037ce41169938e79d14380eb8cfa240b83a308d24620694e4ba70901b6e",
+    "verify_restored_correction_v3.py": "9c6f5372edb32b937f2a8e926fad62a5d75ea1f1f7477dad0a78803d0ee11dea"
+  },
+  "source_sha256_before": {
+    "capture_per_entry_source_v3.py": "c58a66cc22e668fc2377530d114ed16fceb07f58f23cc2b5df0d385ee89412ae",
+    "release_v3_core.py": "bebae77916e9ee9e7ddc9096699f3c5266894e774d5af7cceaf08d0e4e6fcb3b",
+    "stage_corrected_extensions_v3.py": "91d0430405ec0841c3b1b37d85567c2a0c92abf5585addf2d7bad29d6b75acd4",
+    "test_release_v3.py": "893d3037ce41169938e79d14380eb8cfa240b83a308d24620694e4ba70901b6e",
+    "verify_restored_correction_v3.py": "9c6f5372edb32b937f2a8e926fad62a5d75ea1f1f7477dad0a78803d0ee11dea"
+  },
+  "source_unchanged": true,
+  "started_at_utc": "2026-09-29T11:56:41.798012+00:00",
+  "status": "bounded_invented_stdlib_guard_test_invocation",
+  "stderr_sha256": "9a095d216996ad65ed195546e75b387bdc5245514a4ad51cc103bf13d4df49c2",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "test_only_dependency_injection": true,
+  "wall_seconds": 1.6461172080016695
+}

@@ -1,0 +1,128 @@
+{
+  "ADR041_pre_score_selection_gate_remains_mandatory_and_needs_dispatch_enforcement_check": true,
+  "actual_corrected_score_or_transfer_created": false,
+  "actual_final_visual_review_private_release_or_fresh_remote_restore": false,
+  "actual_missing_subset_or_location_plan_adopted": false,
+  "all_634_source_files_equal_tested_bytes": true,
+  "complete_exact_carrier_files": 233,
+  "corrected_programme_complete": false,
+  "created_at_utc": "2026-09-29T12:54:58.184072+00:00",
+  "dated_progress": {
+    "array_or_trace_bytes_read": false,
+    "collection_is_not_atomic": true,
+    "corrected_freeze_fits_release_complete": false,
+    "created_at_utc": "2026-09-29T12:51:14.422887+00:00",
+    "independent_first_draw_receipts": 342,
+    "internal_available_bytes": 82695000064,
+    "last_progress_line": {
+      "accounted": 342,
+      "context_id": "gbsg2__clinical__r04f02__catalytic_wme__admin_q0.50::inner_03",
+      "stage": "independent_first_draw_replay"
+    },
+    "original_expected_cells": 1625,
+    "original_outcome_status_counts": {
+      "complete": 908,
+      "failed": 169,
+      "failed_diagnostics": 26
+    },
+    "original_stored_cells": 1103,
+    "receipt_status_counts": {
+      "independent_original_first_draw_verified": 342
+    },
+    "status": "dated_metadata_checkpoint_not_completion"
+  },
+  "earlier_failed_attempts_and_root_lookup_exception_roster_errors_retained": true,
+  "focused_locked_test": {
+    "actual_exit_code": 0,
+    "passed_subtests": 17,
+    "passed_tests": 33
+  },
+  "full_locked_test": {
+    "actual_exit_code": 0,
+    "elapsed_seconds": 293.3075637909933,
+    "finished_at_utc": "2026-09-29T12:50:08.575370+00:00",
+    "invocation": {
+      "bytes": 1716,
+      "sha256": "2104c6a9ae8f77e446ee91d84a7090fadfc4423a5b9de6669c656088f0fabcfa"
+    },
+    "passed_subtests": 157,
+    "passed_tests": 998,
+    "skips": 0,
+    "source_before_equals_after": true
+  },
+  "historical_diff_check": {
+    "exact_bound_historical_files_with_whitespace": 5,
+    "full_actual_exit_code": 2,
+    "historical_bytes_preserved": true,
+    "other_staged_files_actual_exit_code": 0
+  },
+  "original_157_source_build_lock_files_unchanged": true,
+  "portable_test_files": 2,
+  "preparation_review_archives": {
+    "release-v3-preparation": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-release-v3-preparation.tar.gz",
+      "bytes": 360631,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "preparation_receipt.json",
+      "preparation_receipt_sha256": "5ded4445b5a1488e0ab02a4eadbab43a8159e422a385918a2551e1989d0b5034",
+      "regular_members": 233,
+      "sha256": "b2d1490962b2dbcbee4093cd6e1a9c08ee27fe08e39692d0fb5a6a779bedb439"
+    },
+    "release-v3-repository-test-preparation": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-release-v3-repository-test-preparation.tar.gz",
+      "bytes": 49912,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "preparation_receipt.json",
+      "preparation_receipt_sha256": "8ee905002fb366277e30be25157dcda927e6287d45dbe309c550bfc35619ee47",
+      "regular_members": 39,
+      "sha256": "f04f39e3d272344ff488a02e39b167692183597e498918161d47e8fc88510ab9"
+    },
+    "release-v3-repository-test-review": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-release-v3-repository-test-review.tar.gz",
+      "bytes": 19546,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "receipt.json",
+      "preparation_receipt_sha256": "a19bfd5df02111e5988684e571d52d2febfe2d3d64bcc3735c51357ba65a17a9",
+      "regular_members": 7,
+      "sha256": "da25590fd2b6df5ada4a5d965e956974b7b000b863801e5aeae11d6c99c2f684"
+    },
+    "release-v3-review": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-release-v3-review.tar.gz",
+      "bytes": 25119,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "receipt.json",
+      "preparation_receipt_sha256": "d1dd9630e48fbadfea7e916d84bf249c3ee287a37cd3a6bd59ef441db0570051",
+      "regular_members": 7,
+      "sha256": "9da3b34705a1793c5cc53b2b240f3947a5741499355489fac389e1232d47af0e"
+    }
+  },
+  "prior_399_and_349_source_files_unchanged": true,
+  "root_engineering_review": {
+    "actual_controller_stdout_and_written_pass_contract_preserved": true,
+    "actual_corrected_score_freeze_plan_adoption_source_capture_qa_release_or_fresh_receive": false,
+    "actual_pre_score_selection_enforcement_is_next_check": true,
+    "all_233_carrier_files_and_196_predecessor_files_are_exact_sealed_bytes": true,
+    "checked_at_utc": "2026-09-29T12:54:58.084012+00:00",
+    "four_runtime_sources_and_both_portable_helper_test_sources_read": true,
+    "original_32_method_objects_preserved_plus_one_full_carrier_isolated_import_guard": true,
+    "original_v2_receiving_and_per_entry_pins_remain_distinct": true,
+    "portable_test_peer_receipt_sha256": "a19bfd5df02111e5988684e571d52d2febfe2d3d64bcc3735c51357ba65a17a9",
+    "runtime_peer_receipt_sha256": "d1dd9630e48fbadfea7e916d84bf249c3ee287a37cd3a6bd59ef441db0570051",
+    "source_only_review_or_fictional_test_not_actual_scientific_approval": true
+  },
+  "ruff_and_coordination_schemas_actual_exit_code": 0,
+  "schema_version": 1,
+  "status": "verified_release_v3_implementation_integration_not_actual_scientific_or_transfer_execution",
+  "unchanged_predecessor_files": 196,
+  "validation_archive": {
+    "archive": "2026-09-29-generator-correction-release-v3-integration-validation.tar.gz",
+    "bytes": 316829,
+    "exact_member_roundtrip_and_source_before_after_verified": true,
+    "regular_members": 46,
+    "sha256": "a43f92edc3818b13f8695d881004f1782a357fc132a6b2543f5fd32b1d2fbfea"
+  }
+}

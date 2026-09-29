@@ -1,0 +1,450 @@
+test_active_owner_refuses (test_release_adapters.GuardTests.test_active_owner_refuses) ... ok
+test_actual_capture_injected_rc0_and_nonzero_failure (test_release_adapters.GuardTests.test_actual_capture_injected_rc0_and_nonzero_failure) ... ok
+test_alias_refused_distinct_retained_file_supported (test_release_adapters.GuardTests.test_alias_refused_distinct_retained_file_supported) ... ERROR
+test_capture_link_failure_preserves_closed_temp (test_release_adapters.GuardTests.test_capture_link_failure_preserves_closed_temp) ... ok
+test_changed_byte_refuses (test_release_adapters.GuardTests.test_changed_byte_refuses) ... ok
+test_complete_three_route_fixture_and_failure_bytes_stage (test_release_adapters.GuardTests.test_complete_three_route_fixture_and_failure_bytes_stage) ... ERROR
+test_extra_actual_tree_file_refuses_even_when_all_declared_exist (test_release_adapters.GuardTests.test_extra_actual_tree_file_refuses_even_when_all_declared_exist) ... ok
+test_legacy_qa_or_missing_named_review_refuses (test_release_adapters.GuardTests.test_legacy_qa_or_missing_named_review_refuses) ... FAIL
+test_malformed_stdout_capture_refuses (test_release_adapters.GuardTests.test_malformed_stdout_capture_refuses) ... ok
+test_missing_or_tampered_failed_trace_refuses (test_release_adapters.GuardTests.test_missing_or_tampered_failed_trace_refuses) ... ok
+test_missing_report_row_or_duplicate_cell_refuses (test_release_adapters.GuardTests.test_missing_report_row_or_duplicate_cell_refuses) ... FAIL
+test_missing_source_gate_rc0_cannot_be_reconstructed (test_release_adapters.GuardTests.test_missing_source_gate_rc0_cannot_be_reconstructed) ... ok
+test_omitted_external_numerical_producer_bytes_refuse (test_release_adapters.GuardTests.test_omitted_external_numerical_producer_bytes_refuse) ... FAIL
+test_output_overlap_and_overwrite_refuse (test_release_adapters.GuardTests.test_output_overlap_and_overwrite_refuse) ... ERROR
+test_partial_grid_refuses_before_destination (test_release_adapters.GuardTests.test_partial_grid_refuses_before_destination) ... ok
+test_partial_selected_or_failure_not_promoted (test_release_adapters.GuardTests.test_partial_selected_or_failure_not_promoted) ... FAIL
+test_publication_failure_retains_pending_attempt_no_final_destination (test_release_adapters.GuardTests.test_publication_failure_retains_pending_attempt_no_final_destination) ... ERROR
+test_relocated_role_mapping_exact_bytes_and_no_guessing (test_release_adapters.GuardTests.test_relocated_role_mapping_exact_bytes_and_no_guessing) ... ERROR
+test_source_change_during_copy_refuses (test_release_adapters.GuardTests.test_source_change_during_copy_refuses) ... ok
+test_staged_test_payload_never_certifies_actual_restore (test_release_adapters.GuardTests.test_staged_test_payload_never_certifies_actual_restore) ... ERROR
+test_symlink_duplicate_json_and_nonfinite_refuse (test_release_adapters.GuardTests.test_symlink_duplicate_json_and_nonfinite_refuse) ... ok
+test_unreviewed_figure_refuses (test_release_adapters.GuardTests.test_unreviewed_figure_refuses) ... ok
+test_changed_immutable_payload_stops_before_next_child (test_receiving_adapters.ReceivingTests.test_changed_immutable_payload_stops_before_next_child) ... ERROR
+test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) ... 
+  test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='verify_mixed_extensions.py') ... ERROR
+  test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='verify_restored_reproduction.py') ... ERROR
+  test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='report_replay.py') ... ERROR
+test_production_policy_refuses_injected_replay (test_receiving_adapters.ReceivingTests.test_production_policy_refuses_injected_replay) ... ERROR
+test_three_read_only_replays_positive_and_exact_inventory (test_receiving_adapters.ReceivingTests.test_three_read_only_replays_positive_and_exact_inventory) ... ERROR
+test_unknown_replay_file_refuses_final_receipt (test_receiving_adapters.ReceivingTests.test_unknown_replay_file_refuses_final_receipt) ... ERROR
+test_all_three_fixed_read_only_entrypoints (test_source_capture.SourceCaptureTests.test_all_three_fixed_read_only_entrypoints) ... ok
+test_arbitrary_execution_mode_refused (test_source_capture.SourceCaptureTests.test_arbitrary_execution_mode_refused) ... ok
+test_claim_changed_primary_findings_refused (test_source_capture.SourceCaptureTests.test_claim_changed_primary_findings_refused) ... ok
+test_nonzero_retains_logs_without_success_receipt (test_source_capture.SourceCaptureTests.test_nonzero_retains_logs_without_success_receipt) ... ok
+test_output_overlap_missing_roles_and_overwrite (test_source_capture.SourceCaptureTests.test_output_overlap_missing_roles_and_overwrite) ... ok
+test_production_api_rejects_injection (test_source_capture.SourceCaptureTests.test_production_api_rejects_injection) ... ok
+test_unreviewed_helper_receipt_refused_before_invocation (test_source_capture.SourceCaptureTests.test_unreviewed_helper_receipt_refused_before_invocation) ... ok
+
+======================================================================
+ERROR: test_alias_refused_distinct_retained_file_supported (test_release_adapters.GuardTests.test_alias_refused_distinct_retained_file_supported)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 600, in test_alias_refused_distinct_retained_file_supported
+    output, _ = fixture.stage()
+                ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_complete_three_route_fixture_and_failure_bytes_stage (test_release_adapters.GuardTests.test_complete_three_route_fixture_and_failure_bytes_stage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 463, in test_complete_three_route_fixture_and_failure_bytes_stage
+    state = fixture.validate()
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 442, in validate
+    return st.validate(self.request, c.Pins(), self.pins, self.policy, self.deps)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_output_overlap_and_overwrite_refuse (test_release_adapters.GuardTests.test_output_overlap_and_overwrite_refuse)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 605, in test_output_overlap_and_overwrite_refuse
+    output, _ = fixture.stage()
+                ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_publication_failure_retains_pending_attempt_no_final_destination (test_release_adapters.GuardTests.test_publication_failure_retains_pending_attempt_no_final_destination)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 618, in test_publication_failure_retains_pending_attempt_no_final_destination
+    fixture.stage()
+    ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_relocated_role_mapping_exact_bytes_and_no_guessing (test_release_adapters.GuardTests.test_relocated_role_mapping_exact_bytes_and_no_guessing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 680, in test_relocated_role_mapping_exact_bytes_and_no_guessing
+    output, _ = fixture.stage()
+                ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_staged_test_payload_never_certifies_actual_restore (test_release_adapters.GuardTests.test_staged_test_payload_never_certifies_actual_restore)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 674, in test_staged_test_payload_never_certifies_actual_restore
+    output, _ = fixture.stage()
+                ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_changed_immutable_payload_stops_before_next_child (test_receiving_adapters.ReceivingTests.test_changed_immutable_payload_stops_before_next_child)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 197, in test_changed_immutable_payload_stops_before_next_child
+    request, output, python, deps, calls = receiving(fixture)
+                                           ~~~~~~~~~^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 19, in receiving
+    restored, _ = fixture.stage()
+                  ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='verify_mixed_extensions.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 166, in test_each_actual_child_failure_retains_rc_and_stops
+    request, output, python, deps, calls = receiving(fixture)
+                                           ~~~~~~~~~^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 19, in receiving
+    restored, _ = fixture.stage()
+                  ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='verify_restored_reproduction.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 166, in test_each_actual_child_failure_retains_rc_and_stops
+    request, output, python, deps, calls = receiving(fixture)
+                                           ~~~~~~~~~^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 19, in receiving
+    restored, _ = fixture.stage()
+                  ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_each_actual_child_failure_retains_rc_and_stops (test_receiving_adapters.ReceivingTests.test_each_actual_child_failure_retains_rc_and_stops) (target='report_replay.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 166, in test_each_actual_child_failure_retains_rc_and_stops
+    request, output, python, deps, calls = receiving(fixture)
+                                           ~~~~~~~~~^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 19, in receiving
+    restored, _ = fixture.stage()
+                  ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_production_policy_refuses_injected_replay (test_receiving_adapters.ReceivingTests.test_production_policy_refuses_injected_replay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 157, in test_production_policy_refuses_injected_replay
+    request, output, python, deps, _calls = receiving(fixture)
+                                            ~~~~~~~~~^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 19, in receiving
+    restored, _ = fixture.stage()
+                  ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_three_read_only_replays_positive_and_exact_inventory (test_receiving_adapters.ReceivingTests.test_three_read_only_replays_positive_and_exact_inventory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 144, in test_three_read_only_replays_positive_and_exact_inventory
+    request, output, python, deps, calls = receiving(fixture)
+                                           ~~~~~~~~~^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 19, in receiving
+    restored, _ = fixture.stage()
+                  ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+ERROR: test_unknown_replay_file_refuses_final_receipt (test_receiving_adapters.ReceivingTests.test_unknown_replay_file_refuses_final_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 183, in test_unknown_replay_file_refuses_final_receipt
+    request, output, python, deps, _calls = receiving(fixture)
+                                            ~~~~~~~~~^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_receiving_adapters.py", line 19, in receiving
+    restored, _ = fixture.stage()
+                  ~~~~~~~~~~~~~^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 448, in stage
+    return output, st.stage(request_path, digest, output, self.pins, dependencies=self.deps, policy=self.policy)
+                   ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 280, in stage
+    validated = validate(request, pins, source_pins, policy, dependencies)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/stage_corrected_extensions.py", line 72, in validate
+    core.require(initial_invocation["operation"] == "mixed_extensions_deep_verification"
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 and initial_invocation["argv"] == source_attempt["argv"][3:]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                 and initial_invocation["actual_numeric_thread_environment"] == {name: "1" for name in core.NUMERIC},
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 "actual source verifier invocation differs from captured child")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+======================================================================
+FAIL: test_legacy_qa_or_missing_named_review_refuses (test_release_adapters.GuardTests.test_legacy_qa_or_missing_named_review_refuses)
+----------------------------------------------------------------------
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 546, in test_legacy_qa_or_missing_named_review_refuses
+    with self.assertRaisesRegex(ValueError, "corrected production QA"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "corrected production QA" does not match "actual source verifier invocation differs from captured child"
+
+======================================================================
+FAIL: test_missing_report_row_or_duplicate_cell_refuses (test_release_adapters.GuardTests.test_missing_report_row_or_duplicate_cell_refuses)
+----------------------------------------------------------------------
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 570, in test_missing_report_row_or_duplicate_cell_refuses
+    with self.assertRaisesRegex(ValueError, "row roster"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "row roster" does not match "actual source verifier invocation differs from captured child"
+
+======================================================================
+FAIL: test_omitted_external_numerical_producer_bytes_refuse (test_release_adapters.GuardTests.test_omitted_external_numerical_producer_bytes_refuse)
+----------------------------------------------------------------------
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 586, in test_omitted_external_numerical_producer_bytes_refuse
+    with self.assertRaisesRegex(ValueError, "bytes omitted"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "bytes omitted" does not match "actual source verifier invocation differs from captured child"
+
+======================================================================
+FAIL: test_partial_selected_or_failure_not_promoted (test_release_adapters.GuardTests.test_partial_selected_or_failure_not_promoted)
+----------------------------------------------------------------------
+verification_io.VerificationFailure: actual source verifier invocation differs from captured child
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 536, in test_partial_selected_or_failure_not_promoted
+    with self.assertRaisesRegex(ValueError, "pending or failed"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "pending or failed" does not match "actual source verifier invocation differs from captured child"
+
+----------------------------------------------------------------------
+Ran 34 tests in 9.536s
+
+FAILED (failures=4, errors=13)

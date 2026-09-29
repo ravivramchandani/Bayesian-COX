@@ -1,0 +1,27 @@
+{
+  "argv": [
+    "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "test_receiving.py"
+  ],
+  "exit_code": 0,
+  "started_at_utc": "2026-09-29T09:07:09.815565+00:00",
+  "elapsed_seconds": 5.889900166977895,
+  "source_start_sha256": {
+    "receiving_core.py": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f",
+    "verify_restored_reproduction.py": "9387aae83e348515999843963ace0acba0cacef2501fbdacbb0cef85bd5ad33e",
+    "test_receiving.py": "db6f243142a519695405fecc57857b81304cfb9cf7f13cbd7e533cc501760c47"
+  },
+  "source_finish_sha256": {
+    "receiving_core.py": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f",
+    "verify_restored_reproduction.py": "9387aae83e348515999843963ace0acba0cacef2501fbdacbb0cef85bd5ad33e",
+    "test_receiving.py": "db6f243142a519695405fecc57857b81304cfb9cf7f13cbd7e533cc501760c47"
+  },
+  "source_bytes_unchanged": true,
+  "scope": "invented/injected only; no actual cohorts/traces/arrays/checker/generator/SVD/model/optimizer/fit/MCMC/prediction/score"
+}

@@ -1,0 +1,24 @@
+{
+  "actual_scientific_evidence_or_storage_image_read": false,
+  "actual_source_receiving_or_stage_execution": false,
+  "at_utc": "2026-09-29T09:47:29.997174+00:00",
+  "checked_actual_test_lint_processes": {
+    "ruff_final.invocation.json": {
+      "actual_exit_code": 0,
+      "exact_current_source_bytes": true,
+      "sha256": "811d74efc5c6fda82b03994e6571f9a9cb3ce0a087fc0976194cd9c90bf3ac53"
+    },
+    "synthetic_final.invocation.json": {
+      "actual_exit_code": 0,
+      "exact_current_source_bytes": true,
+      "sha256": "5788cc42bc5447d14994a00d7fc5a9379d0b55b53bef55951b1d7fbf26fb5e5c"
+    }
+  },
+  "content_sha256": "069a3b654ddc254742bf1d9fcfcbe43ef3794f7ba6bac101e56ef47bacf8c0c0",
+  "immutable_IO_unchanged": true,
+  "invented_or_injected_only": true,
+  "peer_review": "separate root-assigned source-only review pending after seal",
+  "status": "final_preparation_guards_passed_no_actual_science",
+  "syntax_checks_sha256": "b14ab907aa3b10761b40d95fb990079e90d386f0b036c562af99622c284ee8ef",
+  "test_cases": 43
+}

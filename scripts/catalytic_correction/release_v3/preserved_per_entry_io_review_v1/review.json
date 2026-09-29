@@ -1,0 +1,188 @@
+{
+  "actual_capture_or_receiving_run": false,
+  "actual_subset_or_selection_decided": false,
+  "content_sha256": "f9c01f2ef2c6c8d178277f6442481a9863a93c6228cdbee706ed0d1d42f07d76",
+  "data_or_array_or_trace_opened": false,
+  "engineering_review_only": true,
+  "historic_environment_checker_argv_rc_extra_gate_added": false,
+  "implementation_source_sha256": {
+    "capture_at_location.py": "6eac7cda2a452552ee1e9c3b3aa9ee5909601729a841a75844eea43e9d43ff8d",
+    "capture_original_at_location.py": "2a482751500025c73f7204c280f8e897d786eec54513520acca43adbd57cb8fe",
+    "location_core.py": "e2103480646cb5f26d30e0fbab6a740e53ba52778616c08c0b30fb5fb4cd17f0",
+    "receiving_at_locations.py": "6c56ceb15b19cc19204bf5139c7c9bbb28cb156faed5a5767e18ec53b6ad14b3",
+    "run_selected_at_locations.py": "d444de262d568107db6a822a6c37142e81249810fa5f75e9d947902730fcd616",
+    "selected_at_locations.py": "4c26d2ede68554aee6ad80af3b372a5f5d09e6fb78525dcb0846c294ae7156dd",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_at_locations.py": "e8e51e236d96687c549219091d6b2ca89e9c9a219cf49b48481c6485b51b525f"
+  },
+  "interface_contract_sha256": "c8ee0e7c531d3455dc86cbaee94dd2ceb48d2481a11620561e571d8a720c90ec",
+  "material_findings": [],
+  "no_copy_as_numerical_execution_proof": true,
+  "observations": [
+    {
+      "fact": "Uses the exact original manifest plan-order repeat1/fold1 filter of 92, preserves sorted unique original92 union frozen pilots, and permits alternate roots only for root-chosen frozen pending inherited entries whose current inventory action is reuse_original_outcome. Known verified base evidence, changed/terminal/unresolved and pilot-only entries cannot move. Worker integer is the original filtered plan index; no automatic or score-driven selection.",
+      "id": "fixed_scope_and_pending_only_locations",
+      "sources": {
+        "capture_at_location.py": [
+          230,
+          280
+        ],
+        "location_core.py": [
+          93,
+          185
+        ]
+      }
+    },
+    {
+      "fact": "Every retained prior plan is read through its exact path/SHA and documentary scope bindings. Earlier row roots/attempts cannot be replaced. Walking current-to-old history assigns the first introducing plan SHA, stable on append. Earlier record envelopes must be in retained history with the exact same row; new passes use current envelope. Actual capture retains its exact plan separately. Cyclic/foreign/changed history fails.",
+      "id": "complete_append_only_history",
+      "sources": {
+        "location_core.py": [
+          175,
+          245,
+          258,
+          267,
+          297,
+          311,
+          369,
+          383
+        ]
+      }
+    },
+    {
+      "fact": "Location/choice/audit are supplied root-reviewed byte carriers, not generated approvals. New capture records leave scientific lineage, original owner execution and numerical resolution reviews absent/pending. Current inherited complete input check and original source acquisition remain required. This engineering report is not a root scientific approval.",
+      "id": "root_reviews_remain_external",
+      "sources": {
+        "capture_at_location.py": [
+          378,
+          420
+        ],
+        "location_core.py": [
+          115,
+          185,
+          283,
+          291,
+          357,
+          418
+        ]
+      }
+    },
+    {
+      "fact": "Production CLI has no injection/command/resume/automatic retry interface. Default dispatch is subprocess.run only. Requested interpreter must be samefile with actual interpreter; numeric5 all one; clean exact119/source map/matched/full259 report and unchanged official argv required. Shared declared output is exclusively created and empty before worker dispatch. Actual typed rc0/raw closed logs, source/refit/official receipts and exact scientific_match stdout remain required. Copying cached bytes to a different root cannot meet this route.",
+      "id": "fresh_genuine_numerical_capture",
+      "sources": {
+        "capture_at_location.py": [
+          86,
+          161,
+          207,
+          420
+        ],
+        "capture_original_at_location.py": [
+          20,
+          66
+        ]
+      }
+    },
+    {
+      "fact": "Byte-pinned original selected-v1 controller/science predicates are loaded without masquerading new code as old source. Original current() input proof is checked before alternate reuse; original/default/alternate owners remain barriers. Only local per-entry root changes, restored in finally. Original verify_old_numerical_producer, official receipt/full scientific cell and raw posterior/sample_stats comparisons, trace inventory and root execution/lineage gates are delegated unchanged. Existing changed and terminal child paths remain original.",
+      "id": "source_original_scientific_gates_unchanged",
+      "sources": {
+        "selected_at_locations.py": [
+          20,
+          56,
+          97,
+          148,
+          153,
+          202
+        ]
+      }
+    },
+    {
+      "fact": "Requires exact separate new adapter and old source maps, explicit distinct complete alternate numerical/capture directory mappings, trusted immutable inventories and new external output. Loads old receiving-v1 normally. Temporary historical original-reproduction view is supplied to producer verification; actual restored root to array comparison; both restored in finally. All three final scientific route statuses, fixed selected union and old comparator/producer predicates remain unchanged. No controller execute/resume dispatch or generator/model/optimizer route is added.",
+      "id": "receiving_path_separation",
+      "sources": {
+        "receiving_at_locations.py": [
+          17,
+          58,
+          61,
+          158
+        ]
+      }
+    },
+    {
+      "fact": "Full alternate capture/refit trees include every file, orphan/failure and empty directory and are rehashed/reinventoried. Exact actual request/plan/raw attempts/streams/producer/official acquisition records are checked. Symlinks, aliases, copied-root equivalence, existing output and overwrite are refused. Nonzero/partial/launch/publication failures remain retained and cannot authorize automatic retry.",
+      "id": "retention_write_once_failure",
+      "sources": {
+        "capture_at_location.py": [
+          127,
+          183,
+          312,
+          420
+        ],
+        "location_core.py": [
+          269,
+          281,
+          313,
+          354,
+          357,
+          421
+        ],
+        "selected_at_locations.py": [
+          59,
+          94,
+          119,
+          148
+        ]
+      }
+    },
+    {
+      "fact": "All ten pre-existing capture definitions other than capture are AST-identical. capture adds I/O plan/current-input/owner/retained-request bindings and leaves original dispatch law intact. Eleven final source hashes match producer retained rc0 test/Ruff before/after maps and syntax receipt; 53 invented/injected tests cover metadata/history/routing failures. They were read, not run by this reviewer, and do not establish real numerical or receiving execution.",
+      "id": "source_delta_and_retained_tests",
+      "sources": {
+        "capture_at_location.py": [
+          1,
+          420
+        ],
+        "fictional_support.py": [
+          1,
+          92
+        ],
+        "test_capture_locations.py": [
+          1,
+          352
+        ],
+        "test_locations.py": [
+          1,
+          454
+        ]
+      }
+    },
+    {
+      "fact": "Sealed release-v2 bytes remain unchanged and intentionally reject these separately pinned wrappers. Actual adoption requires the documented separate narrow retained-tree/runtime/plan/source-receiving capture wiring; no archive transport or scientific reducer change is performed here. This is a known integration dependency, not a claim that release-v2 accepts the new evidence.",
+      "id": "release_adoption_explicit_pending",
+      "sources": {
+        "README.md": [
+          1,
+          41
+        ],
+        "RELEASE_COMPATIBILITY.md": [
+          1,
+          18
+        ]
+      }
+    }
+  ],
+  "one_of_five_scientific_root_approvals": false,
+  "schema_version": 1,
+  "source_only": true,
+  "status": "source_only_per_entry_io_peer_review_clean",
+  "target_import_or_tests_executed": false,
+  "target_preparation_content_sha256": "e38e82be27f8c8585d389cfbcc780861cdd6a927346e22096c2fff45c993b8ae",
+  "target_preparation_receipt_sha256": "6670b27e78fb05f7c266cc52b72241a4b477f5d9a27213e8882bdcbd1038f366",
+  "target_root": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_io_v1",
+  "test_source_sha256": {
+    "fictional_support.py": "943d5104e1778de25a3253918b2a5c857dcde197bcbd57522f93c4bcd60b0b88",
+    "test_capture_locations.py": "8966de4b62dd5e1a526fadba010b68cff1c6c0e58bd39956a866a23ef091da03",
+    "test_locations.py": "5eb256e751c9ae99fe2b4d986aee4923b8852ad04f0fd4f66cb73e4b01b306af"
+  }
+}

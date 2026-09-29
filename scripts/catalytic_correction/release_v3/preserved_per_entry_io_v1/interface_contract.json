@@ -1,0 +1,217 @@
+{
+  "actual_producer_audit": {
+    "each_entry": {
+      "current_input_witness_sha256": "same witness hash",
+      "default_original_reproduction_owner_finished": true,
+      "pending_base_entry_sha256": "same pending hash",
+      "status": "existing_actual_numerical_producer_proof_genuinely_unavailable"
+    },
+    "required_fields": [
+      "selection_sha256",
+      "original_numerical_evidence_sha256",
+      "entries"
+    ],
+    "reviewer_role": "root",
+    "status": "original_numerical_producer_availability_reviewed"
+  },
+  "actual_reviews_created": false,
+  "actual_science_executed": false,
+  "actual_subset_location_review_or_execution": null,
+  "additional_acquisition_fields": {
+    "actual_location_plan": [
+      "path",
+      "sha256"
+    ],
+    "actual_location_plan_meaning": "exact retained reviewed plan used by actual capture",
+    "existing_status": "reviewed_original_numerical_evidence_resolution",
+    "location_plan_sha256": "first retained plan introducing entry",
+    "old_evidence_and_scientific_gates": "all unchanged",
+    "reproduction_location": [
+      "original_cell_id",
+      "location_plan_sha256",
+      "historical_reproduction_root",
+      "capture_root",
+      "original_plan_selected_index",
+      "pending_base_entry_sha256",
+      "current_input_witness_sha256",
+      "io_adapter_source_sha256"
+    ]
+  },
+  "capture_pending_status": "original_missing_producer_execution_captured_root_review_pending",
+  "capture_request": {
+    "location_plan": [
+      "path",
+      "sha256"
+    ],
+    "retained_request": "request_capture.json exact source bytes",
+    "route": "official_fresh_refit",
+    "schema_version": 1,
+    "status": "root_selected_original_producer_completion_request",
+    "test_only": false,
+    "unchanged_fields": [
+      "source",
+      "original_run",
+      "selected_reproduction_selection",
+      "root_missing_producer_choice",
+      "original_cell_id",
+      "workers",
+      "worker",
+      "matched",
+      "expected_environment_report",
+      "lock_hash_file_sha256",
+      "reproduction_output",
+      "capture_output"
+    ],
+    "worker": "exact original plan-order index, NOT sorted scope position"
+  },
+  "content_sha256": "c0645de8bb51f97b393b5ab691ebb346c804447286c7e248baedfb8a773896c2",
+  "fixed_scope_rule": "sorted_unique(original_plan_repeat1_fold1_92_union_frozen_full_budget_pilots)",
+  "historical_environment_checker_argv_rc_gate_added": false,
+  "implementation_source_sha256": {
+    "capture_at_location.py": "6eac7cda2a452552ee1e9c3b3aa9ee5909601729a841a75844eea43e9d43ff8d",
+    "capture_original_at_location.py": "2a482751500025c73f7204c280f8e897d786eec54513520acca43adbd57cb8fe",
+    "location_core.py": "e2103480646cb5f26d30e0fbab6a740e53ba52778616c08c0b30fb5fb4cd17f0",
+    "receiving_at_locations.py": "6c56ceb15b19cc19204bf5139c7c9bbb28cb156faed5a5767e18ec53b6ad14b3",
+    "run_selected_at_locations.py": "d444de262d568107db6a822a6c37142e81249810fa5f75e9d947902730fcd616",
+    "selected_at_locations.py": "4c26d2ede68554aee6ad80af3b372a5f5d09e6fb78525dcb0846c294ae7156dd",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_at_locations.py": "e8e51e236d96687c549219091d6b2ca89e9c9a219cf49b48481c6485b51b525f"
+  },
+  "legacy_preparation_receipt_sha256": {
+    "capture": "2a8530662d20936ac9f84a93db83b558abf6c1651a4df5039925cc616df72ea1",
+    "receiving": "fe0662adacbf29bc356d7c19f7abd40b2b6304cb9f683673fce1e7ae39f1e1ba",
+    "selected": "43f2dba209a4d068df7122a3be956d295f7810601272b271fa996ad5a27aa95b"
+  },
+  "legacy_source_sha256": {
+    "capture": {
+      "capture_original_producer.py": "71ce704199512379024a53b5de3add15ca74be5ea73dc093e2ae4685d5af35e3",
+      "producer_capture.py": "c8c10daace6f44ebcfd0305cbd48954d1db4afedae442103b69d736053ffb95e",
+      "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8"
+    },
+    "receiving": {
+      "receiving_core.py": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f",
+      "verify_restored_reproduction.py": "9387aae83e348515999843963ace0acba0cacef2501fbdacbb0cef85bd5ad33e"
+    },
+    "selected": {
+      "reproduction_core.py": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5",
+      "run_reproduction.py": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c",
+      "terminal_replay_child.py": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    }
+  },
+  "location_plan": {
+    "append_only": "all prior entries/science/source bindings preserved; current complete history retained",
+    "bound_records": {
+      "actual_producer_audit": [
+        "path",
+        "sha256"
+      ],
+      "io_adapter_preparation": [
+        "path",
+        "sha256"
+      ],
+      "previous_plan": "null for first, else exact path/sha256 prior plan",
+      "root_missing_producer_choice": [
+        "path",
+        "sha256"
+      ]
+    },
+    "entry_locations": {
+      "entry_fields": {
+        "capture_root": "safe distinct absent absolute capture directory",
+        "current_input_witness_sha256": "frozen complete inherited input witness file-byte SHA",
+        "historical_reproduction_root": "safe distinct absent absolute numerical output directory",
+        "original_cell_id": "exact original92 key",
+        "original_plan_selected_index": "integer original manifest filtered plan-order index 0..91",
+        "pending_base_entry_sha256": "canonical frozen pending entry SHA",
+        "producer_route": "official_fresh_refit",
+        "workers": 92
+      },
+      "key": "only exact root-chosen pending inherited original92 identities"
+    },
+    "hash_fields": [
+      "selection_sha256",
+      "scope_definition_sha256",
+      "original_manifest_sha256",
+      "input_inventory_sha256",
+      "definition_content_sha256",
+      "original_numerical_evidence_sha256"
+    ],
+    "historical_plan_path": "absolute historical file role",
+    "legacy_code_roots": [
+      "selected",
+      "receiving",
+      "capture"
+    ],
+    "reviewer_role": "root",
+    "schema_version": 1,
+    "source_maps": [
+      "io_adapter_source_sha256",
+      "legacy_source_sha256"
+    ],
+    "status": "root_reviewed_original_numerical_output_locations"
+  },
+  "original_full259_report_and_all_actual_numerical_scientific_gates_preserved": true,
+  "owned_selected_records": {
+    "completed_pass": "current reviewed location envelope; original scientific scope/status fields unchanged",
+    "earlier_records": "exact retained historical envelopes accepted; never rewritten",
+    "external_artifacts": "all source/history/review/witness and retained full tree byte bindings",
+    "location_extension": [
+      "location_plan_path",
+      "location_plan_sha256",
+      "io_adapter_source_sha256",
+      "legacy_source_sha256",
+      "selection_bytes_rewritten"
+    ],
+    "reproduction_location": "explicit extra metadata for chosen entries, null for default",
+    "retained_per_entry_trees": "completed alternate acquisition metadata plus full numerical/capture artifacts/directories"
+  },
+  "production_receiving_status": "corrected_selected_reproduction_restored_read_only_verified",
+  "real_process_rc0_capture": "future reviewed caller must capture genuine default subprocess rc/argv/source/raw logs separately",
+  "receiving_bindings": {
+    "additional_fields": {
+      "location_extension": {
+        "io_adapter_source_sha256": "exact new eight-source map",
+        "location_plan": [
+          "historical_path",
+          "sha256"
+        ]
+      },
+      "location_receiving_code": "explicit ACTUAL byte-identical old receiving-v1 source/preparation directory"
+    },
+    "base_status": "corrected_selected_reproduction_receiving_bindings",
+    "output": "fresh external; immutable restore and selected controller untouched",
+    "own_preparation": "passed as explicit path/SHA CLI argument and bound within location plan",
+    "path_map": "exact explicit directory map for every alternate numerical/capture root; trusted full inventories and all original resolver laws retained",
+    "unchanged_source_maps": [
+      "reproduction_source_sha256",
+      "receiving_source_sha256"
+    ]
+  },
+  "release_v2_adoption": "requires separately reviewed narrow wiring; current sealed release-v2 unchanged",
+  "retry_policy": "one declared absent root per identity; retained failure cannot trigger automatic new attempt or overwrite; further explicit attempt design required",
+  "root_missing_producer_choice": {
+    "automatic_all92_rerun": false,
+    "reason": "existing_actual_numerical_producer_proof_genuinely_unavailable",
+    "required_fields": [
+      "selection_sha256",
+      "original_manifest_sha256",
+      "selected_missing_producer_cell_ids",
+      "reason",
+      "source_score_selection",
+      "automatic_all92_rerun"
+    ],
+    "source_score_selection": false,
+    "status": "root_selected_missing_original_producer_proofs"
+  },
+  "schema_version": 1,
+  "selection_bytes_rewritten": false,
+  "status": "original_reproduction_per_entry_io_preparation_contract",
+  "synthetic_receiving_status": "synthetic_receiving_verification_fixture_passed",
+  "test_only_dependency_injection_production": false,
+  "three_scientific_routes_unchanged": [
+    "reused_verified_original_numerical_reproduction",
+    "new_corrected_numerical_reproduction",
+    "terminal_no_fit_recipe_replay"
+  ],
+  "unsupported_alias_or_dedup_maps": false
+}

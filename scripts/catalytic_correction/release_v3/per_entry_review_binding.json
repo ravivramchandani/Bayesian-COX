@@ -1,0 +1,48 @@
+{
+  "artifacts": {
+    "REPORT.md": {
+      "bytes": 5169,
+      "sha256": "92bbf7394bda746043c8613c870dbdc176f371ca0a44aa5e89a5df0eee7096db"
+    },
+    "artifact_checks.json": {
+      "bytes": 46107,
+      "sha256": "0177b47e12d07182e9f0dd4f33b348588af6b2057393e28929c55ffcb138fa51"
+    },
+    "capture_ast_delta.json": {
+      "bytes": 1154,
+      "sha256": "3f4701f6cbd0e26bc7edc3a3ef4179a079cd431d24e5ff9ae638fc01e6b4282f"
+    },
+    "capture_source_delta.patch": {
+      "bytes": 10431,
+      "sha256": "3fc9309781e0cb4efebf91a501d52775e60464a6d865cca644f83535a79d800a"
+    },
+    "receipt.json": {
+      "bytes": 2811,
+      "sha256": "af971b9dc4b3a9e016110e3cf8cab4996dd5f0444ea0ab5009856a28744091d5"
+    },
+    "retained_test_evidence_checks.json": {
+      "bytes": 1367,
+      "sha256": "44c2d43cbdcb9e10cb22c2bbb62ec29f87bdb4692030b7420a6c071852778eac"
+    },
+    "review.json": {
+      "bytes": 9011,
+      "sha256": "426cbbb7d3fca85e4fbe466762a52e9c40fb3fdb441e44a998752a9099fadd7a"
+    },
+    "scope.json": {
+      "bytes": 1034,
+      "sha256": "572035cdf4e5a46e1bd27ff2ea0534a7bbfd75b2ead11ec4fdacfd963203eac2"
+    },
+    "static_source_inventory.json": {
+      "bytes": 6538,
+      "sha256": "63028e88dda264012ebc0b211f33db2589a1fe11e4fbcadfac1be27ae712e009"
+    },
+    "transport_predecessor_checks.json": {
+      "bytes": 26022,
+      "sha256": "840375f056b4b191baa8a61e5ffde3a5033ffa3cbc255de32c0ac4f8dc5f97f3"
+    }
+  },
+  "copied_root": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v3/preserved_per_entry_io_review_v1",
+  "receipt_sha256": "af971b9dc4b3a9e016110e3cf8cab4996dd5f0444ea0ab5009856a28744091d5",
+  "scientific_or_launch_approval_conferred": false,
+  "source_root": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_io_review_v1"
+}

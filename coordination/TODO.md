@@ -625,8 +625,19 @@ reporting replay remains a separate pre-publication gate.
   the prior 349 files and all 157 original source/build/lock files unchanged.
   The separate per-entry integration record retains actual commands, raw
   diagnostics, restored guide variants and root archival lookup errors.
-  Actual missing-subset selection, plan adoption, execution and separately
-  pinned release wiring remain pending.
+  Actual missing-subset selection, plan adoption and execution remain pending.
+  Separately pinned release-v3 wiring is now integrated with its complete
+  233-file carrier and 196 unchanged predecessor files. Focused checks passed
+  33 tests/17 subtests; full locked make test passed 998 tests/157 subtests
+  without skips at 12:50 UTC. Ruff and schemas passed; all 634 captured files,
+  prior 399/349-file checkpoints and all 157 original source/build/lock files
+  remain unchanged. Source and portable-test peer reviews found no material
+  blocker. The four exact preparation/review archives and separate v3
+  integration record retain the earlier failures and root lookup/check errors.
+  Actual source capture, staging, packaging and fresh receiving verification
+  remain pending scientific evidence. Before any corrected pilot score,
+  validate and freeze the actual ADR-041 selection/scope review; verify that
+  dispatch enforces this gate in addition to the five-review freeze.
   The read-only observer registered all nine original owners at 11:16 UTC
   to capture future genuine exits; it supplies no past return code or numerical
   approval. The 52-member curated incident preparation preserves the exact

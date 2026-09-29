@@ -1,0 +1,21 @@
+{
+  "scope": "AST and JSON parsing only; no science",
+  "checks": {
+    "receiving_core.py": {
+      "syntax": "passed",
+      "sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f"
+    },
+    "verify_restored_reproduction.py": {
+      "syntax": "passed",
+      "sha256": "9387aae83e348515999843963ace0acba0cacef2501fbdacbb0cef85bd5ad33e"
+    },
+    "test_receiving.py": {
+      "syntax": "passed",
+      "sha256": "db6f243142a519695405fecc57857b81304cfb9cf7f13cbd7e533cc501760c47"
+    },
+    "interface_contract.json": {
+      "json": "passed",
+      "sha256": "42d8493f21fd3f956a7e4587b086d6db09b6a9c7fc3e829cc520d61198c68484"
+    }
+  }
+}

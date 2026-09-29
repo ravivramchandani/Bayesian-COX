@@ -1,0 +1,30 @@
+{
+  "added_definitions": [
+    "load_new_helper"
+  ],
+  "changed_definitions": [
+    "capture"
+  ],
+  "content_sha256": "51e668ec356bc5bfa79f7fbdb6e141381e6d6b603c96fabadbcc28a02253e0e2",
+  "new_source_path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_io_v1/capture_at_location.py",
+  "new_source_sha256": "6eac7cda2a452552ee1e9c3b3aa9ee5909601729a841a75844eea43e9d43ff8d",
+  "numeric_tuple_and_policy_constants_unchanged": true,
+  "old_source_path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/producer_capture.py",
+  "old_source_sha256": "c8c10daace6f44ebcfd0305cbd48954d1db4afedae442103b69d736053ffb95e",
+  "original_reserved_empty_environment_source_argv_official_receipt_and_log_gates_retained": true,
+  "removed_definitions": [],
+  "status": "source_only_capture_delta_checked",
+  "target_import_or_execution": false,
+  "unchanged_definitions": [
+    "Policy",
+    "binding",
+    "bound_record",
+    "git_state",
+    "no_overlap",
+    "original_selected",
+    "output_inventory",
+    "raw_json",
+    "run_captured",
+    "runtime"
+  ]
+}

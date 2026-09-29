@@ -1,0 +1,58 @@
+{
+  "actual_science_producer_receiver_or_package_invoked": false,
+  "argv": [
+    "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "ruff",
+    "check",
+    "--no-cache",
+    "--select",
+    "E,F,I,UP,B",
+    "--ignore",
+    "E501",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v3/release_v3_core.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v3/stage_corrected_extensions_v3.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v3/capture_per_entry_source_v3.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v3/verify_restored_correction_v3.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v3/test_release_v3.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v3/run_preparation_checks.py"
+  ],
+  "content_sha256": "cf4666710adba02899ed48aabd8e74ed8a5722b6d439d945c900b44ad3c0e810",
+  "cwd": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v3",
+  "exit_code": 0,
+  "finished_at_utc": "2026-09-29T12:02:31.669733+00:00",
+  "invented_or_injected_fixture_scope_only": true,
+  "numeric_thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "phase": "ruff",
+  "schema_version": 1,
+  "source_sha256_after": {
+    "capture_per_entry_source_v3.py": "c58a66cc22e668fc2377530d114ed16fceb07f58f23cc2b5df0d385ee89412ae",
+    "release_v3_core.py": "2e74cb35c5e3074c8e724a8e4d3030e5af59ab17f2193049f680794db33d8e90",
+    "run_preparation_checks.py": "65393969f8215bfe3fd8fcc2d4af1b081736d955bb2d44311a0823e4a3113db9",
+    "stage_corrected_extensions_v3.py": "91d0430405ec0841c3b1b37d85567c2a0c92abf5585addf2d7bad29d6b75acd4",
+    "test_release_v3.py": "c4bbc2dfbe0b847915af221bc66a9642ceabae4821b4579e0bb65320145a007e",
+    "verify_restored_correction_v3.py": "9c6f5372edb32b937f2a8e926fad62a5d75ea1f1f7477dad0a78803d0ee11dea"
+  },
+  "source_sha256_before": {
+    "capture_per_entry_source_v3.py": "c58a66cc22e668fc2377530d114ed16fceb07f58f23cc2b5df0d385ee89412ae",
+    "release_v3_core.py": "2e74cb35c5e3074c8e724a8e4d3030e5af59ab17f2193049f680794db33d8e90",
+    "run_preparation_checks.py": "65393969f8215bfe3fd8fcc2d4af1b081736d955bb2d44311a0823e4a3113db9",
+    "stage_corrected_extensions_v3.py": "91d0430405ec0841c3b1b37d85567c2a0c92abf5585addf2d7bad29d6b75acd4",
+    "test_release_v3.py": "c4bbc2dfbe0b847915af221bc66a9642ceabae4821b4579e0bb65320145a007e",
+    "verify_restored_correction_v3.py": "9c6f5372edb32b937f2a8e926fad62a5d75ea1f1f7477dad0a78803d0ee11dea"
+  },
+  "source_unchanged": true,
+  "started_at_utc": "2026-09-29T12:02:31.613833+00:00",
+  "status": "bounded_release_v3_preparation_check_invocation",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+  "wall_seconds": 0.055723083001794294
+}

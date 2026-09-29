@@ -1,0 +1,1354 @@
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF                            [100%]
+=================================== FAILURES ===================================
+_ ReceivingTests.test_actual_official_numerical_producer_and_distinct_comparator _
+
+self = <test_receiving.ReceivingTests testMethod=test_actual_official_numerical_producer_and_distinct_comparator>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_ ReceivingTests.test_actual_prestage_producer_and_cached_official_comparison __
+
+self = <test_receiving.ReceivingTests testMethod=test_actual_prestage_producer_and_cached_official_comparison>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_________ ReceivingTests.test_cached_official_comparison_alone_refused _________
+
+self = <test_receiving.ReceivingTests testMethod=test_cached_official_comparison_alone_refused>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_____ ReceivingTests.test_changed_actual_execution_and_sample_recomparison _____
+
+self = <test_receiving.ReceivingTests testMethod=test_changed_actual_execution_and_sample_recomparison>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_______ ReceivingTests.test_changed_complete_role_hash_receipt_required ________
+
+self = <test_receiving.ReceivingTests testMethod=test_changed_complete_role_hash_receipt_required>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+____ ReceivingTests.test_changed_extra_budget_or_wrong_seed_request_refused ____
+
+self = <test_receiving.ReceivingTests testMethod=test_changed_extra_budget_or_wrong_seed_request_refused>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+________ ReceivingTests.test_changed_nonzero_actual_child_not_accepted _________
+
+self = <test_receiving.ReceivingTests testMethod=test_changed_nonzero_actual_child_not_accepted>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_ ReceivingTests.test_changed_sample_array_disagreement_not_hidden_by_receipt __
+
+self = <test_receiving.ReceivingTests testMethod=test_changed_sample_array_disagreement_not_hidden_by_receipt>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___________ ReceivingTests.test_complete_pass_exact_sorted_coverage ____________
+
+self = <test_receiving.ReceivingTests testMethod=test_complete_pass_exact_sorted_coverage>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___________ ReceivingTests.test_document_byte_content_and_nan_guards ___________
+
+self = <test_receiving.ReceivingTests testMethod=test_document_byte_content_and_nan_guards>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___________ ReceivingTests.test_frozen_original92_union_pilot_scope ____________
+
+self = <test_receiving.ReceivingTests testMethod=test_frozen_original92_union_pilot_scope>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_ ReceivingTests.test_historical_actual_producer_missing_commit_input_coverage_refused _
+
+self = <test_receiving.ReceivingTests testMethod=test_historical_actual_producer_missing_commit_input_coverage_refused>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+__ ReceivingTests.test_historical_cached_compare_flag_must_match_actual_route __
+
+self = <test_receiving.ReceivingTests testMethod=test_historical_cached_compare_flag_must_match_actual_route>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_____ ReceivingTests.test_historical_producer_source_input_tamper_refused ______
+
+self = <test_receiving.ReceivingTests testMethod=test_historical_producer_source_input_tamper_refused>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_____ ReceivingTests.test_mapped_common_forbids_restore_writes_and_claims ______
+
+self = <test_receiving.ReceivingTests testMethod=test_mapped_common_forbids_restore_writes_and_claims>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+__________ ReceivingTests.test_mapped_common_read_preserves_document ___________
+
+self = <test_receiving.ReceivingTests testMethod=test_mapped_common_read_preserves_document>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___ ReceivingTests.test_nonpilot_requires_supplied_full_budget_pilot_review ____
+
+self = <test_receiving.ReceivingTests testMethod=test_nonpilot_requires_supplied_full_budget_pilot_review>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_ ReceivingTests.test_original_failed_outcome_comparison_is_not_claimed_samples _
+
+self = <test_receiving.ReceivingTests testMethod=test_original_failed_outcome_comparison_is_not_claimed_samples>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_____ ReceivingTests.test_original_numerical_resolution_only_fills_pending _____
+
+self = <test_receiving.ReceivingTests testMethod=test_original_numerical_resolution_only_fills_pending>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_ ReceivingTests.test_original_sample_value_mismatch_refused_even_when_resealed _
+
+self = <test_receiving.ReceivingTests testMethod=test_original_sample_value_mismatch_refused_even_when_resealed>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_ ReceivingTests.test_original_science_and_sample_comparison_reads_invented_samples _
+
+self = <test_receiving.ReceivingTests testMethod=test_original_science_and_sample_comparison_reads_invented_samples>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___________ ReceivingTests.test_original_scientific_mismatch_refused ___________
+
+self = <test_receiving.ReceivingTests testMethod=test_original_scientific_mismatch_refused>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_ ReceivingTests.test_preparation_ast_no_generator_model_fit_or_scoring_dispatch _
+
+self = <test_receiving.ReceivingTests testMethod=test_preparation_ast_no_generator_model_fit_or_scoring_dispatch>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+__________ ReceivingTests.test_record_cannot_promote_retained_failure __________
+
+self = <test_receiving.ReceivingTests testMethod=test_record_cannot_promote_retained_failure>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+__ ReceivingTests.test_recorded_argv_duplicate_wrong_relative_source_refused ___
+
+self = <test_receiving.ReceivingTests testMethod=test_recorded_argv_duplicate_wrong_relative_source_refused>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+________ ReceivingTests.test_resolver_all_failed_orphan_bytes_are_bound ________
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_all_failed_orphan_bytes_are_bound>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_____ ReceivingTests.test_resolver_consistent_nested_file_mapping_allowed ______
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_consistent_nested_file_mapping_allowed>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___________ ReceivingTests.test_resolver_duplicate_mapping_rejected ____________
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_duplicate_mapping_rejected>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___________ ReceivingTests.test_resolver_extra_orphan_file_rejected ____________
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_extra_orphan_file_rejected>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+______ ReceivingTests.test_resolver_inconsistent_nested_mapping_rejected _______
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_inconsistent_nested_mapping_rejected>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+____ ReceivingTests.test_resolver_maps_without_rewriting_original_document _____
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_maps_without_rewriting_original_document>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+__________ ReceivingTests.test_resolver_missing_pinned_file_rejected ___________
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_missing_pinned_file_rejected>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_____________ ReceivingTests.test_resolver_overlap_output_rejected _____________
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_overlap_output_rejected>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_______ ReceivingTests.test_resolver_receiving_alias_ambiguity_rejected ________
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_receiving_alias_ambiguity_rejected>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_________ ReceivingTests.test_resolver_refuses_unknown_historical_file _________
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_refuses_unknown_historical_file>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___________ ReceivingTests.test_resolver_rejects_relative_traversal ____________
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_rejects_relative_traversal>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+____________ ReceivingTests.test_resolver_symlink_evidence_rejected ____________
+
+self = <test_receiving.ReceivingTests testMethod=test_resolver_symlink_evidence_rejected>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_________ ReceivingTests.test_runtime_accepts_samefile_and_numeric_one _________
+
+self = <test_receiving.ReceivingTests testMethod=test_runtime_accepts_samefile_and_numeric_one>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___ ReceivingTests.test_runtime_alias_samefile_allowed_only_for_interpreter ____
+
+self = <test_receiving.ReceivingTests testMethod=test_runtime_alias_samefile_allowed_only_for_interpreter>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_________ ReceivingTests.test_runtime_refuses_missing_numeric_variable _________
+
+self = <test_receiving.ReceivingTests testMethod=test_runtime_refuses_missing_numeric_variable>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+__ ReceivingTests.test_runtime_refuses_wrong_interpreter_before_binding_reads __
+
+self = <test_receiving.ReceivingTests testMethod=test_runtime_refuses_wrong_interpreter_before_binding_reads>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+_ ReceivingTests.test_terminal_later_acquisition_preserves_exact_pending_decision _
+
+self = <test_receiving.ReceivingTests testMethod=test_terminal_later_acquisition_preserves_exact_pending_decision>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+________________ ReceivingTests.test_write_new_never_overwrites ________________
+
+self = <test_receiving.ReceivingTests testMethod=test_write_new_never_overwrites>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+___________ ReceivingTests.test_wrong_actual_prestage_helper_refused ___________
+
+self = <test_receiving.ReceivingTests testMethod=test_wrong_actual_prestage_helper_refused>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+________ ReceivingTests.test_wrong_actual_prestage_worker_shard_refused ________
+
+self = <test_receiving.ReceivingTests testMethod=test_wrong_actual_prestage_worker_shard_refused>
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+>       self.f = Fixture(self.root)
+                 ^^^^^^^^^^^^^^^^^^
+
+test_receiving.py:317: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+test_receiving.py:133: in __init__
+    self.selection_sha = r.binding(self.repro / "selection.json")["sha256"]
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+receiving_core.py:68: in binding
+    absolute(path)
+receiving_core.py:51: in absolute
+    require(not any(part.is_symlink() for part in (path, *path.parents)), "symlinked receiving evidence refused")
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+condition = False, message = 'symlinked receiving evidence refused'
+
+    def require(condition: bool, message: str) -> None:
+        if not condition:
+>           raise InvalidEvidence(message)
+E           restore_under_test.InvalidEvidence: symlinked receiving evidence refused
+
+receiving_core.py:46: InvalidEvidence
+=========================== short test summary info ============================
+FAILED test_receiving.py::ReceivingTests::test_actual_official_numerical_producer_and_distinct_comparator
+FAILED test_receiving.py::ReceivingTests::test_actual_prestage_producer_and_cached_official_comparison
+FAILED test_receiving.py::ReceivingTests::test_cached_official_comparison_alone_refused
+FAILED test_receiving.py::ReceivingTests::test_changed_actual_execution_and_sample_recomparison
+FAILED test_receiving.py::ReceivingTests::test_changed_complete_role_hash_receipt_required
+FAILED test_receiving.py::ReceivingTests::test_changed_extra_budget_or_wrong_seed_request_refused
+FAILED test_receiving.py::ReceivingTests::test_changed_nonzero_actual_child_not_accepted
+FAILED test_receiving.py::ReceivingTests::test_changed_sample_array_disagreement_not_hidden_by_receipt
+FAILED test_receiving.py::ReceivingTests::test_complete_pass_exact_sorted_coverage
+FAILED test_receiving.py::ReceivingTests::test_document_byte_content_and_nan_guards
+FAILED test_receiving.py::ReceivingTests::test_frozen_original92_union_pilot_scope
+FAILED test_receiving.py::ReceivingTests::test_historical_actual_producer_missing_commit_input_coverage_refused
+FAILED test_receiving.py::ReceivingTests::test_historical_cached_compare_flag_must_match_actual_route
+FAILED test_receiving.py::ReceivingTests::test_historical_producer_source_input_tamper_refused
+FAILED test_receiving.py::ReceivingTests::test_mapped_common_forbids_restore_writes_and_claims
+FAILED test_receiving.py::ReceivingTests::test_mapped_common_read_preserves_document
+FAILED test_receiving.py::ReceivingTests::test_nonpilot_requires_supplied_full_budget_pilot_review
+FAILED test_receiving.py::ReceivingTests::test_original_failed_outcome_comparison_is_not_claimed_samples
+FAILED test_receiving.py::ReceivingTests::test_original_numerical_resolution_only_fills_pending
+FAILED test_receiving.py::ReceivingTests::test_original_sample_value_mismatch_refused_even_when_resealed
+FAILED test_receiving.py::ReceivingTests::test_original_science_and_sample_comparison_reads_invented_samples
+FAILED test_receiving.py::ReceivingTests::test_original_scientific_mismatch_refused
+FAILED test_receiving.py::ReceivingTests::test_preparation_ast_no_generator_model_fit_or_scoring_dispatch
+FAILED test_receiving.py::ReceivingTests::test_record_cannot_promote_retained_failure
+FAILED test_receiving.py::ReceivingTests::test_recorded_argv_duplicate_wrong_relative_source_refused
+FAILED test_receiving.py::ReceivingTests::test_resolver_all_failed_orphan_bytes_are_bound
+FAILED test_receiving.py::ReceivingTests::test_resolver_consistent_nested_file_mapping_allowed
+FAILED test_receiving.py::ReceivingTests::test_resolver_duplicate_mapping_rejected
+FAILED test_receiving.py::ReceivingTests::test_resolver_extra_orphan_file_rejected
+FAILED test_receiving.py::ReceivingTests::test_resolver_inconsistent_nested_mapping_rejected
+FAILED test_receiving.py::ReceivingTests::test_resolver_maps_without_rewriting_original_document
+FAILED test_receiving.py::ReceivingTests::test_resolver_missing_pinned_file_rejected
+FAILED test_receiving.py::ReceivingTests::test_resolver_overlap_output_rejected
+FAILED test_receiving.py::ReceivingTests::test_resolver_receiving_alias_ambiguity_rejected
+FAILED test_receiving.py::ReceivingTests::test_resolver_refuses_unknown_historical_file
+FAILED test_receiving.py::ReceivingTests::test_resolver_rejects_relative_traversal
+FAILED test_receiving.py::ReceivingTests::test_resolver_symlink_evidence_rejected
+FAILED test_receiving.py::ReceivingTests::test_runtime_accepts_samefile_and_numeric_one
+FAILED test_receiving.py::ReceivingTests::test_runtime_alias_samefile_allowed_only_for_interpreter
+FAILED test_receiving.py::ReceivingTests::test_runtime_refuses_missing_numeric_variable
+FAILED test_receiving.py::ReceivingTests::test_runtime_refuses_wrong_interpreter_before_binding_reads
+FAILED test_receiving.py::ReceivingTests::test_terminal_later_acquisition_preserves_exact_pending_decision
+FAILED test_receiving.py::ReceivingTests::test_write_new_never_overwrites - r...
+FAILED test_receiving.py::ReceivingTests::test_wrong_actual_prestage_helper_refused
+FAILED test_receiving.py::ReceivingTests::test_wrong_actual_prestage_worker_shard_refused
+45 failed in 5.12s

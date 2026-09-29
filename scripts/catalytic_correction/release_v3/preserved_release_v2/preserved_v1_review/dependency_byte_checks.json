@@ -1,0 +1,46 @@
+{
+  "checked_source_and_preparation_bytes": {
+    "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/scripts/extension_release/archive_common.py": {
+      "bytes": 8647,
+      "sha256": "e873967f9074bf2feee1be06f2ad7d883b3639228652dcf0d1f31072220f4118"
+    },
+    "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/scripts/extension_release/package.py": {
+      "bytes": 9672,
+      "sha256": "70856d7cdb73362c203907c7ab784e73b6520c323c27f31f2449b7ba183ff6b8"
+    },
+    "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/scripts/extension_release/qa_transfer.py": {
+      "bytes": 12336,
+      "sha256": "49be829acf5efd8e18500bf59c6c4ba619d5f730c52d8f76e74e13b4cff95506"
+    },
+    "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/scripts/extension_release/stage_extensions.py": {
+      "bytes": 17631,
+      "sha256": "b7aba74dbf5da9cec25f79068559a2c2d01a5af5d2a4f7c878732af3f6533f71"
+    },
+    "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/scripts/extension_release/verify.py": {
+      "bytes": 16591,
+      "sha256": "9e79b63f474a799bb6b8a5dfd0e41ed13b6f71341d910575f79f34f06a29c50c"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_review_v1/receipt.json": {
+      "bytes": 1993,
+      "sha256": "a53024d4b88cedcdf96232ebd82c92b701616154a94b61662a09003080eeaa6b"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reporting_qa_v1/preparation_receipt.json": {
+      "bytes": 8216,
+      "sha256": "70604211ceeab2c257ce1c6610cf07b140ee700c84b28b54df48d3652ee65add"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_restore_v1/preparation_receipt.json": {
+      "bytes": 7504,
+      "sha256": "fe0662adacbf29bc356d7c19f7abd40b2b6304cb9f683673fce1e7ae39f1e1ba"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_v1/preparation_receipt.json": {
+      "bytes": 9202,
+      "sha256": "43f2dba209a4d068df7122a3be956d295f7810601272b271fa996ad5a27aa95b"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_verification_v2/preparation_receipt.json": {
+      "bytes": 18105,
+      "sha256": "5efe4d332cb6c89b8e75daeb4b7aaa883dbd42b180511d92092bb176bd5e1536"
+    }
+  },
+  "no_target_execution": true,
+  "related_capture_source_sha256": "2331916a66ccd11aebfc9f5e9ac7d19eea8c47950ca0ac64e6946721356831ed"
+}

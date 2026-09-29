@@ -1,0 +1,29 @@
+{
+  "actual_scientific_execution": false,
+  "argv": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_release_adapters"
+  ],
+  "cwd": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1",
+  "exit_code": 0,
+  "finished_at_utc": "2026-09-29T09:12:50.488811+00:00",
+  "source_sha256_after": {
+    "release_core.py": "8b134356c8fb9d3957a9c181f44d0d679263e137c7039395e226b7a9d7e8ca00",
+    "stage_corrected_extensions.py": "58cbc542fa77511598ae493f622d5f4aba2038c20fb8db34791e63e03292e91b",
+    "test_release_adapters.py": "43cc86b2939029e82cfcf91aaa2349d74421548286ef91eb6b937b94b19de7bf",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_correction.py": "0ecf04256d988bb8bbc7cb1327ba4b5b22497b4a4a140da26b3b7a7498f081d5"
+  },
+  "source_sha256_before": {
+    "release_core.py": "8b134356c8fb9d3957a9c181f44d0d679263e137c7039395e226b7a9d7e8ca00",
+    "stage_corrected_extensions.py": "58cbc542fa77511598ae493f622d5f4aba2038c20fb8db34791e63e03292e91b",
+    "test_release_adapters.py": "43cc86b2939029e82cfcf91aaa2349d74421548286ef91eb6b937b94b19de7bf",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_correction.py": "0ecf04256d988bb8bbc7cb1327ba4b5b22497b4a4a140da26b3b7a7498f081d5"
+  },
+  "started_at_utc": "2026-09-29T09:12:41.363436+00:00"
+}

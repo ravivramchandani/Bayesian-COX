@@ -1,0 +1,14 @@
+E731 Do not assign a `lambda` expression, use a `def`
+    --> test_receiving.py:1042:9
+     |
+1040 | …         return outcomes
+1041 | …     fake = SimpleNamespace(root=self.f.repro, selection=self.f.selection, rc=self.f.rc, run=fake_run)
+1042 | …     dependency = lambda *args: {"environment": {"report": {"status": "ok", "package_count": 259}, "invocation": {"exit_code": 0}}}
+     |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1043 | …     with patch.dict(os.environ, {name: "1" for name in r.NUMERIC_VARIABLES}), patch.object(r, "ReceivingVerifier", return_value=fake):
+1044 | …         receipt = r.verify_receiving(bindings, sha, output, Path(sys.executable), dependencies=dependency)
+     |
+help: Rewrite `dependency` as a `def`
+
+Found 1 error.
+No fixes available (1 hidden fix can be enabled with the `--unsafe-fixes` option).

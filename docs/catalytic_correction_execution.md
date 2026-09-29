@@ -327,8 +327,8 @@ source-only reviews are preserved in
 Restored input locations use explicit path bindings; immutable historical
 paths and recorded bytes are preserved.
 
-The final reporting and reporting-replay adapters require the completed mixed certificate,
-selected reproduction, frozen descriptive comparisons and actual named
+The final reporting and reporting-replay adapters require the completed mixed
+certificate, selected reproduction, frozen descriptive comparisons and actual named
 visual review. Their [contract](../scripts/catalytic_correction/reporting/interface_contract.json)
 preserves all failed denominators and complete-pair requirements. Partial
 comparisons report observed means without confidence intervals. The fixed
@@ -336,8 +336,9 @@ roster has 1,625 dimension rows, 123 descriptive comparisons and links to the
 27 existing formal contrasts. Only a comparison with all 25 paired folds may
 receive its existing corrected interval.
 
-Before that actual review, `reporting/corrected_pdf_qa.py prepare` renders all 32 PDF pages, four indexed
-contact sheets and a blank review record. It separately binds the six table
+Before that actual review, `reporting/corrected_pdf_qa.py prepare` renders all
+32 PDF pages, four indexed contact sheets and a blank review record. It
+separately binds the six table
 inventories. Root must inspect
 every actual page at full size and the contact sheets before supplying the
 required attestation; an implementation test or generated image supplies
@@ -354,6 +355,19 @@ trees and actual reporting/review/replay proof. Whole trees retain failures,
 orphans and empty directories. Only the four explicitly specified capture
 roles may be flat four-file groups. Actual stage, package, remote download and
 fresh receiving verification remain separate completion gates.
+
+For ADR-042 per-entry evidence, use the separately named complete 233-file
+`release_v3/` carrier and its
+[contract](../scripts/catalytic_correction/release_v3/interface_contract.json).
+Its controller/read-only source capture binds genuine process exits, raw
+logs and the actual written selected pass. The current location plan and
+all prior plans, distinct numerical/capture trees and failed attempts remain
+explicitly retained. Its receiving entrypoint invokes only the new read-only
+selected verifier; the original mixed and reporting command gates remain
+unchanged. Original v2, receiving and per-entry preparation pins retain
+their distinct historical identities. Installing four runtime files alone
+is insufficient. Tested integration does not supply an actual missing
+subset, plan adoption, numerical producer, source capture or receiving check.
 
 Final private retention must include every file in the preserved 1,339-file
 forensic sparsebundle, including the interrupted first replay and partial

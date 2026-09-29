@@ -1,0 +1,51 @@
+{
+  "actual_data_or_science_executed": false,
+  "argv": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_io_v1",
+    "-p",
+    "test*.py",
+    "-v"
+  ],
+  "cwd": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_io_v1",
+  "exit_code": 1,
+  "finished_at_utc": "2026-09-29T11:15:08.379023+00:00",
+  "source_sha256_after": {
+    "capture_at_location.py": "6eac7cda2a452552ee1e9c3b3aa9ee5909601729a841a75844eea43e9d43ff8d",
+    "capture_original_at_location.py": "2a482751500025c73f7204c280f8e897d786eec54513520acca43adbd57cb8fe",
+    "fictional_support.py": "943d5104e1778de25a3253918b2a5c857dcde197bcbd57522f93c4bcd60b0b88",
+    "location_core.py": "e2103480646cb5f26d30e0fbab6a740e53ba52778616c08c0b30fb5fb4cd17f0",
+    "receiving_at_locations.py": "6c56ceb15b19cc19204bf5139c7c9bbb28cb156faed5a5767e18ec53b6ad14b3",
+    "run_selected_at_locations.py": "d444de262d568107db6a822a6c37142e81249810fa5f75e9d947902730fcd616",
+    "selected_at_locations.py": "4c26d2ede68554aee6ad80af3b372a5f5d09e6fb78525dcb0846c294ae7156dd",
+    "test_capture_locations.py": "8966de4b62dd5e1a526fadba010b68cff1c6c0e58bd39956a866a23ef091da03",
+    "test_locations.py": "a1ce2ed2d1e874fcd00a3108accffc4bffc7da625a664f5b05c3f414568cc302",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_at_locations.py": "e8e51e236d96687c549219091d6b2ca89e9c9a219cf49b48481c6485b51b525f"
+  },
+  "source_sha256_before": {
+    "capture_at_location.py": "6eac7cda2a452552ee1e9c3b3aa9ee5909601729a841a75844eea43e9d43ff8d",
+    "capture_original_at_location.py": "2a482751500025c73f7204c280f8e897d786eec54513520acca43adbd57cb8fe",
+    "fictional_support.py": "943d5104e1778de25a3253918b2a5c857dcde197bcbd57522f93c4bcd60b0b88",
+    "location_core.py": "e2103480646cb5f26d30e0fbab6a740e53ba52778616c08c0b30fb5fb4cd17f0",
+    "receiving_at_locations.py": "6c56ceb15b19cc19204bf5139c7c9bbb28cb156faed5a5767e18ec53b6ad14b3",
+    "run_selected_at_locations.py": "d444de262d568107db6a822a6c37142e81249810fa5f75e9d947902730fcd616",
+    "selected_at_locations.py": "4c26d2ede68554aee6ad80af3b372a5f5d09e6fb78525dcb0846c294ae7156dd",
+    "test_capture_locations.py": "8966de4b62dd5e1a526fadba010b68cff1c6c0e58bd39956a866a23ef091da03",
+    "test_locations.py": "a1ce2ed2d1e874fcd00a3108accffc4bffc7da625a664f5b05c3f414568cc302",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_at_locations.py": "e8e51e236d96687c549219091d6b2ca89e9c9a219cf49b48481c6485b51b525f"
+  },
+  "sources_unchanged": true,
+  "started_at_utc": "2026-09-29T11:15:00.510249+00:00",
+  "status": "synthetic_preparation_check_recorded",
+  "stderr_sha256": "f5558fc56bb5c9a466f635b4ed84f39017b7d9820aa8c30d1d5cbfd6d7ff6510",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "wall_seconds": 7.86811999999918
+}

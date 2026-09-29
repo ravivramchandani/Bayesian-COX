@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+    "-B",
+    "-m",
+    "ruff",
+    "check",
+    "receiving_core.py",
+    "verify_restored_reproduction.py",
+    "test_receiving.py"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 0.11615400001755916
+}

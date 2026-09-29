@@ -93,7 +93,18 @@ preserves the actual checks. Any new original-law work still requires the
 actual missing subset, a reviewed location plan and separately pinned
 release wiring before execution.
 
-At 12:39 UTC on 29 September, the current replay had 323 verified contexts;
+The separately pinned release-v3 implementation is integrated with its full
+233-file preparation and unchanged predecessor evidence. Its focused checks
+passed 33 tests and 17 subtests; the expanded full locked suite passed 998
+tests and 157 subtests without skips at 12:50 UTC on 29 September. The
+[v3 integration record](../coordination/recovery/2026-09-29-generator-correction-release-v3-integration.json)
+retains exact archives and validation. Actual source capture, release and
+fresh receiving verification remain pending completed scientific evidence.
+ADR-041's actual selection and scope review must be frozen and checked before
+any corrected pilot score; the numerical freeze alone does not enforce that
+additional gate. The current continuation stops before fitting.
+
+At 12:51 UTC on 29 September, the current replay had 342 verified contexts;
 the original grid had 1,103 stored outcomes: 908 complete, 169 failed and
 26 failed diagnostics. The read-only exit observer
 registered all nine original processes and records future exits. Registration

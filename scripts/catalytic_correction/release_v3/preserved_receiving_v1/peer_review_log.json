@@ -1,0 +1,21 @@
+{
+  "content_sha256": "95839a0c3c38045b8717c304d67c0bb1faea0ae7d461f44e420e15c789b3bff5",
+  "findings": [],
+  "method_freeze_release_or_scientific_approval_created": false,
+  "review_scope": [
+    "agreed binding carrier and genuine external rc0 stdout interface",
+    "immutable source/restore mapping and full failed/orphan file inventories",
+    "actual producer proof distinct from cached official comparison",
+    "three evidence routes and no fit/generator/controller dispatch",
+    "pending-origin terminal source acquisition retention",
+    "fresh output artifact map/publication checks"
+  ],
+  "reviewed_source_sha256": {
+    "receiving_core.py": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f",
+    "verify_restored_reproduction.py": "9387aae83e348515999843963ace0acba0cacef2501fbdacbb0cef85bd5ad33e"
+  },
+  "reviewer": "/root/extension_final_claims_prep",
+  "reviewer_imported_tests_data_or_checkers": false,
+  "schema_version": 1,
+  "status": "bounded_source_only_receiving_interoperability_review_clean"
+}

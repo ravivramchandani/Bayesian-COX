@@ -1,0 +1,549 @@
+test_active_owner_refuses (test_release_adapters.GuardTests.test_active_owner_refuses) ... ERROR
+test_actual_capture_injected_rc0_and_nonzero_failure (test_release_adapters.GuardTests.test_actual_capture_injected_rc0_and_nonzero_failure) ... ERROR
+test_capture_link_failure_preserves_closed_temp (test_release_adapters.GuardTests.test_capture_link_failure_preserves_closed_temp) ... ERROR
+test_changed_byte_refuses (test_release_adapters.GuardTests.test_changed_byte_refuses) ... ERROR
+test_complete_three_route_fixture_and_failure_bytes_stage (test_release_adapters.GuardTests.test_complete_three_route_fixture_and_failure_bytes_stage) ... ERROR
+test_explicit_alias_requires_unchanged_target_bytes (test_release_adapters.GuardTests.test_explicit_alias_requires_unchanged_target_bytes) ... ERROR
+test_extra_actual_tree_file_refuses_even_when_all_declared_exist (test_release_adapters.GuardTests.test_extra_actual_tree_file_refuses_even_when_all_declared_exist) ... ERROR
+test_legacy_qa_or_missing_named_review_refuses (test_release_adapters.GuardTests.test_legacy_qa_or_missing_named_review_refuses) ... ERROR
+test_malformed_stdout_capture_refuses (test_release_adapters.GuardTests.test_malformed_stdout_capture_refuses) ... ERROR
+test_missing_or_tampered_failed_trace_refuses (test_release_adapters.GuardTests.test_missing_or_tampered_failed_trace_refuses) ... ERROR
+test_missing_report_row_or_duplicate_cell_refuses (test_release_adapters.GuardTests.test_missing_report_row_or_duplicate_cell_refuses) ... ERROR
+test_missing_source_gate_rc0_cannot_be_reconstructed (test_release_adapters.GuardTests.test_missing_source_gate_rc0_cannot_be_reconstructed) ... ERROR
+test_omitted_external_numerical_producer_bytes_refuse (test_release_adapters.GuardTests.test_omitted_external_numerical_producer_bytes_refuse) ... ERROR
+test_output_overlap_and_overwrite_refuse (test_release_adapters.GuardTests.test_output_overlap_and_overwrite_refuse) ... ERROR
+test_partial_grid_refuses_before_destination (test_release_adapters.GuardTests.test_partial_grid_refuses_before_destination) ... ERROR
+test_partial_selected_or_failure_not_promoted (test_release_adapters.GuardTests.test_partial_selected_or_failure_not_promoted) ... ERROR
+test_publication_failure_retains_pending_attempt_no_final_destination (test_release_adapters.GuardTests.test_publication_failure_retains_pending_attempt_no_final_destination) ... ERROR
+test_relocated_role_mapping_exact_bytes_and_no_guessing (test_release_adapters.GuardTests.test_relocated_role_mapping_exact_bytes_and_no_guessing) ... ERROR
+test_source_change_during_copy_refuses (test_release_adapters.GuardTests.test_source_change_during_copy_refuses) ... ERROR
+test_staged_test_payload_never_certifies_actual_restore (test_release_adapters.GuardTests.test_staged_test_payload_never_certifies_actual_restore) ... ERROR
+test_symlink_duplicate_json_and_nonfinite_refuse (test_release_adapters.GuardTests.test_symlink_duplicate_json_and_nonfinite_refuse) ... ERROR
+test_unreviewed_figure_refuses (test_release_adapters.GuardTests.test_unreviewed_figure_refuses) ... ERROR
+
+======================================================================
+ERROR: test_active_owner_refuses (test_release_adapters.GuardTests.test_active_owner_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 398, in test_active_owner_refuses
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_actual_capture_injected_rc0_and_nonzero_failure (test_release_adapters.GuardTests.test_actual_capture_injected_rc0_and_nonzero_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 537, in test_actual_capture_injected_rc0_and_nonzero_failure
+    raw(script, b"# never actually executed\n")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_capture_link_failure_preserves_closed_temp (test_release_adapters.GuardTests.test_capture_link_failure_preserves_closed_temp)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 557, in test_capture_link_failure_preserves_closed_temp
+    c.write_new(path, c.seal({"fictional": True}))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 87, in write_new
+    write_bytes_new(path, data)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 92, in write_bytes_new
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_changed_byte_refuses (test_release_adapters.GuardTests.test_changed_byte_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 392, in test_changed_byte_refuses
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_complete_three_route_fixture_and_failure_bytes_stage (test_release_adapters.GuardTests.test_complete_three_route_fixture_and_failure_bytes_stage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 354, in test_complete_three_route_fixture_and_failure_bytes_stage
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_explicit_alias_requires_unchanged_target_bytes (test_release_adapters.GuardTests.test_explicit_alias_requires_unchanged_target_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 482, in test_explicit_alias_requires_unchanged_target_bytes
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_extra_actual_tree_file_refuses_even_when_all_declared_exist (test_release_adapters.GuardTests.test_extra_actual_tree_file_refuses_even_when_all_declared_exist)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 386, in test_extra_actual_tree_file_refuses_even_when_all_declared_exist
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_legacy_qa_or_missing_named_review_refuses (test_release_adapters.GuardTests.test_legacy_qa_or_missing_named_review_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 432, in test_legacy_qa_or_missing_named_review_refuses
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_malformed_stdout_capture_refuses (test_release_adapters.GuardTests.test_malformed_stdout_capture_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 416, in test_malformed_stdout_capture_refuses
+    receipt = cap(directory, "child", "captured", {"status": "done"})
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 43, in cap
+    raw(stdout, (json.dumps(summary) + "\n").encode())
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_missing_or_tampered_failed_trace_refuses (test_release_adapters.GuardTests.test_missing_or_tampered_failed_trace_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 378, in test_missing_or_tampered_failed_trace_refuses
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_missing_report_row_or_duplicate_cell_refuses (test_release_adapters.GuardTests.test_missing_report_row_or_duplicate_cell_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 452, in test_missing_report_row_or_duplicate_cell_refuses
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_missing_source_gate_rc0_cannot_be_reconstructed (test_release_adapters.GuardTests.test_missing_source_gate_rc0_cannot_be_reconstructed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 405, in test_missing_source_gate_rc0_cannot_be_reconstructed
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_omitted_external_numerical_producer_bytes_refuse (test_release_adapters.GuardTests.test_omitted_external_numerical_producer_bytes_refuse)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 466, in test_omitted_external_numerical_producer_bytes_refuse
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_output_overlap_and_overwrite_refuse (test_release_adapters.GuardTests.test_output_overlap_and_overwrite_refuse)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 493, in test_output_overlap_and_overwrite_refuse
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_partial_grid_refuses_before_destination (test_release_adapters.GuardTests.test_partial_grid_refuses_before_destination)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 366, in test_partial_grid_refuses_before_destination
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_partial_selected_or_failure_not_promoted (test_release_adapters.GuardTests.test_partial_selected_or_failure_not_promoted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 422, in test_partial_selected_or_failure_not_promoted
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_publication_failure_retains_pending_attempt_no_final_destination (test_release_adapters.GuardTests.test_publication_failure_retains_pending_attempt_no_final_destination)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 502, in test_publication_failure_retains_pending_attempt_no_final_destination
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_relocated_role_mapping_exact_bytes_and_no_guessing (test_release_adapters.GuardTests.test_relocated_role_mapping_exact_bytes_and_no_guessing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 568, in test_relocated_role_mapping_exact_bytes_and_no_guessing
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_source_change_during_copy_refuses (test_release_adapters.GuardTests.test_source_change_during_copy_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 512, in test_source_change_during_copy_refuses
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_staged_test_payload_never_certifies_actual_restore (test_release_adapters.GuardTests.test_staged_test_payload_never_certifies_actual_restore)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 562, in test_staged_test_payload_never_certifies_actual_restore
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_symlink_duplicate_json_and_nonfinite_refuse (test_release_adapters.GuardTests.test_symlink_duplicate_json_and_nonfinite_refuse)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 525, in test_symlink_duplicate_json_and_nonfinite_refuse
+    raw(file, b'{"a":1,"a":2}')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+======================================================================
+ERROR: test_unreviewed_figure_refuses (test_release_adapters.GuardTests.test_unreviewed_figure_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 442, in test_unreviewed_figure_refuses
+    fixture = Fixture(self.base)
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 77, in __init__
+    raw(path, b"fictional non-array source bytes")
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/test_release_adapters.py", line 22, in raw
+    return c.sha(path)
+           ~~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 51, in sha
+    safe(path)
+    ~~~~^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 34, in safe
+    require(path.is_absolute() and ".." not in path.parts
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            and not any(item.is_symlink() for item in (path, *path.parents)), "unsafe or linked path")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1/verification_io.py", line 23, in require
+    raise VerificationFailure(message)
+verification_io.VerificationFailure: unsafe or linked path
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.061s
+
+FAILED (errors=22)

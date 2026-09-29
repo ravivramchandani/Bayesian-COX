@@ -1,0 +1,146 @@
+--- /Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_original_producer_completion_v1/producer_capture.py
++++ /Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_io_v1/capture_at_location.py
+@@ -34,7 +34,9 @@
+ 
+ NUMERIC = ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS",
+            "VECLIB_MAXIMUM_THREADS", "NUMEXPR_NUM_THREADS")
+-OWN = ("producer_capture.py", "capture_original_producer.py", "verification_io.py")
++OWN = ("location_core.py", "capture_at_location.py", "capture_original_at_location.py",
++       "selected_at_locations.py", "run_selected_at_locations.py", "receiving_at_locations.py",
++       "verify_restored_at_locations.py", "verification_io.py")
+ SCOPE_RULE = "sorted_unique(original_plan_repeat1_fold1_92_union_frozen_full_budget_pilots)"
+ 
+ 
+@@ -179,6 +181,27 @@
+     io.require({f"cells/{identity}.json", f"receipts/{identity}.json"} <= set(artifacts), "official cell/receipt absent")
+     return {"artifacts": artifacts, "directories": directories,
+             "trace_containers_parsed_by_adapter": False}
++
++
++def load_new_helper(name: str, prepared: dict[str, Any]) -> Any:
++    """Load only this new, honestly pinned stdlib wrapper."""
++    root = Path(__file__).absolute().parent
++    expected = prepared["implementation_source_sha256"][name]
++    io.require(io.sha(root / name) == expected, "new location helper differs")
++    namespace = "location_core" if name == "location_core.py" else "_capture_per_entry_" + name.removesuffix(".py")
++    if namespace in sys.modules:
++        module = sys.modules[namespace]
++        io.require(Path(module.__file__).absolute() == root / name and io.sha(root / name) == expected,
++                   "existing location helper is foreign")
++        return module
++    spec = importlib.util.spec_from_file_location(namespace, root / name)
++    io.require(spec is not None and spec.loader is not None and namespace not in sys.modules,
++               "location helper namespace unavailable")
++    module = importlib.util.module_from_spec(spec)
++    sys.modules[namespace] = module
++    spec.loader.exec_module(module)
++    io.require(io.sha(root / name) == expected, "new location helper changed")
++    return module
+ 
+ 
+ def capture(request_path: Path, request_sha: str, python: Path, preparation: dict[str, Any],
+@@ -226,12 +249,30 @@
+                and choice["source_score_selection"] is False and choice["automatic_all92_rerun"] is False
+                and isinstance(chosen, list) and chosen == sorted(set(chosen)) and chosen
+                and set(chosen) <= set(selected), "root-selected missing original proof list required")
++    location_path, location_request = bound_record(request["location_plan"], pins)
++    location_module = dependencies.get("location_module")
++    if location_module is None:
++        location_module = load_new_helper("location_core.py", preparation)
++    loader = dependencies.get("context_loader")
++    if loader is None:
++        support = load_new_helper("selected_at_locations.py", preparation)
++        loader = support.load_context
++    context = loader(location_request, selection_path, request["selected_reproduction_selection"]["sha256"], preparation)
++    io.require(context["selection"] == selection and context["original"] == original,
++               "location context is not the same original selection/science")
++    locations = location_module.Locations(location_path, request["location_plan"]["sha256"], preparation,
++        selection=selection, selection_sha=request["selected_reproduction_selection"]["sha256"],
++        scope_sha=context["rc"].scope_definition(selection), original=original, inventory=context["inventory"],
++        base=context["evidence"], freeze=context["freeze"])
++    io.require(location_request["root_missing_producer_choice"] == request["root_missing_producer_choice"],
++               "capture and shared plan use different missing-producer decisions")
+     identity = request["original_cell_id"]
+     io.require(identity in chosen and identity in selection["selected_cells"], "identity not root-selected original92 missing proof")
+     worker = selected.index(identity)
+     io.require(request["workers"] == 92 and type(request["workers"]) is int
+                and type(request["worker"]) is int and request["worker"] == worker,
+                "official fixed92 plan-order shard differs")
++    context["verify_inherited_input"](identity)
+     source_cell = original_run / "cells" / (identity + ".json")
+     source_value = pins.json(source_cell, io.sha(source_cell), field="cell_content_sha256")
+     io.require(source_value["cell_id"] == identity and source_value["status"] in {"complete", "failed", "failed_diagnostics"},
+@@ -258,18 +299,20 @@
+     for name, expected in preparation["implementation_source_sha256"].items():
+         pins.bind(own / name, expected)
+     output, capture_root = (io.safe(Path(request[name])) for name in ("reproduction_output", "capture_output"))
+-    io.require(selection["paths"]["original_reproduction"] == str(output),
+-               "v1 fixed original_reproduction must be the actual fresh invocation output; copying cannot preserve this proof")
++    locations.fresh(identity, output, capture_root)
+     immutable = [source, original_run, matched, request_path, selection_path, choice_path, environment_path, own]
+     for path, other in ((output, capture_root), (capture_root, output)):
+         no_overlap(path, [*immutable, other])
+         io.require(path.parent.is_dir() and not path.exists(), "fresh absent output with existing parent required; no resume")
+     before_git = git_state(source, policy.commit, invoke)
+     pins.recheck()
++    locations.recheck()
+     # Reserve only after all read-only prerequisite checks. Never delete a failed
+     # or partial owned output. A second capture must use new root-reviewed paths.
+     capture_root.mkdir(exist_ok=False)
+     output.mkdir(exist_ok=False)
++    io.write_bytes_new(capture_root / "request_capture.json", request_path.read_bytes())
++    pins.bind(capture_root / "request_capture.json", request_sha)
+     io.write_new(capture_root / "owner_started.json", io.seal({"status": "original_producer_capture_owner_started",
+         "pid": os.getpid(), "host": socket.gethostname(), "original_cell_id": identity,
+         "request_sha256": request_sha, "runtime": observed_runtime, "source_before": before_git,
+@@ -285,6 +328,9 @@
+     io.require(not any(output.iterdir()), "reserved output no longer empty; numerical refit refused")
+     pins.recheck()
+     io.require(not (original_run / "claims" / (identity + ".json")).exists(), "original source owner became active")
++    locations.owner_clear(identity)
++    locations.recheck()
++    context["verify_inherited_input"](identity)
+     argv = [str(python), "-I", "-B", str(script), "--source", str(original_run), "--output", str(output),
+             "--matched", str(matched), "--workers", "92", "--worker", str(worker)]
+     numerical_attempt = run_captured(argv, source, capture_root, "numerical", environment, invoke,
+@@ -318,7 +364,8 @@
+         "argv": argv, "cwd": str(source), "script_index": 3, "workers": 92, "worker": worker,
+         "actual_attempt_record_sha256": io.sha(capture_root / "numerical.attempt.json"),
+         "stdout": numerical_attempt["stdout"], "stderr": numerical_attempt["stderr"],
+-        "fresh_output_reserved_empty_before_numerical_dispatch": True, "test_only_dependency_injection": test_only}
++        "fresh_output_reserved_empty_before_numerical_dispatch": True, "test_only_dependency_injection": test_only,
++        "reproduction_location": locations.metadata(identity), "actual_location_plan": request["location_plan"]}
+     invocation = io.seal({**common, "status": "actual_original_numerical_worker_invocation_recorded" if not test_only
+         else "synthetic_original_numerical_worker_invocation_fixture", "actual_numerical_refit_execution": not test_only,
+         "numerically_refitted_cell_ids": [identity]})
+@@ -340,14 +387,19 @@
+         "source_cell": binding(source_cell), "refit_cell": binding(refit_path), "official_receipt": binding(official_path),
+         "test_only_dependency_injection": test_only}))
+     files = {str(path.relative_to(capture_root)): binding(path) for path in sorted(capture_root.iterdir()) if path.is_file()}
+-    expected = {"owner_started.json", "environment.stdout.txt", "environment.stderr.log", "environment.attempt.json",
++    expected = {"request_capture.json", "owner_started.json", "environment.stdout.txt", "environment.stderr.log", "environment.attempt.json",
+         "numerical.stdout.txt", "numerical.stderr.log", "numerical.attempt.json", "output_inventory.json",
+         "invocation_record.json", "official_comparison_record.json", "producer_pending_review.json"}
+     io.inventory(capture_root, expected, set())
+     pins.recheck()
++    locations.recheck()
++    locations.owner_clear(identity)
+     receipt = io.seal({"status": "original_missing_producer_execution_captured_root_review_pending" if not test_only
+         else "synthetic_original_producer_completion_fixture_passed", "original_cell_id": identity,
+         "request_sha256": request_sha, "selection_sha256": request["selected_reproduction_selection"]["sha256"],
++        "reproduction_location": locations.metadata(identity),
++        "actual_location_plan": request["location_plan"],
++        "io_adapter_source_sha256": preparation["implementation_source_sha256"],
+         "root_missing_producer_choice_sha256": request["root_missing_producer_choice"]["sha256"],
+         "route": "official_fresh_refit", "scheduled_original_cells": 1, "captured_original_cells": 1,
+         "worker": worker, "workers": 92, "runtime": observed_runtime, "artifacts": files,
+@@ -358,6 +410,9 @@
+     io.inventory(capture_root, expected | {"capture_receipt.json"}, set())
+     io.require({name: binding(capture_root / name) for name in files} == files, "capture evidence changed during publication")
+     pins.recheck()
++    locations.recheck()
++    context["verify_inherited_input"](identity)
++    locations.owner_clear(identity)
+     return {"status": receipt["status"], "original_cell_id": identity, "scheduled_original_cells": 1,
+             "capture_receipt_path": str(capture_root / "capture_receipt.json"),
+             "capture_receipt_sha256": io.sha(capture_root / "capture_receipt.json"),

@@ -1,0 +1,133 @@
+{
+  "actual_scientific_or_transfer_execution": false,
+  "capture": {
+    "historical_missing_259_environment_rc_not_invented_or_required": true,
+    "injection_refused_by_production_gates": true,
+    "new_own_producer_map": true,
+    "operation": "actual_per_entry_release_v3_child_capture",
+    "raw_logs_and_attempt_retained_before_completion": true,
+    "typed_actual_rc0_required": true
+  },
+  "content_sha256": "f95845842113256d3ac22fe930d19a533b0b3a64fbbcf905012485629ae4d3ef",
+  "coverage_and_transport": {
+    "actual_fixed_logical_cells": 1625,
+    "actual_generator_contexts": 1650,
+    "aliases_dedup_or_parent_child_target_conflicts": false,
+    "all_current_prior_plans_and_root_actual_acquisition_reviews_retained": true,
+    "complete_interval_pairs": 25,
+    "descriptive_pairs": 123,
+    "formal_links": 27,
+    "new_estimand_test_gate": false,
+    "original_selected_base": 92,
+    "qa_full_page_verdicts": 32,
+    "qa_indexed_contacts": 4,
+    "qa_table_hashes_semantic_inventories": 6,
+    "report_ratio_rows": 1625,
+    "safe_package_download_transport_unchanged": true,
+    "selected_union": "original92 plus prospectively input-selected frozen full-budget pilots",
+    "whole_trees_include_failed_orphan_and_empty_directories": true
+  },
+  "independent_v3_source_review_status": "pending_parent_arrangement_after_preparation_seal",
+  "overall_completion_assessed": false,
+  "pending_actual_work": [
+    "root source review/integration approval",
+    "all actual reviewed input/freeze/arithmetic/mixed/science prerequisites",
+    "actual selected controller/reproduction/producer/comparison evidence and clear owners",
+    "actual rendering and named visual QA",
+    "actual corrected sidecar/source replay/claims",
+    "actual staging/archive/private draft/download/restore/fresh replays and publication approval"
+  ],
+  "prepared_only": true,
+  "receiving": {
+    "actual_v3_receipt_must_be_restored_role": true,
+    "alternate_numeric_and_capture_directory_maps_required": true,
+    "current_plan_path": "RESTORED/execution/per_entry_io/location_plan.json",
+    "execute_or_resume_controller_on_receiver": false,
+    "legacy_source_maps_unchanged": true,
+    "location_receiving_code": "actual RESTORED/code/correction/receiving_reproduction",
+    "old_science_request_schema": 1,
+    "only_new_readonly_child": "verify_restored_at_locations.py",
+    "other_mixed_reporting_commands_unchanged": true,
+    "per_entry_io_revision": 3,
+    "source_and_remote_proofs_distinct": true
+  },
+  "root_actual_approvals_generated": false,
+  "runtime_source_sha256": {
+    "capture_per_entry_source_v3.py": "c58a66cc22e668fc2377530d114ed16fceb07f58f23cc2b5df0d385ee89412ae",
+    "release_v3_core.py": "448c32dde298b98ba75218df1b5c6a9a0a09c3e85fa8108d06e38f11ce206068",
+    "stage_corrected_extensions_v3.py": "91d0430405ec0841c3b1b37d85567c2a0c92abf5585addf2d7bad29d6b75acd4",
+    "verify_restored_correction_v3.py": "9c6f5372edb32b937f2a8e926fad62a5d75ea1f1f7477dad0a78803d0ee11dea"
+  },
+  "schema_version": 3,
+  "source_capture_request": {
+    "capture_prefix": "fresh exclusive absolute prefix outside immutable inputs/output",
+    "controller_only": {
+      "reviews": {
+        "original-numerical-resolution": "null or exact path/sha256",
+        "pilot-review": "null or exact path/sha256",
+        "resolution-review": "null or exact path/sha256"
+      },
+      "selection": "actual path/sha256 carrier"
+    },
+    "evidence_output": "read_only: new external proof dir; controller: new or unchanged strict-resume output dir",
+    "immutable_files": "explicit absolute immutable files",
+    "immutable_roots": "explicit absolute immutable input/source roots",
+    "io_preparation": {
+      "path": "ACTUAL_IO_ROOT/preparation_receipt.json",
+      "sha256": "6670b27e78fb05f7c266cc52b72241a4b477f5d9a27213e8882bdcbd1038f366"
+    },
+    "location_plan": "exact path/sha256 carrier",
+    "mode": [
+      "controller",
+      "read_only"
+    ],
+    "read_only_only": {
+      "input_request": "actual unchanged receiving-binding request path/sha256 plus honest location extension"
+    },
+    "schema_version": 3,
+    "status": "per_entry_release_v3_source_capture_request",
+    "test_only": false
+  },
+  "source_stdout": {
+    "controller": "original compact all_selected_reproduction_outcomes_accounted stdout binds actual written pass path/SHA; only written pass contains location_extension",
+    "read_only": "corrected_selected_reproduction_restored_read_only_verified plus exact selection/pass/counts/no-fit/no-generator/locationplan/eight-source map/actual receipt path+SHA"
+  },
+  "stage_request": {
+    "all_old_fields_roles_and_gates_retained": true,
+    "old_schema_version": 1,
+    "old_status": "corrected_release_staging_inputs_bound",
+    "per_entry_io": {
+      "controller_capture": {
+        "path": "ACTUAL_GENUINE_V3_CONTROLLER_CAPTURE_PREFIX.receipt.json",
+        "sha256": "ACTUAL_CAPTURE_BYTE_SHA256"
+      },
+      "controller_request": {
+        "path": "ACTUAL_SEALED_CONTROLLER_CAPTURE_REQUEST",
+        "sha256": "ACTUAL_REQUEST_BYTE_SHA256"
+      },
+      "location_plan": {
+        "path": "ACTUAL_ABSOLUTE_CURRENT_PLAN_PATH",
+        "sha256": "ACTUAL_CURRENT_PLAN_BYTE_SHA256"
+      },
+      "release_v3_preparation_sha256": "ACTUAL_FINAL_V3_RECEIPT_SHA256",
+      "revision": 3,
+      "source_capture_request": {
+        "path": "ACTUAL_SEALED_READONLY_CAPTURE_REQUEST",
+        "sha256": "ACTUAL_REQUEST_BYTE_SHA256"
+      },
+      "tree_roles": {
+        "ACTUAL_ROOT_CHOSEN_ID": {
+          "capture": "per_entry_capture__ACTUAL_ROOT_CHOSEN_ID",
+          "numerical": "per_entry_numerical__ACTUAL_ROOT_CHOSEN_ID"
+        }
+      }
+    }
+  },
+  "status": "prospective_separately_pinned_per_entry_release_v3_interface",
+  "unchanged_dependencies": {
+    "per_entry_io_v1": "6670b27e78fb05f7c266cc52b72241a4b477f5d9a27213e8882bdcbd1038f366",
+    "per_entry_source_review": "af971b9dc4b3a9e016110e3cf8cab4996dd5f0444ea0ab5009856a28744091d5",
+    "receiving_v1": "fe0662adacbf29bc356d7c19f7abd40b2b6304cb9f683673fce1e7ae39f1e1ba",
+    "release_v2": "9e567639359328d958e73c476a2d16ec8b0ab408e17c1fb016c37c3234713c1d"
+  }
+}

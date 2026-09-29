@@ -1,0 +1,37 @@
+{
+  "actual_scientific_execution": false,
+  "argv": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_release_adapters",
+    "test_receiving_adapters",
+    "test_source_capture"
+  ],
+  "cwd": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_release_adapter_v1",
+  "exit_code": 1,
+  "finished_at_utc": "2026-09-29T09:34:06.816450+00:00",
+  "source_sha256_after": {
+    "capture_corrected_source.py": "d966a0492b608e6b23c4abf163c2030a2adf34f400327c4ea3a9d73d7d33a3ba",
+    "release_core.py": "d3ffbe9f3a3e7e17c25951d93a25b95dd13d8b83d77be5afbdbb9cc6d8d8c8bb",
+    "stage_corrected_extensions.py": "b037ba52780b3fefb3b67a0f570f263cba0e5e99130467999f0fb868c9b10323",
+    "test_receiving_adapters.py": "d1bb6740355090c08c76984133bce86af6e041732c91f8a8679b896bebb144d3",
+    "test_release_adapters.py": "4ddba7fc27f01277d59ecb7ab65664704baec8041b46dbef7c722a9b9bca344e",
+    "test_source_capture.py": "7a1d2135dc90b2e7335b9fdda3bf80a01735bca41390c372cda48fafd8a9d448",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_correction.py": "035a87b1ea0521be92f4027c2b6b6069aac96d3b2a34a7cf2a17f49109cb093d"
+  },
+  "source_sha256_before": {
+    "capture_corrected_source.py": "d966a0492b608e6b23c4abf163c2030a2adf34f400327c4ea3a9d73d7d33a3ba",
+    "release_core.py": "d3ffbe9f3a3e7e17c25951d93a25b95dd13d8b83d77be5afbdbb9cc6d8d8c8bb",
+    "stage_corrected_extensions.py": "b037ba52780b3fefb3b67a0f570f263cba0e5e99130467999f0fb868c9b10323",
+    "test_receiving_adapters.py": "d1bb6740355090c08c76984133bce86af6e041732c91f8a8679b896bebb144d3",
+    "test_release_adapters.py": "4ddba7fc27f01277d59ecb7ab65664704baec8041b46dbef7c722a9b9bca344e",
+    "test_source_capture.py": "7a1d2135dc90b2e7335b9fdda3bf80a01735bca41390c372cda48fafd8a9d448",
+    "verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "verify_restored_correction.py": "035a87b1ea0521be92f4027c2b6b6069aac96d3b2a34a7cf2a17f49109cb093d"
+  },
+  "started_at_utc": "2026-09-29T09:33:56.872808+00:00"
+}

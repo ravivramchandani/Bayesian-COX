@@ -1,0 +1,28 @@
+{
+  "actual_data_or_science_executed": false,
+  "content_sha256": "eef6d2b41b942a2ccee67ca6a5b84646ffbcd5f7fc0b10cf1f60980ab678b747",
+  "earlier_failed_checks_retained": true,
+  "fixes": [
+    "macOS fictional temporary roots resolved before linked-path checks; production IO unchanged",
+    "small Ruff-only import/default/loop bindings",
+    "fictional capture carrier rebound to full sealed input JSON and exact producer metadata",
+    "fictional receiving fixture path-variable collision removed",
+    "unsupported historical file aliases removed; distinct explicit retention required by sealed receiving v1",
+    "reporting fresh-restored roots/files enforced by receiving parent; original-tree shortcuts rejected",
+    "executing adapter/preparation retained in private payload"
+  ],
+  "method_review_approval_created": false,
+  "source_only_findings_from_peers": [
+    {
+      "finding": "sealed receiving v1 rejects equal-target aliases and overlapping file/directory maps",
+      "resolution": "aliases refused; sealed receiving original preserved",
+      "reviewer": "correction_preflight_inventory"
+    },
+    {
+      "finding": "reporting helper validates bytes but relies on parent to require freshly restored evidence locations",
+      "resolution": "exact staged/current file roles recorded; fresh receiving paths enforced",
+      "reviewer": "closeout_preparation"
+    }
+  ],
+  "status": "preparation_history_only"
+}

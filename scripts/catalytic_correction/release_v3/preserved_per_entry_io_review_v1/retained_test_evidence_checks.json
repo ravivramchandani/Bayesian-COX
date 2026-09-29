@@ -1,0 +1,28 @@
+{
+  "checks": [
+    {
+      "all_11_final_source_pins_match": true,
+      "exit_code": 0,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_io_v1/synthetic_tests_attempt4.invocation.json",
+      "producer_execution_scope": "retained invented/injected test or Ruff evidence; not independently rerun here",
+      "sha256": "32aff7e3278ad37afcd54f767874e55daf8a96a96ff32f4bb99b1ea8ef97e2b1",
+      "source_bytes_unchanged": true
+    },
+    {
+      "all_11_final_source_pins_match": true,
+      "exit_code": 0,
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_reproduction_per_entry_io_v1/ruff_attempt4.invocation.json",
+      "producer_execution_scope": "retained invented/injected test or Ruff evidence; not independently rerun here",
+      "sha256": "44ccc5c57097d95d4806dc23b2730afdc4cf73d1f4d7657f54e882f7a8d60978",
+      "source_bytes_unchanged": true
+    }
+  ],
+  "content_sha256": "abd08e8223bfc0d102f90a5577f0d8dfda55a3ca5199267cfb8d6e109d2244ca",
+  "failed_attempt3_retained": true,
+  "no_locked_real_scientific_runtime_equivalence_inferred": true,
+  "status": "producer_retained_test_lint_and_syntax_bytes_match_final_source",
+  "syntax_files": 11,
+  "synthetic_test_count": 53,
+  "synthetic_test_wall_seconds": 6.888,
+  "test_execution_by_this_reviewer": false
+}

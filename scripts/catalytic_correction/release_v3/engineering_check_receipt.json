@@ -1,0 +1,88 @@
+{
+  "actual_producer_or_receiving_capture": false,
+  "actual_scientific_or_numerical_operations": false,
+  "all_previous_failed_and_passed_preparation_attempts_preserved": true,
+  "checked_at_utc": "2026-09-29T12:12:32.480745+00:00",
+  "content_sha256": "7cccec78e4f63b325d86be7e00130ab11a6aa249007a384f23735fb4c141738b",
+  "guard_methods": [
+    "test_predecessor_small_byte_pins",
+    "test_duplicate_nonfinite_and_nonobject_json_refused",
+    "test_preparation_member_content_and_traversal_refused",
+    "test_linked_preparation_and_adapter_refused",
+    "test_pinned_import_namespace_and_changed_source",
+    "test_controller_argv_keeps_explicit_optional_reviews",
+    "test_new_receiving_command_is_read_only_and_separately_named",
+    "test_core_proxy_preserves_old_predicate_identity",
+    "test_old_asset_optional_roles_are_decided_by_unchanged_gate",
+    "test_old_reproduction_failure_is_never_bypassed",
+    "test_exact_distinct_tree_role_names",
+    "test_legacy_alias_restored_even_after_exception",
+    "test_final_stage_cannot_publish_without_extension",
+    "test_fictional_capture_raw_exit_and_injection_flag",
+    "test_nonzero_and_boolean_exit_do_not_install_success",
+    "test_launch_exception_retains_actual_unavailable",
+    "test_capture_collision_refuses_without_invoke",
+    "test_injected_capture_cannot_pass_production_command_gate",
+    "test_changed_command_or_producer_is_refused",
+    "test_controller_capture_binds_actual_written_pass_not_invented_stdout",
+    "test_controller_foreign_written_pass_refused",
+    "test_controller_input_changed_during_actual_capture_refused",
+    "test_production_injection_is_refused_before_launch",
+    "test_immutable_input_overlap_refuses_before_mock_dispatch",
+    "test_old_maps_cannot_be_rebranded_as_new_receiving",
+    "test_readonly_source_capture_binds_real_named_receipt_in_fictional_fixture",
+    "test_restored_distinct_tree_directory_maps_required",
+    "test_full_tree_and_prior_history_are_retained_or_refused",
+    "test_receiver_final_version_pins_cannot_change",
+    "test_receiver_changes_only_exact_read_only_entrypoint",
+    "test_receiver_keeps_mixed_and_reporting_commands_unchanged",
+    "test_python_runtime_thread_guards_remain_original"
+  ],
+  "independent_v3_source_review_pending": true,
+  "independent_v3_source_review_performed": false,
+  "invented_guard_method_count": 32,
+  "predecessor_byte_proof_sha256": "09fdc13f717ae1ccc60ac0596b951de225ad85726913991ab5d22c55e9fa6653",
+  "root_adoption_and_all_actual_scientific_release_gates_pending": true,
+  "schema_version": 1,
+  "source_data_or_process_state_inspected": false,
+  "status": "release_v3_bounded_engineering_preparation_validated",
+  "successful_final_checks": {
+    "ruff_attempt3": {
+      "exit_code": 0,
+      "invocation_sha256": "597f033686c351306b917dcbf6c37de6d311855644d5d22c906443c829d4ed92",
+      "source_sha256": {
+        "capture_per_entry_source_v3.py": "c58a66cc22e668fc2377530d114ed16fceb07f58f23cc2b5df0d385ee89412ae",
+        "release_v3_core.py": "448c32dde298b98ba75218df1b5c6a9a0a09c3e85fa8108d06e38f11ce206068",
+        "run_preparation_checks.py": "65393969f8215bfe3fd8fcc2d4af1b081736d955bb2d44311a0823e4a3113db9",
+        "stage_corrected_extensions_v3.py": "91d0430405ec0841c3b1b37d85567c2a0c92abf5585addf2d7bad29d6b75acd4",
+        "test_release_v3.py": "ce1d916b82eccb4769c495491450a83cbb62bba57df0b18842e05a039b6797a8",
+        "verify_restored_correction_v3.py": "9c6f5372edb32b937f2a8e926fad62a5d75ea1f1f7477dad0a78803d0ee11dea"
+      }
+    },
+    "syntax_attempt1": {
+      "exit_code": 0,
+      "invocation_sha256": "815ac278b893bd8fc299f2aae45e72850235f8413e1ab80f924ae3a5f4604298",
+      "source_sha256": {
+        "capture_per_entry_source_v3.py": "c58a66cc22e668fc2377530d114ed16fceb07f58f23cc2b5df0d385ee89412ae",
+        "release_v3_core.py": "448c32dde298b98ba75218df1b5c6a9a0a09c3e85fa8108d06e38f11ce206068",
+        "run_preparation_checks.py": "65393969f8215bfe3fd8fcc2d4af1b081736d955bb2d44311a0823e4a3113db9",
+        "stage_corrected_extensions_v3.py": "91d0430405ec0841c3b1b37d85567c2a0c92abf5585addf2d7bad29d6b75acd4",
+        "test_release_v3.py": "ce1d916b82eccb4769c495491450a83cbb62bba57df0b18842e05a039b6797a8",
+        "verify_restored_correction_v3.py": "9c6f5372edb32b937f2a8e926fad62a5d75ea1f1f7477dad0a78803d0ee11dea"
+      }
+    },
+    "synthetic_tests_attempt3": {
+      "exit_code": 0,
+      "invocation_sha256": "19c29e349e5e71bf7f44f0f0a5c2ed4eaaac83f1f08562061c6966339926e79c",
+      "source_sha256": {
+        "capture_per_entry_source_v3.py": "c58a66cc22e668fc2377530d114ed16fceb07f58f23cc2b5df0d385ee89412ae",
+        "release_v3_core.py": "448c32dde298b98ba75218df1b5c6a9a0a09c3e85fa8108d06e38f11ce206068",
+        "run_preparation_checks.py": "65393969f8215bfe3fd8fcc2d4af1b081736d955bb2d44311a0823e4a3113db9",
+        "stage_corrected_extensions_v3.py": "91d0430405ec0841c3b1b37d85567c2a0c92abf5585addf2d7bad29d6b75acd4",
+        "test_release_v3.py": "ce1d916b82eccb4769c495491450a83cbb62bba57df0b18842e05a039b6797a8",
+        "verify_restored_correction_v3.py": "9c6f5372edb32b937f2a8e926fad62a5d75ea1f1f7477dad0a78803d0ee11dea"
+      }
+    }
+  },
+  "syntax_source_count": 6
+}

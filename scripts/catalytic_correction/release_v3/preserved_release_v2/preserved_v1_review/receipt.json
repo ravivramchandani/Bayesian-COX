@@ -1,0 +1,45 @@
+{
+  "artifacts": {
+    "REPORT.md": {
+      "bytes": 1812,
+      "sha256": "8ddf53f0969826686863455bcda314b070a43027e0b526b554069ff6040b6ba7"
+    },
+    "context.json": {
+      "bytes": 1970,
+      "sha256": "97dc3f49eaaa138835e6a62f213ac80b8defe510a1e1f5b65bde6e312fce6ab1"
+    },
+    "dependency_byte_checks.json": {
+      "bytes": 2564,
+      "sha256": "a1b774bd50b3c7fae6e52f2ffcf4834f45652abba689bdcd3be21f5339b84f49"
+    },
+    "review.json": {
+      "bytes": 7711,
+      "sha256": "6cf4b7c4481337acf8fff110605b3bb7f2167224564590a00e0a4d2b9a1567e0"
+    },
+    "scope.json": {
+      "bytes": 564,
+      "sha256": "df26dce227c659ddc0a43e88dcf872ed9226ce89c0b9c17eee99ab6b5e50182d"
+    },
+    "target_artifact_checks.json": {
+      "bytes": 7981,
+      "sha256": "ae8b8e808ba14f6d683766e89206f60f81ff736a678a3ba54c6ddd63d8aaaf7f"
+    }
+  },
+  "content_sha256": "2ec648b58edcdebcfdae669f7f8b5c2bbda635057c492da8f5a54f0d7c9b7f58",
+  "material_finding_count": 2,
+  "review_sha256": "6cf4b7c4481337acf8fff110605b3bb7f2167224564590a00e0a4d2b9a1567e0",
+  "schema_version": 1,
+  "scope": {
+    "historical_259_checker_argv_or_rc_requirement_added": false,
+    "live_process_metadata_or_kernel_subscription": false,
+    "method_freeze_visual_scientific_or_launch_approval_created": false,
+    "packaging_restore_staging_captures_download_upload_or_publication_executed": false,
+    "repo_sealed_sources_original_owners_or_evidence_modified": false,
+    "scientific_data_arrays_traces_scores_or_results_read": false,
+    "source_only": true,
+    "target_imports_tests_or_helper_functions_executed": false,
+    "target_reported_43_test_run_not_independently_rerun": true
+  },
+  "status": "corrected_release_adapter_source_only_peer_review_preserved",
+  "target_preparation_receipt_sha256": "4a02cf6f7013263c7ec86529f4abb26e8d66c40a1c3529518a03935f8112e788"
+}
