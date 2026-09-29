@@ -1,0 +1,20 @@
+{
+  "actual_scientific_review_scope_adoption_freeze_dispatch_or_final_release_approval_created": false,
+  "archive": {
+    "archive": "2026-09-29-generator-correction-dispatch-guard-independent-design-review.tar.gz",
+    "bytes": 8326,
+    "regular_members": 7,
+    "sha256": "d8095921734132fb320f322d6982ce4a0f75cf58f2206ef334fe2b434fb15e1d"
+  },
+  "findings_forwarded_to_implementer_before_actual_dispatch": true,
+  "finished_runtime_independent_review_and_tests_pending": true,
+  "full_report_read": true,
+  "implementation_requirements": [
+    "reject_output_overlapping_any_complete_immutable_guard_preparation_reproduction_input_tree_or_bound_input_file_before_first_write",
+    "explicit_source_receiving_mode_and_external_actual_restore_authority_reject_historical_fallback_or_wrong_physical_copy"
+  ],
+  "reviewed_at_utc": "2026-09-29T13:50:31.001636+00:00",
+  "reviewer_name": "Codex root",
+  "schema_version": 1,
+  "status": "root_read_independent_prospective_guard_design_findings"
+}

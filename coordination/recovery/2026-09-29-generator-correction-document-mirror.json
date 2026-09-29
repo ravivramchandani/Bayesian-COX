@@ -1,0 +1,37 @@
+{
+  "actual_mirror_subprocess_returncode": 0,
+  "all_prior_original_versions_preserved": 141,
+  "archives": {
+    "checkout-preservation-actual-push": {
+      "archive": "2026-09-29-generator-correction-checkout-preservation-actual-push.tar.gz",
+      "bytes": 3900,
+      "regular_members": 43,
+      "sha256": "40e1464960b1e368c38c93007c5cf610ede5ce1af2acb1dbf49d346e742de071"
+    },
+    "document-mirror-actual": {
+      "archive": "2026-09-29-generator-correction-original-checkout-document-mirror-actual.tar.gz",
+      "bytes": 102200,
+      "regular_members": 25,
+      "sha256": "834b77d35c970e3eee0836e1557a3f820ee9f41239e8d2c112054c52e52be6ec"
+    },
+    "document-mirror-actual-capture": {
+      "archive": "2026-09-29-generator-correction-document-mirror-actual-capture.tar.gz",
+      "bytes": 1151,
+      "regular_members": 4,
+      "sha256": "4c2006135d0758503bcff4f35dcdee7ff2eee2a29a78988646bd4ec1d9c13a0c"
+    }
+  },
+  "completed_at_utc": "2026-09-29T13:40:38.898152+00:00",
+  "exact_six_targets_equal_published_source_bytes": true,
+  "general_old_git_synchronization_deferred": true,
+  "old_git_operation_source_data_result_or_owner_modification_performed": false,
+  "recorded_at_utc": "2026-09-29T13:47:05.841266+00:00",
+  "remote_verified_source_main": "023406135ab2a24d0cce912f74f9a3d138e7fa5f",
+  "resident_634_implementation_source_files_unchanged": true,
+  "root_topology_display_shape_error_retained_before_mirror_launch": true,
+  "schema_version": 1,
+  "scientific_or_release_completion_supplied": false,
+  "scoped_non_target_original_files_unchanged": 135,
+  "selected_shared_git_admin_metadata_files_unchanged": 24,
+  "status": "actual_six_document_only_ide_mirror_verified"
+}
