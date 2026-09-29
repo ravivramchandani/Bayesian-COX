@@ -1381,3 +1381,27 @@ still had 1,103 outcomes. Source inspection identified that the five-review
 freeze does not itself enforce ADR-041's pre-score selection/scope review.
 That existing requirement must be validated before corrected pilot dispatch.
 Current continuation remains prefit-only; no corrected score exists.
+
+## 2026-09-29 — Original local-state preservation and prospective guard design
+
+Preserved all 141 files and four directories belonging to the original
+checkout's eight tracked edits and 20 untracked entries. Every untracked
+source/test/JSON and all 14 compressed archive collisions match resident main
+byte for byte. Six older document variants remain retained with paired diffs.
+Actual backup subprocess returned zero; source hashes and original Git
+HEAD/status were unchanged before/after. No stash, fetch, merge or owner
+mutation occurred. Source-only dependency review found four live-route
+worktrees share the original Git administration, so general synchronization
+is deferred while those owners are active. The six disjoint guide/coordination
+documents may be mirrored separately after the verified resident push.
+
+Root read the complete prospective guarded-dispatch design and accepted
+external implementation preparation. It keeps the old scientific pins and
+requires prospective scope/selection authority, zero-attempt introduction,
+fixed resume, genuine two-process capture and independent source/fresh
+receiving proof checks. Runtime tests, independent/root reviews and actual
+scientific approvals remain pending. At 13:22 UTC, independent replay had
+403 verified contexts and original production had 1,105 outcomes: 909 complete,
+170 failed and 26 failed diagnostics. All original/continuation/observer owners
+remained present. Exact recovery archives are linked in
+`coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json`.

@@ -104,8 +104,17 @@ ADR-041's actual selection and scope review must be frozen and checked before
 any corrected pilot score; the numerical freeze alone does not enforce that
 additional gate. The current continuation stops before fitting.
 
-At 12:51 UTC on 29 September, the current replay had 342 verified contexts;
-the original grid had 1,103 stored outcomes: 908 complete, 169 failed and
+The original checkout's 141 local files are now preserved, and all untracked
+collisions match published main. The [preservation record](../coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json)
+links the exact archives and actual backup-process capture. Integration
+continues in the resident checkout. General original-checkout Git
+synchronization is deferred while active frozen worktrees use its shared Git
+administration; the six disjoint guide/coordination files may be mirrored
+separately after a verified push. The prospective launch-guard design is prepared;
+finished implementation tests and actual pre-score approvals remain pending.
+
+At 13:22 UTC on 29 September, the current replay had 403 verified contexts;
+the original grid had 1,105 stored outcomes: 909 complete, 170 failed and
 26 failed diagnostics. The read-only exit observer
 registered all nine original processes and records future exits. Registration
 does not certify finished numerical work. The interrupted replay, partial

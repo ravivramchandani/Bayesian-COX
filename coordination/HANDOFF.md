@@ -16,8 +16,15 @@ remain preserved. The two original execution/code-guide variants have now
 returned and were byte-preserved before reconciliation. Their useful root,
 reporting and transfer details are retained in the resident guides alongside
 the later incident safeguards. Fresh production-worktree Git checks return
-the expected `119476f` and a clean tree. Synchronizing the original main
-checkout remains pending preservation and reconciliation of its local state.
+the expected `119476f` and a clean tree. All 141 files and four directories
+in the original main checkout's eight edited files and 20 untracked entries
+are now byte-preserved in a recovery archive. All untracked source/test/JSON
+and compressed archive collisions match resident main exactly. Six older
+document variants remain preserved. The source-only dependency audit found
+that four live-route worktrees share original main's Git administration.
+General Git synchronization is deferred while those owners are active;
+no stash, fetch or merge has occurred. The six disjoint coordination/guide
+documents may be mirrored separately after the verified resident push.
 
 ## Next action — validate the catalytic generator correction
 
@@ -297,6 +304,23 @@ selection and supplied scope review. The five-review numerical freeze alone
 does not enforce that additional selection gate. Current continuation stops
 before fitting; no corrected score or selection-gate violation exists.
 Predispatch enforcement is the next implementation check.
+
+At 13:22 UTC the current replay had 403 independently verified contexts.
+Original production had 1,105 stored outcomes: 909 complete, 170 failed and
+26 failed diagnostics. All nine original owners, the current continuation
+and the exit observer remained present. This is a dated metadata checkpoint,
+not a complete grid, numerical approval or release.
+
+Root read the complete prospective dispatch-guard design and accepted it for
+separate external implementation preparation. It preserves the existing
+scientific source pins and requires the actual selected scope before any
+corrected pilot/remaining dispatch, a zero-attempt first introduction, fixed
+resume bindings, genuine parent/child captures and separate source/fresh
+receiving semantic verification. Finished runtime tests, independent review,
+root review and all actual scientific approvals remain pending. The five
+actual review requirements, design, checkout audit, exact local backup and
+actual backup-process capture are archived. The compact preservation record is
+`coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json`.
 
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its

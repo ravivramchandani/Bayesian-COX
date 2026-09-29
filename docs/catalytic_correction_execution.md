@@ -381,6 +381,17 @@ bindings preserved. No standalone raw filesystem-check capture is available.
 
 ## Subsequent stages
 
+The prospective dispatch-guard design is preserved in the recovery archives.
+Its implementation must validate the actual ADR-041 selection and named scope
+review before pilot/remaining dispatch while preserving the existing fit and
+reproduction source pins. A first introduction must refuse every prior
+corrected attempt, including empty/orphan attempt directories; later resumes
+must retain the original selection. Genuine parent/child capture history and
+separate read-only source/fresh receiving semantic verification are required.
+Design preparation does not supply tested runtime or any actual scientific
+approval. See the [preservation record](../coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json)
+for the design and exact original-checkout backup.
+
 1. Independently verify original first proposals and enumerate exact reuse,
    changed inputs and unresolved outcomes, including all WME inner dependencies.
 2. Verify kernel, kappa and weighted-mixture arithmetic on changed accepted

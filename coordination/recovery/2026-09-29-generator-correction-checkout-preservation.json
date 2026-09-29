@@ -1,0 +1,134 @@
+{
+  "actual_current_coordination_schema_returncode": 0,
+  "actual_preservation_subprocess_returncode": 0,
+  "actual_previous_full_suite": {
+    "finished_at_utc": "2026-09-29T12:50:08.575370+00:00",
+    "returncode": 0,
+    "skips": 0,
+    "subtests": 157,
+    "tests": 998
+  },
+  "actual_scientific_reviews_selection_freeze_fits_reproduction_release_not_completed": true,
+  "all_untracked_source_test_json_and_archive_collisions_byte_equal_to_published_resident": true,
+  "archives": {
+    "actual-review-requirements": {
+      "archive": "2026-09-29-generator-correction-actual-review-requirements.tar.gz",
+      "bytes": 9765,
+      "regular_members": 8,
+      "sha256": "87db7bf287f99e235c176ee1275c532e5d5473bbafe7f51b43fb048391bdbd9e"
+    },
+    "checkout-preservation-root-validation": {
+      "archive": "2026-09-29-generator-correction-checkout-preservation-root-validation.tar.gz",
+      "bytes": 189857,
+      "regular_members": 36,
+      "sha256": "2f5cecbb87e5d6fdda3c41921aecf5c329f9d162051e7f61b0fd772956f08f97"
+    },
+    "dispatch-guard-design": {
+      "archive": "2026-09-29-generator-correction-dispatch-guard-design.tar.gz",
+      "bytes": 10487,
+      "regular_members": 6,
+      "sha256": "c7ff8289307c561bb78c893e93d55d0f1efcfc48025ee56e0b2e594ab91cdd23"
+    },
+    "original-checkout-archive-collision-list": {
+      "archive": "2026-09-29-generator-correction-original-checkout-archive-collision-list.tar.gz",
+      "bytes": 1686,
+      "regular_members": 2,
+      "sha256": "a601722312853c39f91b012af9cc34c703836e6e0eafddcebe0518aad743993e"
+    },
+    "original-checkout-document-mirror-assessment": {
+      "archive": "2026-09-29-generator-correction-original-checkout-document-mirror-assessment.tar.gz",
+      "bytes": 2622,
+      "regular_members": 3,
+      "sha256": "e2da7945fed75e0fb806afe3c47587a3472823c12147030fb0fecb89b8ae1f4f"
+    },
+    "original-checkout-execution-dependency-audit": {
+      "archive": "2026-09-29-generator-correction-original-checkout-execution-dependency-audit.tar.gz",
+      "bytes": 257663,
+      "regular_members": 89,
+      "sha256": "878bbcaa70873bc60804bf933130d8827a86d5475ea3a4f30f2a908d26376db3"
+    },
+    "original-checkout-local-state-preservation": {
+      "archive": "2026-09-29-generator-correction-original-checkout-local-state-preservation.tar.gz",
+      "bytes": 2139034,
+      "regular_members": 158,
+      "sha256": "4ed589fb3d212cd3c559186c36e6bbe1725d1ca76568980caa05c1dafcf2f0fd"
+    },
+    "original-checkout-preservation-actual-capture": {
+      "archive": "2026-09-29-generator-correction-original-checkout-preservation-actual-capture.tar.gz",
+      "bytes": 918,
+      "regular_members": 3,
+      "sha256": "44d291257b319708b6f110b34371243db5be0babc3859e09b73d9b11ec987aba"
+    },
+    "original-checkout-reconciliation-audit": {
+      "archive": "2026-09-29-generator-correction-original-checkout-reconciliation-audit.tar.gz",
+      "bytes": 202229,
+      "regular_members": 67,
+      "sha256": "1c5cfe7f1742f809bd2237cf5fb4c154b0b44cb3f14aa1c04d1b3a04079825f4"
+    }
+  },
+  "compressed_archive_bytes_compared": 1806841,
+  "compressed_archives_compared": 14,
+  "content_sha256": "468dc616454a02a1aba650c549ce1aa3073fbfb84b9c69038a1dfa224d490b57",
+  "created_at_utc": "2026-09-29T13:35:55.928028+00:00",
+  "dated_progress": {
+    "array_or_trace_bytes_read": false,
+    "collection_is_not_atomic": true,
+    "corrected_freeze_fits_release_complete": false,
+    "independent_first_draw_receipts": 403,
+    "observed_at_utc": "2026-09-29T13:22:16.942016+00:00",
+    "original_expected_cells": 1625,
+    "original_statuses": {
+      "complete": 909,
+      "failed": 170,
+      "failed_diagnostics": 26
+    },
+    "original_stored_cells": 1105,
+    "owner_ps_actual_argv": [
+      "ps",
+      "-p",
+      "62025,62026,62027,62028,62029,62030,64406,71385,98854,29118,29119,29120,29125,48620,48621",
+      "-o",
+      "pid=,ppid=,stat=,etime=,pcpu="
+    ],
+    "owner_ps_actual_returncode": 0,
+    "owner_ps_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "owner_ps_stdout_sha256": "a8a3421c693be569f10ce0c3f764396249028b169a325281fde9a3040b386c8f",
+    "replay_statuses": {
+      "independent_original_first_draw_verified": 403
+    },
+    "status": "dated_metadata_checkpoint_not_completion",
+    "volume_available_bytes": {
+      "/Users/macuser": 83871903744,
+      "/Volumes/BayesCoxTransfer20260929": 428966686720,
+      "/Volumes/SSD980": 987744436224
+    }
+  },
+  "existing_scientific_pins_and_gates_unchanged": true,
+  "general_original_checkout_git_synchronization_deferred_while_owners_active": true,
+  "guard_runtime_tests_independent_review_and_root_review_pending": true,
+  "main_original157_source_build_lock_files_unchanged": true,
+  "older_distinct_document_variants_preserved": 6,
+  "original_bytes_head_and_status_before_after_unchanged": true,
+  "original_checkout_git_stash_fetch_merge_or_document_mirror_performed": false,
+  "original_checkout_head": "dc081c0040527a7e62905a9055c6077c037c33be",
+  "original_tracked_edits": 8,
+  "original_untracked_status_entries": 20,
+  "pending": [
+    "complete1650_independent_input_replay_and_arithmetic",
+    "tested_reviewed_guard_runtime",
+    "five_actual_root_reviews_and_frozen_actual_selection_scope",
+    "full_budget_pilots_and_selected_corrected_fits",
+    "mixed_deep_verification_selected_reproduction_reporting_actual_pdf_review",
+    "actual_private_release_and_fresh_remote_restore"
+  ],
+  "preserved_root_lookup_ui_and_orchestration_errors_are_not_scientific_failures": true,
+  "previous_remote_verified_main": "9c5ee279525e8a7771b4fc17498f5ddfddab9de8",
+  "prospective_guard_design_root_read_and_accepted_for_external_implementation_preparation": true,
+  "schema_version": 1,
+  "scoped_original_directories_preserved": 4,
+  "scoped_original_files_preserved": 141,
+  "shared_original_git_admin_live_route_worktrees": 4,
+  "six_disjoint_documents_may_be_mirrored_only_after_remote_verified_push": true,
+  "source634_current_equal_actual_successful_full_suite_capture": true,
+  "status": "verified_original_checkout_local_state_preservation_and_prospective_guard_design"
+}

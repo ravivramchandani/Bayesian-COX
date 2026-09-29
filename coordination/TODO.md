@@ -638,6 +638,15 @@ reporting replay remains a separate pre-publication gate.
   remain pending scientific evidence. Before any corrected pilot score,
   validate and freeze the actual ADR-041 selection/scope review; verify that
   dispatch enforces this gate in addition to the five-review freeze.
+  The prospective guard design is root-read and accepted for separate external
+  implementation preparation; finished runtime tests and reviews remain
+  pending. Preserve all old scientific pins and require genuine source/fresh
+  receiving verification of its capture history before release completion.
+  The original checkout's 141 scoped local files are byte-backed up, with all
+  untracked collisions verified against published main. Its synchronization
+  is deferred while active owners depend on shared Git administration; no
+  stash, fetch or merge occurred. Six disjoint guide/coordination documents
+  may be mirrored separately after the verified resident push.
   The read-only observer registered all nine original owners at 11:16 UTC
   to capture future genuine exits; it supplies no past return code or numerical
   approval. The 52-member curated incident preparation preserves the exact
