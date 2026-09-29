@@ -975,4 +975,10 @@ Format:
   proposal is retained byte-for-byte in
   `coordination/recovery/2026-09-29-generator-correction-proposal/`; its pending
   flags describe that historical proposal, not completed corrective gates.
+  The prospective cap, seed namespace, complete-proposal retry rule and
+  training-input pilot selection are now specified in
+  `config/catalytic_correction.yaml` and
+  `docs/protocol_addendum_catalytic_correction.md`. Tested generator/preflight
+  implementation does not replace the complete-input, arithmetic and distinct
+  corrected numerical-freeze gates.
   Method source: [Li and Huang (2026), Section 5.1](https://academic.oup.com/biometrics/article/82/1/ujag004/8455879).

@@ -1,0 +1,22 @@
+analysis_id: catalytic_rank_correction_v1
+evidence_status: post_hoc_methodological_sensitivity
+original_production_commit: 119476fef55b1eeb690527f234c1423440720d45
+models: [catalytic_fixed, catalytic_adaptive, catalytic_wme]
+outer_contexts: 825
+inner_contexts: 825
+proposal:
+  first_seed: original_generation_seed
+  retry_seed_label: rank_conditioned_retry
+  retry_seed_indices: [1, 255]
+  attempt_cap_including_first: 256
+  redraw: complete_original_covariate_and_time_proposal
+  retry_only: exact_original_constructor_rank_rejection
+  rank_rule: original_numpy_matrix_rank_default
+  exhaustion: explicit_execution_failure
+execution:
+  preflight_workers: 1
+  numeric_threads: 1
+  original_fit_and_evaluation_seeds: preserve
+  original_sampling_and_acceptance_gates: preserve
+  numerical_fit_freeze_required: true
+  full_budget_pilot_required: true

@@ -77,6 +77,7 @@ Follow these steps in order. They are the core of the code.
 | Tables and figures | `scripts/render_confirmatory.py` | `src/rendering/` | No; pure renderer that checks every source hash |
 | Post-hoc extensions (ADR-039) | `scripts/run_extensions.py` | `src/pipelines/extensions/` | Yes; a separate frozen 1,625-fit grid |
 | Extension verification and figures | `scripts/finalize_extensions.py`, `render_extensions.py` | `src/pipelines/extensions/verification.py`, `analysis.py`, `rq2.py`, `decision_curves.py` | No; reconstructs jobs and uses stored traces/predictions |
+| Catalytic correction preflight (ADR-040) | `scripts/catalytic_correction/run_preflight.py` | `preflight_core.py`, `src/pipelines/extensions/correction_generator.py` | No; training-only proposal/rank accounting before a separate corrected-fit freeze |
 
 ## Suggested reading order
 

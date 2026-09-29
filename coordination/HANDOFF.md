@@ -25,12 +25,40 @@ the original first draw. Conditioning changes its sampling law; a separate
 addendum and actual method/implementation review are required before fitting.
 Existing source and private transfer checks do not certify corrected evidence.
 
+The active candidate is `src/pipelines/extensions/correction_generator.py`;
+the real preflight entry point is
+`scripts/catalytic_correction/run_preflight.py`. The candidate's 17 focused
+tests and the runner's 25 injected tests passed. Independent source reviews
+found no material defect. Optional processor restoration matches original
+clinical, singleton and selected-gene proposals exactly; complete training
+provenance is independently bound by the controller. The prospective cap is
+256 whole proposals, original seed first, with rank-only retry seeds specified
+in `config/catalytic_correction.yaml` and
+`docs/protocol_addendum_catalytic_correction.md`. The candidate, recipe,
+preflight-runner, selective-fit-contract and independent-arithmetic preparation
+receipts are preserved with their original bytes in five dated recovery
+archives. Full locked-environment `make test` passed 391 tests and 21 subtests;
+schemas and Ruff passed. The compact verification record is
+`coordination/recovery/2026-09-29-generator-correction-integration.json`. These are
+implementation/preparation evidence, not actual preflight results or a
+corrected fit freeze. See
+[execution instructions](../docs/catalytic_correction_execution.md).
+
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its
 failed outcomes too. Refresh dependent analyses/QA and verify a fresh remote
 restore before declaring the corrected handoff complete. The original
 clinical/robustness/sampler releases and unaffected comparators need no
 restart. Do not promise a total completion time from the earlier short profile.
+
+At 2026-09-29 06:01 UTC the original run had 1,083 recorded outcomes:
+894 complete, 167 execution failures and 22 diagnostic failures. All six
+production workers and the remaining pre-stage worker were active. Original
+completion/final-analysis markers were absent. Internal free space was
+35.56 GiB; the mounted APFS transfer image had 199.68 GiB free. These dated
+counts are a checkpoint, not a live progress claim. New preflight evidence
+will use that APFS image with one low-priority worker; current original
+outputs and workers remain in place.
 
 ## Active post-hoc extension production — authorised 2026-09-28
 

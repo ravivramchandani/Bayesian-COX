@@ -550,8 +550,15 @@ reporting replay remains a separate pre-publication gate.
     the exact original/corrected boundaries and remaining tasks.
   Original proposal:
   `coordination/recovery/2026-09-29-generator-correction-proposal/PROPOSAL.md`.
-  Correction implementation, whole-block preflight, new freeze, reuse/refit
-  inventory and corrected numerical results remain pending.
+  Candidate generation and the actual training-preflight runner are
+  implemented. Their 17/25 focused tests and independent source reviews
+  passed; five sealed preparation bundles are preserved in recovery
+  archives. Cap 256, exact rank-only retry seeds and prospective pilot
+  selection are specified in the correction addendum/config. Full locked
+  repository testing passed 391 tests/21 subtests, schemas and Ruff. Actual
+  whole-block preflight, independent complete-input replay/reuse inventory,
+  arithmetic, corrected numerical freeze/pilot/fits and downstream transfer
+  remain pending. See `docs/catalytic_correction_execution.md`.
 - [ ] T-186 (T; depends T-181–T-185, T-189, T-190) — Render the extension bundle with the
   same verified renderer and lineage rules. Acceptance: every thesis number
   traces to generated evidence, with actual visual QA and separate primary/

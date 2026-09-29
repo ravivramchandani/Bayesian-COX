@@ -13,6 +13,15 @@ anything on another Mac. A later correction keeps the original failed records
 and has its own specification, results and verified transfer; the original
 release receipts do not certify it.
 
+The tested candidate and real training-preflight runner are now implemented;
+see [correction execution](catalytic_correction_execution.md). The actual
+1,650-context audit and complete reuse/refit verification still precede any
+corrected numerical freeze. The recovery archives preserve the original
+candidate, recipe inventory, runner and selective-fit-contract preparation
+receipts, plus the independently reviewed arithmetic preparation. They do
+not contain completed corrected fits or a completed
+extension release.
+
 This guide describes the handoff for an Apple Silicon Mac. The authoritative
 task state is in [HANDOFF](../coordination/HANDOFF.md) and
 [TODO](../coordination/TODO.md). Read [the code guide](code_guide.md) for the

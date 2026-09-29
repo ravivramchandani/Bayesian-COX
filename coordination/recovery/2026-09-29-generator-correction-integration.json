@@ -1,0 +1,115 @@
+{
+  "actual_changed_input_arithmetic_passed": false,
+  "archives": {
+    "coordination/recovery/2026-09-29-generator-correction-arithmetic.tar.gz": {
+      "bytes": 33039,
+      "sha256": "08fd9e7d3f97341cc9ef41b6a3ad90227318c969cfdf124c057b2bed04566b22"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-candidate.tar.gz": {
+      "bytes": 17561,
+      "sha256": "6202bcae30ebed4101a05507dff6f16f72dabac607a4caf8dba949a9b37924fb"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-fit-contracts.tar.gz": {
+      "bytes": 23982,
+      "sha256": "8dc3c2180ef672474578c016242fd949ef0671c82b44970217215ed60a847c2c"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-inventory.tar.gz": {
+      "bytes": 143066,
+      "sha256": "99872973c168d16962712ba7ec6109fecdec27464348fab0c08b7a2afccb8a4a"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-preflight-runner.tar.gz": {
+      "bytes": 30934,
+      "sha256": "60ebfe10637f9116b802a799a28ce97dbdadf042e68cae0ebd3de60627064f4c"
+    }
+  },
+  "base_commit": "c77792cf731a2d8fc2ad58a567cf270d6e714029",
+  "checks": {
+    "coordination_schemas": "passed",
+    "environment": {
+      "conda_package_count": 237,
+      "direct_import_versions": {
+        "arviz": "0.23.4",
+        "h5py": "3.16.0",
+        "lifelines": "0.30.3",
+        "matplotlib": "3.11.1",
+        "numpy": "2.4.6",
+        "pandas": "2.3.3",
+        "pycox": "0.3.0",
+        "pymc": "5.28.5",
+        "scipy": "1.17.1",
+        "seaborn": "0.13.2",
+        "shap": "0.51.0",
+        "sksurv": "0.28.0",
+        "torch": "2.13.0",
+        "torchtuples": "0.2.2",
+        "yaml": "6.0.3"
+      },
+      "hdf5": {
+        "h5py": "3.16.0",
+        "hdf5_built": "2.1.0",
+        "hdf5_runtime": "2.1.0"
+      },
+      "lock_sha256": "1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57",
+      "package_count": 259,
+      "pip_package_count": 22,
+      "platform": {
+        "machine": "arm64",
+        "macos": "26.6",
+        "system": "Darwin"
+      },
+      "python": "3.11.15",
+      "status": "ok",
+      "verified_conda_packages": 237,
+      "verified_pip_packages": 22
+    },
+    "git_diff_check": "passed",
+    "locked_make_test": {
+      "seconds": 319.82,
+      "status": "passed",
+      "subtests": 21,
+      "tests": 391
+    },
+    "original_v5_existing_files_unchanged": 157,
+    "ruff_all": "passed"
+  },
+  "content_sha256": "f96b01209a76842ed42d37a4937bf9f53bec31618373c53d2456a4c6eac9e76f",
+  "corrected_fits_complete": false,
+  "corrected_numerical_freeze_created": false,
+  "corrected_reporting_qa_release_restore_complete": false,
+  "created_at_utc": "2026-09-29T06:16:36.186088+00:00",
+  "exact_fit_reuse_inventory_complete": false,
+  "independent_all_context_first_draw_replay_complete": false,
+  "kind": "generator_correction_integration_verification",
+  "original_numerical_workers_or_source_changed": false,
+  "post_test_changes": [
+    {
+      "after_sha256": "65329d7d5ce8895267d137eeb8a589c0eaf2b628139646c126a9c57b82250914",
+      "before_sha256": "6c55ff2e5ce3518c9da8508f8d4a55dbc6c21b3721acc6d86781d4f6001313c2",
+      "executable_source_and_tests_unchanged": true,
+      "file": "config/catalytic_correction.yaml",
+      "kind": "remove_extra_blank_line_at_eof",
+      "parsed_yaml_exactly_unchanged": true
+    }
+  ],
+  "real_training_preflight_complete": false,
+  "schema_version": 1,
+  "tested_files": {
+    "config/catalytic_correction.yaml": "65329d7d5ce8895267d137eeb8a589c0eaf2b628139646c126a9c57b82250914",
+    "docs/protocol_addendum_catalytic_correction.md": "1e031951c8b680d4595be35118c07089acacaaf5e2bf22a9e235bda5a33664da",
+    "scripts/catalytic_correction/preflight_core.py": "6b03c18a7dc55f896d7c999e0cca676cffb9822132914ce86a90867986a4798c",
+    "scripts/catalytic_correction/run_preflight.py": "940e4af0a37328a11ee51d43e6be64e91d92fa865ad5ae7452478b0b8ae1f38f",
+    "src/pipelines/extensions/correction_generator.py": "64963c33b067c3c67f5406037a3782820d99c1d687598a9536c72225e6939f11",
+    "tests/test_catalytic_correction_preflight.py": "b36de20ce17e284e2bcace38d84ade8ada806e0310e9a532407e9be38c0b1c6c",
+    "tests/test_correction_generator.py": "479a2322e156f67217fd3a7a9bee304accaa4a4b18db1ea4dab615cf7fc29436"
+  },
+  "validation_directory": "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_integration_validation_v1",
+  "validation_files": {
+    "environment.command.json": "937de88f27781eb172f92fba87b88f6762313e482c82d1fb5690299f50053ca6",
+    "environment.stderr.txt": "eb2612b030f85596f09498719121b73805675bc21cf1c2eb3ffb645c2db57dfe",
+    "environment.stdout.json": "cc6fc42b01e2a273c31e4c85acff93c4090e289d1b8dd924438e5c7e211475e7",
+    "full_tests.command.json": "750b17e31b98d50c1d5b21faed946e7e6659cec77c67e215baf2c70822485385",
+    "full_tests.exit.json": "df4d721d233a2334088d2d2e0110346ae9e509ff46bf0b379fbcfa85c715af4d",
+    "full_tests.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "full_tests.stdout.txt": "e9c8aaca6e3c89b3dac15e4ffb052237ce0f8a05b79374c4d5310e00139cf619"
+  }
+}
