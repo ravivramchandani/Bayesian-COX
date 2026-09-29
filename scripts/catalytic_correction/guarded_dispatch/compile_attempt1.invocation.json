@@ -1,0 +1,86 @@
+{
+  "actual_numerical_or_guarded_controller_dispatch": false,
+  "argv": [
+    "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "import ast,pathlib; paths=['/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v3/capture_guarded_dispatch.py', '/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v3/capture_preparation_checks.py', '/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v3/guard_fit_dispatch.py', '/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v3/test_guarded_dispatch.py', '/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v3/test_guarded_dispatch_regressions.py', '/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v3/test_guarded_dispatch_reuse_consistency.py', '/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v3/verify_guarded_dispatch_proof.py']; [(ast.parse(pathlib.Path(p).read_text(),filename=p),compile(pathlib.Path(p).read_text(),p,'exec')) for p in paths]; print('AST/compile passed:',len(paths))"
+  ],
+  "cwd": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v3",
+  "exit_code": 0,
+  "finished_at_utc": "2026-09-29T14:59:46.633861+00:00",
+  "mode": "compile",
+  "raw_stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "raw_stdout": {
+    "bytes": 22,
+    "sha256": "40996752f2a968e8aaaab63f707f93cea485a63973c1e632cca44dd50fe15682"
+  },
+  "schema_version": 1,
+  "source_finish": {
+    "capture_guarded_dispatch.py": {
+      "bytes": 7648,
+      "sha256": "f82a7b8d2c65e829a7178c8fb230751bef193356e8589c22512ac229de944611"
+    },
+    "capture_preparation_checks.py": {
+      "bytes": 3024,
+      "sha256": "583870dd3d62343e9623d089d412a3c93d22bf221a8a2ce2d1f1adb70bfbc638"
+    },
+    "guard_fit_dispatch.py": {
+      "bytes": 76079,
+      "sha256": "368141f522b8d2d9b4d8829a0c1102d326bd7aafc6b063ee574932f02c33c116"
+    },
+    "test_guarded_dispatch.py": {
+      "bytes": 37287,
+      "sha256": "1f149bbf44a90580f63de55678ae196480615f16a83d16c542d6dfbc628a521f"
+    },
+    "test_guarded_dispatch_regressions.py": {
+      "bytes": 15012,
+      "sha256": "0b9e0d56a71613b066baa96e4927567bbdfeb11642ef2905087b2a5f2020633a"
+    },
+    "test_guarded_dispatch_reuse_consistency.py": {
+      "bytes": 4418,
+      "sha256": "5bdff58f9265b0d01ac2e4b98b57de6c45c48d88c69bfb66c339d0fce3b86ec7"
+    },
+    "verify_guarded_dispatch_proof.py": {
+      "bytes": 2500,
+      "sha256": "7b19d4c7efa945d22e03cc779e1a1e64a06425f59a7d6b7d862097708ec501a9"
+    }
+  },
+  "source_start": {
+    "capture_guarded_dispatch.py": {
+      "bytes": 7648,
+      "sha256": "f82a7b8d2c65e829a7178c8fb230751bef193356e8589c22512ac229de944611"
+    },
+    "capture_preparation_checks.py": {
+      "bytes": 3024,
+      "sha256": "583870dd3d62343e9623d089d412a3c93d22bf221a8a2ce2d1f1adb70bfbc638"
+    },
+    "guard_fit_dispatch.py": {
+      "bytes": 76079,
+      "sha256": "368141f522b8d2d9b4d8829a0c1102d326bd7aafc6b063ee574932f02c33c116"
+    },
+    "test_guarded_dispatch.py": {
+      "bytes": 37287,
+      "sha256": "1f149bbf44a90580f63de55678ae196480615f16a83d16c542d6dfbc628a521f"
+    },
+    "test_guarded_dispatch_regressions.py": {
+      "bytes": 15012,
+      "sha256": "0b9e0d56a71613b066baa96e4927567bbdfeb11642ef2905087b2a5f2020633a"
+    },
+    "test_guarded_dispatch_reuse_consistency.py": {
+      "bytes": 4418,
+      "sha256": "5bdff58f9265b0d01ac2e4b98b57de6c45c48d88c69bfb66c339d0fce3b86ec7"
+    },
+    "verify_guarded_dispatch_proof.py": {
+      "bytes": 2500,
+      "sha256": "7b19d4c7efa945d22e03cc779e1a1e64a06425f59a7d6b7d862097708ec501a9"
+    }
+  },
+  "source_unchanged": true,
+  "started_at_utc": "2026-09-29T14:59:46.528032+00:00",
+  "status": "bounded_preparation_check_return_captured"
+}

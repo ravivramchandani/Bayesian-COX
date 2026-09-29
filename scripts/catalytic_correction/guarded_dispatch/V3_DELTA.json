@@ -1,0 +1,66 @@
+{
+  "content_sha256": "dbac034eec2d36cbefe7f2401699a3b16067464617af5adeecb24bd3f5a81482",
+  "full_v2_79_files_and_two_dirs_preserved": true,
+  "full_v2_review_15_files_preserved": true,
+  "narrow_correction": {
+    "function": "account_cell",
+    "reuse_requires": {
+      "changed_roles": [],
+      "generator_failures": {},
+      "missing_roles": [],
+      "tuning_record_reused_sha256": null
+    },
+    "scientific_gates_or_budget_changes": false,
+    "source_math_classifier_pin": {
+      "bytes": 22845,
+      "sha256": "83cb84002cd9dc447f70d9346baaba16197fa04d5a43e8b2fb500c2ce38f7fef"
+    },
+    "terminal_missing_or_changed_roles_remain_allowed": true,
+    "terminal_requires": {
+      "tuning_record_reused_sha256": null
+    }
+  },
+  "new_regression_surface": {
+    "alias_import_order": [
+      "test_guarded_dispatch",
+      "test_guarded_dispatch_regressions",
+      "test_guarded_dispatch_reuse_consistency"
+    ],
+    "borrowed_only_helpers": [
+      "setUp",
+      "tearDown",
+      "rewrite",
+      "make_reuse"
+    ],
+    "new_class": "GuardV3ReuseConsistency",
+    "new_method_count": 7,
+    "new_methods": [
+      "test_original_negative_reuse_statuses_remain_valid",
+      "test_reused_changed_roles_impossible_and_refused",
+      "test_reused_generator_failure_impossible_and_refused",
+      "test_reused_missing_roles_impossible_and_refused",
+      "test_reused_nonnull_tuning_marker_impossible_and_refused",
+      "test_terminal_failures_keep_legitimate_missing_and_changed_roles",
+      "test_terminal_nonnull_tuning_marker_impossible_and_refused"
+    ],
+    "new_module": "test_guarded_dispatch_reuse_consistency.py",
+    "no_inherited_old_test_collection": true,
+    "old23_module": "test_guarded_dispatch.py",
+    "retained34_source_and_method_ASTs": "unchanged",
+    "v2_11_module": "test_guarded_dispatch_regressions.py"
+  },
+  "only_changed_production_function": "account_cell",
+  "retained34_test_source_byte_and_method_AST_exact": true,
+  "runtime_source_sha256": {
+    "capture_guarded_dispatch.py": "f82a7b8d2c65e829a7178c8fb230751bef193356e8589c22512ac229de944611",
+    "guard_fit_dispatch.py": "368141f522b8d2d9b4d8829a0c1102d326bd7aafc6b063ee574932f02c33c116",
+    "verify_guarded_dispatch_proof.py": "7b19d4c7efa945d22e03cc779e1a1e64a06425f59a7d6b7d862097708ec501a9"
+  },
+  "schema_version": 1,
+  "scientific_completion_or_actual_review_dispatch_created": false,
+  "status": "GD_R2a_narrow_preparation_fix_pending_independent_review",
+  "terminal_null_rule_review_evidence": "source-only pinned classifier248-249; V3 fictional regression now executed",
+  "v1_history_nested_unchanged": true,
+  "v2_review_actual_probe_rc0_is_counterexample_evidence_not_approval": true,
+  "v3_failed_check_attempts": []
+}

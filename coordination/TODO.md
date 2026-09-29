@@ -638,25 +638,27 @@ reporting replay remains a separate pre-publication gate.
   remain pending scientific evidence. Before any corrected pilot score,
   validate and freeze the actual ADR-041 selection/scope review; verify that
   dispatch enforces this gate in addition to the five-review freeze.
-  The prospective guard design is root-read and accepted for separate external
-  implementation preparation. Its first sealed version passed 23 fictional
-  tests, Ruff and five-source compile checks; finished-source review found
-  three material input-protection/account-envelope/pass-row gaps, so that
-  version is preserved and not adopted. V2 closes those gaps and passes
-  34 fictional methods; its portable adapter passes 35 tests/133 subtests.
-  Independent review demonstrated impossible decision metadata accepted
-  alongside original reuse. V2 remains unadopted; a narrow v3 correction,
-  finished review, portable tests and root integration remain pending.
-  Preserve all old scientific pins and require genuine source/fresh
-  receiving verification of its capture history before release completion.
+  V1/V2 guard carriers, counterexamples and failed preparation attempts remain
+  preserved and unadopted. Reviewed V3 is integrated at
+  `scripts/catalytic_correction/guarded_dispatch/`. Its actual full locked suite
+  passed 1,040 tests/293 subtests with zero skips at 15:34:34 UTC; all 752
+  captured files were unchanged and repository-wide Ruff passed. The exact
+  reviewed preparations, complete Git roster, failed metadata checks and
+  completed captures are linked from the guarded-dispatch integration-v3
+  record. All preceding scientific pins/configuration/addendum remain unchanged.
+  Before pilot/remaining dispatch, supply the five actual scientific review
+  roles, corrected numerical freeze, ADR-041 selection/named scope review and
+  named guard request/adoption. Use the guarded launcher; preserve the direct
+  account phase. Genuine separate source/fresh receiving semantic captures
+  remain required before release completion.
   The original checkout's 141 scoped local files are byte-backed up, with all
   untracked collisions verified against published main. Its synchronization
   is deferred while active owners depend on shared Git administration; no
-  stash, fetch or merge occurred. At 14:21 UTC six disjoint guide/coordination
-  documents were mirrored from remote-verified `fe1c26d`; all six published
-  byte bindings and 135 other scoped files, both sets of prior document backups
-  and 24 selected shared-Git administrative files were verified unchanged.
-  The actual mirror and parent capture are retained in the v2 mirror record.
+  stash, fetch or merge occurred. At 14:55 UTC on 29 September six disjoint
+  documents were mirrored from remote-verified `a26d5a2`. Their published
+  bindings, 135 non-target scoped files, preceding backups and selected
+  shared-Git metadata stayed unchanged. That actual zero-return mirror and
+  parent capture are in the v3 mirror record.
   The read-only observer registered all nine original owners at 11:16 UTC
   to capture future genuine exits; it supplies no past return code or numerical
   approval. The 52-member curated incident preparation preserves the exact

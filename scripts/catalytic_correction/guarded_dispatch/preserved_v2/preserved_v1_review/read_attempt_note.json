@@ -1,0 +1,10 @@
+{
+  "actual_tool_exit_code": 2,
+  "content_sha256": "ab06ddb25d5a36b650621c05e75ecdf2fe9a548ef113ce5546f76f066c945ba1",
+  "incorrect_guessed_path": "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/contracts.py",
+  "raw_error": "rg: /Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/contracts.py: IO error for operation on /Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/contracts.py: No such file or directory (os error 2)",
+  "resolution": "rg --files located correction_fit_contracts.py; exact pinned source read and verified",
+  "schema_version": 1,
+  "scientific_failure": false,
+  "status": "small_source_read_path_error_preserved"
+}

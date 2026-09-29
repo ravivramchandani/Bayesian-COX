@@ -1,0 +1,90 @@
+{
+  "actual_numerical_or_guarded_controller_dispatch": false,
+  "argv": [
+    "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "ruff",
+    "check",
+    "--no-cache",
+    "--select",
+    "E,F,I,UP,B",
+    "--ignore",
+    "E501",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/capture_guarded_dispatch.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/capture_preparation_checks.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/guard_fit_dispatch.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/test_guarded_dispatch.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/test_guarded_dispatch_regressions.py",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/verify_guarded_dispatch_proof.py"
+  ],
+  "cwd": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2",
+  "exit_code": 0,
+  "finished_at_utc": "2026-09-29T14:30:59.394859+00:00",
+  "mode": "ruff",
+  "raw_stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "raw_stdout": {
+    "bytes": 19,
+    "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  "schema_version": 1,
+  "source_finish": {
+    "capture_guarded_dispatch.py": {
+      "bytes": 7648,
+      "sha256": "f82a7b8d2c65e829a7178c8fb230751bef193356e8589c22512ac229de944611"
+    },
+    "capture_preparation_checks.py": {
+      "bytes": 3024,
+      "sha256": "583870dd3d62343e9623d089d412a3c93d22bf221a8a2ce2d1f1adb70bfbc638"
+    },
+    "guard_fit_dispatch.py": {
+      "bytes": 75828,
+      "sha256": "ee80c8e610f81b1cf7059c87d7cc4df80b964e6d76cd6c3144205f09add8bdc9"
+    },
+    "test_guarded_dispatch.py": {
+      "bytes": 37287,
+      "sha256": "1f149bbf44a90580f63de55678ae196480615f16a83d16c542d6dfbc628a521f"
+    },
+    "test_guarded_dispatch_regressions.py": {
+      "bytes": 15012,
+      "sha256": "0b9e0d56a71613b066baa96e4927567bbdfeb11642ef2905087b2a5f2020633a"
+    },
+    "verify_guarded_dispatch_proof.py": {
+      "bytes": 2500,
+      "sha256": "7b19d4c7efa945d22e03cc779e1a1e64a06425f59a7d6b7d862097708ec501a9"
+    }
+  },
+  "source_start": {
+    "capture_guarded_dispatch.py": {
+      "bytes": 7648,
+      "sha256": "f82a7b8d2c65e829a7178c8fb230751bef193356e8589c22512ac229de944611"
+    },
+    "capture_preparation_checks.py": {
+      "bytes": 3024,
+      "sha256": "583870dd3d62343e9623d089d412a3c93d22bf221a8a2ce2d1f1adb70bfbc638"
+    },
+    "guard_fit_dispatch.py": {
+      "bytes": 75828,
+      "sha256": "ee80c8e610f81b1cf7059c87d7cc4df80b964e6d76cd6c3144205f09add8bdc9"
+    },
+    "test_guarded_dispatch.py": {
+      "bytes": 37287,
+      "sha256": "1f149bbf44a90580f63de55678ae196480615f16a83d16c542d6dfbc628a521f"
+    },
+    "test_guarded_dispatch_regressions.py": {
+      "bytes": 15012,
+      "sha256": "0b9e0d56a71613b066baa96e4927567bbdfeb11642ef2905087b2a5f2020633a"
+    },
+    "verify_guarded_dispatch_proof.py": {
+      "bytes": 2500,
+      "sha256": "7b19d4c7efa945d22e03cc779e1a1e64a06425f59a7d6b7d862097708ec501a9"
+    }
+  },
+  "source_unchanged": true,
+  "started_at_utc": "2026-09-29T14:30:59.333573+00:00",
+  "status": "bounded_preparation_check_return_captured"
+}

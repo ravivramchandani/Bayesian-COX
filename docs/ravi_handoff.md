@@ -18,39 +18,42 @@ binds all 12,446 artifacts and seed histories. Independent original-draw/input
 replay and arithmetic must complete before the five actual execution reviews,
 freeze and full-budget pilot. The detached continuation stops before fitting.
 
-The first launch safeguard passed 23 fictional tests, but
-[independent probes](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v1-independent-review.json)
-confirmed three material gaps. V2 closes those gaps and passes 34 fictional
-methods, with 35 portable tests and 133 subtests. Its
-[independent review](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json)
-found contradictory reuse decisions accepted, so both versions remain
-preserved and unadopted. A narrow v3 correction and finished source/portable/
-root integration checks are being prepared. Actual ADR-041 selection and
-scope approval must be checked before any corrected score; preparation
-tests do not supply those approvals.
+The corrected launch safeguard is integrated as reviewed engineering source.
+Earlier V1/V2 versions and their review failures remain preserved. The five
+actual scientific reviews, corrected numerical freeze, ADR-041 selection/named
+scope review and dispatch adoption are still pending.
 
-The current implementation includes the reviewed freeze, selective-fitting,
+Corrected pilot/remaining fits use the
+[guarded launcher](../scripts/catalytic_correction/guarded_dispatch/capture_guarded_dispatch.py).
+The separate `verify_guarded_dispatch_proof.py` checks retained dispatch
+history. Its actual source and fresh receiving captures remain required
+before release completion. Scientific budgets and acceptance gates are unchanged.
+
+The current implementation includes the reviewed freeze builder, selective-fitting,
 mixed deep verification, selected reproduction, reporting and release-v3
-components. The latest full locked suite passed 998 tests and 157 subtests;
-all 634 captured files remained unchanged at the 14:43 UTC checkpoint.
+components. The full locked suite passed 1,040 tests and 293 subtests with
+zero skips at 15:34:34 UTC on 29 September; all 752 captured files remained
+unchanged. Repository-wide lint passed. These are implementation checks;
+the numerical programme remains in progress.
 Exact validation history is linked from the
-[v3 integration record](../coordination/recovery/2026-09-29-generator-correction-release-v3-integration.json).
+[v3 integration record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-integration-v3.json).
 The final extension transfer still requires completed numerical evidence,
 selected reproduction, actual figure review and a fresh remote restore.
 Guard history additionally requires separately captured source and fresh
 receiving semantic verification; existing release-v3 only transports those
 records.
 
-At 14:43 UTC on 29 September, metadata showed 582 verified input receipts and
-1,111 original outcomes: 914 complete, 170 failed and 27 failed diagnostics.
-These are dated progress counts. Original successes/failures and the
-interrupted storage/replay evidence remain preserved. Keep SSD980 and its
-two mounted images available while the owner's jobs continue. Owner-side
-integration uses the resident checkout; only the six published guides and
-coordination documents are mirrored into the original IDE checkout while
-live worktrees depend on its shared Git metadata. The
-[latest mirror record](../coordination/recovery/2026-09-29-generator-correction-document-mirror-v2.json)
-binds that document-only update from remote-verified `fe1c26d`.
+At 15:38:44 UTC on 29 September, a non-atomic metadata check showed 707 of
+1,650 independent input receipts and 1,115 of 1,625 original outcomes:
+917 complete, 170 failed and 28 failed diagnostics. All 15 monitored jobs
+were present. These are dated progress counts.
+Original successes/failures and interrupted storage/replay evidence remain
+preserved. Keep SSD980 and its two mounted images available while jobs run.
+Owner-side integration uses the resident checkout; only the six published
+guide/coordination documents are mirrored into the original IDE checkout
+while live worktrees depend on its shared Git metadata. The
+[14:55 document mirror](../coordination/recovery/2026-09-29-generator-correction-document-mirror-v3.json)
+records that narrow update from published `a26d5a2`.
 
 Use [the code guide](code_guide.md),
 [correction execution](catalytic_correction_execution.md) and

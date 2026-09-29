@@ -1,0 +1,233 @@
+{
+  "actual_controller_dispatch_or_reviews_created": false,
+  "actual_scientific_completion_certified": false,
+  "allowed_original_account_operations": [
+    "reuse_original_outcome",
+    "retain_corrected_input_failure"
+  ],
+  "bound_design_reviews": {
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_design_v1/receipt.json": {
+      "bytes": 1837,
+      "sha256": "be9b8f6346b796e7b44f7935a12808669a00e8dbd99c822b99ae794fc572fb82"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_independent_design_review_v1/receipt.json": {
+      "bytes": 1758,
+      "sha256": "13983de7393b0bf5ae878a3a8324f6e70e4f3ccc377eb30b0265a0aa493bc264"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_transfer_compatibility_review_v1/receipt.json": {
+      "bytes": 4881,
+      "sha256": "c53553f635dccd53c5725d88ca11b7bdc4187dd4db66ebbeafbe8759a6438c83"
+    }
+  },
+  "capture": {
+    "actual_returncode": "integer or unavailable null, never boolean/derived success",
+    "before_child": "exact CLI/request, current interpreter samefile, numeric5=1, original gates, launcher-before tree, fixed introduction",
+    "closed_causal_history": [
+      "sequence_index contiguous",
+      "previous guard invocation byte SHA",
+      "predecessor-after equals successor-before",
+      "existing bytes and directories unchanged",
+      "actual direct controller passes bound",
+      "unique new attempt ownership",
+      "final root exactly last-after"
+    ],
+    "closed_nonzero": "retained_guard_failure_history_accounted and CLI exit1, successful_guard_coverage=false",
+    "default": "subprocess.run, injection refused in production",
+    "partial_or_unclassified": "retain and refuse automatic resume/success",
+    "streams": "exclusive raw stdout/stderr flushed fsynced and closed before byte binding",
+    "two_actual_subprocesses": [
+      "owned launcher -> guard",
+      "guard -> unchanged controller"
+    ]
+  },
+  "content_sha256": "43f140ed7e3d54c8fcdc4f84da7fd945cc9d2e7223bdb81b4a21595e8733e114",
+  "existing_transfer": {
+    "directory_inventory": "complete directories actually materialized by retained files, never claim standalone external empty dirs transported",
+    "extra_files": "exact unique retained_files under execution/retained_external/guarded-dispatch, no aliases or extra tree asset",
+    "source_and_receiving_semantic_invocations_separate_from_old_capture_modes": true,
+    "whole_corrected_run": "unchanged v3 asset includes all guard directories and history"
+  },
+  "first_introduction": {
+    "account_flags_required": [
+      "fit_dispatched=false",
+      "newly_executed_fit=false",
+      "artifacts={}",
+      "matching freeze/definition/witness path/hash",
+      "no corrected_reference"
+    ],
+    "all_cells_checked_independently": true,
+    "attempt_descendants_must_be_absent_including_empty": true,
+    "no_active_claims": true,
+    "overlap_refusal": "output vs guard/preparation/fit/reproduction/authority before mkdir in either direction"
+  },
+  "locations": {
+    "actual_verifier_code_directory_equals_declared_role": true,
+    "all_request_freeze_selection_roles_explicit": true,
+    "authority": "separate actual named root guard_proof_locations_reviewed; byteSHA supplied as external CLI trust anchor",
+    "authority_digest_excludes": [
+      "authority",
+      "content_sha256"
+    ],
+    "before_after_all_files_and_directories_unchanged": true,
+    "file_shape": {
+      "binding": "exact SHA/bytes",
+      "historical": "absolute source file",
+      "payload_role": "mode-specific role",
+      "restored": "distinct physical mapped file"
+    },
+    "keys": [
+      "schema_version",
+      "status",
+      "request_sha256",
+      "mode",
+      "fresh_payload_roles",
+      "source_guard_proof",
+      "immutable_roots",
+      "immutable_files",
+      "transport_evidence",
+      "authority",
+      "content_sha256"
+    ],
+    "modes": [
+      "source",
+      "receiving"
+    ],
+    "no_receiving_historical_identity_or_fallback": true,
+    "readonly_output": "new externally located directory; disjoint from every immutable root/file",
+    "receiving_source_proof": "actual same-request source semantic receipt, success true and test flag false, separately retained/mapped",
+    "receiving_transport_roles": [
+      "actual_stage",
+      "actual_restore"
+    ],
+    "schema_version": 1,
+    "status": "guard_proof_locations_proposed",
+    "whole_root_shape": {
+      "historical": "absolute source role",
+      "inventory": {
+        "directories": "complete sorted distinct roster including empty directories",
+        "files": "relative exact SHA/bytes map"
+      },
+      "payload_role": "null source / key in fresh_payload_roles receiving",
+      "restored": "exact current physical role"
+    }
+  },
+  "main_or_predecessor_edits": false,
+  "namespace": "passes/guarded_dispatch_v1",
+  "preparation": {
+    "exact_inventory": "artifacts plus its own receipt and artifact_directories",
+    "no_unlisted_files_or_empty_dirs": true,
+    "runtime_sources": [
+      "capture_guarded_dispatch.py",
+      "guard_fit_dispatch.py",
+      "verify_guarded_dispatch_proof.py"
+    ],
+    "status": "guarded_dispatch_preparation_sealed"
+  },
+  "programme_complete": false,
+  "request": {
+    "actual_review_required": [
+      "nonempty reviewer_name",
+      "reviewer_role=root",
+      "reviewed_at_utc<=actual launch",
+      "test_only is not true"
+    ],
+    "adoption_binds": "request_body_sha256",
+    "adoption_status": "guard_dispatch_request_reviewed",
+    "carrier_shape": {
+      "path": "absolute unlinked actual path",
+      "sha256": "exact 64 lower hexadecimal byte SHA"
+    },
+    "exact_keys": [
+      "schema_version",
+      "status",
+      "test_only",
+      "guard_code",
+      "guard_source_sha256",
+      "guard_preparation",
+      "implementation_review",
+      "scope_review",
+      "adoption",
+      "selection",
+      "freeze",
+      "manifest",
+      "fit_code",
+      "reproduction_code",
+      "corrected_run",
+      "locked_python",
+      "phase",
+      "limit",
+      "pilot_review",
+      "resolution_review",
+      "request_body_sha256",
+      "content_sha256"
+    ],
+    "five_old_review_roles": [
+      "method",
+      "arithmetic",
+      "input_witness",
+      "implementation",
+      "freeze"
+    ],
+    "implementation_review_extra": {
+      "dispatch_guard_implementation": {
+        "preparation": "actual sealed preparation carrier",
+        "source_sha256": "exact runtime three-map"
+      }
+    },
+    "limit": "null or positive nonbool integer",
+    "new_guard_pins_do_not_enter_old_execution_definition_digest": true,
+    "phase": [
+      "pilot",
+      "remaining"
+    ],
+    "remaining_requires": "actual named root pilot review and exact old validate_pilot_review",
+    "request_body_digest_excludes": [
+      "adoption",
+      "request_body_sha256",
+      "content_sha256"
+    ],
+    "schema_version": 1,
+    "status": "guarded_corrected_fit_dispatch_request",
+    "test_only": false
+  },
+  "runtime_source_sha256": {
+    "capture_guarded_dispatch.py": "1759e74e59397d4bcb877795ccef6117c3c1dbf202019ed5a4df3791972fae80",
+    "guard_fit_dispatch.py": "3a44a8b560c9c405b4ebb9c1ab8708002d00ce6b4f94992858516eee3aaff1e0",
+    "verify_guarded_dispatch_proof.py": "7b19d4c7efa945d22e03cc779e1a1e64a06425f59a7d6b7d862097708ec501a9"
+  },
+  "schema_version": 1,
+  "scientific_gates_changed": false,
+  "separate_actual_capture_gate": {
+    "helper_generates_capture_or_approvals": false,
+    "old_release_capture_or_receiving_semantic_route": false,
+    "receiving": "genuine fresh invocation/raw capture stays outside immutable restored payload",
+    "source": "root captures real semantic helper argv/source/rc0/stdout/stderr + exact emitted receipt; includes exact source capture files in staged map authority"
+  },
+  "source_definitions_hashes": {
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_child.py": {
+      "bytes": 36632,
+      "sha256": "8ec459f949d7edb18bb587b42eab5baa823fa606075b086c8a5b2475256b2935"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_common.py": {
+      "bytes": 30288,
+      "sha256": "b17f378ba77ea3ae5ba25c836e963a1a0160556465b25745462f648e325d1f11"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_controller.py": {
+      "bytes": 24921,
+      "sha256": "1fdeecc9d437bae930414bc84094da01f21140e6db86e09193cf47a395f1a038"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/reproduction_core.py": {
+      "bytes": 30615,
+      "sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/run_reproduction.py": {
+      "bytes": 36376,
+      "sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/terminal_replay_child.py": {
+      "bytes": 19483,
+      "sha256": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    }
+  },
+  "status": "prospective_guarded_dispatch_interface"
+}

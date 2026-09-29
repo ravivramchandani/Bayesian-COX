@@ -1,0 +1,68 @@
+{
+  "actual_probe_invocation_binding": {
+    "bytes": 24800,
+    "sha256": "e57a3f7c9bda2b8e96d3ccd4b7478d925b69bf2c11ecd218a16557499ec4f9d3"
+  },
+  "actual_probe_returncode": 0,
+  "actual_scientific_scope_freeze_adoption_or_release_approval": false,
+  "all_49_captured_input_and_helper_files_unchanged": true,
+  "all_reference_and_additional_pinned_sources_unchanged": true,
+  "archival_file_count_including_receipt": 11,
+  "artifact_count": 10,
+  "artifacts": {
+    "REPORT.md": {
+      "bytes": 10056,
+      "sha256": "300faa7d67c495e1980ba6dd169ecd24c270b478a441dd54d6bf96a176652e56"
+    },
+    "capture_review_probe.py": {
+      "bytes": 3841,
+      "sha256": "fb44263f84df5da7c36daaf6c207ed9df332fecbb088acaa1df307b95d07e4d8"
+    },
+    "findings.json": {
+      "bytes": 2673,
+      "sha256": "417ed38ed9cd06ceb6f43761b8c2f17f1d9ad6f203984d7ccaf58bd72b7e674a"
+    },
+    "probe.invocation.json": {
+      "bytes": 24800,
+      "sha256": "e57a3f7c9bda2b8e96d3ccd4b7478d925b69bf2c11ecd218a16557499ec4f9d3"
+    },
+    "probe.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "probe.stdout.log": {
+      "bytes": 924,
+      "sha256": "ac37ba1391edf98829fb7f68cf16fb68f89423cd07a4353294c3f6f28a6e94b7"
+    },
+    "probe_counterexamples.py": {
+      "bytes": 4555,
+      "sha256": "ac0c410983c466269e8cc83a128754d261c3774b9891fecac712ff7fccfd0dd4"
+    },
+    "read_attempt_note.json": {
+      "bytes": 763,
+      "sha256": "83b30699585da41d943444d1c0f0a2dbefcb7cb97f5db9466d7e3d29c4bb425c"
+    },
+    "seal_review.py": {
+      "bytes": 7509,
+      "sha256": "7ec660d96b47fddc92f235c239f2d2d84da0c92f82973ce9563e32325b1721e3"
+    },
+    "source_and_reference_recheck.json": {
+      "bytes": 23350,
+      "sha256": "622e61a8bc8012f81874225eb1f3809e3898cbd3a751b412c6785825856195dd"
+    }
+  },
+  "content_sha256": "28ac255c2dec06dc3fce2f5b2742b2bc5ebba06cb6fad9e72611164e85deea92",
+  "created_at_utc": "2026-09-29T14:19:07.901627+00:00",
+  "findings": [
+    "GD-R1",
+    "GD-R2",
+    "GD-R3"
+  ],
+  "main_original_or_carrier_edits": false,
+  "real_controller_scientific_checker_dataset_array_trace_process_git_remote_access": false,
+  "review_scope": "full static source review plus three disposable fictional metadata counterexamples",
+  "reviewed_preparation_sha256": "54b1eaa4b4da20719a63c55c2ad67b91fbd936b650dba16dfa52091ba1b5942b",
+  "reviewer_agent": "/root/dispatch_guard_independent_design_review",
+  "schema_version": 1,
+  "status": "independent_guarded_dispatch_v1_implementation_review_sealed_with_material_findings"
+}

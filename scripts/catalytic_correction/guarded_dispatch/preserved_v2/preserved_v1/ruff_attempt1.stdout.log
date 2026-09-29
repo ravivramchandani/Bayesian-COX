@@ -1,0 +1,76 @@
+UP035 [*] Import from `collections.abc` instead: `Callable`, `Iterator`
+  --> capture_guarded_dispatch.py:14:1
+   |
+12 | import uuid
+13 | from pathlib import Path
+14 | from typing import Any, Callable, Iterator
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: Import from `collections.abc`
+   |
+13 | from pathlib import Path
+   - from typing import Any, Callable, Iterator
+14 + from typing import Any
+15 + from collections.abc import Callable, Iterator
+16 |
+   |
+
+F401 [*] `uuid` imported but unused
+  --> guard_fit_dispatch.py:14:8
+   |
+12 | import sys
+13 | import tempfile
+14 | import uuid
+   |        ^^^^
+15 | from datetime import UTC, datetime
+16 | from pathlib import Path
+   |
+help: Remove unused import: `uuid`
+   |
+13 | import tempfile
+   - import uuid
+14 | from datetime import UTC, datetime
+   |
+
+UP035 [*] Import from `collections.abc` instead: `Callable`, `Iterator`
+  --> guard_fit_dispatch.py:17:1
+   |
+15 | from datetime import UTC, datetime
+16 | from pathlib import Path
+17 | from typing import Any, Callable, Iterator
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+18 |
+19 | SOURCES = ("capture_guarded_dispatch.py", "guard_fit_dispatch.py", "verify_guarded_dispatch_proof.py")
+   |
+help: Import from `collections.abc`
+   |
+16 | from pathlib import Path
+   - from typing import Any, Callable, Iterator
+17 + from typing import Any
+18 + from collections.abc import Callable, Iterator
+19 |
+   |
+
+B023 Function definition does not bind loop variable `outcome`
+   --> test_guarded_dispatch.py:349:85
+    |
+347 |             folder.mkdir()
+348 |             result = g.capture(["fictional"], folder, "test", f.root, dict(os.environ),
+349 |                                invoke=lambda *_a, **_kw: SimpleNamespace(returncode=outcome), testing=True)
+    |                                                                                     ^^^^^^^
+350 |             self.assertIsNone(result["returncode"])
+351 |             self.assertEqual(result["status"], "subprocess_result_unavailable")
+    |
+
+F821 Undefined name `resolver`
+   --> test_guarded_dispatch.py:515:13
+    |
+513 |         (f.output / "extra.fake").write_bytes(b"extra")
+514 |         with self.assertRaises(g.InvalidProof):
+515 |             resolver.verify()
+    |             ^^^^^^^^
+516 |
+517 |     def test_source_symlink_traversal_occupied_alias_and_numeric_env_refused(self) -> None:
+    |
+
+Found 5 errors.
+[*] 3 fixable with the `--fix` option.

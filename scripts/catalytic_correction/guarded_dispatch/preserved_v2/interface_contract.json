@@ -1,0 +1,398 @@
+{
+  "actual_controller_dispatch_or_reviews_created": false,
+  "actual_scientific_completion_certified": false,
+  "allowed_original_account_operations": [
+    "reuse_original_outcome",
+    "retain_corrected_input_failure"
+  ],
+  "bound_design_reviews": {
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_design_v1/receipt.json": {
+      "bytes": 1837,
+      "sha256": "be9b8f6346b796e7b44f7935a12808669a00e8dbd99c822b99ae794fc572fb82"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_independent_design_review_v1/receipt.json": {
+      "bytes": 1758,
+      "sha256": "13983de7393b0bf5ae878a3a8324f6e70e4f3ccc377eb30b0265a0aa493bc264"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_transfer_compatibility_review_v1/receipt.json": {
+      "bytes": 4881,
+      "sha256": "c53553f635dccd53c5725d88ca11b7bdc4187dd4db66ebbeafbe8759a6438c83"
+    }
+  },
+  "capture": {
+    "actual_returncode": "integer or unavailable null, never boolean/derived success",
+    "before_child": "exact CLI/request, current interpreter samefile, numeric5=1, original gates, launcher-before tree, fixed introduction",
+    "closed_causal_history": [
+      "sequence_index contiguous",
+      "previous guard invocation byte SHA",
+      "predecessor-after equals successor-before",
+      "existing bytes and directories unchanged",
+      "actual direct controller passes bound",
+      "unique new attempt ownership",
+      "final root exactly last-after"
+    ],
+    "closed_nonzero": "retained_guard_failure_history_accounted and CLI exit1, successful_guard_coverage=false",
+    "default": "subprocess.run, injection refused in production",
+    "partial_or_unclassified": "retain and refuse automatic resume/success",
+    "streams": "exclusive raw stdout/stderr flushed fsynced and closed before byte binding",
+    "two_actual_subprocesses": [
+      "owned launcher -> guard",
+      "guard -> unchanged controller"
+    ]
+  },
+  "content_sha256": "58cc875536ba43c0d64f2e190a331a924cf1bfdfd9c7aacbceaf6b707dae5a2f",
+  "existing_transfer": {
+    "directory_inventory": "complete directories actually materialized by retained files, never claim standalone external empty dirs transported",
+    "extra_files": "exact unique retained_files under execution/retained_external/guarded-dispatch, no aliases or extra tree asset",
+    "source_and_receiving_semantic_invocations_separate_from_old_capture_modes": true,
+    "whole_corrected_run": "unchanged v3 asset includes all guard directories and history"
+  },
+  "fictional_test_fixture_changes": {
+    "account_decision": "supplies exact original distinct sealed pure decision shape",
+    "account_pass_builder": "fills exact old pass metadata in Fixture.put only",
+    "injected_controller": "returns verified-existing for an already-retained no-fit cell",
+    "original23_method_ASTs": "unchanged",
+    "production_validation_relaxed": false,
+    "regression_methods": 11,
+    "regression_module": "test_guarded_dispatch_regressions.py"
+  },
+  "first_introduction": {
+    "account_flags_required": [
+      "fit_dispatched=false",
+      "newly_executed_fit=false",
+      "artifacts={}",
+      "matching freeze/definition/witness path/hash",
+      "no corrected_reference"
+    ],
+    "all_cells_checked_independently": true,
+    "attempt_descendants_must_be_absent_including_empty": true,
+    "no_active_claims": true,
+    "overlap_refusal": "output vs guard/preparation/fit/reproduction/authority before mkdir in either direction"
+  },
+  "implementation_preparation_version": 2,
+  "locations": {
+    "actual_verifier_code_directory_equals_declared_role": true,
+    "all_request_freeze_selection_roles_explicit": true,
+    "authority": "separate actual named root guard_proof_locations_reviewed; byteSHA supplied as external CLI trust anchor",
+    "authority_digest_excludes": [
+      "authority",
+      "content_sha256"
+    ],
+    "before_after_all_files_and_directories_unchanged": true,
+    "file_shape": {
+      "binding": "exact SHA/bytes",
+      "historical": "absolute source file",
+      "payload_role": "mode-specific role",
+      "restored": "distinct physical mapped file"
+    },
+    "keys": [
+      "schema_version",
+      "status",
+      "request_sha256",
+      "mode",
+      "fresh_payload_roles",
+      "source_guard_proof",
+      "immutable_roots",
+      "immutable_files",
+      "transport_evidence",
+      "authority",
+      "content_sha256"
+    ],
+    "modes": [
+      "source",
+      "receiving"
+    ],
+    "no_receiving_historical_identity_or_fallback": true,
+    "readonly_output": "new externally located directory; disjoint from every immutable root/file",
+    "receiving_source_proof": "actual same-request source semantic receipt, success true and test flag false, separately retained/mapped",
+    "receiving_transport_roles": [
+      "actual_stage",
+      "actual_restore"
+    ],
+    "schema_version": 1,
+    "status": "guard_proof_locations_proposed",
+    "whole_root_shape": {
+      "historical": "absolute source role",
+      "inventory": {
+        "directories": "complete sorted distinct roster including empty directories",
+        "files": "relative exact SHA/bytes map"
+      },
+      "payload_role": "null source / key in fresh_payload_roles receiving",
+      "restored": "exact current physical role"
+    }
+  },
+  "main_or_predecessor_edits": false,
+  "namespace": "passes/guarded_dispatch_v1",
+  "preceding_independent_findings": {
+    "binding": {
+      "bytes": 2604,
+      "sha256": "2834ceca014e412bead8b8b4366883b7870641e925e5cc849b03d450fbe81153"
+    },
+    "findings": [
+      "GD-R1",
+      "GD-R2",
+      "GD-R3"
+    ],
+    "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_independent_review_v1/receipt.json",
+    "preserved_under": "preserved_v1_review"
+  },
+  "preceding_preparation": {
+    "adopted": false,
+    "binding": {
+      "bytes": 11967,
+      "sha256": "54b1eaa4b4da20719a63c55c2ad67b91fbd936b650dba16dfa52091ba1b5942b"
+    },
+    "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/preparation_receipt.json",
+    "preserved_under": "preserved_v1"
+  },
+  "preparation": {
+    "exact_inventory": "artifacts plus its own receipt and artifact_directories",
+    "no_unlisted_files_or_empty_dirs": true,
+    "runtime_sources": [
+      "capture_guarded_dispatch.py",
+      "guard_fit_dispatch.py",
+      "verify_guarded_dispatch_proof.py"
+    ],
+    "status": "guarded_dispatch_preparation_sealed"
+  },
+  "programme_complete": false,
+  "request": {
+    "actual_review_required": [
+      "nonempty reviewer_name",
+      "reviewer_role=root",
+      "reviewed_at_utc<=actual launch",
+      "test_only is not true"
+    ],
+    "adoption_binds": "request_body_sha256",
+    "adoption_status": "guard_dispatch_request_reviewed",
+    "carrier_shape": {
+      "path": "absolute unlinked actual path",
+      "sha256": "exact 64 lower hexadecimal byte SHA"
+    },
+    "exact_keys": [
+      "schema_version",
+      "status",
+      "test_only",
+      "guard_code",
+      "guard_source_sha256",
+      "guard_preparation",
+      "implementation_review",
+      "scope_review",
+      "adoption",
+      "selection",
+      "freeze",
+      "manifest",
+      "fit_code",
+      "reproduction_code",
+      "corrected_run",
+      "locked_python",
+      "phase",
+      "limit",
+      "pilot_review",
+      "resolution_review",
+      "request_body_sha256",
+      "content_sha256"
+    ],
+    "five_old_review_roles": [
+      "method",
+      "arithmetic",
+      "input_witness",
+      "implementation",
+      "freeze"
+    ],
+    "implementation_review_extra": {
+      "dispatch_guard_implementation": {
+        "preparation": "actual sealed preparation carrier",
+        "source_sha256": "exact runtime three-map"
+      }
+    },
+    "limit": "null or positive nonbool integer",
+    "new_guard_pins_do_not_enter_old_execution_definition_digest": true,
+    "phase": [
+      "pilot",
+      "remaining"
+    ],
+    "remaining_requires": "actual named root pilot review and exact old validate_pilot_review",
+    "request_body_digest_excludes": [
+      "adoption",
+      "request_body_sha256",
+      "content_sha256"
+    ],
+    "schema_version": 1,
+    "status": "guarded_corrected_fit_dispatch_request",
+    "test_only": false
+  },
+  "runtime_source_sha256": {
+    "capture_guarded_dispatch.py": "f82a7b8d2c65e829a7178c8fb230751bef193356e8589c22512ac229de944611",
+    "guard_fit_dispatch.py": "ee80c8e610f81b1cf7059c87d7cc4df80b964e6d76cd6c3144205f09add8bdc9",
+    "verify_guarded_dispatch_proof.py": "7b19d4c7efa945d22e03cc779e1a1e64a06425f59a7d6b7d862097708ec501a9"
+  },
+  "schema_version": 1,
+  "scientific_gates_changed": false,
+  "separate_actual_capture_gate": {
+    "helper_generates_capture_or_approvals": false,
+    "old_release_capture_or_receiving_semantic_route": false,
+    "receiving": "genuine fresh invocation/raw capture stays outside immutable restored payload",
+    "source": "root captures real semantic helper argv/source/rc0/stdout/stderr + exact emitted receipt; includes exact source capture files in staged map authority"
+  },
+  "source_definitions_hashes": {
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/config/catalytic_correction.yaml": {
+      "bytes": 849,
+      "sha256": "65329d7d5ce8895267d137eeb8a589c0eaf2b628139646c126a9c57b82250914"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/coordination/DECISIONS.md": {
+      "bytes": 60940,
+      "sha256": "e42c86c211672b55bb29ca89bc2a1afab48756184206f261eda05f9cc26e20f9"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/docs/protocol_addendum_catalytic_correction.md": {
+      "bytes": 7927,
+      "sha256": "1e031951c8b680d4595be35118c07089acacaaf5e2bf22a9e235bda5a33664da"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/build_freeze.py": {
+      "bytes": 27470,
+      "sha256": "dcef11d5c82037e6cda9b252ddc70bcf7b431f1c389b0867960b12c48bbeff3e"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_child.py": {
+      "bytes": 36632,
+      "sha256": "8ec459f949d7edb18bb587b42eab5baa823fa606075b086c8a5b2475256b2935"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_common.py": {
+      "bytes": 30288,
+      "sha256": "b17f378ba77ea3ae5ba25c836e963a1a0160556465b25745462f648e325d1f11"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_controller.py": {
+      "bytes": 24921,
+      "sha256": "1fdeecc9d437bae930414bc84094da01f21140e6db86e09193cf47a395f1a038"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_interface_contract.json": {
+      "bytes": 11279,
+      "sha256": "67850b9228cb55d775d1ab48ebba733938b00d47527aa9f236f4f7fe4fd5e78b"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/receiving/receiving_core.py": {
+      "bytes": 63832,
+      "sha256": "9da62601b7f482be97f62de30566fe52eb916fa59d09995fe13654f700e20f3f"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/release/release_core.py": {
+      "bytes": 49373,
+      "sha256": "5b546d5321caeb14ec48a56a472f12abe88147dceb02a6bae8bf7fba43aa06f4"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/release/stage_corrected_extensions.py": {
+      "bytes": 32380,
+      "sha256": "c6fa843a7059b04703e4c035d39035856553f302a394f7587ddb97df1dc28e07"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/release/verify_restored_correction.py": {
+      "bytes": 34487,
+      "sha256": "992869a5a91e33fec1e098d876bcd8e10eed24c7ff349514505bbe6bd697ad5c"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/release_v3/release_v3_core.py": {
+      "bytes": 50746,
+      "sha256": "448c32dde298b98ba75218df1b5c6a9a0a09c3e85fa8108d06e38f11ce206068"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/interface_contract.json": {
+      "bytes": 9001,
+      "sha256": "5f3d42ec05e9093edca8511ebb04dc53c49af505641f0f4b411e2940d0b672ba"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/reproduction_core.py": {
+      "bytes": 30615,
+      "sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/run_reproduction.py": {
+      "bytes": 36376,
+      "sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/terminal_replay_child.py": {
+      "bytes": 19483,
+      "sha256": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/verification/mixed_analysis.py": {
+      "bytes": 20737,
+      "sha256": "21b68ca05b595cc66ad914c484de73690c1c0cd6435b7f05d8401c26a3160b61"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/verification/mixed_lineage.py": {
+      "bytes": 8813,
+      "sha256": "27fabfd82a4c5b78804858d7388189ae9790fd67c7c6bb56fab7b8715ec66234"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/verification/verification_gates.py": {
+      "bytes": 20567,
+      "sha256": "b6100e97a70139b0c68f30cc10b88ea79c2a5b4478bfa6132d8115082b8df5ae"
+    }
+  },
+  "status": "prospective_guarded_dispatch_interface",
+  "v2_corrections": {
+    "GD-R1": {
+      "dispatch_only_exemption": "selection.corrected_run",
+      "entrypoints_before_write": [
+        "capture_guarded_dispatch.launch",
+        "guard_fit_dispatch.dispatch",
+        "guard_fit_dispatch.verify_guarded_dispatch_proof"
+      ],
+      "ordinary_file_parent_not_blanket_forbidden": true,
+      "protected": [
+        "all immutable guard/prep/fit/repro roots",
+        "every freeze.paths tree or file",
+        "arithmetic tree",
+        "actual request file and every review carrier",
+        "selection original_reproduction tree",
+        "selection recipe_inventory and original_numerical_evidence and scope_review files"
+      ],
+      "readonly_protects_corrected_run": true,
+      "source_and_mapped_receiving_roles_protected": true
+    },
+    "GD-R2": {
+      "completion_flags_false": true,
+      "decision": "distinct decision_content_sha256 and original no-fit action/source/model/definition/seed grammar",
+      "exact_account_cell_branches": [
+        "reuse_original_outcome",
+        "retain_corrected_input_failure"
+      ],
+      "forbidden_all_extra_fields_including": [
+        "corrected_cell",
+        "child_receipt_path",
+        "invocation_path",
+        "observations_path",
+        "child_wall_seconds",
+        "child_exit_code",
+        "corrected_reference",
+        "unclassified_corrected_score"
+      ],
+      "negative_original_reuse": [
+        "failed",
+        "failed_diagnostics"
+      ]
+    },
+    "GD-R3": {
+      "exact_rows": {
+        "outcome_retained": [
+          "original_cell_id",
+          "status",
+          "operation",
+          "scientific_status",
+          "record_sha256",
+          "fit_dispatched"
+        ],
+        "pending": [
+          "original_cell_id",
+          "status",
+          "fit_dispatched"
+        ],
+        "verified_existing_outcome": [
+          "original_cell_id",
+          "status",
+          "record_sha256"
+        ]
+      },
+      "exact_top_schema_grid_count_status_false_flags_pending_gates": true,
+      "pending_in_its_pass_roster": false,
+      "pending_may_get_later_no_fit_cell": true,
+      "pending_statuses": [
+        "await_original_owner_or_outcome",
+        "await_original_outcome",
+        "unresolved",
+        "changed_inputs_waiting_for_authorized_phase"
+      ],
+      "records": "each historical closed pass binds its own immutable subset, not every later final cell",
+      "rosters": "pairwise comparable under immutable append-only acquisition",
+      "rows": "unique known inventory prefix matching original account loop"
+    }
+  }
+}

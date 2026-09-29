@@ -1,0 +1,66 @@
+{
+  "actual_scientific_or_adoption_approval": false,
+  "content_sha256": "dce4684d89b6f81236ebe0f26821ca82fa1e83d4b1d6c286539f8044e5c28813",
+  "findings": [
+    {
+      "actual_scientific_corruption_or_execution_claimed": false,
+      "guard_lines": [
+        397,
+        444
+      ],
+      "id": "GD-R2a",
+      "observed_counterexamples": [
+        {
+          "field": "changed_roles",
+          "rejected": false,
+          "unexpectedly_accepted": true
+        },
+        {
+          "field": "missing_roles",
+          "rejected": false,
+          "unexpectedly_accepted": true
+        },
+        {
+          "field": "generator_failures",
+          "rejected": false,
+          "unexpectedly_accepted": true
+        },
+        {
+          "field": "tuning_record_reused_sha256",
+          "rejected": false,
+          "unexpectedly_accepted": true
+        }
+      ],
+      "observed_entry_point": "account_only on disposable fictional metadata",
+      "original_classifier_lines": [
+        238,
+        255
+      ],
+      "preserve_legitimate_terminal_missing_changed_roles": true,
+      "preserve_original_reused_statuses": [
+        "complete",
+        "failed",
+        "failed_diagnostics"
+      ],
+      "probe_invocation": {
+        "bytes": 76206,
+        "sha256": "b19bd4887c7691c17535ecce6d8678ace808ab0c1ed9c9a8ca18448afa38b91c"
+      },
+      "recommended_bounded_correction": {
+        "reuse_changed_roles": [],
+        "reuse_generator_failures": {},
+        "reuse_missing_roles": [],
+        "reuse_tuning_record_reused_sha256": null,
+        "terminal_tuning_record_reused_sha256": null
+      },
+      "relation": "residual dependent decision consistency within original GD-R2",
+      "severity": "material_before_guarded_dispatch_adoption",
+      "terminal_null_marker_conclusion": "source_only_not_independently_probed"
+    }
+  ],
+  "material_finding_count": 1,
+  "schema_version": 1,
+  "status": "independent_v2_delta_review_one_material_residual",
+  "subject_preparation_receipt_sha256": "46a95785348e9f54379178caaf728fd863cccef3d133b2f5a3c8116aa5d9e9cc",
+  "v1_three_demonstrated_counterexamples_closed": true
+}

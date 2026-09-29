@@ -5,7 +5,14 @@ State needed to resume work in a new session or on another machine.
 Updated: 2026-09-30 (New Zealand; dated checkpoints below use UTC)
 
 Current integration checkout:
-`~/bayes-cox-runs/ravi-main-integration-20260929`. macOS offloaded the original
+`~/bayes-cox-runs/ravi-main-integration-20260929`. Current engineering validation
+passed 1,040 tests and 293 subtests with zero skips at 15:34:34 UTC on
+29 September. All 752 captured implementation files were unchanged;
+repository-wide Ruff passed. The actual scientific reviews, numerical freeze
+and corrected fits remain pending. Details are in the guarded-dispatch
+integration-v3 record below.
+
+macOS offloaded the original
 repository's Git metadata and several documents to iCloud; scoped downloads
 restored the metadata used by the frozen production worktree. The new clone
 started from remote-verified `dc081c0`; its
@@ -15,7 +22,7 @@ numerical owners/evidence
 remain preserved. The two original execution/code-guide variants have now
 returned and were byte-preserved before reconciliation. Their useful root,
 reporting and transfer details are retained in the resident guides alongside
-the later incident safeguards. Fresh production-worktree Git checks return
+the later incident safeguards. Recorded production-worktree Git checks returned
 the expected `119476f` and a clean tree. All 141 files and four directories
 in the original main checkout's eight edited files and 20 untracked entries
 are now byte-preserved in a recovery archive. All untracked source/test/JSON
@@ -23,13 +30,13 @@ and compressed archive collisions match resident main exactly. Six older
 document variants remain preserved. The source-only dependency audit found
 that four live-route worktrees share original main's Git administration.
 General Git synchronization is deferred while those owners are active;
-no stash, fetch or merge has occurred. At 14:21 UTC the six disjoint
-coordination/guide documents were mirrored from remote-verified `fe1c26d`.
+no stash, fetch or merge has occurred. At 14:55 UTC on 29 September the
+six disjoint documents were mirrored from remote-verified `a26d5a2`.
 All six matched published bytes; 135 other scoped files, the 141-file backup,
-six preceding published document variants, 24 selected shared-Git
-administrative files and 634 resident implementation files remained unchanged.
-The actual mirror and parent capture are preserved in
-`coordination/recovery/2026-09-29-generator-correction-document-mirror-v2.json`.
+six preceding published variants, 24 selected shared-Git administrative files
+and 634 implementation files remained unchanged. Its actual zero-return
+capture is retained in
+`coordination/recovery/2026-09-29-generator-correction-document-mirror-v3.json`.
 
 ## Next action — validate the catalytic generator correction
 
@@ -308,7 +315,7 @@ pilot score, root must validate and freeze ADR-041's actual original-92/pilot
 selection and supplied scope review. The five-review numerical freeze alone
 does not enforce that additional selection gate. Current continuation stops
 before fitting; no corrected score or selection-gate violation exists.
-Predispatch enforcement is the next implementation check.
+Predispatch engineering enforcement is integrated and tested; the actual numerical prerequisites remain pending.
 
 At 13:22 UTC the current replay had 403 independently verified contexts.
 Original production had 1,105 stored outcomes: 909 complete, 170 failed and
@@ -316,27 +323,35 @@ Original production had 1,105 stored outcomes: 909 complete, 170 failed and
 and the exit observer remained present. This is a dated metadata checkpoint,
 not a complete grid, numerical approval or release.
 
-Root read the complete prospective dispatch-guard design and accepted it for
-separate external implementation preparation. It preserves the existing
-scientific source pins and requires the actual selected scope before any
-corrected pilot/remaining dispatch, a zero-attempt first introduction, fixed
-resume bindings, genuine parent/child captures and separate source/fresh
-receiving semantic verification. The first sealed runtime passed 23 fictional
-tests, Ruff and five-source compile checks, but finished-source review found
-three material gaps: output protection omitted additional selection inputs,
-no-fit envelopes did not reject the real controller's numerical references,
-and account-pass rows could be unbound. It is preserved and is not adopted.
-A separate v2 closed those three gaps and passed 34 fictional methods;
-its portable adapter passed 35 tests and 133 subtests. Independent review
-demonstrated one residual decision-consistency gap: impossible changed,
-missing, failed-generator or tuning-reuse metadata could accompany original
-reuse. Root checked the exact probe and old classifier. V2 is preserved and
-not adopted; a separate narrow v3 correction is being prepared. Finished v3
-reviews, portable/root integration and actual scientific approvals remain
-pending. The five
-actual review requirements, design, checkout audit, exact local backup and
-actual backup-process capture are archived. The compact preservation record is
-`coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json`.
+The guarded-dispatch design preserves the existing scientific pins and adds
+ADR-041's actual selection and named scope review before pilot/remaining
+fits. V1 remains preserved and unadopted after three counterexamples involving
+input protection, numerical references in no-fit records and account-pass
+bindings. V2 remains preserved and unadopted after independent probes accepted
+contradictory original-reuse decisions.
+
+V3 closes those gaps and is now integrated as reviewed engineering source at
+`scripts/catalytic_correction/guarded_dispatch/`. Its full locked suite passed
+1,040 tests and 293 subtests with zero skips at 15:34:34 UTC; all 752 captured
+implementation files were unchanged. Repository-wide Ruff passed. All 634
+preceding implementation files, 157 original source/build/lock files and
+original scientific pins remain unchanged. The exact reviewed carrier and
+portable fixtures, all prior failures, independent reviews and completed
+validation captures are retained in
+`coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-integration-v3.json`.
+The separately retained AST convention clarification leaves its metadata's
+historical creation interpreter unknown; the actual tests use the locked
+Python 3.11 environment.
+
+Pilot/remaining fits must use `capture_guarded_dispatch.py`. The five actual
+method, arithmetic, input-witness, implementation and freeze reviews,
+corrected numerical freeze, ADR-041 selection/scope and named dispatch
+adoption remain pending. First introduction refuses prior numerical attempts;
+resume retains the original proof. Separately captured source and genuine
+fresh receiving calls to `verify_guarded_dispatch_proof.py` remain required
+before release completion. Existing release-v3 transports that history but
+does not run those semantic checks. The prior design and exact checkout
+backup remain linked from the checkout-preservation record.
 
 At 14:43 UTC the read-only checkpoint found 582 independently verified input
 receipts and 1,111 original outcomes: 914 complete, 170 failed and 27 failed
@@ -346,6 +361,15 @@ capture, and all 20 original design source pins are unchanged. The compact
 v2 review record retains actual captures and the non-adoption finding:
 `coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json`;
 passing fictional tests do not certify actual dispatch or scientific results.
+
+At 15:38:44 UTC on 29 September, the non-atomic metadata checkpoint had 707 of
+1,650 independently verified first-draw receipts and 1,115 of 1,625 original
+outcomes: 917 complete, 170 failed and 28 failed diagnostics. The actual
+presence query returned zero with all 15 selected PIDs present. The 634
+preceding implementation files and 20 original source pins were unchanged;
+the parent capture also bound all 752 current implementation files.
+This is a dated progress checkpoint, not a completed grid or numerical
+approval. Its capture is retained with the document-validation checkpoint.
 
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its

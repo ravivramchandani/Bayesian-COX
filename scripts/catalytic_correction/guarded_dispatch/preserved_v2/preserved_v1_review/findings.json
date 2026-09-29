@@ -1,0 +1,110 @@
+{
+  "actual_probe_returncode": 0,
+  "actual_scientific_or_scope_freeze_adoption_release_approval": false,
+  "content_sha256": "08a0fc0688e22daeffdad87dd0b9a31824b2e05c41978650476987cd2633f1bd",
+  "fictional_counterexamples": [
+    {
+      "case": "no_fit_account_with_actual_corrected_numerical_field_names",
+      "id": "GD-R2",
+      "injected_fields": [
+        "child_exit_code",
+        "child_receipt_path",
+        "child_wall_seconds",
+        "corrected_cell",
+        "invocation_path",
+        "observations_path"
+      ],
+      "real_controller_main_or_science_called": false,
+      "unexpectedly_accepted": true
+    },
+    {
+      "case": "foreign_numeric_outcome_row_with_false_dispatch_flag",
+      "id": "GD-R3",
+      "real_controller_main_or_science_called": false,
+      "unexpectedly_accepted": true
+    },
+    {
+      "case": "absent_corrected_run_inside_selection_original_reproduction",
+      "id": "GD-R1",
+      "injected_child_call_count": 1,
+      "injected_guard_returncode": 19,
+      "output_created": true,
+      "protected_directory_changed": true,
+      "real_controller_main_or_science_called": false,
+      "unexpectedly_accepted": true
+    }
+  ],
+  "findings": [
+    {
+      "id": "GD-R1",
+      "source_lines": {
+        "capture_guarded_dispatch.py": [
+          [
+            68,
+            78
+          ]
+        ],
+        "guard_fit_dispatch.py": [
+          [
+            276,
+            279
+          ]
+        ],
+        "reproduction_core.py": [
+          [
+            94,
+            97
+          ]
+        ]
+      },
+      "title": "Pre-write separation omits selection-only immutable roles"
+    },
+    {
+      "id": "GD-R2",
+      "source_lines": {
+        "fit_controller.py": [
+          [
+            261,
+            269
+          ]
+        ],
+        "guard_fit_dispatch.py": [
+          [
+            335,
+            344
+          ]
+        ]
+      },
+      "title": "Nominal account envelopes retain actual corrected-fit fields"
+    },
+    {
+      "id": "GD-R3",
+      "source_lines": {
+        "fit_controller.py": [
+          [
+            191,
+            204
+          ],
+          [
+            226,
+            229
+          ],
+          [
+            272,
+            276
+          ]
+        ],
+        "guard_fit_dispatch.py": [
+          [
+            351,
+            355
+          ]
+        ]
+      },
+      "title": "False dispatch flag admits foreign or unbound account-pass rows"
+    }
+  ],
+  "reviewed_preparation_sha256": "54b1eaa4b4da20719a63c55c2ad67b91fbd936b650dba16dfa52091ba1b5942b",
+  "schema_version": 1,
+  "status": "material_contract_gaps_observed_requires_separate_corrected_carrier"
+}

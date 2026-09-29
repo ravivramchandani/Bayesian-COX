@@ -1,0 +1,50 @@
+# Independent review of sealed guarded-dispatch implementation v1
+
+**Three material contract gaps remain; correct them before actual adoption or dispatch.** The reviewed preparation receipt byte SHA is `54b1eaa4b4da20719a63c55c2ad67b91fbd936b650dba16dfa52091ba1b5942b` (40 bound files, 41 full members). All three runtime files, the complete fictional tests, README/interface, original pinned gate predicates, sealed design and independent design/transfer reviews were read. Final genuine preparation records report 23 unit tests, AST/compile of five files and Ruff, each rc0 with exact start/finish source pins. Those existing tests do not cover the three counterexamples below.
+
+This review used static inspection plus one genuinely captured subprocess containing **only three disposable fictional metadata probes**, using the existing invented fixture and injected child return. The real controller/main, scientific backends, environment checkers, datasets, arrays, traces, numerical owner/process state, Git and remote state were not invoked or inspected. Guard/fixture modules and original stdlib metadata helpers were imported only for those fictional probes. Probe rc0 means the counterexamples were observed; it is not guard, scientific or release approval. All 49 captured input/helper files were byte unchanged before/after the probe, including all 41 carrier members and six pinned predecessors.
+
+## GD-R1: pre-write separation omits selection-only immutable roles
+
+`capture_guarded_dispatch.py:68–78` validates the request and authority, then calls the old `prepare_output` with guard/fit/reproduction-code roots, the old freeze paths, guard preparation and arithmetic parent. `guard_fit_dispatch.py:276–279` additionally protects direct authority files. Neither protects `selection.paths.original_reproduction`; the other selection-only input files and the actual bound request file also need explicit separation before the first write. The original selection predicate declares these roles at `reproduction_core.py:94–97`; the old controller's original forbidden list never included them (`fit_controller.py:331–342`).
+
+The bounded probe uses an absent corrected root **inside** the fixture's immutable original-reproduction directory, with a matching selection and CLI/request. The launcher accepts it, creates the corrected root and guard capture/preparation namespace, and changes the protected directory. The injected guard return is 19 and no real child is launched. A later semantic or release refusal cannot reverse the prior mutation.
+
+Close the entire actual request/freeze/selection input surface, excluding only the intended corrected output role itself, before calling any mutating preparation/claim/copy/capture operation. Include `original_reproduction`, original numerical evidence, recipe inventory, the actual request file and optional review carriers. Protect declared directory roots and individual files in both ancestry directions, without treating every file parent as an immutable root. Apply equivalent validation to the guard child and read-only semantic checks. The existing source/guard/reproduction ancestry tests should remain, with this selection-only case added.
+
+## GD-R2: nominal account envelopes can carry actual corrected-fit fields
+
+`guard_fit_dispatch.py:335–344` calls the narrow old `verify_record`, checks several fixed identity/no-fit flags, and rejects only `corrected_reference`. The actual unchanged fit controller writes **`corrected_cell`**, `child_wall_seconds`, `child_exit_code`, `child_receipt_path`, `invocation_path` and `observations_path` when a corrected fit occurs (`fit_controller.py:261–269`). The nominal no-fit envelope can contain these actual numerical reference fields while its operation/flags/artifacts still pass the guard.
+
+The bounded probe adds all six actual corrected-fit fields to the invented terminal-input account cell, retains false dispatch/new-fit flags, and reseals it. `account_only` accepts it. This directly violates the accepted first-introduction rule to reject any corrected numerical reference or unclassified envelope. No actual prior numerical fit is claimed by this demonstration.
+
+Enforce the exact legitimate account envelope grammar or explicitly reject every corrected-fit-only field, and check operation/decision/status/reference consistency. Keep the existing immutable freeze/definition/witness and empty-artifacts predicates. Do not reject failed original outcomes merely because their status is negative: original reuse legitimately retains `complete`, `failed` or `failed_diagnostics`. Do not change any original fit/scoring predicate.
+
+Legitimate original account-cell branches (`fit_controller.py:205–225`) share the base schema/identity/evidence/freeze/definition/witness/source-evidence/decision/generator-context/seed fields; `fit_dispatched=false`, `artifacts={}` and the three completion/reporting/release booleans remain false. The reuse branch has `operation=reuse_original_outcome`, original scientific status, an `original_reference` to `original_extension_run/cells/<id>.json` with original byte/content hashes, `newly_executed_fit=false` and `fit_seconds=0.0`. The terminal input branch has `operation=retain_corrected_input_failure`, `scientific_status=not_fit_input_failure`, `original_reference=null`, `original_outcome_pending` boolean, `failure_contexts=decision.generator_failures`, the same false new-fit marker and zero fit seconds. Preserve these two branches. Original classification (`correction_fit_contracts.py:238–255`) retains its distinct `decision_content_sha256` and always reports `fit_dispatched=false`; the account decision actions are respectively `reuse_original_outcome` or `retain_input_failure`.
+
+## GD-R3: a false flag accepts foreign/unbound account-pass rows
+
+`guard_fit_dispatch.py:351–355` allows every `current_pass` row with `fit_dispatched is False`, without checking its identity, status, operation, record hash or reference. Only the alternative `verified_existing_outcome` arm binds a cell. The cumulative `record_sha256` map being valid does not establish every current-pass row is a legitimate original account result.
+
+The bounded probe adds a foreign `outcome_retained` row with `operation=fit_corrected_inputs`, `scientific_status=complete`, a nonexistent record hash and `fit_dispatched=false`, alongside the legitimate cumulative account map. `account_only` accepts it. This is an unclassified nominal account pass, not a genuine scientific result.
+
+Validate the original current-pass grammar, identity membership and all required links. Preserve legitimate pending/nonexecuted rows rather than requiring every row to produce a new cell. The unchanged controller emits:
+
+| Branch and original lines | Exact row fields relevant to closure |
+|---|---|
+| Existing verified cell, `191–199` | `original_cell_id`, `status=verified_existing_outcome`, `record_sha256` bound to the checked cell. No `fit_dispatched` field is required. |
+| Pending/unresolved, `200–204` | `original_cell_id`, `status` one of `await_original_owner_or_outcome`, `await_original_outcome`, `unresolved`; `fit_dispatched=false`. A cell is not required. |
+| Changed input awaiting account-authorized phase, `226–229` | `original_cell_id`, `status=changed_inputs_waiting_for_authorized_phase`, `fit_dispatched=false`. A cell is not required. |
+| Newly retained non-fit account outcome, `272–276` | `original_cell_id`, `status=outcome_retained`, account operation, original/terminal scientific status, `record_sha256` bound to its checked cell, `fit_dispatched=false`. |
+
+Also retain the original pass's cumulative exact cell-map binding, grid/count/status fields and flags as appropriate (`fit_controller.py:295–306`). Do not require `current_pass` to equal the cumulative retained-cell roster: it describes only that invocation and may contain legitimate pending rows.
+
+## Other reviewed gates and limits
+
+The new receiving/source mode discrimination, externally anchored named locations review, explicit historical roles, complete file/directory inventories, and no receiving identity/fallback checks address DG-I2 in the read paths (`guard_fit_dispatch.py:531–635,799–841`). Source/stage/restore authenticity remains the separately named root review's job; hashing transport evidence alone does not establish a real invocation. Whole corrected-run retention and distinct external `retained_files` remain the compatible transfer route. Neither old staging nor receiving orchestration invokes guard semantics: root must still capture and review the two actual semantic invocations separately, as README states.
+
+The initial introduction is exclusively written before the controller capture, with fixed selection/review/preparation pins and a no-attempt snapshot. Genuine typed return capture, immutable source/preparation checks, complete attempt and direct-pass deltas, prior-byte preservation, contiguous history, final closed root/history and the unchanged remaining pilot predicate are present. These remain source/fictional assurances until actual root-owned execution and semantic verification.
+
+Closed nonzero histories may be appended only via another separately adopted request. They continue to report `successful_guard_coverage=false`; they cannot pass the mandatory final guard release gate. The unchanged controller independently refuses an existing missing-outcome attempt (`fit_controller.py:230–231`), so the guard does not silently delete/retry an orphan. Partial/unclassified captures block automatic resume. This behavior is consistent with the documented limits; no science failure is inferred from an engineering nonzero capture.
+
+No further rewrite was attempted. Preserve v1 and this review, correct the three gaps in a separately sealed v2, rerun meaningful fictional tests and final checks, then independently review exact v2 bytes. No actual five-role review, scope, freeze, adoption, corrected score, fresh restoration or release approval was created here.

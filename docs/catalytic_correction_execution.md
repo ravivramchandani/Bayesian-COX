@@ -188,8 +188,13 @@ explicit paths rather than inferring a freeze from a successful source test.
 
 ## Reviewed corrected fits
 
-`fit_controller.py` accepts `account`, `pilot` and `remaining` phases. It
-requires a separate reviewed correction freeze and manifest, all original
+`fit_controller.py` retains its original `account`, `pilot` and `remaining`
+implementation. Direct `account` remains unchanged. Pilot/remaining calls
+must use
+`scripts/catalytic_correction/guarded_dispatch/capture_guarded_dispatch.py`,
+which delegates that unchanged controller only after actual selection/scope
+and named adoption checks. The controller requires a separate reviewed
+correction freeze and manifest, all original
 input bytes, full preflight and arithmetic accounting, and five existing
 byte-pinned reviews: method, arithmetic, input witness, implementation and
 freeze. Each review binds the same acyclic execution definition and immutable
@@ -381,32 +386,38 @@ bindings preserved. No standalone raw filesystem-check capture is available.
 
 ## Subsequent stages
 
-The prospective dispatch-guard design is preserved in the recovery archives.
-Its implementation must validate the actual ADR-041 selection and named scope
-review before pilot/remaining dispatch while preserving the existing fit and
-reproduction source pins. A first introduction must refuse every prior
-corrected attempt, including empty/orphan attempt directories; later resumes
-must retain the original selection. Genuine parent/child capture history and
-separate read-only source/fresh receiving semantic verification are required.
-The first sealed runtime passed 23 fictional tests, Ruff and five-source
-compile checks. Finished-source review identified three material omissions
-in protection of additional selection inputs, actual numerical references
-inside no-fit records, and account-pass row bindings. That version is preserved
-and not adopted. V2 closes those three gaps and passes 34 fictional methods;
-its portable adapter passes 35 tests and 133 subtests. Independent review
-demonstrated four impossible original-reuse decision mutations accepted by
-V2, so it is also preserved and unadopted. A narrow v3 correction must pass
-finished source, portable and root integration checks before actual use. Its
-no-fit decisions must agree with the original classifier: reused outcomes
-have no missing/changed roles, generator failures or tuning-reuse marker;
-terminal input failures also have no tuning-reuse marker, while their
-missing/changed roles may legitimately remain. Passing preparation
-tests supplies no scientific approval. Existing v3 transports the guard's
-records but does not invoke its semantic verification; genuine source and
-fresh receiving subprocess captures remain separately required before final
-release completion. See the [v2 review record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json)
-and [preservation record](../coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json)
-for the design and exact original-checkout backup.
+The V3 guarded-dispatch carrier is integrated and tested engineering source. Its
+41 fictional tests and independent 41-test/nine-case review passed; the
+portable adapter is sealed. Exact receipt prefixes are `65db400…`, `a97d6a2…`
+and `cbe9759…`. V1/V2, their failed checks and actual counterexamples remain
+preserved and unadopted. V3 changes only the no-fit decision consistency
+checks; all old scientific pins and predicates remain unchanged. Its full
+locked suite passed 1,040 tests and 293 subtests with zero skips
+at 15:34:34 UTC; all 752 captured files were unchanged and repository-wide
+Ruff passed. Actual captures and reviewed-source bindings are in the
+[integration record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-integration-v3.json).
+
+Before pilot/remaining dispatch, root must supply the five actual method,
+arithmetic, input-witness, implementation and freeze reviews, the corrected
+numerical freeze/manifest, ADR-041 selection and named scope review, and the
+separately reviewed guard request/adoption. The implementation review binds
+the guard source/preparation before freeze; selection and request then bind
+the finalized freeze without a digest cycle. The launcher is
+`scripts/catalytic_correction/guarded_dispatch/capture_guarded_dispatch.py`.
+Its first introduction refuses every previous corrected attempt, including
+empty/orphan directories; resume retains the original selection and complete
+capture history. Remaining keeps the original actual pilot-review gate.
+
+Use `scripts/catalytic_correction/guarded_dispatch/verify_guarded_dispatch_proof.py`
+separately in source and fresh receiving modes with externally reviewed
+locations. Capture the genuine process return, raw logs and emitted receipt;
+source proof must bind the staged history, and fresh proof stays outside the
+immutable restored payload. Existing release-v3 transports the history but
+does not execute these semantic checks. Neither engineering source adoption
+nor semantic proof certifies scientific correctness or numerical completion.
+See the [v2 review record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json)
+for rejected history and the [preservation record](../coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json)
+for the exact checkout backup.
 
 1. Independently verify original first proposals and enumerate exact reuse,
    changed inputs and unresolved outcomes, including all WME inner dependencies.

@@ -1,0 +1,73 @@
+{
+  "artifact_directories": [],
+  "artifacts": {
+    "REPORT.md": {
+      "bytes": 7247,
+      "sha256": "bba5b5e94cd5ae33345bbde00fe980075cb8b9b61d24eaac9479839f40319d21"
+    },
+    "capture_delta_checks.py": {
+      "bytes": 7650,
+      "sha256": "f53bb45cdc71d34ecc75589caf8f9e3208c47c565dc3587e2462c0e41cbce8cf"
+    },
+    "delta_ast_and_initial_inventory.json": {
+      "bytes": 41205,
+      "sha256": "fdb02f97df46b0da87ffb2c8e4b1637dff3a2de871a8408f06a46f22e53545e4"
+    },
+    "final_verification.json": {
+      "bytes": 83983,
+      "sha256": "dafa88a6d68a8ed0b65374e12da5e26bb895650e0e5866d80b57b5c2257b151a"
+    },
+    "findings.json": {
+      "bytes": 2144,
+      "sha256": "4dd4309219d3fed50b4c649a2fdc2b27a46fe3c5f09b11bb84ff8c5e3ea36347"
+    },
+    "probe_reuse_consistency.py": {
+      "bytes": 2070,
+      "sha256": "4cc7f860b204e9370bc3870069335a49c668cc6fb789762f88776661f07142bc"
+    },
+    "reuse_probe.invocation.json": {
+      "bytes": 76206,
+      "sha256": "b19bd4887c7691c17535ecce6d8678ace808ab0c1ed9c9a8ca18448afa38b91c"
+    },
+    "reuse_probe.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "reuse_probe.stdout.log": {
+      "bytes": 478,
+      "sha256": "b420e5a615af336c6b85ff683808f2ed4f635fee91b026e6de4c6659dc9f495c"
+    },
+    "seal_review.py": {
+      "bytes": 9712,
+      "sha256": "3633cbc4462aa1bf710a5b822bd4ede1b294847d09cfc7e263e1c2652afa2eb8"
+    },
+    "source_evidence.json": {
+      "bytes": 65156,
+      "sha256": "492572235e4c3ba25e2b4faf71968c2e6ee0440b752736cba6b4b27360c3c1a5"
+    },
+    "unit.invocation.json": {
+      "bytes": 76266,
+      "sha256": "8db504725ab847591a981a285507dfd42d576f9cab868fe5ad450e6a590f5000"
+    },
+    "unit.stderr.log": {
+      "bytes": 6190,
+      "sha256": "562138dc645e424fd5b9892a577d1cd612c4ce987169aabfeef968059dd73817"
+    },
+    "unit.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "content_sha256": "302b821a4466663114cb2be71b7f2e553c5ee6688e6c095a221e00d9f1e5bf12",
+  "material_finding_count": 1,
+  "owner": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_independent_review_v2",
+  "schema_version": 1,
+  "scientific_or_adoption_approval": false,
+  "sealed_at_utc": "2026-09-29T14:47:02.525129+00:00",
+  "status": "independent_v2_delta_review_sealed_one_material_residual",
+  "subject": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2",
+  "subject_preparation_receipt": {
+    "bytes": 30359,
+    "sha256": "46a95785348e9f54379178caaf728fd863cccef3d133b2f5a3c8116aa5d9e9cc"
+  }
+}

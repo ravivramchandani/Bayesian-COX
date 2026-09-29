@@ -1,0 +1,19 @@
+F401 [*] `json` imported but unused
+ --> test_guarded_dispatch_regressions.py:5:8
+  |
+3 | from __future__ import annotations
+4 |
+5 | import json
+  |        ^^^^
+6 | import shutil
+7 | import unittest
+  |
+help: Remove unused import: `json`
+  |
+4 |
+  - import json
+5 | import shutil
+  |
+
+Found 1 error.
+[*] 1 fixable with the `--fix` option.

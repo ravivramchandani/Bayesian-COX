@@ -80,7 +80,9 @@ Follow these steps in order. They are the core of the code.
 | Catalytic correction preflight (ADR-040) | `scripts/catalytic_correction/run_preflight.py` | `preflight_core.py`, `src/pipelines/extensions/correction_generator.py` | No; training-only proposal/rank accounting before a separate corrected-fit freeze |
 | Original first-draw replay and exact reuse | `scripts/catalytic_correction/run_reuse.py` | `normal_first_draw_child.py`, `reuse_core.py`, `correction_fit_contracts.py` | No; binds all 1,650 original proposals and 1,625 input/model/fit/evaluation witnesses |
 | Changed-input arithmetic accounting | `scripts/catalytic_correction/run_arithmetic.py` | `independent_arithmetic.py`, `bound_arithmetic.py`, `kappa_observation.py` | Original kappa optimization only where required; retains genuine gate failures |
-| Reviewed selective corrected fitting | `scripts/catalytic_correction/fit_controller.py` | `fit_common.py`, `fit_child.py` | Yes; requires five actual execution reviews, a separate freeze and an approved full-budget pilot before remaining fits |
+| Corrected no-fit accounting | `scripts/catalytic_correction/fit_controller.py --phase account` | `fit_common.py` | No; retains the original account phase and its actual freeze/input gates |
+| Guarded corrected pilot/remaining fits | `scripts/catalytic_correction/guarded_dispatch/capture_guarded_dispatch.py` | `guard_fit_dispatch.py`, unchanged `fit_controller.py`, `fit_common.py`, `fit_child.py` | Yes; adds actual ADR-041 selection/named scope/adoption before original dispatch; remaining also requires the actual full-budget pilot review |
+| Separate dispatch-history semantics | `scripts/catalytic_correction/guarded_dispatch/verify_guarded_dispatch_proof.py` | Reviewed request/locations, complete history and distinct source/fresh receiving authority | No; reads immutable evidence; each real invocation needs its own genuine external return capture |
 | Serial pre-fit continuation | `scripts/catalytic_correction/continue_prefit.py` | Explicit pinned request, `run_reuse.py`, `run_arithmetic.py` | No; waits for complete preflight, prepares actual evidence and stops before reviews/freeze/pilot |
 | Corrected freeze assembly | `scripts/catalytic_correction/build_freeze.py` | Complete existing input/arithmetic evidence and five supplied actual reviews | No; emits an unapproved proposal first and never creates its own reviews |
 | Selected corrected reproduction (ADR-041) | `scripts/catalytic_correction/reproduction/run_reproduction.py` | Frozen original-92/pilot union, actual producer proofs, `terminal_replay_child.py` and exact original comparators | Fresh full-budget fits for changed accepted inputs; inherited original refits and terminal no-fit recipe replay remain separate |
@@ -90,17 +92,17 @@ Follow these steps in order. They are the core of the code.
 | Corrected reporting and visual QA | `scripts/catalytic_correction/reporting/` | Verified mixed cells, frozen descriptive comparisons and explicit actual figure review | No; renders reports/pages and verifies completed review evidence |
 | Corrected private transfer | `scripts/catalytic_correction/release/`, `release_v3/` | Genuine source/fresh receiving capture, complete evidence trees and actual reporting/QA/replay proofs; v3 separately retains ADR-042 location plans and per-entry trees | No; captures, stages and verifies transported evidence after completed scientific gates |
 
-Before corrected pilot or remaining fits, a separately reviewed launch
-safeguard must enforce ADR-041's actual selection and scope in addition to
-the existing five-review freeze. The first 23-test preparation is preserved
-with three material review findings and is not adopted. V2 closes those gaps
-but independent probes found contradictory original-reuse decisions accepted;
-it remains unadopted. A narrow v3 correction and repository integration remain
-pending. Existing release-v3 can transport guard
-records, but separate actual source and fresh receiving semantic captures
-are still required. Follow the
-[current review record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json)
-and [execution guide](catalytic_correction_execution.md).
+Guarded-dispatch V3 is integrated and verified engineering source. Its full
+locked suite passed 1,040 tests/293 subtests with zero skips; all 752 captured
+files were unchanged and repository-wide Ruff passed. The exact reviewed
+source, portable fixtures and prior failed checks are retained in the
+[integration record](../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-integration-v3.json).
+V1/V2 remain preserved and unadopted. Pilot/remaining work uses the guarded
+launcher and still requires the five actual scientific review roles, numerical
+freeze, ADR-041 selection/named scope and named dispatch adoption. Existing
+release-v3 transports the history but does not invoke its semantic CLI;
+genuine source and fresh receiving captures remain separate requirements.
+Follow the [execution guide](catalytic_correction_execution.md).
 
 ## Suggested reading order
 

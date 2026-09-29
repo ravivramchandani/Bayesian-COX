@@ -1,0 +1,74 @@
+{
+  "actual_scientific_imports": false,
+  "after": {
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_child.py": {
+      "bytes": 36632,
+      "sha256": "8ec459f949d7edb18bb587b42eab5baa823fa606075b086c8a5b2475256b2935"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_common.py": {
+      "bytes": 30288,
+      "sha256": "b17f378ba77ea3ae5ba25c836e963a1a0160556465b25745462f648e325d1f11"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_controller.py": {
+      "bytes": 24921,
+      "sha256": "1fdeecc9d437bae930414bc84094da01f21140e6db86e09193cf47a395f1a038"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/reproduction_core.py": {
+      "bytes": 30615,
+      "sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/run_reproduction.py": {
+      "bytes": 36376,
+      "sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/terminal_replay_child.py": {
+      "bytes": 19483,
+      "sha256": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    }
+  },
+  "all_six_exact": true,
+  "before": {
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_child.py": {
+      "bytes": 36632,
+      "sha256": "8ec459f949d7edb18bb587b42eab5baa823fa606075b086c8a5b2475256b2935"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_common.py": {
+      "bytes": 30288,
+      "sha256": "b17f378ba77ea3ae5ba25c836e963a1a0160556465b25745462f648e325d1f11"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_controller.py": {
+      "bytes": 24921,
+      "sha256": "1fdeecc9d437bae930414bc84094da01f21140e6db86e09193cf47a395f1a038"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/reproduction_core.py": {
+      "bytes": 30615,
+      "sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/run_reproduction.py": {
+      "bytes": 36376,
+      "sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/terminal_replay_child.py": {
+      "bytes": 19483,
+      "sha256": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    }
+  },
+  "content_sha256": "d6ca73fc316117b6f4dfcea9c401865e68b7ec9c35226ddb376af262b3028771",
+  "main_edits": false,
+  "references": {
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_design_v1/receipt.json": {
+      "bytes": 1837,
+      "sha256": "be9b8f6346b796e7b44f7935a12808669a00e8dbd99c822b99ae794fc572fb82"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_independent_design_review_v1/receipt.json": {
+      "bytes": 1758,
+      "sha256": "13983de7393b0bf5ae878a3a8324f6e70e4f3ccc377eb30b0265a0aa493bc264"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_transfer_compatibility_review_v1/receipt.json": {
+      "bytes": 4881,
+      "sha256": "c53553f635dccd53c5725d88ca11b7bdc4187dd4db66ebbeafbe8759a6438c83"
+    }
+  },
+  "schema_version": 1,
+  "status": "read_only_predecessor_source_bytes_preserved"
+}

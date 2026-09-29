@@ -1,0 +1,227 @@
+{
+  "Ravi_baseline_body_unchanged": true,
+  "actual_final_schema_exit_code": 0,
+  "checked_at_utc": "2026-09-29T15:47:53.232458+00:00",
+  "checked_local_links": [
+    {
+      "document": "coordination/HANDOFF.md",
+      "target": "../docs/catalytic_correction_execution.md"
+    },
+    {
+      "document": "coordination/HANDOFF.md",
+      "target": "../docs/extensions_execution.md"
+    },
+    {
+      "document": "coordination/HANDOFF.md",
+      "target": "../docs/ravi_handoff.md"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "../coordination/HANDOFF.md"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "../coordination/TODO.md"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "../coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "../scripts/catalytic_correction/guarded_dispatch/capture_guarded_dispatch.py"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-integration-v3.json"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "../coordination/recovery/2026-09-29-generator-correction-document-mirror-v3.json"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "code_guide.md"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "catalytic_correction_execution.md"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "extensions_execution.md"
+    },
+    {
+      "document": "docs/ravi_handoff.md",
+      "target": "current_evidence_status.md"
+    },
+    {
+      "document": "docs/code_guide.md",
+      "target": "../coordination/reviews/2026-09-28-documentation-pass.md"
+    },
+    {
+      "document": "docs/code_guide.md",
+      "target": "../coordination/reviews/2026-09-28-extension-documentation-pass.md"
+    },
+    {
+      "document": "docs/code_guide.md",
+      "target": "../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-integration-v3.json"
+    },
+    {
+      "document": "docs/code_guide.md",
+      "target": "catalytic_correction_execution.md"
+    },
+    {
+      "document": "docs/code_guide.md",
+      "target": "extensions_execution.md"
+    },
+    {
+      "document": "docs/catalytic_correction_execution.md",
+      "target": "protocol_addendum_catalytic_correction.md"
+    },
+    {
+      "document": "docs/catalytic_correction_execution.md",
+      "target": "../coordination/HANDOFF.md"
+    },
+    {
+      "document": "docs/catalytic_correction_execution.md",
+      "target": "../scripts/catalytic_correction/receiving/interface_contract.json"
+    },
+    {
+      "document": "docs/catalytic_correction_execution.md",
+      "target": "../scripts/catalytic_correction/reporting/interface_contract.json"
+    },
+    {
+      "document": "docs/catalytic_correction_execution.md",
+      "target": "../scripts/catalytic_correction/release/interface_contract.json"
+    },
+    {
+      "document": "docs/catalytic_correction_execution.md",
+      "target": "../scripts/catalytic_correction/release_v3/interface_contract.json"
+    },
+    {
+      "document": "docs/catalytic_correction_execution.md",
+      "target": "../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-integration-v3.json"
+    },
+    {
+      "document": "docs/catalytic_correction_execution.md",
+      "target": "../coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json"
+    },
+    {
+      "document": "docs/catalytic_correction_execution.md",
+      "target": "../coordination/recovery/2026-09-29-generator-correction-checkout-preservation.json"
+    }
+  ],
+  "current752_implementation_files_equal_successful1040_test_capture": true,
+  "current_documents": {
+    "coordination/HANDOFF.md": {
+      "bytes": 79121,
+      "sha256": "233880319baa35346f76141700ce07d7d78e6b80e3b3890e4da69f6bbafc6d3e"
+    },
+    "coordination/JOURNAL.md": {
+      "bytes": 88659,
+      "sha256": "d8843eddf2c9a1435882a4a9ac18cb735e0ca31a70f4838e30f4420f2e77b065"
+    },
+    "coordination/TODO.md": {
+      "bytes": 46343,
+      "sha256": "73b03d122a34068bf640eb8c4d519418103d771f79bd938fe52bef0a76d3c1a0"
+    },
+    "docs/catalytic_correction_execution.md": {
+      "bytes": 25253,
+      "sha256": "5a1ee823e6229794380772205118939db9d97a7d97d03fa9fe18faff49db40a3"
+    },
+    "docs/code_guide.md": {
+      "bytes": 16292,
+      "sha256": "16e7fcc0812eecde4f8758fe2a1a39b9942192c9c06d42f2c704ce212d909206"
+    },
+    "docs/ravi_handoff.md": {
+      "bytes": 12246,
+      "sha256": "f77bd300bc2794befad0cb10209c2b190c8b6b238a2302db4db0de7fcacd9fb9"
+    }
+  },
+  "dated_progress": {
+    "actual_corrected_reviews_freeze_selection_fits_release_complete": false,
+    "actual_owner_presence_query": {
+      "argv": [
+        "/bin/ps",
+        "-p",
+        "62025,62026,62027,62028,62029,62030,64406,71385,98854,29118,29119,29120,29125,48620,48621",
+        "-o",
+        "pid=,ppid=,stat=,etime=,comm="
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "29118     1 SNs     05:42:52 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n29119     1 Ss      05:42:51 /usr/bin/caffeinate\n29120 29118 SN      05:42:51 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n29125 29120 SN      05:42:51 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n48620     1 SNs     04:22:18 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n48621 48620 SN      04:22:18 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62025     1 Rs   01-17:36:49 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62026     1 Rs   01-17:36:49 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62027     1 Rs   01-17:36:49 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62028     1 Rs   01-17:36:49 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62029     1 Rs   01-17:36:49 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n62030     1 Rs   01-17:36:49 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n64406     1 Rs   01-17:20:54 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n71385     1 Ss   01-16:16:23 /opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python\n98854     1 SNs  01-12:47:38 /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python\n"
+    },
+    "arrays_or_traces_read": false,
+    "checked_at_utc": "2026-09-29T15:38:44.760989+00:00",
+    "collection_is_not_atomic": true,
+    "current_634_files_equal_successful_998_full_test_capture": true,
+    "design_source_reference": {
+      "binding": {
+        "bytes": 5399,
+        "sha256": "54886a0120c12e02bfe71d470d56d37f6e3483e1ba0c4f6a6f5004f5aa58af56"
+      },
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_dispatch_guard_design_v1/source_bindings_before.json"
+    },
+    "independent_first_draw_receipts": 707,
+    "independent_receipt_status_counts": {
+      "independent_original_first_draw_verified": 707
+    },
+    "numerical_owners_modified": false,
+    "original_20_design_source_pins_unchanged": true,
+    "original_expected_cells": 1625,
+    "original_outcome_status_counts": {
+      "complete": 917,
+      "failed": 170,
+      "failed_diagnostics": 28
+    },
+    "original_stored_cells": 1115,
+    "status": "dated_metadata_checkpoint_not_completion",
+    "successful_test_reference": {
+      "binding": {
+        "bytes": 112639,
+        "sha256": "f592e8a7251d390c3f131515bb3ae7f61b1602a4d50370955b7885a830c9acfc"
+      },
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_release_v3_integration_validation_v1/make_test.tested_source_after.json"
+    }
+  },
+  "independent_doc_polish_findings_resolved_and_capture_order_clarification_retained": true,
+  "new_archives": {
+    "actual_document_checks": {
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-v3-documentation-checks.tar.gz",
+      "bytes": 740503,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "regular_members": 80,
+      "sha256": "0c3eb620ae6469921341b99785eddf3163d727381a3c2450fa0faaf2e0fb7ebe"
+    },
+    "guarded-dispatch-documentation-review": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-documentation-review.tar.gz",
+      "bytes": 4178,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "receipt.json",
+      "preparation_receipt_sha256": "8d2c06c38ffbd15b5348f520740477a57d902e3a8b9b0dc2eb61e5a400a719ba",
+      "regular_members": 4,
+      "sha256": "d4ecf3783cb31c46261b1a32761f571a3891a2b8d195fd4adbce70d10e2b423f"
+    },
+    "guarded-dispatch-documentation-review-followup": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-documentation-review-followup.tar.gz",
+      "bytes": 1598,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "receipt.json",
+      "preparation_receipt_sha256": "0effc9bcc27379374204e0cbf0d4425c0940874faed2cbb8390db29403691f45",
+      "regular_members": 2,
+      "sha256": "54a8a79c462122c42cf8ceedd4325265b1662c99eccfc29faad68b487fb6f749"
+    }
+  },
+  "old_failed_log_byte_binding": {
+    "bytes": 8972,
+    "sha256": "e5ada7e54a96968e2e7efcd0b08cf49cbd3c6221fc726b4a1e141001a0db0cb1"
+  },
+  "only_exact_old_failed_log_whitespace_exception": "scripts/catalytic_correction/guarded_dispatch/preserved_v2/unit_attempt1.stderr.log",
+  "schema_version": 1,
+  "scientific_completion_or_release_certified": false,
+  "status": "six_current_guides_verified_before_publication"
+}

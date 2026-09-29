@@ -1,0 +1,74 @@
+{
+  "actual_scientific_review_or_execution": false,
+  "content_sha256": "ed529f20849bb948f42b00c356eec83ab12a842e96b1ad231aa22392bacf903b",
+  "preserved_check_failures": [
+    {
+      "actual_exit_code": 1,
+      "cause": "fixture temp path retained Darwin /var symlink; fixture canonicalized, runtime guard unchanged",
+      "label": "unit_attempt1"
+    },
+    {
+      "actual_exit_code": 1,
+      "cause": "test cleanup statement in wrong method; fixture corrected",
+      "label": "unit_attempt3"
+    },
+    {
+      "actual_exit_code": 1,
+      "cause": "five bounded import/unused/loop binding/test cleanup findings fixed",
+      "label": "ruff_attempt1"
+    }
+  ],
+  "remaining_boundary": "The root-reviewed locations authority establishes genuine source/stage/restore provenance. Transport evidence bytes alone or a guard semantic receipt are not scientific or producer approval. Mandatory separate source/fresh receiving actual captures are not supplied by this preparation.",
+  "requirements": [
+    {
+      "id": "DG-C1",
+      "implementation": "validate_account_snapshot inspects every initial cell and pass, not only latest phase"
+    },
+    {
+      "id": "DG-C2",
+      "implementation": "old verify_record plus explicit no-fit/freeze/definition/witness path+sha/artifacts checks"
+    },
+    {
+      "id": "DG-C3",
+      "implementation": "files and complete directories include empty attempts/orphans/claims and controller claim"
+    },
+    {
+      "id": "DG-C4",
+      "implementation": "readonly mappings resolve all direct recipe paths; never call prepare_output or scientific checker"
+    },
+    {
+      "id": "DG-C5",
+      "implementation": "isolated exact pinned stdlib modules, occupied alias refusal and finally restoration"
+    },
+    {
+      "id": "DG-C6",
+      "implementation": "closed sequence/predecessor/before-after/pass/request/attempt ownership, immutable previous bytes and final state"
+    },
+    {
+      "id": "DG-C7",
+      "implementation": "remaining calls unchanged full-budget pilot predicate with actual named review"
+    },
+    {
+      "id": "DG-I1",
+      "implementation": "both-direction immutable guard/preparation/reproduction ancestry protection before first write"
+    },
+    {
+      "id": "DG-I2",
+      "implementation": "explicit source vs receiving, fresh payload roles, separately anchored stage/restore review, no identity fallback"
+    },
+    {
+      "id": "DG-FINAL-1",
+      "implementation": "complete preparation file/directory inventory excludes unlisted empty dirs and files"
+    },
+    {
+      "id": "DG-FINAL-2",
+      "implementation": "future-dated named review cannot authorize launch"
+    },
+    {
+      "id": "DG-FINAL-3",
+      "implementation": "guard child before-tree must equal its owned launcher snapshot"
+    }
+  ],
+  "schema_version": 1,
+  "status": "bounded_engineering_findings_implemented_and_fixture_checked"
+}

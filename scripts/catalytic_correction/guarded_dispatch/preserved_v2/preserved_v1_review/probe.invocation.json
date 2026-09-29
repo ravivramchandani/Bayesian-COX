@@ -1,0 +1,430 @@
+{
+  "actual_real_controller_or_scientific_dispatch": false,
+  "all_sources_unchanged": true,
+  "argv": [
+    "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python3.11",
+    "-I",
+    "-B",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_independent_review_v1/probe_counterexamples.py"
+  ],
+  "content_sha256": "ea852a170db3dcecc82b0c420099e8090b605b6af29c95d2a37c41d9681d18fd",
+  "cwd": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_independent_review_v1",
+  "exit_code": 0,
+  "finished_at_utc": "2026-09-29T14:15:39.250380+00:00",
+  "numeric_thread_environment": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  },
+  "observed_capture_interpreter": "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python3.11",
+  "raw_stderr": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "raw_stdout": {
+    "bytes": 924,
+    "sha256": "ac37ba1391edf98829fb7f68cf16fb68f89423cd07a4353294c3f6f28a6e94b7"
+  },
+  "requested_interpreter": "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python3.11",
+  "schema_version": 1,
+  "source_after": {
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_independent_review_v1/capture_review_probe.py": {
+      "bytes": 3841,
+      "sha256": "fb44263f84df5da7c36daaf6c207ed9df332fecbb088acaa1df307b95d07e4d8"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_independent_review_v1/probe_counterexamples.py": {
+      "bytes": 4555,
+      "sha256": "ac0c410983c466269e8cc83a128754d261c3774b9891fecac712ff7fccfd0dd4"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/README.md": {
+      "bytes": 8502,
+      "sha256": "b5a3e558fc6556b0efa0bed7f8f9ef6ca48fee6631d8c34791a7327f7550af28"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/capture_guarded_dispatch.py": {
+      "bytes": 7915,
+      "sha256": "1759e74e59397d4bcb877795ccef6117c3c1dbf202019ed5a4df3791972fae80"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/capture_preparation_checks.py": {
+      "bytes": 3023,
+      "sha256": "c9ccd9fb97fc0542dca1a207eb627d56af2f0d2dfd9368359092ea9d11b6bc99"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt1.invocation.json": {
+      "bytes": 3123,
+      "sha256": "b5e9b6e5f7f3f85c568d373ed0e791f99cb1d597248bfcfb7a36432a8ad222b8"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt1.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt1.stdout.log": {
+      "bytes": 22,
+      "sha256": "d09bdfc1c55518c026214f9166c4657acc1acf652983219003437c1b39492048"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt2.invocation.json": {
+      "bytes": 3123,
+      "sha256": "8654e3fe9e390ad8f2bab62e9e70d0ae0599394bba9a1da3942a984aa16de79f"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt2.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt2.stdout.log": {
+      "bytes": 22,
+      "sha256": "d09bdfc1c55518c026214f9166c4657acc1acf652983219003437c1b39492048"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/engineering_findings_and_corrections.json": {
+      "bytes": 2894,
+      "sha256": "d1595cac2ba0ac3d90160174402522e293d2bbf1e7755fd2f1b12c561d5a6d36"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/guard_fit_dispatch.py": {
+      "bytes": 63525,
+      "sha256": "3a44a8b560c9c405b4ebb9c1ab8708002d00ce6b4f94992858516eee3aaff1e0"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/interface_contract.json": {
+      "bytes": 9422,
+      "sha256": "e3c65fc8cc2956402d7c5ccc58e0ba9e1b84b900c8d383f4ec5eea6211104bdc"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/preparation_receipt.json": {
+      "bytes": 11967,
+      "sha256": "54b1eaa4b4da20719a63c55c2ad67b91fbd936b650dba16dfa52091ba1b5942b"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt1.invocation.json": {
+      "bytes": 3056,
+      "sha256": "c52d0ced6545ca9f80e6a9df141ca87748543d33277d4a3c66f5911940b20717"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt1.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt1.stdout.log": {
+      "bytes": 2436,
+      "sha256": "57e98726bf2612212f64807e1a6b8a12cd5bcb7037871bf69b0d1f9ec7f5d92e"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt2.invocation.json": {
+      "bytes": 3054,
+      "sha256": "f6f3346e72c525d66dee213c16f95ba22fa8dbf0f2ed4998e3117fa2bbad13ce"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt2.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt2.stdout.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt3.invocation.json": {
+      "bytes": 3054,
+      "sha256": "37921295232c044d433ef724348351b6a903b5d418f626602d4a3e2e1c35b09d"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt3.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt3.stdout.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/source_bindings.json": {
+      "bytes": 1825,
+      "sha256": "574bb0ddba4167d0cdc25bf5a132756efd8f68f9883faa9f1aa1ff096afdccb6"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/source_preservation_receipt.json": {
+      "bytes": 3878,
+      "sha256": "939b95eefc4515cdf7c799dcc788a06d7e2c8b33914f1762c5a43b625c622d8a"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/test_guarded_dispatch.py": {
+      "bytes": 35633,
+      "sha256": "a75133f84b795129967583cb29035c1cd6f70364af78a407eff921805f9af0bd"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt1.invocation.json": {
+      "bytes": 2516,
+      "sha256": "9160697736d9d85b97de0c206eda145cc5c3a89fc030a5ac196a21772c5ce410"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt1.stderr.log": {
+      "bytes": 33918,
+      "sha256": "8369fad0650654285413496fb9f7398ae4b9dd5c381ee19be21986082b563364"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt1.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt2.invocation.json": {
+      "bytes": 2515,
+      "sha256": "8f268b17d824a293e648529fe89123a7cadf60db8033f72978cfb4a711cecda4"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt2.stderr.log": {
+      "bytes": 2967,
+      "sha256": "fd5c2118bd5a2c6f9060dfdae44585964e47c1ea3d3991b3c347d62fee643da9"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt2.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt3.invocation.json": {
+      "bytes": 2515,
+      "sha256": "150ed3220ed59a3e9ffdf819a9236ecbbe74aba054471d28ae321e0a7e46bf1a"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt3.stderr.log": {
+      "bytes": 4256,
+      "sha256": "a6b5fd670176344e37346b786d0f74a76823cbd73013e9d247c31828a06d32d7"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt3.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt4.invocation.json": {
+      "bytes": 2515,
+      "sha256": "51d5087881bfdfaf070a99598f84dd2922d2f02e24e7cb27fb91d09cb53eb164"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt4.stderr.log": {
+      "bytes": 3586,
+      "sha256": "4a5fc62833101b06787a0a82b8ee30472ba0e06d5c9ede69bc2858bb73e8de2f"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt4.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt5.invocation.json": {
+      "bytes": 2515,
+      "sha256": "45de75b40a7c6027d29f2de52be003c26643afa3623a2487d47df188ee15eb8c"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt5.stderr.log": {
+      "bytes": 4032,
+      "sha256": "095e9c2318dc7150c8753a2ead22a0523813215406ee712fcbeae8af858fcd90"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt5.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/verify_guarded_dispatch_proof.py": {
+      "bytes": 2500,
+      "sha256": "7b19d4c7efa945d22e03cc779e1a1e64a06425f59a7d6b7d862097708ec501a9"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_child.py": {
+      "bytes": 36632,
+      "sha256": "8ec459f949d7edb18bb587b42eab5baa823fa606075b086c8a5b2475256b2935"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_common.py": {
+      "bytes": 30288,
+      "sha256": "b17f378ba77ea3ae5ba25c836e963a1a0160556465b25745462f648e325d1f11"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_controller.py": {
+      "bytes": 24921,
+      "sha256": "1fdeecc9d437bae930414bc84094da01f21140e6db86e09193cf47a395f1a038"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/reproduction_core.py": {
+      "bytes": 30615,
+      "sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/run_reproduction.py": {
+      "bytes": 36376,
+      "sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/terminal_replay_child.py": {
+      "bytes": 19483,
+      "sha256": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    }
+  },
+  "source_before": {
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_independent_review_v1/capture_review_probe.py": {
+      "bytes": 3841,
+      "sha256": "fb44263f84df5da7c36daaf6c207ed9df332fecbb088acaa1df307b95d07e4d8"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_independent_review_v1/probe_counterexamples.py": {
+      "bytes": 4555,
+      "sha256": "ac0c410983c466269e8cc83a128754d261c3774b9891fecac712ff7fccfd0dd4"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/README.md": {
+      "bytes": 8502,
+      "sha256": "b5a3e558fc6556b0efa0bed7f8f9ef6ca48fee6631d8c34791a7327f7550af28"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/capture_guarded_dispatch.py": {
+      "bytes": 7915,
+      "sha256": "1759e74e59397d4bcb877795ccef6117c3c1dbf202019ed5a4df3791972fae80"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/capture_preparation_checks.py": {
+      "bytes": 3023,
+      "sha256": "c9ccd9fb97fc0542dca1a207eb627d56af2f0d2dfd9368359092ea9d11b6bc99"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt1.invocation.json": {
+      "bytes": 3123,
+      "sha256": "b5e9b6e5f7f3f85c568d373ed0e791f99cb1d597248bfcfb7a36432a8ad222b8"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt1.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt1.stdout.log": {
+      "bytes": 22,
+      "sha256": "d09bdfc1c55518c026214f9166c4657acc1acf652983219003437c1b39492048"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt2.invocation.json": {
+      "bytes": 3123,
+      "sha256": "8654e3fe9e390ad8f2bab62e9e70d0ae0599394bba9a1da3942a984aa16de79f"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt2.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/compile_attempt2.stdout.log": {
+      "bytes": 22,
+      "sha256": "d09bdfc1c55518c026214f9166c4657acc1acf652983219003437c1b39492048"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/engineering_findings_and_corrections.json": {
+      "bytes": 2894,
+      "sha256": "d1595cac2ba0ac3d90160174402522e293d2bbf1e7755fd2f1b12c561d5a6d36"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/guard_fit_dispatch.py": {
+      "bytes": 63525,
+      "sha256": "3a44a8b560c9c405b4ebb9c1ab8708002d00ce6b4f94992858516eee3aaff1e0"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/interface_contract.json": {
+      "bytes": 9422,
+      "sha256": "e3c65fc8cc2956402d7c5ccc58e0ba9e1b84b900c8d383f4ec5eea6211104bdc"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/preparation_receipt.json": {
+      "bytes": 11967,
+      "sha256": "54b1eaa4b4da20719a63c55c2ad67b91fbd936b650dba16dfa52091ba1b5942b"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt1.invocation.json": {
+      "bytes": 3056,
+      "sha256": "c52d0ced6545ca9f80e6a9df141ca87748543d33277d4a3c66f5911940b20717"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt1.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt1.stdout.log": {
+      "bytes": 2436,
+      "sha256": "57e98726bf2612212f64807e1a6b8a12cd5bcb7037871bf69b0d1f9ec7f5d92e"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt2.invocation.json": {
+      "bytes": 3054,
+      "sha256": "f6f3346e72c525d66dee213c16f95ba22fa8dbf0f2ed4998e3117fa2bbad13ce"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt2.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt2.stdout.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt3.invocation.json": {
+      "bytes": 3054,
+      "sha256": "37921295232c044d433ef724348351b6a903b5d418f626602d4a3e2e1c35b09d"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt3.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/ruff_attempt3.stdout.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/source_bindings.json": {
+      "bytes": 1825,
+      "sha256": "574bb0ddba4167d0cdc25bf5a132756efd8f68f9883faa9f1aa1ff096afdccb6"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/source_preservation_receipt.json": {
+      "bytes": 3878,
+      "sha256": "939b95eefc4515cdf7c799dcc788a06d7e2c8b33914f1762c5a43b625c622d8a"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/test_guarded_dispatch.py": {
+      "bytes": 35633,
+      "sha256": "a75133f84b795129967583cb29035c1cd6f70364af78a407eff921805f9af0bd"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt1.invocation.json": {
+      "bytes": 2516,
+      "sha256": "9160697736d9d85b97de0c206eda145cc5c3a89fc030a5ac196a21772c5ce410"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt1.stderr.log": {
+      "bytes": 33918,
+      "sha256": "8369fad0650654285413496fb9f7398ae4b9dd5c381ee19be21986082b563364"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt1.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt2.invocation.json": {
+      "bytes": 2515,
+      "sha256": "8f268b17d824a293e648529fe89123a7cadf60db8033f72978cfb4a711cecda4"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt2.stderr.log": {
+      "bytes": 2967,
+      "sha256": "fd5c2118bd5a2c6f9060dfdae44585964e47c1ea3d3991b3c347d62fee643da9"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt2.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt3.invocation.json": {
+      "bytes": 2515,
+      "sha256": "150ed3220ed59a3e9ffdf819a9236ecbbe74aba054471d28ae321e0a7e46bf1a"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt3.stderr.log": {
+      "bytes": 4256,
+      "sha256": "a6b5fd670176344e37346b786d0f74a76823cbd73013e9d247c31828a06d32d7"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt3.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt4.invocation.json": {
+      "bytes": 2515,
+      "sha256": "51d5087881bfdfaf070a99598f84dd2922d2f02e24e7cb27fb91d09cb53eb164"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt4.stderr.log": {
+      "bytes": 3586,
+      "sha256": "4a5fc62833101b06787a0a82b8ee30472ba0e06d5c9ede69bc2858bb73e8de2f"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt4.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt5.invocation.json": {
+      "bytes": 2515,
+      "sha256": "45de75b40a7c6027d29f2de52be003c26643afa3623a2487d47df188ee15eb8c"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt5.stderr.log": {
+      "bytes": 4032,
+      "sha256": "095e9c2318dc7150c8753a2ead22a0523813215406ee712fcbeae8af858fcd90"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/unit_attempt5.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1/verify_guarded_dispatch_proof.py": {
+      "bytes": 2500,
+      "sha256": "7b19d4c7efa945d22e03cc779e1a1e64a06425f59a7d6b7d862097708ec501a9"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_child.py": {
+      "bytes": 36632,
+      "sha256": "8ec459f949d7edb18bb587b42eab5baa823fa606075b086c8a5b2475256b2935"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_common.py": {
+      "bytes": 30288,
+      "sha256": "b17f378ba77ea3ae5ba25c836e963a1a0160556465b25745462f648e325d1f11"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_controller.py": {
+      "bytes": 24921,
+      "sha256": "1fdeecc9d437bae930414bc84094da01f21140e6db86e09193cf47a395f1a038"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/reproduction_core.py": {
+      "bytes": 30615,
+      "sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/run_reproduction.py": {
+      "bytes": 36376,
+      "sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/reproduction/terminal_replay_child.py": {
+      "bytes": 19483,
+      "sha256": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    }
+  },
+  "started_at_utc": "2026-09-29T14:15:38.979100+00:00",
+  "status": "bounded_fictional_probe_actual_return_captured"
+}

@@ -1,0 +1,1848 @@
+{
+  "content_sha256": "7a0e4cd76b5315a673e063a8cb1aa90a54efb2da5a679ed126c85446a5c3c076",
+  "evidence": [
+    {
+      "bytes": 75828,
+      "line_end": 394,
+      "line_start": 343,
+      "lines": [
+        {
+          "line": 343,
+          "text": "def immutable_output_roles(request: dict[str, Any], gates: dict[str, Any], request_path: Path,"
+        },
+        {
+          "line": 344,
+          "text": "                           *, include_corrected_run: bool = False) -> list[tuple[str, Path, str]]:"
+        },
+        {
+          "line": 345,
+          "text": "    \"\"\"Declare every bound immutable file/tree; ordinary file siblings stay usable."
+        },
+        {
+          "line": 346,
+          "text": ""
+        },
+        {
+          "line": 347,
+          "text": "    The controller's intentional selection.corrected_run role is exempt only"
+        },
+        {
+          "line": 348,
+          "text": "    during dispatch. Read-only proof outputs protect that tree as well."
+        },
+        {
+          "line": 349,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 350,
+          "text": "    rows = [(key, safe(Path(request[key])), \"tree\") for key in (\"guard_code\", \"fit_code\", \"reproduction_code\")]"
+        },
+        {
+          "line": 351,
+          "text": "    rows.extend(((\"guard_preparation_tree\", carrier(request[\"guard_preparation\"])[0].parent, \"tree\"),"
+        },
+        {
+          "line": 352,
+          "text": "                 (\"actual_request\", safe(request_path), \"file\")))"
+        },
+        {
+          "line": 353,
+          "text": "    for key in (\"guard_preparation\", \"implementation_review\", \"scope_review\", \"adoption\", \"selection\", \"freeze\", \"manifest\", \"pilot_review\", \"resolution_review\"):"
+        },
+        {
+          "line": 354,
+          "text": "        if request[key] is not None:"
+        },
+        {
+          "line": 355,
+          "text": "            rows.append((f\"request.{key}\", carrier(request[key])[0], \"file\"))"
+        },
+        {
+          "line": 356,
+          "text": "    freeze, selection = gates[\"freeze\"], gates[\"selection\"]"
+        },
+        {
+          "line": 357,
+          "text": "    require(set(freeze[\"paths\"]) <= FREEZE_TREE_ROLES | FREEZE_FILE_ROLES, \"unclassified frozen path role\")"
+        },
+        {
+          "line": 358,
+          "text": "    for key, value in freeze[\"paths\"].items():"
+        },
+        {
+          "line": 359,
+          "text": "        rows.append((f\"freeze.{key}\", safe(Path(value)), \"tree\" if key in FREEZE_TREE_ROLES else \"file\"))"
+        },
+        {
+          "line": 360,
+          "text": "    arithmetic = safe(Path(freeze[\"arithmetic_accounting\"][\"path\"]))"
+        },
+        {
+          "line": 361,
+          "text": "    rows.append((\"arithmetic_tree\", arithmetic.parent, \"tree\"))"
+        },
+        {
+          "line": 362,
+          "text": "    for key, value in freeze[\"review_bindings\"].items():"
+        },
+        {
+          "line": 363,
+          "text": "        rows.append((f\"freeze.review.{key}\", carrier(value)[0], \"file\"))"
+        },
+        {
+          "line": 364,
+          "text": "    require(set(selection[\"paths\"]) <= SELECTION_TREE_ROLES | SELECTION_FILE_ROLES | {\"corrected_run\"}, \"unclassified selection path role\")"
+        },
+        {
+          "line": 365,
+          "text": "    for key, value in selection[\"paths\"].items():"
+        },
+        {
+          "line": 366,
+          "text": "        if key == \"corrected_run\" and not include_corrected_run:"
+        },
+        {
+          "line": 367,
+          "text": "            continue"
+        },
+        {
+          "line": 368,
+          "text": "        rows.append((f\"selection.{key}\", safe(Path(value)),"
+        },
+        {
+          "line": 369,
+          "text": "                     \"tree\" if key in SELECTION_TREE_ROLES or key == \"corrected_run\" else \"file\"))"
+        },
+        {
+          "line": 370,
+          "text": "    return rows"
+        },
+        {
+          "line": 371,
+          "text": ""
+        },
+        {
+          "line": 372,
+          "text": ""
+        },
+        {
+          "line": 373,
+          "text": "def protect_output(output: Path, request: dict[str, Any], gates: dict[str, Any], request_path: Path,"
+        },
+        {
+          "line": 374,
+          "text": "                   *, resolve: Callable[[Path], Path] = safe, include_corrected_run: bool = False,"
+        },
+        {
+          "line": 375,
+          "text": "                   extra_files: tuple[Path, ...] = ()) -> list[Path]:"
+        },
+        {
+          "line": 376,
+          "text": "    \"\"\"Refuse both ancestry directions for all immutable roles before any write."
+        },
+        {
+          "line": 377,
+          "text": ""
+        },
+        {
+          "line": 378,
+          "text": "    Protect the exact bound file, not its parent directory. Check historical and"
+        },
+        {
+          "line": 379,
+          "text": "    mapped receiving paths so neither preserved tree can be changed."
+        },
+        {
+          "line": 380,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 381,
+          "text": "    safe(output)"
+        },
+        {
+          "line": 382,
+          "text": "    protected = []"
+        },
+        {
+          "line": 383,
+          "text": "    rows = immutable_output_roles(request, gates, request_path, include_corrected_run=include_corrected_run)"
+        },
+        {
+          "line": 384,
+          "text": "    for path in extra_files:"
+        },
+        {
+          "line": 385,
+          "text": "        safe(path)"
+        },
+        {
+          "line": 386,
+          "text": "        require(not output.is_relative_to(path) and not path.is_relative_to(output),"
+        },
+        {
+          "line": 387,
+          "text": "                \"output overlaps actual verifier request/locations authority\")"
+        },
+        {
+          "line": 388,
+          "text": "        protected.append(path)"
+        },
+        {
+          "line": 389,
+          "text": "    for label, historical, _kind in rows:"
+        },
+        {
+          "line": 390,
+          "text": "        for path in {historical, resolve(historical)}:"
+        },
+        {
+          "line": 391,
+          "text": "            require(not output.is_relative_to(path) and not path.is_relative_to(output),"
+        },
+        {
+          "line": 392,
+          "text": "                    f\"output overlaps immutable role {label}\")"
+        },
+        {
+          "line": 393,
+          "text": "            protected.append(path)"
+        },
+        {
+          "line": 394,
+          "text": "    return protected"
+        }
+      ],
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/guard_fit_dispatch.py",
+      "sha256": "ee80c8e610f81b1cf7059c87d7cc4df80b964e6d76cd6c3144205f09add8bdc9"
+    },
+    {
+      "bytes": 75828,
+      "line_end": 444,
+      "line_start": 397,
+      "lines": [
+        {
+          "line": 397,
+          "text": "def account_cell(value: dict[str, Any], identity: str, request: dict[str, Any], gates: dict[str, Any]) -> None:"
+        },
+        {
+          "line": 398,
+          "text": "    \"\"\"Require exactly an original reuse or terminal-input account envelope.\"\"\""
+        },
+        {
+          "line": 399,
+          "text": "    terminal = value[\"operation\"] == \"retain_corrected_input_failure\""
+        },
+        {
+          "line": 400,
+          "text": "    expected = ACCOUNT_BASE_KEYS | ({\"original_outcome_pending\", \"failure_contexts\"} if terminal else set())"
+        },
+        {
+          "line": 401,
+          "text": "    if \"test_only\" in value:"
+        },
+        {
+          "line": 402,
+          "text": "        require(request[\"test_only\"] is True and value[\"test_only\"] is True, \"synthetic account envelope refused\")"
+        },
+        {
+          "line": 403,
+          "text": "        expected |= {\"test_only\"}"
+        },
+        {
+          "line": 404,
+          "text": "    require(set(value) == expected, \"unclassified or corrected-fit-only account fields\")"
+        },
+        {
+          "line": 405,
+          "text": "    entry = next(row for row in gates[\"inventory\"][\"entries\"] if row[\"original_cell_id\"] == identity)"
+        },
+        {
+          "line": 406,
+          "text": "    require(value[\"schema_version\"] == 1 and value[\"original_cell_id\"] == identity"
+        },
+        {
+          "line": 407,
+          "text": "            and value[\"evidence_status\"] == \"post_hoc_rank_conditioned_correction_after_original_failures_known\""
+        },
+        {
+          "line": 408,
+          "text": "            and value[\"corrected_manifest_sha256\"] == request[\"manifest\"][\"sha256\"]"
+        },
+        {
+          "line": 409,
+          "text": "            and value[\"correction_freeze_sha256\"] == request[\"freeze\"][\"sha256\"]"
+        },
+        {
+          "line": 410,
+          "text": "            and value[\"definition_content_sha256\"] == gates[\"freeze\"][\"definition_content_sha256\"]"
+        },
+        {
+          "line": 411,
+          "text": "            and value[\"input_witness_sha256\"] == entry[\"input_witness_sha256\"]"
+        },
+        {
+          "line": 412,
+          "text": "            and value[\"input_witness_path\"] == entry[\"input_witness_path\"], \"account identity/witness binding differs\")"
+        },
+        {
+          "line": 413,
+          "text": "    require(value[\"fit_dispatched\"] is False and value[\"newly_executed_fit\"] is False and value[\"artifacts\"] == {}"
+        },
+        {
+          "line": 414,
+          "text": "            and type(value[\"fit_seconds\"]) in {int, float} and value[\"fit_seconds\"] == 0.0"
+        },
+        {
+          "line": 415,
+          "text": "            and all(value[key] is False for key in (\"programme_complete\", \"reporting_certified\", \"release_certified\")), \"account contains numerical/completion metadata\")"
+        },
+        {
+          "line": 416,
+          "text": "    decision = value[\"decision\"]"
+        },
+        {
+          "line": 417,
+          "text": "    require(isinstance(decision, dict) and set(decision) == ACCOUNT_DECISION_KEYS"
+        },
+        {
+          "line": 418,
+          "text": "            and decision[\"decision_content_sha256\"] == digest({key: item for key, item in decision.items() if key != \"decision_content_sha256\"})"
+        },
+        {
+          "line": 419,
+          "text": "            and decision[\"schema_version\"] == 1 and decision[\"scope\"] == \"supplied_evidence_contract_not_actual_byte_verification\""
+        },
+        {
+          "line": 420,
+          "text": "            and decision[\"original_cell_id\"] == identity and decision[\"model\"] == entry[\"model\"]"
+        },
+        {
+          "line": 421,
+          "text": "            and decision[\"correction_specification_sha256\"] == gates[\"freeze\"][\"definition_content_sha256\"]"
+        },
+        {
+          "line": 422,
+          "text": "            and decision[\"source_evidence\"] == value[\"source_evidence\"] and decision[\"fit_dispatched\"] is False"
+        },
+        {
+          "line": 423,
+          "text": "            and isinstance(value[\"generator_contexts\"], dict) and isinstance(value[\"original_seed_namespace\"], dict)"
+        },
+        {
+          "line": 424,
+          "text": "            and decision[\"seed_ledger_sha256\"] == digest(value[\"original_seed_namespace\"]), \"account decision/source grammar differs\")"
+        },
+        {
+          "line": 425,
+          "text": "    source = value[\"source_evidence\"]"
+        },
+        {
+          "line": 426,
+          "text": "    if source is not None:"
+        },
+        {
+          "line": 427,
+          "text": "        require(isinstance(source, dict) and source[\"original_cell_id\"] == identity"
+        },
+        {
+          "line": 428,
+          "text": "                and source[\"status\"] in {\"complete\", \"failed\", \"failed_diagnostics\"}, \"original source identity/status differs\")"
+        },
+        {
+          "line": 429,
+          "text": "    require(decision[\"original_outcome_available\"] is (source is not None)"
+        },
+        {
+          "line": 430,
+          "text": "            and decision[\"original_status\"] == (None if source is None else source[\"status\"]), \"original decision outcome metadata differs\")"
+        },
+        {
+          "line": 431,
+          "text": "    if terminal:"
+        },
+        {
+          "line": 432,
+          "text": "        require(decision[\"action\"] == \"retain_input_failure\" and value[\"scientific_status\"] == \"not_fit_input_failure\""
+        },
+        {
+          "line": 433,
+          "text": "                and value[\"original_reference\"] is None and type(value[\"original_outcome_pending\"]) is bool"
+        },
+        {
+          "line": 434,
+          "text": "                and isinstance(value[\"failure_contexts\"], dict) and bool(value[\"failure_contexts\"])"
+        },
+        {
+          "line": 435,
+          "text": "                and value[\"failure_contexts\"] == decision[\"generator_failures\"]"
+        },
+        {
+          "line": 436,
+          "text": "                and all(name in value[\"generator_contexts\"] and len(value[\"generator_contexts\"][name]) == 2"
+        },
+        {
+          "line": 437,
+          "text": "                        and value[\"generator_contexts\"][name][0] == status for name, status in value[\"failure_contexts\"].items()),"
+        },
+        {
+          "line": 438,
+          "text": "                \"terminal-input account branch differs\")"
+        },
+        {
+          "line": 439,
+          "text": "    else:"
+        },
+        {
+          "line": 440,
+          "text": "        require(value[\"operation\"] == decision[\"action\"] == \"reuse_original_outcome\" and source is not None"
+        },
+        {
+          "line": 441,
+          "text": "                and value[\"scientific_status\"] == source[\"status\"]"
+        },
+        {
+          "line": 442,
+          "text": "                and value[\"original_reference\"] == {\"logical_root\": \"original_extension_run\", \"path\": f\"cells/{identity}.json\","
+        },
+        {
+          "line": 443,
+          "text": "                    \"sha256\": source[\"cell_byte_sha256\"], \"cell_content_sha256\": source[\"cell_content_sha256\"]},"
+        },
+        {
+          "line": 444,
+          "text": "                \"original reuse branch/reference differs\")"
+        }
+      ],
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/guard_fit_dispatch.py",
+      "sha256": "ee80c8e610f81b1cf7059c87d7cc4df80b964e6d76cd6c3144205f09add8bdc9"
+    },
+    {
+      "bytes": 75828,
+      "line_end": 520,
+      "line_start": 447,
+      "lines": [
+        {
+          "line": 447,
+          "text": "def account_pass(value: dict[str, Any], checked: dict[str, str], cells: dict[str, dict[str, Any]],"
+        },
+        {
+          "line": 448,
+          "text": "                 request: dict[str, Any], gates: dict[str, Any]) -> set[str]:"
+        },
+        {
+          "line": 449,
+          "text": "    \"\"\"Verify exact old rows and the cumulative roster of this historical pass."
+        },
+        {
+          "line": 450,
+          "text": ""
+        },
+        {
+          "line": 451,
+          "text": "    Earlier partial rosters are immutable subsets of the final snapshot. Pending"
+        },
+        {
+          "line": 452,
+          "text": "    rows cannot have a cell in that pass, but may acquire a later no-fit outcome."
+        },
+        {
+          "line": 453,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 454,
+          "text": "    expected = ACCOUNT_PASS_KEYS"
+        },
+        {
+          "line": 455,
+          "text": "    if \"test_only\" in value:"
+        },
+        {
+          "line": 456,
+          "text": "        require(request[\"test_only\"] is True and value[\"test_only\"] is True, \"synthetic account pass refused\")"
+        },
+        {
+          "line": 457,
+          "text": "        expected |= {\"test_only\"}"
+        },
+        {
+          "line": 458,
+          "text": "    identities = [entry[\"original_cell_id\"] for entry in gates[\"inventory\"][\"entries\"]]"
+        },
+        {
+          "line": 459,
+          "text": "    require(set(value) == expected and value[\"schema_version\"] == 1 and value[\"phase\"] == \"account\""
+        },
+        {
+          "line": 460,
+          "text": "            and value[\"corrected_manifest_sha256\"] == request[\"manifest\"][\"sha256\"], \"account pass grammar differs\")"
+        },
+        {
+          "line": 461,
+          "text": "    records = value[\"record_sha256\"]"
+        },
+        {
+          "line": 462,
+          "text": "    require(isinstance(records, dict) and set(records) <= set(checked)"
+        },
+        {
+          "line": 463,
+          "text": "            and all(checked[identity] == expected_sha for identity, expected_sha in records.items()),"
+        },
+        {
+          "line": 464,
+          "text": "            \"historical pass contains foreign/changed/unclassified cells\")"
+        },
+        {
+          "line": 465,
+          "text": "    require(type(value[\"scheduled_logical_cells\"]) is int and value[\"scheduled_logical_cells\"] == 1625"
+        },
+        {
+          "line": 466,
+          "text": "            and type(value[\"retained_logical_outcomes\"]) is int and value[\"retained_logical_outcomes\"] == len(records)"
+        },
+        {
+          "line": 467,
+          "text": "            and value[\"status\"] == (\"all_logical_outcomes_accounted\" if set(records) == set(identities) else \"partial_selective_fit_accounting\")"
+        },
+        {
+          "line": 468,
+          "text": "            and all(value[key] is False for key in (\"all_fits_numerically_verified\", \"programme_complete\", \"reporting_certified\", \"release_certified\"))"
+        },
+        {
+          "line": 469,
+          "text": "            and value[\"pending_gates\"] == [\"mixed_lineage_deep_verification\", \"analysis_reporting_qa\", \"selected_reproduction\", \"package_restore_replay\"],"
+        },
+        {
+          "line": 470,
+          "text": "            \"account cumulative grid/count/status/flags differ\")"
+        },
+        {
+          "line": 471,
+          "text": "    rows = value[\"current_pass\"]"
+        },
+        {
+          "line": 472,
+          "text": "    require(isinstance(rows, list) and bool(rows) and all(isinstance(row, dict) for row in rows)"
+        },
+        {
+          "line": 473,
+          "text": "            and [row.get(\"original_cell_id\") for row in rows] == identities[:len(rows)],"
+        },
+        {
+          "line": 474,
+          "text": "            \"foreign/duplicate/reordered account pass identity\")"
+        },
+        {
+          "line": 475,
+          "text": "    for row in rows:"
+        },
+        {
+          "line": 476,
+          "text": "        identity, status = row[\"original_cell_id\"], row[\"status\"]"
+        },
+        {
+          "line": 477,
+          "text": "        if status == \"verified_existing_outcome\":"
+        },
+        {
+          "line": 478,
+          "text": "            require(set(row) == {\"original_cell_id\", \"status\", \"record_sha256\"}"
+        },
+        {
+          "line": 479,
+          "text": "                    and identity in cells"
+        },
+        {
+          "line": 480,
+          "text": "                    and records.get(identity) == checked.get(identity) == row[\"record_sha256\"], \"existing account row is not bound to this pass\")"
+        },
+        {
+          "line": 481,
+          "text": "        elif status == \"outcome_retained\":"
+        },
+        {
+          "line": 482,
+          "text": "            require(set(row) == {\"original_cell_id\", \"status\", \"operation\", \"scientific_status\", \"record_sha256\", \"fit_dispatched\"}"
+        },
+        {
+          "line": 483,
+          "text": "                    and identity in cells and records.get(identity) == checked.get(identity) == row[\"record_sha256\"]"
+        },
+        {
+          "line": 484,
+          "text": "                    and row[\"fit_dispatched\"] is False and row[\"operation\"] == cells[identity][\"operation\"]"
+        },
+        {
+          "line": 485,
+          "text": "                    and row[\"scientific_status\"] == cells[identity][\"scientific_status\"], \"retained account row is not an exact no-fit outcome\")"
+        },
+        {
+          "line": 486,
+          "text": "        else:"
+        },
+        {
+          "line": 487,
+          "text": "            require(status in PENDING_ACCOUNT_STATUSES and set(row) == {\"original_cell_id\", \"status\", \"fit_dispatched\"}"
+        },
+        {
+          "line": 488,
+          "text": "                    and row[\"fit_dispatched\"] is False and identity not in records, \"unclassified/bound numerical/pending account row\")"
+        },
+        {
+          "line": 489,
+          "text": "    return set(records)"
+        },
+        {
+          "line": 490,
+          "text": ""
+        },
+        {
+          "line": 491,
+          "text": ""
+        },
+        {
+          "line": 492,
+          "text": "def validate_account_snapshot(root: Path, state: dict[str, Any], request: dict[str, Any], gates: dict[str, Any]) -> None:"
+        },
+        {
+          "line": 493,
+          "text": "    \"\"\"Independently inspect initial cells/passes through unchanged metadata helpers.\"\"\""
+        },
+        {
+          "line": 494,
+          "text": "    require(not attempt_ids(state) and \"controller.claim.json\" not in state[\"files\"]"
+        },
+        {
+          "line": 495,
+          "text": "            and not any(Path(name).parts[0] == \"claims\" for name in state[\"files\"])"
+        },
+        {
+          "line": 496,
+          "text": "            and not any(Path(name).parts[0] == \"claims\" and len(Path(name).parts) > 1 for name in state[\"directories\"]), \"prior attempt or active owner blocks introduction\")"
+        },
+        {
+          "line": 497,
+          "text": "    require(state[\"files\"].get(\"manifest.json\", {}).get(\"sha256\") == request[\"manifest\"][\"sha256\"], \"account manifest differs\")"
+        },
+        {
+          "line": 498,
+          "text": "    allowed = {\"manifest.json\", \"cells\", \"claims\", \"attempts\", \"passes\"}"
+        },
+        {
+          "line": 499,
+          "text": "    require({Path(name).parts[0] for name in (*state[\"files\"], *state[\"directories\"])} <= allowed, \"unexpected account namespace\")"
+        },
+        {
+          "line": 500,
+          "text": "    inventory = {entry[\"original_cell_id\"]: entry for entry in gates[\"inventory\"][\"entries\"]}"
+        },
+        {
+          "line": 501,
+          "text": "    names = [name for name in state[\"files\"] if Path(name).parts[0] == \"cells\"]"
+        },
+        {
+          "line": 502,
+          "text": "    require(all(Path(name).parent == Path(\"cells\") and Path(name).name in {f\"{identity}.json\" for identity in inventory} for name in names)"
+        },
+        {
+          "line": 503,
+          "text": "            and not any(Path(name).parts[0] == \"cells\" and len(Path(name).parts) > 1 for name in state[\"directories\"]), \"foreign cell node\")"
+        },
+        {
+          "line": 504,
+          "text": "    checked, cells = {}, {}"
+        },
+        {
+          "line": 505,
+          "text": "    for name in names:"
+        },
+        {
+          "line": 506,
+          "text": "        path = root / name"
+        },
+        {
+          "line": 507,
+          "text": "        require(binding(path) == state[\"files\"][name], \"initial account bytes changed\")"
+        },
+        {
+          "line": 508,
+          "text": "        value = gates[\"controller\"].verify_record(path, request[\"manifest\"][\"sha256\"], path.stem)"
+        },
+        {
+          "line": 509,
+          "text": "        account_cell(value, path.stem, request, gates)"
+        },
+        {
+          "line": 510,
+          "text": "        cells[path.stem] = value"
+        },
+        {
+          "line": 511,
+          "text": "        checked[path.stem] = binding(path)[\"sha256\"]"
+        },
+        {
+          "line": 512,
+          "text": "    require(not any(Path(name).parts[0] == \"passes\" and len(Path(name).parts) > 1 for name in state[\"directories\"]), \"unexpected initial pass directory\")"
+        },
+        {
+          "line": 513,
+          "text": "    rosters = []"
+        },
+        {
+          "line": 514,
+          "text": "    for name in (name for name in state[\"files\"] if Path(name).parts[0] == \"passes\"):"
+        },
+        {
+          "line": 515,
+          "text": "        path = root / name"
+        },
+        {
+          "line": 516,
+          "text": "        require(Path(name).parent == Path(\"passes\") and path.suffix == \".json\" and binding(path) == state[\"files\"][name], \"unexpected/unbound account pass node\")"
+        },
+        {
+          "line": 517,
+          "text": "        value = document(path)"
+        },
+        {
+          "line": 518,
+          "text": "        rosters.append(account_pass(value, checked, cells, request, gates))"
+        },
+        {
+          "line": 519,
+          "text": "    require(all(first <= second or second <= first for first in rosters for second in rosters),"
+        },
+        {
+          "line": 520,
+          "text": "            \"historical account rosters imply removal/replacement rather than append-only cells\")"
+        }
+      ],
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/guard_fit_dispatch.py",
+      "sha256": "ee80c8e610f81b1cf7059c87d7cc4df80b964e6d76cd6c3144205f09add8bdc9"
+    },
+    {
+      "bytes": 7648,
+      "line_end": 85,
+      "line_start": 60,
+      "lines": [
+        {
+          "line": 60,
+          "text": "           gates_factory: Callable[..., Any] | None = None, testing: bool = False) -> dict[str, Any]:"
+        },
+        {
+          "line": 61,
+          "text": "    \"\"\"Validate authority, reserve immutable capture, and wait for the actual guard."
+        },
+        {
+          "line": 62,
+          "text": ""
+        },
+        {
+          "line": 63,
+          "text": "    Only fictional injected tests may supply alternative subprocess/gate code."
+        },
+        {
+          "line": 64,
+          "text": "    A prior partial namespace without introduction is never adopted on resume."
+        },
+        {
+          "line": 65,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 66,
+          "text": "    g.require(testing or invoke is subprocess.run, \"unapproved subprocess injection\")"
+        },
+        {
+          "line": 67,
+          "text": "    g.require(testing or gates_factory is None, \"unapproved gate injection\")"
+        },
+        {
+          "line": 68,
+          "text": "    request = g.document(args.request, args.request_sha256)"
+        },
+        {
+          "line": 69,
+          "text": "    preparation = g.validate_request(request, testing=testing)"
+        },
+        {
+          "line": 70,
+          "text": "    g.match_arguments(args, request)"
+        },
+        {
+          "line": 71,
+          "text": "    observed = g.runtime(args.python)"
+        },
+        {
+          "line": 72,
+          "text": "    g.validate_authority(request, gates, testing=testing)"
+        },
+        {
+          "line": 73,
+          "text": "    root = g.safe(args.output)"
+        },
+        {
+          "line": 74,
+          "text": "    forbidden = g.protect_output(root, request, gates, args.request)"
+        },
+        {
+          "line": 75,
+          "text": "    gates[\"controller\"].prepare_output(root, args.manifest, args.manifest_sha256, forbidden)"
+        },
+        {
+          "line": 76,
+          "text": "    namespace = root / g.NAMESPACE"
+        },
+        {
+          "line": 77,
+          "text": "    g.require(not (namespace / \"guard.claim.json\").exists(), \"guard already owned; no stale clearing\")"
+        },
+        {
+          "line": 78,
+          "text": "    if namespace.exists():"
+        },
+        {
+          "line": 79,
+          "text": "        g.require((namespace / \"introduction.json\").exists(), \"prior partial namespace has no introduction; review it\")"
+        },
+        {
+          "line": 80,
+          "text": "        previous = g.history(root, request, gates_factory=gates_factory or g.original_gates, testing=testing)"
+        },
+        {
+          "line": 81,
+          "text": "        index, predecessor = previous[\"invocations\"] + 1, previous[\"last_guard_capture_sha256\"]"
+        },
+        {
+          "line": 82,
+          "text": "    else:"
+        },
+        {
+          "line": 83,
+          "text": "        g.account_only(root, request, gates)"
+        },
+        {
+          "line": 84,
+          "text": "        namespace.mkdir()"
+        },
+        {
+          "line": 85,
+          "text": "        (namespace / \"invocations\").mkdir()"
+        }
+      ],
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/capture_guarded_dispatch.py",
+      "sha256": "f82a7b8d2c65e829a7178c8fb230751bef193356e8589c22512ac229de944611"
+    },
+    {
+      "bytes": 75828,
+      "line_end": 1038,
+      "line_start": 983,
+      "lines": [
+        {
+          "line": 983,
+          "text": "                                 *, gates_factory: Callable[..., Any] = original_gates, testing: bool = False,"
+        },
+        {
+          "line": 984,
+          "text": "                                 executing_code_directory: Path | None = None) -> dict[str, Any]:"
+        },
+        {
+          "line": 985,
+          "text": "    \"\"\"Verify retained source/receiving proof into a new external factual receipt."
+        },
+        {
+          "line": 986,
+          "text": ""
+        },
+        {
+          "line": 987,
+          "text": "    No dispatcher, original main, environment checker or scientific predicate is"
+        },
+        {
+          "line": 988,
+          "text": "    executed. Immutable historical bytes/path strings are never rewritten."
+        },
+        {
+          "line": 989,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 990,
+          "text": "    locations = TrustedLocations(locations_path, locations_sha256, location_review_sha256, request_sha256, testing=testing)"
+        },
+        {
+          "line": 991,
+          "text": "    safe(output)"
+        },
+        {
+          "line": 992,
+          "text": "    require(not output.exists() and output.parent.is_dir(), \"new external output required\")"
+        },
+        {
+          "line": 993,
+          "text": "    for immutable in (*locations.roots, *locations.files):"
+        },
+        {
+          "line": 994,
+          "text": "        require(not output.is_relative_to(immutable) and not immutable.is_relative_to(output), \"output overlaps preserved evidence\")"
+        },
+        {
+          "line": 995,
+          "text": "    before = locations.verify()"
+        },
+        {
+          "line": 996,
+          "text": "    request = document(locations.resolve(request_path), request_sha256)"
+        },
+        {
+          "line": 997,
+          "text": "    validate_historical_roles(request, locations)"
+        },
+        {
+          "line": 998,
+          "text": "    executing = executing_code_directory or Path(__file__).absolute().parent"
+        },
+        {
+          "line": 999,
+          "text": "    require(testing or safe(executing) == locations.historical_read(Path(request[\"guard_code\"])), \"actual verifier must run from its declared source/restored guard role\")"
+        },
+        {
+          "line": 1000,
+          "text": "    validate_request(request, resolve=locations.resolve, testing=testing)"
+        },
+        {
+          "line": 1001,
+          "text": "    with gates_factory(request, locations.resolve, read_only=True) as gates:"
+        },
+        {
+          "line": 1002,
+          "text": "        validate_authority(request, gates, resolve=locations.resolve, testing=testing)"
+        },
+        {
+          "line": 1003,
+          "text": "        protect_output(output, request, gates, request_path, resolve=locations.resolve, include_corrected_run=True,"
+        },
+        {
+          "line": 1004,
+          "text": "                       extra_files=(locations_path, carrier(locations.value[\"authority\"])[0]))"
+        },
+        {
+          "line": 1005,
+          "text": "    result = history(locations.resolve(Path(request[\"corrected_run\"])), request, resolve=locations.resolve,"
+        },
+        {
+          "line": 1006,
+          "text": "                     gates_factory=gates_factory, testing=testing)"
+        },
+        {
+          "line": 1007,
+          "text": "    require(locations.verify() == before, \"evidence changed during read-only semantic verification\")"
+        },
+        {
+          "line": 1008,
+          "text": "    output.mkdir()"
+        },
+        {
+          "line": 1009,
+          "text": "    value = {\"schema_version\": 1, \"status\": \"retained_guard_proof_semantically_verified\" if result[\"successful_guard_coverage\"] else \"retained_guard_failure_history_accounted\","
+        },
+        {
+          "line": 1010,
+          "text": "             \"test_only_dependency_injection\": testing, \"request_sha256\": request_sha256,"
+        },
+        {
+          "line": 1011,
+          "text": "             \"locations_sha256\": locations_sha256, \"actual_location_review_sha256\": location_review_sha256,"
+        },
+        {
+          "line": 1012,
+          "text": "             \"verification_mode\": locations.mode,"
+        },
+        {
+          "line": 1013,
+          "text": "             \"successful_guard_coverage\": result[\"successful_guard_coverage\"],"
+        },
+        {
+          "line": 1014,
+          "text": "             \"guard_source_sha256\": request[\"guard_source_sha256\"], \"immutable_inventory_sha256\": before,"
+        },
+        {
+          "line": 1015,
+          "text": "             \"history\": {key: item for key, item in result.items() if key != \"last_state\"},"
+        },
+        {
+          "line": 1016,
+          "text": "             \"historical_json_or_argv_rewritten\": False, \"preserved_evidence_modified\": False,"
+        },
+        {
+          "line": 1017,
+          "text": "             \"new_controller_or_scientific_calls\": False, \"scientific_completion_certified\": False, \"programme_complete\": False}"
+        },
+        {
+          "line": 1018,
+          "text": "    write_new(output / \"receipt.json\", value)"
+        },
+        {
+          "line": 1019,
+          "text": "    return document(output / \"receipt.json\")"
+        },
+        {
+          "line": 1020,
+          "text": ""
+        },
+        {
+          "line": 1021,
+          "text": ""
+        },
+        {
+          "line": 1022,
+          "text": "def dispatch(args: argparse.Namespace, gates: dict[str, Any], *, invoke: Callable[..., Any] = subprocess.run,"
+        },
+        {
+          "line": 1023,
+          "text": "             testing: bool = False) -> dict[str, Any]:"
+        },
+        {
+          "line": 1024,
+          "text": "    \"\"\"Introduce/recheck prospective evidence, then capture the old controller.\"\"\""
+        },
+        {
+          "line": 1025,
+          "text": "    request = document(args.request, args.request_sha256)"
+        },
+        {
+          "line": 1026,
+          "text": "    validate_request(request, testing=testing)"
+        },
+        {
+          "line": 1027,
+          "text": "    match_arguments(args, request)"
+        },
+        {
+          "line": 1028,
+          "text": "    observed = runtime(args.python)"
+        },
+        {
+          "line": 1029,
+          "text": "    validate_authority(request, gates, testing=testing)"
+        },
+        {
+          "line": 1030,
+          "text": "    root = safe(args.output)"
+        },
+        {
+          "line": 1031,
+          "text": "    protect_output(root, request, gates, args.request)"
+        },
+        {
+          "line": 1032,
+          "text": "    namespace = root / NAMESPACE"
+        },
+        {
+          "line": 1033,
+          "text": "    require(len(args.invocation_id) == 32 and all(c in \"0123456789abcdef\" for c in args.invocation_id), \"unsafe invocation identity\")"
+        },
+        {
+          "line": 1034,
+          "text": "    directory = namespace / \"invocations\" / args.invocation_id"
+        },
+        {
+          "line": 1035,
+          "text": "    require(directory.is_dir(), \"owned invocation reservation absent\")"
+        },
+        {
+          "line": 1036,
+          "text": "    launch = document(directory / \"launcher_launch.json\", args.launch_sha256)"
+        },
+        {
+          "line": 1037,
+          "text": "    require(launch[\"request_sha256\"] == args.request_sha256 and launch[\"invocation_id\"] == args.invocation_id"
+        },
+        {
+          "line": 1038,
+          "text": "            and launch[\"guard_source_sha256\"] == request[\"guard_source_sha256\"] and launch[\"guard_argv_prefix\"] =="
+        }
+      ],
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/guard_fit_dispatch.py",
+      "sha256": "ee80c8e610f81b1cf7059c87d7cc4df80b964e6d76cd6c3144205f09add8bdc9"
+    },
+    {
+      "bytes": 22845,
+      "line_end": 255,
+      "line_start": 191,
+      "lines": [
+        {
+          "line": 191,
+          "text": "def classify(witness: FitWitness) -> dict[str, Any]:"
+        },
+        {
+          "line": 192,
+          "text": "    \"\"\"Classify supplied proof as reuse, selective fit, input failure or unresolved."
+        },
+        {
+          "line": 193,
+          "text": ""
+        },
+        {
+          "line": 194,
+          "text": "    This is a pure planning decision. A changed-input cell may be scheduled"
+        },
+        {
+          "line": 195,
+          "text": "    before its original worker finishes; its original outcome remains pending."
+        },
+        {
+          "line": 196,
+          "text": "    An identical-input cell waits for actual original evidence. No optimizer/"
+        },
+        {
+          "line": 197,
+          "text": "    MCMC failure is retried just because its old outcome failed."
+        },
+        {
+          "line": 198,
+          "text": "    \"\"\""
+        },
+        {
+          "line": 199,
+          "text": "    check_digest(witness.correction_specification_sha256)"
+        },
+        {
+          "line": 200,
+          "text": "    expected = seed_ledger(witness.original_cell_id)"
+        },
+        {
+          "line": 201,
+          "text": "    require(witness.original_seeds == expected and witness.corrected_seeds == expected,"
+        },
+        {
+          "line": 202,
+          "text": "            \"cell/inner/fit/evaluation seed identity differs\")"
+        },
+        {
+          "line": 203,
+          "text": "    require(witness.model and f\"__{witness.model}__\" in witness.original_cell_id,"
+        },
+        {
+          "line": 204,
+          "text": "            \"model does not agree with original cell ID\")"
+        },
+        {
+          "line": 205,
+          "text": "    missing, changed = [], []"
+        },
+        {
+          "line": 206,
+          "text": "    for role in required_roles(witness.model):"
+        },
+        {
+          "line": 207,
+          "text": "        comparison = witness.roles.get(role)"
+        },
+        {
+          "line": 208,
+          "text": "        if comparison is None or not comparison.complete():"
+        },
+        {
+          "line": 209,
+          "text": "            missing.append(role)"
+        },
+        {
+          "line": 210,
+          "text": "        elif comparison.original_sha256 != comparison.corrected_sha256:"
+        },
+        {
+          "line": 211,
+          "text": "            changed.append(role)"
+        },
+        {
+          "line": 212,
+          "text": "    expected_contexts = {\"outer\"} if witness.model in CATALYTIC_MODELS else set()"
+        },
+        {
+          "line": 213,
+          "text": "    if witness.model == \"catalytic_wme\":"
+        },
+        {
+          "line": 214,
+          "text": "        expected_contexts |= {f\"inner_{f:02}\" for f in range(1, 4)}"
+        },
+        {
+          "line": 215,
+          "text": "    require(not (set(witness.generator_contexts) - expected_contexts), \"unexpected generator context\")"
+        },
+        {
+          "line": 216,
+          "text": "    for context in sorted(expected_contexts - set(witness.generator_contexts)):"
+        },
+        {
+          "line": 217,
+          "text": "        missing.append(f\"generator_receipt:{context}\")"
+        },
+        {
+          "line": 218,
+          "text": "    failures = {}"
+        },
+        {
+          "line": 219,
+          "text": "    for context, (status, receipt_sha) in witness.generator_contexts.items():"
+        },
+        {
+          "line": 220,
+          "text": "        require(status in GENERATOR_STATUSES, \"unknown corrected generator outcome\")"
+        },
+        {
+          "line": 221,
+          "text": "        check_digest(receipt_sha)"
+        },
+        {
+          "line": 222,
+          "text": "        if status != \"accepted\":"
+        },
+        {
+          "line": 223,
+          "text": "            failures[context] = status"
+        },
+        {
+          "line": 224,
+          "text": "    if witness.original_evidence is not None:"
+        },
+        {
+          "line": 225,
+          "text": "        witness.original_evidence.validate()"
+        },
+        {
+          "line": 226,
+          "text": "        require(witness.original_evidence.original_cell_id == witness.original_cell_id,"
+        },
+        {
+          "line": 227,
+          "text": "                \"original outcome belongs to another cell\")"
+        },
+        {
+          "line": 228,
+          "text": "    tuning_dependencies = {"
+        },
+        {
+          "line": 229,
+          "text": "        \"model_sources\", \"model_configuration\", \"fit_sources\", \"fit_configuration\","
+        },
+        {
+          "line": 230,
+          "text": "        \"evaluation_sources\", \"evaluation_configuration\", \"environment\","
+        },
+        {
+          "line": 231,
+          "text": "        \"candidate_configuration\", \"unchanged_execution_dependencies\","
+        },
+        {
+          "line": 232,
+          "text": "    }"
+        },
+        {
+          "line": 233,
+          "text": "    inner_changed = any(role.startswith(\"inner.\") or role in tuning_dependencies for role in changed)"
+        },
+        {
+          "line": 234,
+          "text": "    recorded_tuning = (None if witness.original_evidence is None else"
+        },
+        {
+          "line": 235,
+          "text": "                       witness.original_evidence.wme_tuning_record_sha256)"
+        },
+        {
+          "line": 236,
+          "text": "    wme_action = (\"retune_then_fit_changed_inputs\" if inner_changed or recorded_tuning is None"
+        },
+        {
+          "line": 237,
+          "text": "                  else \"fit_changed_inputs_reuse_tuning\")"
+        },
+        {
+          "line": 238,
+          "text": "    action = (\"retain_input_failure\" if failures else \"unresolved\" if missing else"
+        },
+        {
+          "line": 239,
+          "text": "              wme_action if changed and witness.model == \"catalytic_wme\" else"
+        },
+        {
+          "line": 240,
+          "text": "              \"fit_changed_inputs\" if changed else \"await_original_outcome\""
+        },
+        {
+          "line": 241,
+          "text": "              if witness.original_evidence is None else \"reuse_original_outcome\")"
+        },
+        {
+          "line": 242,
+          "text": "    result = {"
+        },
+        {
+          "line": 243,
+          "text": "        \"schema_version\": 1, \"scope\": \"supplied_evidence_contract_not_actual_byte_verification\","
+        },
+        {
+          "line": 244,
+          "text": "        \"original_cell_id\": witness.original_cell_id, \"model\": witness.model,"
+        },
+        {
+          "line": 245,
+          "text": "        \"correction_specification_sha256\": witness.correction_specification_sha256,"
+        },
+        {
+          "line": 246,
+          "text": "        \"action\": action, \"missing_roles\": missing, \"changed_roles\": changed,"
+        },
+        {
+          "line": 247,
+          "text": "        \"generator_failures\": failures, \"witness_sha256\": digest(asdict(witness)),"
+        },
+        {
+          "line": 248,
+          "text": "        \"tuning_record_reused_sha256\": recorded_tuning"
+        },
+        {
+          "line": 249,
+          "text": "        if action == \"fit_changed_inputs_reuse_tuning\" else None,"
+        },
+        {
+          "line": 250,
+          "text": "        \"original_status\": None if witness.original_evidence is None else witness.original_evidence.status,"
+        },
+        {
+          "line": 251,
+          "text": "        \"original_outcome_available\": witness.original_evidence is not None,"
+        },
+        {
+          "line": 252,
+          "text": "        \"source_evidence\": None if witness.original_evidence is None else asdict(witness.original_evidence),"
+        },
+        {
+          "line": 253,
+          "text": "        \"seed_ledger_sha256\": digest(expected), \"fit_dispatched\": False,"
+        },
+        {
+          "line": 254,
+          "text": "    }"
+        },
+        {
+          "line": 255,
+          "text": "    result[\"decision_content_sha256\"] = digest(result)"
+        }
+      ],
+      "path": "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/correction_fit_contracts.py",
+      "sha256": "83cb84002cd9dc447f70d9346baaba16197fa04d5a43e8b2fb500c2ce38f7fef"
+    },
+    {
+      "bytes": 24921,
+      "line_end": 229,
+      "line_start": 187,
+      "lines": [
+        {
+          "line": 187,
+          "text": "    def record(self, entry: dict[str, Any]) -> dict[str, Any]:"
+        },
+        {
+          "line": 188,
+          "text": "        \"\"\"Reuse exact old success/failure, retain input failure or fit changed inputs.\"\"\""
+        },
+        {
+          "line": 189,
+          "text": "        identity, output = entry[\"original_cell_id\"], self.args.output"
+        },
+        {
+          "line": 190,
+          "text": "        path = output / \"cells\" / f\"{identity}.json\""
+        },
+        {
+          "line": 191,
+          "text": "        if path.exists():"
+        },
+        {
+          "line": 192,
+          "text": "            recorded = verify_record(path, self.args.manifest_sha256, identity)"
+        },
+        {
+          "line": 193,
+          "text": "            common.require(recorded[\"input_witness_sha256\"] == entry[\"input_witness_sha256\"], \"resume input witness differs\")"
+        },
+        {
+          "line": 194,
+          "text": "            witness_path = common.below(self.paths[\"witness_root\"], entry[\"input_witness_path\"])"
+        },
+        {
+          "line": 195,
+          "text": "            common.verify_witness_proofs(witness_path.parent, common.read_json(witness_path, entry[\"input_witness_sha256\"]), self.contracts)"
+        },
+        {
+          "line": 196,
+          "text": "            if recorded[\"source_evidence\"] is not None:"
+        },
+        {
+          "line": 197,
+          "text": "                common.require(common.verify_original_outcome(self.paths[\"original_run\"], identity, recorded[\"source_evidence\"]) is not None,"
+        },
+        {
+          "line": 198,
+          "text": "                               \"recorded original owner or source bytes differ\")"
+        },
+        {
+          "line": 199,
+          "text": "            return {\"original_cell_id\": identity, \"status\": \"verified_existing_outcome\", \"record_sha256\": common.sha(path)}"
+        },
+        {
+          "line": 200,
+          "text": "        with common.Claim(output / \"claims\" / f\"{identity}.json\", self.args.manifest_sha256):"
+        },
+        {
+          "line": 201,
+          "text": "            _, decision, old, witness = self.current(entry)"
+        },
+        {
+          "line": 202,
+          "text": "            action = decision[\"action\"]"
+        },
+        {
+          "line": 203,
+          "text": "            if action in {\"await_original_owner_or_outcome\", \"await_original_outcome\", \"unresolved\"}:"
+        },
+        {
+          "line": 204,
+          "text": "                return {\"original_cell_id\": identity, \"status\": action, \"fit_dispatched\": False}"
+        },
+        {
+          "line": 205,
+          "text": "            record: dict[str, Any] = {\"schema_version\": 1, \"original_cell_id\": identity,"
+        },
+        {
+          "line": 206,
+          "text": "                       \"evidence_status\": \"post_hoc_rank_conditioned_correction_after_original_failures_known\","
+        },
+        {
+          "line": 207,
+          "text": "                       \"corrected_manifest_sha256\": self.args.manifest_sha256, \"correction_freeze_sha256\": self.args.freeze_sha256,"
+        },
+        {
+          "line": 208,
+          "text": "                       \"definition_content_sha256\": self.freeze[\"definition_content_sha256\"],"
+        },
+        {
+          "line": 209,
+          "text": "                       \"input_witness_path\": entry[\"input_witness_path\"], \"input_witness_sha256\": entry[\"input_witness_sha256\"],"
+        },
+        {
+          "line": 210,
+          "text": "                       \"source_evidence\": decision[\"source_evidence\"], \"decision\": decision,"
+        },
+        {
+          "line": 211,
+          "text": "                       \"generator_contexts\": {name: list(row) for name, row in witness.generator_contexts.items()},"
+        },
+        {
+          "line": 212,
+          "text": "                       \"original_seed_namespace\": witness.corrected_seeds,"
+        },
+        {
+          "line": 213,
+          "text": "                       \"fit_dispatched\": False, \"artifacts\": {}, \"programme_complete\": False,"
+        },
+        {
+          "line": 214,
+          "text": "                       \"reporting_certified\": False, \"release_certified\": False}"
+        },
+        {
+          "line": 215,
+          "text": "            if action == \"reuse_original_outcome\":"
+        },
+        {
+          "line": 216,
+          "text": "                common.require(old is not None, \"pending original outcome cannot be reusable\")"
+        },
+        {
+          "line": 217,
+          "text": "                record.update(operation=\"reuse_original_outcome\", scientific_status=old[\"status\"],"
+        },
+        {
+          "line": 218,
+          "text": "                              original_reference={\"logical_root\": \"original_extension_run\", \"path\": f\"cells/{identity}.json\","
+        },
+        {
+          "line": 219,
+          "text": "                                                  \"sha256\": witness.original_evidence.cell_byte_sha256,"
+        },
+        {
+          "line": 220,
+          "text": "                                                  \"cell_content_sha256\": witness.original_evidence.cell_content_sha256},"
+        },
+        {
+          "line": 221,
+          "text": "                              newly_executed_fit=False, fit_seconds=0.0)"
+        },
+        {
+          "line": 222,
+          "text": "            elif action == \"retain_input_failure\":"
+        },
+        {
+          "line": 223,
+          "text": "                record.update(operation=\"retain_corrected_input_failure\", scientific_status=\"not_fit_input_failure\","
+        },
+        {
+          "line": 224,
+          "text": "                              original_reference=None, original_outcome_pending=old is None,"
+        },
+        {
+          "line": 225,
+          "text": "                              failure_contexts=decision[\"generator_failures\"], newly_executed_fit=False, fit_seconds=0.0)"
+        },
+        {
+          "line": 226,
+          "text": "            elif action in common.FIT_ACTIONS:"
+        },
+        {
+          "line": 227,
+          "text": "                common.require(old is not None and witness.original_evidence is not None, \"pending original cannot be corrected-fit-ready\")"
+        },
+        {
+          "line": 228,
+          "text": "                if self.args.phase == \"account\" or self.args.phase == \"pilot\" and identity not in self.manifest[\"pilot_cells\"]:"
+        },
+        {
+          "line": 229,
+          "text": "                    return {\"original_cell_id\": identity, \"status\": \"changed_inputs_waiting_for_authorized_phase\", \"fit_dispatched\": False}"
+        }
+      ],
+      "path": "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_controller.py",
+      "sha256": "1fdeecc9d437bae930414bc84094da01f21140e6db86e09193cf47a395f1a038"
+    },
+    {
+      "bytes": 24921,
+      "line_end": 306,
+      "line_start": 272,
+      "lines": [
+        {
+          "line": 272,
+          "text": "            common.write_new(path, common.seal(record))"
+        },
+        {
+          "line": 273,
+          "text": "            verify_record(path, self.args.manifest_sha256, identity)"
+        },
+        {
+          "line": 274,
+          "text": "            return {\"original_cell_id\": identity, \"status\": \"outcome_retained\", \"operation\": record[\"operation\"],"
+        },
+        {
+          "line": 275,
+          "text": "                    \"scientific_status\": record[\"scientific_status\"], \"record_sha256\": common.sha(path),"
+        },
+        {
+          "line": 276,
+          "text": "                    \"fit_dispatched\": record[\"fit_dispatched\"]}"
+        },
+        {
+          "line": 277,
+          "text": ""
+        },
+        {
+          "line": 278,
+          "text": "    def run(self) -> dict[str, Any]:"
+        },
+        {
+          "line": 279,
+          "text": "        \"\"\"Account an authorized pass; remaining fits require a real pilot review.\"\"\""
+        },
+        {
+          "line": 280,
+          "text": "        if self.args.phase == \"remaining\":"
+        },
+        {
+          "line": 281,
+          "text": "            common.require(self.args.pilot_review is not None and self.args.pilot_review_sha256 is not None,"
+        },
+        {
+          "line": 282,
+          "text": "                           \"remaining fits require an actual explicit pilot review and byte hash\")"
+        },
+        {
+          "line": 283,
+          "text": "            validate_pilot_review(common.read_json(self.args.pilot_review, self.args.pilot_review_sha256),"
+        },
+        {
+          "line": 284,
+          "text": "                                  self.manifest, self.args.manifest_sha256, self.args.output)"
+        },
+        {
+          "line": 285,
+          "text": "        rows = self.inventory[\"entries\"]"
+        },
+        {
+          "line": 286,
+          "text": "        if self.args.phase == \"pilot\":"
+        },
+        {
+          "line": 287,
+          "text": "            rows = [entry for entry in rows if entry[\"original_cell_id\"] in self.manifest[\"pilot_cells\"]]"
+        },
+        {
+          "line": 288,
+          "text": "        results = []"
+        },
+        {
+          "line": 289,
+          "text": "        with common.Claim(self.args.output / \"controller.claim.json\", self.args.manifest_sha256):"
+        },
+        {
+          "line": 290,
+          "text": "            for entry in rows:"
+        },
+        {
+          "line": 291,
+          "text": "                results.append(self.record(entry))"
+        },
+        {
+          "line": 292,
+          "text": "                print(json.dumps(results[-1], sort_keys=True), flush=True)"
+        },
+        {
+          "line": 293,
+          "text": "                if self.args.limit is not None and len(results) >= self.args.limit:"
+        },
+        {
+          "line": 294,
+          "text": "                    break"
+        },
+        {
+          "line": 295,
+          "text": "            records = {path.stem: common.sha(path) for path in sorted((self.args.output / \"cells\").glob(\"*.json\"))}"
+        },
+        {
+          "line": 296,
+          "text": "            expected = {row[\"original_cell_id\"] for row in self.inventory[\"entries\"]}"
+        },
+        {
+          "line": 297,
+          "text": "            common.require(set(records) <= expected, \"unexpected logical output cell\")"
+        },
+        {
+          "line": 298,
+          "text": "            value = common.seal({\"schema_version\": 1, \"phase\": self.args.phase,"
+        },
+        {
+          "line": 299,
+          "text": "                                 \"corrected_manifest_sha256\": self.args.manifest_sha256,"
+        },
+        {
+          "line": 300,
+          "text": "                                 \"status\": \"all_logical_outcomes_accounted\" if set(records) == expected else \"partial_selective_fit_accounting\","
+        },
+        {
+          "line": 301,
+          "text": "                                 \"scheduled_logical_cells\": 1625, \"retained_logical_outcomes\": len(records),"
+        },
+        {
+          "line": 302,
+          "text": "                                 \"current_pass\": results, \"record_sha256\": records,"
+        },
+        {
+          "line": 303,
+          "text": "                                 \"all_fits_numerically_verified\": False, \"programme_complete\": False,"
+        },
+        {
+          "line": 304,
+          "text": "                                 \"reporting_certified\": False, \"release_certified\": False,"
+        },
+        {
+          "line": 305,
+          "text": "                                 \"pending_gates\": [\"mixed_lineage_deep_verification\", \"analysis_reporting_qa\", \"selected_reproduction\", \"package_restore_replay\"]})"
+        },
+        {
+          "line": 306,
+          "text": "            common.write_new(self.args.output / \"passes\" / f\"{uuid.uuid4().hex}.json\", value)"
+        }
+      ],
+      "path": "/Users/macuser/bayes-cox-runs/ravi-main-integration-20260929/scripts/catalytic_correction/fit_controller.py",
+      "sha256": "1fdeecc9d437bae930414bc84094da01f21140e6db86e09193cf47a395f1a038"
+    },
+    {
+      "bytes": 15012,
+      "line_end": 184,
+      "line_start": 144,
+      "lines": [
+        {
+          "line": 144,
+          "text": "    def test_actual_six_corrected_fit_fields_and_unknown_score_field_refused(self) -> None:"
+        },
+        {
+          "line": 145,
+          "text": "        f = self.fixture"
+        },
+        {
+          "line": 146,
+          "text": "        path = f.output / \"cells/a.json\""
+        },
+        {
+          "line": 147,
+          "text": "        original = g.document(path)"
+        },
+        {
+          "line": 148,
+          "text": "        fields = {\"corrected_cell\": {\"logical_root\": \"corrected_fit_run\", \"path\": \"outside.fake\"},"
+        },
+        {
+          "line": 149,
+          "text": "                  \"child_receipt_path\": \"outside/child_receipt.json\", \"invocation_path\": \"outside/invocation.json\","
+        },
+        {
+          "line": 150,
+          "text": "                  \"observations_path\": \"outside/observations.json\", \"child_wall_seconds\": 3.0, \"child_exit_code\": 0,"
+        },
+        {
+          "line": 151,
+          "text": "                  \"corrected_reference\": {\"path\": \"outside.fake\"}, \"unclassified_corrected_score\": 0.9}"
+        },
+        {
+          "line": 152,
+          "text": "        for name, value in fields.items():"
+        },
+        {
+          "line": 153,
+          "text": "            with self.subTest(name=name):"
+        },
+        {
+          "line": 154,
+          "text": "                self.rewrite(path, {**original, name: value})"
+        },
+        {
+          "line": 155,
+          "text": "                f.controller.verify_record(path, f.manifest[\"sha256\"], \"a\")"
+        },
+        {
+          "line": 156,
+          "text": "                with self.assertRaises(g.InvalidProof):"
+        },
+        {
+          "line": 157,
+          "text": "                    g.account_only(f.output, f.request, f.gates())"
+        },
+        {
+          "line": 158,
+          "text": "        self.rewrite(path, {**original, **fields})"
+        },
+        {
+          "line": 159,
+          "text": "        with self.assertRaises(g.InvalidProof):"
+        },
+        {
+          "line": 160,
+          "text": "            g.account_only(f.output, f.request, f.gates())"
+        },
+        {
+          "line": 161,
+          "text": ""
+        },
+        {
+          "line": 162,
+          "text": "    def test_legitimate_original_success_and_negative_reuse_kept(self) -> None:"
+        },
+        {
+          "line": 163,
+          "text": "        f = self.fixture"
+        },
+        {
+          "line": 164,
+          "text": "        for status in (\"complete\", \"failed\", \"failed_diagnostics\"):"
+        },
+        {
+          "line": 165,
+          "text": "            with self.subTest(status=status):"
+        },
+        {
+          "line": 166,
+          "text": "                self.make_reuse(status)"
+        },
+        {
+          "line": 167,
+          "text": "                g.account_only(f.output, f.request, f.gates())"
+        },
+        {
+          "line": 168,
+          "text": ""
+        },
+        {
+          "line": 169,
+          "text": "    def test_reuse_reference_and_terminal_decision_status_must_match(self) -> None:"
+        },
+        {
+          "line": 170,
+          "text": "        f = self.fixture"
+        },
+        {
+          "line": 171,
+          "text": "        path = f.output / \"cells/a.json\""
+        },
+        {
+          "line": 172,
+          "text": "        original = g.document(path)"
+        },
+        {
+          "line": 173,
+          "text": "        for key, value in ((\"scientific_status\", \"complete\"), (\"original_reference\", {\"path\": \"bad\"}),"
+        },
+        {
+          "line": 174,
+          "text": "                           (\"original_outcome_pending\", 1), (\"failure_contexts\", {}), (\"fit_seconds\", True)):"
+        },
+        {
+          "line": 175,
+          "text": "            with self.subTest(key=key):"
+        },
+        {
+          "line": 176,
+          "text": "                self.rewrite(path, {**original, key: value})"
+        },
+        {
+          "line": 177,
+          "text": "                with self.assertRaises(g.InvalidProof):"
+        },
+        {
+          "line": 178,
+          "text": "                    g.account_only(f.output, f.request, f.gates())"
+        },
+        {
+          "line": 179,
+          "text": "        self.rewrite(path, original)"
+        },
+        {
+          "line": 180,
+          "text": "        self.make_reuse(\"failed\")"
+        },
+        {
+          "line": 181,
+          "text": "        reused = g.document(path)"
+        },
+        {
+          "line": 182,
+          "text": "        self.rewrite(path, {**reused, \"original_reference\": {**reused[\"original_reference\"], \"sha256\": \"0\" * 64}})"
+        },
+        {
+          "line": 183,
+          "text": "        with self.assertRaises(g.InvalidProof):"
+        },
+        {
+          "line": 184,
+          "text": "            g.account_only(f.output, f.request, f.gates())"
+        }
+      ],
+      "path": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v2/test_guarded_dispatch_regressions.py",
+      "sha256": "0b9e0d56a71613b066baa96e4927567bbdfeb11642ef2905087b2a5f2020633a"
+    }
+  ],
+  "schema_version": 1,
+  "status": "exact_pinned_source_line_evidence"
+}

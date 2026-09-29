@@ -1480,3 +1480,34 @@ implementation files still matched the successful 998-test capture, and all
 20 original design pins were unchanged. The exact preparations, probes,
 portable captures and root checks are linked from
 `coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-v2-review.json`.
+
+
+## 2026-09-29 — Guarded-dispatch V3 integrated and verified
+
+Reviewed V3 is integrated with its complete 116-file carrier and two portable
+test sources. The actual full locked suite passed 1,040 tests and 293 subtests,
+zero skips, at 15:34:34 UTC. All 752 captured files stayed unchanged; repository-
+wide Ruff passed. All 634 preceding implementation files, 157 original
+source/build/lock files and old scientific pins/configuration/addendum remain
+unchanged. The focused installed fixtures passed 42 tests/136 subtests.
+
+V1/V2 source and failed attempts remain exact. The independent V3 runtime
+review checked 41 tests/nine cases; its portable review checked all 497 inputs
+unchanged and found no material delta issue. Both stopped metadata validators
+remain retained. The separate AST clarification proves equal old/new controls
+under locked 3.11 and current 3.14; creation-time metadata interpreter identity
+remains unknown. The finalizer's dated partial self-capture is retained beside
+the completed 87-file validation snapshot. One exact historical failed-check
+log retains trailing whitespace; only that byte-pinned path is excluded from
+Git's whitespace check. The complete carrier, including ignored logs, is staged.
+Evidence is linked from
+`coordination/recovery/2026-09-29-generator-correction-guarded-dispatch-integration-v3.json`.
+
+The five actual scientific review roles, corrected numerical freeze,
+ADR-041 selection/scope, named dispatch adoption and actual source/fresh
+semantic captures remain pending. No corrected fit or release is certified.
+The 14:55 UTC document mirror used published `a26d5a2`; its actual v3 record
+is preserved. At 15:38:44 UTC the dated metadata check recorded 707 independent
+first-draw receipts and 1,115 original outcomes (917 complete, 170 failed,
+28 failed diagnostics). All 15 selected PIDs were present. Original workers,
+continuation and observer ownership remain unchanged.

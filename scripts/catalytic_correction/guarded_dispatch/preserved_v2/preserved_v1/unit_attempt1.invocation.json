@@ -1,0 +1,76 @@
+{
+  "actual_numerical_or_guarded_controller_dispatch": false,
+  "argv": [
+    "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+    "-I",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1",
+    "-p",
+    "test_guarded_dispatch.py",
+    "-v"
+  ],
+  "cwd": "/Users/macuser/bayes-cox-runs/extensions-20260928/generator_correction_guarded_dispatch_v1",
+  "exit_code": 1,
+  "finished_at_utc": "2026-09-29T13:46:09.168835+00:00",
+  "mode": "unit",
+  "raw_stderr": {
+    "bytes": 33918,
+    "sha256": "8369fad0650654285413496fb9f7398ae4b9dd5c381ee19be21986082b563364"
+  },
+  "raw_stdout": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "schema_version": 1,
+  "source_finish": {
+    "capture_guarded_dispatch.py": {
+      "bytes": 7888,
+      "sha256": "a84214b66ebb910e0630be0b28dc450553e0b25e65642d9ce5132ada07f0fbc3"
+    },
+    "capture_preparation_checks.py": {
+      "bytes": 3023,
+      "sha256": "c9ccd9fb97fc0542dca1a207eb627d56af2f0d2dfd9368359092ea9d11b6bc99"
+    },
+    "guard_fit_dispatch.py": {
+      "bytes": 55994,
+      "sha256": "c6eec1a721c5db8734da362bbe685a9b1ce010157dba634425ba6ad9ad4a46a2"
+    },
+    "test_guarded_dispatch.py": {
+      "bytes": 28175,
+      "sha256": "b883691b2bdb8fb4d5ea028d3cb02f7a64e94641ef8720d4c9c15fb51da8c79c"
+    },
+    "verify_guarded_dispatch_proof.py": {
+      "bytes": 2385,
+      "sha256": "b96ba3dcf61ec87edb270b6df5a1fba01db100e17d50ddd8903448dff659f177"
+    }
+  },
+  "source_start": {
+    "capture_guarded_dispatch.py": {
+      "bytes": 7888,
+      "sha256": "a84214b66ebb910e0630be0b28dc450553e0b25e65642d9ce5132ada07f0fbc3"
+    },
+    "capture_preparation_checks.py": {
+      "bytes": 3023,
+      "sha256": "c9ccd9fb97fc0542dca1a207eb627d56af2f0d2dfd9368359092ea9d11b6bc99"
+    },
+    "guard_fit_dispatch.py": {
+      "bytes": 55994,
+      "sha256": "c6eec1a721c5db8734da362bbe685a9b1ce010157dba634425ba6ad9ad4a46a2"
+    },
+    "test_guarded_dispatch.py": {
+      "bytes": 28175,
+      "sha256": "b883691b2bdb8fb4d5ea028d3cb02f7a64e94641ef8720d4c9c15fb51da8c79c"
+    },
+    "verify_guarded_dispatch_proof.py": {
+      "bytes": 2385,
+      "sha256": "b96ba3dcf61ec87edb270b6df5a1fba01db100e17d50ddd8903448dff659f177"
+    }
+  },
+  "source_unchanged": true,
+  "started_at_utc": "2026-09-29T13:46:08.724648+00:00",
+  "status": "bounded_preparation_check_return_captured"
+}

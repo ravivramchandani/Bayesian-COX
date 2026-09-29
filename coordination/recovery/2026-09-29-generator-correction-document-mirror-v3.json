@@ -1,0 +1,56 @@
+{
+  "actual_parent_capture_exit_code": 0,
+  "actual_scientific_approval_or_guard_adoption_created": false,
+  "all135_scoped_non_target_files_unchanged": true,
+  "all141_original_versions_preserved": true,
+  "all6_previous_published_versions_preserved": true,
+  "archives": {
+    "document-mirror-v3-actual-capture": {
+      "archive": "2026-09-29-generator-correction-document-mirror-v3-actual-capture.tar.gz",
+      "bytes": 57457,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "regular_members": 7,
+      "sha256": "770aeb9b04f1f14dc6cb9833df28fd4b33fe9e6ad36fe90e52d83ab0e6bfb031"
+    },
+    "guarded-dispatch-v2-review-push-failed": {
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-v2-review-push-failed.tar.gz",
+      "bytes": 4081,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "regular_members": 31,
+      "sha256": "3e8fbcc1756c336e7100771b81b15f57391096bcd3a5e6b9cc63f305fe0d194e"
+    },
+    "guarded-dispatch-v2-review-push-retry": {
+      "archive": "2026-09-29-generator-correction-guarded-dispatch-v2-review-push-retry.tar.gz",
+      "bytes": 3572,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "regular_members": 32,
+      "sha256": "83c6ad32d61734d585490ca3b48e622f25a35d4d0a84827fd51bbe67caeddc9f"
+    },
+    "original-checkout-document-mirror-actual-v3": {
+      "all_receipt_artifact_hashes_verified": true,
+      "archive": "2026-09-29-generator-correction-original-checkout-document-mirror-actual-v3.tar.gz",
+      "bytes": 191547,
+      "exact_member_roundtrip_and_source_before_after_verified": true,
+      "preparation_receipt": "receipt.json",
+      "preparation_receipt_sha256": "ba3f451f6aee8bd181d92ed04ba0cdee5e4b6a3fffbf27174b93d3086c0594e2",
+      "regular_members": 31,
+      "sha256": "45b102685333e11e0666b900c9c9d7c176cd12a67fdad688755c5b0577f2e0fb"
+    }
+  },
+  "completed_at_utc": "2026-09-29T14:55:12.353801+00:00",
+  "created_at_utc": "2026-09-29T14:56:06.350230+00:00",
+  "git_server_failure": {
+    "actual_exit_code": 1,
+    "failed_attempt_retained": true,
+    "message": "GitHub Internal Server Error",
+    "same_commit_retry_succeeded": true
+  },
+  "mirrored_document_count": 6,
+  "original_git_or_source_data_results_owners_modified": false,
+  "published_checkpoint": "a26d5a2646b35380b8565e211ece6d36278ec3be",
+  "remote_push_verified_at_utc": "2026-09-29T14:54:19.822486+00:00",
+  "resident634_implementation_files_unchanged": true,
+  "schema_version": 1,
+  "selected24_shared_git_admin_files_unchanged": true,
+  "status": "six_published_documents_mirrored_to_original_ide_checkout"
+}
