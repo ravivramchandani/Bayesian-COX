@@ -78,6 +78,9 @@ Follow these steps in order. They are the core of the code.
 | Post-hoc extensions (ADR-039) | `scripts/run_extensions.py` | `src/pipelines/extensions/` | Yes; a separate frozen 1,625-fit grid |
 | Extension verification and figures | `scripts/finalize_extensions.py`, `render_extensions.py` | `src/pipelines/extensions/verification.py`, `analysis.py`, `rq2.py`, `decision_curves.py` | No; reconstructs jobs and uses stored traces/predictions |
 | Catalytic correction preflight (ADR-040) | `scripts/catalytic_correction/run_preflight.py` | `preflight_core.py`, `src/pipelines/extensions/correction_generator.py` | No; training-only proposal/rank accounting before a separate corrected-fit freeze |
+| Original first-draw replay and exact reuse | `scripts/catalytic_correction/run_reuse.py` | `normal_first_draw_child.py`, `reuse_core.py`, `correction_fit_contracts.py` | No; binds all 1,650 original proposals and 1,625 input/model/fit/evaluation witnesses |
+| Changed-input arithmetic accounting | `scripts/catalytic_correction/run_arithmetic.py` | `independent_arithmetic.py`, `bound_arithmetic.py`, `kappa_observation.py` | Original kappa optimization only where required; retains genuine gate failures |
+| Reviewed selective corrected fitting | `scripts/catalytic_correction/fit_controller.py` | `fit_common.py`, `fit_child.py` | Yes; requires five actual execution reviews, a separate freeze and an approved full-budget pilot before remaining fits |
 
 ## Suggested reading order
 

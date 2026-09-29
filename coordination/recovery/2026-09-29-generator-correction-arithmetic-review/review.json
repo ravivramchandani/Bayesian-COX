@@ -1,0 +1,70 @@
+{
+  "actual_scientific_operations_executed": false,
+  "confirmed_boundaries": [
+    "Exact pinned original L-BFGS-B options and catalytic 1e-6 post-kernel guard are delegated unchanged.",
+    "The kappa observer delegates one optimizer and every already-requested kernel call exactly once, with aliases restored in finally; returned jacobian is distinct from the actual original post-kernel gradient.",
+    "Formula mismatches and unrelated optimizer exceptions remain unresolved, rather than becoming original convergence attrition or selecting a new proposal.",
+    "Genuine original guard failures retain base checks and observed predicate evidence; adaptive optimum checks remain explicitly pending for those failures.",
+    "Changed accepted fixed/adaptive contexts require kappa, WME contexts require q/gradient/tau/Breslow checks without optimizer; all unchanged and terminal positions are separately accounted.",
+    "Accepted arrays are byte/dtype/shape bound; serial output publication, complete receipt copies, existing record revalidation and final exact output inventories remain write-once.",
+    "Actual source/input/environment and runner bytes are bound and rechecked; selector/replay receipt semantics are verified before the checker or arithmetic."
+  ],
+  "content_sha256": "64562a7fd3b75b81000c74d3859a8303a2e7c020be6ccf0e0776447b1e82d850",
+  "corrected_fit_freeze_created": false,
+  "limitations": [
+    "This is a source-only review of the stated final bytes, not an actual 1650-input arithmetic run, numerical certificate, method approval, freeze or reuse approval.",
+    "Reviewer read source/test text and hashed only source/review files; no reviewed imports/tests, environment checker, programme data/arrays/traces, generator, SVD/rank, optimizer, fit, MCMC, prediction, score or actual preflight/replay was invoked.",
+    "The root remains sole integration, actual execution and scientific approval owner."
+  ],
+  "original_arithmetic_sha256": "53b38e5d9314fefcfd37260ac95d1bd9400af44f564c2142f7e7d61986f20332",
+  "remaining_material_findings": [],
+  "resolved_findings": [
+    {
+      "finding": "The subprocess environment report originally could certify a different controller interpreter.",
+      "id": "A-01",
+      "resolution": "verify_current_interpreter requires absolute existing requested Python samefile as sys.executable at run entry before source or evidence loading; a mismatch-before-loading test and symlink alias control are present.",
+      "status": "resolved_in_reviewed_source"
+    },
+    {
+      "finding": "Selector self-consistency originally did not prove changed/unchanged constructor identity against actual bound context receipts, and full 825/825 shape checks depended on there being changed inputs.",
+      "id": "A-02",
+      "resolution": "All small preflight/replay receipts are SHA/content/request-bound and checked against actual first/accepted arrays, accepted index and assessment; unconditional production outer/inner counts and complete WME triplets are enforced; substituted original/accepted witnesses and redraw-as-unchanged are tested.",
+      "status": "resolved_in_reviewed_source"
+    },
+    {
+      "finding": "Completed context resume originally checked request/bytes/lineage without required arithmetic/kappa outcome semantics.",
+      "id": "A-03",
+      "resolution": "validate_context_record checks selector category, exact kappa need, complete passed 56 base and 83 checked optimum comparisons, training units, unchanged optimizer options and observed original post-kernel predicate; malformed omitted-kappa/incomplete-optimum/threshold checkpoints are rejected without a new optimizer.",
+      "status": "resolved_in_reviewed_source"
+    },
+    {
+      "finding": "Terminal replay labels originally did not independently require exact saved exception identity or constructor assessment facts.",
+      "id": "A-04",
+      "resolution": "Input and nonrank type/message/status and generator/full-constructor flags are compared; terminal rank first constructor identity/result is required; seven invented terminal substitution cases are present.",
+      "status": "resolved_in_reviewed_source"
+    }
+  ],
+  "reviewed_at_utc": "2026-09-29T07:18:09.848420+00:00",
+  "reviewed_sha256": {
+    "scripts/catalytic_correction/kappa_observation.py": "5b30454b70abd9100e8d80a264a8fa6ea2e9b84fafc7c55838740f846d0c0d29",
+    "scripts/catalytic_correction/run_arithmetic.py": "039c14735c2ec4f03327e19cf06201f9a6bead47bc5afcc55b0375af0cf40345",
+    "tests/test_catalytic_correction_arithmetic_accounting.py": "e3889fa7684f9c3ae9b00b89228ca7d9db1a5c0fba3a01d73eb718418944c5f7",
+    "tests/test_catalytic_kappa_observation.py": "56a1274b1243731ed7482b1e661e570578c3b0b2c00ca9fb2ecf58c0d905618b"
+  },
+  "reviewer_task": "/root/correction_preflight_inventory",
+  "schema_version": 1,
+  "scientific_method_approved": false,
+  "source_root": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project",
+  "status": "bounded_source_only_peer_review_complete",
+  "supporting_sha256": {
+    "scripts/catalytic_correction/bound_arithmetic.py": "edb3d79c9e040da7181984c6074fee42bca3f80e068d725962614070a5453ff5",
+    "scripts/catalytic_correction/independent_arithmetic.py": "49f81724eff2931fd2c051551a85913f45de9e99012b3c1f3d854c94755f3827",
+    "scripts/catalytic_correction/preflight_core.py": "6b03c18a7dc55f896d7c999e0cca676cffb9822132914ce86a90867986a4798c"
+  },
+  "test_owner_report": {
+    "focused_tests_passed": 35,
+    "reported_seconds": 3.34,
+    "reviewer_tests_executed": 0,
+    "source": "root message; not independently rerun by reviewer"
+  }
+}

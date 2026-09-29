@@ -90,6 +90,40 @@ model/fit/evaluation witnesses remain required. Missing original cells wait
 for their current workers. Neither this preflight nor the original release
 receipts certifies corrected fitting, reporting or transfer.
 
+## Independent original replay and exact reuse
+
+`run_reuse.py` first requires a complete, byte-pinned preflight. It launches
+one fresh original-import child per context, fits preprocessing on the full
+raw training frame, calls the original generator once at the original seed,
+and delegates its constructor guard. It independently compares all four
+constructor inputs, complete processor metadata and the original returned
+metadata or its absence. An accepted label or legacy JSON hash alone is
+insufficient. No model, optimizer, prediction or metric is executed.
+
+The same pass binds all 1,625 logical cells: ordered raw and encoded training
+and validation inputs, censored outcomes, preprocessing, models, sampling,
+seeds, evaluation rules and every WME inner dependency. Role receipts retain
+both transparent canonical values. Saved successes and failures require exact
+original cell and trace bytes. Missing or currently owned original outcomes
+remain pending. Later finished-source snapshots are append-only; never edit
+a frozen inventory or replace an original cell.
+
+Use the clean pinned correction checkout and the same exact interpreter:
+
+```bash
+"$LOCK_PYTHON" -B \
+  "$CORRECTION_CODE/scripts/catalytic_correction/run_reuse.py" --help
+```
+
+All source/helper/config/addendum/preflight hashes are explicit CLI inputs.
+Use a new external output directory; the final stdout names the immutable
+`inventories/<digest>/inventory.json` and its byte hash. The result also
+contains `definition.json`, `arithmetic_selector.json` and
+`replay/completion.json`. These files define arithmetic coverage and pilot
+eligibility. The pilot scope includes changed accepted inputs with complete
+role proofs even when an original worker still owns that cell. Its ownership
+barrier remains in force before actual fitting.
+
 ## Changed-input arithmetic
 
 The integrated `independent_arithmetic.py` independently evaluates the
@@ -104,21 +138,64 @@ independent reuse inventory before execution; a successful selected subset
 does not establish complete changed-input coverage. Bayesian fixed and
 adaptive outer inputs both require the original kappa initialization.
 
-Run `compute-kappa` as an explicitly separate stage, then `validate` against
-its byte-pinned receipt. Validation itself cannot optimize. Every invocation
-uses a new destination; inputs, source and supplied witnesses are rechecked
-before its success receipt is published. The CLI exposes the required paths
-and receipt hashes through `--help`:
+`run_arithmetic.py` is the complete accounting entry point. It requires all
+1,650 actual preflight and independent replay receipts, the complete
+1,625-cell inventory and an exact locked controller interpreter. Before
+optimization it verifies selector labels and witnesses against their actual
+receipts and performs independent base formula/gradient/unit checks. Changed
+Bayesian outer inputs then use the untouched original kappa initializer once,
+with its actual success/value/post-score predicate recorded. An original
+guard failure remains a terminal optimizer outcome; adaptive optimum checks
+remain pending for that outcome. A formula mismatch is unresolved and blocks
+the corrected freeze.
+
+The coordinator accounts for unchanged, changed and terminal contexts and
+rechecks completed checkpoint semantics on resume without repeating a solver.
+Its `accounting.json` and every bound artifact are required by the fit gates.
+The lower-level `bound_arithmetic.py` remains available for explicit isolated
+compute/validate calls. The complete coordinator exposes its required inputs:
 
 ```bash
 "$LOCK_PYTHON" -B \
-  "$CORRECTION_CODE/scripts/catalytic_correction/bound_arithmetic.py" --help
+  "$CORRECTION_CODE/scripts/catalytic_correction/run_arithmetic.py" --help
 ```
 
 An arithmetic or original optimizer failure retains partial records and a
 failure receipt. It is not permission to select another proposal or change a
 gate. Account for every affected context explicitly before a corrected freeze;
 these helpers alone certify neither reuse nor production readiness.
+
+## Reviewed corrected fits
+
+`fit_controller.py` accepts `account`, `pilot` and `remaining` phases. It
+requires a separate reviewed correction freeze and manifest, all original
+input bytes, full preflight and arithmetic accounting, and five existing
+byte-pinned reviews: method, arithmetic, input witness, implementation and
+freeze. Each review binds the same acyclic execution definition and immutable
+inventory. Preparation receipts cannot substitute for these reviews.
+
+The prospective pilot uses the largest `n_train * p` matrix in each changed
+input model/setting/gene-budget group, with lexicographic cell-ID ties. It
+does not select by fit success or performance. Pending original ownership
+means wait for the chosen cell. The child delegates unchanged original
+scientific code with accepted byte-verified proposals, four chains, 2,000
+tuning/draw iterations and every original diagnostic remedy and gate. A
+changed WME inner input requires all nine tuning fits; outer-only changes
+can reuse tuning only with complete identity evidence.
+
+```bash
+"$LOCK_PYTHON" -B \
+  "$CORRECTION_CODE/scripts/catalytic_correction/fit_controller.py" \
+  --freeze "$CORRECTED_FREEZE" --freeze-sha256 "$CORRECTED_FREEZE_SHA256" \
+  --manifest "$CORRECTED_MANIFEST" --manifest-sha256 "$CORRECTED_MANIFEST_SHA256" \
+  --python "$LOCK_PYTHON" --output "$CORRECTED_RUN" --phase account
+```
+
+An actual review of all retained pilot outcomes, resources and lineage is
+required for `remaining`. Nonzero child execution preserves logs and blocks
+automatic refitting of an existing attempt. Original optimizer/tuning and
+diagnostic failures remain reportable failures. A controller accounting
+receipt alone does not certify numerical verification, reporting or release.
 
 ## Subsequent stages
 

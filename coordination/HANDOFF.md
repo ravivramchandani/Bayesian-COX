@@ -49,9 +49,11 @@ The real preflight started at 2026-09-29 06:22 UTC from clean detached commit
 PID 81194 uses one low-priority worker and one numerical thread. Its output is
 `/Volumes/BayesCoxExtensions20260928/correction-20260929/preflight_v1`; the
 separate launch receipt is `preflight_v1_launch.json` in its parent directory
-and logs are in the sibling `worker_logs` directory. At 06:34 UTC, 350 of
-1,650 contexts were recorded, all accepting the original first draw in the
-early GBSG2 block. This does not establish METABRIC or whole-grid feasibility.
+and logs are in the sibling `worker_logs` directory. At 07:19 UTC, 1,087 of
+1,650 contexts were recorded: 984 accepted the original first draw and 103
+accepted a rank-conditioned redraw. The largest accepted attempt index was
+68. No terminal outcome had yet been recorded; the completion marker was
+absent. This does not establish whole-grid feasibility.
 The first saved context's artifact bindings and all 259 locked packages were
 checked. Inspect the completion marker and context receipts before advancing;
 do not duplicate or edit this running checkout.
@@ -64,6 +66,24 @@ pending the complete preflight and independently reviewed reuse inventory.
 The full locked suite with these integrated helpers passed 420 tests and
 21 subtests; schemas and Ruff passed. Its separate compact receipt is
 `coordination/recovery/2026-09-29-generator-correction-arithmetic-integration.json`.
+
+The complete first-draw/reuse inventory runner, changed-input arithmetic
+coordinator and selective-fit controller are now integrated. Their focused
+injected tests passed 61, 35 and 37 tests respectively. The reviewed replay
+and fit runtime bytes are retained unchanged alongside their sealed recovery
+archives; test paths are portable. The separate arithmetic source review
+records the resolved interpreter, receipt-binding, coverage and checkpoint
+findings. These are implementation checks. Actual replay, arithmetic, the
+five bound execution reviews, corrected freeze and pilot remain pending.
+Original pending ownership is a launch barrier, never a reason to select a
+smaller pilot. The pilot uses the largest training matrix in each specified
+model/setting/gene-budget group under the unchanged four-chain budget.
+The full locked suite with these integrations passed 553 tests and 57
+subtests; schemas, exact 259-package verification and Ruff passed. All 157
+original source/build/lock bytes are unchanged. Both integration test
+attempts are retained; the first exposed a test-isolation issue, fixed by
+checking tool imports in a fresh process. The compact receipt is
+`coordination/recovery/2026-09-29-generator-correction-execution-integration.json`.
 
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its

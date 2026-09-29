@@ -1,0 +1,225 @@
+{
+  "active_preflight_checkpoint": {
+    "accepted_redraw": 103,
+    "accounted_contexts": 1087,
+    "checked_at_utc": "2026-09-29T07:19:45.473318+00:00",
+    "completion_marker_exists": false,
+    "first_draw": 984,
+    "largest_accepted_attempt_index": 68,
+    "running_code_commit": "cc231a0daed2614a087e9889e5d93556351a7fc2"
+  },
+  "actual_changed_input_arithmetic_complete": false,
+  "actual_corrected_fit_freeze_created": false,
+  "actual_corrected_model_fits": 0,
+  "actual_independent_replay_complete": false,
+  "arithmetic_peer_review_receipt": {
+    "bytes": 1501,
+    "sha256": "bf1c5e4cf5d1df0ee8592873cbff40ec018dcbefac909469ee50ea20b9e589f9"
+  },
+  "base_commit": "5b640560e9ba75db8c4fbbe17a640cb81eafb8b7",
+  "checked_at_utc": "2026-09-29T07:29:52.496692+00:00",
+  "content_sha256": "4bfc554ae6b001bf4305b5eda39be6682c7284d4eaf1e5d4aab6a0728ad413ed",
+  "environment_verification": {
+    "conda_package_count": 237,
+    "direct_import_versions": {
+      "arviz": "0.23.4",
+      "h5py": "3.16.0",
+      "lifelines": "0.30.3",
+      "matplotlib": "3.11.1",
+      "numpy": "2.4.6",
+      "pandas": "2.3.3",
+      "pycox": "0.3.0",
+      "pymc": "5.28.5",
+      "scipy": "1.17.1",
+      "seaborn": "0.13.2",
+      "shap": "0.51.0",
+      "sksurv": "0.28.0",
+      "torch": "2.13.0",
+      "torchtuples": "0.2.2",
+      "yaml": "6.0.3"
+    },
+    "hdf5": {
+      "h5py": "3.16.0",
+      "hdf5_built": "2.1.0",
+      "hdf5_runtime": "2.1.0"
+    },
+    "lock_sha256": "1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57",
+    "package_count": 259,
+    "pip_package_count": 22,
+    "platform": {
+      "machine": "arm64",
+      "macos": "26.6",
+      "system": "Darwin"
+    },
+    "python": "3.11.15",
+    "status": "ok",
+    "verified_conda_packages": 237,
+    "verified_pip_packages": 22
+  },
+  "focused_injected_tests": {
+    "arithmetic_accounting_and_observation": 35,
+    "fit_runner": 37,
+    "reuse_and_contracts": 61
+  },
+  "full_locked_test": {
+    "actual_invocation": {
+      "argv": [
+        "/usr/bin/nice",
+        "-n",
+        "15",
+        "make",
+        "test",
+        "PYTHON=/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python"
+      ],
+      "cwd": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project",
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-29T07:26:07.339626+00:00",
+      "source_files": 193,
+      "source_hashes_unchanged": true,
+      "started_at_utc": "2026-09-29T07:22:44.161717+00:00",
+      "test_environment": {
+        "BAYES_COX_ORIGINAL_SOURCE": "/Users/macuser/bayes-cox-runs/extensions-code-20260928-119476f",
+        "MKL_NUM_THREADS": "1",
+        "NUMEXPR_NUM_THREADS": "1",
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "PYTEST_ADDOPTS": "-rs",
+        "VECLIB_MAXIMUM_THREADS": "1"
+      },
+      "wall_seconds": 203.17441591699026
+    },
+    "passed": 553,
+    "skipped": 0,
+    "source_files_unchanged": 193,
+    "subtests_passed": 57,
+    "wall_seconds": 203.17441591699026
+  },
+  "implemented": [
+    "independent_original_first_draw_and_full_reuse_inventory",
+    "complete_changed_input_arithmetic_accounting",
+    "serial_full_budget_selective_corrected_fit_controller"
+  ],
+  "integration_adaptations": [
+    "tests use repository-relative helper paths",
+    "fit import isolation tested in a fresh process",
+    "one import-order lint exception preserves the exact shared reuse-core dependency bytes"
+  ],
+  "numerical_results_certified": false,
+  "original_source_build_and_lock_bytes": {
+    "all_unchanged": true,
+    "checked": 157,
+    "reference_receipt": {
+      "bytes": 16609,
+      "sha256": "3849ab7498cfce430c290ba17555d886be33c70c5d4f4d6153796d96a85963b1"
+    }
+  },
+  "pending": [
+    "complete1650_preflight",
+    "complete_independent_original_replay_and1625_input_inventory",
+    "actual_changed_input_arithmetic",
+    "five_actual_execution_reviews_and_corrected_freeze",
+    "full_budget_pilot_and_review",
+    "necessary_selective_corrected_fits",
+    "mixed_lineage_deep_verification_and_selected_reproduction",
+    "dependent_analyses_and_actual_visual_qa",
+    "private_release_and_fresh_remote_restore"
+  ],
+  "preserved_preparation_archives": {
+    "2026-09-29-generator-correction-fit-runner.tar.gz": {
+      "bytes": 50359,
+      "sha256": "54264522ff602aad0bfead842152d1f21f09ad3974d30d02a37d4a3ef0bd69fd"
+    },
+    "2026-09-29-generator-correction-reuse-runner.tar.gz": {
+      "bytes": 47855,
+      "sha256": "e4aa1033f96c708745b5d28522e82de6513ed552ca096f268013e9beef722de9"
+    }
+  },
+  "release_certified": false,
+  "reporting_certified": false,
+  "retained_earlier_test_attempt": {
+    "failed_test": "test_no_project_src_loaded_by_synthetic_suite",
+    "passed": 543,
+    "path": "correction_execution_integration_validation_v1",
+    "reason": "global module assertion collided with other suite imports; nine source-bound candidate cases lacked the explicitly supplied original-source environment variable",
+    "resolution": "fresh isolated tool-import check and explicit sealed original source for the final complete suite",
+    "skipped": 9,
+    "status": "one_integration_test_failure",
+    "subtests_passed": 52
+  },
+  "schema_version": 1,
+  "scientific_method_approved": false,
+  "sources": {
+    "ruff.toml": {
+      "bytes": 273,
+      "sha256": "876cbdcefa7bf699916e10b963b3349152b359c6eac059d66de760c2bc98686c"
+    },
+    "scripts/catalytic_correction/correction_fit_contracts.py": {
+      "bytes": 22845,
+      "sha256": "83cb84002cd9dc447f70d9346baaba16197fa04d5a43e8b2fb500c2ce38f7fef"
+    },
+    "scripts/catalytic_correction/fit_child.py": {
+      "bytes": 36632,
+      "sha256": "8ec459f949d7edb18bb587b42eab5baa823fa606075b086c8a5b2475256b2935"
+    },
+    "scripts/catalytic_correction/fit_common.py": {
+      "bytes": 30288,
+      "sha256": "b17f378ba77ea3ae5ba25c836e963a1a0160556465b25745462f648e325d1f11"
+    },
+    "scripts/catalytic_correction/fit_controller.py": {
+      "bytes": 24921,
+      "sha256": "1fdeecc9d437bae930414bc84094da01f21140e6db86e09193cf47a395f1a038"
+    },
+    "scripts/catalytic_correction/fit_interface_contract.json": {
+      "bytes": 11279,
+      "sha256": "67850b9228cb55d775d1ab48ebba733938b00d47527aa9f236f4f7fe4fd5e78b"
+    },
+    "scripts/catalytic_correction/kappa_observation.py": {
+      "bytes": 5446,
+      "sha256": "5b30454b70abd9100e8d80a264a8fa6ea2e9b84fafc7c55838740f846d0c0d29"
+    },
+    "scripts/catalytic_correction/normal_first_draw_child.py": {
+      "bytes": 9107,
+      "sha256": "ba3c82fde4dace859ff677c04c5335bb78824e3928f7c6f238667351a460d674"
+    },
+    "scripts/catalytic_correction/reuse_core.py": {
+      "bytes": 55686,
+      "sha256": "db558bee7973677305cc9f6e6062bb753e3dbe7daba3f5e08b80b657f115ac84"
+    },
+    "scripts/catalytic_correction/run_arithmetic.py": {
+      "bytes": 40376,
+      "sha256": "039c14735c2ec4f03327e19cf06201f9a6bead47bc5afcc55b0375af0cf40345"
+    },
+    "scripts/catalytic_correction/run_reuse.py": {
+      "bytes": 28622,
+      "sha256": "d20526cb4a90bc2c6b0f17463db85df156d693221cf962be44624571b8ee1c84"
+    },
+    "tests/test_catalytic_correction_arithmetic_accounting.py": {
+      "bytes": 22443,
+      "sha256": "e3889fa7684f9c3ae9b00b89228ca7d9db1a5c0fba3a01d73eb718418944c5f7"
+    },
+    "tests/test_catalytic_correction_fit_contracts.py": {
+      "bytes": 15343,
+      "sha256": "5f42da7717c4452bf261b487913c5246e01e46215bb713657faedf3f8ebe9ec4"
+    },
+    "tests/test_catalytic_correction_fit_runner.py": {
+      "bytes": 38859,
+      "sha256": "6bfdcc77c58293b9e98a8c7a9134e5909d5ff6be945ad8bc05e27df9e7421596"
+    },
+    "tests/test_catalytic_correction_reuse.py": {
+      "bytes": 40885,
+      "sha256": "f514cb0b747af0f964d9f818ac1c0cbb9acd95c93548f13a881cd9bd3a85b113"
+    },
+    "tests/test_catalytic_kappa_observation.py": {
+      "bytes": 4839,
+      "sha256": "56a1274b1243731ed7482b1e661e570578c3b0b2c00ca9fb2ecf58c0d905618b"
+    }
+  },
+  "status": "integrated_implementation_verified",
+  "validation_archive": {
+    "all_members_byte_verified": true,
+    "bytes": 22096,
+    "path": "coordination/recovery/2026-09-29-generator-correction-execution-validation.tar.gz",
+    "regular_members": 27,
+    "sha256": "29f68a01f72bafa9a57d7a1ffa9079206fe88e513fc5f60374f19f10d4717015"
+  }
+}

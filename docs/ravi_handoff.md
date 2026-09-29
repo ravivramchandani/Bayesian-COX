@@ -17,14 +17,25 @@ The tested candidate and real training-preflight runner are now implemented
 and pushed at `cc231a0`; see
 [correction execution](catalytic_correction_execution.md). The actual
 1,650-context audit is running on the owner's Mac using one low-priority
-worker. At 2026-09-29 06:34 UTC, 350 early GBSG2 contexts had accepted their
-original first draw; the METABRIC assessment and complete reuse/refit
-verification remain pending before any corrected numerical freeze. Do not
+worker. At 2026-09-29 07:19 UTC, 1,087 contexts were accounted for: 984
+accepted their original draw and 103 accepted a rank-conditioned redraw.
+No terminal outcome had yet been recorded and the full completion marker
+was absent. The whole-grid assessment and complete reuse/refit verification
+remain pending before any corrected numerical freeze. Do not
 start a duplicate audit. The recovery archives preserve the original
 candidate, recipe inventory, runner and selective-fit-contract preparation
 receipts, plus the independently reviewed arithmetic preparation. They do
 not contain completed corrected fits or a completed
 extension release.
+
+The next-stage replay, arithmetic-accounting and selective-fit scripts are
+also integrated with focused injected tests and separate source reviews.
+The full locked integration suite passed 553 tests and 57 subtests; exact
+environment, schema and lint checks passed.
+These scripts require actual complete input evidence and the reviewed
+corrected freeze before fitting. A Git checkout alone does not supply the
+pending numerical results. Ravi should use the final private release and
+its verified restore instructions once those gates are complete.
 
 This guide describes the handoff for an Apple Silicon Mac. The authoritative
 task state is in [HANDOFF](../coordination/HANDOFF.md) and

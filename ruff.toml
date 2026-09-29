@@ -1,0 +1,6 @@
+# Preserve the byte-pinned replay bridge shared by independently reviewed tools.
+# Its dependency imports are injected under explicit, checked module aliases.
+extend = "pyproject.toml"
+
+[lint.extend-per-file-ignores]
+"scripts/catalytic_correction/reuse_core.py" = ["I001"]

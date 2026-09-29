@@ -557,10 +557,19 @@ reporting replay remains a separate pre-publication gate.
   selection are specified in the correction addendum/config. Full locked
   repository testing passed 391 tests/21 subtests, schemas and Ruff. Actual
   whole-block preflight is active from pinned, pushed commit `cc231a0`;
-  at 2026-09-29 06:34 UTC it had recorded 350/1,650 early GBSG2 contexts,
-  all accepting their original first draw. This is not whole-grid feasibility.
+  at 2026-09-29 07:19 UTC it had recorded 1,087/1,650 contexts: 984 first
+  draws and 103 accepted redraws, with no terminal outcome yet. The complete
+  preflight marker was absent; this is not whole-grid feasibility.
   Independent arithmetic helpers are integrated with 29 passing synthetic
   tests; the resulting full locked suite passed 420 tests and 21 subtests.
+  The complete replay/reuse builder, arithmetic accounting coordinator and
+  selective-fit runner are integrated; their focused injected suites passed
+  61/35/37 tests. The runtime bridges preserve reviewed preparation bytes;
+  source reviews and tests do not approve actual scientific evidence.
+  The complete locked integration suite passed 553 tests/57 subtests, exact
+  259-package verification, schemas and Ruff; all 157 original source/build/
+  lock bytes remain unchanged. Both test attempts are preserved in the dated
+  execution-validation recovery archive and compact integration receipt.
   Complete-input replay/reuse inventory, actual changed-input
   arithmetic, corrected numerical freeze/pilot/fits and downstream transfer
   remain pending. See `docs/catalytic_correction_execution.md`.

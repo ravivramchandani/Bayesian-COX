@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "scope": "pending_selective_corrected_fit_interface_not_actual_review_or_freeze",
+  "actual_freeze_created": false,
+  "actual_fits_dispatched": 0,
+  "original_production_commit": "119476fef55b1eeb690527f234c1423440720d45",
+  "original_manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+  "original_manifest_content_sha256": "4577c615486ee871d508837aa812f59539b59338c63834716453a8b03ea394a3",
+  "dependency_pins": {
+    "contracts": "83cb84002cd9dc447f70d9346baaba16197fa04d5a43e8b2fb500c2ce38f7fef",
+    "preflight_core": "6b03c18a7dc55f896d7c999e0cca676cffb9822132914ce86a90867986a4798c",
+    "reuse_core": "db558bee7973677305cc9f6e6062bb753e3dbe7daba3f5e08b80b657f115ac84"
+  },
+  "controller_cli": {
+    "required": ["freeze", "freeze-sha256", "manifest", "manifest-sha256", "output", "python", "phase"],
+    "phase_choices": ["account", "pilot", "remaining"],
+    "optional": ["limit", "pilot-review", "pilot-review-sha256", "resolution-review", "resolution-review-sha256"]
+  },
+  "actual_process_runtime_guard": {
+    "timing": "both entrypoints before checker subprocesses or scientific imports",
+    "current_interpreter": "requested locked Python must samefile(sys.executable)",
+    "numeric_thread_environment": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1"},
+    "full_lock_check": "fresh original259checker report separately required and byte-bound before actual cohort access"
+  },
+  "freeze": {
+    "status": "reviewed_corrected_fit_freeze",
+    "required_fields": ["status", "original_production_commit", "original_manifest_sha256", "definition_content_sha256", "input_inventory_sha256", "preflight_completion_sha256", "preflight_manifest_sha256", "implementation_source_sha256", "dependency_source_sha256", "paths", "arithmetic_accounting", "review_bindings", "execution", "content_sha256"],
+    "implementation_source_names": ["fit_common.py", "fit_child.py", "fit_controller.py"],
+    "dependency_names": ["contracts", "preflight_core", "reuse_core"],
+    "explicit_path_roles": ["source", "original_run", "matched", "preflight", "contracts", "preflight_core", "reuse_core", "witness_root", "inventory"],
+    "arithmetic_accounting_fields": ["path", "sha256"],
+    "review_roles": ["method", "arithmetic", "input_witness", "implementation", "freeze"],
+    "review_binding_fields": ["path", "sha256"],
+    "review_receipt_fields": ["status", "role", "definition_content_sha256", "input_inventory_sha256", "execution_definition_sha256", "content_sha256"],
+    "review_status": "reviewed_for_corrected_fit_execution",
+    "execution": {
+      "fit_workers": 1,
+      "numeric_threads": 1,
+      "original_full_budget": true,
+      "pilot_rule": "each(model,setting,gene_budget):max(n_train*p),then_lexicographic_original_cell_id",
+      "pilot_eligibility": "changed_accepted_training_inputs_complete_role_and_arithmetic_accounting;original_owner_is_launch_barrier_only",
+      "original_resolution_policy": "fresh_reviewed_finished_source_snapshot"
+    },
+    "execution_definition_digest": "fit_common.execution_definition(freeze); code,input,preflight,policy,arithmetic SHA only; excludes review hashes and freeze hash"
+  },
+  "manifest": {
+    "status": "corrected_fit_manifest_frozen",
+    "required_fields": ["status", "freeze_sha256", "definition_content_sha256", "input_inventory_sha256", "pilot_cells", "content_sha256"],
+    "copy_policy": "preserve exact source bytes to output/manifest.json; refuse conflicting destination"
+  },
+  "inventory": {
+    "scheduled_cells": 1625,
+    "required_fields": ["definition_content_sha256", "preflight_completion_sha256", "scheduled_cells", "entries", "selection_scope", "content_sha256"],
+    "entry_fields_consumed": ["original_cell_id", "model", "input_witness_path", "input_witness_sha256", "snapshot_path", "snapshot_sha256"],
+    "selection_scope_fields": ["original_cell_id", "model", "setting", "gene_budget", "n_train", "p"],
+    "pilot_scope_interpretation": "changed accepted training inputs with complete exact role proofs and requested arithmetic accounting; original-owner availability does not alter frozen selection",
+    "input_witness_fields": ["definition_content_sha256", "fit_witness", "proof_artifacts", "content_sha256"],
+    "fit_witness_fields": ["original_cell_id", "model", "correction_specification_sha256", "original_seeds", "corrected_seeds", "roles", "generator_contexts", "original_evidence"],
+    "comparison_fields": ["original_sha256", "corrected_sha256", "proof_receipt_sha256", "basis"],
+    "required_role_counts": {"common": 19, "fixed_or_adaptive": 21, "wme": 42},
+    "proof_policy": "actual proof_receipt_sha256 for every complete role must bind sealed actual proof_artifact bytes, exact cell/definition/role/basis identity and canonical original/corrected value digests; supplied digests alone never suffice"
+  },
+  "path_conventions": {
+    "inventory_entry_paths": "relative to freeze.paths.witness_root",
+    "input_witness": "cells/<original_cell_id>/input_witness.json",
+    "role_proofs": "cells/<original_cell_id>/roles/<role>.json",
+    "input_proof_and_snapshot_artifacts": "relative to cells/<original_cell_id> (input_witness parent)",
+    "standalone_original_verification": "cells/<original_cell_id>/source_snapshots/<digest>.json",
+    "snapshot": "cells/<original_cell_id>/snapshots/<digest>.json",
+    "original_trace_keys": "run-relative traces/<original_cell_id>/<filename>",
+    "accepted_preflight": "contexts/<original_cell_id>/<outer|inner_01..03>/receipt.json",
+    "raw_corrected_cell": "attempts/<original_cell_id>/cells/<original_cell_id>.json",
+    "corrected_outcome_envelope": "cells/<original_cell_id>.json"
+  },
+  "snapshot": {
+    "required_fields": ["original_cell_id", "input_witness_sha256", "definition_content_sha256", "source_evidence", "original_claim_active", "decision", "artifacts", "content_sha256"],
+    "source_verification_policy": "SourceEvidence.verification_receipt_sha256 binds a standalone actual source check, never the containing snapshot; current cell/content/referenced/orphan hashes and no active original claim independently rechecked",
+    "tuning_record_sha256": "canonical SHA of {selected_parameters: exact recorded object, inner_tuning: exact recorded object}; absent unless both actually recorded"
+  },
+  "later_resolution_review": {
+    "status": "original_finished_snapshots_reviewed",
+    "required_fields": ["status", "definition_content_sha256", "input_inventory_sha256", "snapshots", "content_sha256"],
+    "snapshot_binding_fields": ["snapshot_path", "snapshot_sha256"],
+    "policy": "same immutable input witness/definition/inventory; fresh write-once original-outcome acquisition only, not a changed scientific input or selection scope"
+  },
+  "arithmetic_accounting": {
+    "status": "all_scheduled_arithmetic_outcomes_accounted",
+    "required_fields": ["status", "preflight_completion_sha256", "context_outcomes", "artifacts", "proposals_selected_by_optimizer", "extra_proposals_generated", "content_sha256"],
+    "context_count": 1650,
+    "row_fields": ["context_id", "preflight_status", "preflight_receipt_sha256", "status", "formula_checks", "kappa_required", "original_kappa_status", "evidence_sha256"],
+    "allowed_statuses": ["arithmetic_verified", "unchanged_inputs_independently_witnessed", "original_kappa_gate_failed", "preflight_exhausted_rank_cap", "preflight_nonrank_failure", "preflight_input_failure"],
+    "unchanged_first_draw": {"formula_checks": "not_required", "kappa_required": false, "original_kappa_status": "not_required", "required_extra": "independent_replay_receipt_sha256 bound to actual artifact; accepted_original_first_draw only"},
+    "changed_kappa_failure": {"formula_checks": "passed", "original_kappa_status": "original_gate_failed", "required_extra": "optimizer_predicate_evidence_sha256 bound to actual result/options/postopt predicate artifact; adaptive_status pending_original_kappa_gate_failure for adaptive outer; no full adaptive optimum claim"},
+    "nonaccepted_input": {"formula_checks": "not_applicable", "kappa_required": false, "original_kappa_status": "not_applicable"},
+    "blocked": ["formula mismatch", "missing requested check", "missing actual optimizer/predicate failure telemetry", "different proposal chosen after optimizer failure"]
+  },
+  "reuse_execution_bridge": {
+    "name": "verify_execution_inputs",
+    "required_kwargs": ["job", "raw", "runner", "fitting", "primary", "manifest", "input_witness", "preflight_contexts", "core", "contracts", "witness_directory", "input_witness_sha256", "environment_verification"],
+    "private_injected_modules": ["_reuse_bound_core", "_reuse_bound_contracts"],
+    "returned_fields": ["status", "input_witness_sha256", "generator_training_contexts", "receipt"],
+    "status": "current_complete_inputs_match_corrected_witness",
+    "environment": "actual fresh pinned original259checker report equal to preflight environment role; supplemental observed direct versions/Python/samefile fields separate",
+    "scope": "reconstruct inputs/proofs only; no generator, model construction, optimizer or scoring"
+  },
+  "outcome_envelope": {
+    "operations": ["reuse_original_outcome", "fit_corrected_inputs", "retain_corrected_input_failure"],
+    "required_fields": ["original_cell_id", "corrected_manifest_sha256", "correction_freeze_sha256", "definition_content_sha256", "input_witness_path", "input_witness_sha256", "source_evidence", "decision", "generator_contexts", "original_seed_namespace", "operation", "scientific_status", "fit_dispatched", "newly_executed_fit", "artifacts", "content_sha256"],
+    "new_fit_fields": ["corrected_cell", "child_receipt_path", "invocation_path", "observations_path", "fit_seconds", "child_wall_seconds", "child_exit_code"],
+    "reuse_fields": ["original_reference", "fit_seconds"],
+    "input_failure_fields": ["failure_contexts", "original_outcome_pending", "fit_seconds"],
+    "pending_origin_input_failure_closeout": "retain honest immutable source_evidence null/pending marker; full verifier must independently bind later finished original source/status/traces in a fresh source snapshot and its certificate; absence blocks full closeout",
+    "verification_flags": {"programme_complete": false, "reporting_certified": false, "release_certified": false}
+  },
+  "pilot_review": {
+    "status": "full_budget_pilot_reviewed",
+    "required_fields": ["status", "corrected_manifest_sha256", "approve_remaining_selective_fits", "original_full_budget_retained", "all_failures_retained_and_reviewed", "pilot_outcomes", "content_sha256"],
+    "outcome_binding": "exactly every frozen pilot ID -> actual corrected-envelope {sha256,bytes}; all new fit invocations/artifacts rechecked; failures retained and review allowed, not diagnostic-clean-only"
+  },
+  "pending_gates": ["actual complete preflight/replay/witness/arithmetic accounting", "root scientific/implementation/input/freeze reviews", "actual separate correction freeze and manifest", "actual owner-finished source snapshots", "full-budget pilot and review", "mixed-lineage numerical verification", "reporting/reproduction/package/restore adapters"]
+}
