@@ -1189,3 +1189,32 @@ production has no stored cells. Candidate refits remain 66 and official
 receipts remain zero. The original numerical workers and coordinators continue.
 Compact receipt:
 `coordination/recovery/2026-09-28-extension-bundle-v2-preparation-verification.json`.
+
+
+## 2026-09-29 — Correction freeze, verification and reproduction integration
+
+Integrated exact reviewed runtime bytes for freeze assembly, pre-fit
+continuation, mixed deep verification and selected three-route reproduction.
+ADR-041 specifies original92 union input-selected pilots before corrected
+scores. Source reviews fixed current-inventory/definition/selector arithmetic
+provenance and distinguished actual external pre-stage numerical production
+from the later official cached comparison. Missing producer evidence stays
+pending. Terminal pending-source decisions retain their immutable envelope
+and separately reviewed later acquisition without a second recipe execution.
+
+Portable test adapters use exact historical Git blobs and a text copy of the
+actual external producer helper; no original source, input, gate, worker or
+live continuation was edited. Full locked make test passed 727 tests and 57
+subtests, with no skips. Exact 259 environment, schemas, Ruff and diff checks
+passed; all 157 original source/build/lock bytes remain unchanged. Both failed
+fixture/capture attempts and the successful validation are preserved in the
+48-member integration-validation archive. The compact record is
+`coordination/recovery/2026-09-29-generator-correction-verification-reproduction-integration.json`.
+
+At 08:36 UTC the actual preflight had 1,536/1,650 contexts: 1,291 first draws and 245
+accepted redraws, max accepted index 87, no terminal outcome or completion
+marker. Original production had 1,090/1,625 outcomes (898 complete, 168 execution
+failures, 24 diagnostic failures). Detached continuation waits for preflight
+completion before actual replay and arithmetic. No corrected fit freeze,
+score, selected reproduction, mixed result, QA or private restore is certified
+by this implementation validation. Receiving/reporting adapters remain pending.

@@ -545,6 +545,9 @@ reporting replay remains a separate pre-publication gate.
   - original failures, optimizer/tuning and MCMC outcomes remain separately
     accounted for; corrected and reused evidence has explicit lineage and
     independently verified reproduction/metrics/diagnostics;
+  - ADR-041's fixed original-92/pilot union and actual scope review are frozen
+    before corrected scores; new refits, inherited original numerical
+    reproduction and terminal no-fit recipe replay remain distinct;
   - affected inference/RQ2/DCA and reporting are regenerated, actually visually
     reviewed, privately released and freshly restored/replayed; Ravi receives
     the exact original/corrected boundaries and remaining tasks.
@@ -557,8 +560,8 @@ reporting replay remains a separate pre-publication gate.
   selection are specified in the correction addendum/config. Full locked
   repository testing passed 391 tests/21 subtests, schemas and Ruff. Actual
   whole-block preflight is active from pinned, pushed commit `cc231a0`;
-  at 2026-09-29 07:19 UTC it had recorded 1,087/1,650 contexts: 984 first
-  draws and 103 accepted redraws, with no terminal outcome yet. The complete
+  at 2026-09-29 08:36 UTC it had recorded 1,536/1,650 contexts: 1,291 first
+  draws and 245 accepted redraws, with no terminal outcome yet. The complete
   preflight marker was absent; this is not whole-grid feasibility.
   Independent arithmetic helpers are integrated with 29 passing synthetic
   tests; the resulting full locked suite passed 420 tests and 21 subtests.
@@ -570,6 +573,13 @@ reporting replay remains a separate pre-publication gate.
   259-package verification, schemas and Ruff; all 157 original source/build/
   lock bytes remain unchanged. Both test attempts are preserved in the dated
   execution-validation recovery archive and compact integration receipt.
+  The reviewed freeze builder, serial continuation, mixed deep verifier and
+  selected reproduction controller are also integrated with exact runtime
+  bytes and portable tests. The full locked suite passed 727 tests/57
+  subtests with no skips; exact environment, schemas and Ruff passed, and
+  all 157 original source/build/lock files remain unchanged. The dated
+  verification/reproduction integration receipt retains failed validation
+  attempts. Actual science and completion are not certified by these checks.
   Complete-input replay/reuse inventory, actual changed-input
   arithmetic, corrected numerical freeze/pilot/fits and downstream transfer
   remain pending. See `docs/catalytic_correction_execution.md`.

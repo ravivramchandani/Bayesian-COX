@@ -49,10 +49,10 @@ The real preflight started at 2026-09-29 06:22 UTC from clean detached commit
 PID 81194 uses one low-priority worker and one numerical thread. Its output is
 `/Volumes/BayesCoxExtensions20260928/correction-20260929/preflight_v1`; the
 separate launch receipt is `preflight_v1_launch.json` in its parent directory
-and logs are in the sibling `worker_logs` directory. At 07:19 UTC, 1,087 of
-1,650 contexts were recorded: 984 accepted the original first draw and 103
+and logs are in the sibling `worker_logs` directory. At 08:36 UTC, 1,536 of
+1,650 contexts were recorded: 1,291 accepted the original first draw and 245
 accepted a rank-conditioned redraw. The largest accepted attempt index was
-68. No terminal outcome had yet been recorded; the completion marker was
+87. No terminal outcome had yet been recorded; the completion marker was
 absent. This does not establish whole-grid feasibility.
 The first saved context's artifact bindings and all 259 locked packages were
 checked. Inspect the completion marker and context receipts before advancing;
@@ -85,6 +85,43 @@ attempts are retained; the first exposed a test-isolation issue, fixed by
 checking tool imports in a fresh process. The compact receipt is
 `coordination/recovery/2026-09-29-generator-correction-execution-integration.json`.
 
+A single detached pre-fit continuation was launched at 2026-09-29 07:48 UTC,
+PID 97059. It waits for PID 81194 to exit and requires complete, byte-bound
+preflight evidence with no remaining live claims. It then runs the actual
+independent first-draw/reuse pass and complete changed-input arithmetic,
+serially, from clean detached pushed commit `d332013`. It stops before the
+five execution reviews, corrected freeze or pilot. Do not duplicate it.
+Its code is `scripts/catalytic_correction/continue_prefit.py`; the live
+external helper is separately pinned and must not be edited. The APFS parent
+contains `continuation_v1_request.json`, `continuation_v1_launch.json`,
+`continuation_v1/` and sibling `worker_logs/continuation_v1.*` logs. Failure
+or an incomplete upstream stage is retained and stops advancement.
+Source-only peer review and 12 injected guards passed; neither constitutes
+actual completed replay or arithmetic.
+
+ADR-041 prospectively fixes selected reproduction to the sorted union of
+the original 92 repeat-one/fold-one identities and input-selected pilots.
+Freeze the actual selection and its supplied scope review before any
+corrected score. Original numerical receipts may wait for their existing
+owner; byte agreement does not substitute for actual producer/refit proof.
+
+The reviewed freeze builder, serial pre-fit continuation, mixed deep verifier
+and selected reproduction controller are integrated with unchanged sealed
+runtime bytes. Freeze and verification require the current inventory,
+definition, selector and complete 1,650-context arithmetic binding. Selected
+reproduction checks the actual external pre-stage numerical producer separately
+from the later official cached comparison, retaining unavailable provenance as
+pending. A terminal pending-source envelope may acquire a separately reviewed
+finished-source snapshot without mutation or a second generator replay.
+The full locked suite passed 727 tests and 57 subtests with no skips; exact
+259-package environment, schemas and Ruff passed. All 157 original source/
+build/lock bytes remain unchanged. Validation history retains the earlier
+fixture-isolation failure and capture-path failures. Its compact record is
+`coordination/recovery/2026-09-29-generator-correction-verification-reproduction-integration.json`.
+These are implementation checks; actual correction evidence and completion
+remain pending. Correction-aware reporting/QA and receiving transfer adapters
+are being prepared separately before use.
+
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its
 failed outcomes too. Refresh dependent analyses/QA and verify a fresh remote
@@ -92,11 +129,11 @@ restore before declaring the corrected handoff complete. The original
 clinical/robustness/sampler releases and unaffected comparators need no
 restart. Do not promise a total completion time from the earlier short profile.
 
-At 2026-09-29 06:01 UTC the original run had 1,083 recorded outcomes:
-894 complete, 167 execution failures and 22 diagnostic failures. All six
+At 2026-09-29 08:36 UTC the original run had 1,090 recorded outcomes:
+898 complete, 168 execution failures and 24 diagnostic failures. All six
 production workers and the remaining pre-stage worker were active. Original
-completion/final-analysis markers were absent. Internal free space was
-35.56 GiB; the mounted APFS transfer image had 199.68 GiB free. These dated
+completion/final-analysis markers were absent. At 08:00 UTC, internal free
+space was about 35 GiB and the mounted APFS image had 199 GiB free. These dated
 counts are a checkpoint, not a live progress claim. New preflight evidence
 uses that APFS image with one low-priority worker; current original
 outputs and workers remain in place.

@@ -1,4 +1,4 @@
-# Current evidence status — 2026-09-28
+# Current evidence status — 2026-09-29
 
 The protocol and `claim_evidence_register.md` are preserved study-definition
 records. This dated status note records subsequent evidence without changing
@@ -69,6 +69,19 @@ See [extension execution](extensions_execution.md) and the active state in
 earlier ADR-032/ADR-033 chronology and changes no permitted primary or
 explanation claim. No first-evaluation or external-preregistration claim is
 established.
+
+ADR-040 separately specifies a rank-conditioned generator sensitivity after
+the original failures were observed. Its real 1,650-context training-only
+preflight is active; whole-grid feasibility, exact reuse/refit scope and
+changed-input arithmetic are not yet complete. It changes no original cell
+or acceptance gate. Tested preparation tools and source reviews do not
+certify corrected numerical results. A distinct actual evidence freeze and
+full-budget pilot precede corrected fitting. ADR-041 fixes selected
+reproduction to the original 92 identities plus the input-selected pilots,
+before corrected scores. Full mixed-grid verification, actual selected
+reproduction, revised analyses, visual QA and fresh private restoration are
+still required. The baseline releases above remain verified; the original
+extension and its correction are separate pending evidence programmes.
 
 The authoritative production evidence is
 `confirmatory_v1_confirmatory_cdcdcee84651`, with completion content hash

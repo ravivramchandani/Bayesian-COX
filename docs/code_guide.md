@@ -81,6 +81,10 @@ Follow these steps in order. They are the core of the code.
 | Original first-draw replay and exact reuse | `scripts/catalytic_correction/run_reuse.py` | `normal_first_draw_child.py`, `reuse_core.py`, `correction_fit_contracts.py` | No; binds all 1,650 original proposals and 1,625 input/model/fit/evaluation witnesses |
 | Changed-input arithmetic accounting | `scripts/catalytic_correction/run_arithmetic.py` | `independent_arithmetic.py`, `bound_arithmetic.py`, `kappa_observation.py` | Original kappa optimization only where required; retains genuine gate failures |
 | Reviewed selective corrected fitting | `scripts/catalytic_correction/fit_controller.py` | `fit_common.py`, `fit_child.py` | Yes; requires five actual execution reviews, a separate freeze and an approved full-budget pilot before remaining fits |
+| Serial pre-fit continuation | `scripts/catalytic_correction/continue_prefit.py` | Explicit pinned request, `run_reuse.py`, `run_arithmetic.py` | No; waits for complete preflight, prepares actual evidence and stops before reviews/freeze/pilot |
+| Corrected freeze assembly | `scripts/catalytic_correction/build_freeze.py` | Complete existing input/arithmetic evidence and five supplied actual reviews | No; emits an unapproved proposal first and never creates its own reviews |
+| Selected corrected reproduction (ADR-041) | `scripts/catalytic_correction/reproduction/run_reproduction.py` | Frozen original-92/pilot union, actual producer proofs, `terminal_replay_child.py` and exact original comparators | Fresh full-budget fits for changed accepted inputs; inherited original refits and terminal no-fit recipe replay remain separate |
+| Mixed correction verification | `scripts/catalytic_correction/verification/verify_mixed_extensions.py` | Complete input/trace/child lineage, pinned original diagnostic/scoring/reducer functions | No; independently verifies 1,625 outcomes and produces its own mixed certificate |
 
 ## Suggested reading order
 

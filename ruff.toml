@@ -4,3 +4,6 @@ extend = "pyproject.toml"
 
 [lint.extend-per-file-ignores]
 "scripts/catalytic_correction/reuse_core.py" = ["I001"]
+# This byte-pinned callback is invoked synchronously within each context's
+# replay_recipe call and never escapes the loop iteration.
+"scripts/catalytic_correction/reproduction/terminal_replay_child.py" = ["B023"]

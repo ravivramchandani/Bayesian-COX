@@ -17,8 +17,8 @@ The tested candidate and real training-preflight runner are now implemented
 and pushed at `cc231a0`; see
 [correction execution](catalytic_correction_execution.md). The actual
 1,650-context audit is running on the owner's Mac using one low-priority
-worker. At 2026-09-29 07:19 UTC, 1,087 contexts were accounted for: 984
-accepted their original draw and 103 accepted a rank-conditioned redraw.
+worker. At 2026-09-29 08:36 UTC, 1,536 contexts were accounted for: 1,291
+accepted their original draw and 245 accepted a rank-conditioned redraw.
 No terminal outcome had yet been recorded and the full completion marker
 was absent. The whole-grid assessment and complete reuse/refit verification
 remain pending before any corrected numerical freeze. Do not
@@ -36,6 +36,26 @@ These scripts require actual complete input evidence and the reviewed
 corrected freeze before fitting. A Git checkout alone does not supply the
 pending numerical results. Ravi should use the final private release and
 its verified restore instructions once those gates are complete.
+
+One detached continuation on the owner's Mac waits for the full preflight,
+then runs the independent original replay/reuse inventory and changed-input
+arithmetic serially. It stops before the actual reviews, corrected freeze
+and full-budget pilot. Inspect its launch receipt and logs in the current
+HANDOFF; do not start overlapping work on another laptop. ADR-041 fixes
+selected correction reproduction before corrected scores to the original
+92 identities plus input-selected pilots. It distinguishes fresh corrected
+refits, inherited original numerical reproduction and terminal no-fit recipe
+replay. Those actual evidence checks and the corrected release remain pending.
+
+The reviewed freeze builder, mixed deep verifier and selected reproduction
+controller are integrated too. The latest full locked suite passed 727 tests
+and 57 subtests with no skips; exact environment, schema and lint checks
+passed, and all 157 original source/build/lock files are unchanged. The
+[dated integration record](../coordination/recovery/2026-09-29-generator-correction-verification-reproduction-integration.json)
+contains the checks and preserved validation history. These checks do not
+supply corrected numerical outcomes or a completed handoff. Correction-aware
+reporting, actual figure review and fresh receiving verification remain
+required before the corrected private release is complete.
 
 This guide describes the handoff for an Apple Silicon Mac. The authoritative
 task state is in [HANDOFF](../coordination/HANDOFF.md) and

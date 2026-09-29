@@ -1,0 +1,161 @@
+{
+  "actual_invocation": {
+    "all_five_numeric_thread_environment_variables": "1",
+    "deep_verification_cli": "verify_mixed_extensions.py",
+    "fresh_replay_metadata_outside_restored_inputs": true,
+    "initial_capture_cli": "capture_verification.py",
+    "initial_partial_attempt_auto_resume": false,
+    "real_process_rc0_must_be_captured": true,
+    "render_cli": "render_verified_mix.py",
+    "replay_mode_flags": [
+      "--verify-existing",
+      "--replay-prefix"
+    ],
+    "write_once_exclusive_atomic_publication": true
+  },
+  "analysis": {
+    "additional_reducers": [
+      "existing_rq2_effects",
+      "existing_decision_curves"
+    ],
+    "adr032_substituted_horseshoe_arm_distinct": true,
+    "dca_original_horseshoe_arm": "bayesian_horseshoe_original",
+    "formal_family_cardinalities": [
+      27,
+      3,
+      27,
+      13
+    ],
+    "new_estimand_or_gate_or_multiplicity_family": false,
+    "primary_negative_incomplete_findings_separate": true
+  },
+  "analysis_commit": "8551d326b02bfe88915cfd9eb50c6ca8e5690e3a",
+  "arithmetic_provenance": {
+    "accounting_fields": [
+      "input_inventory_sha256",
+      "definition_content_sha256",
+      "selector_sha256",
+      "scheduled_contexts"
+    ],
+    "exact_ordered_context_and_receipt_bindings": true,
+    "original_numerical_predicates_unchanged": true,
+    "selector_byte_sha256_from_inventory_field": "arithmetic_selector_sha256",
+    "selector_created_before_inventory_and_has_no_inventory_digest": true,
+    "selector_logical_path": "witness_root/arithmetic_selector.json",
+    "selector_provenance_fields": [
+      "definition_content_sha256",
+      "preflight_completion_sha256",
+      "replay_completion_sha256",
+      "scheduled_contexts"
+    ]
+  },
+  "completion": {
+    "original855_certificate_inherited": false,
+    "pending_gates": [
+      "corrected_rendering_and_visual_qa",
+      "corrected_selected_reproduction",
+      "corrected_reporting_sidecar_and_final_claim_review",
+      "corrected_private_package_fresh_restore_replay"
+    ],
+    "programme_complete": false,
+    "scientific_method_approval_conferred_by_verifier": false,
+    "status": "mixed_original_corrected_grid_deep_verified_and_frozen_analysis_recomputed"
+  },
+  "content_sha256": "fab3874fbac4198ab2587fb82ab785dc62d92bc85bf9e4dca895b1a0501706b2",
+  "evidence_boundary": {
+    "actual_cohorts_or_arrays_or_source_traces_read_by_preparation": false,
+    "actual_generator_svd_optimizer_fitting_mcmc_or_render_invoked_by_preparation": false,
+    "actual_scoring_or_reducers_or_diagnostics_invoked_by_preparation": false,
+    "method_freeze_reuse_or_scientific_completion_approval": false
+  },
+  "input_bindings": {
+    "content_digest_field": "content_sha256",
+    "files": [
+      "arithmetic_accounting",
+      "definition",
+      "freeze",
+      "inventory",
+      "manifest"
+    ],
+    "files_entry_fields": [
+      "path",
+      "sha256"
+    ],
+    "optional_file_bindings": [
+      "resolution_review",
+      "pilot_review"
+    ],
+    "preparation_receipt_binding_field": "verification_preparation_receipt_sha256",
+    "review_paths": [
+      "arithmetic",
+      "freeze",
+      "implementation",
+      "input_witness",
+      "method"
+    ],
+    "roots": [
+      "analysis",
+      "candidate_module",
+      "context_inventory",
+      "contracts",
+      "corrected_run",
+      "correction_addendum",
+      "correction_config",
+      "fit_code",
+      "matched",
+      "original_run",
+      "preflight",
+      "preflight_code",
+      "primary",
+      "production",
+      "reuse_code",
+      "robustness",
+      "sampler",
+      "witness_root"
+    ],
+    "schema_version": 1
+  },
+  "operations": [
+    "reuse_original_outcome",
+    "fit_corrected_inputs",
+    "retain_corrected_input_failure"
+  ],
+  "original_production_commit": "119476fef55b1eeb690527f234c1423440720d45",
+  "output_namespace": {
+    "compatible_science_cell_content_digest_field": "cell_content_sha256",
+    "exact_inventory_required": true,
+    "fixed_files": [
+      "invocation.json",
+      "environment.stdout.json",
+      "environment.stderr.log",
+      "environment_invocation.json",
+      "manifest.json",
+      "completion.json",
+      "reference_verification.json",
+      "comparison_accounting.json",
+      "render_input.json",
+      "aggregates/paired_families.json",
+      "aggregates/rq2_effects.json",
+      "aggregates/decision_curves.json"
+    ],
+    "only_new_corrected_fit_cells": [
+      "checks/corrected/<original_cell_id>.json"
+    ],
+    "own_document_content_digest_field": "content_sha256",
+    "per_all_logical_cells": [
+      "cells/<original_cell_id>.json",
+      "lineage/<original_cell_id>.json",
+      "checks/original/<original_cell_id>.json"
+    ]
+  },
+  "preparation_version": 2,
+  "preserved_v1_preparation_receipt_sha256": "7bd0cc43317ace9438b46c321f3f2b498f04241763231fd086c5154c3d45b534",
+  "required_generator_contexts": {
+    "outer": 825,
+    "total": 1650,
+    "wme_inner": 825
+  },
+  "required_logical_cells": 1625,
+  "schema_version": 1,
+  "status": "prospective_mixed_verification_interface_not_executed_on_real_evidence"
+}

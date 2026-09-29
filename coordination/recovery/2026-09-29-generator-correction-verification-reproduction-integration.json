@@ -1,0 +1,180 @@
+{
+  "actual_replay_arithmetic_five_reviews_fit_freeze_pilots_fits_reproduction_mixed_results_QA_release_restore_or_thesis_completion_certified": false,
+  "base_commit": "d33201349fa6ad08227b38404cdd404723b172a6",
+  "checks": {
+    "diff": {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.03004158299881965
+    },
+    "exact_environment": {
+      "argv": [
+        "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+        "scripts/verify_environment.py",
+        "--lock-file",
+        "conda-lock.yml",
+        "--hash-file",
+        "conda-lock.yml.sha256"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 12.011068040999817
+    },
+    "full_locked_make_test": {
+      "invocation": {
+        "argv": [
+          "nice",
+          "-n",
+          "15",
+          "make",
+          "test",
+          "PYTHON=/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python"
+        ],
+        "cwd": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project",
+        "exit_code": 0,
+        "finished_at_utc": "2026-09-29T08:38:48.356259+00:00",
+        "numeric_thread_environment": {
+          "MKL_NUM_THREADS": "1",
+          "NUMEXPR_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        },
+        "source_bytes_unchanged": true,
+        "source_differences": [],
+        "source_files": 215,
+        "started_at_utc": "2026-09-29T08:35:11.038533+00:00",
+        "wall_seconds": 217.31706220799242
+      },
+      "passed": 727,
+      "skipped": 0,
+      "subtests_passed": 57
+    },
+    "original_source_preservation": {
+      "all_bytes_unchanged": true,
+      "changed": [],
+      "files": 157,
+      "reference": "/Users/macuser/bayes-cox-runs/extensions-20260928/transfer_validation_v5_extension_documentation/tested_source.json",
+      "reference_sha256": "3849ab7498cfce430c290ba17555d886be33c70c5d4f4d6153796d96a85963b1"
+    },
+    "ruff": {
+      "argv": [
+        "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "."
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.12368124999920838
+    },
+    "schemas": {
+      "argv": [
+        "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+        "tests/test_coordination_schemas.py"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.04768991700257175
+    }
+  },
+  "content_sha256": "bea97ab2494c465fdc7b6797c8fa6495a609583bb245e038faecdf99720fed2e",
+  "dated_live_checkpoint": {
+    "continuation_prepared_exists": false,
+    "observation_started_at_utc": "2026-09-29T08:36:50.204181+00:00",
+    "observed_at_utc": "2026-09-29T08:36:55.658315+00:00",
+    "original": {
+      "completion_exists": false,
+      "outcome_counts": {
+        "complete": 898,
+        "failed": 168,
+        "failed_diagnostics": 24
+      },
+      "scheduled_cells": 1625,
+      "stored_cells": 1090
+    },
+    "preflight": {
+      "accounted_contexts": 1536,
+      "completion_exists": false,
+      "controller_claim_exists": true,
+      "max_accepted_attempt_index": 87,
+      "outcome_counts": {
+        "accepted_original_first_draw": 1291,
+        "accepted_rank_conditioned_redraw": 245
+      },
+      "scheduled_contexts": 1650
+    },
+    "status": "dated_metadata_checkpoint_not_a_scientific_approval"
+  },
+  "historical_producer_text_fixture": {
+    "bytes": 4416,
+    "sha256": "1b5e63aa380f707bed3e9497584070c32e2d2a1eff5b5e47272aa189b6a07b5f"
+  },
+  "live_original_preflight_and_continuation_not_mutated": true,
+  "portable_test_source": {
+    "bytes": 59751,
+    "sha256": "1f396218c95ecd4caa0d2e3b5689ee2051df1957f70641e2e592422a5117cdbf"
+  },
+  "preparation_receipts": {
+    "freeze_builder_v2": "0f928ef2765efc1263916591f60dde67e8d3b6dbe24e9916d429d2a1ff84e79c",
+    "reproduction_v1": "43f2dba209a4d068df7122a3be956d295f7810601272b271fa996ad5a27aa95b",
+    "verification_v2": "5efe4d332cb6c89b8e75daeb4b7aaa883dbd42b180511d92092bb176bd5e1536"
+  },
+  "recovery_archives": {
+    "coordination/recovery/2026-09-29-generator-correction-continuation.tar.gz": {
+      "bytes": 11544,
+      "sha256": "bdb6364df0b6724abf1be244cf89399652af7dbe5c40a9ca2b9890619fa23213"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-freeze-builder-v2.tar.gz": {
+      "bytes": 51837,
+      "sha256": "78047e26130620b927964abd33d932d49e6cf24b03ea5a881bb8df00d45064dd"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-freeze-builder.tar.gz": {
+      "bytes": 22160,
+      "sha256": "9f86ea395ccff0afe14f802c394f55a72508967ee89353d8b01640aab72d3ec1"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-reproduction.tar.gz": {
+      "bytes": 49280,
+      "sha256": "eee6cedb041b55ade79a29f3fca09246cf91b42370b100dfb8ef2ef4020240a8"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-verification-integration-validation.tar.gz": {
+      "bytes": 29511,
+      "sha256": "5e068bb44687360b99ad24d017b37a6add96a1a58fb3bbca869e103edda74c7f"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-verification-v2.tar.gz": {
+      "bytes": 97654,
+      "sha256": "5f1a3089d92c9e58605130d158e711a523ead942997d9f4ad40e5e9cf69853c0"
+    },
+    "coordination/recovery/2026-09-29-generator-correction-verification.tar.gz": {
+      "bytes": 72304,
+      "sha256": "77c44409b470cbd99c6525d845a4374a2608bb133bb04cdb68a6a17421a24ced"
+    }
+  },
+  "runtime_source_sha256": {
+    "scripts/catalytic_correction/build_freeze.py": "dcef11d5c82037e6cda9b252ddc70bcf7b431f1c389b0867960b12c48bbeff3e",
+    "scripts/catalytic_correction/continue_prefit.py": "4bd349a85748a257cc48944b87eaa41aa336784e056183d7fe2652ad845419c2",
+    "scripts/catalytic_correction/reproduction/reproduction_core.py": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5",
+    "scripts/catalytic_correction/reproduction/run_reproduction.py": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c",
+    "scripts/catalytic_correction/reproduction/terminal_replay_child.py": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61",
+    "scripts/catalytic_correction/verification/bound_lineage.py": "fdf19ced03836f7b138591c6a98743fdb7a449a5043e41948c4451bcf78aa5d6",
+    "scripts/catalytic_correction/verification/capture_verification.py": "2331916a66ccd11aebfc9f5e9ac7d19eea8c47950ca0ac64e6946721356831ed",
+    "scripts/catalytic_correction/verification/frozen_backend.py": "ef7fae7fb2b964dde6a42f673a9b2896103b8e0664b06faabd551300777c9f7f",
+    "scripts/catalytic_correction/verification/mixed_analysis.py": "21b68ca05b595cc66ad914c484de73690c1c0cd6435b7f05d8401c26a3160b61",
+    "scripts/catalytic_correction/verification/mixed_lineage.py": "27fabfd82a4c5b78804858d7388189ae9790fd67c7c6bb56fab7b8715ec66234",
+    "scripts/catalytic_correction/verification/render_verified_mix.py": "a166ded834ec7feefcf105303724c6d649147e3e6062a76fed3f71bed6022332",
+    "scripts/catalytic_correction/verification/science_verification.py": "bcfba312b2b9ca5f6ef2cdb1d7c7b068b33ae79791f15b926b4ca04f92acce07",
+    "scripts/catalytic_correction/verification/verification_gates.py": "b6100e97a70139b0c68f30cc10b88ea79c2a5b4478bfa6132d8115082b8df5ae",
+    "scripts/catalytic_correction/verification/verification_io.py": "389c09c0b4f151adf754d20b3c21b2cdd0fa6809bcc4cd78dda470739d2ea3b8",
+    "scripts/catalytic_correction/verification/verify_mixed_extensions.py": "ee9c5060f95cca9a4ccee9aa6d186b4a0fd49c0167cc0f8c26ab70bc67864a21"
+  },
+  "schema_version": 1,
+  "status": "reviewed_source_and_locked_tests_correction_continuation_freeze_verification_reproduction_integration",
+  "validation_archive": {
+    "bytes": 29511,
+    "sha256": "5e068bb44687360b99ad24d017b37a6add96a1a58fb3bbca869e103edda74c7f"
+  },
+  "validation_regular_members": 48,
+  "verified_at_utc": "2026-09-29T08:40:12.862079+00:00"
+}

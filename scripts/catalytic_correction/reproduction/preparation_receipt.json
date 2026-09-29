@@ -1,0 +1,233 @@
+{
+  "actual_runtime_required": "samefile locked interpreter, all5 numeric vars1, exact259 environment recheck, actual correction freeze/manifest and source/input/witness/review/ownership gates",
+  "artifact_count_excluding_receipt": 46,
+  "artifacts": {
+    "README.md": {
+      "bytes": 14303,
+      "sha256": "8d82407d76287070ade237e4b277488e5a10adfc0365e8d147655e573e93ebc6"
+    },
+    "interface_contract.json": {
+      "bytes": 9001,
+      "sha256": "5f3d42ec05e9093edca8511ebb04dc53c49af505641f0f4b411e2940d0b672ba"
+    },
+    "peer_review_log.json": {
+      "bytes": 1928,
+      "sha256": "60c5f572e544b4f259895fc933f74259cd6f5304dcb1b858f4832a44a3b06e84"
+    },
+    "pyproject.toml": {
+      "bytes": 304,
+      "sha256": "782074206eadd09aef16ff07ba2215e151fb5289333d50d1194ad1f1d185cccc"
+    },
+    "reproduction_core.py": {
+      "bytes": 30615,
+      "sha256": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5"
+    },
+    "ruff_attempt1.invocation.json": {
+      "bytes": 426,
+      "sha256": "652ed06197461e8064fe852f72266f8ad28087bdc390320c1325ea4e1145c272"
+    },
+    "ruff_attempt1.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ruff_attempt1.stdout.txt": {
+      "bytes": 1001,
+      "sha256": "ad39382d00c72276e280925f4eff7c00410cb9f479ba9e296adf3a00cd04e1f5"
+    },
+    "ruff_attempt2.invocation.json": {
+      "bytes": 393,
+      "sha256": "61047bccce631848127a9ee2a1399eecd3be294d88a15e85a65df8a662c04ad6"
+    },
+    "ruff_attempt2.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ruff_attempt2.stdout.txt": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "ruff_attempt3.invocation.json": {
+      "bytes": 1812,
+      "sha256": "e11aea14230e2c9953da052ad80e47d6480bf8e17c03406c763e4c742085b3b8"
+    },
+    "ruff_attempt3.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ruff_attempt3.stdout.txt": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "ruff_attempt4.invocation.json": {
+      "bytes": 1812,
+      "sha256": "bbe32226d7b751cc7d9a9c94a53b469374764c28bffa0b103388cd3a0064b0cf"
+    },
+    "ruff_attempt4.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ruff_attempt4.stdout.txt": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "ruff_attempt5.invocation.json": {
+      "bytes": 1812,
+      "sha256": "7744b740f44d4dbdfa7bcdb8375c679fea35570f651b4455b2952d15d9d25529"
+    },
+    "ruff_attempt5.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ruff_attempt5.stdout.txt": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "ruff_final.invocation.json": {
+      "bytes": 2161,
+      "sha256": "378305aa03472745dbe5887b22b717ba1faae65913af1673ca217c8ac28cdf8c"
+    },
+    "ruff_final.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ruff_final.stdout.txt": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "run_reproduction.py": {
+      "bytes": 36376,
+      "sha256": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c"
+    },
+    "syntax_checks.json": {
+      "bytes": 796,
+      "sha256": "7d79aed5665a058d9c6a23ad22e60ae0605393c9fcb25d7d4989e7373043ac1c"
+    },
+    "syntax_checks_final.json": {
+      "bytes": 796,
+      "sha256": "0066c62973727b31ff15fc4c3bfb04275f22a231ee1e3248e3bddd55a03321db"
+    },
+    "terminal_replay_child.py": {
+      "bytes": 19483,
+      "sha256": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+    },
+    "test_reproduction.py": {
+      "bytes": 51282,
+      "sha256": "516282c3b79a500fa1d1f3bd692f9a9021c321be2ac36d7bd7269e856e9a7bac"
+    },
+    "tests_attempt1.invocation.json": {
+      "bytes": 431,
+      "sha256": "db1ac390b8861d63315c059bc1f1c6e7030346fd7e965a5324a883b22c769ea7"
+    },
+    "tests_attempt1.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_attempt1.stdout.txt": {
+      "bytes": 99,
+      "sha256": "e3155dfd579e6119540fc52e4dc8046a52c14c500fc2dda4260bc5f174209d19"
+    },
+    "tests_attempt2.invocation.json": {
+      "bytes": 397,
+      "sha256": "09ca59d39ab5b26492fe8df555d0193f8671c73aff779b2a9f8fb639af1c76b8"
+    },
+    "tests_attempt2.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_attempt2.stdout.txt": {
+      "bytes": 6339,
+      "sha256": "bda3198118a6f5cfa0363a765be1ec9a802f8c81cfb8b3b00dad043bff468dd1"
+    },
+    "tests_attempt3.invocation.json": {
+      "bytes": 1816,
+      "sha256": "cd1c7c300f839fd96e0ac8923f68580354e713ab0507525bb4df994182aea96d"
+    },
+    "tests_attempt3.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_attempt3.stdout.txt": {
+      "bytes": 99,
+      "sha256": "5eddbe1395d7e037c8c42ea89ff7735e0998d141a8448616936abbed667812cc"
+    },
+    "tests_attempt4.invocation.json": {
+      "bytes": 1816,
+      "sha256": "30fdafffca0c729a8b5e56e51a1a1e0c596c84a7bc5202355a6ef285e4c208c2"
+    },
+    "tests_attempt4.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_attempt4.stdout.txt": {
+      "bytes": 179,
+      "sha256": "bed1ee2ff6e4d63b8fec96c5691860a0c6f63e65fa363f987ae0d598f6ebf241"
+    },
+    "tests_attempt5.invocation.json": {
+      "bytes": 1816,
+      "sha256": "fcc8baf48bad22ed7dce74bfe56c3a24638c11363679b20cc8febe672389e1f1"
+    },
+    "tests_attempt5.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_attempt5.stdout.txt": {
+      "bytes": 179,
+      "sha256": "6fcefcbd478d7e3c009de44b354c773d645a39b7dac6aa0f92f4f9148d815e26"
+    },
+    "tests_final.invocation.json": {
+      "bytes": 2166,
+      "sha256": "3b4b195f35a77f379eed8d9e82cc34c1e1eb704948df99bce9e3af97953c5946"
+    },
+    "tests_final.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tests_final.stdout.txt": {
+      "bytes": 179,
+      "sha256": "4c17bd70a3051c44aab8d659cb145841564ec172519ecf82afb332686f5bab02"
+    }
+  },
+  "checks": {
+    "bounded_source_only_peer_request_terminal_review": "clean",
+    "invented_injected_tests": 88,
+    "pure_syntax_and_contract_json": "passed",
+    "ruff": "passed",
+    "tests": "passed"
+  },
+  "content_sha256": "14f9f0fece4b21bde59f93bb0388dda4ea91cfff5902d9b5537fdc3806ae2745",
+  "fit_reuse_numerical_reproduction_method_freeze_release_or_thesis_complete_certified": false,
+  "implementation_source_sha256": {
+    "reproduction_core.py": "fa43d4c75f231a59f12adb73b312627744b6c40dd0a97c002016ed4cba597cb5",
+    "run_reproduction.py": "86eed8bd3af2f5ddab9b1bf354e7251518cfb64932da778d05d63a937209829c",
+    "terminal_replay_child.py": "830e866d38eb65f9742cb9e7e48212f532ee1d1bfd9eeb7791ca89dbe3dacc61"
+  },
+  "pending_scientific_gates": [
+    "root integration and implementation review",
+    "actual prospectively frozen selected scope and correction freeze/manifest",
+    "actual original numerical producer/source/environment/input/refit/comparison evidence; pending members remain pending",
+    "actual corrected selected full-budget numerical reproduction or scoped terminal no-fit recipe replay",
+    "actual numerical comparisons and subsequent mixed verification/analysis/reporting/package/restore gates"
+  ],
+  "production_counts": {
+    "complete_generator_preflight": 1650,
+    "original_logical_grid": 1625,
+    "original_selected": 92
+  },
+  "prospective_scope": "sorted unique original92 union actual frozen input-selected full-budget pilots; independent root scope review before corrected scores required",
+  "root_is_sole_integration_review_freeze_and_actual_execution_owner": true,
+  "schema_version": 1,
+  "scientific_execution": {
+    "actual_reproduction_run": false,
+    "optimizers_models_fits_mcmc_predictions_or_scores_run": false,
+    "original_workers_or_support_mutated": false,
+    "real_cohorts_or_arrays_read": false,
+    "real_context_reconstruction": false,
+    "real_environment_checker_run": false,
+    "real_generators_or_svd_run": false,
+    "real_posterior_trace_arrays_read": false,
+    "repo_or_sealed_sources_mutated": false
+  },
+  "sealed_at_utc": "2026-09-29T08:25:57.976786+00:00",
+  "status": "selected_correction_reproduction_implementation_preparation_sealed",
+  "test_source_sha256": "516282c3b79a500fa1d1f3bd692f9a9021c321be2ac36d7bd7269e856e9a7bac"
+}

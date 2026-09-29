@@ -165,6 +165,27 @@ failure receipt. It is not permission to select another proposal or change a
 gate. Account for every affected context explicitly before a corrected freeze;
 these helpers alone certify neither reuse nor production readiness.
 
+## Assemble the reviewed freeze
+
+`build_freeze.py` reads the complete preflight, independent replay, exact
+reuse/refit inventory, transparent role proofs and actual arithmetic account.
+It verifies the current inventory/definition/selector hashes and all 1,650
+selector receipt bindings. The selector describes input requirements; it
+does not itself approve or certify arithmetic. The builder's preparation
+receipt is preserved in
+`coordination/recovery/2026-09-29-generator-correction-freeze-builder-v2.tar.gz`.
+
+The first operation emits an unapproved execution proposal. Finalization
+requires five existing root reviews bound to its exact acyclic execution
+digest; it cannot write those approvals. Both operations use a new exclusive
+output directory and recheck every input. Consult the supplied schema and
+explicit paths rather than inferring a freeze from a successful source test.
+
+```bash
+"$LOCK_PYTHON" -B \
+  "$CORRECTION_CODE/scripts/catalytic_correction/build_freeze.py" --help
+```
+
 ## Reviewed corrected fits
 
 `fit_controller.py` accepts `account`, `pilot` and `remaining` phases. It
@@ -196,6 +217,81 @@ required for `remaining`. Nonzero child execution preserves logs and blocks
 automatic refitting of an existing attempt. Original optimizer/tuning and
 diagnostic failures remain reportable failures. A controller accounting
 receipt alone does not certify numerical verification, reporting or release.
+
+## Pre-fit continuation
+
+`continue_prefit.py` accepts an explicit byte-pinned request and a clean
+execution checkout. It waits for the specified same-host preflight process
+to exit, verifies its actual command identity, then requires all 1,650
+context outcomes and removal of live controller/launcher claims. It executes
+`run_reuse.py` and `run_arithmetic.py` serially with the same exact locked
+interpreter and five numeric-thread variables set to one. Each actual
+invocation, return code and raw log is retained. A nonzero or incomplete
+stage stops advancement; it does not retry a failed numerical operation.
+
+The continuation's final pre-fit receipt means actual replay/reuse and
+arithmetic evidence is prepared. It creates no scientific review, corrected
+freeze, pilot or fit. Only one continuation owns an output attempt. Inspect
+the live launch/request/log bindings in HANDOFF before starting any process.
+
+## Prospective corrected reproduction
+
+ADR-041 fixes the selected scope before corrected scores: the sorted unique
+union of the original plan's 92 repeat-one/fold-one cells and all
+input-selected full-budget pilot cells. A separate supplied scope review
+and immutable code/input/selection bindings precede execution.
+
+`reproduction/run_reproduction.py` requires the separately reviewed actual
+selection, correction freeze and fit manifest. Its sealed preparation,
+88 injected guards and original validation attempts are preserved in
+`coordination/recovery/2026-09-29-generator-correction-reproduction.tar.gz`;
+a further fresh-process import check is integrated into the repository suite.
+Run the controller from a clean pinned checkout with explicit paths:
+
+```bash
+"$LOCK_PYTHON" -I -B \
+  "$CORRECTION_CODE/scripts/catalytic_correction/reproduction/run_reproduction.py" --help
+```
+
+The active original refit producer is the separately pinned external
+`prestage_refits.py`, which delegates original119 scientific code. Its actual
+new-refit log/owner/environment/input/return-code proof and the later actual
+official cached comparison are separately required. Do not infer missing
+historical producer evidence from a saved cell or comparison receipt.
+Later source or numerical-evidence acquisition uses reviewed append-only
+resolution records and never changes the frozen selection or prior proof.
+The execution/resume controller is not a read-only receiving checker; a
+separate path-mapped receiving adapter must preserve restored evidence.
+
+Changed accepted inputs require fresh full-budget refits with the identical
+corrected freeze, seeds and gates. Unchanged reused outcomes require actual
+original numerical-refit receipts and reviewed producer/source/environment/
+input evidence; their actual scientific contents and posterior/sample-statistic
+arrays are compared again. Missing evidence remains pending. Terminal input
+outcomes receive independent replay of the applicable complete outer/inner
+rank-only generator recipe and are labelled no-fit recipe reproduction.
+These routes are separately accounted for. No byte audit becomes a numerical
+refit, and the selected union does not claim an all-grid numerical rerun.
+
+## Mixed verification and reporting
+
+`verification/verify_mixed_extensions.py` requires all 1,625 original and
+resolved corrected outcomes and the actual reviewed freeze. It independently
+reconstructs all input roles, checks generation-use/tuning/seed/child lineage,
+recomputes stored posterior/prior diagnostics and rescores complete forecasts.
+Referenced traces, failed partial traces and orphan files remain accounted
+for. It delegates the unchanged four-family, RQ2 and decision-curve reducers
+to the pinned original scientific source and preserves baseline findings.
+
+The verifier has its own mixed-lineage certificate. It does not inherit the
+original extension certificate. `capture_verification.py` binds actual return
+code zero, raw logs and completion before `render_verified_mix.py` can render.
+Rendering leaves actual visual QA, selected reproduction, the reporting
+sidecar and fresh private restoration pending. The exact tested runtime and
+source-only reviews are preserved in
+`coordination/recovery/2026-09-29-generator-correction-verification-v2.tar.gz`.
+Restored input locations use explicit path bindings; immutable historical
+paths and recorded bytes are preserved.
 
 ## Subsequent stages
 

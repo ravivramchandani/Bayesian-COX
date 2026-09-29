@@ -982,3 +982,43 @@ Format:
   implementation does not replace the complete-input, arithmetic and distinct
   corrected numerical-freeze gates.
   Method source: [Li and Huang (2026), Section 5.1](https://academic.oup.com/biometrics/article/82/1/ujag004/8455879).
+
+## ADR-041 — Freeze selected correction reproduction before corrected scores
+
+- Status: ACCEPTED for the prospective scope; actual reproduction remains pending
+- Date: 2026-09-29
+- Context: ADR-040 requires independently verified correction reproduction.
+  The original extension plan specifies 92 repeat-one/fold-one cells. The
+  correction also selects full-budget pilots from training-input dimensions.
+  No corrected fitting or outer-validation score has yet been executed.
+- Decision:
+  - Select the sorted unique union of the original plan's fixed 92 identities
+    and every input-selected corrected pilot identity. Supply a separate
+    sealed scope review, code/input bindings and immutable selection before
+    any corrected score. Neither fit success nor model performance changes
+    the selection. Original ownership delays execution, not selection.
+  - For changed accepted inputs, execute a fresh refit with the same corrected
+    freeze, input witnesses, seeds, full sampling budget, remedies and gates.
+    Compare scientific cell contents and actual posterior/sample-statistic
+    arrays using the pinned original reproduction rules. Retain every failed
+    attempt, trace, log and comparison failure.
+  - For unchanged reused outcomes, require the actual original numerical
+    reproduction and reviewed producer/source/environment/input evidence.
+    Reapply scientific-content and sampled-array comparisons to those actual
+    source/refit files. Report inherited original numerical reproduction;
+    byte agreement alone does not establish that a refit occurred.
+  - For terminal corrected input outcomes, independently replay the complete
+    applicable outer/inner generator recipe under normal full-raw training
+    preprocessing, the exact rank-only retry rule and cap. Report no-fit
+    recipe reproduction separately from numerical model reproduction.
+    Retain historically unavailable constructor evidence as unavailable.
+  - Missing original numerical evidence may remain explicitly pending in the
+    prospective selection. Resolve it only through separately reviewed,
+    append-only evidence without changing identities or known bindings.
+    No tool generates its own scope or scientific approval.
+- Consequences: This check covers the declared selected union, not an
+  all-grid numerical rerun. Deep input, diagnostic, metric and lineage
+  verification still covers the complete 1,625-cell mixed grid. Actual
+  selected reproduction, visual QA and fresh private release restoration
+  remain separate completion gates. ADR-040's generation, pilot and
+  acceptance rules are unchanged; no running specification is rewritten.
