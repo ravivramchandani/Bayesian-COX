@@ -5,7 +5,7 @@ See [extension execution](extensions_execution.md) for its frozen settings,
 complete fit grid and verification gates. The released baseline below stays
 unchanged; extension results are not yet remotely complete.
 
-The generator correction is being prepared separately under ADR-040/T-190.
+The generator correction is proceeding separately under ADR-040/T-190.
 The original extension run continues. Corrected fits have not started; their
 scope and reusable results require training-input preflight and exact
 compatibility checks first. Read the current HANDOFF/TODO before launching
@@ -13,10 +13,14 @@ anything on another Mac. A later correction keeps the original failed records
 and has its own specification, results and verified transfer; the original
 release receipts do not certify it.
 
-The tested candidate and real training-preflight runner are now implemented;
-see [correction execution](catalytic_correction_execution.md). The actual
-1,650-context audit and complete reuse/refit verification still precede any
-corrected numerical freeze. The recovery archives preserve the original
+The tested candidate and real training-preflight runner are now implemented
+and pushed at `cc231a0`; see
+[correction execution](catalytic_correction_execution.md). The actual
+1,650-context audit is running on the owner's Mac using one low-priority
+worker. At 2026-09-29 06:34 UTC, 350 early GBSG2 contexts had accepted their
+original first draw; the METABRIC assessment and complete reuse/refit
+verification remain pending before any corrected numerical freeze. Do not
+start a duplicate audit. The recovery archives preserve the original
 candidate, recipe inventory, runner and selective-fit-contract preparation
 receipts, plus the independently reviewed arithmetic preparation. They do
 not contain completed corrected fits or a completed

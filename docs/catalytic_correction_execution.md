@@ -90,6 +90,36 @@ model/fit/evaluation witnesses remain required. Missing original cells wait
 for their current workers. Neither this preflight nor the original release
 receipts certifies corrected fitting, reporting or transfer.
 
+## Changed-input arithmetic
+
+The integrated `independent_arithmetic.py` independently evaluates the
+catalytic kernel and analytic score, fixed/adaptive prior expressions and
+weighted Breslow objective/score. Its reference loader compiles only the
+byte-pinned original function definitions. It does not import a model,
+construct prior data, generate proposals or compute rank.
+
+`bound_arithmetic.py` requires a complete 1,650-context preflight and an
+explicit, byte-pinned selector. The selector must be reconciled with the
+independent reuse inventory before execution; a successful selected subset
+does not establish complete changed-input coverage. Bayesian fixed and
+adaptive outer inputs both require the original kappa initialization.
+
+Run `compute-kappa` as an explicitly separate stage, then `validate` against
+its byte-pinned receipt. Validation itself cannot optimize. Every invocation
+uses a new destination; inputs, source and supplied witnesses are rechecked
+before its success receipt is published. The CLI exposes the required paths
+and receipt hashes through `--help`:
+
+```bash
+"$LOCK_PYTHON" -B \
+  "$CORRECTION_CODE/scripts/catalytic_correction/bound_arithmetic.py" --help
+```
+
+An arithmetic or original optimizer failure retains partial records and a
+failure receipt. It is not permission to select another proposal or change a
+gate. Account for every affected context explicitly before a corrected freeze;
+these helpers alone certify neither reuse nor production readiness.
+
 ## Subsequent stages
 
 1. Independently verify original first proposals and enumerate exact reuse,

@@ -9,8 +9,8 @@ Updated: 2026-09-29
 ADR-040/T-190 records corrective work after the observed synthetic-rank
 failures. The original numerical programme continues from its sealed code;
 no corrected numerical run has started. Do not alter current workers,
-their inputs or saved cells. The immediate step is training-only generator
-preflight across all 825 catalytic jobs and every WME inner split, followed
+their inputs or saved cells. Training-only generator preflight is running
+across all 825 catalytic jobs and every WME inner split, followed
 by exact first-proposal/input compatibility and a justified reuse/refit
 inventory. Original accepted and failed outcomes are both retained when
 complete inputs/model/fit/evaluation identity is proved.
@@ -44,6 +44,27 @@ implementation/preparation evidence, not actual preflight results or a
 corrected fit freeze. See
 [execution instructions](../docs/catalytic_correction_execution.md).
 
+The real preflight started at 2026-09-29 06:22 UTC from clean detached commit
+`cc231a0daed2614a087e9889e5d93556351a7fc2`, which is pushed and remote-verified.
+PID 81194 uses one low-priority worker and one numerical thread. Its output is
+`/Volumes/BayesCoxExtensions20260928/correction-20260929/preflight_v1`; the
+separate launch receipt is `preflight_v1_launch.json` in its parent directory
+and logs are in the sibling `worker_logs` directory. At 06:34 UTC, 350 of
+1,650 contexts were recorded, all accepting the original first draw in the
+early GBSG2 block. This does not establish METABRIC or whole-grid feasibility.
+The first saved context's artifact bindings and all 259 locked packages were
+checked. Inspect the completion marker and context receipts before advancing;
+do not duplicate or edit this running checkout.
+
+The independent arithmetic helpers are integrated at
+`scripts/catalytic_correction/{independent_arithmetic,bound_arithmetic}.py`.
+Their 29 synthetic tests pass using three pinned historical Git blobs rather
+than machine-specific source paths. Actual changed-input arithmetic remains
+pending the complete preflight and independently reviewed reuse inventory.
+The full locked suite with these integrated helpers passed 420 tests and
+21 subtests; schemas and Ruff passed. Its separate compact receipt is
+`coordination/recovery/2026-09-29-generator-correction-arithmetic-integration.json`.
+
 Use a specified full-budget pilot under that new freeze to measure compute
 and execution before scheduling the necessary correction fits. Preserve its
 failed outcomes too. Refresh dependent analyses/QA and verify a fresh remote
@@ -57,7 +78,7 @@ production workers and the remaining pre-stage worker were active. Original
 completion/final-analysis markers were absent. Internal free space was
 35.56 GiB; the mounted APFS transfer image had 199.68 GiB free. These dated
 counts are a checkpoint, not a live progress claim. New preflight evidence
-will use that APFS image with one low-priority worker; current original
+uses that APFS image with one low-priority worker; current original
 outputs and workers remain in place.
 
 ## Active post-hoc extension production — authorised 2026-09-28

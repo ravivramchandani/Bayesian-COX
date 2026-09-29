@@ -556,7 +556,12 @@ reporting replay remains a separate pre-publication gate.
   archives. Cap 256, exact rank-only retry seeds and prospective pilot
   selection are specified in the correction addendum/config. Full locked
   repository testing passed 391 tests/21 subtests, schemas and Ruff. Actual
-  whole-block preflight, independent complete-input replay/reuse inventory,
+  whole-block preflight is active from pinned, pushed commit `cc231a0`;
+  at 2026-09-29 06:34 UTC it had recorded 350/1,650 early GBSG2 contexts,
+  all accepting their original first draw. This is not whole-grid feasibility.
+  Independent arithmetic helpers are integrated with 29 passing synthetic
+  tests; the resulting full locked suite passed 420 tests and 21 subtests.
+  Complete-input replay/reuse inventory, actual changed-input
   arithmetic, corrected numerical freeze/pilot/fits and downstream transfer
   remain pending. See `docs/catalytic_correction_execution.md`.
 - [ ] T-186 (T; depends T-181–T-185, T-189, T-190) — Render the extension bundle with the

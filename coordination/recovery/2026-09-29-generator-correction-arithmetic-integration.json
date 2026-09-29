@@ -1,0 +1,103 @@
+{
+  "base_commit": "cc231a0daed2614a087e9889e5d93556351a7fc2",
+  "content_sha256": "08873bbd14c18532b2315d5df1d69818b7f964ca6f0cdadbcd9ebcad6f494cec",
+  "created_at_utc": "2026-09-29T06:44:37.167417+00:00",
+  "integration_changes": [
+    "Independent arithmetic core copied byte-identically from the sealed preparation.",
+    "Bound CLI adds only package/direct-sibling import compatibility; numerical logic remains unchanged.",
+    "Tests import integrated modules and materialize exactly three pinned119476f Git blobs in temporary directories; no machine-specific paths.",
+    "Dated handoff state records actual active training preflight from separate cc231a0 code; later test-count documentation passed separate schema validation."
+  ],
+  "kind": "root_verified_arithmetic_helper_integration",
+  "preserved_preparation_archive": {
+    "path": "coordination/recovery/2026-09-29-generator-correction-arithmetic.tar.gz",
+    "sha256": "08fd9e7d3f97341cc9ef41b6a3ad90227318c969cfdf124c057b2bed04566b22"
+  },
+  "schema_version": 1,
+  "scope": {
+    "actual_complete_input_reuse_inventory_complete": false,
+    "actual_full_preflight_complete": false,
+    "corrected_fitting_started": false,
+    "corrected_numerical_freeze_created": false,
+    "new_actual_cohort_arithmetic_executed": false,
+    "programme_completion_certified": false
+  },
+  "source_sha256": {
+    "coordination/HANDOFF.md": "ffb6a7577532bcd85e997b901bd5adbb674d1170730f5d4a84c1d78e2106ba04",
+    "coordination/TODO.md": "1bb4a6f1eb89f3262da88e8fb838a1e101b583880d0d60d0cf5d46a08866f368",
+    "docs/catalytic_correction_execution.md": "96726279a67c03ce6a442509910354d01be13cfc28888afd9d20c4b9f0600f45",
+    "docs/ravi_handoff.md": "fd8e17a6e596d610b05220685f52eeb6d6a933fed96c97e4802ba94f9e62a44b",
+    "scripts/catalytic_correction/bound_arithmetic.py": "edb3d79c9e040da7181984c6074fee42bca3f80e068d725962614070a5453ff5",
+    "scripts/catalytic_correction/independent_arithmetic.py": "49f81724eff2931fd2c051551a85913f45de9e99012b3c1f3d854c94755f3827",
+    "tests/test_catalytic_correction_arithmetic.py": "289df734a9b5e602370186da098555de9ca7a7f189e08d0e2c47d69b0fe829a6",
+    "tests/test_catalytic_correction_bound_arithmetic.py": "7ac709bf3a6157c07974a8590b5491a27b72d457fdfe15d1b406a7e337b4603a"
+  },
+  "validation": {
+    "coordination_schemas": "passed",
+    "focused_tests": "29 passed",
+    "full_make_test": "420 passed,21 subtests passed",
+    "full_test_sources_unchanged": true,
+    "git_diff_check": "passed",
+    "locked_python": "/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python",
+    "original_source_recheck": "157 existing source/build/lock files byte-identical",
+    "repository_ruff": "passed"
+  },
+  "validation_logs": {
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/diff_check.invocation.json": {
+      "bytes": 131,
+      "sha256": "84cc633407b6939b7481516a0e2f12f7e82aff974d30c05491478883208aab0b"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/diff_check.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/diff_check.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/make_test.invocation.json": {
+      "bytes": 371,
+      "sha256": "83c8cce5166c688708e0437f60670d3dcffc959ea6922ca748a2271ceb65b2ad"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/make_test.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/make_test.stdout.txt": {
+      "bytes": 840,
+      "sha256": "149cbef3c2485f518264425519c6f2df033ae4a50471b85da198e1216684ad50"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/original_source_recheck.json": {
+      "bytes": 123,
+      "sha256": "8813b60abeeb2efc94fb4a46f62304a59e73e3ced5f3108163bfcf8a7e9a5d36"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/ruff.invocation.json": {
+      "bytes": 229,
+      "sha256": "e74b493cdebd41d9c7f39bc8524a90dde34dccc8ab3efc6b3aa7f0332ab8f4a7"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/ruff.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/ruff.stdout.txt": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/schemas.invocation.json": {
+      "bytes": 227,
+      "sha256": "9b7ea09f7ef071557d973493b807a762fe414bff910a7293263f7ae11d16248d"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/schemas.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/schemas.stdout.txt": {
+      "bytes": 39,
+      "sha256": "e5f1be16713585fe49e45d50305514da8003d5e161f45e6c3285d58c584eb770"
+    },
+    "/Users/macuser/bayes-cox-runs/extensions-20260928/correction_arithmetic_integration_validation_v1/tested_source.json": {
+      "bytes": 894,
+      "sha256": "233ecd592da550902214df215a800298b54c795f227c89a51ae348bbb5a8b4cc"
+    }
+  }
+}
