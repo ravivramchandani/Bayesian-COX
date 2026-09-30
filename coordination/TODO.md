@@ -53,8 +53,10 @@ complete recovered extension grid or corrected fit is yet certified.
 At 13:02 UTC, the Storage Settings scan had stopped and a single monitored
 worker-4 refit started under the pinned recovery plan and completed with a
 matching official scientific record at 14:03 UTC. Two of 21 affected refits
-are verified; 19 remain. The separate assembly adapter is prepared and tested, but its
-preflight is gated on all 21 refits and six complete worker receipts.
+are verified; 19 remain. At 19:53 UTC a single worker-5 refit started for the
+fixed `r01f01` Piironen–Vehtari horseshoe cell; its result is pending. The
+separate assembly adapter is prepared and tested, but its preflight is gated
+on all 21 refits and six complete worker receipts.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:

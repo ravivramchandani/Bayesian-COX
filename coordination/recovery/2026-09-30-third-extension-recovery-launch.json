@@ -1,0 +1,18 @@
+{
+  "capture_directory": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/worker05_ramp1",
+  "cell_id": "metabric_matched__expression__r01f01__pv_horseshoe__full",
+  "completed_refits_before_launch": 2,
+  "control_plan_file_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "controller_sha256": "7dbd229104577d5aea60721947dbd878bf69bfa7f0dae511649fca0fc6aa4dad",
+  "local_capture_script_sha256": "8d57d88656bf7735164e6b771f26fb1f07614303a7a4d606572d38e2da8b8ae2",
+  "local_launch_sha256": "35b4750ab5e876cbd233d0977bce18a88fb19123d383d1b6a519ba25e8a4189f",
+  "local_wrapper_start_sha256": "a922c79f312ca3a9f39faa30f0b6ae0a80cf77e483b56ad82e1347632b6c60c4",
+  "max_new_cells": 1,
+  "note": "The active fit is not a verified result. Validate typed returns, cell and trace hashes, and official scientific comparison after it finishes.",
+  "recorded_at_utc": "2026-09-30T19:53:32.284683+00:00",
+  "remaining_refits_including_active": 19,
+  "schema_version": 1,
+  "source_manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+  "status": "third_monitored_recovery_refit_launched_result_pending",
+  "worker": 5
+}

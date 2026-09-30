@@ -4,6 +4,25 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Active single-cell recovery ramp — 2026-09-30, 19:53 UTC
+
+After the second refit passed independent review, worker 5 started one new
+write-once cell under the unchanged pinned v3 controller:
+`metabric_matched__expression__r01f01__pv_horseshoe__full`, with
+`--max-new-cells 1`. Its detached wrapper, invocation, logs and typed returns
+are under
+`~/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/worker05_ramp1/`
+and its `refits/` attempt. The
+[portable launch receipt](recovery/2026-09-30-third-extension-recovery-launch.json)
+binds the plan and capture hashes. The worker and child acquired their expected
+exclusive claims; no other numerical worker was active at launch. This third
+fit is pending, not a verified result. After it stops, check both typed
+returns, the cell and trace hashes, the fixed identity and official non-timing
+scientific comparison before counting it or starting another worker. At
+launch the Mac APFS control volume had about 42 GiB free (above the controller's
+10 GiB gate), memory pressure reported 64% free, and the SSD APFS image was
+mounted. Keep SSD980 attached.
+
 ## Second monitored recovery fit — completed 2026-09-30, 14:03 UTC
 
 After the open macOS Storage Settings window closed, observed swap-outs fell

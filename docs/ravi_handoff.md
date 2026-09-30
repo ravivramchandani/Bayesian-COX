@@ -92,6 +92,10 @@ adapter must bind the full recovered source before continuation. The latest
 recovery sequence. No partial extension or correction evidence has yet been
 published as a remote results release. No numerical worker was active at the
 19:50 UTC review.
+At 19:53 UTC, one monitored worker-5 refit started under the fixed recovery
+plan. Its [launch receipt](../coordination/recovery/2026-09-30-third-extension-recovery-launch.json)
+is portable; the numerical result remains pending and no second worker should
+start before its returns and scientific comparison are checked.
 The [assembly guide](extension_recovery_assembly.md) identifies the separate
 adapter and its full-refit gate; assembly has not yet run.
 
