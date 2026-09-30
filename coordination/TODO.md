@@ -479,7 +479,7 @@ the existing programme's private code/evidence release and restore checks.
 
 ## Active post-hoc extension research — non-blocking under ADR-044
 
-- [ ] T-192 (P; depends ADR-045 scope freeze and existing baseline releases) —
+- [x] T-192 (P; depends ADR-045 scope freeze and existing baseline releases) —
   Complete the separate clinical methods study. Acceptance: the dated scope
   and 225-cell roster pass hash verification; all selected saved cells,
   original/ADR-032 references and nine selected first-fold refits receive
@@ -491,6 +491,14 @@ the existing programme's private code/evidence release and restore checks.
   downloaded afresh and scientifically replayed in the locked environment.
   The task does not close T-182–T-186 or T-189–T-191 and does not authorize
   thesis edits or paper submission.
+  Completed 2026-10-01 NZ: 225/225 selected cells independently rescored;
+  nine saved refits matched on non-timing scientific content (the nine older
+  formal receipts remain missing); all 27 contrasts were estimable at 25
+  pairs with zero Holm rejections. Four PDFs and nine claim boundaries passed
+  named review. The private release's fresh GitHub download passed archive
+  verification and scientific replay; exact hashes and limitations are in
+  `recovery/2026-10-01-clinical-methods-release.json`. This closes only the
+  focused subset, not the unfinished full extension or thesis writing.
 
 The owner superseded the 2026-09-27 thesis-essential extension scope on
 2026-10-01. The experiment may continue toward a later Q1 paper, but its

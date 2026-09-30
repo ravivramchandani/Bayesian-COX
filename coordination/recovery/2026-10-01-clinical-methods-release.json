@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-09-30T23:46:06.742374+00:00",
+  "status": "private_release_and_fresh_scientific_restore_verified",
+  "evidence_status": "post_hoc_clinical_methods_subset",
+  "selection": "outcome-aware after partial extension results/statuses; fixed scope committed before focused analysis",
+  "full_extension_grid_verified": false,
+  "scope_freeze_sha256": "4d0f2265ae2ab51e7e75eab1a72eff381180aa4b699ee4fc488057e929d01261",
+  "production_code_commit": "119476fef55b1eeb690527f234c1423440720d45",
+  "analysis_code_commit": "eaebcd7b422e63cc7b0792cc8ac481f83a0080ba",
+  "source_verification_sha256": "892763c8043e202f32096e18ffe56c7d5e11eaa07e9b01998ab1461aac73d523",
+  "analysis_completion_sha256": "5b79637f1abcbd70098d3a4d1862560be6a8fe94185a9a33d94f5d46f22b2a72",
+  "paired_families_sha256": "e272a5565375e1f854ee8ee42f94e21a421d7b0791e2e1b58751c53f3e327ded",
+  "descriptive_sha256": "5a1159f6f3b4bb07bb67f2c7a9605f589f78016b10cb3e4bf9a379ebf393d1f6",
+  "render_lineage_sha256": "7933c7a0d020f717ab1002bd15f5722835437b6dbcec161053cd5a9d3544f495",
+  "named_review_sha256": "f56a9003477080162fd17005b07730a0a83c3c301b441bd77d91aadf2c9d70ed",
+  "visual_qa_receipt_sha256": "13a6c3001a37bfa38e812dc43042c91c0ea42a7b0849042106cf6b2ce44094a6",
+  "release_stage_sha256": "0f2af10185fea65b516e7574d122b7b6f2b16efff63aa839f73d71ead103e8b0",
+  "local_restored_science_receipt_sha256": "37b8889b85c37cca18b85f5ebfde19504221de7231d8a5dcac5bf483ffd8a08c",
+  "fresh_download_restored_science_receipt_sha256": "38c5656725eee72c917d5ce3765e8a2ab5a53f379cc4af90b1b351d3ea98c74d",
+  "scientific_summary": {
+    "selected_source_cells_rescored": 225,
+    "selected_saved_refits_compared": 9,
+    "historical_formal_refit_receipts_verified": 0,
+    "fixed_contrasts": 27,
+    "aligned_pairs_per_contrast": 25,
+    "holm_rejections": 0,
+    "all_holm_adjusted_p_values": 1.0,
+    "all_repeated_cv_intervals_include_zero": true,
+    "original_horseshoe_diagnostic_failures": 20,
+    "adr032_horseshoe_cells_passed": 75
+  },
+  "release": {
+    "repository": "ravivramchandani/Bayesian-COX",
+    "repository_private": true,
+    "tag": "clinical-methods-posthoc-20261001-eaebcd7",
+    "target_commit": "eaebcd7b422e63cc7b0792cc8ac481f83a0080ba",
+    "published_at_utc": "2026-09-30T23:36:17Z",
+    "url": "https://github.com/ravivramchandani/Bayesian-COX/releases/tag/clinical-methods-posthoc-20261001-eaebcd7",
+    "canonical_inventory_sha256": "3497558581a4fefb67eabcf8a2b215cec6f48e3654fe681679a2572f54378953",
+    "release_notes_sha256": "1954b01890bfed58a139ed8e4bd45eb7da78c873b9442a0f71b4f8e5bfefe232",
+    "assets": {
+      "inventory.json": {
+        "bytes": 72128,
+        "sha256": "fa699da776b0e2efbb9c38fab3047a010a1d6ed978a4ecfa91610c20e177ceae"
+      },
+      "part-000001.tar.gz": {
+        "bytes": 43479230,
+        "sha256": "072fcdef51dc84299499cf2c66a2f843f5989fa1067b4c69bcf276dbe83d0678"
+      }
+    },
+    "archive_member_count": 285
+  },
+  "receiving_check": "fresh clone, fresh GitHub download, generic archive restore and independent scientific replay on current Apple Silicon Mac; a second physical laptop was not tested",
+  "limitations": [
+    "no external validation or clinical utility claim",
+    "no superiority or equivalence claim",
+    "no raw posterior arrays in restored baseline releases",
+    "METABRIC known same-individual pair may cross historical folds and some predictor timing remains unresolved"
+  ]
+}

@@ -18,13 +18,34 @@ diagnostic attrition and the original horseshoe failures stay visible. The
 new scope was selected after partial extension execution, so it is not
 result-blind. Focused scores were not inspected during the scope decision.
 
-T-192 requires a separate subset verifier, analysis, rendering, visual QA,
-private release and fresh scientific restore. Nine existing first-fold
-penalised refit files still need a formal comparison receipt. The 1,625-fit
-extension, recovery and correction retain their original open tasks and
-frozen gates. A focused release cannot be called the full extension release.
-Ravi's thesis remains on the ADR-044 baseline path; Overleaf and paper work
-are unchanged.
+T-192 is complete as a separate, privately released study. Clean code commit
+`eaebcd7b422e63cc7b0792cc8ac481f83a0080ba` verified and independently
+rescored 225/225 selected penalised cells and compared all nine saved
+first-fold refits on non-timing scientific content. The nine historical
+formal refit receipts remain absent and are reported as such. All 27 fixed
+IBS contrasts have 25 paired folds; the Holm family is complete, with zero
+rejections and every repeated-CV interval crossing zero. This establishes
+neither superiority nor equivalence. The original horseshoe record retains
+20 diagnostic failures; the separate ADR-032 sensitivity passed 75/75 cells.
+
+The [private focused release](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/clinical-methods-posthoc-20261001-eaebcd7)
+has canonical inventory SHA-256
+`3497558581a4fefb67eabcf8a2b215cec6f48e3654fe681679a2572f54378953`.
+Its four PDFs and nine claim boundaries passed named review. A fresh GitHub
+download passed archive verification and independent scientific replay of
+225 cells, nine refits, the analysis and preserved QA. The
+[release receipt](recovery/2026-10-01-clinical-methods-release.json) binds
+the code, scope, asset and replay hashes; the [results note](../docs/clinical_methods_results.md)
+gives the permitted interpretation. The earlier candidate render was
+rejected for ambiguous horseshoe and interval labels, corrected in `eaebcd7`,
+and preserved outside the release; its statistical aggregates were unchanged.
+This receiving check used a fresh clone and download on this Mac, not Ravi's
+physical laptop.
+
+The 1,625-fit extension, recovery and correction retain their original open
+tasks and frozen gates. This focused release cannot be called the full
+extension release. Ravi's thesis remains on the ADR-044 baseline path;
+Overleaf and paper work are unchanged.
 
 ## Submission-first scope — 2026-10-01 New Zealand
 

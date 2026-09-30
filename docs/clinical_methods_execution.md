@@ -1,5 +1,16 @@
 # Focused clinical methods evidence and private transfer
 
+The completed private checkpoint is
+[`clinical-methods-posthoc-20261001-eaebcd7`](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/clinical-methods-posthoc-20261001-eaebcd7)
+at analysis commit `eaebcd7b422e63cc7b0792cc8ac481f83a0080ba`.
+Download its `inventory.json` and `part-000001.tar.gz` into a fresh directory
+and use canonical inventory SHA-256
+`3497558581a4fefb67eabcf8a2b215cec6f48e3654fe681679a2572f54378953`
+with the restore command below. A fresh clone and download on the current Mac
+passed the full scientific replay; a second physical laptop has not been
+tested. The exact evidence is in the
+[release receipt](../coordination/recovery/2026-10-01-clinical-methods-release.json).
+
 This is the separate ADR-045 post-hoc clinical subset. It is not completion
 of the frozen 1,625-fit extension or a change to Ravi's submission-first
 thesis. The exact scope and 225-cell roster were committed before this
@@ -96,9 +107,13 @@ digest to the verifier. The `verify.py` input directory must contain only
 `inventory.json` and its numbered shards.
 
 ```bash
+mkdir -p /path/to/fresh-downloaded-assets
+gh release download clinical-methods-posthoc-20261001-eaebcd7 \
+  --repo ravivramchandani/Bayesian-COX \
+  --dir /path/to/fresh-downloaded-assets
 "$clinical_python" scripts/extension_release/verify.py \
   /path/to/fresh-downloaded-assets /path/to/new-restored-focused-tree \
-  --expected-sha256 RECORDED_CANONICAL_INVENTORY_SHA256
+  --expected-sha256 3497558581a4fefb67eabcf8a2b215cec6f48e3654fe681679a2572f54378953
 ```
 
 On the receiving Mac, use a fresh clone of the private code repository and

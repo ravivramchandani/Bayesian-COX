@@ -13,6 +13,16 @@ not a thesis-submission prerequisite. Do not infer full-grid findings from
 its partial results. The thesis results and conclusion chapters still need
 writing and review; Overleaf edits await the owner's separate instruction.
 
+A separate [post-hoc clinical methods study](clinical_methods_results.md)
+is now complete and privately released. Its fixed 225 penalised-Cox cells
+were independently rescored; all 27 comparisons have 25 matched fold pairs,
+but none passes Holm adjustment and none establishes equivalence. The
+original horseshoe run retains 20 failed-diagnostic cells, while the separate
+ADR-032 sensitivity passed 75/75. Nine saved penalised refits matched their
+source records on non-timing scientific content, although all nine earlier
+formal receipts remain absent. This focused study does not finish the
+1,625-fit extension or alter the submission-first thesis scope.
+
 Read [HANDOFF](../coordination/HANDOFF.md) and [TODO](../coordination/TODO.md)
 before launching extension work on another Mac. The original workers stopped
 after a host interruption; three of 21 missing-trace refits are now verified
@@ -114,6 +124,15 @@ depend on its shared Git metadata. The
 [14:55 document mirror](../coordination/recovery/2026-09-29-generator-correction-document-mirror-v3.json)
 records that narrow update from published `a26d5a2`.
 
+Use [the clinical methods execution guide](clinical_methods_execution.md)
+and [release receipt](../coordination/recovery/2026-10-01-clinical-methods-release.json)
+for the focused subset. Its fresh download and scientific replay passed on
+this Mac; Ravi still needs to verify the exact lock and repository access on
+his own Apple Silicon laptop. Clinical METABRIC's known same-individual pair
+may cross historical folds, and exact pretreatment availability of some
+predictors remains unresolved. The baseline releases lack raw posterior
+arrays, so no new trace-level diagnostic recalculation is claimed.
+
 Use [the code guide](code_guide.md),
 [correction execution](catalytic_correction_execution.md) and
 [extension execution](extensions_execution.md) for component and run details.
@@ -127,7 +146,7 @@ not tested.
 
 The private repository is
 [ravivramchandani/Bayesian-COX](https://github.com/ravivramchandani/Bayesian-COX).
-Use an account with access to this repository. There are three evidence releases:
+Use an account with access to this repository. There are four evidence releases:
 
 - [Original confirmatory evidence](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085):
   all 450 original cells, predictions, metrics, inference and source manifests.
@@ -139,6 +158,14 @@ Use an account with access to this repository. There are three evidence releases
 - [Supporting audit evidence](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-audit-20260928):
   full native PDF review evidence, completed logs, earlier probes and external
   helpers; all three assets and 899 archive members verified after download.
+- [Focused post-hoc clinical methods evidence](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/clinical-methods-posthoc-20261001-eaebcd7):
+  225 selected penalised cells, nine saved refits, fixed 27-contrast analysis,
+  descriptive tables, four reviewed PDF figures, frozen scope and code
+  snapshots. Its canonical package inventory SHA-256 is
+  `3497558581a4fefb67eabcf8a2b215cec6f48e3654fe681679a2572f54378953`;
+  a fresh download and scientific replay passed. It depends on the first two
+  releases for Bayesian reference evidence and does not include raw posterior
+  arrays or the unfinished full extension.
 
 Large results are release assets in the same private repository. A Git clone
 contains the current code, plans and guides; the commands below retrieve the

@@ -12,6 +12,21 @@ research, but neither has a verified complete-grid result or release. Their
 partial cells do not support thesis comparison claims. Thesis chapter writing
 and review remain unfinished.
 
+ADR-045 separately released a focused, outcome-aware post-hoc clinical
+methods subset on 2026-10-01 NZ. All 225 selected penalised-Cox cells passed
+independent identity, prediction and metric checks. The 27 fixed IBS
+contrasts each have 25 aligned pairs; none is Holm-rejected and every
+repeated-CV 95% interval includes zero. These are not equivalence or global
+winner findings. The original horseshoe's 20 diagnostic failures remain
+separate from the 75/75 passing ADR-032 sensitivity. Nine saved penalised
+refits matched on non-timing scientific content, while all nine historical
+formal receipts remain absent. Four PDF figures and nine claim boundaries
+passed named review, and the private release passed fresh download and
+scientific replay. The [results note](clinical_methods_results.md) and
+[release receipt](../coordination/recovery/2026-10-01-clinical-methods-release.json)
+state exact scope, hashes and limits. This does not complete the original
+1,625-fit extension or add a thesis-submission prerequisite.
+
 At the 2026-09-30 20:30 UTC recovery checkpoint, three of 21 missing-trace
 refits passed independent non-timing scientific comparison. Eighteen refits
 and all 411 initially absent cells remain; no numerical worker was active.
