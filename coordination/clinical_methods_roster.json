@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "source": "original post-hoc extension clinical full condition only",
+  "datasets": ["gbsg2", "whas500", "metabric"],
+  "penalised_models": ["ridge", "lasso", "elastic_net"],
+  "bayesian_references": ["bayesian_normal", "bayesian_spike_slab", "ADR-032 bayesian_horseshoe"],
+  "repeats": [1, 2, 3, 4, 5],
+  "folds": [1, 2, 3, 4, 5],
+  "condition": "full",
+  "setting": "clinical",
+  "source_cell_name": "{dataset}__clinical__r{repeat:02d}f{fold:02d}__{model}__full.json",
+  "source_cell_count": 225,
+  "reference_cell_count": 225,
+  "primary_contrast_count": 27,
+  "selected_reproduction": "all nine penalised-model by cohort cells at repeat 1 fold 1"
+}

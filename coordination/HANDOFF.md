@@ -4,6 +4,28 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Separate focused clinical methods study — ADR-045
+
+The owner approved a smaller post-hoc methods study while Ravi finishes the
+submission-first thesis. Its dated, hash-pinned scope is in
+`docs/protocol_addendum_clinical_methods.md`,
+`coordination/clinical_methods_roster.json` and
+`coordination/clinical_methods_scope_freeze.json`. The fixed input is 225
+original extension clinical penalised-Cox cells, 150 frozen normal/spike-slab
+references and 75 ADR-032 horseshoe references across all three cohorts and
+25 folds. The original 27-member Holm family remains complete-or-unavailable;
+diagnostic attrition and the original horseshoe failures stay visible. The
+new scope was selected after partial extension execution, so it is not
+result-blind. Focused scores were not inspected during the scope decision.
+
+T-192 requires a separate subset verifier, analysis, rendering, visual QA,
+private release and fresh scientific restore. Nine existing first-fold
+penalised refit files still need a formal comparison receipt. The 1,625-fit
+extension, recovery and correction retain their original open tasks and
+frozen gates. A focused release cannot be called the full extension release.
+Ravi's thesis remains on the ADR-044 baseline path; Overleaf and paper work
+are unchanged.
+
 ## Submission-first scope — 2026-10-01 New Zealand
 
 ADR-044 supersedes ADR-036's requirement that the unfinished Q1-oriented

@@ -31,6 +31,12 @@ not a verified runtime forecast. The owner-set 2026-11-30 planning target
 supersedes the older 26-week study-protocol schedule for project management;
 the university submission deadline still needs independent confirmation.
 
+ADR-045 separately narrows one clinical methods study to the fixed 225
+penalised-Cox cells and 225 original/ADR-032 Bayesian references. Its scope
+was chosen after partial extension execution, so it is post-hoc and does not
+close or change the 1,625-fit programme. T-192 tracks its own scientific and
+remote-release gates; it does not block the submission-first thesis.
+
 ADR-040 adds targeted catalytic-generator correction work under T-190 after
 the original rank failures were inspected. ADR-043/T-191 now requires a
 separate recovered lineage for the interrupted original-law extension; its
@@ -469,6 +475,19 @@ the existing programme's private code/evidence release and restore checks.
   formatting only.
 
 ## Active post-hoc extension research — non-blocking under ADR-044
+
+- [ ] T-192 (P; depends ADR-045 scope freeze and existing baseline releases) —
+  Complete the separate clinical methods study. Acceptance: the dated scope
+  and 225-cell roster pass hash verification; all selected saved cells,
+  original/ADR-032 references and nine selected first-fold refits receive
+  independent identity, lineage, prediction, metric and non-timing-content
+  verification; all 27 fixed IBS contrasts preserve missing coverage and
+  the complete-family Holm gate; calibration, discrimination, diagnostic
+  attrition and measured runtime are reported without unsupported claims;
+  every rendered item passes visual QA; a private evidence package is
+  downloaded afresh and scientifically replayed in the locked environment.
+  The task does not close T-182–T-186 or T-189–T-191 and does not authorize
+  thesis edits or paper submission.
 
 The owner superseded the 2026-09-27 thesis-essential extension scope on
 2026-10-01. The experiment may continue toward a later Q1 paper, but its

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "classification": "post-hoc outcome-aware subset; not result-blind preregistration",
+  "frozen_utc": "2026-09-30T21:21:48Z",
+  "selection_before_focused_performance_inspection": true,
+  "source_extension_manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+  "source_fit_commit": "119476fef55b1eeb690527f234c1423440720d45",
+  "baseline_source_pins": "coordination/extension_sources/baseline_sources.json",
+  "baseline_source_pins_sha256": "54aaeb4b0e90688f3e50960c1a2487a1ba5e1ecfc4e907c0a223957541d3bd1f",
+  "original_extension_freeze_record_sha256": "7fff89898fed5c66084fd74d6e0a0eb69b8b65aa35d8f87b427acd39b50586f3",
+  "sha256": {
+    "coordination/clinical_methods_roster.json": "880251576e5ef0393d4404e67d68795574faa0ef1462fb871cd067a3351ebc86",
+    "docs/protocol_addendum_clinical_methods.md": "fd5a4c85f89004eae22d23019be5bbaaaf4a36b3aa77e75982f77738d019b3f6"
+  },
+  "source_penalised_cells": 225,
+  "reference_bayesian_cells": 225,
+  "primary_contrasts": 27,
+  "selected_existing_refits_to_verify": 9
+}

@@ -1190,3 +1190,35 @@ Format:
   research tasks with their existing acceptance criteria, but no longer block
   T-147 or T-150–T-161. The study protocol and result-blind extension addendum
   remain preserved. No result changes its original scientific status.
+
+## ADR-045 — Extract a focused post-hoc clinical methods study
+
+- Status: ACCEPTED
+- Date: 2026-10-01
+- Context: The owner approved a smaller, separate clinical methods study while
+  Ravi completes the submission-first thesis. All penalised-Cox clinical
+  source cells are stored, whereas the full 1,625-fit extension and its
+  correction cannot finish on the desired short schedule. This scope choice
+  follows partial extension execution and is therefore outcome-aware even
+  though the original 27-comparison family was frozen before its results.
+- Decision:
+  - Freeze the separate scope and exact roster in
+    `docs/protocol_addendum_clinical_methods.md` and
+    `coordination/clinical_methods_roster.json` before focused performance
+    analysis. Preserve the original addendum and full-grid tasks.
+  - Use all 225 clinical penalised-Cox cells, 150 original normal/spike-slab
+    references and 75 separately labelled ADR-032 horseshoe references.
+    Report all statuses and original horseshoe attrition; no favourable
+    model, fold or cohort exclusion is allowed.
+  - Keep the original 27-member Holm family and its complete-family,
+    25-pair and corrected-interval claim gates. Show calibration,
+    discrimination, coverage and runtime descriptively. Do not infer a
+    prior-only causal effect or cross-cohort external validation.
+  - Build a new verifier, analysis, renderer and private-release path that
+    certify only this subset. The full-extension finalizer/release gates
+    remain unsatisfied and cannot be reused as a certificate for this study.
+  - No decision curve, genomic comparison, catalytic correction, Overleaf
+    edit, paper drafting or DOI is required for this focused evidence package.
+- Consequences: T-192 tracks this separate study. A complete focused release
+  does not close T-182–T-186 or T-189–T-191, nor change the thesis scope in
+  ADR-044. Scientific claims depend on the resulting verified evidence.
