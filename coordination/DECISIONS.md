@@ -1222,3 +1222,34 @@ Format:
 - Consequences: T-192 tracks this separate study. A complete focused release
   does not close T-182–T-186 or T-189–T-191, nor change the thesis scope in
   ADR-044. Scientific claims depend on the resulting verified evidence.
+
+## ADR-046 — State the baseline verification level available to the focused study
+
+- Status: ACCEPTED
+- Date: 2026-10-01
+- Context: The frozen focused addendum asks to verify Bayesian traces and
+  diagnostics with existing frozen evidence helpers. Independent review found
+  that the restored confirmatory and ADR-032 releases used for this study
+  contain hash-verified cell records and a 450-cell exact-refit report, but
+  not the raw posterior arrays needed to recompute MCMC diagnostics from
+  traces. The existing helpers explicitly verify stored status, hashes and
+  lineage without recalculating diagnostics or prediction scores. This
+  distinction was identified before focused comparative results were read.
+- Decision:
+  - Keep the focused addendum and its freeze hash unchanged. Supersede only
+    its overbroad trace-verification sentence: for the Bayesian references,
+    verify every stored cell and source hash, frozen manifests/completions,
+    ADR-032 lineage, the existing release receipts and all 450 exact-refit
+    scientific-content matches. Pin the prior release files in
+    `coordination/clinical_methods_baseline_evidence.json`.
+  - Report the verification limit explicitly. The focused study must not
+    claim that raw posterior arrays were re-inspected or that diagnostics
+    were recomputed from those arrays. Stored diagnostic statuses and all
+    original failures remain visible. The new 225 penalised-Cox cells still
+    receive independent forecast/metric rescoring and nine saved-refit
+    comparisons under ADR-045.
+  - No change to the 27 contrasts, paired-patient requirement, Holm gate,
+    model roster, clinical cohorts, or original full-extension programme.
+- Consequences: T-192 can be judged only at this stated evidence level;
+  manuscript and handoff text must carry the same limit. This correction
+  does not turn a stored result into a recomputed raw-trace finding.

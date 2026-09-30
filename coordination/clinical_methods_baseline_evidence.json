@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "baseline_release_tag": "results-programme-20260927-11f86ce",
+  "reproduction_verification_relative_path": "reproduction/verification.json",
+  "reproduction_verification_sha256": "5ee67afad696efe1848f3b697c45ed995127ec5cefbefac21291b4753af1ec28",
+  "reproduction_cells_checked": 450,
+  "reproduction_cells_identical": 450,
+  "programme_analysis_verified_relative_path": "release_metadata/programme_analysis_verified.json",
+  "programme_analysis_verified_sha256": "a6e35856d7e887cc7aabc5bf978a8e8fb2783db534dbb85926d5c388c1acfc57",
+  "programme_release_ready_relative_path": "release_metadata/programme_release_ready.json",
+  "programme_release_ready_sha256": "7fdeffa6fb6a9ceaddf626df23a6e0009200428639b4622cf71b5aa9321ec08f",
+  "verification_limit": "saved diagnostic and prediction records corroborated by exact refit report; raw posterior arrays unavailable in restored baseline releases"
+}

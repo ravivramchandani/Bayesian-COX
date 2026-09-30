@@ -36,6 +36,9 @@ penalised-Cox cells and 225 original/ADR-032 Bayesian references. Its scope
 was chosen after partial extension execution, so it is post-hoc and does not
 close or change the 1,625-fit programme. T-192 tracks its own scientific and
 remote-release gates; it does not block the submission-first thesis.
+ADR-046 records the baseline-reference verification limit: restored Bayesian
+cell records and 450 exact-refit matches are checked, but raw posterior-array
+diagnostics cannot be recomputed from the earlier release.
 
 ADR-040 adds targeted catalytic-generator correction work under T-190 after
 the original rank failures were inspected. ADR-043/T-191 now requires a
