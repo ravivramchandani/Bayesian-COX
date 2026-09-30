@@ -4,7 +4,27 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
-## Active single-cell recovery ramp — 2026-09-30, 19:53 UTC
+## Submission-first scope — 2026-10-01 New Zealand
+
+ADR-044 supersedes ADR-036's requirement that the unfinished Q1-oriented
+extension and catalytic correction be completed before thesis submission.
+Ravi's thesis now proceeds from the verified, privately released baseline:
+confirmatory, robustness, explanation, the separately labelled ADR-032 sampler
+sensitivity and ADR-033 Holm bound, including the original diagnostic and
+explanation failures. T-147 and T-150–T-161 are the submission critical path;
+the results and conclusion chapters are still essentially empty. The frozen
+extension addendum and every numerical/release gate remain intact. The owner
+wants the experiment completed quickly, so its separate run may continue in
+parallel, but partial extension cells cannot support completed-grid claims or
+delay the baseline thesis. The worker-5 refit below has now been verified;
+no numerical producer was active at the 20:34 UTC checkpoint. Recheck
+controller state and host resources before a new launch. The two-day
+experiment aim is not a verified ETA: 18 refits, 411 absent cells, selected
+reproduction and correction
+still remain. Paper drafting and DOI work stay after thesis submission.
+Overleaf edits still await the owner's separate instruction.
+
+## Third monitored recovery fit — completed 2026-09-30, 20:27 UTC
 
 After the second refit passed independent review, worker 5 started one new
 write-once cell under the unchanged pinned v3 controller:
@@ -15,13 +35,21 @@ are under
 and its `refits/` attempt. The
 [portable launch receipt](recovery/2026-09-30-third-extension-recovery-launch.json)
 binds the plan and capture hashes. The worker and child acquired their expected
-exclusive claims; no other numerical worker was active at launch. This third
-fit is pending, not a verified result. After it stops, check both typed
-returns, the cell and trace hashes, the fixed identity and official non-timing
-scientific comparison before counting it or starting another worker. At
-launch the Mac APFS control volume had about 42 GiB free (above the controller's
-10 GiB gate), memory pressure reported 64% free, and the SSD APFS image was
-mounted. Keep SSD980 attached.
+exclusive claims; no other numerical worker was active at launch. The wrapper
+and fitting child returned zero, the cell and new trace passed hash and
+identity checks, and an independent repeat of the official non-timing
+scientific comparison matched the original. Original posterior-array equality
+remains unavailable because the original trace bytes are missing. The
+[third-refit receipt](recovery/2026-09-30-third-extension-recovery-refit.json)
+binds the returns and comparison; it is not a completed grid or remote result
+release. Three of 21 affected refits are verified; 18 remain. The
+`--max-new-cells 1` ramp stopped with no active claim or worker. At launch the
+Mac APFS control volume had about 42 GiB free (above the controller's 10 GiB
+gate), memory pressure reported 64% free, and the SSD APFS image was mounted.
+At the 20:34 UTC post-test check, the Mac had 36 GiB free, 12.7 GiB swap in
+use and 35% reported memory free; Storage Management and FileProvider were
+also consuming substantial CPU. No next fit was launched under that host
+pressure. Recheck before any new producer. Keep SSD980 attached.
 
 ## Second monitored recovery fit — completed 2026-09-30, 14:03 UTC
 
@@ -1089,12 +1117,12 @@ in the 2026-08-16 sequence below:
   corrections in `TODO.md` for later;
 - commit and push at the end, with no AI co-author trailer.
 
-### Standing owner instructions (2026-09-27)
+### Standing owner instructions (updated 2026-10-01)
 
-- The thesis must contain every experiment a Q1 journal paper needs
-  (ADR-036), with the scientific design refined by ADR-037. The paper is
-  drafted later; the thesis is its planned evidence base, not a guarantee
-  of acceptance or of no further reviewer-requested analysis.
+- Submission-first scope (ADR-044) uses the verified baseline and completed
+  separately labelled sensitivities. The post-hoc extension and correction
+  remain active research with unchanged scientific gates, but no longer block
+  the thesis. The paper is drafted later; no Q1 acceptance is guaranteed.
 - Do not edit the Overleaf thesis until the owner instructs.
 - Only one agent works on the repository at a time.
 - Commit and push regularly at completed, verified milestones; confirm the
@@ -1222,8 +1250,9 @@ Completed integration gates and their evidence locations are in
 10. [x] Commit and push verified evidence and Ravi's handoff. The final
     close-out is recorded in the dated review and compact receipt.
 
-11. [ ] Thesis extension experiments under ADR-036–ADR-038; T-180–T-186 and
-    T-189 in `TODO.md`. The new analyses were not part of the completed coordinator.
+11. [ ] Non-blocking post-hoc extension experiments under ADR-044; T-180–T-186
+    and T-189–T-191 in `TODO.md`. These analyses were not part of the completed
+    baseline coordinator and do not gate thesis submission.
     Dependencies:
     - freeze the actual new-analysis addendum (T-180) before their own results;
       reference existing ADR-032/ADR-033 evidence with its actual chronology;
@@ -1274,10 +1303,11 @@ actual visual QA, claim review and private release verification. Historical
 logs and host paths are in the audit release. The student restore guide
 requires neither these host paths nor another run of the completed fits.
 
-Administrative deadline: the live programme in `TODO.md` runs from 2026-08-17
-to 2026-11-30. This 15-week schedule supersedes the earlier 26-week dates for
-project management without changing any frozen analytical method or claim
-gate.
+Owner-set planning target: the live thesis programme in `TODO.md` runs from
+2026-08-17 to 2026-11-30. This 15-week schedule supersedes the earlier
+26-week dates for project management without changing any frozen analytical
+method or claim gate. Confirm the university submission deadline separately;
+ADR-044 defers paper drafting and DOI work until after thesis submission.
 
 ## Exact runtime
 

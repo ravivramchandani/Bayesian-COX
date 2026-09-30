@@ -22,13 +22,18 @@ contrasts have Holm-adjusted p-values of 1.0 and corrected intervals including
 zero. Both final rendered lineages and all 428 PDFs passed verification and
 review. Original failed cells and incomplete primary inference are unchanged.
 
-All completed results, exact code, tables, figures and audit records are in
-private GitHub Releases and have been downloaded and restored independently.
-The separate post-hoc extension implementation is frozen and actively filling
-its 1,625-fit grid. Its complete verification, rendering, visual review and
-remote restoration remain pending. Follow [extension execution](docs/extensions_execution.md)
-and the current HANDOFF before running anything. Overleaf edits and paper
-submission remain outside this code/results programme.
+The completed baseline results, exact code, tables, figures and audit records
+are in private GitHub Releases and have been downloaded and restored
+independently.
+ADR-044 makes this verified baseline the submission-scope thesis evidence.
+The separate post-hoc extension was interrupted and is being recovered in a
+new lineage; its 1,625-fit grid, catalytic correction, rendering, visual
+review and remote restoration remain incomplete. This research may continue
+in parallel but does not block the baseline thesis or support full-grid
+claims yet. Follow [extension execution](docs/extensions_execution.md) and
+the current HANDOFF before running anything. The separate Overleaf thesis
+has not been edited under this code/results checkpoint; paper drafting is
+deferred until after thesis submission.
 
 ## Start here — Ravi's handoff
 

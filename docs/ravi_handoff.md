@@ -4,9 +4,20 @@ The baseline code and results programme is complete and remotely verified.
 The separate 1,625-cell post-hoc extension and catalytic correction remain
 unfinished. Their final results are not yet available as a verified remote release.
 
+ADR-044 sets a submission-first thesis scope: use the verified baseline,
+robustness and explanation evidence, plus the separately labelled ADR-032
+sampler sensitivity and ADR-033 Holm bound. Report the original diagnostic
+failures, incomplete primary contrast family and failed explanation gate.
+The unfinished extension may continue as separate post-hoc research but is
+not a thesis-submission prerequisite. Do not infer full-grid findings from
+its partial results. The thesis results and conclusion chapters still need
+writing and review; Overleaf edits await the owner's separate instruction.
+
 Read [HANDOFF](../coordination/HANDOFF.md) and [TODO](../coordination/TODO.md)
 before launching extension work on another Mac. The original workers stopped
-after a host interruption; do not start competing workers or treat the partial
+after a host interruption; three of 21 missing-trace refits are now verified
+in a separate recovery lineage. Check current controller state and host
+resources before any new worker; do not treat the partial
 local run as a verified release.
 A clone supplies code and plans. Completed results are restored from the
 private releases below.
@@ -254,7 +265,9 @@ on a receiving laptop or merge its partial outputs into the frozen run.
 The extension transfer is pending its complete-grid, deep verification,
 92-refit, final PDF-QA and fresh remote-restoration gates. Follow
 [extension execution](extensions_execution.md) and the current HANDOFF;
-T-186 is checked only after its separate evidence bundle passes.
+T-186 is checked only after its separate evidence bundle passes. Under
+ADR-044 these are non-blocking extension gates, not conditions for the
+baseline thesis evidence freeze.
 
 The original 20 horseshoe failures, incomplete original primary contrast
 family and failed explanation-convergence gate remain part of the evidence.

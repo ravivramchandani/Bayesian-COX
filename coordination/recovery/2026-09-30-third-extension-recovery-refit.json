@@ -1,0 +1,27 @@
+{
+  "cell_id": "metabric_matched__expression__r01f01__pv_horseshoe__full",
+  "child_return_code": 0,
+  "control_plan_file_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "controller_sha256": "7dbd229104577d5aea60721947dbd878bf69bfa7f0dae511649fca0fc6aa4dad",
+  "local_child_return_sha256": "6fafe4ad465bb4198479ea0528bd23c8031a081bd5081b00a3eba75f0ffbf020",
+  "local_comparison_sha256": "42b3dba9498196687b7167c45e7c764dab55b58a11280149ad5dec053705e5e5",
+  "local_wrapper_return_sha256": "02653f8821cca62c7460d0b10f10fc4be707585513e5ed16bc37971c8895eea0",
+  "note": "No original source result was rewritten. This is not a complete recovered extension or remote results release.",
+  "numeric_workers_after_ramp": "none; --max-new-cells 1 stopped worker 5",
+  "official_non_timing_science": "match",
+  "original_posterior_array_equality": "unavailable: original trace bytes missing",
+  "recorded_at_utc": "2026-09-30T20:30:45+00:00",
+  "refit_cell_file_sha256": "74536ce98bed92f029ec1150b0eb35641b16b89b619fcaa5f4e320d8cf34c841",
+  "refit_status": "complete",
+  "refit_trace_sha256": {
+    "1/posterior/attempt_1_posterior.nc": "5fbea3ea9c1d7e70fd8e5455950b2a6e38a569585827b4f526d91654470cd0ef"
+  },
+  "remaining_affected_refits": 18,
+  "schema_version": 1,
+  "selected_reproduction_status": "requires fresh binding to recovered source and new trace",
+  "source_cell_file_sha256": "4a7693898a517005543a7a40328efe06b44333ae3457d40cad04a1404ee7808e",
+  "source_manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+  "source_status": "complete",
+  "status": "third_of_21_recovery_refits_scientific_match_not_complete_grid",
+  "wrapper_return_code": 0
+}

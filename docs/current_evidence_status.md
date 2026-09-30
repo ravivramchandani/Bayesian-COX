@@ -1,8 +1,21 @@
-# Current evidence status — 2026-09-29
+# Current evidence status — updated 2026-10-01
 
 The protocol and `claim_evidence_register.md` are preserved study-definition
 records. This dated status note records subsequent evidence without changing
 their claim rules. It does not assert submission review or supervisor sign-off.
+
+ADR-044 makes the already verified baseline the submission-scope thesis
+evidence. The original confirmatory, robustness and explanation limitations
+below remain mandatory; ADR-032 and ADR-033 are separate post-hoc additions.
+The 1,625-cell extension and catalytic correction continue as non-blocking
+research, but neither has a verified complete-grid result or release. Their
+partial cells do not support thesis comparison claims. Thesis chapter writing
+and review remain unfinished.
+
+At the 2026-09-30 20:30 UTC recovery checkpoint, three of 21 missing-trace
+refits passed independent non-timing scientific comparison. Eighteen refits
+and all 411 initially absent cells remain; no numerical worker was active.
+The original missing posterior arrays still prevent exact array comparison.
 
 | Register item | Verified current evidence | Permitted interpretation |
 | --- | --- | --- |
@@ -48,14 +61,15 @@ original-host result files. See [Ravi's handoff](ravi_handoff.md) and the
 [close-out review](../coordination/reviews/2026-09-28-programme-closeout.md).
 The earlier numerical checkpoint is preserved unchanged as historical state.
 
-ADR-036–ADR-039 authorize separate post-hoc thesis analyses: tuned penalised
+ADR-036–ADR-039 specified separate post-hoc analyses: tuned penalised
 Cox, a precisely specified Piironen–Vehtari variant, survival decision
 curves, matched METABRIC clinical/expression comparisons and three catalytic
 variants. T-180 was frozen before any of their outer-validation results,
 under content hash
 `50b5f30f697b633718078e18c0da54be297361f8b06aeaf95af32e12aa1c646f`.
-Production is actively filling the 1,625-fit grid from sealed commit
-`119476f`; completed individual cells remain incomplete programme evidence.
+The original 1,625-fit grid was interrupted after partial production from
+sealed commit `119476f`; ADR-043 recovery is active in a separate lineage.
+Completed individual cells remain incomplete programme evidence.
 The separately sealed analysis verifier is `8551d32`. Full deep verification,
 92 selected exact refits, rendering, actual visual QA and private remote
 restoration are still required before extension conclusions are recorded.
@@ -77,7 +91,9 @@ rank guard, 1,400 on their first draw and 250 after rank-conditioned redraws.
 The actual saved-record audit verified all artifact/seed bindings. This
 establishes training-input feasibility; exact reuse/refit scope, optimizer/
 MCMC outcomes and changed-input arithmetic are not yet complete. Independent
-normal-import replay is active. It changes no original cell
+normal-import replay sealed all 1,650 first-draw contexts, while its
+input/reuse inventory stopped at 1,536 of 1,625 cells before recovery. It
+changes no original cell
 or acceptance gate. Tested preparation tools and source reviews do not
 certify corrected numerical results. A distinct actual evidence freeze and
 full-budget pilot precede corrected fitting. ADR-041 fixes selected

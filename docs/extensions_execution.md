@@ -8,14 +8,26 @@ distinct planned fits, 90 reused full RQ2 anchors and 92 selected exact refits.
 Its new results are not complete until all verification, reproduction,
 rendering, actual visual QA and remote-restoration gates pass.
 
+Current control (ADR-043/ADR-044): the original run below was interrupted.
+Do not execute the six-worker launch recipe against that run or a receiving
+laptop. Use the pinned recovery plan and latest
+[HANDOFF](../coordination/HANDOFF.md) for the active 21-refit stage. Only
+after all 21 refits are verified and the separate run is assembled and
+checked may the frozen six-shard runner fill the 411 absent cells in the
+recovered APFS root, with worker count
+limited by measured host resources. This post-hoc programme is not a
+thesis-submission gate; its full scientific and release gates are unchanged.
+The recipe below documents the original run design, not a current restart.
+
 Use the exact Apple Silicon conda lock and verify it before fitting. Keep
 one repository integration owner. Run production from a clean detached
 checkout of the implementation commit, with outputs outside the checkout.
 Do not run from a mutable development branch, change sampler settings,
 combine manifests, overwrite failed cells or edit the primary outputs.
-Set BLAS/OpenMP/Accelerate to one thread per worker. Start with six disjoint
-workers on this host; resource settings affect scheduling, not the grid.
-On a smaller receiving Mac choose fewer workers and monitor memory/disk.
+Set BLAS/OpenMP/Accelerate to one thread per worker. The original plan used
+six disjoint workers; resource settings affect scheduling, not the grid.
+For the recovered run choose a measured safe worker count and monitor
+memory/disk.
 
 The commands below use shell variables `extension_python`, `extension_code`,
 and `extension_home` chosen for the receiving machine. Do not copy absolute

@@ -691,7 +691,7 @@ Format:
 
 ## ADR-036 — Extension experiments are thesis evidence; the paper is deferred
 
-- Status: ACCEPTED
+- Status: SUPERSEDED-BY-ADR-044
 - Date: 2026-09-27
 - Context: The owner wants the thesis itself to contain every experiment a
   Q1 journal paper would need. The paper is to be drafted after the thesis.
@@ -1143,3 +1143,50 @@ Format:
   robustness evidence. It supersedes ADR-040's assumption that the intact
   original extension shards can simply continue. The catalytic correction
   remains a separate post-hoc version with its existing scientific gates.
+
+## ADR-044 — Submit from verified baseline evidence; continue extensions separately
+
+- Status: ACCEPTED
+- Date: 2026-10-01
+- Context: The owner chose a submission-first thesis scope after the full
+  extension/recovery workload proved incompatible with a near-term writing
+  schedule. The owner still wants to finish the extension experiment quickly.
+  The approved original study protocol states that the three-cohort
+  confirmatory and robustness programme answers the master's questions. Its
+  evidence is released and freshly restorable. The later ADR-036 made all
+  Q1-oriented extensions thesis-essential, but the interrupted extension is
+  still incomplete and the corrected fits have not started. The thesis
+  results and conclusion chapters remain unwritten.
+- Decision:
+  - Supersede ADR-036 only where it requires completion of T-182–T-186 and
+    T-189–T-191 before the thesis can be submitted. The thesis evidence base
+    is the verified confirmatory, robustness and explanation record, the
+    separately labelled ADR-032 sampler sensitivity and ADR-033 Holm bound.
+    The original 20 diagnostic failures, five-of-nine estimable primary
+    contrast family, and failed explanation-convergence gate must be reported
+    without a superiority, equivalence or explanation-stability claim.
+  - Keep the frozen extension addendum, original run, recovery plan, results
+    and all scientific acceptance gates unchanged. The extension and its
+    catalytic correction may continue in parallel as separate post-hoc
+    research; they are not thesis-submission prerequisites. The active
+    single-cell refit is allowed to reach its recorded terminal return.
+    A partial 1,625-cell grid is not a completed experiment and cannot be
+    cherry-picked into thesis conclusions.
+  - If the entire extension evidence bundle, including the separate catalytic
+    correction and T-186 verification/release gates, is available before the
+    thesis results lock, the owner and supervisors may include it as clearly
+    separated supplementary evidence. Otherwise, document the unfinished
+    programme as future work without numerical claims from its partial grid.
+    ADR-043's recovery lineage and any original/recovered outcome differences are
+    reported in the extension evidence; the thesis reports them only if that
+    verified extension is actually included. Paper drafting and DOI work
+    remain after thesis submission.
+  - Prioritize the thesis evidence freeze, results and conclusion chapters,
+    claim review, supervisor review and clean rendered thesis. Continue to
+    require an owner instruction before editing the separate Overleaf
+    repository. The owner's couple-of-days experiment target is a planning
+    aim, not permission to shorten the frozen grid or bypass verification.
+- Consequences: T-182–T-186 and T-189–T-191 remain open, active post-hoc
+  research tasks with their existing acceptance criteria, but no longer block
+  T-147 or T-150–T-161. The study protocol and result-blind extension addendum
+  remain preserved. No result changes its original scientific status.

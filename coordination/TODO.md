@@ -1,21 +1,35 @@
 # TODO
 
-Live task register for the 15-week thesis and paper programme, 2026-08-17 to
-2026-11-30. Completed tasks are checked and later pruned; durable findings
+Live task register for the 15-week thesis programme, 2026-08-17 to the
+owner-set 2026-11-30 planning target; paper work is deferred. Completed tasks
+are checked and later pruned; durable findings
 belong in `JOURNAL.md`. The design and claim rules are in
 `docs/study_protocol.md` and `docs/claim_evidence_register.md`.
 
 Owners: **R** Ravi; **PS** principal supervisor; **SS** statistical/
 associate supervisor; **DO** institutional data/ethics owner; **IR**
 independent clinical, methods or library reviewer. Tier **T** is
-thesis-essential; tier **P** is publication-enhancing and subject to the
-drop rules in the protocol.
+thesis-essential; tier **P** is non-blocking post-hoc/publication work. A P
+experiment may continue before submission, but its completion is not a thesis
+gate under ADR-044. Paper drafting and DOI work remain deferred.
 
 A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
 ## Current programme — 2026-10-01
+
+ADR-044 sets submission-first scope. Write and review the thesis from the
+already released confirmatory, robustness, explanation, ADR-032 sensitivity
+and ADR-033 Holm evidence. Report the original failed gates and incomplete
+inference; do not promote the interrupted extension's partial cells into a
+finished comparison. T-147 and T-150–T-161 are the thesis critical path.
+The post-hoc extension and correction remain active separate research, with
+all frozen numerical and release gates intact, but T-182–T-186 and T-189–T-191
+no longer block thesis submission. The owner's two-day experiment target is
+not a verified runtime forecast. The owner-set 2026-11-30 planning target
+supersedes the older 26-week study-protocol schedule for project management;
+the university submission deadline still needs independent confirmation.
 
 ADR-040 adds targeted catalytic-generator correction work under T-190 after
 the original rank failures were inspected. ADR-043/T-191 now requires a
@@ -54,9 +68,13 @@ At 13:02 UTC, the Storage Settings scan had stopped and a single monitored
 worker-4 refit started under the pinned recovery plan and completed with a
 matching official scientific record at 14:03 UTC. Two of 21 affected refits
 are verified; 19 remain. At 19:53 UTC a single worker-5 refit started for the
-fixed `r01f01` Piironen–Vehtari horseshoe cell; its result is pending. The
-separate assembly adapter is prepared and tested, but its preflight is gated
-on all 21 refits and six complete worker receipts.
+fixed `r01f01` Piironen–Vehtari horseshoe cell. Its wrapper and child returned
+zero by 20:27 UTC; the cell/trace hashes and independent non-timing scientific
+comparison passed. Three of 21 refits are now verified; 18 remain. No
+numerical worker or claim was active at the 20:30 UTC checkpoint. Original
+posterior-array equality remains unavailable because the source trace bytes
+are missing. The separate assembly adapter is prepared and tested, but its
+preflight is gated on all 21 refits and six complete worker receipts.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:
@@ -346,9 +364,10 @@ or explanation stability.
   Rotterdam-to-GBSG2 transport branch before acquisition or harmonisation.
   Acceptance: ADR-025 records the irreversible scope decision.
 - [ ] T-147 (T, W9–10, owners R/PS/SS; depends T-140–T-145) — Freeze all
-  thesis evidence. Acceptance: clean rerun manifest, statistical/clinical
-  claim approval, immutable result tag and zero unresolved thesis-critical
-  row in the claim ledger.
+  submission-scope thesis evidence independently of the unfinished extension.
+  Acceptance: clean baseline manifest, statistical/clinical claim approval,
+  immutable result tags and zero unresolved thesis-critical row in the claim
+  ledger. T-182–T-186 and T-189–T-191 are not prerequisites under ADR-044.
 
 ## Weeks 1–14 — Thesis writing and audit
 
@@ -374,12 +393,13 @@ or explanation stability.
   results and sensitivities are included without manual number transcription.
   The 2026-09-27 code programme prepares generated artefacts and recorded
   corrections; editing the Overleaf results chapter remains outside its scope.
-  Scope includes the ADR-036/ADR-037 thesis experiments (T-180–T-186), with
-  effects, uncertainty, paired coverage and diagnostic attrition. The original
-  incomplete primary family and failed explanation gate remain explicit;
-  include the separately labelled T-190 correction if executed and retain
-  the original generator-failure findings alongside it;
-  Overleaf editing starts only on owner instruction.
+  Under ADR-044, use the verified baseline, robustness, explanation, ADR-032
+  sensitivity and ADR-033 Holm evidence. The original incomplete primary
+  family and failed explanation gate remain explicit. Include a separate
+  post-hoc extension only if its full evidence bundle, including the separate
+  correction and T-186 gates, finishes before the thesis results lock;
+  otherwise describe it as unfinished future work without partial-grid
+  comparative claims. Overleaf editing starts only on owner instruction.
 - [ ] T-154 (T, W9–10, owners R/PS/SS; depends T-147) — Draft discussion and
   conclusion. Acceptance: each RQ is answered at its supported strength;
   limitations cover internal evaluation, endpoint heterogeneity, predictor
@@ -408,30 +428,31 @@ or explanation stability.
   formatting and archive receive final sign-off.
 - [ ] T-161 (T, W14, owners R/PS; depends T-160) — Submit the university-
   format thesis/source/evidence archive, leaving Week 15 as contingency before
-  the 2026-11-30 deadline.
+  the 2026-11-30 planning target; confirm the university deadline with the
+  supervisors before committing to a submission date.
 
-## Paper and release — deferred until after thesis submission (ADR-036)
+## Paper drafting and DOI — deferred until after thesis submission (ADR-044)
 
 The thesis supplies the planned evidence base for the paper; future journal
 review may require separately documented analyses. T-170 to T-174, T-187 and
 T-188 start only after the thesis is submitted. This deferral does not stop
 the existing programme's private code/evidence release and restore checks.
 
-- [ ] T-170 (P, W9–11, owners R/PS; depends T-135 progressively) — Create
+- [ ] T-170 (P, deferred, owners R/PS; depends T-135 progressively) — Create
   the target-journal article and supplement architecture from frozen thesis
   evidence. Acceptance: contribution, reporting checklist and figure/table
   budget fit the selected journal with no new primary analysis.
-- [ ] T-171 (P, W11–13, owners R/PS/SS; depends T-147/T-170) — Draft the
+- [ ] T-171 (P, deferred, owners R/PS/SS; depends T-147/T-170) — Draft the
   manuscript and supplement. Acceptance: every statement uses the frozen
   claim ledger and result artefacts; title/abstract do not overclaim.
-- [ ] T-172 (P, W13–14, owners R/PS/SS/IR; depends T-171) — Complete methods,
+- [ ] T-172 (P, deferred, owners R/PS/SS/IR; depends T-171) — Complete methods,
   domain and language review. Acceptance: a response matrix resolves every
   actionable comment and journal/category quartile is re-verified.
-- [ ] T-173 (P, W13–15, owners R/DO; depends T-103/T-129/T-147) — Build the
+- [ ] T-173 (P, deferred, owners R/DO; depends T-103/T-129/T-147) — Build the
   permissible publication archive. Acceptance: software, lock, manifests,
   derived outputs and data-access instructions have an archival DOI; upstream
   patient data are included only as allowed by the licence matrix.
-- [ ] T-174 (P, W14–15, owners R/PS/SS; depends T-172/T-173) — Complete the
+- [ ] T-174 (P, deferred, owners R/PS/SS; depends T-172/T-173) — Complete the
   journal submission package. Acceptance: manuscript, supplement, reporting
   checklist, cover letter, CRediT/COI/funding declarations and repository link
   are submission-ready.
@@ -443,17 +464,18 @@ the existing programme's private code/evidence release and restore checks.
 - [ ] T-188 (P, deferred, owner action) — Mint an archival DOI for code and evidence
   (Zenodo), then submit. Owner steps: repository-to-Zenodo link, author
   declarations, journal submission.
-- [ ] T-175 (T/P, W14–15, owners R/PS; no new scope) — Protected contingency
-  for failed reruns, licence decisions, supervisor revisions, university
-  corrections or journal formatting only.
+- [ ] T-175 (T, W14–15, owners R/PS; no new scope) — Protected thesis
+  contingency for evidence corrections, supervisor revisions and university
+  formatting only.
 
-## Thesis extension experiments — post-hoc under ADR-036–ADR-039
+## Active post-hoc extension research — non-blocking under ADR-044
 
-Owner instruction 2026-09-27: the thesis contains every experiment needed
-for a Q1 journal paper, and the paper is drafted later. This is a quality
-target, not an acceptance guarantee. Every result below is post-hoc and
-labelled as such; the frozen confirmatory record stays primary. ADR-033's
-Holm bound is already computed and rendered; ADR-032 has seven existing
+The owner superseded the 2026-09-27 thesis-essential extension scope on
+2026-10-01. The experiment may continue toward a later Q1 paper, but its
+unfinished numerical and release work does not delay the baseline thesis.
+This is a quality target, not an acceptance guarantee. Every result below is
+post-hoc and labelled as such; the frozen confirmatory record stays primary.
+ADR-033's Holm bound is already computed and rendered; ADR-032 has seven existing
 probes and a separately specified 75-cell production stage. The extension
 implementation and result-blind addendum are frozen; the 1,625-fit numerical
 grid began from sealed commit `119476f` and is paused at the interruption
@@ -492,7 +514,7 @@ capture guards passed. They retain v1 gates and require genuine support review,
 reporting/claim outputs and source replay before v3 assembly; fresh-restored
 reporting replay remains a separate pre-publication gate.
 
-- [x] T-180 (T; no dependency) — Write and freeze
+- [x] T-180 (P; no dependency) — Write and freeze
   `docs/protocol_addendum_extensions.md` before results of the four new
   analyses exist. Acceptance: grids and inner-CV objectives, precise variant
   priors and survival-scale calibration, decision-curve action/thresholds/
@@ -517,24 +539,24 @@ reporting replay remains a separate pre-publication gate.
   Inference/completion and separate rendering now verify. All nine contrasts
   are estimable; all adjusted p-values are 1.0 and corrected intervals include
   zero. Final PDF QA passed. Independent of T-180; no duplicate run needed.
-- [ ] T-182 (T; depends T-180) — Fit ridge, lasso and elastic-net Cox on the
+- [ ] T-182 (P; depends T-180) — Fit ridge, lasso and elastic-net Cox on the
   frozen outer folds of all three cohorts. Acceptance: same patients and
   evaluation rules as the Bayesian comparison; penalties selected by inner
   CV with preprocessing inside each training split; complete cell accounting,
   specified paired effects/uncertainty/multiplicity and reproduction checks.
-- [ ] T-183 (T; depends T-180, T-181) — Run the Piironen–Vehtari horseshoe
+- [ ] T-183 (P; depends T-180, T-181) — Run the Piironen–Vehtari horseshoe
   variant on all 75 clinical cells. Acceptance: fixed local/global/slab priors,
   expected relevant predictor count and justified survival-scale calibration;
   comparable ADR-032 sampler settings and unchanged gates; diagnostics, pass
   rate and paired contrasts labelled as joint prior-specification sensitivity.
-- [ ] T-184 (T; depends T-180) — Run decision curve analysis from the stored
+- [ ] T-184 (P; depends T-180) — Run decision curve analysis from the stored
   out-of-fold predictions at the three training-defined horizons.
   Acceptance: survival net benefit against treat-all and treat-none, fixed
   clinical action/thresholds/censoring/support rules, and uncertainty that
   accounts for repeated patients across folds/repeats. Report every specified
   available curve and exclusions; identify fold-specific horizons honestly.
   No refitting or clinical deployment/impact claim.
-- [ ] T-185 (T; preparation depends T-180 source rules; fitting depends T-180, T-182, T-183, T-189 implementation) — Build the matched METABRIC
+- [ ] T-185 (P; preparation depends T-180 source rules; fitting depends T-180, T-182, T-183, T-189 implementation) — Build the matched METABRIC
   clinical-only and clinical-plus-expression comparison from the pinned
   cBioPortal archive. Acceptance: source hashes, audited patient/sample
   alignment and timing, same eligible patients/25 outer folds/endpoints/
@@ -547,7 +569,7 @@ reporting replay remains a separate pre-publication gate.
   Report predictor/event counts, diagnostics, matched effects, uncertainty,
   multiplicity and reproduction checks. Preserve the original full-cohort
   primary analysis separately.
-- [ ] T-189 (T; depends T-180 and T-185 prepared data, not completed matched fits) — Implement and run the Cox catalytic prior
+- [ ] T-189 (P; depends T-180 and T-185 prepared data, not completed matched fits) — Implement and run the Cox catalytic prior
   arm (ADR-038). Acceptance:
   - the prior log-density and weighted mixture estimate match the authors'
     reference implementation on a fixed test case;
@@ -559,7 +581,7 @@ reporting replay remains a separate pre-publication gate.
     with explicit failure counts and independently reconstructed provenance;
     the frozen generator has no redraw remedy and failed cells are immutable;
   - paired contrasts against the other priors and comparators are recorded.
-- [ ] T-190 (T; depends T-180/T-189 implementation and prepared T-185 data,
+- [ ] T-190 (P; depends T-180/T-189 implementation and prepared T-185 data,
   not completion of the original fits) — Validate and implement the separately
   specified catalytic-generator correction under ADR-040. Acceptance:
   - ADR-043's distinct recovered source run and producer map must pass before
@@ -715,7 +737,7 @@ reporting replay remains a separate pre-publication gate.
   to capture future genuine exits; it supplies no past return code or numerical
   approval. The 52-member curated incident preparation preserves the exact
   checkpoint error/correction and prospective complete forensic-image mapping.
-- [ ] T-191 (T; depends T-180) — Recover the interrupted original-law extension
+- [ ] T-191 (P; depends T-180) — Recover the interrupted original-law extension
   grid under ADR-043 without rewriting its frozen records. Acceptance:
   - the fixed 21-cell/34-trace forensic inventory from `c5ac205`, all 1,214
     original cell JSONs, surviving traces, failed outcomes and archived
@@ -738,26 +760,28 @@ reporting replay remains a separate pre-publication gate.
     certify it. Analysis, figure/PDF QA and fresh release restoration retain
     the explicit old/new lineage and missing-original-array limitation. No
     completed local grid alone checks this task or T-186.
-- [ ] T-186 (T; depends T-181–T-185, T-189, T-190, T-191) — Render the extension bundle with the
-  same verified renderer and lineage rules. Acceptance: every thesis number
+- [ ] T-186 (P; depends T-181–T-185, T-189, T-190, T-191) — Render the extension bundle with the
+  same verified renderer and lineage rules. Acceptance: every reported extension number
   traces to generated evidence, with actual visual QA and separate primary/
   post-hoc lineage. Preserve the negative original explanation finding and
   unavailable original contrasts; no retrospective equivalence claim.
   The frozen original version may finish its own rendering/transfer first;
-  complete updated thesis evidence additionally requires the separately
+  complete updated extension evidence additionally requires the separately
   verified corrective version and its explicit original-outcome comparison.
 
 ## Hard scope controls
 
 - No unprespecified model family, prior, real dataset or analysis after
-  protocol freeze at the end of Week 5, except the post-hoc thesis
-  analyses named in ADR-035/ADR-036 and refined by ADR-037–ADR-040, specified in the
-  frozen addendum before their own results. Existing ADR-032/ADR-033 evidence
+  protocol freeze at the end of Week 5, except the separately specified
+  post-hoc extension analyses named in ADR-035/ADR-036 and refined by
+  ADR-037–ADR-040, non-blocking under ADR-044 and specified in the frozen
+  addendum before their own results. Existing ADR-032/ADR-033 evidence
   retains its earlier specification and actual chronology.
 - Rotterdam transport and ADEMP simulation are already dropped and cannot be
   reactivated within this study.
-- If more than one week behind, drop non-primary SHAP case studies and then
-  non-primary sensitivity grid points.
+- The historical pre-freeze drop rule for non-primary SHAP cases and sensitivity
+  grid points does not shorten the already frozen extension grid. A narrower
+  future study needs its own prospective specification and separate claims.
 - Never drop provenance, fold-local preprocessing, calibration, full Bayesian
   diagnostics, predictor-timing audit, primary robustness, claim verification
   or clean thesis build.

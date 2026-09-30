@@ -31,11 +31,14 @@ tool, vendor or model, and must not contain AI-assistance disclosures or similar
 process statements. The work is the student's responsibility and authorship.
 Do not add such language unless the owner explicitly reverses this instruction.
 
-## Delivery deadline
+## Delivery target
 
-The owner requires the thesis and paper package to be finished by 2026-11-30.
-Use the compressed 15-week schedule in `coordination/TODO.md`; do not restore
-the earlier 2027 deadline.
+The owner set 2026-11-30 as the thesis and paper-package planning target in
+August 2026. ADR-044 subsequently made the verified baseline the
+submission-scope thesis evidence and deferred paper drafting and DOI work
+until after thesis submission. Use the compressed 15-week thesis schedule in
+`coordination/TODO.md`; do not restore the earlier 2027 planning dates.
+Confirm the university submission deadline separately.
 
 ## Confirmatory close-out boundary
 

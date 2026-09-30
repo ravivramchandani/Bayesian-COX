@@ -41,7 +41,7 @@ clean-build:
 	conda run --name $(LOCK_ENV) python scripts/verify_environment.py \
 		--lock-file $(LOCK_FILE) --hash-file $(LOCK_FILE).sha256
 	conda run --name $(LOCK_ENV) python -m pytest tests -q
-	conda run --name $(LOCK_ENV) python -m ruff check .
+	conda run --name $(LOCK_ENV) python -m ruff check --no-cache .
 
 data:
 	$(PYTHON) scripts/download_datasets.py
@@ -103,7 +103,7 @@ test: schemas
 	$(PYTHON) -m pytest tests -q
 
 lint:
-	$(PYTHON) -m ruff check .
+	$(PYTHON) -m ruff check --no-cache .
 
 format:
 	$(PYTHON) -m ruff format .
