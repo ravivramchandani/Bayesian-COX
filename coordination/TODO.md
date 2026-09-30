@@ -15,11 +15,12 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
-## Current programme — 2026-09-30
+## Current programme — 2026-10-01
 
 ADR-040 adds targeted catalytic-generator correction work under T-190 after
-the original rank failures were inspected. The original 1,625-cell extension
-programme continues unchanged. Corrected fitting has not started. First
+the original rank failures were inspected. ADR-043/T-191 now requires a
+separate recovered lineage for the interrupted original-law extension; its
+frozen original run remains preserved. Corrected fitting has not started. First
 validate all catalytic training inputs, establish exact input compatibility
 and a justified reuse/refit inventory, then freeze and pilot the separate
 post-hoc correction. Existing source or transfer receipts do not certify this
@@ -31,10 +32,14 @@ workers and the V3 pre-fit continuation are stopped. The original grid has
 1,214 stored cells, but 21 of them reference 34 missing traces; six stale
 claims and two partial trace files were archived. V3 has sealed all 1,650
 first-draw replay contexts, while its input/reuse inventory stopped at
-1,536 of 1,625 cells. An isolated original-trace reconstruction pilot is
-running; no corrected fit or result has started. The next gate is its actual
-return and exact trace-hash comparison, followed by a reviewed recovery of
-the remaining missing traces and strict original verification. See `HANDOFF.md`.
+1,536 of 1,625 cells. The isolated one-cell pilot completed: its official
+non-timing scientific record matches the original, but its new trace SHA-256
+does not, and the missing original posterior arrays cannot be compared.
+It is not an original trace restoration. A prospectively frozen 21-refit and
+411-absent [roster](recovery/2026-09-30-original-extension-absent-roster.json),
+new recovered source root, strict verification and V3 source
+rebinding are the next gates. No corrected fit or result has started. See
+`HANDOFF.md` and ADR-043.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:
@@ -540,6 +545,9 @@ reporting replay remains a separate pre-publication gate.
 - [ ] T-190 (T; depends T-180/T-189 implementation and prepared T-185 data,
   not completion of the original fits) — Validate and implement the separately
   specified catalytic-generator correction under ADR-040. Acceptance:
+  - ADR-043's distinct recovered source run and producer map must pass before
+    a new complete reuse inventory, arithmetic or corrected numerical freeze;
+    the interrupted V3 partial inventory is retained as historical evidence;
   - whole-block training-only preflight covers all 825 catalytic outer jobs
     and all WME inner splits, with rare-category support, finite inputs,
     ranks, seeds and hashes; no MCMC or validation-score selection;
@@ -690,7 +698,30 @@ reporting replay remains a separate pre-publication gate.
   to capture future genuine exits; it supplies no past return code or numerical
   approval. The 52-member curated incident preparation preserves the exact
   checkpoint error/correction and prospective complete forensic-image mapping.
-- [ ] T-186 (T; depends T-181–T-185, T-189, T-190) — Render the extension bundle with the
+- [ ] T-191 (T; depends T-180) — Recover the interrupted original-law extension
+  grid under ADR-043 without rewriting its frozen records. Acceptance:
+  - the fixed 21-cell/34-trace forensic inventory from `c5ac205`, all 1,214
+    original cell JSONs, surviving traces, failed outcomes and archived
+    interrupted claims remain preserved; verify the exact 411 initially absent
+    identities against the frozen roster before dispatch and enforce one
+    producer for the new root;
+  - all 21 trace-incomplete cells are refitted once in fresh captured roots
+    under sealed `119476f`, exact lock/data/manifest/seeds/budgets, with every
+    actual return, attempt, diagnostic and new trace hash retained; compare
+    each non-timing scientific record to its saved original and review every
+    mismatch, without claiming equality to missing posterior arrays; recorded
+    terminal failed/failed-diagnostics outcomes remain eligible if they match;
+  - a separate recovered-run root binds the 1,193 fully verified inherited
+    cells, the 21 new refits and the 411 initially absent positions to their
+    actual producers; the sealed six-shard runner completes only the absent
+    positions, and all 1,625 final cells pass strict hash/deep verification;
+  - the fixed 92 selected reproductions, including three affected
+    repeat-one/fold-one cells, bind to and pass against this recovered source
+    and its actual traces; prestaged original receipts do not automatically
+    certify it. Analysis, figure/PDF QA and fresh release restoration retain
+    the explicit old/new lineage and missing-original-array limitation. No
+    completed local grid alone checks this task or T-186.
+- [ ] T-186 (T; depends T-181–T-185, T-189, T-190, T-191) — Render the extension bundle with the
   same verified renderer and lineage rules. Acceptance: every thesis number
   traces to generated evidence, with actual visual QA and separate primary/
   post-hoc lineage. Preserve the negative original explanation finding and

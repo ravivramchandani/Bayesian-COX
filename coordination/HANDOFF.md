@@ -2,7 +2,7 @@
 
 State needed to resume work in a new session or on another machine.
 
-Updated: 2026-09-30 (New Zealand; dated checkpoints below use UTC)
+Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
 Current integration checkout:
 `~/bayes-cox-runs/ravi-main-integration-20260929`. Current engineering validation
@@ -39,7 +39,7 @@ and 634 implementation files remained unchanged. Its actual zero-return
 capture is retained in
 `coordination/recovery/2026-09-29-generator-correction-document-mirror-v3.json`.
 
-## Interruption recovery — 2026-09-30, 10:58 UTC
+## Interruption recovery — 2026-09-30, updated 11:21 UTC
 
 The six original extension workers and V3 pre-fit continuation are stopped;
 their recorded PIDs are historical. The original run has 1,214 of 1,625 cell
@@ -69,15 +69,29 @@ missing traces. The local integrity list is
 `~/bayes-cox-runs/environment-recovery-20260930-after-reboot-v1/missing_original_traces_audit.json`.
 The portable [trace inventory](recovery/2026-09-30-host-interruption-trace-inventory.json)
 records all 34 expected hashes without presenting them as repaired results.
-An isolated frozen-code refit pilot is running under
-`~/bayes-cox-runs/original-trace-reconstruction-pilot-20260930-v1/`; its
-result is pending and it does not modify or certify any original cell.
+The isolated frozen-code pilot under
+`~/bayes-cox-runs/original-trace-reconstruction-pilot-20260930-v1/`
+finished. Its fresh cell matches the saved non-timing scientific record under
+the sealed reproduction comparator, but its posterior NetCDF SHA differs.
+The wrapper returned 1 solely on this hash mismatch; its fitting child
+produced a terminal complete cell. The original posterior arrays are missing,
+so their equality to the new samples cannot be established. The pilot changed
+no original file and is not one of the 21 accepted recovery refits. The
+[pilot comparison](recovery/2026-09-30-original-trace-pilot-comparison.json)
+records the hashes, comparison and limitation.
 
-Next, require the pilot's actual return and exact trace-hash comparison.
-Only verified reconstruction or an independently reviewed new lineage may
-resolve the 21 affected cells. Then recheck all original cell/trace hashes,
-resume the six sealed shards, and launch a new captured V3 owner for the
-remaining reuse inventory and arithmetic. Do not relaunch the interrupted
+ADR-043/T-191 governs the next work. The exact 411 absent-cell identities are
+frozen in the [absent roster](recovery/2026-09-30-original-extension-absent-roster.json);
+verify that roster against the original run before new dispatch, then capture
+all 21 affected fits in fresh write-once
+roots under the sealed settings. Compare each official scientific record to
+its saved original. A new recovered source run may inherit the 1,193 strictly
+verified cells and those 21 fresh cells only after all comparisons pass; it
+then fills the 411 frozen absent positions with one producer. Preserve every
+terminal failed outcome. Rebind the fixed 92 selected reproduction checks and
+V3's reuse/arithmetic inventory to that actual recovered source. V3's 1,650
+sealed replay contexts remain distinct evidence, but its 1,536-cell partial
+inventory cannot certify the new source. Do not relaunch the interrupted
 one-attempt wrapper or treat saved cell JSONs alone as complete evidence.
 
 ## Next action — validate the catalytic generator correction

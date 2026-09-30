@@ -53,12 +53,23 @@ partial traces were archived with verified hashes. The
 [trace inventory](../coordination/recovery/2026-09-30-host-interruption-trace-inventory.json)
 records each missing file and expected hash. The frozen raw expression,
 matched cohort and locked environment have been restored and verified. An
-isolated original-trace reconstruction pilot is running; its result is pending
-and it does not modify the frozen run. The original six workers remain stopped.
+isolated frozen-code pilot completed. Its new cell matches the saved official
+non-timing scientific record, but the new NetCDF hash differs; the missing
+original posterior arrays cannot be compared. Its
+[comparison receipt](../coordination/recovery/2026-09-30-original-trace-pilot-comparison.json)
+is method evidence, not a restored original trace or a released result. The
+original six workers remain stopped. ADR-043/T-191 requires all 21 affected
+cells to be refitted in fresh captured roots, then a separate recovered run
+to finish the 411 identities fixed in the
+[absent roster](../coordination/recovery/2026-09-30-original-extension-absent-roster.json).
+Preserve the old run and every
+terminal failure; do not resume its workers or copy pilot traces into it.
 
 The V3 correction has sealed all 1,650 first-draw replay contexts and written
 its selector. Its input/reuse inventory stopped at 1,536 of 1,625 cells; no
 complete inventory, arithmetic, corrected fit or corrected result is certified.
+The completed replay is preserved, while source-dependent reuse and arithmetic
+must be checked against the recovered run before corrected fitting.
 The two original external sparsebundles remain detached. Their byte-verified
 internal copies are mounted read-only, and SSD980 is attached for the eventual
 transfer. The latest [HANDOFF](../coordination/HANDOFF.md) records local audit

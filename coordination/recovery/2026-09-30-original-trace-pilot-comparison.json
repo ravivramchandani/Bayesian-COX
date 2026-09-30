@@ -1,0 +1,14 @@
+{
+  "cell_id": "metabric_matched__expression__r02f05__bayesian_horseshoe__full",
+  "comparison": "sealed scientific_content and assert_scientific_equal passed",
+  "expected_original_trace_sha256": "6c068dcbd5ac600fd3c4215e9b4548e95237cca85312ba386792226296ee5ae0",
+  "new_trace_sha256": "dd46aaca4a3a411ace673681bccac1a02dad520ed605cbb9e5764e63a8fbcb36",
+  "note": "This pilot is compatibility evidence, not an exact original-trace restoration or a corrected fit.",
+  "original_cell_unchanged": true,
+  "pilot_cell_file_sha256": "d6e4b6436bd9018edbd158c389aa5011721e8284cae04cd104055cde477b1919",
+  "pilot_wrapper_return_code": 1,
+  "posterior_array_comparison": "unavailable because original trace bytes are missing",
+  "recorded_at_utc": "2026-09-30T11:20:44.433115+00:00",
+  "sealed_reproduction_source_sha256": "1c16387ecf8cafb01488840229f51f727dbe741614c9c91996c98a1a53781428",
+  "source_cell_file_sha256": "758898931f34ae921879a88014fc162df7d1936efb234a4b18b0d8ac4db107a6"
+}

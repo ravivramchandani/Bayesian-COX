@@ -1062,3 +1062,84 @@ Format:
   missing subset, location plan, scientific approval, corrected freeze or
   numerical result. ADR-040/ADR-041's scope, seeds, budgets, acceptance gates,
   full mixed verification and fresh-restore requirements remain unchanged.
+
+## ADR-043 — Recover the interrupted extension in a separate result lineage
+
+- Status: ACCEPTED for the prospective recovery scope; execution and release
+  remain pending
+- Date: 2026-10-01 (New Zealand)
+- Context: The unpublished 1,625-cell post-hoc extension run stopped with
+  1,214 stored cell JSONs and 411 positions without a cell. Twenty-one of the
+  stored records reference 34 missing posterior NetCDF files; the other
+  1,193 cells passed strict cell/trace hash verification. The exact 21-cell,
+  34-trace inventory was committed at `c5ac205` before the isolated one-cell
+  recovery pilot returned. That pilot's source/refit non-timing scientific
+  JSON matches under the frozen reproduction comparison, but its NetCDF SHA
+  differs. A surviving trace demonstrates time-dependent container metadata;
+  the missing original posterior arrays cannot be compared. This pilot is a
+  recovery-method probe, not an accepted replacement cell. The six interrupted
+  claims and two partial traces are preserved in a verified local archive.
+- Decision:
+  - Preserve the interrupted original run, including every success, failure,
+    cell JSON, surviving trace and missing-trace reference. The six dead-owner
+    claims and two partial traces were archived and their claim paths cleared
+    before this decision; retain that forensic receipt and make no further
+    change to the original result root.
+    Never write reconstructed files into its missing trace paths, rewrite its
+    21 cell JSONs or label a new NetCDF as the original byte-bound artifact.
+  - Freeze the 21 recovery identities from
+    `coordination/recovery/2026-09-30-host-interruption-trace-inventory.json`.
+    Freeze the 411 absent identities from the same original manifest and cell
+    directory in
+    `coordination/recovery/2026-09-30-original-extension-absent-roster.json`
+    before any new numerical dispatch; prohibit another producer of the
+    recovered root while this roster is assembled. The 21 were selected
+    by missing trace evidence, not results. In fresh write-once roots,
+    dispatch all 21 once under sealed production commit
+    `119476f`, the original manifest, exact locked environment and matched
+    data hash, seeds, budgets and diagnostic rules. The isolated pilot is not
+    counted as one of these 21. Preserve actual starts, child return codes,
+    raw logs, attempts, failed outcomes, cells and trace hashes. A process
+    interruption requires a separate captured retry, not overwrite.
+  - Compare each new cell against its preserved original JSON using the
+    frozen reproduction rule that excludes only timing, trace-container
+    hashes and traceback. Record status, seed, parameters, predictions,
+    metrics, diagnostics and every difference. Original posterior-array
+    equality is unavailable and must never be claimed. A difference or an
+    interrupted or unresolved attempt stops automatic run assembly for
+    explicit scientific review; it does not select a favourable repeat or
+    erase an old failure. A recorded `failed` or `failed_diagnostics` result
+    is a terminal scientific outcome and remains eligible if its official
+    scientific record matches.
+  - After the 21 refits and comparisons pass, assemble a distinct recovered
+    extension root from the 1,193 fully verified original cells/traces and
+    the 21 new cells/traces. Bind each producer, file hash and reason for
+    replacement in a write-once lineage manifest; require the frozen run
+    manifest to match exactly. Resume only the 411 frozen absent positions in
+    that recovered root using the sealed six-shard runner and unchanged
+    settings. After the documented dead-claim archival and clearance, the old
+    run remains separately readable and unchanged.
+  - Recheck all 1,625 recovered cells and trace hashes, independent full-grid
+    metrics/diagnostics, the fixed 92-cell selected reproduction (including
+    the three affected repeat-one/fold-one identities), rendered figures and
+    actual PDF QA. Rebind each selected reproduction to the recovered source
+    map and compare sampled arrays against the actual source trace. Existing
+    prestaged refits and receipts do not automatically certify this recovered
+    run, particularly its three replaced selected cells. Report the recovery
+    lineage and any old/new outcome differences in the thesis evidence. Final
+    release requires a fresh
+    receiving restoration and source/receiving comparison; a local assembled
+    grid is not a published result.
+  - Keep V3's sealed 1,650 first-draw replay as distinct evidence. Its partial
+    1,536-cell reuse inventory binds the interrupted source and cannot certify
+    the recovered run. Review whether replay inputs can be independently
+    rebound to the actual recovered source map; otherwise repeat them. Build a
+    new complete input/reuse inventory and arithmetic against the actual
+    recovered producer map before any
+    ADR-040 corrected numerical freeze or fit. Retain ADR-041/ADR-042's
+    original-law producer and reproduction gates with explicit new locations.
+- Consequences: This is a post-incident recovery of an unpublished post-hoc
+  extension, not a retrospective repair of the released confirmatory or
+  robustness evidence. It supersedes ADR-040's assumption that the intact
+  original extension shards can simply continue. The catalytic correction
+  remains a separate post-hoc version with its existing scientific gates.
