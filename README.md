@@ -110,7 +110,7 @@ Install and verify it with conda-lock:
 conda-lock install -n bayes-cox-clean conda-lock.yml
 conda run -n bayes-cox-clean python scripts/verify_environment.py
 conda run -n bayes-cox-clean python -m pytest -q
-conda run -n bayes-cox-clean python -m ruff check .
+conda run -n bayes-cox-clean python -m ruff check --no-cache .
 ```
 
 The independently verified local environment is

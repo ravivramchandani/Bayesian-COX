@@ -23,7 +23,7 @@ conda run -n bayes-cox-conda-lock-4-0-2 \
   conda-lock install -n bayes-cox-clean conda-lock.yml
 conda run -n bayes-cox-clean python scripts/verify_environment.py
 conda run -n bayes-cox-clean python -m pytest tests -q
-conda run -n bayes-cox-clean python -m ruff check .
+conda run -n bayes-cox-clean python -m ruff check --no-cache .
 ```
 
 The equivalent Make workflow is:

@@ -145,6 +145,23 @@ contains the current code, plans and guides; the commands below retrieve the
 result files and verify them. None of these releases requires files from the
 supervisor's laptop.
 
+## Thesis source is a separate Overleaf project
+
+`Main.tex` and the thesis chapters are not in the GitHub code repository.
+They are in the separate [Overleaf Git project](https://git.overleaf.com/6a750f3e68075fe560b0c306).
+Ravi needs access to that project as well as the private GitHub repository;
+access from this Mac does not verify his own login. He may edit in Overleaf or,
+after cloning `bayesian-cox`, clone the thesis beside it:
+
+```bash
+git clone https://git.overleaf.com/6a750f3e68075fe560b0c306 ../thesis-overleaf
+```
+
+`make thesis` expects `../thesis-overleaf` by default; set `THESIS_DIR` if it
+lives elsewhere. The remote thesis is a draft: its results and conclusion
+chapters and abstract still need the verified findings and review. Restored
+figures and tables come from the GitHub releases above.
+
 ## Install and restore on a fresh Mac
 
 Prerequisites: Apple Silicon, macOS 14 or newer, Git, authenticated GitHub CLI
@@ -186,7 +203,7 @@ conda run -n bayes-cox-clean python scripts/restore_programme_release.py \
   --output-dir "$RAVI_RESULTS"
 
 conda run -n bayes-cox-clean make test PYTHON=python
-conda run -n bayes-cox-clean python -m ruff check .
+conda run -n bayes-cox-clean python -m ruff check --no-cache .
 ```
 
 The original restoration reports `cells=450 complete=430 failed_diagnostics=20`
