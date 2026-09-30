@@ -15,7 +15,7 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
-## Current programme — 2026-09-29
+## Current programme — 2026-09-30
 
 ADR-040 adds targeted catalytic-generator correction work under T-190 after
 the original rank failures were inspected. The original 1,625-cell extension
@@ -601,10 +601,20 @@ reporting replay remains a separate pre-publication gate.
   recovery archives do not supply a complete corrected handoff.
   A storage interruption at about 09:44 UTC ended the first replay attempt.
   Root preserved the full image, passed the read-only APFS check and rehashed
-  all preflight evidence plus 76 complete replay contexts. Continuation PID
-  29120 resumed verified checkpoints at 09:55 UTC on the new 400 GiB APFS
-  image; the old attempt and partial child remain read-only. Corrected fits
-  are still unapproved. Reporting/QA implementation passed 51 portable checks
+  all preflight evidence plus 76 complete replay contexts. The second attempt
+  resumed those checkpoints at 09:55 UTC but its wrapper ended with return
+  code 1 at 22:20:35 UTC when hashing the reuse log returned an I/O error.
+  The reuse subprocess return code was not published and remains unknown.
+  Both external sparsebundle originals remain detached and preserved; complete
+  file-by-file byte-verified internal copies are mounted read-only. An
+  independent sealed audit passed all 1,592 complete replay contexts, leaving
+  58 of 1,650 contexts without top-level receipts. One partial context is
+  excluded. A separate V3 root now holds only the 1,592 verified complete
+  contexts, staged with a zero-return byte check. V3 continuation and
+  arithmetic have not launched; no corrected fit is approved. The audit,
+  staging and recovery receipts are local under `~/bayes-cox-runs/`, not yet
+  a complete remote results release. See `HANDOFF.md` for exact paths and
+  current space guards. Reporting/QA implementation passed 51 portable checks
   and three subtests; actual results/review/replay remain pending. Transfer
   v2 implementation is integrated with its full 100-file preparation and
   68 passing portable checks/35 subtests. Independent review resolved the

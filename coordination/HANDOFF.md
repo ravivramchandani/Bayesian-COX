@@ -45,9 +45,9 @@ failures. The original numerical programme continues from its sealed code;
 no corrected numerical run has started. Do not alter current workers,
 their inputs or saved cells. Training-only generator preflight is complete
 across all 825 catalytic jobs and every WME inner split. Independent
-first-proposal/input replay is running before a justified reuse/refit
-inventory. Original accepted and failed outcomes are both retained when
-complete inputs/model/fit/evaluation identity is proved.
+first-proposal/input replay awaits its last 58 contexts before a justified
+reuse/refit inventory. Original accepted and failed outcomes are both retained
+when complete inputs/model/fit/evaluation identity is proved.
 
 The preserved proposal is
 `coordination/recovery/2026-09-29-generator-correction-proposal/PROPOSAL.md`.
@@ -190,27 +190,56 @@ reattached it read-only. The APFS check passed with exit code zero. All
 and 76 complete replay contexts were independently rehashed successfully.
 One uncommitted next child and its claims remain in the old attempt.
 
-The current pre-fit owner is continuation PID 29120, launched at 09:55 UTC
-through owned capture PID 29118. The unchanged helper and pinned `d332013`
-code resume the 76 verified checkpoints in a new witness root:
+The second pre-fit attempt launched continuation PID 29120 at 09:55 UTC on
+29 September through owned capture PID 29118. Its witness root was
 `/Volumes/BayesCoxTransfer20260929/correction-20260929/reuse_v2`.
-Its arithmetic and orchestration outputs are sibling `arithmetic_v2` and
-`continuation_v2`. The new 400 GiB APFS image is backed by
-`/Volumes/SSD980/bayesian-cox-extensions-20260928/BayesCoxTransfer20260929.sparsebundle`.
-The original image stays read-only; original numerical owners, code, data,
-traces and results remain unchanged. At 10:38 UTC, 130 independently verified
-context receipts were present and the original grid contained 1,095 cells:
-901 complete, 169 failed and 25 failed diagnostics. These are dated
-checkpoints. The retained 10:23 checkpoint incorrectly counted a nonexistent
-`first_draw` directory as zero; the 10:38 checkpoint uses the actual
-`replay/contexts` receipts and explicitly records that counting error.
+At 22:20:35 UTC, its wrapper ended with actual return code 1: an I/O error
+occurred while hashing `reuse.stdout.log` after the reuse subprocess returned.
+No child return-code receipt was published, so the subprocess return code is
+unknown. Neither replay completion nor arithmetic was published. Preserve
+this attempt, its partial child, claims and logs under
+`~/bayes-cox-runs/extensions-20260928/correction_storage_incident_20260929_v1/`
+and the external transfer image; do not infer a scientific failure from the
+wrapper error.
 
-The request, actual wrapper/child launch and raw logs are retained in
-`~/bayes-cox-runs/extensions-20260928/correction_storage_incident_20260929_v1/`.
-The wrapper records the eventual genuine continuation return code on the
-internal disk. The new attempt still stops before the five actual execution
-reviews, freeze, pilot or corrected fits. Keep SSD980 connected and both
-images mounted; do not start another replay or edit either attempt.
+At the second storage incident, both external APFS image volumes were
+unmounted while SSD980 remained mounted. Both original sparsebundles were
+normally detached and left unchanged. Complete internal backup copies were
+verified file by file against the detached originals: 1,339 files and
+5,559,317,478 bytes for the original preflight/code image, and 2,759 files
+and 11,516,716,006 bytes for the transfer image. Only the internal copies are
+mounted read-only. The old copy is at its historical
+`/Volumes/BayesCoxExtensions20260928` path for exact input-path bindings;
+the transfer copy is at `/Volumes/BayesCoxTransferRecovery20260930`.
+Recovery capture and clone-copy receipts are under
+`~/bayes-cox-runs/correction-storage-recovery-20260930-v1/`.
+
+The independent read-only audit in
+`~/bayes-cox-runs/correction_transfer_clone_receipt_audit_20260930_v1/`
+has sealed receipt SHA-256
+`5240addb8523c92fcd9e4cbb795bd9a872bffe8e2c74d982fa6bfed7cf40eb76`.
+It accepted all 1,592 complete top-level replay receipts, including their
+bound child/input artifacts and recomputed first-draw assessment, with zero
+recorded failures. Exactly 58 of 1,650 contexts still lack a top-level
+receipt. One partial context has no completion receipt and is not reusable.
+The separate V3 staging returned code zero and byte-verified 1,592 complete
+contexts (6,370 files; 2,701,809,549 bytes) into
+`~/bayes-cox-runs/correction-storage-recovery-20260930-v1/reuse_v3`.
+Its `reuse_v3_staging.completed.json` records the audit binding and exclusion
+of the partial context and old claims. V3 continuation request and launcher
+are in preparation; V3 replay and arithmetic have not started. No corrected
+fit, scientific freeze or final result is certified by recovery or staging.
+
+At 02:44 UTC on 30 September, all six original workers were alive and the
+original run held 1,188 of 1,625 cells: 979 complete, 174 failed and 35
+failed diagnostics. About 27 GiB of internal space remained at 02:51 UTC.
+Check internal `df` every 10–15 minutes during further V3 or original writes.
+Do not start corrected fitting at 15 GiB or less free, or any further
+write-heavy stage at 10 GiB or less free. These are recovery-space guards,
+not scientific gates. The remaining 437 original cells have a planning
+estimate of about 19.8 GiB but no proven upper bound. Do not duplicate the
+original workers; keep SSD980 attached for the eventual transfer, without
+mounting or writing either original sparsebundle.
 
 Correction-aware reporting/QA is integrated at
 `scripts/catalytic_correction/reporting/`. Its reviewed runtime and copied

@@ -6,7 +6,7 @@ active. Their final results are not yet available as a verified remote release.
 
 Read [HANDOFF](../coordination/HANDOFF.md) and [TODO](../coordination/TODO.md)
 before launching extension work on another Mac. The owner's existing jobs
-still own the original run and input replay; do not start overlapping workers.
+still own the original run; do not start overlapping workers.
 A clone supplies code and plans. Completed results are restored from the
 private releases below.
 
@@ -16,7 +16,7 @@ redraw, with no terminal outcome. The
 [completed-preflight record](../coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json)
 binds all 12,446 artifacts and seed histories. Independent original-draw/input
 replay and arithmetic must complete before the five actual execution reviews,
-freeze and full-budget pilot. The detached continuation stops before fitting.
+freeze and full-budget pilot. No corrected fit has started.
 
 The corrected launch safeguard is integrated as reviewed engineering source.
 Earlier V1/V2 versions and their review failures remain preserved. The five
@@ -43,15 +43,25 @@ Guard history additionally requires separately captured source and fresh
 receiving semantic verification; existing release-v3 only transports those
 records.
 
-At 15:38:44 UTC on 29 September, a non-atomic metadata check showed 707 of
-1,650 independent input receipts and 1,115 of 1,625 original outcomes:
-917 complete, 170 failed and 28 failed diagnostics. All 15 monitored jobs
-were present. These are dated progress counts.
-Original successes/failures and interrupted storage/replay evidence remain
-preserved. Keep SSD980 and its two mounted images available while jobs run.
-Owner-side integration uses the resident checkout; only the six published
-guide/coordination documents are mirrored into the original IDE checkout
-while live worktrees depend on its shared Git metadata. The
+At 02:44 UTC on 30 September, the six original extension workers were alive
+and 1,188 of 1,625 original cells were stored: 979 complete, 174 failed and
+35 failed diagnostics. These are dated progress counts, not final results.
+The second pre-fit continuation ended with wrapper return code 1 after an
+I/O error while hashing its reuse log; the reuse subprocess return code is
+unknown. The two original external sparsebundles remain preserved and
+detached. Their complete, byte-verified internal copies are mounted read-only.
+An independent sealed audit verified 1,592 of 1,650 complete first-draw replay
+contexts. Only those complete contexts were staged into a separate V3 root;
+one partial context and old claims were excluded. The remaining 58 contexts,
+arithmetic and all corrected fits are pending. V3 continuation has not launched.
+The local audit and staging records are under
+`~/bayes-cox-runs/correction_transfer_clone_receipt_audit_20260930_v1/` and
+`~/bayes-cox-runs/correction-storage-recovery-20260930-v1/`; these are not yet
+a remote results release. Keep SSD980 attached for the eventual transfer, and
+do not start overlapping workers or write to either original sparsebundle.
+Owner-side integration uses the resident checkout. The earlier six-document
+mirror into the original IDE checkout was narrowly scoped while live worktrees
+depend on its shared Git metadata. The
 [14:55 document mirror](../coordination/recovery/2026-09-29-generator-correction-document-mirror-v3.json)
 records that narrow update from published `a26d5a2`.
 
