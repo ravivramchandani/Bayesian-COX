@@ -52,13 +52,16 @@ unknown. The two original external sparsebundles remain preserved and
 detached. Their complete, byte-verified internal copies are mounted read-only.
 An independent sealed audit verified 1,592 of 1,650 complete first-draw replay
 contexts. Only those complete contexts were staged into a separate V3 root;
-one partial context and old claims were excluded. The remaining 58 contexts,
-arithmetic and all corrected fits are pending. V3 continuation has not launched.
+one partial context and old claims were excluded. V3 continuation launched at
+03:00:40 UTC on 30 September to complete the remaining 58 contexts.
+Replay completion, arithmetic and all corrected fits are still pending.
 The local audit and staging records are under
 `~/bayes-cox-runs/correction_transfer_clone_receipt_audit_20260930_v1/` and
 `~/bayes-cox-runs/correction-storage-recovery-20260930-v1/`; these are not yet
 a remote results release. Keep SSD980 attached for the eventual transfer, and
 do not start overlapping workers or write to either original sparsebundle.
+The active V3 launch record is under
+`~/bayes-cox-runs/correction-continuation-v3-owner-20260930-v1/`.
 Owner-side integration uses the resident checkout. The earlier six-document
 mirror into the original IDE checkout was narrowly scoped while live worktrees
 depend on its shared Git metadata. The

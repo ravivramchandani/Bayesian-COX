@@ -610,10 +610,14 @@ reporting replay remains a separate pre-publication gate.
   independent sealed audit passed all 1,592 complete replay contexts, leaving
   58 of 1,650 contexts without top-level receipts. One partial context is
   excluded. A separate V3 root now holds only the 1,592 verified complete
-  contexts, staged with a zero-return byte check. V3 continuation and
-  arithmetic have not launched; no corrected fit is approved. The audit,
-  staging and recovery receipts are local under `~/bayes-cox-runs/`, not yet
-  a complete remote results release. See `HANDOFF.md` for exact paths and
+  contexts, staged with a zero-return byte check. V3 detached capture PID
+  27135 and helper PID 27137 launched at 03:00:40 UTC on 30 September from
+  `~/bayes-cox-runs/correction-continuation-v3-owner-20260930-v1/`, bound to
+  request SHA-256 `ab38b3ecf6dbfe729e65ea11722945dbcb291b32fac05cdfd2ea96596dba7b9a`.
+  Replay is active; child return, whole replay, arithmetic and corrected fits
+  remain pending. The audit, staging and recovery receipts are local under
+  `~/bayes-cox-runs/`, not yet a complete remote results release. See
+  `HANDOFF.md` for exact paths and
   current space guards. Reporting/QA implementation passed 51 portable checks
   and three subtests; actual results/review/replay remain pending. Transfer
   v2 implementation is integrated with its full 100-file preparation and

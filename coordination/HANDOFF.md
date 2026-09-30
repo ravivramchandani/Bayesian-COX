@@ -45,9 +45,9 @@ failures. The original numerical programme continues from its sealed code;
 no corrected numerical run has started. Do not alter current workers,
 their inputs or saved cells. Training-only generator preflight is complete
 across all 825 catalytic jobs and every WME inner split. Independent
-first-proposal/input replay awaits its last 58 contexts before a justified
-reuse/refit inventory. Original accepted and failed outcomes are both retained
-when complete inputs/model/fit/evaluation identity is proved.
+first-proposal/input replay is active, with 58 contexts remaining before a
+justified reuse/refit inventory. Original accepted and failed outcomes are
+retained when complete inputs/model/fit/evaluation identity is proved.
 
 The preserved proposal is
 `coordination/recovery/2026-09-29-generator-correction-proposal/PROPOSAL.md`.
@@ -226,9 +226,18 @@ The separate V3 staging returned code zero and byte-verified 1,592 complete
 contexts (6,370 files; 2,701,809,549 bytes) into
 `~/bayes-cox-runs/correction-storage-recovery-20260930-v1/reuse_v3`.
 Its `reuse_v3_staging.completed.json` records the audit binding and exclusion
-of the partial context and old claims. V3 continuation request and launcher
-are in preparation; V3 replay and arithmetic have not started. No corrected
-fit, scientific freeze or final result is certified by recovery or staging.
+of the partial context and old claims. V3 detached capture PID 27135 and
+continuation helper PID 27137 launched at 03:00:40 UTC on 30 September from
+`~/bayes-cox-runs/correction-continuation-v3-owner-20260930-v1/`.
+The frozen request SHA-256 is
+`ab38b3ecf6dbfe729e65ea11722945dbcb291b32fac05cdfd2ea96596dba7b9a`.
+Its witness is the internal
+`~/bayes-cox-runs/correction-storage-recovery-20260930-v1/reuse_v3` root;
+new arithmetic and orchestration outputs are sibling `arithmetic_v3` and
+`continuation_v3` directories under the same recovery root.
+The replay is active; the child return code, whole replay, arithmetic and
+all corrected fits are pending. No scientific freeze or final result is
+certified by recovery, staging or launch.
 
 At 02:44 UTC on 30 September, all six original workers were alive and the
 original run held 1,188 of 1,625 cells: 979 complete, 174 failed and 35
