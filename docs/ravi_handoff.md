@@ -91,6 +91,10 @@ ready; a separate reviewed adapter must bind the full recovered source before
 continuation. The latest [HANDOFF](../coordination/HANDOFF.md) records local
 audit paths and the recovery sequence. No partial extension or correction
 evidence has yet been published as a remote results release.
+At 13:02 UTC, one worker-4 refit had started after the Storage Settings scan
+stopped; its result is pending and no other numerical worker is active.
+The [assembly guide](extension_recovery_assembly.md) identifies the separate
+adapter and its full-refit gate; assembly has not yet run.
 
 Owner-side integration uses the resident checkout. The earlier six-document
 mirror into the original IDE checkout was narrowly scoped while live worktrees

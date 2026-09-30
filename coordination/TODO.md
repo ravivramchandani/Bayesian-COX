@@ -50,6 +50,10 @@ adapter are reviewed. The two redundant internal
 image backups were removed only after fresh byte verification and read-only
 remount of their SSD originals; live result roots remain on Mac APFS. No
 complete recovered extension grid or corrected fit is yet certified.
+At 13:02 UTC, the Storage Settings scan had stopped and a single monitored
+worker-4 refit started under the pinned recovery plan; its result remains
+pending. The separate assembly adapter is prepared and tested, but its
+preflight is gated on all 21 refits and six complete worker receipts.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:
