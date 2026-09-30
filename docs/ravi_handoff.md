@@ -92,21 +92,19 @@ A dedicated 300 GiB virtual APFS image on SSD980 is mounted at
 `/Volumes/BayesCoxRecovery20261001` for future results; it has passed
 exclusive-create and atomic-rename probes. Existing result roots were not
 moved into it, and it must be mounted before any future job using it.
-A guarded recovery controller is published. Its first two monitored refits
+A guarded recovery controller is published. Its first three monitored refits
 finished with zero wrapper/child returns and matching official non-timing
-scientific records. The [first receipt](../coordination/recovery/2026-09-30-first-extension-recovery-refit.json)
-and [second receipt](../coordination/recovery/2026-09-30-second-extension-recovery-refit.json)
-bind the evidence. Nineteen affected refits and 411 initially absent cells
-remain. The pinned controller's assembly command is retired; the separate
-adapter must bind the full recovered source before continuation. The latest
+scientific records. The [first receipt](../coordination/recovery/2026-09-30-first-extension-recovery-refit.json),
+[second receipt](../coordination/recovery/2026-09-30-second-extension-recovery-refit.json)
+and [third receipt](../coordination/recovery/2026-09-30-third-extension-recovery-refit.json)
+bind the evidence. Eighteen affected refits and 411 initially absent cells
+remain. Original missing posterior arrays cannot be compared. The pinned
+controller's assembly command is retired; the separate adapter must bind the
+full recovered source before continuation. The latest
 [HANDOFF](../coordination/HANDOFF.md) records local audit paths and the
 recovery sequence. No partial extension or correction evidence has yet been
 published as a remote results release. No numerical worker was active at the
-19:50 UTC review.
-At 19:53 UTC, one monitored worker-5 refit started under the fixed recovery
-plan. Its [launch receipt](../coordination/recovery/2026-09-30-third-extension-recovery-launch.json)
-is portable; the numerical result remains pending and no second worker should
-start before its returns and scientific comparison are checked.
+20:34 UTC checkpoint; recheck host resources before another launch.
 The [assembly guide](extension_recovery_assembly.md) identifies the separate
 adapter and its full-refit gate; assembly has not yet run.
 
