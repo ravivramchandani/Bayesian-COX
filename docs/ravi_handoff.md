@@ -77,6 +77,10 @@ run and V3 replay stay at their pinned Mac APFS paths. SSD980's raw filesystem
 is ExFAT, so live numerical roots must not be moved onto it as plain folders.
 A [portable storage checkpoint](../coordination/recovery/2026-09-30-storage-relief-checkpoint.json)
 records the verification.
+A dedicated 300 GiB virtual APFS image on SSD980 is mounted at
+`/Volumes/BayesCoxRecovery20261001` for future results; it has passed
+exclusive-create and atomic-rename probes. Existing result roots were not
+moved into it, and it must be mounted before any future job using it.
 A guarded recovery controller is now published and its first monitored refit
 has started; the result is pending. The latest [HANDOFF](../coordination/HANDOFF.md) records local audit
 paths and the recovery sequence. No partial extension or correction evidence

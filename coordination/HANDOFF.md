@@ -37,6 +37,11 @@ removal receipt is
 `~/bayes-cox-runs/interruption-recovery-20260930-v1/internal_image_copy_relocation_20260930.json`.
 The portable [storage checkpoint](recovery/2026-09-30-storage-relief-checkpoint.json)
 records the two source mounts and local receipt hashes.
+A dedicated 300 GiB virtual, case-sensitive APFS sparsebundle was created on
+SSD980 and mounted at `/Volumes/BayesCoxRecovery20261001`. Exclusive-create
+and atomic-rename probes passed. It is reserved for future recovered and
+corrected result roots; none of the pinned existing roots was moved into it.
+Keep SSD980 attached and mount the image before any future job targeting it.
 
 Current integration checkout:
 `~/bayes-cox-runs/ravi-main-integration-20260929`. Current engineering validation

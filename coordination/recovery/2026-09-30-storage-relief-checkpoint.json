@@ -2,6 +2,15 @@
   "active_result_roots": "unchanged on internal APFS",
   "estimated_internal_space_recovered_gib": 16,
   "external_mounts": "SSD originals mounted read-only at the two prior BayesCox volume paths",
+  "future_recovery_image": {
+    "exclusive_create_and_atomic_rename_probe": "passed",
+    "existing_result_roots_moved": false,
+    "filesystem_name": "Case-sensitive APFS",
+    "image": "/Volumes/SSD980/BayesCoxRecovery20261001.sparsebundle",
+    "local_creation_receipt_sha256": "fe3235cf329467d4847be52d53c6d1221e3cfd478b1778e30d68a4e2d2d9b89c",
+    "mount": "/Volumes/BayesCoxRecovery20261001",
+    "virtual_size_bytes": 321912791040
+  },
   "images": [
     {
       "external_original": "/Volumes/SSD980/bayesian-cox-extensions-20260928/BayesCoxExtensions20260928.sparsebundle",
