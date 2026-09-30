@@ -1,0 +1,287 @@
+{
+  "affected_cell_count": 21,
+  "missing_trace_count": 34,
+  "missing_traces": [
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f01__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "4a7e79a99d83d6b08aeb860aff7076f11d626d8a792af63fbf27c627aaac652b",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 2,
+      "cell_id": "metabric_matched__expression__r01f01__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "edd88a8bb6376a2eb1035086ed12451a56c8d425ac84b860fa1aea77cc2dae7f",
+      "filename": "attempt_2_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f01__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "4828a2e88fb20f2da0b8204cf7a1a86dfbc86d1c35c27e922ae489947ad2b677",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 2,
+      "cell_id": "metabric_matched__expression__r01f01__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "9e037d711a1f880e254cff35d4dfa0fc7f83792575749acbb843f5d165698fe0",
+      "filename": "attempt_2_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 3,
+      "cell_id": "metabric_matched__expression__r01f01__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "2210261c8a0cfe38b8d47a367ff122dba4598a1d86c71e687ed638a48e8c7b22",
+      "filename": "attempt_3_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f01__pv_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "64740fe3dced12e03e3f8631de273beb4a3654f2cd3e81127ddd2bf2aa74241e",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f02__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "03e26a38f40365b9f3875fbeaf199c77a2ddb79d8b41422eaea98f0208476393",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f02__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "980325c6c875250214388f5ff21d772e7cc0a712ae91988cef8895b74d14c73c",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 2,
+      "cell_id": "metabric_matched__expression__r01f02__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "3b9037b2f5c7f04ff6443beb1a90718f13d92e729d6eb8a0d2045e00f3996ae7",
+      "filename": "attempt_2_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 3,
+      "cell_id": "metabric_matched__expression__r01f02__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "3adab637559ff43d2cc9ec52a793a429fc7b18f5854eaba790b278686145c398",
+      "filename": "attempt_3_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f02__pv_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "1fa7048962e7205c5378ed14e45660e9bb101b03b5e9d0b5279575516e2b3946",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 2,
+      "cell_id": "metabric_matched__expression__r01f02__pv_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "f2545bdfe6ac86ff7808a0a9aef3fe5f92b53d806a95560083833cf01657651e",
+      "filename": "attempt_2_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 3,
+      "cell_id": "metabric_matched__expression__r01f02__pv_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "7c314bdc38bf74b211fcce9c741043efa808a7febf1992b4bf63c6be777d5e78",
+      "filename": "attempt_3_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f03__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "9ac833d98f8fd88fb3531a2f3f34ff06c2d0bdee43b953a8cc4f85839ce6a781",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f03__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "0929d98dd6d308a37257eea47e1bf16f363001d3293f9927fc7a98390d0771d0",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 2,
+      "cell_id": "metabric_matched__expression__r01f03__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "0f98f3865331d14956a2fa26cb2df574f687aaae573d7dc8a41735468426ff2b",
+      "filename": "attempt_2_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 3,
+      "cell_id": "metabric_matched__expression__r01f03__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "f2a1e53bca6ba50d8ef36f58e9a924ced5fa142e5431cbc8c658073806528bc4",
+      "filename": "attempt_3_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f03__pv_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "a93f34f02d2bc4c7d7b1dc616dec825d269db2551fc61810b650034e64957e69",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f04__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "b7e9d1741a93509b79bce286b2e320f055a82b56ee14ec2fc2ce539fc19e9490",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f04__pv_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "05d10909d658e55ef412b4ae4fcc3ec35606939da07de6ab77633c4542b8b001",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f05__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "f8e56bd5adeb64e5f0776f0f8499fdce146ef9f657c6d84478c1ed45d3e370a4",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r01f05__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "1b358fc14bc0a4ba730cf2b5b66dfcc76ee70de5bb843e0ea73dfc421f34e532",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 2,
+      "cell_id": "metabric_matched__expression__r01f05__bayesian_spike_slab__full",
+      "cell_status": "failed_diagnostics",
+      "expected_sha256": "5f88e02ee4e9b46cac22ca70f5220851780f4ba8a7ff2b81f03012d528f8d7c7",
+      "filename": "attempt_2_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r02f01__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "f0447422d7ece652c4fc91345772f77d884bf97f71879108bafe0dc27bd215dc",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r02f02__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "fb4dfa07f333322112d0741e459a3ae0bee340587cec1537052549d9320e28e5",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 2,
+      "cell_id": "metabric_matched__expression__r02f02__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "4d7c07d4c3fc2b5649561866aaa32b328dbbf226e8108518cbe0c7778bfbdff9",
+      "filename": "attempt_2_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r02f03__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "70d38015f941fb6ac9014735a962f59a58b38151894d9914cf639556d62a3722",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r02f04__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "6dd791d2bb3daa7eb852ffa28711c4521532e6bb4d6d9eb5e3b14fab413843bd",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 2,
+      "cell_id": "metabric_matched__expression__r02f04__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "0ad3d2706a13008f1a4de9b594f489c907b1da147aa0638f2cabd14757cf3d8e",
+      "filename": "attempt_2_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r02f05__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "6c068dcbd5ac600fd3c4215e9b4548e95237cca85312ba386792226296ee5ae0",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r03f01__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "25b0cbb09222deb3f198baab10399b27da7319901d5428822f9fe21d6f313f5b",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r03f02__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "3d9626d425c37c026f85dc7049d5d0920736b100c71ede4151d9bee5dfd39a87",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 2,
+      "cell_id": "metabric_matched__expression__r03f02__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "1afa063dfc3271fe0a504e61e90a277d15d4827d18da341d6ea40554dbea8e4c",
+      "filename": "attempt_2_posterior.nc",
+      "trace_role": "posterior"
+    },
+    {
+      "attempt": 1,
+      "cell_id": "metabric_matched__expression__r03f03__bayesian_horseshoe__full",
+      "cell_status": "complete",
+      "expected_sha256": "f68bf9597c94cc2ec8079d43dc2e8058128db71fae82773eeb79ed10a3e71133",
+      "filename": "attempt_1_posterior.nc",
+      "trace_role": "posterior"
+    }
+  ],
+  "note": "This is a forensic inventory, not a repaired or completed scientific result. The original cell records remain unchanged.",
+  "original_run_manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+  "planned_cells": 1625,
+  "recorded_at_utc": "2026-09-30T11:04:41.107291+00:00",
+  "schema_version": 1,
+  "source_local_audit_sha256": "8f7a041885293ff9581b63f3a639cd844c5cb272a492781737b308f534c30d52",
+  "status": "interrupted_original_run_missing_trace_inventory",
+  "stored_cell_jsons": 1214,
+  "strictly_verified_stored_cells": 1193
+}

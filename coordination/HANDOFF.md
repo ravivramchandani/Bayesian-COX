@@ -29,8 +29,9 @@ are now byte-preserved in a recovery archive. All untracked source/test/JSON
 and compressed archive collisions match resident main exactly. Six older
 document variants remain preserved. The source-only dependency audit found
 that four live-route worktrees share original main's Git administration.
-General Git synchronization is deferred while those owners are active;
-no stash, fetch or merge has occurred. At 14:55 UTC on 29 September the
+General Git synchronization was deferred while those owners were active;
+no stash, fetch or merge occurred in that preservation step. At 14:55 UTC
+on 29 September the
 six disjoint documents were mirrored from remote-verified `a26d5a2`.
 All six matched published bytes; 135 other scoped files, the 141-file backup,
 six preceding published variants, 24 selected shared-Git administrative files
@@ -38,16 +39,57 @@ and 634 implementation files remained unchanged. Its actual zero-return
 capture is retained in
 `coordination/recovery/2026-09-29-generator-correction-document-mirror-v3.json`.
 
+## Interruption recovery — 2026-09-30, 10:58 UTC
+
+The six original extension workers and V3 pre-fit continuation are stopped;
+their recorded PIDs are historical. The original run has 1,214 of 1,625 cell
+JSONs (1,000 complete, 176 failed, 38 failed diagnostics), leaving 411
+positions without a cell. A strict audit found 21 stored cells referencing 34
+missing posterior traces. Those 21 records remain unchanged; 1,193 stored
+cells passed their cell/trace hash checks. Six dead-owner claims and two
+uncommitted trace files were copied, hash-verified and archived under
+`~/bayes-cox-runs/interruption-recovery-20260930-v1/original_orphans/`
+before the original claim paths were cleared. No original worker has restarted.
+
+V3 sealed all 1,650 first-draw replay contexts and wrote its arithmetic
+selector. Its input/reuse log stops at 1,536 of 1,625 cells; no completed
+inventory or arithmetic result exists. Resuming it now would encounter the
+missing original traces. Neither the old one-attempt owner nor its V3 child
+has a recorded successful return. The five execution reviews, corrected
+freeze, corrected fits, reporting and release remain pending.
+
+The pinned expression source and regenerated matched parquet were restored
+with their exact frozen SHA-256 hashes (`4470069455a4ed38ffed5d12513e468bbf5b9a57d66fa1162e7bd9a64889ab7a`
+and `36ddcdc14d0bd76ee7c88d2c78fab2fab2039ed3819e5c70fd27b21c7b335971`).
+Two missing numerical libraries were restored from their exact conda package
+archives; the frozen environment verifier passed. SSD980 is mounted, while
+both external sparsebundle originals remain detached and their byte-verified
+internal copies are mounted read-only. Neither internal image contains the
+missing traces. The local integrity list is
+`~/bayes-cox-runs/environment-recovery-20260930-after-reboot-v1/missing_original_traces_audit.json`.
+The portable [trace inventory](recovery/2026-09-30-host-interruption-trace-inventory.json)
+records all 34 expected hashes without presenting them as repaired results.
+An isolated frozen-code refit pilot is running under
+`~/bayes-cox-runs/original-trace-reconstruction-pilot-20260930-v1/`; its
+result is pending and it does not modify or certify any original cell.
+
+Next, require the pilot's actual return and exact trace-hash comparison.
+Only verified reconstruction or an independently reviewed new lineage may
+resolve the 21 affected cells. Then recheck all original cell/trace hashes,
+resume the six sealed shards, and launch a new captured V3 owner for the
+remaining reuse inventory and arithmetic. Do not relaunch the interrupted
+one-attempt wrapper or treat saved cell JSONs alone as complete evidence.
+
 ## Next action — validate the catalytic generator correction
 
 ADR-040/T-190 records corrective work after the observed synthetic-rank
-failures. The original numerical programme continues from its sealed code;
-no corrected numerical run has started. Do not alter current workers,
-their inputs or saved cells. Training-only generator preflight is complete
-across all 825 catalytic jobs and every WME inner split. Independent
-first-proposal/input replay is active, with 58 contexts remaining before a
-justified reuse/refit inventory. Original accepted and failed outcomes are
-retained when complete inputs/model/fit/evaluation identity is proved.
+failures. The original numerical programme is paused at the interruption
+checkpoint above; no corrected numerical run has started. Preserve its frozen
+inputs and saved cells. Training-only generator preflight is complete across
+all 825 catalytic jobs and every WME inner split. Independent first-draw
+replay is complete; the reuse/refit inventory and arithmetic are pending.
+Original accepted and failed outcomes are retained only when complete
+inputs/model/fit/evaluation identity is proved.
 
 The preserved proposal is
 `coordination/recovery/2026-09-29-generator-correction-proposal/PROPOSAL.md`.
@@ -235,9 +277,10 @@ Its witness is the internal
 `~/bayes-cox-runs/correction-storage-recovery-20260930-v1/reuse_v3` root;
 new arithmetic and orchestration outputs are sibling `arithmetic_v3` and
 `continuation_v3` directories under the same recovery root.
-The replay is active; the child return code, whole replay, arithmetic and
-all corrected fits are pending. No scientific freeze or final result is
-certified by recovery, staging or launch.
+This was the V3 launch state. The replay later sealed all 1,650 contexts,
+but the continuation stopped during input/reuse inventory as recorded in the
+current interruption checkpoint. No arithmetic, scientific freeze or final
+result is certified by recovery, staging or launch.
 
 At 02:44 UTC on 30 September, all six original workers were alive and the
 original run held 1,188 of 1,625 cells: 979 complete, 174 failed and 35
@@ -421,8 +464,8 @@ production workers and the remaining pre-stage worker were active. Original
 completion/final-analysis markers were absent. At 09:07 UTC, internal free
 space was about 38 GiB and the mounted APFS image had about 195 GiB free.
 These dated counts are checkpoints, not a live progress claim. Correction
-evidence uses that APFS image; current original outputs and workers remain
-in place.
+evidence used that APFS image; see the current interruption checkpoint for
+the present original-run and mount state.
 
 At 08:50 UTC, 12 inactive duplicate compressed release/download cache files
 were copied, independently rehashed and relocated to
@@ -446,7 +489,7 @@ The owner requested plan corrections and full verified code/results
 implementation. ADR-039 refines ADR-038. Implementation, real author/CRAN R
 fixture parity, pinned METABRIC preparation, 298 tests, coordination schemas
 and Ruff have passed. The implementation is remotely pushed. Six disjoint
-numerical workers are actively filling the 1,625-fit grid on this Mac from
+numerical workers began the 1,625-fit grid on this Mac from
 clean detached production commit `119476f`, with outputs outside Git at
 `~/bayes-cox-runs/extensions-20260928/run`. First completed cell scores and
 one saved posterior/prior diagnostic pair were independently checked. Do not

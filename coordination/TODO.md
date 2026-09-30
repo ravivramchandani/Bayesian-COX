@@ -26,6 +26,16 @@ post-hoc correction. Existing source or transfer receipts do not certify this
 new version. Full-budget gene-expression timings supersede short-profile
 completion estimates; no reliable total completion date is recorded.
 
+At the 30 September host-interruption checkpoint, all six frozen extension
+workers and the V3 pre-fit continuation are stopped. The original grid has
+1,214 stored cells, but 21 of them reference 34 missing traces; six stale
+claims and two partial trace files were archived. V3 has sealed all 1,650
+first-draw replay contexts, while its input/reuse inventory stopped at
+1,536 of 1,625 cells. An isolated original-trace reconstruction pilot is
+running; no corrected fit or result has started. The next gate is its actual
+return and exact trace-hash comparison, followed by a reviewed recovery of
+the remaining missing traces and strict original verification. See `HANDOFF.md`.
+
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:
 six exact model refits; the original explanation SHA-256; three byte-identical
@@ -424,7 +434,8 @@ labelled as such; the frozen confirmatory record stays primary. ADR-033's
 Holm bound is already computed and rendered; ADR-032 has seven existing
 probes and a separately specified 75-cell production stage. The extension
 implementation and result-blind addendum are frozen; the 1,625-fit numerical
-grid is active from sealed commit `119476f`. Its early cells are post-hoc
+grid began from sealed commit `119476f` and is paused at the interruption
+checkpoint above. Its stored cells are post-hoc
 results, not a complete programme or grounds to check T-182–T-189 yet.
 The strengthened analysis-only verifier is separately sealed at `8551d32` and cannot alter fitted
 cells. Unmeasured two-hour and ten-hour runtime estimates are withdrawn;
@@ -614,8 +625,10 @@ reporting replay remains a separate pre-publication gate.
   27135 and helper PID 27137 launched at 03:00:40 UTC on 30 September from
   `~/bayes-cox-runs/correction-continuation-v3-owner-20260930-v1/`, bound to
   request SHA-256 `ab38b3ecf6dbfe729e65ea11722945dbcb291b32fac05cdfd2ea96596dba7b9a`.
-  Replay is active; child return, whole replay, arithmetic and corrected fits
-  remain pending. The audit, staging and recovery receipts are local under
+  Replay later completed all 1,650 contexts, but the V3 continuation stopped
+  during input/reuse inventory at 1,536 of 1,625 cells. Its child return is
+  unrecorded; inventory completion, arithmetic and corrected fits remain
+  pending. The audit, staging and recovery receipts are local under
   `~/bayes-cox-runs/`, not yet a complete remote results release. See
   `HANDOFF.md` for exact paths and
   current space guards. Reporting/QA implementation passed 51 portable checks

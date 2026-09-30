@@ -1,12 +1,13 @@
 # Ravi: restore the results and continue the work
 
 The baseline code and results programme is complete and remotely verified.
-The separate 1,625-cell post-hoc extension and catalytic correction are still
-active. Their final results are not yet available as a verified remote release.
+The separate 1,625-cell post-hoc extension and catalytic correction remain
+unfinished. Their final results are not yet available as a verified remote release.
 
 Read [HANDOFF](../coordination/HANDOFF.md) and [TODO](../coordination/TODO.md)
-before launching extension work on another Mac. The owner's existing jobs
-still own the original run; do not start overlapping workers.
+before launching extension work on another Mac. The original workers stopped
+after a host interruption; do not start competing workers or treat the partial
+local run as a verified release.
 A clone supplies code and plans. Completed results are restored from the
 private releases below.
 
@@ -14,9 +15,10 @@ The correction's full training-input preflight is complete: 1,400 of 1,650
 contexts accepted the original draw and 250 accepted a rank-conditioned
 redraw, with no terminal outcome. The
 [completed-preflight record](../coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json)
-binds all 12,446 artifacts and seed histories. Independent original-draw/input
-replay and arithmetic must complete before the five actual execution reviews,
-freeze and full-budget pilot. No corrected fit has started.
+binds all 12,446 artifacts and seed histories. Independent original-draw
+replay has completed, while the input/reuse inventory and arithmetic must
+complete before the five actual execution reviews, freeze and full-budget
+corrected pilot. No corrected fit has started.
 
 The corrected launch safeguard is integrated as reviewed engineering source.
 Earlier V1/V2 versions and their review failures remain preserved. The five
@@ -43,25 +45,26 @@ Guard history additionally requires separately captured source and fresh
 receiving semantic verification; existing release-v3 only transports those
 records.
 
-At 02:44 UTC on 30 September, the six original extension workers were alive
-and 1,188 of 1,625 original cells were stored: 979 complete, 174 failed and
-35 failed diagnostics. These are dated progress counts, not final results.
-The second pre-fit continuation ended with wrapper return code 1 after an
-I/O error while hashing its reuse log; the reuse subprocess return code is
-unknown. The two original external sparsebundles remain preserved and
-detached. Their complete, byte-verified internal copies are mounted read-only.
-An independent sealed audit verified 1,592 of 1,650 complete first-draw replay
-contexts. Only those complete contexts were staged into a separate V3 root;
-one partial context and old claims were excluded. V3 continuation launched at
-03:00:40 UTC on 30 September to complete the remaining 58 contexts.
-Replay completion, arithmetic and all corrected fits are still pending.
-The local audit and staging records are under
-`~/bayes-cox-runs/correction_transfer_clone_receipt_audit_20260930_v1/` and
-`~/bayes-cox-runs/correction-storage-recovery-20260930-v1/`; these are not yet
-a remote results release. Keep SSD980 attached for the eventual transfer, and
-do not start overlapping workers or write to either original sparsebundle.
-The active V3 launch record is under
-`~/bayes-cox-runs/correction-continuation-v3-owner-20260930-v1/`.
+At the 30 September interruption checkpoint, the original run has 1,214 of
+1,625 cell records (1,000 complete, 176 failed, 38 failed diagnostics).
+Twenty-one of those records reference 34 missing posterior traces, so the
+stored count does not certify a verified grid. Six interrupted claims and two
+partial traces were archived with verified hashes. The
+[trace inventory](../coordination/recovery/2026-09-30-host-interruption-trace-inventory.json)
+records each missing file and expected hash. The frozen raw expression,
+matched cohort and locked environment have been restored and verified. An
+isolated original-trace reconstruction pilot is running; its result is pending
+and it does not modify the frozen run. The original six workers remain stopped.
+
+The V3 correction has sealed all 1,650 first-draw replay contexts and written
+its selector. Its input/reuse inventory stopped at 1,536 of 1,625 cells; no
+complete inventory, arithmetic, corrected fit or corrected result is certified.
+The two original external sparsebundles remain detached. Their byte-verified
+internal copies are mounted read-only, and SSD980 is attached for the eventual
+transfer. The latest [HANDOFF](../coordination/HANDOFF.md) records local audit
+paths and the recovery sequence. No partial extension or correction evidence
+has yet been published as a remote results release.
+
 Owner-side integration uses the resident checkout. The earlier six-document
 mirror into the original IDE checkout was narrowly scoped while live worktrees
 depend on its shared Git metadata. The
@@ -207,12 +210,13 @@ p-values of 1.0 and corrected intervals containing zero. Read the
 and [close-out review](../coordination/reviews/2026-09-28-programme-closeout.md).
 A new result always goes in a separate directory.
 
-T-180 is now frozen, and the separate 1,625-fit post-hoc extension grid is
-running from sealed commit `119476f`. It covers penalised Cox (T-182), the
+T-180 is now frozen, and the separate 1,625-fit post-hoc extension grid was
+launched from sealed commit `119476f`. It covers penalised Cox (T-182), the
 precisely specified Piironen–Vehtari variant (T-183), survival decision
 curves (T-184), matched METABRIC clinical/expression comparisons (T-185), and
-the catalytic-prior variants/reference-parity checks (T-189). Do not start
-duplicate workers on a receiving laptop while the active host owns this run.
+the catalytic-prior variants/reference-parity checks (T-189). The host run is
+paused at the interruption checkpoint above; do not start duplicate workers
+on a receiving laptop or merge its partial outputs into the frozen run.
 The extension transfer is pending its complete-grid, deep verification,
 92-refit, final PDF-QA and fresh remote-restoration gates. Follow
 [extension execution](extensions_execution.md) and the current HANDOFF;
@@ -228,7 +232,7 @@ submission and DOI minting are deferred until after thesis submission.
 
 ## Post-hoc extension evidence
 
-The active 1,625-cell extension programme remains separate from the released
+The unfinished 1,625-cell extension programme remains separate from the released
 baseline above. Its final release is pending numerical, visual and remote-transfer
 verification. The [extension restoration guide](extensions_restore.md) gives the
 receiving-Mac procedure and baseline dependencies; replace its remaining tag and
