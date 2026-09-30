@@ -1,0 +1,28 @@
+{
+  "cell_id": "metabric_matched__expression__r01f01__bayesian_horseshoe__full",
+  "child_return_code": 0,
+  "control_plan_file_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "controller_sha256": "7dbd229104577d5aea60721947dbd878bf69bfa7f0dae511649fca0fc6aa4dad",
+  "local_child_return_sha256": "d3e6b41b0eb337b4d5f2fd10419e7ba12731d51a7b8c9f0fe162c1beb243bcc8",
+  "local_comparison_sha256": "19ff6b5e11ffc1cffc30b73ef0fd00491be50ff24fac2b9d3dac4d6649005983",
+  "local_wrapper_return_sha256": "eec97c08937d169e31a3eb56eb6c9ad8b9eeb7bd7b7b43dbbf908f3e8399d297",
+  "note": "No original source result was rewritten. This is not a complete recovered extension or remote results release.",
+  "numeric_workers_after_ramp": "none; --max-new-cells 1 stopped worker 4",
+  "official_non_timing_science": "match",
+  "original_posterior_array_equality": "unavailable: original trace bytes missing",
+  "recorded_at_utc": "2026-09-30T19:51:16.663959+00:00",
+  "refit_cell_file_sha256": "2f744c50d69e4e5723c69ec353d8de28dfb41eb254ec95403c54e04df84b0dc4",
+  "refit_status": "complete",
+  "refit_trace_sha256": {
+    "1/posterior/attempt_1_posterior.nc": "a16b3c7d60058951e7bbde0a0561d5c8fe45485320c35c60aef21af4dfe94ede",
+    "2/posterior/attempt_2_posterior.nc": "71acb78f22576fbc0bbdb5cab0578c5f27a7d6273831b7d40af0fb0406f94a35"
+  },
+  "remaining_affected_refits": 19,
+  "schema_version": 1,
+  "selected_reproduction_status": "requires fresh binding to recovered source and new trace",
+  "source_cell_file_sha256": "f1efdb44206041e04d2be776a1793edb947b7817c71d444b9b76a53d1815691c",
+  "source_manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+  "source_status": "complete",
+  "status": "second_of_21_recovery_refits_scientific_match_not_complete_grid",
+  "wrapper_return_code": 0
+}

@@ -4,7 +4,7 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
-## Active monitored recovery fit — 2026-09-30, 13:02 UTC
+## Second monitored recovery fit — completed 2026-09-30, 14:03 UTC
 
 After the open macOS Storage Settings window closed, observed swap-outs fell
 to zero over ten seconds and free memory rose above 70%. A single new
@@ -13,15 +13,21 @@ write-once refit started under the same pinned v3 plan and controller: worker
 `metabric_matched__expression__r01f01__bayesian_horseshoe__full`.
 Its wrapper and child are captured under
 `~/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/worker04_ramp1/`
-and the corresponding `refits/` entry. The result is pending; do not start a
-second producer or assume a scientific match until its typed returns, trace
-hash and official comparison are checked. This cell belongs to the fixed 92
-selected reproduction identities, so its later source binding needs separate
-verification. No other numerical worker was launched.
+and the corresponding `refits/` entry. The wrapper and child returned zero by
+14:03 UTC, the cell and both new posterior traces passed hash and identity
+checks, and the official non-timing scientific comparison matched the saved
+original. The [second-refit receipt](recovery/2026-09-30-second-extension-recovery-refit.json)
+binds those local records. The original posterior arrays remain missing, so
+exact sampled-array equality cannot be claimed. This cell belongs to the fixed
+92 selected reproduction identities; its old reproduction entry has no trace
+or receipt, and a fresh recovered-source binding remains required. The
+one-cell worker-4 ramp stopped cleanly. Two of 21 affected refits are now
+verified, 19 remain, and no numerical worker or recovery claim was active at
+the 19:50 UTC review.
 
 The separate assembly adapter is documented in
-`docs/extension_recovery_assembly.md`. Its read-only inspection reports one
-completed comparison out of 21; preflight and assembly remain gated on all
+`docs/extension_recovery_assembly.md`. Its read-only inspection reports two
+completed comparisons out of 21; preflight and assembly remain gated on all
 21 successful refit receipts and the six complete worker returns. The pinned
 v3 numerical controller is unchanged. The adapter's proof and claim guards
 passed against tests and the first real refit. The full locked-environment
