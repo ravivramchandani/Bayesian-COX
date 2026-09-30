@@ -41,6 +41,13 @@ new recovered source root, strict verification and V3 source
 rebinding are the next gates. No corrected fit or result has started. See
 `HANDOFF.md` and ADR-043.
 
+At the 1 October New Zealand recovery checkpoint, the guarded controller and
+tests are published; the exact no-fit recovery plan passed. One monitored
+21-cell refit has started, with its result pending. The two redundant internal
+image backups were removed only after fresh byte verification and read-only
+remount of their SSD originals; live result roots remain on Mac APFS. No
+complete recovered extension grid or corrected fit is yet certified.
+
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:
 six exact model refits; the original explanation SHA-256; three byte-identical

@@ -4,6 +4,40 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Active recovery owner and SSD storage — 2026-09-30, 12:10 UTC
+
+ADR-043's recovery controller is published at `1a92d5e`; its full locked test
+suite passed 1,035 tests, 9 skips and 288 subtests, and focused lint passed.
+The fresh no-launch plan at
+`~/bayes-cox-runs/original-extension-recovery-20260930-v3/plan.json` strictly
+checked 1,193 intact cells/traces, the 21-cell and 411-absent rosters, matched
+data, locked environment, exclusive claims and an exact original manifest.
+At 12:09 UTC a single monitored, full-budget recovery fit began: worker 3,
+`--max-new-cells 1`, for
+`metabric_matched__expression__r01f05__bayesian_horseshoe__full`.
+Its captured wrapper, invocation, logs, claims and typed return are under
+`~/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/worker03_ramp1/`
+and the corresponding `refits/` entry. The fit is not yet a verified result;
+do not start another producer for this cell or remove the SSD while checking
+the incident evidence. The controller stops the worker after this one new fit
+for resource and scientific comparison review. An interrupted attempt remains
+visible and requires a separately reviewed archived retry; no automatic
+overwrite is permitted.
+
+The owner asked to reduce Mac storage. The two 30 September internal backup
+sparsebundles were rechecked file by file against their byte-identical SSD
+originals (1,339 and 2,759 files), then detached. The SSD originals are now
+mounted read-only at the same two `/Volumes/BayesCox*` paths; only the
+redundant internal copies were removed. Local usage fell from about 80 GiB to
+64 GiB, and Mac data-volume free space rose from about 95 GiB to 111 GiB.
+The original extension run, sealed code, matched data, active recovery root
+and 47 GiB V3 replay remain at their pinned APFS paths. The raw SSD980 volume
+is ExFAT; do not move a live write-once root there. The verification and
+removal receipt is
+`~/bayes-cox-runs/interruption-recovery-20260930-v1/internal_image_copy_relocation_20260930.json`.
+The portable [storage checkpoint](recovery/2026-09-30-storage-relief-checkpoint.json)
+records the two source mounts and local receipt hashes.
+
 Current integration checkout:
 `~/bayes-cox-runs/ravi-main-integration-20260929`. Current engineering validation
 passed 1,040 tests and 293 subtests with zero skips at 15:34:34 UTC on

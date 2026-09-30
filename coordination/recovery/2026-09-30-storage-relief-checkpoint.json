@@ -1,0 +1,26 @@
+{
+  "active_result_roots": "unchanged on internal APFS",
+  "estimated_internal_space_recovered_gib": 16,
+  "external_mounts": "SSD originals mounted read-only at the two prior BayesCox volume paths",
+  "images": [
+    {
+      "external_original": "/Volumes/SSD980/bayesian-cox-extensions-20260928/BayesCoxExtensions20260928.sparsebundle",
+      "files_byte_verified": 1339,
+      "local_recheck_sha256": "7767d4c050ace64b7a7438a6d9f1adfbe80b410e15a9adbe72f256ec237e5808",
+      "name": "old",
+      "removed_internal_duplicate": "/Users/macuser/bayes-cox-runs/correction-storage-recovery-20260930-v1/old_image_backup_1/BayesCoxExtensions20260928.sparsebundle"
+    },
+    {
+      "external_original": "/Volumes/SSD980/bayesian-cox-extensions-20260928/BayesCoxTransfer20260929.sparsebundle",
+      "files_byte_verified": 2759,
+      "local_recheck_sha256": "faa03e65562e8f3eacb4dfe58f100c37f3153451f027885f6789e7ef91b69f33",
+      "name": "transfer",
+      "removed_internal_duplicate": "/Users/macuser/bayes-cox-runs/correction-storage-recovery-20260930-v1/transfer_image_backup_1/BayesCoxTransfer20260929.sparsebundle"
+    }
+  ],
+  "local_relocation_receipt_sha256": "fa912900544e7e117c077cf652e76d37b5c5eb61439b0c0c944cbc0f4d3c71b1",
+  "note": "The raw SSD980 volume is ExFAT. No live numerical root was moved.",
+  "recorded_at_utc": "2026-09-30T12:11:52.951700+00:00",
+  "schema_version": 1,
+  "status": "verified_redundant_internal_copies_removed"
+}

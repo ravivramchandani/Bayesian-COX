@@ -70,9 +70,15 @@ its selector. Its input/reuse inventory stopped at 1,536 of 1,625 cells; no
 complete inventory, arithmetic, corrected fit or corrected result is certified.
 The completed replay is preserved, while source-dependent reuse and arithmetic
 must be checked against the recovered run before corrected fitting.
-The two original external sparsebundles remain detached. Their byte-verified
-internal copies are mounted read-only, and SSD980 is attached for the eventual
-transfer. The latest [HANDOFF](../coordination/HANDOFF.md) records local audit
+The two original sparsebundles on SSD980 were freshly byte-verified against
+their redundant internal copies, then mounted read-only at the same paths;
+only the internal duplicates were removed, freeing about 16 GiB. The active
+run and V3 replay stay at their pinned Mac APFS paths. SSD980's raw filesystem
+is ExFAT, so live numerical roots must not be moved onto it as plain folders.
+A [portable storage checkpoint](../coordination/recovery/2026-09-30-storage-relief-checkpoint.json)
+records the verification.
+A guarded recovery controller is now published and its first monitored refit
+has started; the result is pending. The latest [HANDOFF](../coordination/HANDOFF.md) records local audit
 paths and the recovery sequence. No partial extension or correction evidence
 has yet been published as a remote results release.
 
