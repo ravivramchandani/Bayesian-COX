@@ -17,6 +17,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
@@ -188,8 +189,9 @@ def _paired_plot(stage: Path, cohort: str, family: dict) -> dict:
     ax.set_yticks(range(len(rows)), labels, fontsize=8)
     ax.invert_yaxis()
     ax.axvline(0, color="grey", linewidth=1, linestyle="--")
-    ax.set_xlabel("Mean paired IBS difference (penalised minus Bayesian); corrected 95% interval")
-    ax.set_title(f"{cohort.upper()} | fixed nine contrasts; Holm family complete: {family['family_complete']}")
+    ax.set_xlabel("Mean paired IBS difference (penalised minus Bayesian); repeated-CV 95% interval")
+    family_status = "complete" if family["family_complete"] else "incomplete"
+    ax.set_title(f"{cohort.upper()} | nine fixed contrasts; 27-test Holm family {family_status}")
     if cohort == "metabric":
         fig.text(0.01, 0.045, "Known same-individual METABRIC accession pair may cross folds.", fontsize=8)
     fig.tight_layout(rect=[0, 0.075, 1, 1])
@@ -212,16 +214,21 @@ def _coverage_plot(stage: Path, descriptive: dict) -> dict:
             ax.barh(index, counts["failed_diagnostics"], left=counts["complete"], color="#e9a03b")
             ax.barh(index, counts["failed"], left=counts["complete"] + counts["failed_diagnostics"],
                     color="#c44536")
-            labels.append(MODEL_LABELS[row["model_key"]] +
-                          (" (original)" if row["source"] == "original_horseshoe_context" else ""))
+            labels.append("Original horseshoe" if row["source"] == "original_horseshoe_context"
+                          else MODEL_LABELS[row["model_key"]])
             ax.text(25.3, index, f"{counts['complete']}/25", va="center", fontsize=7)
         ax.set_yticks(range(len(rows)), labels, fontsize=7)
         ax.invert_yaxis()
         ax.set_xlim(0, 29)
         ax.set_title(cohort.upper())
         ax.set_xlabel("Planned outer folds")
-    fig.suptitle("All outcomes: accepted, failed diagnostics, execution failure")
-    fig.tight_layout(rect=[0, 0.035, 1, 0.94])
+    fig.suptitle("Outer-fold outcomes by model; denominator 25 per cohort")
+    fig.legend(handles=[Patch(color="#277da1", label="Accepted"),
+                        Patch(color="#e9a03b", label="Failed diagnostics"),
+                        Patch(color="#c44536", label="Execution failure")],
+               loc="lower center", bbox_to_anchor=(0.5, 0.04), ncol=3,
+               frameon=False, fontsize=8)
+    fig.tight_layout(rect=[0, 0.11, 1, 0.94])
     return _save_figure(fig, stage, "diagnostic_coverage", ["descriptive.json"])
 
 

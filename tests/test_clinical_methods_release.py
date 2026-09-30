@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -92,6 +93,17 @@ def test_render_and_qa_need_named_explicit_review(tmp_path: Path) -> None:
     write_analysis(analysis)
     lineage = render.render(analysis, rendered)
     assert [row["name"] for row in lineage["figures"]] == list(qa.FIGURES)
+    coverage_text = subprocess.run(
+        ["pdftotext", "-layout", str(rendered / "diagnostic_coverage.pdf"), "-"],
+        check=True, capture_output=True, text=True,
+    ).stdout
+    assert "Original horseshoe" in coverage_text
+    assert "ADR-032 horseshoe (original)" not in coverage_text
+    paired_text = subprocess.run(
+        ["pdftotext", "-layout", str(rendered / "paired_gbsg2.pdf"), "-"],
+        check=True, capture_output=True, text=True,
+    ).stdout
+    assert "repeated-CV 95% interval" in paired_text
     qa.prepare(analysis, rendered, review_dir)
     with pytest.raises(ValueError, match="missing or linked file"):
         qa.verify_seal(analysis, rendered, review_dir)
