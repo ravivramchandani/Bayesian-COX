@@ -81,10 +81,16 @@ A dedicated 300 GiB virtual APFS image on SSD980 is mounted at
 `/Volumes/BayesCoxRecovery20261001` for future results; it has passed
 exclusive-create and atomic-rename probes. Existing result roots were not
 moved into it, and it must be mounted before any future job using it.
-A guarded recovery controller is now published and its first monitored refit
-has started; the result is pending. The latest [HANDOFF](../coordination/HANDOFF.md) records local audit
-paths and the recovery sequence. No partial extension or correction evidence
-has yet been published as a remote results release.
+A guarded recovery controller is published. Its first monitored refit finished
+with zero wrapper/child returns and a matching official non-timing scientific
+record; the [portable receipt](../coordination/recovery/2026-09-30-first-extension-recovery-refit.json)
+binds that evidence. Twenty affected refits and 411 initially absent cells
+remain. No numerical worker was active at the 12:52 UTC checkpoint while host
+swap activity is checked. The pinned controller's assembly command is not
+ready; a separate reviewed adapter must bind the full recovered source before
+continuation. The latest [HANDOFF](../coordination/HANDOFF.md) records local
+audit paths and the recovery sequence. No partial extension or correction
+evidence has yet been published as a remote results release.
 
 Owner-side integration uses the resident checkout. The earlier six-document
 mirror into the original IDE checkout was narrowly scoped while live worktrees

@@ -1,0 +1,26 @@
+{
+  "cell_id": "metabric_matched__expression__r01f05__bayesian_horseshoe__full",
+  "child_return_code": 0,
+  "control_plan_file_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "controller_sha256": "7dbd229104577d5aea60721947dbd878bf69bfa7f0dae511649fca0fc6aa4dad",
+  "local_child_return_sha256": "44ab29e47b5e1aa7f1ee952de6574aebe9470f507e959c54c3cddc1b1a81ad6b",
+  "local_comparison_sha256": "f23112afe217ad09271922de04581d06d131ffabfe41d1da4e7d54d560e21ee7",
+  "local_wrapper_return_sha256": "3d6d9c5ea076440824859ad003696ba063fde23aa767ed97444b4250800748bb",
+  "note": "No source result or missing original trace was rewritten. This is not a complete recovered extension or release.",
+  "numeric_workers_after_ramp": "none; --max-new-cells 1 stopped worker 3",
+  "official_non_timing_science": "match",
+  "original_posterior_array_equality": "unavailable: original trace bytes missing",
+  "recorded_at_utc": "2026-09-30T12:51:38.866659+00:00",
+  "refit_cell_file_sha256": "c4f302523b88b776ecc45bb9e0af434f6064f624dd16f251a843cbd44c7e0650",
+  "refit_status": "complete",
+  "refit_trace_sha256": {
+    "1/posterior/attempt_1_posterior.nc": "c3e86e11a9e4e24b9c3e790fb0b228146a637e866804f9b21b2083081de24d7f"
+  },
+  "remaining_affected_refits": 20,
+  "schema_version": 1,
+  "source_cell_file_sha256": "bc0d2a1a6d013942340997d10494ea8bc39168bcef0a922d286ab658d8eaba25",
+  "source_manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+  "source_status": "complete",
+  "status": "first_of_21_recovery_refits_scientific_match_not_complete_grid",
+  "wrapper_return_code": 0
+}

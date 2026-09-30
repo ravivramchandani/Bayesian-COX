@@ -43,7 +43,10 @@ rebinding are the next gates. No corrected fit or result has started. See
 
 At the 1 October New Zealand recovery checkpoint, the guarded controller and
 tests are published; the exact no-fit recovery plan passed. One monitored
-21-cell refit has started, with its result pending. The two redundant internal
+21-cell refit finished with a matching official scientific record; 20 affected
+refits and the 411 initially absent cells remain. No numerical worker is active
+at the 12:52 UTC checkpoint while host swap activity and a separate assembly
+adapter are reviewed. The two redundant internal
 image backups were removed only after fresh byte verification and read-only
 remount of their SSD originals; live result roots remain on Mac APFS. No
 complete recovered extension grid or corrected fit is yet certified.

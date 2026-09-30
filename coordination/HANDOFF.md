@@ -4,7 +4,28 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
-## Active recovery owner and SSD storage — 2026-09-30, 12:10 UTC
+## Recovery status — 2026-09-30, 12:52 UTC
+
+The first of 21 separate recovery refits finished at 12:31 UTC. Its captured
+wrapper and fitting child both returned zero, the cell and new posterior trace
+verify, and the official non-timing scientific comparison matches the saved
+original. The original missing posterior arrays remain unavailable for exact
+sample comparison. The `--max-new-cells 1` ramp stopped worker 3 cleanly;
+there is no numerical worker or live recovery claim at this checkpoint. The
+[portable first-refit receipt](recovery/2026-09-30-first-extension-recovery-refit.json)
+binds the local return and comparison hashes. Twenty affected refits and all
+411 initially absent extension cells remain; no complete grid is certified.
+
+The host's unrelated Storage Management and File Provider processes are
+currently consuming high CPU while swap use grows past 19 GiB. Keep numerical
+dispatch at one monitored worker only after swap-out activity settles; do not
+scale the six shards on this host yet. Review also found that the pinned v3
+controller's `assemble` command imports an identity verifier that is absent
+from sealed production commit `119476f`. Do not invoke that command. A
+separate reviewed assembly adapter is required; the pinned refit controller
+and completed attempt remain unchanged.
+
+## Monitored recovery launch and SSD storage — 2026-09-30, 12:10 UTC
 
 ADR-043's recovery controller is published at `1a92d5e`; its full locked test
 suite passed 1,035 tests, 9 skips and 288 subtests, and focused lint passed.
