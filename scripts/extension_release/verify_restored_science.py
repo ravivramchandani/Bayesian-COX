@@ -13,6 +13,7 @@ from pathlib import Path
 from failure_transfer import verify_failure_transfer
 from qa_transfer import verify_visual_transfer
 from recovery_lineage import optional_recovered_lineage
+from recovery_transfer import verify_recovery_bundle, verify_recovery_code_archive
 from stage_extensions import verify_source_inputs
 
 
@@ -46,9 +47,21 @@ def main() -> None:
     recovery_provenance = optional_recovered_lineage(run)
     if stage_record.get("recovery_provenance") != recovery_provenance:
         raise ValueError("restored recovery provenance differs from staging")
-    if (stage_record["transfer_tool_sha256"].get("recovery_lineage.py") !=
-            sha256_file(Path(__file__).with_name("recovery_lineage.py"))):
-        raise ValueError("restored recovery verifier differs from staging")
+    recovery_transfer = None
+    recovery_code_archive = None
+    if recovery_provenance is not None:
+        recovery_transfer = verify_recovery_bundle(run, restored / "recovery")
+        recovery_code_archive = verify_recovery_code_archive(
+            restored / "code/recovery.tar.gz", restored / "recovery",
+            stage_record["recovery_code_commit"])
+    if stage_record.get("recovery_transfer") != recovery_transfer:
+        raise ValueError("restored captured recovery proofs differ from staging")
+    if stage_record.get("recovery_code_archive") != recovery_code_archive:
+        raise ValueError("restored recovery source archive differs from staging")
+    for name in ("recovery_lineage.py", "recovery_transfer.py"):
+        if (stage_record["transfer_tool_sha256"].get(name) !=
+                sha256_file(restored / "execution" / name)):
+            raise ValueError(f"restored recovery helper differs from staging: {name}")
     if (stage_record["failure_provenance"] != failure_provenance
             or stage_record["transfer_tool_sha256"]["audit_rank_failures.py"] != sha256_file(failure_helper)):
         raise ValueError("restored supplemental failure provenance differs from staging")
@@ -96,6 +109,11 @@ def main() -> None:
               "rank_failed_cells_reconstructed": failure_provenance["rank_failed_cells_audited"],
               "failure_snapshot_sha256": failure_provenance["snapshot_sha256"],
               "recovery_provenance": recovery_provenance,
+              "recovery_transfer": recovery_transfer,
+              "recovery_code_archive": recovery_code_archive,
+              "recovery_helper_sha256": {
+                  name: sha256_file(Path(__file__).with_name(name))
+                  for name in ("recovery_lineage.py", "recovery_transfer.py")},
               "visual_qa_transfer": visual_transfer,
               "verifier_sha256": sha256_file(Path(__file__)),
               "source_gate_sha256": sha256_file(Path(__file__).with_name("stage_extensions.py")),

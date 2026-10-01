@@ -19,6 +19,11 @@ from audit_support import stage_audit_support
 from failure_transfer import verify_failure_transfer
 from qa_transfer import verify_visual_transfer
 from recovery_lineage import optional_recovered_lineage, verify_recovered_lineage
+from recovery_transfer import (
+    stage_recovery_bundle,
+    verify_recovery_bundle,
+    verify_recovery_code_archive,
+)
 
 
 def git_environment(root: Path, git_dir: Path | None = None) -> dict[str, str]:
@@ -148,6 +153,8 @@ def main() -> None:
     parser.add_argument("--clone-staging", action="store_true", help="require APFS copy-on-write staging; never silently fall back to full copies")
     parser.add_argument("--production-git-dir", type=Path,
                         help="independent Git metadata for an iCloud-offloaded frozen checkout")
+    parser.add_argument("--recovery-control", type=Path,
+                        help="required captured controller root for the interrupted extension run")
     args = parser.parse_args()
     copy_payload = partial(copy_file, clone=args.clone_staging)
     copy_directory = partial(copy_tree, clone=args.clone_staging)
@@ -178,6 +185,16 @@ def main() -> None:
         raise ValueError("completion refers to another run manifest")
     recovery_provenance = optional_recovered_lineage(args.run)
     recovered = recovery_provenance is not None
+    if recovered != (args.recovery_control is not None):
+        raise ValueError("recovered extension staging requires its captured --recovery-control")
+    recovery_code = Path(__file__).resolve().parents[2]
+    recovery_code_commit = commit(recovery_code) if recovered else None
+    if recovered:
+        subprocess.run([sys.executable, "-B",
+                        str(recovery_code / "scripts/seal_recovered_extension_lineage.py"),
+                        "--control", str(args.recovery_control.resolve()),
+                        "--run", str(args.run.resolve()), "--verify-only"],
+                       check=True, timeout=1800)
     if sha256_file(args.matched) != manifest["matched_sha256"]:
         raise ValueError("matched data differs from production")
     for name, expected in manifest["input_sha256"].items():
@@ -237,7 +254,10 @@ def main() -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     stage = Path(tempfile.mkdtemp(prefix=".extension-stage-", dir=out.parent))
     try:
-        for root, name in ((production, "production"), (analysis, "analysis")):
+        code_roots = ((production, "production"), (analysis, "analysis"))
+        if recovered:
+            code_roots += ((recovery_code, "recovery"),)
+        for root, name in code_roots:
             target = stage / "code" / f"{name}.tar.gz"
             target.parent.mkdir(parents=True, exist_ok=True)
             environment = git_environment(root, args.production_git_dir if root == production else None)
@@ -250,6 +270,17 @@ def main() -> None:
         copy_directory(args.run, stage / "evidence/run")
         if recovered and verify_recovered_lineage(stage / "evidence/run") != recovery_provenance:
             raise ValueError("staged recovery provenance differs from the source")
+        recovery_transfer = None
+        recovery_code_archive = None
+        if recovered:
+            recovery_transfer = stage_recovery_bundle(
+                args.recovery_control.resolve(), stage / "evidence/run", stage / "recovery",
+                recovery_code / "coordination/recovery")
+            if verify_recovery_bundle(stage / "evidence/run", stage / "recovery",
+                                      recovery_code / "coordination/recovery") != recovery_transfer:
+                raise ValueError("staged captured recovery proofs differ")
+            recovery_code_archive = verify_recovery_code_archive(
+                stage / "code/recovery.tar.gz", stage / "recovery", recovery_code_commit)
         copy_directory(args.reproduction, stage / "evidence/reproduction")
         copy_directory(args.rendered, stage / "rendered")
         copy_directory(args.qa_dir, stage / "visual_qa")
@@ -258,7 +289,7 @@ def main() -> None:
         copy_payload(args.prestage_helper, stage / "execution/prestage_refits.py")
         copy_payload(args.coordinator_helper, stage / "execution/coordinate_after_fits.py")
         transfer_tools = ("stage_extensions.py", "audit_support.py", "verify_restored_science.py",
-                          "recovery_lineage.py",
+                          "recovery_lineage.py", "recovery_transfer.py",
                           "archive_common.py", "audit_rank_failures.py", "failure_transfer.py", "qa_transfer.py",
                           "audit_support_selftest.py", "selftest_rank_failures.py")
         for name in transfer_tools:
@@ -293,6 +324,9 @@ def main() -> None:
                         "failure_provenance": failure_audit,
                         "visual_qa_transfer": visual_transfer,
                         "recovery_provenance": recovery_provenance,
+                        "recovery_transfer": recovery_transfer,
+                        "recovery_code_commit": recovery_code_commit,
+                        "recovery_code_archive": recovery_code_archive,
                         "staging_copy_mode": "strict_native_clonefile" if args.clone_staging else "copy2",
                         "transfer_tool_sha256": {name: sha256_file(stage / "execution" / name)
                                                  for name in transfer_tools}}

@@ -168,7 +168,13 @@ ten-file measured-source directory to `--raw-source`; the fitting preparation
 command downloads only the five files it needs. The release also preserves
 the executed reference scripts, source/alignment audits and preparation logs
 as 55 separately labelled audit files. Supply their original reference root
-and preparation directory through `--reference-root` and `--preparation-dir`;
+and preparation directory through `--reference-root` and `--preparation-dir`.
+For the ADR-043 recovered grid, supply `--recovery-control` with the preserved
+captured controller root. Staging recomputes the final producer proof, carries
+the old/refit and continuation captures under `recovery/`, and archives the
+recovery code as a third exact Git source archive. The receiving science check
+verifies those copied proofs. An interrupted-manifest run cannot use the
+generic release path by omitting both recovery lineage files.
 Supply all retained integration-validation versions through the separate
 `--validation-logs` directory for this programme's final transfer. The support
 helper rechecks their pinned hashes and domain links

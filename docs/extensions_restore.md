@@ -7,12 +7,17 @@ Then, on your Apple Silicon Mac with the exact verified lock, obtain the extensi
 tag, canonical inventory digest and full production/analysis commits from the
 committed extension release receipt. Publication is still pending; the template
 below cannot yet download extension results. Download only its package inventory and
-numeric shards, check available space, restore to a fresh folder and extract both
+numeric shards, check available space, restore to a fresh folder and extract the two
 code archives outside that evidence folder. Use the latest clone's scientific
 verifier with the original, ADR-032 sampler and robustness paths. It rechecks saved
 results and all 92 refits without fitting; the retained visual receipt describes
 the original review. Preserve failed outcomes and frozen files. Do not start
 duplicate numerical workers while the active host owns the extension run.
+For the ADR-043 recovered release, the package also carries
+`code/recovery.tar.gz` and `recovery/`. The scientific verifier checks their
+Git commit, frozen rosters, 21 old/refit comparisons and captured returns,
+six continuation returns, and exact producer source files without using paths
+on the original host. Preserve both directories when restoring the package.
 
 Choose an APFS destination on the receiving Mac. The atomic final-directory
 commit failed its preflight on an ExFAT external volume on the active host.

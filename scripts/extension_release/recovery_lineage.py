@@ -11,6 +11,7 @@ from typing import Any
 HASH = re.compile(r"[0-9a-f]{64}\Z")
 COUNTS = {"intact_original": 1193, "new_refit": 21, "new_continuation": 411}
 SHARD_COUNTS = (45, 84, 40, 93, 62, 87)
+INTERRUPTED_MANIFEST_SHA256 = "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9"
 
 
 def digest(path: Path) -> str:
@@ -27,7 +28,21 @@ def digest(path: Path) -> str:
 def read(path: Path) -> dict[str, Any]:
     """Read one regular JSON mapping, rejecting malformed evidence."""
     digest(path)
-    value = json.loads(path.read_text(encoding="utf-8"))
+    def unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        """Reject duplicate keys in a producer receipt."""
+        result = {}
+        for key, item in pairs:
+            if key in result:
+                raise ValueError(f"duplicate recovery JSON key: {key}")
+            result[key] = item
+        return result
+
+    def nonfinite(value: str) -> None:
+        """Reject non-finite JSON numbers."""
+        raise ValueError(f"non-finite recovery JSON number: {value}")
+
+    value = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique,
+                       parse_constant=nonfinite)
     if not isinstance(value, dict):
         raise ValueError(f"recovery record is not a mapping: {path}")
     return value
@@ -179,7 +194,10 @@ def verify_recovered_lineage(run: Path, *, candidate: dict[str, Any] | None = No
 
 def optional_recovered_lineage(run: Path) -> dict[str, Any] | None:
     """Require the final supplement whenever either recovery marker exists."""
-    if not any((run / name).exists() or (run / name).is_symlink()
-               for name in ("recovery_lineage.json", "recovery_continuation.json")):
+    marked = any((run / name).exists() or (run / name).is_symlink()
+                 for name in ("recovery_lineage.json", "recovery_continuation.json"))
+    manifest = run / "manifest.json"
+    interrupted = manifest.is_file() and digest(manifest) == INTERRUPTED_MANIFEST_SHA256
+    if not marked and not interrupted:
         return None
     return verify_recovered_lineage(run)

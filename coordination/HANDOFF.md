@@ -6,13 +6,14 @@ Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
 ## Recovered-grid successor — waiting since 2026-10-01, 03:23 UTC
 
-The final-lineage sealer and portable release/restore gate are prepared in the
+The final-lineage sealer and captured-proof release/restore gate are prepared in the
 coordination checkout. After the successor's real completion, use the
 [assembly guide](../docs/extension_recovery_assembly.md) to bind the 411
 new producer files and six captured zero returns. This code has no result to
 seal yet. The release stage now refuses an assembled recovered run without
-its final supplement and can use independent Git metadata for the frozen
-production checkout. A complete portable recovery proof bundle, deep
+its final supplement, recomputes the actual source proof from the controller,
+and packages the refit/continuation captures and recovery source archive. It
+can use independent Git metadata for the frozen production checkout. Deep
 verification, fresh 92-cell reproduction, render/QA and transfer are still
 required.
 

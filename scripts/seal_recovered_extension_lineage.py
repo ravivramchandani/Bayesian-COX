@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 from collections import Counter
 from pathlib import Path
@@ -121,12 +122,19 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--control", type=Path, required=True)
     parser.add_argument("--run", type=Path, required=True)
+    parser.add_argument("--verify-only", action="store_true",
+                        help="recompute actual producer proof without writing")
     args = parser.parse_args()
     control, run = args.control.resolve(), args.run.resolve()
     target = run / "recovery_continuation.json"
+    result = source_lineage(control, run)
+    if args.verify_only:
+        if recovery.read_json(target) != result:
+            raise ValueError("stored final lineage differs from actual source proof")
+        print(json.dumps(verify_recovered_lineage(run), sort_keys=True))
+        return
     if target.exists() or target.is_symlink():
         raise FileExistsError(target)
-    result = source_lineage(control, run)
     verify_recovered_lineage(run, candidate=result)
     recovery.write_new_json(target, result)
     print(verify_recovered_lineage(run))

@@ -63,7 +63,13 @@ pre-continuation lineage. The portable verifier in
 `scripts/extension_release/recovery_lineage.py` rechecks all 1,625 cell and
 trace hashes and the exact 1,193/21/411 producer partition without opening
 historical host paths. Extension staging and fresh scientific restoration
-require this check for a recovered run. The staging command may receive
+require this check for a recovered run. Staging also requires
+`--recovery-control /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3`.
+It recomputes the source proof, copies the 21 original/refit comparisons and
+captured returns plus six continuation captures into `recovery/`, and verifies
+their exact producer source files in a third `code/recovery.tar.gz` archive.
+The receiving verifier repeats those checks against the transferred records
+without opening the original Mac paths. The staging command may receive
 `--production-git-dir /Volumes/BayesCoxRecovery20261001/frozen-git-metadata-119476f/.git`
 to archive the sealed source using its independently verified Git metadata.
 This lineage gate precedes deep finalization, 92 fresh selected reproductions,
