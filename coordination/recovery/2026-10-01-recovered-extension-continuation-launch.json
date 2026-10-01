@@ -1,0 +1,25 @@
+{
+  "control": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3",
+  "fixed_pending_cell_count": 411,
+  "fixed_plan_content_sha256": "862a771296fe0e6dc4e5befab39655b67491e3241dad6de1384c6c77eb19236a",
+  "fixed_plan_file_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "new_continuation_cells_dispatched_at_checkpoint": 0,
+  "note": "The successor waits for the first supervisor complete receipt and six fixed-shard worker returns. It then captures separate assembly preflight, assembly and six sealed continuation worker exits. No assembled root, 411-cell result, deep verification or release exists at this checkpoint. Keep both pinned runtime checkouts and SSD mounts unchanged.",
+  "prior_refit_supervisor_capture": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/sequential-v1",
+  "recorded_at_utc": "2026-10-01T03:33:43.196324+00:00",
+  "recovered_run": "/Volumes/BayesCoxRecovery20261001/recovered-extension-run",
+  "schema_version": 1,
+  "status": "successor_waiting_for_21_refit_supervisor",
+  "successor_analysis_commit": "442a35c43f5c70e350d14836e377f2649f8ead80",
+  "successor_claim_sha256_at_checkpoint": "7fba3ff8246a4c117e00d0ff131d73a79d6e128dfbfb57a556dce46f067dbf84",
+  "successor_launch_sha256": "7536f13c8664e1f3acfcc67a75cc1c37344a3d3d1a070ec938596ea567717819",
+  "successor_pid_at_checkpoint": 83450,
+  "successor_runtime_checkout": "/Volumes/BayesCoxRecovery20261001/ravi-continuation-runtime-20261001",
+  "successor_source_sha256": "748680c2b8c9d747479cb4c261624c6a63d8efc30709f3c63cc25f342cee632a",
+  "successor_start_sha256": "981899386a94b1a0f7fce91f65feeede172cfd719d7237a0981f986ffed0168f",
+  "tests_at_runtime_commit": {
+    "passed": 1086,
+    "skipped": 9,
+    "subtests_passed": 288
+  }
+}

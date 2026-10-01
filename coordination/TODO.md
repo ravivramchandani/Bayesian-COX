@@ -96,6 +96,14 @@ changed code, another active producer or insufficient space. Keep the SSD
 mounted and do not edit the pinned runtime checkout until its complete or
 failure receipt has been reviewed. The later 411-cell continuation and the
 correction remain separate, unstarted gates.
+At 03:23 UTC, a successor watcher started from a different pinned checkout;
+its [launch receipt](recovery/2026-10-01-recovered-extension-continuation-launch.json)
+records that it is waiting and has fitted zero of the 411 cells. Only after
+the first supervisor has completed all 21 refits and six shard receipts will
+it preflight/assemble a separate run and capture six frozen continuation
+workers. Its stored-grid completion is not deep verification, final lineage,
+reproduction or release. Do not edit either pinned runtime checkout or start
+an independent recovery/continuation worker.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:

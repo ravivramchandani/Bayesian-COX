@@ -4,6 +4,30 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Recovered-grid successor — waiting since 2026-10-01, 03:23 UTC
+
+A second detached watcher (PID 83450 at launch) waits for the 21-refit
+supervisor's real complete receipt and six fixed-shard returns. Its
+[launch checkpoint](recovery/2026-10-01-recovered-extension-continuation-launch.json)
+pins clean analysis commit `442a35c`, source, plan, process and claim. No
+assembly or continuation cell has begun. After the prior proof passes, it
+captures separate assembly preflight and assembly, then runs only the 411
+originally absent manifest positions through the sealed six-shard runner,
+one worker at a time. Each return and new cell/trace hash is checked before
+another shard begins. Its `complete.json` will mean a stored 1,625-cell grid
+pending deep verification, 92 selected reproductions, final 411-producer
+lineage, figures/PDF review and private release. A failure retains its claim
+and capture for review; it never retries or changes the original run.
+
+Keep both runtime checkouts untouched while their watchers are active:
+`/Volumes/BayesCoxRecovery20261001/ravi-thesis-handoff-20261001` at `a673512`
+and `/Volumes/BayesCoxRecovery20261001/ravi-continuation-runtime-20261001` at
+`442a35c`. The separate coordination worktree can publish further code and
+status without changing either pinned process. The preserved correction
+evidence image at `/Volumes/BayesCoxExtensions20260928` was reattached
+read-only after the SSD reconnect and passed APFS verification; correction
+replay still requires the recovered full-grid source and is not running.
+
 ## Sequential recovery supervisor — waiting since 2026-10-01, 03:04 UTC
 
 A detached supervisor (PID 38835 at launch) is waiting for the fourth
