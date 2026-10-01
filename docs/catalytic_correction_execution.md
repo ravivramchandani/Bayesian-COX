@@ -138,6 +138,14 @@ fresh destination. It changes only `manifest.input_paths.run`; the definition,
 replay completion and per-context records remain byte-identical. Its external
 `.replay-stage.json` records the copy, not scientific approval.
 
+The captured `scripts/post_successor_replay_stage.py` watcher is waiting for
+the fixed recovered-grid successor. It checks the successor's pinned launch,
+clean runtime and actual completion, then captures the write-once final
+lineage sealer and this staging adapter. Its launch and start receipts are in
+`coordination/recovery/2026-10-01-post-successor-replay-stage-*.json`.
+It does not run `run_reuse.py`, arithmetic or a corrected fit. Review its
+terminal capture and staged receipt before proceeding with those gates.
+
 The source V3 directory is
 `~/bayes-cox-runs/correction-storage-recovery-20260930-v1/reuse_v3`.
 Its definition, execution manifest and replay completion file SHA-256 values

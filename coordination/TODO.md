@@ -104,6 +104,15 @@ it preflight/assemble a separate run and capture six frozen continuation
 workers. Its stored-grid completion is not deep verification, final lineage,
 reproduction or release. Do not edit either pinned runtime checkout or start
 an independent recovery/continuation worker.
+At 05:53 UTC a third watcher started from clean commit `f2a5703` and is
+waiting for that successor's actual completion. Its
+[launch](recovery/2026-10-01-post-successor-replay-stage-launch.json) and
+[start](recovery/2026-10-01-post-successor-replay-stage-start.json) receipts
+pin the exact plan, successor and complete V3 replay inputs. It will seal the
+final producer lineage and copy only the 1,650 verified first-draw contexts;
+it cannot start reuse inventory, arithmetic or a corrected fit. Keep its
+pinned runtime checkout and the SSD mounts intact. Completion remains gated
+on the actual prior workers; no staged recovered-source replay exists yet.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:

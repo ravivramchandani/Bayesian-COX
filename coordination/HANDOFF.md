@@ -4,6 +4,25 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Post-successor replay staging — waiting since 2026-10-01, 05:53 UTC
+
+A third detached watcher (PID 962 at launch) waits for the successor's
+genuine `complete.json` and released producer claim. Its
+[launch](recovery/2026-10-01-post-successor-replay-stage-launch.json) and
+[start](recovery/2026-10-01-post-successor-replay-stage-start.json) receipts
+bind clean code commit `f2a5703`, the fixed recovery plan, successor launch,
+preflight/replay anchors and destination. The locked suite passed 1,110 tests,
+9 skips and 288 subtests before launch. The watcher has no completed source
+to seal yet. After the successor finishes, it captures the final 1,625-cell
+producer-lineage sealer, then verifies and copies the 1,650 complete V3
+first-draw replay contexts to
+`/Volumes/BayesCoxRecovery20261001/correction-replay-recovered-20261001`.
+It stops before reuse inventory, arithmetic or a corrected fit. A failed
+gate retains its claim and capture for review. Keep its pinned checkout
+`/Volumes/BayesCoxRecovery20261001/ravi-post-successor-runtime-20261001`
+at `f2a5703` untouched alongside the two earlier runtime checkouts and
+keep SSD980 and its mounted APFS images attached.
+
 ## Correction replay transfer — prepared, source run still pending
 
 The V3 independent first-draw replay has 1,650 completed contexts: 1,400
@@ -33,8 +52,14 @@ seal yet. The release stage now refuses an assembled recovered run without
 its final supplement, recomputes the actual source proof from the controller,
 and packages the refit/continuation captures and recovery source archive. It
 can use independent Git metadata for the frozen production checkout. Deep
-verification, fresh 92-cell reproduction, render/QA and transfer are still
-required.
+verification, renewed source-bound 92-cell reproduction checks, render/QA
+and transfer are still required. A read-only audit found 89 unaffected
+prestaged refits as candidates for exact rechecking and three affected
+selected identities whose six declared refit traces are missing. The latter
+require fresh captured fits; the former cannot receive new source-bound
+receipts until the recovered run exists and exact cell, trace, scientific
+content and sampled arrays are reverified. Do not describe the 89 as newly
+fitted or infer ADR-041 producer return codes from their saved records.
 
 A second detached watcher (PID 83450 at launch) waits for the 21-refit
 supervisor's real complete receipt and six fixed-shard returns. Its
@@ -49,7 +74,7 @@ pending deep verification, 92 selected reproductions, final 411-producer
 lineage, figures/PDF review and private release. A failure retains its claim
 and capture for review; it never retries or changes the original run.
 
-Keep both runtime checkouts untouched while their watchers are active:
+Keep the first two runtime checkouts untouched while their watchers are active:
 `/Volumes/BayesCoxRecovery20261001/ravi-thesis-handoff-20261001` at `a673512`
 and `/Volumes/BayesCoxRecovery20261001/ravi-continuation-runtime-20261001` at
 `442a35c`. The separate coordination worktree can publish further code and

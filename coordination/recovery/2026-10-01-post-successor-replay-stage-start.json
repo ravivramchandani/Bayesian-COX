@@ -1,0 +1,24 @@
+{
+  "checkout_commit": "f2a5703aeaec00b8da3eac0b6ab899f676523999",
+  "contexts": "/Volumes/BayesCoxExtensions20260928/correction-20260929/inputs/recipes_v1/contexts.jsonl",
+  "destination": "/Volumes/BayesCoxRecovery20261001/correction-replay-recovered-20261001",
+  "owner_pid": 962,
+  "plan_content_sha256": "862a771296fe0e6dc4e5befab39655b67491e3241dad6de1384c6c77eb19236a",
+  "plan_file_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "preflight_output": "/Volumes/BayesCoxExtensions20260928/correction-20260929/preflight_v1",
+  "recovered_run": "/Volumes/BayesCoxRecovery20261001/recovered-extension-run",
+  "source_replay": "/Users/macuser/bayes-cox-runs/correction-storage-recovery-20260930-v1/reuse_v3",
+  "started_utc": "2026-10-01T05:53:56.729458+00:00",
+  "successor_launch_sha256": "7536f13c8664e1f3acfcc67a75cc1c37344a3d3d1a070ec938596ea567717819",
+  "successor_start_sha256": "981899386a94b1a0f7fce91f65feeede172cfd719d7237a0981f986ffed0168f",
+  "v3_preflight_pins": {
+    "contexts": "979efa26eba81652f151438e637eaf0899b1d875b69dd5c2305764ff66546fb7",
+    "definition": "47df1918083e0b2ab23c5e7bec98bd3dc5a576226425ce5c3730a6501b8b2b49",
+    "preflight_completion": "f914c34e18d5c63ecc8a0dfa21988e022bb86d08c535f04799e9518857dece62",
+    "preflight_manifest": "9b3533aa97ad88038e635c4e2cbbe3cc3b001c7e270a21307d8df69b57f6f5be",
+    "recovered_run_manifest": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+    "recovery_lineage_verifier": "3af38987fa7e7d90af066e89af34084ba698f09a40378abcc6be6829633814a1",
+    "replay_completion": "95d6e1628c44f69f83f6aadee2ed6eb58107de2a332ed98a6e1f14b8fa5432ee",
+    "source_manifest": "a3b859fff4973223ba8c55372c922edb98ec9d9066dbe26b0430d85ec00a8343"
+  }
+}

@@ -72,5 +72,10 @@ The receiving verifier repeats those checks against the transferred records
 without opening the original Mac paths. The staging command may receive
 `--production-git-dir /Volumes/BayesCoxRecovery20261001/frozen-git-metadata-119476f/.git`
 to archive the sealed source using its independently verified Git metadata.
-This lineage gate precedes deep finalization, 92 fresh selected reproductions,
-rendering, actual PDF review and private release; it does not replace them.
+This lineage gate precedes deep finalization, 92 renewed source-bound selected
+comparisons, rendering, actual PDF review and private release; it does not
+replace them. Previously fitted unaffected selected cells may be reused only
+after exact recovered-source cell, trace, scientific-content and sampled-array
+checks. The three selected identities affected by missing refit traces need
+fresh captured refits. Label prior and new numerical producers separately;
+saved prestage markers alone do not prove ADR-041 worker return codes.
