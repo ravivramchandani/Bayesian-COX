@@ -62,7 +62,7 @@ def wait_for_capture(capture: Path, expected_cell: str, control: Path,
     if (launch_receipt.get("capture_directory") != str(capture)
             or launch_receipt.get("control") != str(control)
             or launch_receipt.get("cell_id") != expected_cell
-            or launch_receipt.get("control_plan_sha256") != plan["content_sha256"]
+            or launch_receipt.get("control_plan_sha256") != recovery.sha256_file(control / "plan.json")
             or recovery.sha256_file(capture / "capture.py") != launch_receipt.get("capture_script_sha256")
             or recovery.sha256_file(capture / "launch.json") != launch_receipt.get("launch_sha256")
             or recovery.sha256_file(capture / "wrapper_start.json") != launch_receipt.get("wrapper_start_sha256")

@@ -34,8 +34,9 @@ def prior_capture(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path
     (capture / "return.json").write_text(json.dumps({"wrapper_pid": 1234,
                                                        "caffeinate_pid": 1235,
                                                        "return_code": 0}) + "\n")
+    (control / "plan.json").write_text(json.dumps(plan) + "\n")
     receipt = {"capture_directory": str(capture), "control": str(control),
-               "cell_id": CELL, "control_plan_sha256": plan["content_sha256"],
+               "cell_id": CELL, "control_plan_sha256": recovery.sha256_file(control / "plan.json"),
                "capture_script_sha256": recovery.sha256_file(capture / "capture.py"),
                "launch_sha256": recovery.sha256_file(capture / "launch.json"),
                "wrapper_start_sha256": recovery.sha256_file(capture / "wrapper_start.json")}
