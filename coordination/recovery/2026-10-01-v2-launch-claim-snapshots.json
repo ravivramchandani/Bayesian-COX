@@ -1,0 +1,18 @@
+{
+  "live_claims_modified": false,
+  "purpose": "Preserve exact launch claim bytes before the successful V2 controllers remove their live claims.",
+  "recorded_at_utc": "2026-10-01T07:39:15.380960+00:00",
+  "schema_version": 1,
+  "snapshots": {
+    "continuation": {
+      "control_copy": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/continuation_captures/sequential-v2.claim-at-launch.json",
+      "repo_copy": "coordination/recovery/2026-10-01-v2-continuation-claim-at-launch.json",
+      "sha256": "a39ddb76d4f7208359a2ced0f8cf42ae4564fb65fbc198fcdc96412138985d8e"
+    },
+    "supervisor": {
+      "control_copy": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/sequential-v2.claim-at-launch.json",
+      "repo_copy": "coordination/recovery/2026-10-01-v2-supervisor-claim-at-launch.json",
+      "sha256": "08ef2ea81944d8b7c358911ec6dd06feb67c1f891010f865a2421d5e4c30dfeb"
+    }
+  }
+}

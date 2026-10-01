@@ -1,0 +1,26 @@
+{
+  "analysis_binding": {
+    "analysis_code_sha256": {
+      "scripts/assemble_recovered_extension.py": "97742915013a675c1d834b17de6ef4114ad115bebd2267bdaf882a2b49c883c7",
+      "scripts/recover_extension_run.py": "7dbd229104577d5aea60721947dbd878bf69bfa7f0dae511649fca0fc6aa4dad",
+      "scripts/reproduce_extensions.py": "1c16387ecf8cafb01488840229f51f727dbe741614c9c91996c98a1a53781428",
+      "src/data/cohorts.py": "cde8293a9f732e4a0d8d69ab53602169ecd525477caf5ad9c8dfe4e80e5cfd28",
+      "src/data/survival_folds.py": "624d1bb416c0b9c57375fe1d2c9612c54ecfc1c48d767544c3be82b72c8582b4",
+      "src/pipelines/confirmatory/options.py": "f18950d93e6c8c78adcdd02b71faa4f4f512236742c43e23942d6482c1fd1b3f",
+      "src/pipelines/extensions/planning.py": "99d2174d90aa7f50335fff510bae32da363c2dc2e54b08488e04bbc904006ee1",
+      "src/pipelines/extensions/runner.py": "8a68415cfceb6adcb370df03a870eced48290ef29d5b36449c2577189069cbcc",
+      "src/pipelines/extensions/verification.py": "44d85598e12d9120a8efcba63d008760f1605f46707ccd77dd8055325f1c59f6",
+      "src/pipelines/robustness/conditions.py": "f9cb528a6769a0a90c97db29cef48e60dec912babb5dd783f7ab03acb530ff57",
+      "src/utils/reproducibility.py": "2679ffe438568bf4dd147cf4eb92f29aee587864063cf8d723ce41dbd8e647be"
+    },
+    "analysis_git_commit": "7f8a2b211bed387706a31cf9834456787042e2c0",
+    "salvage_script_sha256": "149fbe37bba552378a8dd7d6e7620ed21a5ebc4e938c353dccfd5889cdfe0e7d",
+    "supervisor_sha256": "1dc1f30d1aacbbc979defed31297926237d61dbc023b572577661fc13ca1fef9",
+    "v2_supervisor_sha256": "fe771be3e3c1f5216a352602afb0185e9d1a2de2c634a6b4e4a25510c27183b2"
+  },
+  "capture_root": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/sequential-v2",
+  "pid": 15330,
+  "plan_sha256": "862a771296fe0e6dc4e5befab39655b67491e3241dad6de1384c6c77eb19236a",
+  "salvage_proof_sha256": "ced149102d1bbb092cf95d487cdaf8065254fd0d4bcb862ede174b2438f3f7ea",
+  "started_utc": "2026-10-01T07:09:50.197239+00:00"
+}

@@ -190,10 +190,15 @@ def main() -> None:
     recovery_code = Path(__file__).resolve().parents[2]
     recovery_code_commit = commit(recovery_code) if recovered else None
     if recovered:
+        supervisor_version = read_mapping(
+            args.run / "recovery_continuation.json").get("supervisor_version", "v1")
+        if supervisor_version not in {"v1", "v2"}:
+            raise ValueError("unknown recovered extension supervisor version")
         subprocess.run([sys.executable, "-B",
                         str(recovery_code / "scripts/seal_recovered_extension_lineage.py"),
                         "--control", str(args.recovery_control.resolve()),
-                        "--run", str(args.run.resolve()), "--verify-only"],
+                        "--run", str(args.run.resolve()),
+                        "--supervisor-version", supervisor_version, "--verify-only"],
                        check=True, timeout=1800)
     if sha256_file(args.matched) != manifest["matched_sha256"]:
         raise ValueError("matched data differs from production")

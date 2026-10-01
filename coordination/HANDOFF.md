@@ -15,6 +15,9 @@ recovered run or started any of the 411 absent cells. The V2 supervisor remains
 active separately; the last verified count was four of 21 affected refits.
 Both processes have distinct V2 claims and write-once captures. Do not remove
 those claims or change either pinned runtime checkout. Keep the SSD attached.
+Exact launch-time claim bytes were independently copied and
+[published](recovery/2026-10-01-v2-launch-claim-snapshots.json) before the live
+controllers can release their claims on success; the live claims were untouched.
 The original V1 failures and claims remain historical evidence. Downstream
 lineage and release scripts still need explicit V2 binding before any release.
 The later V1 launch entries below describe stopped processes.
