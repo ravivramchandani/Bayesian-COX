@@ -1,5 +1,35 @@
 # Extension trace-recovery supervision
 
+The third V2 controller is a replay watcher at clean published commit
+`adc260c`. Its
+`coordination/recovery/2026-10-01-post-successor-replay-stage-v2-launch.json`
+pins its active process, captured start, V2 successor and frozen V3 sources.
+It waits for the full recovered grid, then seals producer lineage and stages
+replay without a fit. Its `post_successor_stage_v2.claim` and
+`post_successor_captures/sequential-v2` must remain untouched while active.
+The command below records that already-running invocation; do not launch it
+again:
+
+```bash
+/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -I -B \
+  /Users/macuser/bayes-cox-runs/ravi-post-successor-v2-runtime-20261001/scripts/post_successor_replay_stage.py \
+  --supervisor-version v2 \
+  --control /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3 \
+  --recovered-run /Volumes/BayesCoxRecovery20261001/recovered-extension-run \
+  --capture-root /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/post_successor_captures/sequential-v2 \
+  --source-replay /Users/macuser/bayes-cox-runs/correction-storage-recovery-20260930-v1/reuse_v3 \
+  --preflight-output /Volumes/BayesCoxExtensions20260928/correction-20260929/preflight_v1 \
+  --contexts /Volumes/BayesCoxExtensions20260928/correction-20260929/inputs/recipes_v1/contexts.jsonl \
+  --destination /Volumes/BayesCoxRecovery20261001/correction-replay-recovered-20261001 \
+  --python /Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python \
+  --plan-file-sha256 ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694 \
+  --plan-content-sha256 862a771296fe0e6dc4e5befab39655b67491e3241dad6de1384c6c77eb19236a \
+  --successor-launch-sha256 9554c89655da41f8f5d53db286088706ae69a5a528251f9b6775750103ff1b9b \
+  --successor-start-sha256 acd627c20ee236c5c20f24ebf9222a56366862f92c60ca860605d90238c79c0b \
+  --checkout-commit adc260c5220535f8723c310604f26ac0e1d3ae8a \
+  --poll-seconds 60 --execute
+```
+
 The V2-aware successor launched from separate clean Mac-local commit
 `0c3f48a` on 2026-10-01. Its actual process and start are pinned in
 `coordination/recovery/2026-10-01-recovered-extension-continuation-v2-launch.json`.

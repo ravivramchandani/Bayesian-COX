@@ -4,6 +4,21 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## V2 replay watcher waiting — 2026-10-01, 07:50 UTC
+
+The V2-aware post-successor watcher is active from a third clean Mac-local
+checkout at published commit `adc260c` (PID 24437 at launch). Its
+[launch checkpoint](recovery/2026-10-01-post-successor-replay-stage-v2-launch.json)
+binds its code, process, exact V2 successor launch/start and frozen V3 replay
+inputs. It waits for the successor's actual 1,625-cell completion and released
+claim before sealing producer lineage and staging the 1,650 first-draw replay
+contexts. It cannot start extension cells or corrected fitting. Its distinct
+V2 claim and capture are active; an exact launch-claim copy is on the remote.
+No recovered run, staged replay or new extension release exists yet. The V2
+supervisor, successor and watcher are all running; only four of 21 affected
+refits were verified at the last completed cell checkpoint. Keep their pinned
+checkouts, claims and SSD mounts unchanged. The V1 failed chain remains intact.
+
 ## V2 continuation waiting — 2026-10-01, 07:26 UTC
 
 The V2-aware continuation controller is running from a second clean, Mac-local

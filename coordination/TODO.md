@@ -19,6 +19,15 @@ artefacts satisfy the stated gate.
 
 ## Current programme — 2026-10-01
 
+At 07:50 UTC the separately captured V2 replay watcher started from clean,
+published commit `adc260c`. Its
+[launch checkpoint](recovery/2026-10-01-post-successor-replay-stage-v2-launch.json)
+binds the active process and V2 successor. It waits for genuine full-grid
+completion, then seals lineage and stages first-draw replay without fitting.
+The recovered run and replay destination do not yet exist. Original-law
+recovery still has 17 affected refits and 411 absent cells to execute; the
+portable V2 release verifier and later deep result gates remain outstanding.
+
 At 07:26 UTC the V2-aware continuation controller started from clean,
 published commit `0c3f48a` with a distinct claim and capture. Its
 [launch checkpoint](recovery/2026-10-01-recovered-extension-continuation-v2-launch.json)

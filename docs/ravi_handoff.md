@@ -31,10 +31,12 @@ formal receipts remain absent. This focused study does not finish the
 
 Read [HANDOFF](../coordination/HANDOFF.md) and [TODO](../coordination/TODO.md)
 before launching extension work on another Mac. The original workers stopped
-after a host interruption; three of 21 missing-trace refits are now verified
-in a separate recovery lineage. Check current controller state and host
-resources before any new worker; do not treat the partial
-local run as a verified release.
+after a host interruption; four of 21 missing-trace refits have verified
+non-timing scientific comparisons. Three separately captured V2 controllers
+are active on the owner's Mac to finish the remaining refits, assemble the
+recovered grid and stage correction replay. Do not start a competing worker
+or treat the partial local run as a verified release. Their launch evidence
+and current limits are in HANDOFF; the final extension results are still pending.
 A clone supplies code and plans. Completed results are restored from the
 private releases below.
 
