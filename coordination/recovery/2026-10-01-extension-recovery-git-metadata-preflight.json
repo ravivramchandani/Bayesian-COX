@@ -1,0 +1,40 @@
+{
+  "alternate_git_metadata": {
+    "git_dir": "/Volumes/BayesCoxRecovery20261001/frozen-git-metadata-119476f/.git",
+    "git_work_tree": "/Users/macuser/bayes-cox-runs/extensions-code-20260928-119476f",
+    "head": "119476fef55b1eeb690527f234c1423440720d45",
+    "head_sha256": "6736294072142d42f147afa9a8af8b342f7314569222381ad5d8bf03972b8e02",
+    "index_sha256": "981a308ef85f17fbe7854b9a601425a2b6bc5abf877e468402dc5837e3b9d72f",
+    "nonordinary_index_flags": 0,
+    "scope": "process-local environment only; original .git pointer and frozen code files unchanged",
+    "status_clean": true,
+    "tracked_file_count": 297
+  },
+  "controller_plan_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "controller_source_sha256": "7dbd229104577d5aea60721947dbd878bf69bfa7f0dae511649fca0fc6aa4dad",
+  "failed_preflight_capture": {
+    "capture.py": "a915b552032a42a81a272c90a16c1a722156d5158641f10830da270c5b2534d0",
+    "launch.json": "ae96bb261f17a75bb140a985c09dff61ff9ea4f3342d84737288714e5fcf2ff8",
+    "return.json": "88af1a223ed37b23db818c24d550592d8e1a0a6c4bbdab5934d82292745f3518",
+    "worker.stderr.log": "7ddf5516620eb7f63035916fbcfb4e9e9ea5090d0c41ce429941c74f18386dee",
+    "wrapper_start.json": "16cb1ace36ba1ecc95c6fac12f98090190c1650a9e1a327a3f77beacb2f701ca"
+  },
+  "failed_preflight_created_cell_or_claim": false,
+  "failed_preflight_return_code": 1,
+  "frozen_code_commit": "119476fef55b1eeb690527f234c1423440720d45",
+  "frozen_code_path": "/Users/macuser/bayes-cox-runs/extensions-code-20260928-119476f",
+  "next_gate": "Captured worker run with process-scoped Git environment, then typed returns, file hashes and official scientific comparison",
+  "no_fit_manifest_probe": {
+    "exact_json_match": true,
+    "path": "/Volumes/BayesCoxRecovery20261001/recovery-git-metadata-probe-20261001/manifest.json",
+    "probe_manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9",
+    "source_manifest_sha256": "83b9049fb6aaaadab576b34de0741e4f510344dcefba9f96198d15b5ab4f49b9"
+  },
+  "original_git_pointer": "gitdir: /Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/.git/worktrees/extensions-code-20260928-119476f",
+  "original_git_status_issue": "Git status blocked while reading iCloud-backed shared Git metadata; captured first attempt ended before any producer claim or numerical attempt",
+  "recorded_at_utc": "2026-10-01T02:01:14.012842+00:00",
+  "schema_version": 1,
+  "scientific_result_claim": null,
+  "scope": "ADR-043 worker-0 recovery refit; unchanged frozen numerical plan",
+  "status": "no_fit_preflight_passed"
+}
