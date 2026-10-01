@@ -4,6 +4,23 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Fourth monitored recovery fit — launched 2026-10-01, 02:03 UTC
+
+Three of 21 affected refits remain verified; the fourth is active and has no
+terminal scientific result yet. Worker 0 is fitting the fixed matched-METABRIC
+expression spike-and-slab `r01f03` cell in a separate write-once attempt under
+the unchanged v3 recovery plan. Its
+[launch receipt](recovery/2026-10-01-fourth-extension-recovery-launch.json)
+binds the process, claims, code and capture. The first preflight for this cell
+stopped before a producer claim because the sealed checkout's shared iCloud
+Git metadata stalled. The
+[no-fit preflight record](recovery/2026-10-01-extension-recovery-git-metadata-preflight.json)
+documents a process-scoped independent Git metadata clone at the same frozen
+commit: the sealed source tree checked clean and its freshly built manifest
+matched exactly. No scientific code, frozen input or original cell was changed.
+Check the active capture, typed returns and official comparison before counting
+this refit or launching another worker. Keep SSD980 and its APFS image mounted.
+
 ## Separate focused clinical methods study — ADR-045
 
 The owner approved a smaller post-hoc methods study while Ravi finishes the

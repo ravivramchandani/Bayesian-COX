@@ -84,6 +84,10 @@ numerical worker or claim was active at the 20:30 UTC checkpoint. Original
 posterior-array equality remains unavailable because the source trace bytes
 are missing. The separate assembly adapter is prepared and tested, but its
 preflight is gated on all 21 refits and six complete worker receipts.
+On 1 October at 02:03 UTC, a fourth captured worker-0 refit
+started after a separate no-fit Git-metadata preflight; its result is pending.
+Do not count it as verified until its typed returns, trace hashes and official
+scientific comparison pass. See the latest HANDOFF and launch receipt.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:

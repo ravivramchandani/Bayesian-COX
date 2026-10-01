@@ -1,0 +1,28 @@
+{
+  "capture_directory": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/worker00_ramp2",
+  "capture_script_sha256": "536f4f7f6908181686ad63b8e103f12ec682381b41571db4cceca79c07270f39",
+  "cell_claim_sha256_at_launch": "9ffa255d5eee7413bad26b09b1b17add7d10c535402645b79e58748dad029add",
+  "cell_id": "metabric_matched__expression__r01f03__bayesian_spike_slab__full",
+  "child_start_sha256": "a384f1929a07e6f0c531aa25f5397cb7917c32662122ff3821259d91fe722988",
+  "completed_refits_before_launch": 3,
+  "control": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3",
+  "control_plan_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "controller_sha256": "7dbd229104577d5aea60721947dbd878bf69bfa7f0dae511649fca0fc6aa4dad",
+  "git_environment": {
+    "git_dir": "/Volumes/BayesCoxRecovery20261001/frozen-git-metadata-119476f/.git",
+    "git_optional_locks": "0",
+    "git_work_tree": "/Users/macuser/bayes-cox-runs/extensions-code-20260928-119476f"
+  },
+  "git_metadata_preflight": "coordination/recovery/2026-10-01-extension-recovery-git-metadata-preflight.json",
+  "git_metadata_preflight_commit": "ccc8102b09c1df2f1ef9881d12774432b5e16e40",
+  "invocation_sha256": "b3733b2f00a629cab207ce81aed1e26e66c450f7df268aa6728e285f09d6f99d",
+  "launch_sha256": "54d726cc8928f46c5f6160c2fddafef036d3afcef06347c14fc9dfdd461820a6",
+  "note": "No terminal child or wrapper return, cell/trace verification, or official scientific comparison existed at this launch checkpoint. Preserve all attempts; verify before another producer.",
+  "recorded_at_utc": "2026-10-01T02:06:41.979664+00:00",
+  "remaining_refits_including_active": 18,
+  "schema_version": 1,
+  "status": "captured_original_law_refit_active_result_pending",
+  "worker": 0,
+  "worker_claim_sha256_at_launch": "e1c200822dc4ae3c410c747974fec02eab77b3e16cbf7222730b214301e2acf4",
+  "wrapper_start_sha256": "4b171f8547538c0b7f5e60657c7705af0401141918bdd3071c9de7fff6375c7a"
+}
