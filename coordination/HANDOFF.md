@@ -2,7 +2,25 @@
 
 State needed to resume work in a new session or on another machine.
 
-Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
+Updated: 2026-10-02 (New Zealand; dated checkpoints below use UTC)
+
+## Local storage cleanup — 2026-10-01, 11:12 UTC
+
+The [cleanup receipt](recovery/2026-10-01-local-storage-cleanup.json) records
+the disposable copies removed from the Mac and SSD. Result-data copies were
+byte-compared with retained evidence; removed checkouts were clean and their
+commits remain in `main`. The active V2 runtime
+checkouts are separate Mac-local paths and were not touched. Historical launch
+records below still name the old V1 paths as they existed at launch.
+
+The frozen original run, recovery control and refits, clinical-methods staged
+results and receiving science receipt, release archives, historical storage
+verification cache, and both mounted APFS images remain. At this checkpoint
+the V2 supervisor, continuation and replay watcher were alive; the current
+numerical child was fitting the worker-2 spike-and-slab cell. No complete
+extension or correction release exists. The mounted recovery volume has about
+299 GiB free. Its sparsebundle on the raw SSD has not been compacted while
+the live jobs depend on the mount; do not unmount it just to reclaim bands.
 
 ## V2 replay watcher waiting — 2026-10-01, 07:50 UTC
 

@@ -1,0 +1,91 @@
+{
+  "schema": "local_storage_cleanup_v1",
+  "checked_utc": "2026-10-01T11:12:10Z",
+  "scope": "Remove proven redundant local copies; preserve scientific records, frozen inputs, active claims and release evidence.",
+  "removed_mac_duplicates": [
+    {
+      "path": "/Users/macuser/bayes-cox-runs/agent-scratch/render/old",
+      "files": 881,
+      "size_kib_before": 605816,
+      "retained_equal_copy": "/Users/macuser/bayes-cox-runs/render-equivalence-20260927/original",
+      "proof": "diff -qr returned zero; no active file handle or current manifest reference"
+    },
+    {
+      "path": "/Users/macuser/bayes-cox-runs/private-programme-restore-20260927",
+      "data_files": 2503,
+      "size_kib_before": 2031048,
+      "retained_equal_copy": "/Users/macuser/bayes-cox-runs/student-programme-results-20260928",
+      "proof": "diff -qr -x .DS_Store returned zero; only Finder metadata differed; no active file handle or current manifest reference"
+    }
+  ],
+  "removed_merged_worktrees": [
+    "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/.claude/worktrees/agent-a20c562e68a63e8c6",
+    "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/.claude/worktrees/agent-a3065a89fdbb05c37",
+    "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/.claude/worktrees/agent-a53a1b310d73a0769",
+    "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/.claude/worktrees/agent-a907324ae897734e5",
+    "/Volumes/BayesCoxRecovery20261001/ravi-salvage-runtime-20261001",
+    "/Volumes/BayesCoxRecovery20261001/ravi-post-successor-runtime-20261001",
+    "/Volumes/BayesCoxRecovery20261001/ravi-continuation-runtime-20261001"
+  ],
+  "worktree_proof": "Each was clean, its HEAD was an ancestor of remote main, and git worktree remove unregistered it; no active process used these paths.",
+  "removed_ssd_receiving_duplicates": [
+    {
+      "path": "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/receiving/programme-results",
+      "retained_equal_copy": "/Users/macuser/bayes-cox-runs/student-programme-results-20260928",
+      "proof": "diff -qr -x .DS_Store returned zero for 2503 data files"
+    },
+    {
+      "path": "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/receiving/baseline",
+      "retained_equal_copy": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/project/reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651",
+      "proof": "all 455 files in the receiving original-run subtree matched the retained run with diff -qr"
+    },
+    {
+      "path": "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/receiving/programme-assets",
+      "retained_equal_copies": [
+        "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1/private-programme-download-20260927",
+        "/Users/macuser/bayes-cox-runs/student-programme-results-20260928/release_metadata"
+      ],
+      "proof": "five common tarballs matched recursively; the five metadata files matched with cmp; the private release also remains published"
+    },
+    {
+      "path": "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/receiving/focused-assets-v2",
+      "retained_equal_copy": "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/assets-v2",
+      "proof": "diff -qr returned zero"
+    },
+    {
+      "path": "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/receiving/focused-restored-v2",
+      "retained_equal_copy": "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/local-restored-v2",
+      "proof": "diff -qr returned zero"
+    }
+  ],
+  "removed_ssd_receiving_code": {
+    "paths": [
+      "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/receiving/production",
+      "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/receiving/code"
+    ],
+    "commits": [
+      "119476fef55b1eeb690527f234c1423440720d45",
+      "eaebcd7b422e63cc7b0792cc8ac481f83a0080ba"
+    ],
+    "proof": "both clean commits are ancestors of current main; code/data matched the retained project data, production/data and reports matched the retained frozen source; linked production worktree was unregistered before the clone was removed"
+  },
+  "also_removed": "Empty iCloud-Github-recovery-2026-10-01 directory and disposable untracked Python/test caches; tracked cache files were restored from Git.",
+  "preserved": [
+    "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3",
+    "/Users/macuser/bayes-cox-runs/correction-storage-recovery-20260930-v1/reuse_v3",
+    "/Users/macuser/bayes-cox-runs/extensions-code-20260928-119476f",
+    "/Users/macuser/bayes-cox-runs/ravi-extension-recovery-runtime-20261001",
+    "/Users/macuser/bayes-cox-runs/ravi-extension-continuation-runtime-20261001",
+    "/Users/macuser/bayes-cox-runs/ravi-post-successor-v2-runtime-20261001",
+    "/Volumes/BayesCoxRecovery20261001/ravi-coordination-20261001",
+    "/Volumes/BayesCoxRecovery20261001/ravi-thesis-handoff-20261001",
+    "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/staged-v2",
+    "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/assets-v2",
+    "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/local-restored-v2",
+    "/Volumes/BayesCoxRecovery20261001/clinical-methods-20261001/receiving/focused-restored-science-v2.json",
+    "/Volumes/BayesCoxExtensions20260928/correction-20260929",
+    "/Volumes/BayesCoxExtensions20260928/historical-archive-cache-20260929-v1"
+  ],
+  "post_check": "At 11:12 UTC, V2 supervisor PID 15330, successor PID 19653, replay watcher PID 24437 and numerical child PID 37230 were alive; both BayesCox APFS volumes remained mounted. The recovery APFS volume had 299 GiB available and the Mac data volume about 37 GiB. The retained focused release archive matched SHA-256 072fcdef51dc84299499cf2c66a2f843f5989fa1067b4c69bcf276dbe83d0678.",
+  "physical_ssd_note": "The mounted recovery sparsebundle still occupied about 4.2 GiB on raw SSD980; it was not detached or compacted while the live jobs use it."
+}
