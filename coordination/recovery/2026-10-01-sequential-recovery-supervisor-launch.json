@@ -1,0 +1,26 @@
+{
+  "control": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3",
+  "fixed_plan_content_sha256": "862a771296fe0e6dc4e5befab39655b67491e3241dad6de1384c6c77eb19236a",
+  "fixed_plan_file_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "new_refits_dispatched_by_supervisor_at_checkpoint": 0,
+  "note": "Supervisor waits for the active captured worker return, then checks its cell, traces and official scientific comparison before one-at-a-time dispatch. The fourth result is not yet counted. SSD980 and its APFS image must remain mounted; no other recovery worker or runtime-checkout edit should occur while this process owns the sequence.",
+  "prior_worker_capture": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/worker00_ramp2",
+  "prior_worker_launch_receipt": "coordination/recovery/2026-10-01-fourth-extension-recovery-launch.json",
+  "recorded_at_utc": "2026-10-01T03:05:56.705770+00:00",
+  "remaining_refits_including_active": 18,
+  "schema_version": 1,
+  "status": "supervisor_waiting_for_fourth_refit_result",
+  "supervisor_analysis_commit": "a673512c82649681cca3e520251354a38cc9eae1",
+  "supervisor_claim_sha256_at_checkpoint": "902166d3cc5c24ca42a1f7678d04547ae409fff487b60816c1444bcc32951d2d",
+  "supervisor_launch_sha256": "1b17ea2f824599517d3767e449319aaf0f634683d5c75952118555c1403a7393",
+  "supervisor_pid_at_checkpoint": 38835,
+  "supervisor_runtime_checkout": "/Volumes/BayesCoxRecovery20261001/ravi-thesis-handoff-20261001",
+  "supervisor_source_sha256": "1dc1f30d1aacbbc979defed31297926237d61dbc023b572577661fc13ca1fef9",
+  "supervisor_start_sha256": "1d18d82295319d7ace1a544758113e5fbe657b787667a69cb49667607b332234",
+  "tests_at_runtime_commit": {
+    "passed": 1081,
+    "skipped": 9,
+    "subtests_passed": 288
+  },
+  "verified_refits_before_current_result": 3
+}

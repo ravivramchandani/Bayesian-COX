@@ -4,6 +4,32 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Sequential recovery supervisor — waiting since 2026-10-01, 03:04 UTC
+
+A detached supervisor (PID 38835 at launch) is waiting for the fourth
+captured refit. It has not dispatched another cell. Its
+[launch checkpoint](recovery/2026-10-01-sequential-recovery-supervisor-launch.json)
+binds the fixed plan, live capture, clean analysis commit `a673512`, source
+hash, start and exclusive supervisor claim. The locked suite passed 1,081
+tests, 9 skips and 288 subtests before launch. The runner will verify the
+fourth cell's actual return, trace bytes and official scientific comparison,
+then handle the remaining fixed shards one cell at a time. Any mismatch,
+interrupted attempt, code change, missing SSD mount or low-space gate stops it
+with a retained claim for review. Three of 21 refits are verified now; the
+fourth remains pending. The 411 absent cells and correction have not begun.
+
+Keep `/Volumes/SSD980` and `/Volumes/BayesCoxRecovery20261001` mounted. Do
+not edit or switch the pinned runtime checkout
+`/Volumes/BayesCoxRecovery20261001/ravi-thesis-handoff-20261001` or start an
+independent recovery worker while the supervisor runs. Coordination updates
+can be made from the separate worktree without changing the pinned runtime
+checkout. The APFS image briefly unmounted when SSD980 reconnected during
+testing; it was reattached, passed a live filesystem verification and the
+active fit continued. Check the local `captures/sequential-v1` start, per-cell
+returns and `complete.json` or `failure.json` before advancing T-191. The
+[supervisor guide](../docs/extension_recovery_supervision.md) gives the exact
+paths and stop rules.
+
 ## Fourth monitored recovery fit — launched 2026-10-01, 02:03 UTC
 
 Three of 21 affected refits remain verified; the fourth is active and has no

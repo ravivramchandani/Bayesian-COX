@@ -88,6 +88,14 @@ On 1 October at 02:03 UTC, a fourth captured worker-0 refit
 started after a separate no-fit Git-metadata preflight; its result is pending.
 Do not count it as verified until its typed returns, trace hashes and official
 scientific comparison pass. See the latest HANDOFF and launch receipt.
+At 03:04 UTC, a separate sequential supervisor began waiting for that
+captured return. It has dispatched no new fit at the launch checkpoint; its
+[receipt](recovery/2026-10-01-sequential-recovery-supervisor-launch.json)
+pins the unchanged runtime checkout and plan. It will stop on failed proof,
+changed code, another active producer or insufficient space. Keep the SSD
+mounted and do not edit the pinned runtime checkout until its complete or
+failure receipt has been reviewed. The later 411-cell continuation and the
+correction remain separate, unstarted gates.
 
 The September programme in `HANDOFF.md` supersedes the earlier downstream
 pause. All modular refactors are integrated and passed their required gates:
