@@ -13,11 +13,12 @@ is pinned to analysis code `eaebcd7b422e63cc7b0792cc8ac481f83a0080ba`
 and canonical package inventory SHA-256
 `3497558581a4fefb67eabcf8a2b215cec6f48e3654fe681679a2572f54378953`.
 The [release receipt](../coordination/recovery/2026-10-01-clinical-methods-release.json)
-binds the source, figures, assets and fresh scientific replay. Ravi can use
-the [execution and restore guide](clinical_methods_execution.md) on an
-Apple Silicon Mac with private-repository access and the exact environment
-lock. The receiving replay passed on a fresh clone and download on this Mac;
-Ravi's physical laptop has not yet been tested.
+binds the source, figures, assets and fresh scientific replay. Ravi can read
+this summary and the released figures on any operating system with access to
+the private repository. The [execution and restore guide](clinical_methods_execution.md)
+is for optional exact scientific replay using the macOS arm64 environment
+lock. That replay passed on a fresh clone and download on the original Mac;
+a second physical laptop has not been tested.
 
 | Fixed evidence | Verified result |
 | --- | --- |

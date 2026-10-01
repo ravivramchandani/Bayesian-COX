@@ -1,5 +1,11 @@
 # Ravi: restore the results and continue the work
 
+For the thesis, start with the [beginner guide](ravi_start_here.md). It works
+on Windows, Linux and macOS: check private GitHub/Overleaf access, read the
+claim limits, and download only the reviewed figures and tables you need.
+No Mac, conda installation or numerical replay is required to begin writing.
+This longer handoff preserves technical release and experiment details.
+
 The baseline code and results programme is complete and remotely verified.
 The separate 1,625-cell post-hoc extension and catalytic correction remain
 unfinished. Their final results are not yet available as a verified remote release.
@@ -126,21 +132,22 @@ records that narrow update from published `a26d5a2`.
 
 Use [the clinical methods execution guide](clinical_methods_execution.md)
 and [release receipt](../coordination/recovery/2026-10-01-clinical-methods-release.json)
-for the focused subset. Its fresh download and scientific replay passed on
-this Mac; Ravi still needs to verify the exact lock and repository access on
-his own Apple Silicon laptop. Clinical METABRIC's known same-individual pair
-may cross historical folds, and exact pretreatment availability of some
-predictors remains unresolved. The baseline releases lack raw posterior
+for an optional exact replay of the focused subset. Its fresh download and
+scientific replay passed on the original Mac. Ravi needs to check his own
+private GitHub and Overleaf access, but he does not need a Mac or a replay to
+read the release and work on the thesis. Clinical METABRIC's known
+same-individual pair may cross historical folds, and exact pretreatment
+availability of some predictors remains unresolved. The baseline releases lack raw posterior
 arrays, so no new trace-level diagnostic recalculation is claimed.
 
 Use [the code guide](code_guide.md),
 [correction execution](catalytic_correction_execution.md) and
 [extension execution](extensions_execution.md) for component and run details.
 The [evidence status](current_evidence_status.md) defines permitted scientific
-claims. This guide targets an Apple Silicon Mac: completed baseline releases
-were checked through a fresh clone and restore on this Mac, while Ravi must
-verify the frozen environment on his own laptop. A second physical laptop was
-not tested.
+claims. The full numerical restore procedure below targets an Apple Silicon
+Mac because the exact lock is macOS arm64. It is optional for thesis writing.
+Completed baseline releases were checked through a fresh clone and restore
+on the original Mac; a second physical laptop was not tested.
 
 ## What is on GitHub
 
@@ -177,8 +184,10 @@ supervisor's laptop.
 `Main.tex` and the thesis chapters are not in the GitHub code repository.
 They are in the separate [Overleaf Git project](https://git.overleaf.com/6a750f3e68075fe560b0c306).
 Ravi needs access to that project as well as the private GitHub repository;
-access from this Mac does not verify his own login. He may edit in Overleaf or,
-after cloning `bayesian-cox`, clone the thesis beside it:
+access from this Mac does not verify his own login. With access, he can view
+the draft in Overleaf now. Editing the separate thesis project awaits Ali's
+instruction and coordination. If local work is later needed, clone it beside
+`bayesian-cox`:
 
 ```bash
 git clone https://git.overleaf.com/6a750f3e68075fe560b0c306 ../thesis-overleaf
@@ -189,12 +198,16 @@ lives elsewhere. The remote thesis is a draft: its results and conclusion
 chapters and abstract still need the verified findings and review. Restored
 figures and tables come from the GitHub releases above.
 
-## Install and restore on a fresh Mac
+## Optional locked-environment verification and restore on a fresh Apple Silicon Mac
 
-Prerequisites: Apple Silicon, macOS 14 or newer, Git, authenticated GitHub CLI
-(`gh`), and an arm64 conda installation. Use the exact environment described
-in [environment_lock.md](environment_lock.md). Install the lock tool in its
-own environment; do not regenerate the scientific lock.
+This verifies the released evidence again on a receiving machine. Ravi does
+not need to do it to read the results or prepare the thesis. For those tasks,
+follow the [beginner guide](ravi_start_here.md) on any operating system.
+
+Prerequisites for this optional verification: Apple Silicon, macOS 14 or newer,
+Git, authenticated GitHub CLI (`gh`), and an arm64 conda installation. Use the
+exact environment described in [environment_lock.md](environment_lock.md).
+Install the lock tool in its own environment; do not regenerate the scientific lock.
 
 The pending extension/correction receiving checks also require equality with
 the complete frozen environment report. That report records arm64,

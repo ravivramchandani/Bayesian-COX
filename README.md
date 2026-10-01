@@ -37,18 +37,22 @@ deferred until after thesis submission.
 
 ## Start here — Ravi's handoff
 
-Follow [Ravi's restore and continuation guide](docs/ravi_handoff.md) for a
-fresh Apple Silicon Mac: exact environment, private-repository access,
-checksummed downloads, restoration and next tasks.
+Start with [Ravi's beginner guide](docs/ravi_start_here.md) on any laptop.
+It explains private access, the thesis evidence limits, and how to get the
+reviewed figures and tables without installing the numerical environment.
+The [technical handoff](docs/ravi_handoff.md) keeps the optional locked
+Apple Silicon verification and the separate unfinished experiment state.
 
 - [Original 450-cell evidence](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085)
 - [Verified code/results programme](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-20260927-11f86ce)
 - [Full audit evidence and logs](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-audit-20260928)
+- [Separate focused post-hoc clinical methods evidence](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/clinical-methods-posthoc-20261001-eaebcd7)
 
 A Git clone contains current code, data manifests, plans and guides. Large
-results are release assets in the same private repository. Restoration
-verifies hashes and preserves immutable evidence; it does not fit models.
-No files from the original laptop are required.
+results are release assets in the same private repository. Reading the
+released reports needs no model fit or specific operating system. Optional
+exact restoration verifies hashes and preserves immutable evidence; it does
+not fit models. No files from the original laptop are required.
 
 ## Models
 

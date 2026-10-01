@@ -1,5 +1,11 @@
 # Focused clinical methods evidence and private transfer
 
+This is the operator guide for producing, transferring and scientifically
+replaying the focused evidence. Those steps are already complete on the
+original Mac. Ravi can read the [results note](clinical_methods_results.md)
+and use the [beginner thesis guide](ravi_start_here.md) on any operating
+system; he does not need this macOS arm64 procedure to write the thesis.
+
 The completed private checkpoint is
 [`clinical-methods-posthoc-20261001-eaebcd7`](https://github.com/ravivramchandani/Bayesian-COX/releases/tag/clinical-methods-posthoc-20261001-eaebcd7)
 at analysis commit `eaebcd7b422e63cc7b0792cc8ac481f83a0080ba`.
