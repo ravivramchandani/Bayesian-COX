@@ -48,10 +48,11 @@ The correction's full training-input preflight is complete: 1,400 of 1,650
 contexts accepted the original draw and 250 accepted a rank-conditioned
 redraw, with no terminal outcome. The
 [completed-preflight record](../coordination/recovery/2026-09-29-generator-correction-complete-preflight-verification.json)
-binds all 12,446 artifacts and seed histories. Independent original-draw
-replay has completed, while the input/reuse inventory and arithmetic must
-complete before the five actual execution reviews, freeze and full-budget
-corrected pilot. No corrected fit has started.
+binds all 12,446 artifacts and seed histories. The pre-interruption
+original-draw replay is preserved; recovered-source staging waits for the
+full extension grid. The input/reuse inventory and arithmetic must complete
+before the five actual execution reviews, freeze and full-budget corrected
+pilot. No corrected fit has started.
 
 The corrected launch safeguard is integrated as reviewed engineering source.
 Earlier V1/V2 versions and their review failures remain preserved. The five
@@ -114,19 +115,19 @@ A dedicated 300 GiB virtual APFS image on SSD980 is mounted at
 `/Volumes/BayesCoxRecovery20261001` for future results; it has passed
 exclusive-create and atomic-rename probes. Existing result roots were not
 moved into it, and it must be mounted before any future job using it.
-A guarded recovery controller is published. Its first three monitored refits
-finished with zero wrapper/child returns and matching official non-timing
-scientific records. The [first receipt](../coordination/recovery/2026-09-30-first-extension-recovery-refit.json),
+At the 20:34 UTC 30 September checkpoint, the first three monitored refits
+had zero wrapper/child returns and matching official non-timing scientific
+records. The [first receipt](../coordination/recovery/2026-09-30-first-extension-recovery-refit.json),
 [second receipt](../coordination/recovery/2026-09-30-second-extension-recovery-refit.json)
 and [third receipt](../coordination/recovery/2026-09-30-third-extension-recovery-refit.json)
-bind the evidence. Eighteen affected refits and 411 initially absent cells
-remain. Original missing posterior arrays cannot be compared. The pinned
-controller's assembly command is retired; the separate adapter must bind the
-full recovered source before continuation. The latest
-[HANDOFF](../coordination/HANDOFF.md) records local audit paths and the
-recovery sequence. No partial extension or correction evidence has yet been
-published as a remote results release. No numerical worker was active at the
-20:34 UTC checkpoint; recheck host resources before another launch.
+bind that historical evidence. A fourth refit was later verified through a
+separate no-fit comparison, and the V2 controller is now working through the
+remaining 17; see the latest [HANDOFF](../coordination/HANDOFF.md). The 411
+initially absent cells still await continuation. Original missing posterior
+arrays cannot be compared. The earlier controller's assembly command is
+retired; the separate adapter must bind the full recovered source before
+continuation. No partial extension or correction evidence has yet been
+published as a remote results release.
 The [assembly guide](extension_recovery_assembly.md) identifies the separate
 adapter and its full-refit gate; assembly has not yet run.
 
@@ -184,6 +185,28 @@ Large results are release assets in the same private repository. A Git clone
 contains the current code, plans and guides; the commands below retrieve the
 result files and verify them. None of these releases requires files from the
 supervisor's laptop.
+
+If you contribute code or documentation from your own laptop, use your GitHub
+account to clone the private repository. If you already have a clone, skip the
+first command and enter that directory. Update `main`, use a new branch for
+each change, and add only the intended source or documentation files:
+
+```bash
+gh repo clone ravivramchandani/Bayesian-COX bayesian-cox
+cd bayesian-cox
+git switch main
+git pull --ff-only origin main
+git switch -c ravi/my-change
+git add path/to/changed-file
+git commit -m "Describe the change"
+git push -u origin HEAD
+```
+
+Replace the example branch, file path and message with your actual change.
+Open a pull request into `main` for review. Do not commit raw datasets, local
+run directories or partial extension results; the published evidence is in
+the four releases above. Thesis writing in Overleaf does not require these
+Git commands.
 
 ## Thesis source is a separate Overleaf project
 
@@ -320,9 +343,10 @@ T-180 is now frozen, and the separate 1,625-fit post-hoc extension grid was
 launched from sealed commit `119476f`. It covers penalised Cox (T-182), the
 precisely specified Piironen–Vehtari variant (T-183), survival decision
 curves (T-184), matched METABRIC clinical/expression comparisons (T-185), and
-the catalytic-prior variants/reference-parity checks (T-189). The host run is
-paused at the interruption checkpoint above; do not start duplicate workers
-on a receiving laptop or merge its partial outputs into the frozen run.
+the catalytic-prior variants/reference-parity checks (T-189). The original
+host run stopped at the interruption checkpoint above; the separately captured
+V2 recovery is active on the owner's Mac. Do not start duplicate workers on a
+receiving laptop or merge partial outputs into the frozen run.
 The extension transfer is pending its complete-grid, deep verification,
 92-refit, final PDF-QA and fresh remote-restoration gates. Follow
 [extension execution](extensions_execution.md) and the current HANDOFF;
