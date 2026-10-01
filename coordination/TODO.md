@@ -19,6 +19,16 @@ artefacts satisfy the stated gate.
 
 ## Current programme — 2026-10-01
 
+At 07:26 UTC the V2-aware continuation controller started from clean,
+published commit `0c3f48a` with a distinct claim and capture. Its
+[launch checkpoint](recovery/2026-10-01-recovered-extension-continuation-v2-launch.json)
+binds its actual process and start. It is waiting for the V2 21-refit
+supervisor; no assembly or 411-cell continuation fit has begun. The V1
+successor/watcher failures remain preserved. T-191 still needs 17 affected
+refits, six terminal returns, 411 absent cells, final producer lineage and
+deep verification before a recovered extension release. V2-aware downstream
+sealing, replay and transfer gates are being prepared separately.
+
 At 07:10 UTC a fresh V2 supervisor started from clean published commit
 `7f8a2b2` with its own claim and write-once captures. Its worker-0 terminal
 receipt returned zero; worker 1's first missing fit is running, with no

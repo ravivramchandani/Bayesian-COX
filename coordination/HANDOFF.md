@@ -4,6 +4,21 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## V2 continuation waiting — 2026-10-01, 07:26 UTC
+
+The V2-aware continuation controller is running from a second clean, Mac-local
+checkout at published commit `0c3f48a` (PID 19653 at launch). Its
+[launch checkpoint](recovery/2026-10-01-recovered-extension-continuation-v2-launch.json)
+binds the code, plan, V2 supervisor launch, claim and captured start. It is
+waiting for the real V2 supervisor completion. It has not assembled the
+recovered run or started any of the 411 absent cells. The V2 supervisor remains
+active separately; the last verified count was four of 21 affected refits.
+Both processes have distinct V2 claims and write-once captures. Do not remove
+those claims or change either pinned runtime checkout. Keep the SSD attached.
+The original V1 failures and claims remain historical evidence. Downstream
+lineage and release scripts still need explicit V2 binding before any release.
+The later V1 launch entries below describe stopped processes.
+
 ## Recovery resumed — 2026-10-01, 07:10 UTC
 
 A new V2 supervisor is active (PID 15330 at launch) from the clean, Mac-local
@@ -25,7 +40,7 @@ mounted. The old V1 failures and claims are preserved.
 
 The V1 successor and post-successor watcher remain stopped. They hardcode the
 V1 completion and cannot follow this V2 supervisor. A separately captured V2
-successor gate is needed before assembly and the 411-cell continuation. No
+successor gate was subsequently launched as recorded above. No
 new continuation cell, complete grid, corrected fit or full extension release
 exists yet. The next incident section explains the salvage that V2 requires.
 

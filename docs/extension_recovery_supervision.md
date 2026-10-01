@@ -1,5 +1,26 @@
 # Extension trace-recovery supervision
 
+The V2-aware successor launched from separate clean Mac-local commit
+`0c3f48a` on 2026-10-01. Its actual process and start are pinned in
+`coordination/recovery/2026-10-01-recovered-extension-continuation-v2-launch.json`.
+It waits for the V2 supervisor's 21 verified refits and six terminal worker
+returns. While waiting, the recovered run and assembly plan do not exist and
+no 411-cell continuation fit has started. The command below is its **existing
+launch record**, not an instruction to start another copy while its V2 claim
+or process remains active:
+
+```bash
+/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -I -B \
+  /Users/macuser/bayes-cox-runs/ravi-extension-continuation-runtime-20261001/scripts/continue_recovered_extension.py \
+  --supervisor-version v2 \
+  --control /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3 \
+  --recovered-run /Volumes/BayesCoxRecovery20261001/recovered-extension-run \
+  --assembly-plan /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/assembly_adapter_plan_v2.json \
+  --capture-root /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/continuation_captures/sequential-v2 \
+  --production-git-dir /Users/macuser/bayes-cox-runs/frozen-git-metadata-119476f-v2/.git \
+  --poll-seconds 60 --execute
+```
+
 The reviewed V2 supervisor was launched from a clean Mac-local checkout at
 `7f8a2b2` on 2026-10-01. Its captured process and first two dispatches are
 bound in `coordination/recovery/2026-10-01-sequential-recovery-v2-launch.json`.

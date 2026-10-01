@@ -1,0 +1,23 @@
+{
+  "analysis_git_commit": "0c3f48a5299e544cc816506ab785a89452946316",
+  "assembly_plan": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/assembly_adapter_plan_v2.json",
+  "complete_extension_grid": false,
+  "control": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3",
+  "fixed_plan_content_sha256": "862a771296fe0e6dc4e5befab39655b67491e3241dad6de1384c6c77eb19236a",
+  "fixed_plan_file_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "new_continuation_cells_dispatched_at_checkpoint": 0,
+  "next_gate": "Wait for the V2 supervisor to verify all 21 affected refits and six fixed-shard zero returns; only then assemble and run 411 absent cells.",
+  "recorded_at_utc": "2026-10-01T07:27:03.955778+00:00",
+  "recovered_run": "/Volumes/BayesCoxRecovery20261001/recovered-extension-run",
+  "runtime_checkout": "/Users/macuser/bayes-cox-runs/ravi-extension-continuation-runtime-20261001",
+  "schema_version": 1,
+  "status": "v2_continuation_waiting_for_active_v2_supervisor",
+  "successor_claim_sha256_at_checkpoint": "a39ddb76d4f7208359a2ced0f8cf42ae4564fb65fbc198fcdc96412138985d8e",
+  "successor_launch_sha256": "9554c89655da41f8f5d53db286088706ae69a5a528251f9b6775750103ff1b9b",
+  "successor_pid_at_checkpoint": 19653,
+  "successor_source_sha256": "d3b535a6e839bf7e46ae312d44de4a2c566800207ca9757d0d360a35936a433f",
+  "successor_start_sha256": "acd627c20ee236c5c20f24ebf9222a56366862f92c60ca860605d90238c79c0b",
+  "supervisor_launch_sha256": "de48b7f9b580cf206c5834a4b3b6998b8e36778c8fc9217e6b9dab02f1941963",
+  "supervisor_published_launch_sha256": "596245b6ade76196c150a32db9fe4423da14942148fc11631e49babb9c3082ed",
+  "v1_failed_chain_preserved": true
+}
