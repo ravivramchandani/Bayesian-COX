@@ -6,6 +6,16 @@ Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
 ## Recovered-grid successor — waiting since 2026-10-01, 03:23 UTC
 
+The final-lineage sealer and portable release/restore gate are prepared in the
+coordination checkout. After the successor's real completion, use the
+[assembly guide](../docs/extension_recovery_assembly.md) to bind the 411
+new producer files and six captured zero returns. This code has no result to
+seal yet. The release stage now refuses an assembled recovered run without
+its final supplement and can use independent Git metadata for the frozen
+production checkout. A complete portable recovery proof bundle, deep
+verification, fresh 92-cell reproduction, render/QA and transfer are still
+required.
+
 A second detached watcher (PID 83450 at launch) waits for the 21-refit
 supervisor's real complete receipt and six fixed-shard returns. Its
 [launch checkpoint](recovery/2026-10-01-recovered-extension-continuation-launch.json)

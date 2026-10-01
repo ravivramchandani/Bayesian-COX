@@ -46,3 +46,25 @@ selected-cell reproduction and release checks follow separately.
 The pre-continuation lineage is not a final 1,625-cell release lineage: the
 sealed continuation must add a final supplement binding each of the 411 new
 cells to its producer before any full-grid result is released.
+
+After the continuation watcher has written `complete.json` and released its
+claim, seal the final producer map from the actual six captured returns:
+
+```bash
+python scripts/seal_recovered_extension_lineage.py \
+  --control /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3 \
+  --run /Volumes/BayesCoxRecovery20261001/recovered-extension-run
+```
+
+The command refuses an incomplete capture, failed return, changed saved cell
+or trace, or any active producer claim. It writes
+`recovery_continuation.json` once beside the unchanged frozen manifest and
+pre-continuation lineage. The portable verifier in
+`scripts/extension_release/recovery_lineage.py` rechecks all 1,625 cell and
+trace hashes and the exact 1,193/21/411 producer partition without opening
+historical host paths. Extension staging and fresh scientific restoration
+require this check for a recovered run. The staging command may receive
+`--production-git-dir /Volumes/BayesCoxRecovery20261001/frozen-git-metadata-119476f/.git`
+to archive the sealed source using its independently verified Git metadata.
+This lineage gate precedes deep finalization, 92 fresh selected reproductions,
+rendering, actual PDF review and private release; it does not replace them.

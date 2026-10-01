@@ -18,13 +18,33 @@ from archive_common import atomic_new_directory
 from audit_support import stage_audit_support
 from failure_transfer import verify_failure_transfer
 from qa_transfer import verify_visual_transfer
+from recovery_lineage import optional_recovered_lineage, verify_recovered_lineage
 
 
-def commit(root: Path) -> str:
+def git_environment(root: Path, git_dir: Path | None = None) -> dict[str, str]:
+    """Scope independent Git metadata to one code tree only."""
+    environment = {key: value for key, value in os.environ.items() if not key.startswith("GIT_")}
+    if git_dir is not None:
+        git_dir = git_dir.resolve()
+        if not (git_dir / "HEAD").is_file() or not (git_dir / "index").is_file():
+            raise ValueError("production Git metadata directory is incomplete")
+        environment.update({"GIT_DIR": str(git_dir), "GIT_WORK_TREE": str(root.resolve()),
+                            "GIT_OPTIONAL_LOCKS": "0"})
+    return environment
+
+
+def commit(root: Path, git_dir: Path | None = None) -> str:
     """Require an exact clean code checkout before archiving it."""
-    if subprocess.check_output(["git", "status", "--porcelain"], cwd=root, text=True).strip():
+    environment = git_environment(root, git_dir)
+    if subprocess.check_output(["git", "status", "--porcelain", "--untracked-files=all"],
+                               cwd=root, env=environment, text=True, timeout=30).strip():
         raise ValueError(f"code checkout is not clean: {root}")
-    return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    top = subprocess.check_output(["git", "rev-parse", "--show-toplevel"],
+                                  cwd=root, env=environment, text=True, timeout=30).strip()
+    if Path(top).resolve() != root.resolve():
+        raise ValueError(f"Git work tree differs from code checkout: {root}")
+    return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root,
+                                   env=environment, text=True, timeout=30).strip()
 
 
 def copy_file(source: Path | str, target: Path | str, *, clone: bool = False) -> str:
@@ -126,6 +146,8 @@ def main() -> None:
         parser.add_argument(f"--{name}", type=Path, required=True)
     parser.add_argument("--validation-logs", type=Path, help="completed current-integration logs, kept separate from frozen preparation")
     parser.add_argument("--clone-staging", action="store_true", help="require APFS copy-on-write staging; never silently fall back to full copies")
+    parser.add_argument("--production-git-dir", type=Path,
+                        help="independent Git metadata for an iCloud-offloaded frozen checkout")
     args = parser.parse_args()
     copy_payload = partial(copy_file, clone=args.clone_staging)
     copy_directory = partial(copy_tree, clone=args.clone_staging)
@@ -138,7 +160,7 @@ def main() -> None:
     out = args.output.absolute()
     if out.exists() or out.is_symlink():
         raise FileExistsError(out)
-    production_commit, analysis_commit = commit(production), commit(analysis)
+    production_commit, analysis_commit = commit(production, args.production_git_dir), commit(analysis)
     manifest = read_mapping(args.run / "manifest.json")
     completion = read_mapping(args.run / "completion.json")
     verification = read_mapping(args.run / "verification.json")
@@ -154,6 +176,8 @@ def main() -> None:
         raise ValueError("complete deep verification is absent or differs")
     if completion["manifest_sha256"] != sha256_file(args.run / "manifest.json"):
         raise ValueError("completion refers to another run manifest")
+    recovery_provenance = optional_recovered_lineage(args.run)
+    recovered = recovery_provenance is not None
     if sha256_file(args.matched) != manifest["matched_sha256"]:
         raise ValueError("matched data differs from production")
     for name, expected in manifest["input_sha256"].items():
@@ -216,13 +240,16 @@ def main() -> None:
         for root, name in ((production, "production"), (analysis, "analysis")):
             target = stage / "code" / f"{name}.tar.gz"
             target.parent.mkdir(parents=True, exist_ok=True)
+            environment = git_environment(root, args.production_git_dir if root == production else None)
             subprocess.run(["git", "archive", "--format=tar.gz", f"--output={target}", "HEAD"],
-                           cwd=root, check=True)
+                           cwd=root, env=environment, check=True, timeout=120)
         copy_payload(args.matched, stage / "data/matched_metabric.parquet")
         copy_payload(args.matched_manifest, stage / "data/matched_metabric_manifest.json")
         copy_directory(args.raw_source, stage / "data/metabric_raw")
         copy_payload(args.source_report, stage / "data/metabric_source_report.json")
         copy_directory(args.run, stage / "evidence/run")
+        if recovered and verify_recovered_lineage(stage / "evidence/run") != recovery_provenance:
+            raise ValueError("staged recovery provenance differs from the source")
         copy_directory(args.reproduction, stage / "evidence/reproduction")
         copy_directory(args.rendered, stage / "rendered")
         copy_directory(args.qa_dir, stage / "visual_qa")
@@ -231,6 +258,7 @@ def main() -> None:
         copy_payload(args.prestage_helper, stage / "execution/prestage_refits.py")
         copy_payload(args.coordinator_helper, stage / "execution/coordinate_after_fits.py")
         transfer_tools = ("stage_extensions.py", "audit_support.py", "verify_restored_science.py",
+                          "recovery_lineage.py",
                           "archive_common.py", "audit_rank_failures.py", "failure_transfer.py", "qa_transfer.py",
                           "audit_support_selftest.py", "selftest_rank_failures.py")
         for name in transfer_tools:
@@ -264,6 +292,7 @@ def main() -> None:
                         "frozen_source_sha256": source_hashes, "audit_support": audit,
                         "failure_provenance": failure_audit,
                         "visual_qa_transfer": visual_transfer,
+                        "recovery_provenance": recovery_provenance,
                         "staging_copy_mode": "strict_native_clonefile" if args.clone_staging else "copy2",
                         "transfer_tool_sha256": {name: sha256_file(stage / "execution" / name)
                                                  for name in transfer_tools}}

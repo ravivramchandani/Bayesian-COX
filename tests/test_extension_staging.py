@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import runpy
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -121,3 +122,36 @@ def test_native_clone_tree_preserves_separate_files(staging_module, tmp_path):
     (target / "nested/a").write_bytes(b"changed")
     assert (source / "nested/a").read_bytes() == b"a"
     assert (target / "b").read_bytes() == b"b"
+
+
+def test_frozen_archive_uses_scoped_independent_git_metadata(
+        staging_module, tmp_path, monkeypatch):
+    """An offloaded worktree can be archived without changing another Git root."""
+    metadata = tmp_path / "metadata"
+    sealed = tmp_path / "sealed"
+    analysis = tmp_path / "analysis"
+    for root in (metadata, sealed, analysis):
+        root.mkdir()
+    (metadata / "fixed.txt").write_text("frozen input\n")
+    (sealed / "fixed.txt").write_text("frozen input\n")
+    (analysis / "analysis.txt").write_text("analysis code\n")
+    for root, name in ((metadata, "fixed.txt"), (analysis, "analysis.txt")):
+        subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+        subprocess.run(["git", "add", name], cwd=root, check=True)
+        subprocess.run(["git", "-c", "user.name=Test", "-c", "user.email=test@example.org",
+                        "commit", "-qm", "fixture"], cwd=root, check=True)
+    monkeypatch.setenv("GIT_DIR", str(tmp_path / "wrong-inherited-git"))
+    frozen_commit = staging_module["commit"](sealed, metadata / ".git")
+    clean_environment = staging_module["git_environment"](metadata)
+    assert frozen_commit == subprocess.check_output(["git", "rev-parse", "HEAD"],
+                                                     cwd=metadata, text=True,
+                                                     env=clean_environment).strip()
+    assert staging_module["commit"](analysis) != frozen_commit
+    environment = staging_module["git_environment"](sealed, metadata / ".git")
+    archive = tmp_path / "frozen.tar.gz"
+    subprocess.run(["git", "archive", "--format=tar.gz", f"--output={archive}", "HEAD"],
+                   cwd=sealed, env=environment, check=True)
+    assert archive.is_file()
+    (sealed / "untracked.txt").write_text("not frozen\n")
+    with pytest.raises(ValueError, match="not clean"):
+        staging_module["commit"](sealed, metadata / ".git")

@@ -12,6 +12,7 @@ from pathlib import Path
 
 from failure_transfer import verify_failure_transfer
 from qa_transfer import verify_visual_transfer
+from recovery_lineage import optional_recovered_lineage
 from stage_extensions import verify_source_inputs
 
 
@@ -42,6 +43,12 @@ def main() -> None:
     failure_helper = restored / "execution/audit_rank_failures.py"
     failure_provenance = verify_failure_transfer(run, restored / "failure_provenance", failure_helper)
     stage_record = read_mapping(restored / "release_stage.json")
+    recovery_provenance = optional_recovered_lineage(run)
+    if stage_record.get("recovery_provenance") != recovery_provenance:
+        raise ValueError("restored recovery provenance differs from staging")
+    if (stage_record["transfer_tool_sha256"].get("recovery_lineage.py") !=
+            sha256_file(Path(__file__).with_name("recovery_lineage.py"))):
+        raise ValueError("restored recovery verifier differs from staging")
     if (stage_record["failure_provenance"] != failure_provenance
             or stage_record["transfer_tool_sha256"]["audit_rank_failures.py"] != sha256_file(failure_helper)):
         raise ValueError("restored supplemental failure provenance differs from staging")
@@ -88,6 +95,7 @@ def main() -> None:
               "selected_refits_recompared": 92, "trace_arrays": "exact; timing/NetCDF metadata excluded",
               "rank_failed_cells_reconstructed": failure_provenance["rank_failed_cells_audited"],
               "failure_snapshot_sha256": failure_provenance["snapshot_sha256"],
+              "recovery_provenance": recovery_provenance,
               "visual_qa_transfer": visual_transfer,
               "verifier_sha256": sha256_file(Path(__file__)),
               "source_gate_sha256": sha256_file(Path(__file__).with_name("stage_extensions.py")),
