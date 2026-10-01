@@ -37,7 +37,7 @@ deferred until after thesis submission.
 
 ## Start here — Ravi's handoff
 
-Start with [Ravi's beginner guide](docs/ravi_start_here.md) on any laptop.
+Start with [Ravi's thesis next steps](docs/ravi_thesis_next_steps.md) on any laptop.
 It explains private access, the thesis evidence limits, and how to get the
 reviewed figures and tables without installing the numerical environment.
 The [technical handoff](docs/ravi_handoff.md) keeps the optional locked

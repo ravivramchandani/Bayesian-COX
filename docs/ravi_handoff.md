@@ -1,6 +1,6 @@
 # Ravi: restore the results and continue the work
 
-For the thesis, start with the [beginner guide](ravi_start_here.md). It works
+For the thesis, start with [Ravi's thesis next steps](ravi_thesis_next_steps.md). It works
 on Windows, Linux and macOS: check private GitHub/Overleaf access, read the
 claim limits, and download only the reviewed figures and tables you need.
 No Mac, conda installation or numerical replay is required to begin writing.
@@ -202,7 +202,7 @@ figures and tables come from the GitHub releases above.
 
 This verifies the released evidence again on a receiving machine. Ravi does
 not need to do it to read the results or prepare the thesis. For those tasks,
-follow the [beginner guide](ravi_start_here.md) on any operating system.
+follow [Ravi's thesis next steps](ravi_thesis_next_steps.md) on any operating system.
 
 Prerequisites for this optional verification: Apple Silicon, macOS 14 or newer,
 Git, authenticated GitHub CLI (`gh`), and an arm64 conda installation. Use the

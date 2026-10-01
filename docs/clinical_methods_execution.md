@@ -3,7 +3,7 @@
 This is the operator guide for producing, transferring and scientifically
 replaying the focused evidence. Those steps are already complete on the
 original Mac. Ravi can read the [results note](clinical_methods_results.md)
-and use the [beginner thesis guide](ravi_start_here.md) on any operating
+and use [Ravi's thesis next steps](ravi_thesis_next_steps.md) on any operating
 system; he does not need this macOS arm64 procedure to write the thesis.
 
 The completed private checkpoint is

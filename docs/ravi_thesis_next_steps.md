@@ -1,4 +1,4 @@
-# Ravi: start the thesis on any laptop
+# Ravi: thesis next steps
 
 You can read the verified results and prepare the thesis on Windows, Linux or
 macOS. You do **not** need an Apple Silicon Mac, conda, a Git clone or the
@@ -11,8 +11,9 @@ passed on the original Mac.
    Open the thesis project from your Overleaf dashboard. If either project is
    missing or GitHub shows a 404 page, ask Ali for access before proceeding.
 2. **Read the claim limits before writing.** Use the dated
-   [current evidence status](current_evidence_status.md); older protocol and
-   claim-register pages are historical study-definition records. The thesis
+   [current evidence status](current_evidence_status.md) for what is ready.
+   The older [claim register](claim_evidence_register.md) keeps the study's
+   claim rules, but its historical result statuses are not current. The thesis
    uses the released confirmatory, robustness and explanation evidence, plus the
    separately labelled ADR-032 sampler sensitivity and ADR-033 Holm bound.
    Report the original 20 diagnostic failures, incomplete primary comparison
