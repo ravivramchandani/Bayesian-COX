@@ -19,6 +19,17 @@ artefacts satisfy the stated gate.
 
 ## Current programme — 2026-10-01
 
+At 07:10 UTC a fresh V2 supervisor started from clean published commit
+`7f8a2b2` with its own claim and write-once captures. Its worker-0 terminal
+receipt returned zero; worker 1's first missing fit is running, with no
+result yet. The [launch checkpoint](recovery/2026-10-01-sequential-recovery-v2-launch.json)
+binds the prior no-fit salvage and the preserved V1 failure. Four of 21
+affected refits were verified before this launch; 17 remained. Do not start
+another producer or remove the V2 claim. T-191 next needs the genuine V2
+completion, six terminal worker returns, then a separately captured V2
+successor for assembly and the 411 absent cells. The V1 successor and replay
+watcher are stopped and cannot certify V2 completion.
+
 At 06:57 UTC the fourth affected recovery refit's numerical child was saved
 and independently verified by a separate no-fit scientific comparison. Its
 parent wrapper really returned 1 after `os.getcwd()` failed, so the v1

@@ -1,5 +1,27 @@
 # Extension trace-recovery supervision
 
+The reviewed V2 supervisor was launched from a clean Mac-local checkout at
+`7f8a2b2` on 2026-10-01. Its captured process and first two dispatches are
+bound in `coordination/recovery/2026-10-01-sequential-recovery-v2-launch.json`.
+It requires the separate fourth-refit salvage proof, preserves every V1
+failure/claim, and runs the unchanged fixed controller from `/private/tmp`
+with independently verified local Git metadata. Worker 0 has a zero terminal
+return; worker 1's first missing fit was pending at the launch checkpoint.
+The command below records the V2 invocation; do not start another copy while
+`sequential_supervisor_v2.claim` or its process remains active:
+
+```bash
+/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -I -B \
+  /Users/macuser/bayes-cox-runs/ravi-extension-recovery-runtime-20261001/scripts/supervise_extension_recovery_v2.py \
+  --control /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3 \
+  --capture-root /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/sequential-v2 \
+  --production-git-dir /Users/macuser/bayes-cox-runs/frozen-git-metadata-119476f-v2/.git \
+  --execute
+```
+
+The stopped V1 supervisor and successor below are historical instructions.
+They cannot complete or certify this V2 sequence.
+
 The original `sequential-v1` supervisor failed after the fourth numerical
 child returned zero: its parent wrapper lost a usable current directory while
 importing the official comparison library. The v1 successor and replay watcher

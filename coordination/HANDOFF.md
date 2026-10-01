@@ -4,6 +4,31 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Recovery resumed — 2026-10-01, 07:10 UTC
+
+A new V2 supervisor is active (PID 15330 at launch) from the clean, Mac-local
+checkout pinned to published commit `7f8a2b2`. Its
+[launch checkpoint](recovery/2026-10-01-sequential-recovery-v2-launch.json)
+binds the unchanged 21-cell plan, the separately verified fourth-refit
+salvage, the retained V1 failure, the exact code and process, and a stable Mac
+working directory. The full locked suite passed 1,128 tests, 9 skips and 288
+subtests before launch. Worker 0's fixed-shard terminal call returned zero
+without a new fit. The supervisor then launched worker 1's first missing
+spike-and-slab cell; its result is pending. The verified count at launch is
+still **4 of 21**, with **17** affected refits remaining. The supervisor will
+run the fixed remaining identities one at a time, checking each captured
+return, cell, traces and scientific comparison before advancing. Its distinct
+V2 claim and captures must not be removed or rerun while the process is live.
+The frozen numerical child still uses the frozen source cwd; the long-lived
+wrapper and comparison run from `/private/tmp`. Keep the Mac awake and the SSD
+mounted. The old V1 failures and claims are preserved.
+
+The V1 successor and post-successor watcher remain stopped. They hardcode the
+V1 completion and cannot follow this V2 supervisor. A separately captured V2
+successor gate is needed before assembly and the 411-cell continuation. No
+new continuation cell, complete grid, corrected fit or full extension release
+exists yet. The next incident section explains the salvage that V2 requires.
+
 ## Latest recovery state — 2026-10-01, 06:57 UTC
 
 The fourth affected refit's numerical child returned zero and saved its cell
