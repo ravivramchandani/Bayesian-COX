@@ -16,11 +16,23 @@ python scripts/assemble_recovered_extension.py inspect \
 python scripts/assemble_recovered_extension.py preflight \
   --control /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3 \
   --recovered-run /Volumes/BayesCoxRecovery20261001/recovered-extension-run \
-  --assembly-plan /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/assembly_adapter_plan_v1.json
+  --assembly-plan /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/assembly_adapter_plan_v1.json \
+  --production-git-dir /Volumes/BayesCoxRecovery20261001/frozen-git-metadata-119476f/.git
 python scripts/assemble_recovered_extension.py assemble \
   --control /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3 \
-  --assembly-plan /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/assembly_adapter_plan_v1.json
+  --assembly-plan /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/assembly_adapter_plan_v1.json \
+  --production-git-dir /Volumes/BayesCoxRecovery20261001/frozen-git-metadata-119476f/.git
 ```
+
+The current sealed checkout still has the exact frozen files, but its linked
+Git metadata is on an iCloud-offloaded directory. The independent Git clone
+at the same commit lets the adapter check that unchanged worktree without
+modifying its `.git` pointer. The adapter scopes this metadata only to the
+production-tree check; it verifies its own published analysis checkout with
+its normal Git metadata. On a machine where the sealed checkout's Git works,
+omit `--production-git-dir`. Each refit invocation may come from a different
+integration checkout only when its actual controller file matches the same
+plan-pinned SHA-256; the assembly proof retains every source path and hash.
 
 Preflight verifies the sealed production inputs, original 1,193 intact
 cells and traces, 21 new refit cells and traces, child returns and official

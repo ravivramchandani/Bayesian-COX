@@ -36,16 +36,23 @@ ANALYSIS_FILES = (
 PROVENANCE_STATUS = "pre_continuation_recovered_extension"
 
 
+def clean_git_environment() -> dict[str, str]:
+    """Keep Git checks independent of a caller's recovery-only overrides."""
+    return {key: value for key, value in os.environ.items() if not key.startswith("GIT_")}
+
+
 def require_clean_published_adapter(root: Path) -> str:
     """Require the analysis files and adapter to be tracked and unchanged."""
-    head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    environment = clean_git_environment()
+    head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, env=environment,
+                                   text=True, timeout=30).strip()
     for name in ANALYSIS_FILES:
         subprocess.run(["git", "ls-files", "--error-unmatch", name], cwd=root,
-                       capture_output=True, text=True, check=True)
-    dirty = subprocess.check_output(["git", "status", "--porcelain", "--", *ANALYSIS_FILES],
-                                    cwd=root, text=True)
+                       env=environment, capture_output=True, text=True, check=True, timeout=30)
+    dirty = subprocess.check_output(["git", "status", "--porcelain", "--untracked-files=all"],
+                                    cwd=root, env=environment, text=True, timeout=30)
     if dirty:
-        raise ValueError("assembly adapter or identity-verification input is not committed clean")
+        raise ValueError("assembly analysis checkout is not committed clean")
     return head
 
 
@@ -62,9 +69,35 @@ def validate_destination(destination: Path, control: Path, source: Path, sealed:
     recovery.require_free_space(destination, gib=15)
 
 
-def require_production_root(manifest: dict[str, Any], sealed: Path) -> None:
-    """Recheck every manifest-bound production input in clean 119476f."""
-    recovery.require_sealed_checkout(sealed)
+def require_production_root(manifest: dict[str, Any], sealed: Path,
+                            git_dir: Path | None = None) -> dict[str, Any]:
+    """Recheck the frozen tree using native or separately pinned Git metadata."""
+    environment = clean_git_environment()
+    if git_dir is not None:
+        git_dir = git_dir.resolve()
+        if not git_dir.is_dir() or not (git_dir / "HEAD").is_file() or not (git_dir / "index").is_file():
+            raise ValueError("production Git metadata directory is incomplete")
+        environment.update({"GIT_DIR": str(git_dir), "GIT_WORK_TREE": str(sealed.resolve()),
+                            "GIT_OPTIONAL_LOCKS": "0"})
+    head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=sealed,
+                                   env=environment, text=True, timeout=30).strip()
+    tree = subprocess.check_output(["git", "rev-parse", "HEAD^{tree}"], cwd=sealed,
+                                   env=environment, text=True, timeout=30).strip()
+    top = subprocess.check_output(["git", "rev-parse", "--show-toplevel"], cwd=sealed,
+                                  env=environment, text=True, timeout=30).strip()
+    dirty = subprocess.check_output(["git", "status", "--porcelain", "--untracked-files=all"],
+                                    cwd=sealed, env=environment, text=True, timeout=30)
+    if head != recovery.SEALED_COMMIT or Path(top).resolve() != sealed.resolve() or dirty:
+        raise ValueError("frozen production checkout is not clean at 119476f")
+    attestation: dict[str, Any] = {"mode": "independent_git_dir" if git_dir else "native_git",
+                                   "sealed_code_path": str(sealed), "head": head, "head_tree": tree,
+                                   "work_tree": top, "status_clean": True}
+    if git_dir is not None:
+        flags = subprocess.check_output(["git", "ls-files", "-v"], cwd=sealed,
+                                        env=environment, text=True, timeout=30).splitlines()
+        if any(not flag.startswith("H ") for flag in flags):
+            raise ValueError("production Git metadata uses nonordinary index flags")
+        attestation.update({"git_dir": str(git_dir), "tracked_file_count": len(flags)})
     if manifest["code"]["git_commit"] != recovery.SEALED_COMMIT:
         raise ValueError("extension source was not produced by frozen 119476f")
     if recovery.content_sha256({k: v for k, v in manifest.items() if k != "manifest_content_sha256"}) != manifest["manifest_content_sha256"]:
@@ -72,6 +105,7 @@ def require_production_root(manifest: dict[str, Any], sealed: Path) -> None:
     for name, digest in manifest["input_sha256"].items():
         if recovery.sha256_file(sealed / name) != digest:
             raise ValueError(f"frozen production input changed: {name}")
+    return attestation
 
 
 def require_no_active_producer(control: Path, source: Path) -> None:
@@ -124,7 +158,15 @@ def require_refit_proof(control: Path, plan: dict[str, Any], identity: str,
     owners = [worker for worker, shard in enumerate(plan["shards"]) if identity in shard]
     if len(owners) != 1 or recovery.sha256_file(source_file) != plan["source_cell_file_sha256"][identity]:
         raise ValueError(f"refit differs from its pinned source or fixed shard: {identity}")
-    expected_argv = [plan["python"], str((recovery.REPO / "scripts/recover_extension_run.py").resolve()),
+    argv = invocation.get("argv")
+    controller_name = argv[1] if isinstance(argv, list) and len(argv) > 1 and isinstance(argv[1], str) else ""
+    controller_path = Path(controller_name)
+    if (not controller_path.is_absolute() or controller_path.resolve() != controller_path
+            or controller_path.name != "recover_extension_run.py"
+            or controller_path.parent.name != "scripts" or not controller_path.is_file()
+            or recovery.sha256_file(controller_path) != plan["controller_sha256"]):
+        raise ValueError(f"refit controller differs from the pinned source: {identity}")
+    expected_argv = [plan["python"], str(controller_path),
                      "child", "--control", str(control), "--cell-id", identity, "--run",
                      str(attempt / "run"), "--token", token]
     if (not isinstance(token, str) or len(token) != 32
@@ -152,6 +194,8 @@ def require_refit_proof(control: Path, plan: dict[str, Any], identity: str,
         raise ValueError(f"refit comparison receipt differs from its scientific files: {identity}")
     assert_scientific_equal(scientific_content(source_cell), scientific_content(refit_cell), identity)
     return {"invocation_sha256": recovery.sha256_file(attempt / "invocation.json"),
+            "controller_source_path": str(controller_path),
+            "controller_source_sha256": plan["controller_sha256"],
             "child_start_sha256": recovery.sha256_file(attempt / "child_start.json"),
             "child_return_sha256": recovery.sha256_file(attempt / "child_return.json"),
             "comparison_sha256": recovery.sha256_file(attempt / "scientific_comparison.json"),
@@ -162,7 +206,8 @@ def require_refit_proof(control: Path, plan: dict[str, Any], identity: str,
             "original_posterior_array_equality": "unavailable: original trace bytes missing"}
 
 
-def build_inventory(control: Path, destination: Path) -> dict[str, Any]:
+def build_inventory(control: Path, destination: Path,
+                    production_git_dir: Path | None = None) -> dict[str, Any]:
     """Audit all producers and return a deterministic assembly payload."""
     plan = recovery.load_plan(control)
     source, matched, sealed = (Path(plan[name]) for name in ("source", "matched", "sealed"))
@@ -172,7 +217,7 @@ def build_inventory(control: Path, destination: Path) -> dict[str, Any]:
     if (affected != plan["affected_cell_ids"] or missing != plan["absent_cell_ids"]
             or recovery.sha256_file(source / "manifest.json") != plan["source_manifest_sha256"]):
         raise ValueError("original source roster differs from prepared v3 plan")
-    require_production_root(manifest, sealed)
+    production_git_attestation = require_production_root(manifest, sealed, production_git_dir)
     head = require_clean_published_adapter(recovery.REPO)
     if recovery.sha256_file(recovery.REPO / "scripts/reproduce_extensions.py") != recovery.sha256_file(sealed / "scripts/reproduce_extensions.py"):
         raise ValueError("official scientific comparator differs from sealed production code")
@@ -216,6 +261,7 @@ def build_inventory(control: Path, destination: Path) -> dict[str, Any]:
         raise ValueError("assembled producer map does not cover exactly 1,193 + 21 cells")
     analysis_hashes = {name: recovery.sha256_file(recovery.REPO / name) for name in ANALYSIS_FILES}
     return {"schema_version": 1, "status": PROVENANCE_STATUS,
+            "production_git_attestation": production_git_attestation,
             "source_manifest_sha256": plan["source_manifest_sha256"],
             "source_run": str(source), "sealed_production_root": str(sealed),
             "sealed_production_commit": recovery.SEALED_COMMIT,
@@ -241,7 +287,8 @@ def preflight(args: argparse.Namespace) -> None:
         raise ValueError("assembly plan already exists")
     if output.parent != control:
         raise ValueError("assembly plan must reside in the fixed controller root")
-    inventory = build_inventory(control, destination)
+    git_dir = Path(args.production_git_dir) if args.production_git_dir else None
+    inventory = build_inventory(control, destination, git_dir)
     plan = {"created_utc": recovery.utc_now(), "payload": inventory}
     plan["content_sha256"] = recovery.content_sha256(plan)
     recovery.write_new_json(output, plan)
@@ -259,7 +306,8 @@ def assemble(args: argparse.Namespace) -> None:
         raise ValueError("assembly plan content changed")
     pinned = plan["payload"]
     destination = Path(pinned["destination"])
-    current = build_inventory(control, destination)
+    git_dir = Path(args.production_git_dir) if args.production_git_dir else None
+    current = build_inventory(control, destination, git_dir)
     if current != pinned:
         raise ValueError("producer inventory changed after assembly preflight")
     staging = destination.with_name(destination.name + ".assembly-pending")
@@ -324,9 +372,11 @@ def main() -> None:
     p = commands.add_parser("preflight", help="seal full producer inventory without copying")
     for name in ("control", "recovered-run", "assembly-plan"):
         p.add_argument("--" + name, required=True)
+    p.add_argument("--production-git-dir", help="independent Git metadata for the frozen source tree")
     p = commands.add_parser("assemble", help="copy pinned producers into a new APFS run")
     for name in ("control", "assembly-plan"):
         p.add_argument("--" + name, required=True)
+    p.add_argument("--production-git-dir", help="same independent frozen-source Git metadata as preflight")
     args = parser.parse_args()
     {"inspect": inspect, "preflight": preflight, "assemble": assemble}[args.command](args)
 
