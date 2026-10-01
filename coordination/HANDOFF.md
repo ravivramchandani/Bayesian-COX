@@ -19,6 +19,16 @@ supervisor, successor and watcher are all running; only four of 21 affected
 refits were verified at the last completed cell checkpoint. Keep their pinned
 checkouts, claims and SSD mounts unchanged. The V1 failed chain remains intact.
 
+The portable V2 transfer verifier is now implemented and published at
+`34cbee1`. Its 15 focused tests include relocation, all 23 bounded supervisor
+captures, the preserved failed V1 chain, no-fit salvage, both launch claims
+and archive source bindings. The full locked suite passed 1,144 tests, 9 skips
+and 288 subtests before the final additional no-fit mutation test passed.
+This is an engineering gate: an actual recovered 1,625-cell run, deep science
+verification, selected reproduction, visual QA and a private release are
+still pending. The active pinned runtime checkouts remain at their earlier
+commits and must not be changed.
+
 ## V2 continuation waiting — 2026-10-01, 07:26 UTC
 
 The V2-aware continuation controller is running from a second clean, Mac-local
@@ -33,8 +43,9 @@ those claims or change either pinned runtime checkout. Keep the SSD attached.
 Exact launch-time claim bytes were independently copied and
 [published](recovery/2026-10-01-v2-launch-claim-snapshots.json) before the live
 controllers can release their claims on success; the live claims were untouched.
-The original V1 failures and claims remain historical evidence. Downstream
-lineage and release scripts still need explicit V2 binding before any release.
+The original V1 failures and claims remain historical evidence. The later
+portable V2 binding is recorded in the latest section above; it still needs
+actual completed results before the release gate can run.
 The later V1 launch entries below describe stopped processes.
 
 ## Recovery resumed — 2026-10-01, 07:10 UTC

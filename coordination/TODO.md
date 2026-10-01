@@ -26,7 +26,9 @@ binds the active process and V2 successor. It waits for genuine full-grid
 completion, then seals lineage and stages first-draw replay without fitting.
 The recovered run and replay destination do not yet exist. Original-law
 recovery still has 17 affected refits and 411 absent cells to execute; the
-portable V2 release verifier and later deep result gates remain outstanding.
+portable V2 release verifier is published at `34cbee1` with relocation and
+adversarial proof tests. Its real-run gate and the later deep result gates
+remain outstanding.
 
 At 07:26 UTC the V2-aware continuation controller started from clean,
 published commit `0c3f48a` with a distinct claim and capture. Its

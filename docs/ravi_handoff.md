@@ -37,6 +37,10 @@ are active on the owner's Mac to finish the remaining refits, assemble the
 recovered grid and stage correction replay. Do not start a competing worker
 or treat the partial local run as a verified release. Their launch evidence
 and current limits are in HANDOFF; the final extension results are still pending.
+A portable V2 release verifier is now in the repository, but it can only
+validate and package the extension after the recovered grid and its final
+producer lineage exist. The current run files themselves have not been
+published as a complete remote release.
 A clone supplies code and plans. Completed results are restored from the
 private releases below.
 
