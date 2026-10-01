@@ -1,5 +1,16 @@
 # Extension trace-recovery supervision
 
+The original `sequential-v1` supervisor failed after the fourth numerical
+child returned zero: its parent wrapper lost a usable current directory while
+importing the official comparison library. The v1 successor and replay watcher
+also stopped. Their retained claims and failure receipts are historical
+evidence; the command below is the **original launch record and must not be
+rerun**. The fourth fit has since received a separate captured no-fit official
+comparison and a verified proof. See
+`coordination/recovery/2026-10-01-fourth-refit-postfit-salvage.json` and the
+latest `coordination/HANDOFF.md`. A fresh v2 supervisor is required for the
+remaining 17 refits; it must retain the v1 failure and use a stable Mac cwd.
+
 The original v3 plan fixes 21 trace-incomplete cell identities and six worker
 shards. `scripts/supervise_extension_recovery.py` waits for the active fourth
 captured refit, then dispatches the remaining cells one at a time through the

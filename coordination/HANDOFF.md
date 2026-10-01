@@ -4,6 +4,31 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Latest recovery state — 2026-10-01, 06:57 UTC
+
+The fourth affected refit's numerical child returned zero and saved its cell
+and three traces, but its parent wrapper returned **1** after an ArviZ import
+called `os.getcwd()` from an unavailable working directory. The underlying
+reason the directory was unavailable has not been established. The sequential
+supervisor, recovered-grid successor and post-successor watcher then stopped
+with separate failure receipts and retained claims; none dispatched another
+fit or a continuation cell. Their earlier *waiting* entries below are launch
+history, not current process status.
+
+A separately captured, no-fit invocation completed the official frozen
+comparison from a stable Mac working directory. It returned zero, rehashed the
+saved cell and all three traces, and matched the original non-timing scientific
+record, including its `failed_diagnostics` status. The failed parent return
+remains **1**; it was not relabelled. The [incident and salvage receipt](recovery/2026-10-01-fourth-refit-postfit-salvage.json)
+binds the old failure and claims, new comparison, proof and their hashes.
+**Four of 21** affected refits now have verified comparisons; **17** remain.
+No numerical worker or watcher is active at this checkpoint. The next step is
+a fresh v2 supervisor claim and capture, bound to the preserved v1 failure and
+salvage proof, with a stable Mac working directory for long-running workers.
+The fixed plan, frozen production code and original source run are unchanged.
+No 411-cell continuation, corrected fit, complete extension grid or new
+extension release exists yet.
+
 ## Post-successor replay staging — waiting since 2026-10-01, 05:53 UTC
 
 A third detached watcher (PID 962 at launch) waits for the successor's

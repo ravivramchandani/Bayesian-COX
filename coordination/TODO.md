@@ -19,6 +19,18 @@ artefacts satisfy the stated gate.
 
 ## Current programme — 2026-10-01
 
+At 06:57 UTC the fourth affected recovery refit's numerical child was saved
+and independently verified by a separate no-fit scientific comparison. Its
+parent wrapper really returned 1 after `os.getcwd()` failed, so the v1
+supervisor and both downstream watchers stopped; their failure records and
+claims remain preserved. Four of 21 affected refits are now verified, 17
+remain, and no numerical worker is active. The next T-191 gate is a separately
+captured v2 supervisor that binds this failure and salvage proof, then resumes
+the unchanged plan from a stable Mac working directory. See the latest
+`HANDOFF.md` entry and
+`recovery/2026-10-01-fourth-refit-postfit-salvage.json`. Earlier launch
+checkpoints below are historical, not a claim that those controllers still run.
+
 ADR-044 sets submission-first scope. Write and review the thesis from the
 already released confirmatory, robustness, explanation, ADR-032 sensitivity
 and ADR-033 Holm evidence. Report the original failed gates and incomplete

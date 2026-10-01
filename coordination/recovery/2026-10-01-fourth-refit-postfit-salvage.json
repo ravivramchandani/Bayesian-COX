@@ -1,0 +1,53 @@
+{
+  "control": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3",
+  "failed_v1_evidence_sha256": {
+    "fourth_child_return": "c1eeeec2724ea62ae80eb08f4ddf8f5ac3b3d23ddd7fe3f86a37a39ec22314f3",
+    "fourth_wrapper_return": "a75fc02bfc47401fe2fc5873d4f880667581d947b7d6880493a0a87ee2e416bd",
+    "fourth_wrapper_stderr": "45a2733e233a0b74e41ebd9f942e91fec09bb599695705fca36897dbbc2bdc89",
+    "v1_post_successor_claim": "51bc69148815703bab3852ea3f336cf975843e2b65c5ef3bcb008bd00376f1e0",
+    "v1_post_successor_failure": "c3aba7c476e4d31e7ba5f6832308c47bd4e8b41cded3ed264537217b76010ad9",
+    "v1_successor_claim": "7fba3ff8246a4c117e00d0ff131d73a79d6e128dfbfb57a556dce46f067dbf84",
+    "v1_successor_failure": "972041b37be1854a5bfd81bf498b71003d74349ad8654ba4e0b000a47e16e0d0",
+    "v1_supervisor_claim": "902166d3cc5c24ca42a1f7678d04547ae409fff487b60816c1444bcc32951d2d",
+    "v1_supervisor_failure": "fccc8c54e1f8e4e9a632fc6e9f17c215350556aaec209de160a5162868f2d8e1"
+  },
+  "failure_observation": "The original parent wrapper returned 1 after its numerical child returned 0. Importing ArviZ for compare_refit raised FileNotFoundError at os.getcwd(). The reason its cwd became unavailable is not established.",
+  "fourth_refit": {
+    "cell_file_sha256": "19c65c66d29d9960d02805ea66231bf6fcdfa3976678bea202cf6d864ea1949e",
+    "cell_id": "metabric_matched__expression__r01f03__bayesian_spike_slab__full",
+    "child_return_code": 0,
+    "original_posterior_array_equality": "unavailable: original trace bytes missing",
+    "refit_status": "failed_diagnostics",
+    "source_status": "failed_diagnostics",
+    "trace_sha256": {
+      "attempt_1_posterior.nc": "f5bd69f0c13b74296d3d848d5a2fbc2344bb390812fd2c9838e955b4938aa65b",
+      "attempt_2_posterior.nc": "15d46ce65ed55ed37825c4fd5f13dbe94e15c0df8d8a324ccd618e0c8096e652",
+      "attempt_3_posterior.nc": "acdfebfe585516cda692934ddbb010fcc4dbcf479ea6ae4d464638162f22c389"
+    }
+  },
+  "next_gate": "Publish and launch a separately claimed v2 supervisor bound to the preserved v1 failure and salvage proof; continue unchanged fixed plan from a stable Mac cwd.",
+  "plan_content_sha256": "862a771296fe0e6dc4e5befab39655b67491e3241dad6de1384c6c77eb19236a",
+  "plan_file_sha256": "ae8643f0d379acfab8298090b29e37005579efd5c224ef7be80bfe1713027694",
+  "preservation": "No v1 failure, claim, original source cell, or frozen code was overwritten or relabelled.",
+  "progress": {
+    "affected_refits_remaining": 17,
+    "continuation_absent_cells_started": 0,
+    "corrected_fits_started": 0,
+    "recovered_complete_grid": false,
+    "verified_affected_refits": 4
+  },
+  "recorded_at_utc": "2026-10-01T06:57:51.953373+00:00",
+  "schema_version": 1,
+  "separate_salvage": {
+    "analysis_commit": "47c7321f761b683625457bc3a09bf55b3cad18fb",
+    "capture": "/Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/captures/no-fit-salvage-r01f03-v1",
+    "comparison_sha256": "0501902e31f678ddc5a7b376f174824222cb8f428cfc4e61d0653a8af848b0e2",
+    "complete_sha256": "60f724c9181f7201d31bfb7f1499858ae64a74ff2b2357a3a59992a12e838771",
+    "new_comparison_child_return_code": 0,
+    "new_fits_executed": 0,
+    "official_non_timing_science": "match",
+    "old_wrapper_return_remains": 1,
+    "proof_sha256": "ced149102d1bbb092cf95d487cdaf8065254fd0d4bcb862ede174b2438f3f7ea"
+  },
+  "status": "fourth_refit_salvaged_by_separate_no_fit_comparison; v1_controller_chain_failed"
+}
