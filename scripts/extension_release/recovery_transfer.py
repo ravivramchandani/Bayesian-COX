@@ -35,6 +35,9 @@ def source_files(control: Path, run: Path, rosters: Path) -> dict[str, Path]:
         "control/assembly_receipt.json": control / "assembly_adapter_receipt.json",
         "rosters/trace_inventory.json": rosters / FORENSIC_NAME,
         "rosters/absent_roster.json": rosters / ABSENT_NAME,
+        "supervisor/launch.json": control / "captures/sequential-v1.launch.json",
+        "supervisor/published_launch.json": (
+            code / "coordination/recovery/2026-10-01-sequential-recovery-supervisor-launch.json"),
         "supervisor/start.json": control / "captures/sequential-v1/start.json",
         "supervisor/complete.json": control / "captures/sequential-v1/complete.json",
         "continuation/start.json": control / "continuation_captures/sequential-v1/start.json",
@@ -175,6 +178,8 @@ def verify_recovery_bundle(run: Path, bundle: Path,
         raise ValueError("recovery absent roster differs from plan")
     supervisor = read(bundle / "supervisor/complete.json")
     supervisor_start = read(bundle / "supervisor/start.json")
+    supervisor_launch = read(bundle / "supervisor/launch.json")
+    published_launch = read(bundle / "supervisor/published_launch.json")
     code_hashes = dict(base["analysis_code_sha256"])
     code_hashes.update({
         "scripts/supervise_extension_recovery.py":
@@ -196,6 +201,37 @@ def verify_recovery_bundle(run: Path, bundle: Path,
             or supervisor.get("verified_refits") != 21
             or supervisor.get("complete_workers") != 6):
         raise ValueError("21-refit supervisor completion differs")
+    expected_supervisor_argv = [
+        plan["python"], "-B",
+        str(Path(supervisor_launch["cwd"]) / "scripts/supervise_extension_recovery.py"),
+        "--control", supervisor_start["control"],
+        "--capture-root", str(Path(supervisor_start["control"]) / "captures/sequential-v1"),
+        "--production-git-dir", supervisor_start["production_git_dir"],
+        "--wait-capture", supervisor_start["wait_capture"], "--execute",
+    ]
+    if (supervisor_launch.get("pid") != supervisor_start["owner_pid"]
+            or supervisor_launch.get("analysis_git_commit") !=
+            supervisor_start["analysis_binding"]["analysis_git_commit"]
+            or supervisor_launch.get("supervisor_sha256") !=
+            supervisor_start["analysis_binding"]["supervisor_sha256"]
+            or supervisor_launch.get("plan_file_sha256") != digest(bundle / "control/plan.json")
+            or supervisor_launch.get("prior_capture") != supervisor_start["wait_capture"]
+            or supervisor_launch.get("argv") != expected_supervisor_argv
+            or published_launch.get("supervisor_launch_sha256") !=
+            digest(bundle / "supervisor/launch.json")
+            or published_launch.get("supervisor_start_sha256") !=
+            digest(bundle / "supervisor/start.json")
+            or published_launch.get("fixed_plan_file_sha256") != digest(bundle / "control/plan.json")
+            or published_launch.get("fixed_plan_content_sha256") != plan["content_sha256"]
+            or published_launch.get("supervisor_pid_at_checkpoint") != supervisor_start["owner_pid"]
+            or published_launch.get("supervisor_source_sha256") !=
+            supervisor_start["analysis_binding"]["supervisor_sha256"]
+            or published_launch.get("supervisor_analysis_commit") !=
+            supervisor_start["analysis_binding"]["analysis_git_commit"]
+            or published_launch.get("supervisor_runtime_checkout") != supervisor_launch["cwd"]
+            or published_launch.get("prior_worker_capture") != supervisor_start["wait_capture"]
+            or published_launch.get("control") != supervisor_start["control"]):
+        raise ValueError("captured supervisor launch or published attestation differs")
     for worker, identities in enumerate(plan["shards"]):
         worker_path = bundle / "control/worker_returns" / f"worker_{worker}.json"
         worker_receipt = read(worker_path)
@@ -351,6 +387,8 @@ def verify_recovery_code_archive(archive_path: Path, bundle: Path,
         f"coordination/recovery/{source}": bundle / "rosters" / target
         for source, target in ((FORENSIC_NAME, "trace_inventory.json"),
                                (ABSENT_NAME, "absent_roster.json"))})
+    required["coordination/recovery/2026-10-01-sequential-recovery-supervisor-launch.json"] = (
+        bundle / "supervisor/published_launch.json")
     with tarfile.open(archive_path, "r:gz") as archive:
         if archive.pax_headers.get("comment") != expected_commit:
             raise ValueError("recovery code archive commit differs")

@@ -4,6 +4,25 @@ State needed to resume work in a new session or on another machine.
 
 Updated: 2026-10-01 (New Zealand; dated checkpoints below use UTC)
 
+## Correction replay transfer — prepared, source run still pending
+
+The V3 independent first-draw replay has 1,650 completed contexts: 1,400
+accepted original first draws and 250 rank-rejected first draws followed by
+the frozen redraw rule. Its 1,536-cell input/reuse inventory is partial.
+`scripts/catalytic_correction/stage_replay_for_recovered_run.py` now verifies
+the recovered run's 1,625-cell producer lineage and deeply checks every
+preflight, replay, child and numeric proposal before copying only the complete
+replay evidence to a fresh output with a run-path-only execution-manifest
+change. All 1,650 actual V3 contexts passed its read-only verifier; the
+recovered source is not complete, so no full staging, new input/reuse
+inventory, arithmetic or corrected fit has run. See
+`docs/catalytic_correction_execution.md` for the source anchors and next gate.
+
+The extension release bundle also carries the captured sequential supervisor
+launch and its published attestation, with receiving-side command, plan,
+source, process and archive bindings. This is preparatory release code; no
+complete recovered run or new private extension release exists yet.
+
 ## Recovered-grid successor — waiting since 2026-10-01, 03:23 UTC
 
 The final-lineage sealer and captured-proof release/restore gate are prepared in the

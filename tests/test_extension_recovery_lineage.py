@@ -351,12 +351,37 @@ def bundle_fixture(root: Path) -> tuple[Path, Path, Path, Path]:
         "assembly_plan_sha256": assembly["content_sha256"],
         "manifest_sha256": lineage.digest(run / "manifest.json"),
         "lineage_sha256": lineage.digest(run / "recovery_lineage.json")})
-    write(control / "captures/sequential-v1/start.json", {
+    supervisor_start = {
         "plan_sha256": plan["content_sha256"], "owner_pid": 100,
         "control": str(control),
+        "production_git_dir": "/frozen/.git",
+        "wait_capture": str(control / "captures/fourth"),
         "analysis_binding": {"analysis_git_commit": "supervisor fixture",
                              "supervisor_sha256": lineage.digest(
-                                 code / "supervise_extension_recovery.py")}})
+                                 code / "supervise_extension_recovery.py")}}
+    write(control / "captures/sequential-v1/start.json", supervisor_start)
+    supervisor_launch = {
+        "pid": 100, "cwd": "/runtime", "prior_capture": supervisor_start["wait_capture"],
+        "analysis_git_commit": supervisor_start["analysis_binding"]["analysis_git_commit"],
+        "supervisor_sha256": supervisor_start["analysis_binding"]["supervisor_sha256"],
+        "plan_file_sha256": lineage.digest(control / "plan.json"),
+        "argv": [plan["python"], "-B", "/runtime/scripts/supervise_extension_recovery.py",
+                 "--control", str(control), "--capture-root",
+                 str(control / "captures/sequential-v1"), "--production-git-dir",
+                 supervisor_start["production_git_dir"], "--wait-capture",
+                 supervisor_start["wait_capture"], "--execute"]}
+    write(control / "captures/sequential-v1.launch.json", supervisor_launch)
+    write(rosters / "2026-10-01-sequential-recovery-supervisor-launch.json", {
+        "supervisor_launch_sha256": lineage.digest(control / "captures/sequential-v1.launch.json"),
+        "supervisor_start_sha256": lineage.digest(control / "captures/sequential-v1/start.json"),
+        "fixed_plan_file_sha256": lineage.digest(control / "plan.json"),
+        "fixed_plan_content_sha256": plan["content_sha256"],
+        "supervisor_pid_at_checkpoint": supervisor_start["owner_pid"],
+        "supervisor_source_sha256": supervisor_start["analysis_binding"]["supervisor_sha256"],
+        "supervisor_analysis_commit": supervisor_start["analysis_binding"]["analysis_git_commit"],
+        "supervisor_runtime_checkout": supervisor_launch["cwd"],
+        "prior_worker_capture": supervisor_start["wait_capture"],
+        "control": str(control)})
     write(control / "captures/sequential-v1/complete.json", {
         "plan_sha256": plan["content_sha256"],
         "analysis_binding": {"analysis_git_commit": "supervisor fixture",
@@ -463,6 +488,24 @@ def test_captured_recovery_bundle_rejects_missing_refit_comparison(tmp_path: Pat
         transfer.verify_recovery_bundle(run, bundle, rosters)
 
 
+def test_captured_supervisor_launch_rejects_resealed_semantic_change(tmp_path: Path) -> None:
+    """Inventory hashes cannot substitute for the captured launch attestation."""
+    run, control, rosters, bundle = bundle_fixture(tmp_path)
+    transfer.stage_recovery_bundle(control, run, bundle, rosters)
+    launch_path = bundle / "supervisor/launch.json"
+    changed = transfer.read(launch_path)
+    changed["pid"] += 1
+    write(launch_path, changed)
+    inventory_path = bundle / "inventory.json"
+    inventory = transfer.read(inventory_path)
+    inventory["members"]["supervisor/launch.json"] = lineage.digest(launch_path)
+    inventory["content_sha256"] = lineage.canonical_hash({
+        key: value for key, value in inventory.items() if key != "content_sha256"})
+    write(inventory_path, inventory)
+    with pytest.raises(ValueError, match="captured supervisor launch"):
+        transfer.verify_recovery_bundle(run, bundle, rosters)
+
+
 def test_recovery_code_archive_binds_captured_sources(tmp_path: Path) -> None:
     """The shipped Git source must contain the exact captured producer code."""
     run, control, rosters, bundle = bundle_fixture(tmp_path)
@@ -478,7 +521,7 @@ def test_recovery_code_archive_binds_captured_sources(tmp_path: Path) -> None:
     subprocess.run(["git", "archive", "--format=tar.gz", f"--output={archive}", "HEAD"],
                    cwd=tmp_path, check=True)
     result = transfer.verify_recovery_code_archive(archive, bundle, head)
-    assert result["bound_sources"] == len(adapter.ANALYSIS_FILES) + 4
+    assert result["bound_sources"] == len(adapter.ANALYSIS_FILES) + 5
     (bundle / "code/scripts/continue_recovered_extension.py").write_text("# changed\n")
     with pytest.raises(ValueError, match="differs from captured proof"):
         transfer.verify_recovery_code_archive(archive, bundle, head)

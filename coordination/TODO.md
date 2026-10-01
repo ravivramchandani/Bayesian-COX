@@ -725,7 +725,12 @@ reporting replay remains a separate pre-publication gate.
   Replay later completed all 1,650 contexts, but the V3 continuation stopped
   during input/reuse inventory at 1,536 of 1,625 cells. Its child return is
   unrecorded; inventory completion, arithmetic and corrected fits remain
-  pending. The audit, staging and recovery receipts are local under
+  pending. A separate replay-staging adapter now verifies every completed V3
+  preflight, child and numeric proposal against the recovered-run producer
+  map before copying only the 1,650 replay contexts. All 1,650 source
+  contexts passed a read-only compatibility check; actual staging waits for
+  the full recovered source and does not certify the partial inventory. The
+  audit, staging and recovery receipts are local under
   `~/bayes-cox-runs/`, not yet a complete remote results release. See
   `HANDOFF.md` for exact paths and
   current space guards. Reporting/QA implementation passed 51 portable checks

@@ -124,6 +124,48 @@ eligibility. The pilot scope includes changed accepted inputs with complete
 role proofs even when an original worker still owns that cell. Its ownership
 barrier remains in force before actual fitting.
 
+### Reuse the completed V3 first-draw replay after source recovery
+
+The preserved V3 replay has 1,650 complete contexts. Its 1,536-cell
+input/reuse inventory is incomplete and must not be copied. Once the separate
+recovered extension run has its final 1,625-producer lineage, run
+`scripts/catalytic_correction/stage_replay_for_recovered_run.py` from a clean
+current checkout. The adapter verifies the complete recovered producer map,
+every source preflight and replay receipt, each retained child request and
+numeric proposal, then publishes only the definition, a newly sealed
+execution manifest, replay completion and four bound files per context to a
+fresh destination. It changes only `manifest.input_paths.run`; the definition,
+replay completion and per-context records remain byte-identical. Its external
+`.replay-stage.json` records the copy, not scientific approval.
+
+The source V3 directory is
+`~/bayes-cox-runs/correction-storage-recovery-20260930-v1/reuse_v3`.
+Its definition, execution manifest and replay completion file SHA-256 values
+are respectively `47df1918083e0b2ab23c5e7bec98bd3dc5a576226425ce5c3730a6501b8b2b49`,
+`a3b859fff4973223ba8c55372c922edb98ec9d9066dbe26b0430d85ec00a8343`,
+and `95d6e1628c44f69f83f6aadee2ed6eb58107de2a332ed98a6e1f14b8fa5432ee`.
+The recipe `contexts.jsonl` SHA-256 is
+`979efa26eba81652f151438e637eaf0899b1d875b69dd5c2305764ff66546fb7`.
+The preflight manifest and completion file SHA-256 values are
+`9b3533aa97ad88038e635c4e2cbbe3cc3b001c7e270a21307d8df69b57f6f5be`
+and `f914c34e18d5c63ecc8a0dfa21988e022bb86d08c535f04799e9518857dece62`.
+Provide the recovered run's actual manifest and final-lineage file hashes,
+plus the committed `recovery_lineage.py` source SHA-256
+`3af38987fa7e7d90af066e89af34084ba698f09a40378abcc6be6829633814a1`,
+as the remaining explicit SHA-256 arguments. Do not use the old
+`continue_prefit.py` request:
+it binds the interrupted source and earlier output paths.
+
+Invoke the unchanged, byte-pinned `run_reuse.py` directly against the staged
+output and recovered run. Retain its existing V3 candidate, matched parquet,
+recipe, preflight, configuration and addendum paths and hashes. Set all five
+numeric thread variables to `1` and scope `GIT_DIR` to the independent frozen
+`119476f` metadata with `GIT_WORK_TREE` equal to that source tree and
+`GIT_OPTIONAL_LOCKS=0`; the frozen source's iCloud Git pointer stalls. The
+cached first-draw branch rechecks each rebuilt training request. A successful
+return still requires the complete 1,625-cell inventory and review of every
+reuse/refit decision before arithmetic, reviews or fitting.
+
 ## Changed-input arithmetic
 
 The integrated `independent_arithmetic.py` independently evaluates the
