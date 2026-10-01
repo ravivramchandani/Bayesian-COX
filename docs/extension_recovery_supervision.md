@@ -35,6 +35,31 @@ and `complete.json` or `failure.json` are write-once local evidence. An error
 leaves `sequential_supervisor.claim` in place for audit. Do not remove it or
 restart a failed cell without reviewing the capture, active process and fixed
 plan. Do not launch another recovery worker while this supervisor owns the
-sequence. After `complete.json`, use the separate
-[assembly adapter](extension_recovery_assembly.md) to preflight and assemble
-the 1,214 stored cells. This is not the 1,625-cell extension release.
+sequence.
+
+The separate `scripts/continue_recovered_extension.py` can wait for that
+supervisor's `complete.json`, then invoke the
+[assembly adapter](extension_recovery_assembly.md) and the frozen production
+runner. It writes a new recovered run, captures six worker exits, and checks
+each fixed absent shard (45, 84, 40, 93, 62 and 87 cells). It never changes
+the original run. Launch it only from a second clean, committed checkout; the
+first supervisor's analysis checkout remains pinned until it finishes:
+
+```bash
+/Users/macuser/miniconda3/envs/bayes-cox-lock-verify-20260815-b/bin/python -B \
+  scripts/continue_recovered_extension.py \
+  --control /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3 \
+  --recovered-run /Volumes/BayesCoxRecovery20261001/recovered-extension-run \
+  --assembly-plan /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/assembly_adapter_plan_v1.json \
+  --capture-root /Users/macuser/bayes-cox-runs/original-extension-recovery-20260930-v3/continuation_captures/sequential-v1 \
+  --production-git-dir /Volumes/BayesCoxRecovery20261001/frozen-git-metadata-119476f/.git \
+  --execute
+```
+
+The successor requires 25 GiB free on its SSD run volume and 20 GiB on the Mac
+before each worker. Its `complete.json` means 1,625 cells are stored and their
+file, trace, seed and membership gates passed. It does not certify deep
+diagnostics, complete-grid statistics, the 92 selected reproductions, final
+producer-lineage supplement, rendered PDFs, or a private release. Those
+remain separate gates. A nonzero return leaves the current capture and
+`continuation_supervisor.claim` for audit; it never retries automatically.
