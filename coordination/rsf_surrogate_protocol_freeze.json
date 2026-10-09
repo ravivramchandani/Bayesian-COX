@@ -1,0 +1,10 @@
+{
+  "protocol": "docs/protocol_addendum_rsf_surrogate.md",
+  "version": "1.0",
+  "frozen_at_utc": "2026-10-07T05:00:49Z",
+  "protocol_sha256": "291ad6843e96297717883e3d784503836e150b0e58e9a9314af14d4fef0c1bcf",
+  "baseline_git_commit": "4982e7be623bc5e605c391fcd458f5bfe37377b8",
+  "stored_rsf_predictions_inspected_before_freeze": false,
+  "independent_scientific_review": "pending",
+  "production_gate": "hold_until_independent_review_acceptance"
+}

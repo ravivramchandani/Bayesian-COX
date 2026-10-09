@@ -17,7 +17,18 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
-## Current programme — 2026-10-01
+## Current thesis gate - 2026-10-07
+
+T-106, T-108 and T-147 are complete under the explicit owner override in
+ADR-048. The frozen baseline manifest and claim dispositions are locked;
+statistical, principal-supervisor and clinical/domain review decisions were
+waived for this milestone and are not represented as obtained. The 21,000-word architecture is owner-approved for planning only; any formal
+programme word limit must be checked before final submission. T-150 through
+T-161 remain the thesis-writing and audit work. Q-007 is answered by the
+owner's override. Full result directories remain in the verified private
+release rather than this Windows checkout; no model refit was run for T-147.
+
+## Historical recovery and programme checkpoints - 2026-10-01
 
 At 07:50 UTC the separately captured V2 replay watcher started from clean,
 published commit `adc260c`. Its
@@ -246,19 +257,25 @@ Historical restart counts are superseded by final close-out above.
   recorded; Q-005 answers the owner decision. The applicable institution-
   accepted ranking source and official author facts remain subject to T-172
   factual re-verification, not a new owner decision.
-- [ ] T-106 (T, W1–2, owners R/PS/SS/IR; begins immediately) — Establish and
-  review the claim–evidence ledger. Acceptance: every submitted quantitative,
-  clinical and novelty claim has an artefact/source, permitted wording,
-  reviewer and verification date.
+- [x] T-106 (T, W1–2, owners R/PS/SS/IR; begins immediately) — Establish and
+  review the claim-evidence ledger. Acceptance: all submission-scope claims
+  have an artefact/source, exact permitted wording, result/source key, evidence
+  hash, reviewer and verification date. The active baseline dispositions in
+  docs/claim_evidence_register.md were source-checked by Codex root on
+  2026-10-07. ADR-048 records the owner's waiver of external review decisions;
+  no supervisor or clinical-reviewer approval is claimed.
 - [x] T-107 (T, W1–2, owner R; no dependency) — Repair the LaTeX/BibTeX
   foundation. Acceptance: `latexmk -halt-on-error` and BibTeX succeed; zero
   undefined citations/references, duplicate labels, replacement characters
   or legacy instructional placeholders. Evidence: clean 70-page A4 build,
   embedded fonts, clean log/box audit and `make jargon` pass. Deliberate
   result-gated stubs remain under T-153/T-154/T-156.
-- [ ] T-108 (T, W1–2, owners R/PS; depends T-101) — Replace the template with
-  the approved thesis architecture and word budget. Acceptance: every chapter
-  has a purpose, evidence inputs and supervisor-approved target length.
+- [x] T-108 (T, W1–2, owners R/PS; depends T-101) — Approve a thesis
+  architecture and planning word budget. Acceptance: every chapter has a
+  purpose, evidence inputs and target length. docs/thesis_architecture.md was
+  accepted by the owner for project planning under ADR-048: 21,000 main-text
+  words, with an 18,100–23,900 range. Principal-supervisor review was waived;
+  no institutional word limit or supervisor approval is asserted.
 - [x] T-109 (T, W1–3, owners R/IR; depends T-106) — Rebuild the bibliography
   from publisher/Crossref/authoritative records. Acceptance: every retained
   source has complete metadata and the best stable identifier for its source
@@ -445,11 +462,16 @@ or explanation stability.
 - [x] T-146 (P, decision W3; owner R; depends T-115) — Permanently drop the
   Rotterdam-to-GBSG2 transport branch before acquisition or harmonisation.
   Acceptance: ADR-025 records the irreversible scope decision.
-- [ ] T-147 (T, W9–10, owners R/PS/SS; depends T-140–T-145) — Freeze all
+- [x] T-147 (T, W9–10, owners R/PS/SS; depends T-140–T-145) — Freeze all
   submission-scope thesis evidence independently of the unfinished extension.
-  Acceptance: clean baseline manifest, statistical/clinical claim approval,
-  immutable result tags and zero unresolved thesis-critical row in the claim
-  ledger. T-182–T-186 and T-189–T-191 are not prerequisites under ADR-044.
+  Acceptance: clean baseline manifest, immutable result tags and hashes, and
+  no unsupported thesis-critical claim. coordination/submission_evidence_manifest.json
+  binds the original confirmatory, robustness, explanation, ADR-032, ADR-033
+  and reproduction evidence. Source-bounded claim dispositions are in
+  docs/claim_evidence_register.md. ADR-048 records the owner's explicit waiver
+  of statistical, clinical/domain and supervisor decisions for this milestone;
+  no external approval is claimed. The extension tasks remain nonblocking
+  under ADR-044.
 
 ## Weeks 1–14 — Thesis writing and audit
 
@@ -572,6 +594,76 @@ the existing programme's private code/evidence release and restore checks.
   verification and scientific replay; exact hashes and limitations are in
   `recovery/2026-10-01-clinical-methods-release.json`. This closes only the
   focused subset, not the unfinished full extension or thesis writing.
+
+- [x] T-193 (P; depends ADR-047; owners R/SS/IR) — Freeze the protocol for a
+  separate RSF surrogate-tree analysis before inspecting any surrogate
+  results. Acceptance: a versioned addendum and write-once content hash fix
+  whether the teacher target is the RSF risk score or survival probabilities
+  on the existing evaluation-time grid; the student-tree type and complexity
+  selection; replay tolerance; fold-local training procedure; fidelity and
+  survival-performance metrics; feature grouping; uncertainty/stability
+  summaries; failure rules; seeds; and claim boundaries. Review the protocol
+  independently before production. This task does not reopen ADR-024 or the
+  frozen explanation result. Protocol v1.0 is frozen under ADR-049 at
+  `docs/protocol_addendum_rsf_surrogate.md` (SHA-256 recorded in
+  `coordination/rsf_surrogate_protocol_freeze.json`). Independent review was
+  not obtained; the owner waived that prerequisite for T-193/T-194 execution
+  under ADR-051. The waiver is not represented as scientific review.
+- [ ] T-194 (P; depends T-193; owner R) — Implement and run the separate
+  surrogate pipeline on the three cohorts and all eligible outer folds.
+  Acceptance: replay each RSF from its recorded fold data, preprocessing,
+  selected settings and seed; reconcile validation predictions against the
+  immutable source cell before using it as the teacher; fit and tune each
+  student without outer-validation leakage; account for every source and
+  student cell; retain failures, hashes and measured runtime in a new run
+  directory. Focused tests cover deterministic fitting, lineage and fold
+  isolation. Engineering implementation is in `src/pipelines/rsf_surrogate.py`
+  and `scripts/run_rsf_surrogate.py`. Eighteen focused tests and Ruff checks
+  passed for the initial implementation; those checks predate the final Windows
+  import-path changes and were not rerun. The no-result preflight verified all
+  450 source cells and the pinned source manifest without replaying an RSF or
+  fitting a student. ADR-051 permits production under the owner waiver only
+  after the frozen replay and compute gates pass. A separate Windows x64 lock generated from the
+  same environment specification is recorded in
+  `conda-lock-win-64.yml` and passes the full environment verifier in a clean
+  Python 3.11.15 environment. The earlier 14 focused lock/surrogate checks
+  and Ruff pass also predate the final Windows import-path changes.
+  The updated Windows runner's no-fit preflight also reverified all 450 source
+  cells without replaying a forest or fitting a student. The runner records
+  that execution lock separately from the frozen source release's macOS lock.
+  Windows is eligible only after source prediction replay passes the frozen
+  subject-order and `allclose(rtol=1e-10, atol=1e-12)` check; no platform
+  effect is presumed negligible. The runner first times r01f01 in each cohort
+  and holds the 75-cell run if its measured projection exceeds the one-hour
+  planning ceiling. The sealed Windows pilot at
+  `reports/posthoc/rsf_surrogate_v1_pilot_windows_20261007_r1/` failed replay
+  in all three r01f01 cells: max absolute risk-score differences were 11.6091
+  (GBSG2), 14.2223 (WHAS500) and 87.9071 (METABRIC), against the frozen
+  `allclose(rtol=1e-10, atol=1e-12)` requirement. The pilot is sealed with
+  status `incomplete`; no student tree was fitted, no complete-grid runtime
+  projection is available, and the 75-cell production run was not started.
+  A second sealed pilot using a Windows lock that pins scikit-learn 1.9.0,
+  joblib 1.5.3 and threadpoolctl 3.6.0 to the source-lock versions reproduced
+  the same three maximum errors. Pinning these three package versions alone
+  did not resolve the mismatch; other platform or native-build differences
+  remain possible but unisolated.
+  T-194 remains open. Do not treat Windows replay as scientifically equivalent
+  or change the frozen tolerance based on these observed results. The source
+  lock is macOS arm64 and the execution lock is Windows x64; the specific
+  cause of the prediction differences remains undiagnosed.
+- [ ] T-195 (P; depends T-194; owners R/SS/IR) — Verify and report the
+  surrogate results as post-hoc evidence. Acceptance: report teacher-student
+  fidelity separately from survival-outcome performance, tree complexity and
+  rule/feature stability by cohort; preserve unavailable or failed cells;
+  pass independent scientific and claim review; make no causal, biological,
+  superiority, equivalence or original explanation-stability claim. Existing
+  baseline artefacts remain unchanged. A hash-based run verifier and report
+  writer are implemented; final result verification and external review await
+  T-194 production.
+
+Initial compute planning allowance is 30–60 minutes on hardware similar to
+the archived rehearsal, not a measured production estimate. T-194 should
+time one representative fold per cohort before extrapolating the full run.
 
 The owner superseded the 2026-09-27 thesis-essential extension scope on
 2026-10-01. The experiment may continue toward a later Q1 paper, but its

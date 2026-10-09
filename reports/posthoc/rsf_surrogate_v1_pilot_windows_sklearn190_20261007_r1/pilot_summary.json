@@ -1,0 +1,35 @@
+{
+  "full_run_within_compute_allowance": false,
+  "maximum_allowed_projected_seconds": 3600,
+  "pilot_cells": [
+    {
+      "dataset": "gbsg2",
+      "fold": 1,
+      "measured_seconds": 2.959511200002453,
+      "projected_25_cell_seconds": null,
+      "repeat": 1,
+      "status": "replay_mismatch"
+    },
+    {
+      "dataset": "whas500",
+      "fold": 1,
+      "measured_seconds": 1.5477632000038284,
+      "projected_25_cell_seconds": null,
+      "repeat": 1,
+      "status": "replay_mismatch"
+    },
+    {
+      "dataset": "metabric",
+      "fold": 1,
+      "measured_seconds": 17.821409099997254,
+      "projected_25_cell_seconds": null,
+      "repeat": 1,
+      "status": "replay_mismatch"
+    }
+  ],
+  "projected_total_seconds": null,
+  "projection_method": "25 times each cohort's measured r01f01 replay-and-fit runtime; no overhead adjustment",
+  "protocol_sha256": "291ad6843e96297717883e3d784503836e150b0e58e9a9314af14d4fef0c1bcf",
+  "source_completion_sha256": "44d5d6e2c3cf4d0350c3bc8cb27291436c9934b219c4c895cb139525e6fa25f6",
+  "status": "incomplete"
+}

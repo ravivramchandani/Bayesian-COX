@@ -49,6 +49,11 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _relative_artifact_path(path: Path, root: Path) -> str:
+    """Return one inventory key with platform-independent POSIX separators."""
+    return path.relative_to(root).as_posix()
+
+
 def canonical_json_hash(value: Any) -> str:
     """Hash a JSON-compatible object using the analysis canonical encoding.
 
@@ -276,7 +281,7 @@ def verify_frozen_run(run_dir: Path) -> FrozenRun:
     if not isinstance(inventory, dict):
         raise ValueError("completion artifact has no stored-cell hash inventory")
     actual_paths = sorted((root / "cells").glob("*/*/*.json"))
-    actual_relative = {str(path.relative_to(root)) for path in actual_paths}
+    actual_relative = {_relative_artifact_path(path, root) for path in actual_paths}
     if actual_relative != set(inventory):
         raise RuntimeError("stored cell files do not match the completion inventory")
     if int(completion.get("stored_cells", -1)) != len(actual_paths):
@@ -286,7 +291,7 @@ def verify_frozen_run(run_dir: Path) -> FrozenRun:
     keys: set[tuple[str, str, int, int]] = set()
     observed_status: dict[str, int] = {}
     for path in actual_paths:
-        relative = str(path.relative_to(root))
+        relative = _relative_artifact_path(path, root)
         observed_file_hash = sha256_file(path)
         if inventory[relative] != observed_file_hash:
             raise RuntimeError(f"stored cell file hash does not match: {path}")
@@ -534,7 +539,7 @@ def verify_robustness_run(
     if not isinstance(inventory, dict):
         raise ValueError("robustness completion has no cell inventory")
     actual_paths = sorted((root / "cells").glob("*/*/*/*.json"))
-    actual_relative = {str(path.relative_to(root)) for path in actual_paths}
+    actual_relative = {_relative_artifact_path(path, root) for path in actual_paths}
     if actual_relative != set(inventory):
         raise RuntimeError("robustness cells do not match their completion inventory")
     if int(completion.get("stored_cells", -1)) != len(actual_paths):
@@ -543,7 +548,7 @@ def verify_robustness_run(
     source_refs: dict[str, dict[str, Any]] = {}
     cells: list[dict[str, Any]] = []
     for path in actual_paths:
-        relative = str(path.relative_to(root))
+        relative = _relative_artifact_path(path, root)
         observed = sha256_file(path)
         if inventory[relative] != observed:
             raise RuntimeError(f"robustness cell file hash does not match: {path}")

@@ -37,7 +37,7 @@ def frozen_checkout(tmp_path: Path) -> tuple[Path, str, dict[str, str]]:
     for relative, text in contents.items():
         path = tmp_path / relative
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text)
+        path.write_bytes(text.encode("utf-8"))
     hashes = {relative: sha256_file(tmp_path / relative) for relative in contents}
     # The verifier accepts a freeze only with a valid self-hash and the
     # result-blind attestation.
@@ -89,6 +89,15 @@ def test_changed_live_study_input_is_rejected(frozen_checkout, relative: str) ->
     (root / relative).write_text("changed\n")
     with pytest.raises(RuntimeError, match="live"):
         verify_frozen_evidence(root, hashes, checkpoint=commit)
+
+
+def test_crlf_worktree_text_inputs_match_the_frozen_git_content(frozen_checkout) -> None:
+    """Windows checkout line endings do not change frozen text input identity."""
+    root, commit, hashes = frozen_checkout
+    for relative in ("config/confirmatory.yaml", "conda-lock.yml", "config/protocol_freeze.json"):
+        path = root / relative
+        path.write_bytes(path.read_bytes().replace(b"\n", b"\r\n"))
+    assert verify_frozen_evidence(root, hashes, checkpoint=commit)["frozen_input_sha256"] == hashes
 
 
 def test_forged_manifest_input_map_is_rejected(frozen_checkout) -> None:

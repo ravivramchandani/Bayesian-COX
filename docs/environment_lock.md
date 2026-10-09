@@ -47,6 +47,56 @@ the platform assumption explicit. A lock for another operating system or CPU
 architecture must be generated and independently verified; this lock is not
 portable to those platforms.
 
+## Separate Windows lock for the RSF surrogate study
+
+`conda-lock-win-64.yml` is a platform-specific lock generated from the same
+`environment.yml` dependency specification. Its SHA-256 is recorded in
+`conda-lock-win-64.yml.sha256`. It does not replace the macOS lock or authorize
+confirmatory production on Windows. The Windows lock is reserved for the
+separate post-hoc RSF surrogate study; its run manifest records this lock and
+the platform separately from the frozen source release's macOS lock.
+
+Create and verify the Windows environment with:
+
+```powershell
+conda run -n bayes-cox-conda-lock-4-0-2 conda-lock install `
+  --name bayes-cox-rsf-win-64 conda-lock-win-64.yml
+conda run -n bayes-cox-rsf-win-64 python scripts/verify_environment.py `
+  --platform win-64 --lock-file conda-lock-win-64.yml `
+  --hash-file conda-lock-win-64.yml.sha256
+```
+
+The environment lock establishes package provenance; it does not establish
+numerical equivalence to the frozen source forest. The first Windows pilot
+failed the strict source-prediction replay check in all three cohorts, before
+any student-tree fit. Its sealed records are in
+`reports/posthoc/rsf_surrogate_v1_pilot_windows_20261007_r1/`.
+
+## Windows source-version parity lock
+
+`environment-rsf-surrogate-win.yml` is based on the project environment and
+pins scikit-learn 1.9.0, joblib 1.5.3 and threadpoolctl 3.6.0 to the versions
+in the macOS source lock. `conda-lock-rsf-surrogate-win-64.yml` records the
+Windows x64 package builds and checksums; its digest is in the companion
+`.sha256` file. It was verified in
+`bayes-cox-rsf-win-sklearn190-20261007` with Python 3.11.15 and 249 package
+records. Verify it with:
+
+```powershell
+conda run -n bayes-cox-rsf-win-sklearn190-20261007 `
+  python scripts/verify_environment.py --platform win-64 `
+  --lock-file conda-lock-rsf-surrogate-win-64.yml `
+  --hash-file conda-lock-rsf-surrogate-win-64.yml.sha256
+```
+
+The second pilot at
+`reports/posthoc/rsf_surrogate_v1_pilot_windows_sklearn190_20261007_r1/`
+reproduced the same three maximum replay errors as the first pilot. Matching
+these core package versions did not resolve the cross-platform mismatch; its
+cause remains undiagnosed. Both pilots are incomplete, no surrogate tree was
+fitted, and the 75-cell study was not run. The frozen tolerance remains
+unchanged.
+
 ## HDF5 compatibility finding
 
 The previous active environment combined h5py 3.16.0, compiled against HDF5

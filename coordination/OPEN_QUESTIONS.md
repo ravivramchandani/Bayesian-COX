@@ -4,12 +4,11 @@ Questions with no obvious defensible answer, where the choice would materially
 change the work. Anything with an obvious answer is decided and recorded in
 `DECISIONS.md` instead.
 
-There are currently no open questions. Q-001 through Q-006 are answered and
-retain their recorded answers; Q-001 has the explicit ADR-038/ADR-039
-post-hoc exception. No further reopening is implied. Dated source, journal-policy and
-ranking rechecks are verification tasks, not requests for a new owner
-decision.
-
+Q-001 through Q-008 are answered and retain their recorded answers; Q-001 has
+the explicit ADR-038/ADR-039 post-hoc exception. Q-007 records the owner's
+ADR-048 override for T-106, T-108 and T-147. Q-008 records the ADR-051 waiver
+for T-193/T-194 execution without claiming independent review. Dated source,
+journal-policy and ranking rechecks remain verification tasks.
 Format:
 
 ```markdown
@@ -123,3 +122,28 @@ Format:
   manuscript excludes clinical-utility, treatment-effect and causal claims.
   Any interpretation that cannot be supported that way is removed rather than
   presented as externally reviewed.
+
+
+## Q-007 - Who will provide the requested thesis claim and architecture approvals?
+
+- Status: ANSWERED
+- Track: OWNER
+- Blocks: none. The owner waived reviewer decisions for T-106, T-108 and T-147 under ADR-048.
+- Context: The owner requested completion of the evidence lock without waiting for statistical, principal-supervisor or clinical/domain reviewer decisions. No reviewer contacts were recorded, and Q-006 states that no clinical reviewer was named.
+- Answer: On 2026-10-07 the owner explicitly directed that the prepared source-bounded claim wording and thesis architecture be locked without reviewer decisions. External reviewer approval is not claimed. ADR-048 records the scope and limits of the override.
+
+## Q-008 — Who will independently accept the RSF surrogate protocol?
+
+- Status: ANSWERED (owner waiver; independent review not obtained)
+- Track: OWNER
+- Blocks: None for T-193/T-194 execution under ADR-051. T-195 still requires
+  independent scientific and claim review before its results can be adopted.
+- Context: ADR-049 requires independent scientific acceptance of protocol
+  v1.0 before any RSF replay or surrogate fit. No reviewer or acceptance
+  receipt is recorded. Engineering, focused tests and no-result preflight
+  continue while this item is open.
+- Answer: On 2026-10-07, after being informed that independent acceptance was
+  still pending, the owner instructed execution and waived that prerequisite
+  for T-193/T-194 under ADR-051. No reviewer was identified and independent
+  scientific acceptance is not claimed. The frozen protocol methods and
+  prediction-replay tolerances remain unchanged; T-195 review remains open.

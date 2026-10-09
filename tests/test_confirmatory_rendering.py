@@ -22,6 +22,8 @@ from typing import Any
 import pandas as pd
 import pytest
 
+from src.rendering.verification import _relative_artifact_path
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RENDERER_PATH = PROJECT_ROOT / "scripts" / "render_confirmatory.py"
 
@@ -57,6 +59,15 @@ def _file_hash(path: Path) -> str:
     import hashlib
 
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def test_artifact_inventory_paths_use_posix_separators(tmp_path: Path) -> None:
+    """Frozen file inventories use the same keys on Windows and POSIX."""
+    root = tmp_path / "run"
+    path = root / "cells" / "gbsg2" / "repeat_01_fold_01" / "random_survival_forest.json"
+    assert _relative_artifact_path(path, root) == (
+        "cells/gbsg2/repeat_01_fold_01/random_survival_forest.json"
+    )
 
 
 def _write_json(path: Path, value: dict[str, Any]) -> None:

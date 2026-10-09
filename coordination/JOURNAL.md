@@ -1,5 +1,29 @@
 # JOURNAL
 
+## 2026-10-07 - Windows RSF surrogate replay pilots
+
+Two owner-waived, separately sealed three-cohort r01f01 pilots used the frozen
+protocol and source completion. Each recorded an owner waiver, with
+`independent_acceptance: false`. The first used
+`conda-lock-win-64.yml`; the second used
+`conda-lock-rsf-surrogate-win-64.yml`, which pins scikit-learn 1.9.0, joblib
+1.5.3 and threadpoolctl 3.6.0 to the macOS source-lock versions. Both Windows
+locks passed their environment verifiers. A separate no-fit preflight matched
+subject identities, fold seeds and saved preprocessing metadata for all 75
+source RSF folds.
+
+Both pilot runs recorded `replay_mismatch` for GBSG2, WHAS500 and METABRIC
+under `allclose(rtol=1e-10, atol=1e-12)`. Their repeated maximum absolute
+risk-score errors were 11.609117321060324, 14.222274115060543 and
+87.907108981420947, respectively. Matching the three core model-package
+versions did not resolve the mismatch. Both pilot completions passed their
+integrity checks but have status `incomplete`; runtime projection is
+unavailable. No student tree was fitted and the 75-cell run was not started.
+The mismatch cause and its scientific effect remain undiagnosed, so these
+results do not establish Windows replay equivalence. Protocol v1.0 and its
+tolerance remain unchanged. The sealed cell, manifest and completion evidence
+is retained in the two pilot directories listed in `coordination/HANDOFF.md`.
+
 ## 2026-09-28 — portable temporary-path correction
 
 The independent release review found that macOS exposes its temporary

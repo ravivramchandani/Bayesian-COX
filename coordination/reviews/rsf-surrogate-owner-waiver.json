@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "receipt_type": "owner_gate_waiver",
+  "owner_role": "project owner",
+  "instruction_date": "2026-10-07",
+  "receipt_recorded_at_utc": "2026-10-07T10:08:13Z",
+  "decision": "proceed_under_owner_waiver",
+  "protocol_sha256": "291ad6843e96297717883e3d784503836e150b0e58e9a9314af14d4fef0c1bcf",
+  "authorization_context": "Owner instructed execution after being told Q-008 independent protocol acceptance remained pending.",
+  "scope": [
+    "T-193",
+    "T-194 Windows pilot and budget-qualified production"
+  ],
+  "independent_review_obtained": false,
+  "limitations": [
+    "This receipt is not independent scientific acceptance.",
+    "T-195 still requires independent scientific and claim review.",
+    "All frozen protocol methods, source replay tolerances, and the one-hour runtime ceiling remain in force."
+  ]
+}

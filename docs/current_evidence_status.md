@@ -1,8 +1,20 @@
-# Current evidence status — updated 2026-10-01
+# Current evidence status — updated 2026-10-07
 
-The protocol and `claim_evidence_register.md` are preserved study-definition
-records. This dated status note records subsequent evidence without changing
-their claim rules. It does not assert submission review or supervisor sign-off.
+The frozen protocol remains the study-definition record. The claim register
+now also contains dated, submission-scope evidence dispositions. This status
+note records evidence and review state; it does not assert supervisor or
+clinical sign-off.
+
+The submission evidence manifest and review packet were prepared on
+2026-10-07. The three verified release tags, frozen input hashes, evidence
+artifact hashes and exclusions are recorded in
+coordination/submission_evidence_manifest.json. The complete run directories
+are not materialized in this Windows checkout; the source is the hash-verified
+private release and its previously verified fresh-clone restore. Active
+baseline wording and evidence dispositions are in
+docs/claim_evidence_register.md. T-106, T-108 and T-147 are complete under
+ADR-048. The owner waived external reviewer decisions for this evidence-lock milestone; no supervisor or clinical
+reviewer approval is represented. No model refit was needed or run.
 
 ADR-044 makes the already verified baseline the submission-scope thesis
 evidence. The original confirmatory, robustness and explanation limitations

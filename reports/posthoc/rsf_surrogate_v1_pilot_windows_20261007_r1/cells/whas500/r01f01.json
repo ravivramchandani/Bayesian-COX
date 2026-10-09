@@ -1,0 +1,18 @@
+{
+  "cell_content_sha256": "07f35dd318f7ff188fe1cd8632e3f41f55b83547c17235ffe0f3af27c798e095",
+  "dataset": "whas500",
+  "error_type": "ValueError",
+  "failure_phase": "rsf_replay",
+  "failure_reason": "replayed teacher risk differs from source (max_abs_error=14.222274115060543)",
+  "fold": 1,
+  "model_key": "random_survival_forest",
+  "repeat": 1,
+  "run_identity_sha256": "16f9fac128af671d7416701f21e4b39105c3286f7e27223828a5506713289635",
+  "schema_version": "1.0.0",
+  "source_cell_content_sha256": "3bab362c868cc36ee2425f839a44b02f954595077a2cca70ec3c18d5e903f3bd",
+  "source_cell_sha256": "e893ede03ff58741abae8d1e3ebea222e54fd67e4a0dfc18aa880e78fc82369c",
+  "source_status": "complete",
+  "status": "replay_mismatch",
+  "total_seconds": 1.5232727999973577,
+  "traceback": "Traceback (most recent call last):\n  File \"C:\\Bayesian COX\\scripts\\run_rsf_surrogate.py\", line 500, in _run_cells\n    replay_check = pipeline.verify_teacher_replay(\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Bayesian COX\\src\\pipelines\\rsf_surrogate.py\", line 313, in verify_teacher_replay\n    raise ValueError(f\"replayed teacher risk differs from source (max_abs_error={max_error:.17g})\")\nValueError: replayed teacher risk differs from source (max_abs_error=14.222274115060543)\n"
+}

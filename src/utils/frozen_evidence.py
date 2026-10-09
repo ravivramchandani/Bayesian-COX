@@ -4,8 +4,8 @@ The frozen analysis records its original code, including retired modules.
 ``checkpoint_blob`` reads historical file bytes without changing the checkout;
 ``verify_checkpoint_inputs`` checks their SHA-256 (256-bit Secure Hash
 Algorithm) digests. ``verify_frozen_evidence`` also checks the live freeze and
-protected study inputs. Protocol, data and lock files
-must also retain their recorded bytes in the working tree.
+protected study inputs. Git-tracked text inputs may use either LF or CRLF
+working-tree line endings; their normalized content must match the checkpoint.
 """
 
 from __future__ import annotations
@@ -64,6 +64,12 @@ def checkpoint_blob(
             f"required checkpoint input unavailable: {checkpoint}:{relative}"
         ) from exc
     return result.stdout
+
+
+def _text_sha256(path: Path) -> str:
+    """Hash UTF-8 text after normalizing Windows CRLF to Git's LF bytes."""
+    data = path.read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def verify_checkpoint_inputs(
@@ -136,16 +142,24 @@ def verify_frozen_evidence(
     verify_checkpoint_inputs(project_root, recorded, checkpoint=checkpoint)
 
     live_freeze = project_root / "config/protocol_freeze.json"
-    if not live_freeze.is_file() or live_freeze.read_bytes() != freeze_bytes:
+    if (
+        not live_freeze.is_file()
+        or live_freeze.read_bytes().replace(b"\r\n", b"\n") != freeze_bytes
+    ):
         raise RuntimeError("live config/protocol_freeze.json differs from checkpoint")
     protected = {
         name for name in recorded if name in LIVE_STUDY_INPUTS or name.startswith("data/raw/")
     }
-    changed = [
-        name
-        for name in sorted(protected)
-        if not (project_root / name).is_file() or sha256_file(project_root / name) != recorded[name]
-    ]
+    changed = []
+    for name in sorted(protected):
+        path = project_root / name
+        if not path.is_file():
+            changed.append(name)
+        elif name.startswith("data/raw/"):
+            if sha256_file(path) != recorded[name]:
+                changed.append(name)
+        elif _text_sha256(path) != recorded[name]:
+            changed.append(name)
     if changed:
         raise RuntimeError("live frozen study inputs differ: " + ", ".join(changed))
     return freeze

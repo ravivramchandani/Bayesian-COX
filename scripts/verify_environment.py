@@ -1,16 +1,11 @@
-"""Verify that the active environment matches the committed macOS arm64 lock.
+"""Verify that the active environment matches a committed platform lock.
 
-Official verification and analysis run only in an environment created from
-the hashed ``conda-lock.yml`` (ADR-022, ADR-026); an environment's name is not
-evidence of its contents. Run this script with the interpreter of the
-environment to be checked, before tests or analyses. It checks, in order:
-the lock's platform, its SHA-256 digest against ``conda-lock.yml.sha256`` and
-the hashes of the lock's recorded source files; that every package record has
-a URL and SHA-256 and appears once; the Python version (3.11.15) and a macOS
-14+ arm64 host; that the installed conda packages match the lock exactly in
-name, version, URL and hash; the versions of the pip-installed packages and
-``pip check``; the versions reported by the directly used libraries on
-import; and that h5py runs against the HDF5 library it was built for.
+Run this script with the interpreter of the environment to be checked,
+before tests or analyses. It checks the selected lock's platform and hashes,
+Python 3.11.15, a compatible host, exact conda package records, pip versions
+and dependencies, direct library imports, and HDF5 build/runtime agreement.
+The default remains the confirmatory macOS arm64 lock; the separate Windows
+x64 lock is used only by the post-hoc RSF surrogate study.
 
 On success it prints a JSON summary to standard output and exits with 0. On
 failure it prints ``{"status": "failed", "error": ...}`` to standard error and
@@ -19,6 +14,8 @@ exits with 1. Make targets: ``verify-env``, ``clean-build`` and ``all``.
 Example:
     python scripts/verify_environment.py --lock-file conda-lock.yml \
         --hash-file conda-lock.yml.sha256
+    python scripts/verify_environment.py --platform win-64 \
+        --lock-file conda-lock-win-64.yml --hash-file conda-lock-win-64.yml.sha256
 """
 
 from __future__ import annotations
@@ -80,6 +77,12 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def sha256_text_file(path: Path) -> str:
+    """Hash UTF-8 text after universal newline normalization."""
+    contents = path.read_text(encoding="utf-8").encode("utf-8")
+    return hashlib.sha256(contents).hexdigest()
+
+
 def load_lock(lock_path: Path) -> dict[str, Any]:
     """Load a conda-lock YAML document and validate its top-level type.
 
@@ -96,7 +99,11 @@ def load_lock(lock_path: Path) -> dict[str, Any]:
     return document
 
 
-def validate_lock_structure(lock_path: Path, hash_path: Path) -> dict[str, Any]:
+def validate_lock_structure(
+    lock_path: Path,
+    hash_path: Path,
+    expected_platform: str = EXPECTED_PLATFORM,
+) -> dict[str, Any]:
     """Validate platform, source and package hashes in the committed lock.
 
     This check reads files only; it does not inspect the running environment.
@@ -105,26 +112,27 @@ def validate_lock_structure(lock_path: Path, hash_path: Path) -> dict[str, Any]:
         lock_path: The conda-lock YAML file.
         hash_path: A ``shasum``-style digest file containing
             ``<sha256>  <lock file name>``.
+        expected_platform: The single conda platform expected in the lock.
 
     Returns:
         The parsed lock (key ``document``), its SHA-256 digest and the total,
         conda and pip package counts.
 
     Raises:
-        VerificationError: If the platform is not ``osx-arm64``, a digest does
-            not match, a package lacks a URL or SHA-256, or a
+        VerificationError: If the platform differs from ``expected_platform``,
+            a digest does not match, a package lacks a URL or SHA-256, or a
             (manager, name, platform) record is duplicated.
     """
 
     lock = load_lock(lock_path)
     metadata = lock.get("metadata", {})
     platforms = metadata.get("platforms")
-    if platforms != [EXPECTED_PLATFORM]:
+    if platforms != [expected_platform]:
         raise VerificationError(
-            f"Lock platforms must be [{EXPECTED_PLATFORM!r}], found {platforms!r}"
+            f"Lock platforms must be [{expected_platform!r}], found {platforms!r}"
         )
 
-    actual_digest = sha256_file(lock_path)
+    actual_digest = sha256_text_file(lock_path)
     hash_parts = hash_path.read_text(encoding="utf-8").strip().split()
     if len(hash_parts) != 2 or hash_parts[1] != lock_path.name:
         raise VerificationError(f"Malformed lock digest file: {hash_path}")
@@ -137,7 +145,7 @@ def validate_lock_structure(lock_path: Path, hash_path: Path) -> dict[str, Any]:
     for relative_name, source in source_metadata.items():
         source_path = lock_path.parent / relative_name
         expected = source.get("sha256") if isinstance(source, dict) else None
-        if not source_path.is_file() or expected != sha256_file(source_path):
+        if not source_path.is_file() or expected != sha256_text_file(source_path):
             raise VerificationError(f"Locked input hash mismatch: {source_path}")
 
     packages = lock.get("package")
@@ -173,18 +181,28 @@ def _macos_version() -> tuple[int, ...]:
         raise VerificationError(f"Cannot parse macOS version {value!r}") from error
 
 
-def _validate_host() -> dict[str, str]:
-    """Require a macOS 14+ arm64 host and return its platform description."""
+def _validate_host(expected_platform: str) -> dict[str, str]:
+    """Require the host architecture and operating system for a lock."""
     machine = platform.machine().lower()
-    if sys.platform != "darwin" or machine != "arm64":
-        raise VerificationError(
-            f"This lock supports macOS arm64 only; found {sys.platform}/{machine}"
-        )
-    macos = _macos_version()
-    if macos < MINIMUM_MACOS:
-        minimum = ".".join(map(str, MINIMUM_MACOS))
-        raise VerificationError(f"macOS {minimum}+ is required; found {platform.mac_ver()[0]}")
-    return {"system": platform.system(), "machine": machine, "macos": platform.mac_ver()[0]}
+    if expected_platform == "osx-arm64":
+        if sys.platform != "darwin" or machine != "arm64":
+            raise VerificationError(
+                f"This lock supports macOS arm64 only; found {sys.platform}/{machine}"
+            )
+        macos = _macos_version()
+        if macos < MINIMUM_MACOS:
+            minimum = ".".join(map(str, MINIMUM_MACOS))
+            raise VerificationError(
+                f"macOS {minimum}+ is required; found {platform.mac_ver()[0]}"
+            )
+        return {"system": platform.system(), "machine": machine, "macos": platform.mac_ver()[0]}
+    if expected_platform == "win-64":
+        if sys.platform != "win32" or machine not in {"amd64", "x86_64"}:
+            raise VerificationError(
+                f"This lock supports Windows x64 only; found {sys.platform}/{machine}"
+            )
+        return {"system": platform.system(), "machine": machine, "release": platform.release()}
+    raise VerificationError(f"Unsupported lock platform: {expected_platform}")
 
 
 def _installed_conda_records() -> dict[str, dict[str, Any]]:
@@ -313,18 +331,23 @@ def _verify_hdf5() -> dict[str, str]:
     return {"h5py": h5py.__version__, "hdf5_built": built, "hdf5_runtime": runtime}
 
 
-def verify_current_environment(lock_path: Path, hash_path: Path) -> dict[str, Any]:
+def verify_current_environment(
+    lock_path: Path,
+    hash_path: Path,
+    expected_platform: str = EXPECTED_PLATFORM,
+) -> dict[str, Any]:
     """Run all lock, platform, package, import and binary compatibility checks.
 
     Args:
-        lock_path: Hashed macOS arm64 conda-lock YAML file.
+        lock_path: Hashed conda-lock YAML file for ``expected_platform``.
         hash_path: Companion file recording the exact lock digest and filename.
+        expected_platform: The single platform required in the lock and host.
 
     Returns:
         Verified host, package counts, import versions and HDF5 compatibility details.
     """
 
-    structure = validate_lock_structure(lock_path, hash_path)
+    structure = validate_lock_structure(lock_path, hash_path, expected_platform)
     lock = structure.pop("document")
     packages = lock["package"]
     if platform.python_version() != "3.11.15":
@@ -332,7 +355,7 @@ def verify_current_environment(lock_path: Path, hash_path: Path) -> dict[str, An
 
     return {
         "status": "ok",
-        "platform": _validate_host(),
+        "platform": _validate_host(expected_platform),
         "python": platform.python_version(),
         **structure,
         "verified_conda_packages": _verify_conda_packages(packages),
@@ -350,6 +373,12 @@ def parse_args() -> argparse.Namespace:
     """
 
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--platform",
+        choices=("osx-arm64", "win-64"),
+        default=EXPECTED_PLATFORM,
+        help="locked conda platform (defaults to the confirmatory macOS lock)",
+    )
     parser.add_argument("--lock-file", type=Path, default=Path("conda-lock.yml"))
     parser.add_argument("--hash-file", type=Path, default=Path("conda-lock.yml.sha256"))
     return parser.parse_args()
@@ -360,7 +389,9 @@ def main() -> int:
 
     args = parse_args()
     try:
-        report = verify_current_environment(args.lock_file.resolve(), args.hash_file.resolve())
+        report = verify_current_environment(
+            args.lock_file.resolve(), args.hash_file.resolve(), args.platform
+        )
     except (OSError, KeyError, TypeError, VerificationError) as error:
         print(json.dumps({"status": "failed", "error": str(error)}, indent=2), file=sys.stderr)
         return 1

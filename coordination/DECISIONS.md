@@ -1253,3 +1253,168 @@ Format:
 - Consequences: T-192 can be judged only at this stated evidence level;
   manuscript and handoff text must carry the same limit. This correction
   does not turn a stored result into a recomputed raw-trace finding.
+
+## ADR-047 — Plan a separate post-hoc RSF surrogate-tree analysis
+
+- Status: ACCEPTED
+- Date: 2026-10-07
+- Context: The frozen random survival forest (RSF) cells retain selected
+  settings and validation predictions but not fitted forest objects. ADR-024
+  dropped confirmatory forest SHAP from the immutable explanation stage. A
+  shallow tree that imitates RSF predictions could add a distinct, useful
+  interpretation of the comparator, but it would not measure the existing
+  Bayesian/Cox explanation estimand. The owner asked to add this analysis to
+  the task register and plan; all baseline findings and explanation gates are
+  already known, so this work is explicitly post-hoc.
+- Decision:
+  - Plan a separately versioned RSF surrogate-tree analysis under T-193–T-195.
+    It is non-blocking for thesis submission under ADR-044 and cannot alter,
+    replace or repair any frozen confirmatory, robustness or explanation
+    result.
+  - Preserve the existing cohorts, outer folds, fold-local preprocessing,
+    selected RSF settings and seeds. Refit each source forest in a new run and
+    compare its outer-validation predictions with the stored cell before
+    treating it as the same teacher. A mismatch must be resolved or reported
+    before proceeding; it cannot be silently accepted as an exact replay.
+  - Fit each student tree using outer-training data and RSF-generated targets
+    only. Tree-complexity selection must use training-only data; outer-
+    validation subjects and outcomes remain reserved for fidelity and
+    survival-performance evaluation.
+  - Freeze the exact teacher target, tree type and complexity selection,
+    teacher-replay tolerance, fidelity and outcome metrics, feature grouping,
+    uncertainty/stability summaries, failure handling, seeds and claim limits
+    in a separate protocol addendum before inspecting surrogate results.
+  - Report teacher-student fidelity separately from outcome prediction
+    performance. Describe the tree as an approximation of the RSF, not as a
+    causal, biological or independently validated clinical explanation. Keep
+    all outputs in new files and label the analysis post-hoc.
+- Consequences: T-193 must freeze the detailed protocol before production.
+  The study does not revive confirmatory RSF SHAP, close the original failed
+  explanation-convergence gate, create a new primary model comparison or
+  change the thesis evidence base. Inclusion in the thesis remains subject to
+  completion before its results lock and the existing claim-review process.
+
+
+## ADR-048 - Owner override for submission evidence lock reviews
+
+- Status: ACCEPTED
+- Date: 2026-10-07
+- Context: T-106, T-108 and T-147 were prepared against the verified ADR-044
+  baseline, but statistical, clinical/domain and principal-supervisor review
+  decisions were unavailable. The owner explicitly instructed that the
+  evidence-lock work continue and be completed without reviewer decisions.
+- Decision:
+  - For these three project tasks, waive the external reviewer-decision gates
+    and lock the source-bounded claims in
+    docs/claim_evidence_register.md under the prepared evidence manifest.
+    Record the internal evidence check and this owner override. Do not describe
+    the wording as approved by a statistical supervisor, principal supervisor
+    or clinical reviewer.
+  - Accept the proposed thesis architecture and 21,000-word main-text target
+    as the owner-approved planning baseline in docs/thesis_architecture.md.
+    The supervisor decision is waived for T-108 project tracking. Do not imply
+    that the programme or institution has approved this target; verify any
+    formal programme limit before final submission.
+  - Preserve the original diagnostic failures, incomplete primary family,
+    failed explanation gate, post-hoc labels, source limits and prohibited
+    causal, clinical-utility, deployment, external-validation and superiority
+    claims. No new analysis, result or Overleaf edit is authorized by this
+    override.
+  - Close T-106, T-108 and T-147 on this basis. The waiver applies to this
+    evidence-lock milestone only and does not represent external reviewer
+    approval or waive any later institution-required thesis review.
+- Consequences: The submission baseline is locked for repository planning and
+  writing under owner authority. The record distinguishes internal evidence
+  review from external approval. Q-007 is answered; the three tasks may be
+  checked complete without claiming that reviewers approved the wording.
+
+## ADR-049 - Freeze the RSF surrogate-tree protocol
+
+- Status: FROZEN; independent scientific review pending
+- Date: 2026-10-07
+- Context: The owner asked to implement and run the separate RSF surrogate
+  analysis planned under ADR-047. The protocol choices must be fixed before
+  stored RSF prediction values or surrogate results are inspected. The
+  checkout's uncommitted evidence-lock work is preserved.
+- Decision:
+  - Freeze `docs/protocol_addendum_rsf_surrogate.md` before opening stored
+    RSF prediction values. Its SHA-256 is
+    `291ad6843e96297717883e3d784503836e150b0e58e9a9314af14d4fef0c1bcf`.
+    `coordination/rsf_surrogate_protocol_freeze.json` records the hash,
+    timestamp and baseline commit.
+  - Use the source RSF risk score as the teacher, strict source replay matching,
+    fold-local decision-tree regression, training-only complexity selection,
+    prespecified fidelity/outcome metrics, patient-level repeated-fold
+    summaries, explicit seeds and descriptive feature-group stability.
+  - Keep the study post-hoc and write only to a new run directory. The frozen
+    baseline and original explanation result remain unchanged.
+  - Do not start RSF replay or surrogate production until an independent
+    scientific reviewer records acceptance of the frozen protocol. Code,
+    focused tests and no-result preflight may proceed while review is pending.
+- Consequences: The protocol content is frozen for T-193, but T-193 remains
+  open until independent review is recorded. T-194 production is gated on
+  that review; T-195 also requires independent scientific and claim review.
+
+## ADR-050 - Prepare a Windows x64 environment for the RSF surrogate study
+
+- Status: ACCEPTED; cross-platform replay qualification pending
+- Date: 2026-10-07
+- Context: The owner directed that the separate post-hoc RSF surrogate study
+  continue on Windows if any platform effects are shown to be immaterial.
+  The confirmatory source release is bound to the macOS arm64 lock, so a
+  Windows execution environment must be independently locked and recorded.
+- Decision:
+  - Keep `conda-lock.yml` as the immutable macOS arm64 source-release and
+    confirmatory environment. Add `conda-lock-win-64.yml` as a separate lock
+    generated from the same `environment.yml` version constraints and record
+    its SHA-256 in the companion file.
+  - Permit the Windows lock only for the separate post-hoc RSF surrogate
+    execution. Its lock identity is recorded separately in each run manifest;
+    it does not alter or replace the frozen source release environment.
+  - Do not presume platform differences are negligible. Before any student
+    fit, the independent protocol-acceptance gate in ADR-049 must pass and the
+    Windows RSF replay must preserve subject order and meet the frozen
+    `allclose(rtol=1e-10, atol=1e-12)` tolerance for each eligible source cell.
+    A mismatch blocks use of that cell as a teacher under the frozen protocol.
+  - Keep the three-cohort timing pilot and 60-minute projected runtime ceiling
+    unchanged. Write all pilot and production outputs to new post-hoc paths.
+- Consequences: A Windows environment can be prepared and verified without
+  touching confirmatory outputs. Its installed dependency versions and HDF5
+  compatibility are verified, but no RSF replay has run and cross-platform
+  scientific equivalence is not yet established. Q-008 and ADR-049 remain
+  unchanged; production is still held pending their independent review gate.
+
+## ADR-051 - Owner waiver to execute the RSF surrogate study
+
+- Status: ACCEPTED; independent scientific review not obtained
+- Date: 2026-10-07
+- Context: After being told that Q-008 remained open and no independent
+  protocol acceptance was recorded, the owner instructed execution of the
+  Windows RSF surrogate study. This explicitly waives the ADR-049 reviewer
+  prerequisite for T-193/T-194 execution; it does not supply or imply
+  independent scientific review.
+- Decision:
+  - Proceed with the frozen protocol v1.0 methods and the separately locked
+    Windows x64 environment. Do not alter the protocol hash or describe this
+    owner instruction as reviewer acceptance.
+  - Preserve the strict subject-order and
+    `allclose(rtol=1e-10, atol=1e-12)` teacher replay check. Run one
+    representative fold per cohort first; proceed to the 75-cell grid only
+    when replay passes and the measured runtime projection is at most
+    60 minutes. If either condition fails, stop before full production.
+  - Bind the owner waiver receipt and its hash in every run manifest. The
+    waiver applies only to T-193/T-194 execution on Windows. T-195 still
+    requires independent scientific and claim review before reporting or
+    adopting any result as thesis evidence.
+- Consequences: Q-008 is answered for the T-193/T-194 production prerequisite
+  by the owner's waiver; no independent acceptance was obtained. Any results
+  remain explicitly owner-waived post-hoc evidence and cannot be described as
+  independently reviewed.
+- Execution update (2026-10-07): Two three-cohort Windows r01f01 pilots were
+  sealed under separate Windows locks. All six cell attempts failed the frozen
+  replay tolerance with the same cohort-specific maximum absolute errors
+  (11.6091, 14.2223 and 87.9071). No student tree was fitted and the 75-cell
+  production run was not started. The second lock pinned scikit-learn, joblib
+  and threadpoolctl to the macOS source-lock versions but did not resolve the
+  mismatch. Its cause remains undiagnosed; do not claim platform equivalence
+  or alter protocol v1.0 based on these observed results.

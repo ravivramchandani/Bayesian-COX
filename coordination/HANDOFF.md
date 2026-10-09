@@ -1,8 +1,77 @@
 # HANDOFF
 
+## Planned post-hoc RSF surrogate-tree study — 2026-10-07
+
+The owner asked to implement and run a surrogate tree for the random survival
+forest. ADR-047 authorizes this as a separate post-hoc analysis tracked
+by T-193–T-195. It complements the existing explanation work by measuring how
+well simple tree rules reproduce RSF predictions; it does not replace the
+forest, revive confirmatory forest SHAP, or repair the failed explanation-
+convergence gate. It remains non-blocking for thesis submission under ADR-044.
+
+Plan:
+
+1. Protocol v1.0 is frozen under ADR-049 before any stored RSF predictions
+   were inspected. Its SHA-256 is recorded in
+   `coordination/rsf_surrogate_protocol_freeze.json`. It fixes the RSF risk
+   score target, fold-local tree, complexity selection, replay tolerance,
+   metrics, seeds, uncertainty, stability and claim rules.
+2. Independent scientific acceptance was not obtained. After the owner was
+   told Q-008 remained open, ADR-051 records an owner waiver for this T-193/
+   T-194 Windows execution. Every run manifest records the waiver as an owner
+   gate receipt, never as independent review. T-195 still requires independent
+   scientific and claim review.
+3. The fold-safe pipeline and runner are implemented in
+   `src/pipelines/rsf_surrogate.py` and `scripts/run_rsf_surrogate.py`. They
+   check source prediction replay before fitting, use only outer-training
+   rows for tree selection, retain all 75 planned cells and write to a new
+   post-hoc run directory. The runner verifies each sealed production run and
+   writes the cohort report and per-fold rule/stability records.
+4. The runner loads the current cohort reader and JSON serializer explicitly,
+   while folds, preprocessing and RSF classes resolve from the pinned source
+   checkpoint. A no-result preflight verified the pinned confirmatory release,
+   all 450 source cells and all 80 frozen source inputs. A further no-fit check
+   matched subject identities, fold seeds and saved preprocessing metadata for
+   all 75 RSF source folds. Neither check fit a forest or student tree. The
+   verified release is staged in a temporary Windows checkpoint worktree at
+   commit `44b608572a5e1006a05ed5e3c4985471b2ba594d`; the main checkout's
+   `data/raw` files were not changed. The earlier focused test and Ruff
+   results predate the final runner import-path changes; they were not rerun.
+5. The frozen confirmatory source remains bound to its macOS arm64 lock. A
+   separate Windows x64 lock is now generated from the same dependency spec at
+   `conda-lock-win-64.yml` (SHA-256
+   `0308273bb53d72ff7f974f799b2a3c8ff0f01085d3d72e218313505444354b45`). The
+   dedicated environment `bayes-cox-rsf-win-candidate-20261007` on Python
+   3.11.15 passes the lock verifier with 249 package records and matching
+   HDF5 2.1.0 build/runtime versions. The runner
+   records this execution lock separately from the source release lock.
+6. The first three-cohort pilot is sealed at
+   `reports/posthoc/rsf_surrogate_v1_pilot_windows_20261007_r1/`. All three
+   r01f01 cells failed the frozen `allclose(rtol=1e-10, atol=1e-12)` replay
+   check, with maximum absolute risk-score differences of 11.6091 (GBSG2),
+   14.2223 (WHAS500) and 87.9071 (METABRIC). The pilot is `incomplete`, its
+   runtime projection is unavailable, and no student tree was fitted.
+7. A second sealed pilot at
+   `reports/posthoc/rsf_surrogate_v1_pilot_windows_sklearn190_20261007_r1/`
+   used `conda-lock-rsf-surrogate-win-64.yml` (SHA-256
+   `39d9b0066e6ccbcc594bb5c3c62960237f9fddc9f64de3d7fe9942395fff02b5`). It
+   pins scikit-learn 1.9.0, joblib 1.5.3 and threadpoolctl 3.6.0 to the source
+   lock's versions and passes the full Windows environment verifier. It
+   reproduced the same three replay errors. Pinning these versions did not
+   resolve the mismatch; its root cause is not isolated.
+8. ADR-051 requires replay success before full production. The 75-cell run
+   was not started, and neither Windows pilot supports a claim of scientific
+   equivalence. T-194 remains open. Do not relax the frozen tolerance or use
+   mismatched forests as teachers. T-195 remains open and requires independent
+   scientific and claim review before any result is adopted as thesis evidence.
+
+The archived rehearsal estimate remains non-authoritative. Neither sealed
+pilot supports a valid full-grid runtime projection because replay failed in
+all three cohorts.
+
 State needed to resume work in a new session or on another machine.
 
-Updated: 2026-10-02 (New Zealand; dated checkpoints below use UTC)
+Updated: 2026-10-07 (New Zealand; dated checkpoints below use UTC)
 
 ## Local storage cleanup — 2026-10-01, 11:12 UTC
 
@@ -1772,3 +1841,24 @@ Do not edit live frozen methodological inputs. ADR-030 permits code and
 ordinary-documentation changes while their original checkpoint blobs remain
 verifiable. A methodological change cannot enter the completed confirmatory
 analysis; the acceptance-only sensitivity is separate under ADR-032.
+
+## Submission evidence lock - 2026-10-07
+
+The ADR-044 baseline manifest is locked at
+coordination/submission_evidence_manifest.json. It binds the frozen protocol,
+data and lock hashes, original confirmatory and robustness manifests, the
+explanation artifact, ADR-032 sensitivity, ADR-033 bound, reproduction check,
+private result release tags and their verified archive hashes. The incomplete
+nine-contrast primary family, original diagnostic attrition and failed global
+explanation gate remain explicit. The unfinished extension and ADR-045/T-192
+clinical methods study are excluded from this thesis evidence baseline.
+
+The dated active claim dispositions are in docs/claim_evidence_register.md;
+the locked wording record is coordination/reviews/2026-10-07-submission-claims-review.md.
+The owner-approved planning architecture and 21,000-word main-text budget are
+in docs/thesis_architecture.md. T-106, T-108 and T-147 are complete under
+ADR-048. The owner waived external reviewer decisions for this milestone; no
+supervisor or clinical-reviewer approval is represented. Q-007 is answered.
+The full run directories are not materialized in this Windows checkout; their
+source is the hash-verified private release, with a fresh-clone restore already
+verified. No result refits or Overleaf edits were made for this evidence lock.

@@ -1,0 +1,255 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "submission-baseline-v1-2026-10-07",
+  "prepared_at_utc": "2026-10-07T01:02:54Z",
+  "status": "locked_under_owner_override",
+  "scope_decision": {
+    "decision": "ADR-044 submission-first baseline",
+    "included": [
+      "original confirmatory production",
+      "frozen robustness production",
+      "original explanation production and its failed claim gate",
+      "ADR-032 sampler sensitivity, labelled post hoc",
+      "ADR-033 incomplete-family Holm bound, labelled post hoc",
+      "verified confirmatory replay"
+    ],
+    "excludes": [
+      "unfinished 1,625-cell extension and catalytic correction",
+      "ADR-045/T-192 post-hoc clinical methods study",
+      "exploratory pilot and legacy rehearsal results"
+    ],
+    "rule": "Included evidence retains its original status and limitations; no sensitivity or later study replaces the original confirmatory result."
+  },
+  "code_and_freeze": {
+    "code_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+    "python": "3.11.15",
+    "platform": "macOS arm64",
+    "locked_packages": 259,
+    "lock_sha256": "1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57",
+    "frozen_inputs": [
+      {
+        "path": "data/manifest.yaml",
+        "sha256": "89e3f33b7d264105f31cc125971fbd30ff1cd6a29c3d22dea7112119036cffef"
+      },
+      {
+        "path": "conda-lock.yml",
+        "sha256": "1921895d4a404fc99e848d69ccd4a3f6639a3d1610315c82ecd463ed4bcdfb57"
+      },
+      {
+        "path": "config/confirmatory.yaml",
+        "sha256": "cb17c55bc3a0a06c147ec8831cb2ff4c12401bc1bbb06ed0a080acf39ce4fc4b"
+      }
+    ],
+    "data": [
+      {
+        "cohort": "GBSG2",
+        "records": 686,
+        "events": 299,
+        "derived_data_sha256": "2158b777d27ecfb69b187d3cbcad13fd1eb92d626935c528a4465fea6490ae5f"
+      },
+      {
+        "cohort": "WHAS500",
+        "records": 500,
+        "events": 215,
+        "derived_data_sha256": "4bb01775c04eca11d7f06d6e5dfebd0a5cce75aa7e73fe4261732385be106fcc"
+      },
+      {
+        "cohort": "METABRIC",
+        "records": 1980,
+        "events": 1144,
+        "derived_data_sha256": "731ea80ce0240cb6aa96ffb0f4a3bb379615202966c954512664bef02b29545c"
+      }
+    ],
+    "verification_code_commit_role": "Programme reproduction, report verification, supplementary release and fresh-clone restore checkpoint; the original confirmatory release retains its separate source tag.",
+    "hash_basis": "Hashes are the frozen values recorded in the protocol and release receipts; where the Windows checkout has CRLF line endings, compare content after LF normalization.",
+    "protocol_freeze_content_sha256": "3b5e1042d592ebb6fade0a4a76c1f0d31ce9c0c1cfc08357be46f163f037d2ca",
+    "protocol_freeze_record_file_lf_sha256": "9ba2c4c62a002355d506e783a61e8061eb87034d548896590eb66693cb02fb31"
+  },
+  "result_releases": [
+    {
+      "tag": "confirmatory-v1-44b6085",
+      "target_commit": "44b608572a5e1006a05ed5e3c4985471b2ba594d",
+      "archive_sha256": "0dbb745b82e5998b5aabc4bb3f05b28f87e00ba2851101a8accb83d447ddf34b",
+      "verification": "Original frozen confirmatory checkpoint; local tag resolves to this commit and the closeout receipt verifies the release archive hash.",
+      "url": "https://github.com/ravivramchandani/Bayesian-COX/releases/tag/confirmatory-v1-44b6085"
+    },
+    {
+      "tag": "results-programme-20260927-11f86ce",
+      "target_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+      "verification": "10 release assets and 2,498 archive members verified; fresh-clone restore passed without fitting",
+      "url": "https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-20260927-11f86ce"
+    },
+    {
+      "tag": "results-programme-audit-20260928",
+      "target_commit": "11f86ced8735b32767debb58f3cbbefbb5a7b8e6",
+      "verification": "audit assets and 899 members verified in the closeout receipt",
+      "url": "https://github.com/ravivramchandani/Bayesian-COX/releases/tag/results-programme-audit-20260928"
+    }
+  ],
+  "supplementary_release_assets": {
+    "programme-committed-code.tar.gz": "09693f23c2246fbc35f4e6514fe53c3dc661cd9abe427e0435ff8015efd85091",
+    "programme-confirmatory-reports.tar.gz": "008f31e2b6d5c33930a79156a850a31afc574f53909d8a1d67c4f1d93662ce15",
+    "programme-posthoc-sensitivity.tar.gz": "7445abe7fb28c85a559566ad54cb4e5cf70e663250dd3b4f25a4d4ff55ce69ee",
+    "programme-reproduction.tar.gz": "4f5b684dad73ebe1c6fbc612ce95a51648ab11d05524c7ca970e47392ec96826",
+    "programme-robustness.tar.gz": "05918c159acf84367cdcbb8d9fdd5cf8a6ceeb1bf6d72fb56d9a4ab09f7ea7e4",
+    "programme_analysis_verified.json": "a6e35856d7e887cc7aabc5bf978a8e8fb2783db534dbb85926d5c388c1acfc57",
+    "programme_release_manifest.json": "6f72781d4485c768988fded9d288da30a7e513b69b283c38376d8a5e5bef30f1",
+    "programme_release_ready.json": "7fdeffa6fb6a9ceaddf626df23a6e0009200428639b4622cf71b5aa9321ec08f",
+    "programme_visual_qa.json": "a8bdb99bd79351cef78e40e0aba0a21a1e97cd1aeb532b4f44265520dd8d03c5",
+    "SHA256SUMS": "29b833638178637c969106c28063e06ee6530f4f0f7e9d95044ec23a8c0f603f"
+  },
+  "evidence": [
+    {
+      "id": "confirmatory",
+      "run_id": "confirmatory_v1_confirmatory_cdcdcee84651",
+      "classification": "primary confirmatory evidence",
+      "cells": {
+        "planned": 450,
+        "completed": 430,
+        "failed_diagnostics": 20,
+        "failed_cells": "all horseshoe: 18 GBSG2, 2 METABRIC"
+      },
+      "inference": "5 of 9 prespecified contrasts have 25 paired folds; the Holm family is incomplete. No full-family superiority or equivalence conclusion.",
+      "completion_sha256": "44d5d6e2c3cf4d0350c3bc8cb27291436c9934b219c4c895cb139525e6fa25f6",
+      "run_manifest_sha256": "2a1817365675aa179174b5edf5b3da67bbcb2be1b2eb4143347e4b295052ce02",
+      "completion_record_sha256": "03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1"
+    },
+    {
+      "id": "robustness",
+      "run_id": "confirmatory_v1_robustness_robustness_702d93af33bf",
+      "classification": "prespecified robustness evidence",
+      "cells": {
+        "stored": 825,
+        "diagnostic_pass": 770,
+        "diagnostic_fail": 55
+      },
+      "inference": "129 direct-effect rows: 121 estimates, 95 with full paired coverage, 26 partial and 8 unavailable. 45 difference-in-differences estimates: 33 full and 12 partial. No robustness p-values are stored.",
+      "completion_sha256": "8f136a6b2f9cf0a18308db71d63a69b1b145b0c767548cc7465d4af73e781152",
+      "run_manifest_sha256": "0fc556b803da4f37daa9a63dbddc5ce5ffd350aa2b2831b0a6546b634c36139f"
+    },
+    {
+      "id": "explainability",
+      "artifact": "confirmatory_v1_confirmatory_cdcdcee84651_explainability_v1.json",
+      "classification": "primary explanation evidence with failed global gate",
+      "comparisons": {
+        "total": 1845,
+        "evaluable": 1640,
+        "passed": 1538,
+        "failed": 102
+      },
+      "global_stability_claim_permitted": false,
+      "artifact_sha256": "120984c7edfac468f471b9f500470623689b2647e4bde56d271cc9623346ecd5"
+    },
+    {
+      "id": "adr032_sampler_sensitivity",
+      "classification": "post-hoc sensitivity; separate from primary outcome",
+      "cells": {
+        "planned": 75,
+        "diagnostic_pass": 75
+      },
+      "inference": "9 contrasts; every Holm-adjusted p-value is 1.0 and every corrected interval includes zero. This does not replace original failures or establish equivalence.",
+      "completion_sha256": "0684ca1e61ef8492f27c79f486ea8e57cc75e139808f9a15535f426e82d4833a",
+      "run_manifest_sha256": "76acf071cf41f5456538799625979775ad00a5ab699b55b88987fee7ed6c5d00"
+    },
+    {
+      "id": "adr033_incomplete_holm_bound",
+      "classification": "post-hoc mathematical bound; not a replacement inference",
+      "permitted_statement": "None of the five estimable primary contrasts can be Holm-rejected for any values of the four missing p-values; this supplies neither missing estimates nor evidence of equivalence.",
+      "rendered_table_hashes": {
+        "tables/posthoc_incomplete_holm_bounds.csv": "df7b77c20ef63b3ed26e013b97308693b9329a0c3d484f80338cefc229f41c14",
+        "tables/posthoc_incomplete_holm_bounds.tex": "a43c53e453d45ecb750c355b0fa95ab10b0b5f7ddd5e7f8f9b4d2e0796a3e082"
+      },
+      "verification_record": "coordination/recovery/2026-09-27-render-equivalence.json"
+    },
+    {
+      "id": "confirmatory_reproduction",
+      "classification": "verification only",
+      "cells_identical": 450,
+      "fields_excluded_from_comparison": [
+        "cell_content_sha256",
+        "fit_seconds",
+        "total_seconds"
+      ],
+      "verification_sha256": "5ee67afad696efe1848f3b697c45ed995127ec5cefbefac21291b4753af1ec28"
+    }
+  ],
+  "claim_rules": [
+    "A full-family superiority claim requires the frozen paired Holm test and its prespecified interval rule.",
+    "An interval containing zero permits no equivalence claim.",
+    "IBS is prediction error and does not establish calibration by itself.",
+    "Explanations are model-conditional and not feature truth; the global stability claim gate failed.",
+    "No causal, treatment-benefit, clinical-utility, deployment, external-validation or universal-superiority claim is supported.",
+    "Clinical cohort statements are limited to the pinned source metadata and the documented predictor-availability rules."
+  ],
+  "review_and_signoff": {
+    "internal_evidence_review": {
+      "record": "coordination/recovery/2026-09-28-claim-review.json and dated source check recorded 2026-10-07",
+      "reviewer": "Codex root",
+      "reviewed_at_utc": "2026-10-07",
+      "meaning": "Internal evidence-boundary and source-trace review; not an external statistical or clinical review."
+    },
+    "statistical_supervisor": {
+      "status": "waived_by_owner_under_ADR-048",
+      "reviewer_approval_claimed": false,
+      "decision_record": "coordination/DECISIONS.md#adr-048"
+    },
+    "principal_supervisor": {
+      "status": "waived_by_owner_under_ADR-048",
+      "reviewer_approval_claimed": false,
+      "decision_record": "coordination/DECISIONS.md#adr-048"
+    },
+    "clinical_or_domain_review": {
+      "status": "waived_by_owner_under_ADR-048",
+      "reviewer_approval_claimed": false,
+      "decision_record": "coordination/DECISIONS.md#adr-048"
+    },
+    "thesis_architecture_and_word_budget": {
+      "status": "owner-approved_for_planning_under_ADR-048",
+      "supervisor_approval_claimed": false,
+      "document": "docs/thesis_architecture.md",
+      "formal_programme_limit": "not asserted; verify before final submission"
+    },
+    "owner_routing": {
+      "status": "answered_by_owner_override",
+      "record": "coordination/OPEN_QUESTIONS.md#q-007"
+    }
+  },
+  "execution_note": "No model refitting was required or performed for this evidence lock; the verified baseline artifacts and release receipts were used.",
+  "verification_receipts": {
+    "programme_closeout": {
+      "path": "coordination/recovery/2026-09-28-programme-closeout.json",
+      "content_sha256": "09364de387d8c3de0905dcd1b6ec880244718439f09ee4ab1f148665a2ecf476"
+    },
+    "numerical_evidence_summary": {
+      "path": "coordination/recovery/2026-09-28-numerical-evidence-summary.json",
+      "content_sha256": "9477ad52020ef7951e7cbe24ac6d6b2096a4369f9d1843d5cdf33cf2a42ddc5c"
+    },
+    "prior_internal_claim_review": {
+      "path": "coordination/recovery/2026-09-28-claim-review.json",
+      "content_sha256": "e7cd206705478702be37e4d259fa01dcec6fcf5786ef7ba370ff9fcaafa417b8",
+      "reviewer": "Codex root",
+      "human_signoff": false
+    },
+    "fresh_clone_restore": {
+      "passed": true,
+      "fitting_performed": false,
+      "verified_release_assets": 10,
+      "verified_archive_members": 2498
+    }
+  },
+  "artifact_availability": {
+    "full_run_directories_materialized_in_this_checkout": false,
+    "authoritative_source": "the private original and supplementary releases listed above, with hashes and restore verification recorded in the closeout receipt",
+    "fresh_clone_restore_verified": true,
+    "restore_command": "conda run -n bayes-cox-clean python scripts/restore_confirmatory_release.py"
+  },
+  "owner_override": {
+    "decision": "ADR-048",
+    "date": "2026-10-07",
+    "instruction": "Continue and complete T-106, T-108 and T-147 without reviewer decisions.",
+    "scope": "Waives external statistical-supervisor, principal-supervisor and clinical/domain reviewer decisions for this evidence-lock milestone.",
+    "claim_authority": "The conservative source-bounded wording is owner-authorized for the thesis baseline; no external reviewer approval is represented.",
+    "architecture_authority": "The proposed structure and 21,000-word main-text target are accepted by the owner for planning; no institutional word limit is asserted.",
+    "does_not_waive": "Any later institution-required thesis review or formal programme word-limit requirement."
+  }
+}
