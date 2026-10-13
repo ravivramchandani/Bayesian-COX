@@ -1,5 +1,16 @@
 # HANDOFF
 
+## Post-hoc backward-elimination feature selection — 2026-10-13
+
+ADR-052 adds a separate grouped backward-elimination Cox analysis. The
+protocol and implementation hashes are recorded in
+`coordination/backward_elimination_protocol_freeze.json`. The selector in
+`src/pipelines/extensions/backward_elimination.py` uses training-only inner
+cross-validation, grouped source predictors, IPCW IBS, and a one-standard-
+error simplicity rule. It does not alter frozen results. No tests or model
+fits have been run for this addition; T-196 remains open for production and
+result verification.
+
 ## Planned post-hoc RSF surrogate-tree study — 2026-10-07
 
 The owner asked to implement and run a surrogate tree for the random survival

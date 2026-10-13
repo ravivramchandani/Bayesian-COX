@@ -661,6 +661,21 @@ the existing programme's private code/evidence release and restore checks.
   writer are implemented; final result verification and external review await
   T-194 production.
 
+## Separate post-hoc Cox feature-selection analysis
+
+- [ ] T-196 (P; depends ADR-052) — Run and verify the grouped backward-
+  elimination Cox comparison on the three cohorts' existing outer folds.
+  Acceptance: the frozen addendum hash in
+  `coordination/backward_elimination_protocol_freeze.json` is bound to a new
+  run; all inner-fold
+  candidate scores and failures, selected groups, outer-fold predictions,
+  metrics and lineage are accounted for; preprocessing and selection stay
+  within outer-training data; descriptive selection stability and visual
+  report review are complete; no frozen result or original claim changes.
+  The fold-local selector is implemented in
+  `src/pipelines/extensions/backward_elimination.py`; no experiment has been
+  run and no result directory has been produced.
+
 Initial compute planning allowance is 30–60 minutes on hardware similar to
 the archived rehearsal, not a measured production estimate. T-194 should
 time one representative fold per cohort before extrapolating the full run.

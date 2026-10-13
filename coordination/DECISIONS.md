@@ -1418,3 +1418,34 @@ Format:
   and threadpoolctl to the macOS source-lock versions but did not resolve the
   mismatch. Its cause remains undiagnosed; do not claim platform equivalence
   or alter protocol v1.0 based on these observed results.
+
+## ADR-052 — Add a separate backward-elimination Cox analysis
+
+- Status: ACCEPTED
+- Date: 2026-10-13
+- Context: The frozen baseline uses declared clinical predictor sets and must
+  remain unchanged. A fold-local backward-elimination comparison can assess
+  whether a smaller Cox feature set retains predictive performance, provided
+  selection is isolated from outer validation and from the original claims.
+- Decision:
+  - Add grouped backward elimination as a distinct post-hoc Cox analysis. Do
+    not apply it to the frozen Bayesian, Cox, forest, or DeepSurv cells and do
+    not overwrite any released evidence.
+  - At each greedy step, remove the source-feature group whose removal gives
+    the lowest complete three-fold inner-CV IPCW IBS. Refit preprocessing
+    inside every inner-training split and use the fixed Cox penalty from the
+    confirmatory specification.
+  - Select the smallest model on the greedy path within one fold standard
+    error of the lowest inner mean IBS. The one-standard-error quantity is a
+    selection heuristic, not an inferential interval. Use deterministic
+    preprocessor group order to resolve exact ties and retain every candidate
+    score and failure.
+  - Freeze the protocol and implementation hashes in
+    `coordination/backward_elimination_protocol_freeze.json`; run only in a
+    new post-hoc results directory, using the existing outer-fold identities.
+    Report selection stability descriptively and make no causal, confirmatory,
+    superiority, equivalence, or clinical-utility claims.
+- Consequences: The original feature sets and evidence remain authoritative.
+  The new implementation is available for the separately tracked study, but
+  no model has been fitted and no experiment result is produced by this
+  decision. Production and result verification remain outstanding.

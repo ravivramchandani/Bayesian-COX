@@ -1,0 +1,11 @@
+{
+  "baseline_git_commit": "ab43102aef009b474ed5ff4d01355d87383bb6b1",
+  "classification": "post_hoc_analysis; not external preregistration",
+  "implementation": "src/pipelines/extensions/backward_elimination.py",
+  "implementation_sha256": "1febc31aafc30175cf2488fa1b049364ee832ed941d72c5e96db5bfff1c533be",
+  "protocol": "docs/protocol_addendum_backward_elimination.md",
+  "protocol_sha256": "30ab7032396556659d0232597cb19a9bc99a7f75ebe328fdab9fa629ccedbce9",
+  "protocol_version": "1.0",
+  "frozen_date": "2026-10-13",
+  "results_generated_before_freeze": false
+}

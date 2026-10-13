@@ -50,6 +50,16 @@ Format:
 - Formula: —
 - Used in: `src/evaluation/calibration.py`, confirmatory results chapter.
 
+## Grouped backward elimination
+- Symbol: —
+- Definition: A greedy procedure that removes one source-feature group at a
+  time using inner-training evidence. In this project's post-hoc Cox analysis,
+  removals are ranked by inner-fold IPCW IBS; the smallest model within one
+  fold standard error of the best path score is selected.
+- Formula: —
+- Used in: `src/pipelines/extensions/backward_elimination.py`,
+  `docs/protocol_addendum_backward_elimination.md`.
+
 ## Time-dependent AUC
 - Symbol: $\mathrm{AUC}(t)$
 - Definition: The area under the ROC curve for discriminating subjects who
