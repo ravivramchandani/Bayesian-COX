@@ -1,4 +1,4 @@
-# Current evidence status — updated 2026-10-07
+# Current evidence status — updated 2026-10-21
 
 The frozen protocol remains the study-definition record. The claim register
 now also contains dated, submission-scope evidence dispositions. This status
@@ -21,8 +21,10 @@ evidence. The original confirmatory, robustness and explanation limitations
 below remain mandatory; ADR-032 and ADR-033 are separate post-hoc additions.
 The 1,625-cell extension and catalytic correction continue as non-blocking
 research, but neither has a verified complete-grid result or release. Their
-partial cells do not support thesis comparison claims. Thesis chapter writing
-and review remain unfinished.
+partial cells do not support thesis comparison claims. All thesis chapters and appendices are now a complete LaTeX draft, replaced
+from Ravi's report under explicit owner instruction on 2026-10-21. The draft
+uses regenerated baseline tables and plots; author/supervisor review and final
+submission checks remain. This conversion does not change any evidence status.
 
 ADR-045 separately released a focused, outcome-aware post-hoc clinical
 methods subset on 2026-10-01 NZ. All 225 selected penalised-Cox cells passed
@@ -38,6 +40,11 @@ scientific replay. The [results note](clinical_methods_results.md) and
 [release receipt](../coordination/recovery/2026-10-01-clinical-methods-release.json)
 state exact scope, hashes and limits. This does not complete the original
 1,625-fit extension or add a thesis-submission prerequisite.
+
+The 21 October SSD inspection found five of the 21 recovery refits verified,
+without a completed extension release; no numerical controller is active on this
+Mac. These observations do not affect thesis scope. The following is an older
+historical checkpoint, not a current run claim.
 
 At the 2026-09-30 20:30 UTC recovery checkpoint, three of 21 missing-trace
 refits passed independent non-timing scientific comparison. Eighteen refits

@@ -1,5 +1,39 @@
 # HANDOFF
 
+## Full thesis replacement — 2026-10-21
+
+The owner explicitly authorised replacing the separate Overleaf thesis from
+`1MAT(Comp)_2026_Ramchandani_Ravi.docx` and updating every chapter to the latest
+verified submission-scope results. This supersedes the earlier no-Overleaf-edit
+instruction for this replacement. All five chapters, front matter and source
+appendix topics are now a complete LaTeX draft. Numerical tables and plots are
+regenerated from the saved baseline; no new model fitting was performed.
+
+The source report's seven-pair first-fold evaluation, eight-model diagnostic
+narrative, older cohort summaries and absent-SHAP narrative were superseded by
+the actual repeated-validation evidence. Original diagnostic failures, incomplete
+primary contrasts, the failed explanation gate and post-hoc labels remain. The
+excluded additional experiments remain outside the thesis.
+
+The thesis repository contains `conversion_manifest.json`, an independent
+science audit, bibliography corrections, generated provenance and the saved
+aggregate CSVs. All 1,350 source cells were hash-checked. Independent checks
+found no differences in 2,103 numerical summaries and 1,392 robustness source
+fields. The full manuscript compiles with resolved citations/references.
+The final commit/build receipt is in
+`coordination/reviews/2026-10-21-thesis-conversion.json`.
+
+Ravi's next task is to review the full Overleaf draft, confirm the wording and
+resolve supervisor feedback; he does not need another model run. This technical
+conversion is not university submission or supervisor sign-off. The earlier
+21,000-word figure was a planning target; all substantive source-report topics
+were retained, and final length/format must be reconciled with programme rules.
+
+Historical run notices below are dated snapshots. The 21 October SSD inspection
+found five of 21 recovery refits verified and no completed extension release.
+No experiment controller is running on this Mac and no run was restarted.
+These separate research jobs do not block the thesis.
+
 ## Post-hoc backward-elimination feature selection — 2026-10-13
 
 ADR-052 adds a separate grouped backward-elimination Cox analysis. The

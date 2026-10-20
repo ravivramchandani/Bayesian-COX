@@ -1,5 +1,26 @@
 # JOURNAL
 
+## 2026-10-21 — full thesis replacement from Ravi report
+
+The owner authorised full DOCX-to-LaTeX replacement and updating all sections
+to the latest verified submission evidence. The Overleaf repository now holds
+commit `78ef041`: all five chapters, front matter, source appendix topics
+and reproducibility appendix. Its 157-page PDF compiles with zero unresolved
+citations/references, overflow or infinite-glue errors. A clean checkout builds
+without the SSD or numerical environment. The earlier thesis remains in Git
+history and the source DOCX is unchanged.
+
+Nineteen evidence tables and five vector plots were regenerated after checking
+all 1,350 source-cell hashes. Independent numerical comparisons found no
+differences; original failures, incomplete inference, the failed explanation
+gate and post-hoc labels remain. All 102 source reference identities were
+retained and 27 foundational method references added. The source report's
+older first-fold results and incorrect prior/diagnostic descriptions were
+corrected. No scientific evidence or experiment scope changed and no model
+was fitted. The conversion, provenance and review boundaries are in
+`reviews/2026-10-21-thesis-conversion.json`. Ravi's next step is review and
+supervisor revision of the full draft, not another experiment.
+
 ## 2026-10-07 - Windows RSF surrogate replay pilots
 
 Two owner-waived, separately sealed three-cohort r01f01 pilots used the frozen

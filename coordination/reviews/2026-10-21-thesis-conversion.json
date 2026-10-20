@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-10-21",
+  "task": "Owner-authorised complete source-report conversion and latest-results replacement on Overleaf",
+  "status": "complete_full_draft_pushed_for_author_supervisor_review",
+  "source_document": {
+    "filename": "1MAT(Comp)_2026_Ramchandani_Ravi.docx",
+    "sha256": "bff50545e490afa1911dcc7b4ea17061583e10623b178c51f734a63fbf0042d3",
+    "unchanged": true
+  },
+  "thesis": {
+    "repository": "https://www.overleaf.com/project/6a750f3e68075fe560b0c306",
+    "commit": "78ef0419bfd4f3e1001dc2400b4ea03cc476d706",
+    "previous_commit": "a5f026a165645638f4b202f7c7f427f7444e8914",
+    "compiled_pdf": {
+      "path": "Main.pdf",
+      "pages": 157,
+      "sha256": "0c009b765723a06d32bd8d330c0a8bb6274f98b9e5d539cafa13d8e6fc387ec8"
+    },
+    "source_map": "conversion_manifest.json",
+    "generated_provenance": "generated/provenance.json"
+  },
+  "scope": "Submission-first baseline, robustness and explanation, separately labelled sampler sensitivity and Holm bound. Excluded extension results remain outside scope.",
+  "coverage": {
+    "intro_literature_headings": 66,
+    "method_sections": 18,
+    "results_sections": 15,
+    "conclusion_sections": 9,
+    "source_appendices": "A-J",
+    "added_appendix": "K reproducibility",
+    "original_references": 102,
+    "supplemental_references": 27
+  },
+  "generated_outputs": {
+    "latex_evidence_tables": 19,
+    "vector_figures": 5,
+    "numeric_csvs": 17,
+    "output_artifacts": 42
+  },
+  "verification": {
+    "latexmk": "passed",
+    "undefined_references": 0,
+    "undefined_citations": 0,
+    "overfull_boxes": 0,
+    "infinite_glue_errors": 0,
+    "pdf_interpreter": "Ghostscript nullpage passed",
+    "numeric_comparisons": 2103,
+    "robustness_source_field_comparisons": 1392,
+    "source_cells_hash_verified": 1350,
+    "source_report_tables_mapped": 16,
+    "source_report_figures_mapped": 35,
+    "visual_review": "Complete contact-sheet pass plus full-page critical tables/figures; rotated continuations independently checked with per-page Poppler and Ghostscript."
+  },
+  "fresh_checkout_build": {
+    "status": "passed",
+    "inputs": "committed source and generated assets only",
+    "ssd_or_model_environment_required": false
+  },
+  "render_runtime": {
+    "implementation": "CPython",
+    "machine": "arm64",
+    "matplotlib": "3.10.9",
+    "numpy": "2.2.6",
+    "platform": "macOS-26.7.1-arm64-arm-64bit",
+    "python": "3.10.20",
+    "python_full": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 17:06:34) [Clang 19.1.7 ]"
+  },
+  "model_fitting_performed": false,
+  "scientific_evidence_changed": false,
+  "remaining_thesis_work": [
+    "Ravi author review of the full draft and corrected study interpretation",
+    "Supervisor review and revisions",
+    "Final institution-required length, format, citation, declaration and submission checks"
+  ],
+  "external_supervisor_or_institutional_signoff_claimed": false
+}

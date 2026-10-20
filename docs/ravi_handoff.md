@@ -16,8 +16,11 @@ sampler sensitivity and ADR-033 Holm bound. Report the original diagnostic
 failures, incomplete primary contrast family and failed explanation gate.
 The unfinished extension may continue as separate post-hoc research but is
 not a thesis-submission prerequisite. Do not infer full-grid findings from
-its partial results. The thesis results and conclusion chapters still need
-writing and review; Overleaf edits await the owner's separate instruction.
+its partial results. The owner authorised full Overleaf replacement on 2026-10-21. All chapters
+and appendices are now a complete LaTeX draft with regenerated results. Ravi
+should review that draft and resolve supervisor feedback; no new model run is
+required. The dated conversion receipt is in
+`coordination/reviews/2026-10-21-thesis-conversion.json`.
 
 A separate [post-hoc clinical methods study](clinical_methods_results.md)
 is now complete and privately released. Its fixed 225 penalised-Cox cells
@@ -29,8 +32,12 @@ source records on non-timing scientific content, although all nine earlier
 formal receipts remain absent. This focused study does not finish the
 1,625-fit extension or alter the submission-first thesis scope.
 
-Read [HANDOFF](../coordination/HANDOFF.md) and [TODO](../coordination/TODO.md)
-before launching extension work on another Mac. The original workers stopped
+Historical recovery notes follow. On 2026-10-21 the SSD contained five verified
+recovery refits, no completed extension release, and no active controller on
+this Mac. Statements below that controllers are active describe their dated
+October 1 launch state and are not current. Read
+[HANDOFF](../coordination/HANDOFF.md) and [TODO](../coordination/TODO.md)
+before any separately authorised extension work. The original workers stopped
 after a host interruption; four of 21 missing-trace refits have verified
 non-timing scientific comparisons. Three separately captured V2 controllers
 are active on the owner's Mac to finish the remaining refits, assemble the

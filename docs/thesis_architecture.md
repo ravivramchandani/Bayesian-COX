@@ -1,9 +1,16 @@
 # Thesis architecture and word budget
 
-Status: owner-approved for project planning under ADR-048 on 2026-10-07.
+Current draft: the owner authorised preserving Ravi's complete report in LaTeX
+and replacing the Overleaf version on 2026-10-21. All chapters and appendices
+now exist with regenerated results; see
+`coordination/reviews/2026-10-21-thesis-conversion.json`. The current structure
+retains source appendices A–J and adds reproducibility appendix K. The table
+below preserves the earlier planning budget, not a claim about current length.
+
+Earlier planning status: owner-approved under ADR-048 on 2026-10-07.
 Principal-supervisor approval was waived for T-108; no supervisor approval is
-claimed. This target does not establish an institutional word limit. Overleaf
-is a separate repository and was not edited.
+claimed. This target does not establish an institutional word limit. Overleaf is a separate repository; it was replaced under the later explicit
+owner instruction.
 
 ## Scope
 
@@ -28,11 +35,13 @@ explanation gate stay visible.
 | Appendix B: Diagnostics | Preserve fit-level and explanation-gate diagnostics and attrition. | Confirmatory, robustness and explanation diagnostic artifacts. | Separate from main-text budget |
 
 The owner-approved main-text planning target is 21,000 words, with a planning range of
-18,100–23,900. The abstract and appendices are tracked separately. Current
-review estimates are approximately 1,880 words for the introduction, 6,180
-for the literature review and 5,240 for methodology; the results chapter is
-unwritten and the conclusion is a short stub. These are planning estimates,
-not a final rendered word count.
+18,100–23,900. The abstract and appendices are tracked separately. At the 7 October checkpoint, review estimates were approximately 1,880 words
+for the introduction, 6,180 for the literature review and 5,240 for methodology;
+results and conclusion were unfinished. Those counts and writing states are
+historical. The complete 21 October source-report conversion is longer than
+the earlier planning budget because the owner requested all substantive
+content be retained. Author/supervisor review should reconcile final length
+with the institution's actual requirements.
 
 ## Owner-adopted planning convention
 

@@ -6,6 +6,20 @@ supervisor's SSD for these steps. The Mac-specific software lock is only for
 optional verification of the saved evidence; that verification has already
 passed on the original Mac.
 
+The full thesis was replaced from Ravi's report on 21 October 2026 and updated
+to the verified submission evidence. Start by opening the
+[shared Overleaf thesis](https://www.overleaf.com/project/6a750f3e68075fe560b0c306)
+and selecting `Main.tex` as the main document. Use the current PDF for review;
+the Results, Discussion and Conclusion are now drafted. The old single-fold
+numbers were replaced by the completed repeated-validation evidence.
+
+Ravi's immediate work is to check that the manuscript expresses his study
+accurately, review the corrected methods and conclusions, resolve supervisor
+comments, and complete the university's final format/submission requirements.
+He does not need the SSD, a Mac or another experiment to do this.
+
+The steps below retain access and optional original-evidence download details.
+
 1. **Check access.** Sign in and open the
    [private GitHub repository](https://github.com/ravivramchandani/Bayesian-COX).
    Open the thesis project from your Overleaf dashboard. If either project is
@@ -40,8 +54,8 @@ passed on the original Mac.
    repair of the original failed cells.
 5. **Work from the shared thesis draft.** Check the Results, Discussion,
    Conclusion and abstract against the released tables and the claim limits.
-   Coordinate edits to the shared Overleaf project with Ali; ADR-044 reserves
-   Overleaf editing for a separate owner instruction. Send draft claims and
+   The owner authorised this replacement on 21 October. Review the complete
+   current draft with Ali and the principal supervisor. Send draft claims and
    figures for supervisor review before treating the thesis as finished.
 
 The two archives in steps 3–4 contain the figures and tables needed for the
