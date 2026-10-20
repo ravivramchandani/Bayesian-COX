@@ -10,12 +10,12 @@
   },
   "thesis": {
     "repository": "https://www.overleaf.com/project/6a750f3e68075fe560b0c306",
-    "commit": "78ef0419bfd4f3e1001dc2400b4ea03cc476d706",
+    "commit": "fc25b31a903a4ae8fad2aa62dcc3a4fd2d194341",
     "previous_commit": "a5f026a165645638f4b202f7c7f427f7444e8914",
     "compiled_pdf": {
       "path": "Main.pdf",
-      "pages": 157,
-      "sha256": "0c009b765723a06d32bd8d330c0a8bb6274f98b9e5d539cafa13d8e6fc387ec8"
+      "pages": 159,
+      "sha256": "fec103c8eb5cbb9f879b53ba3c63170ca33c1ca0b2973e97c58db4164814ab1a"
     },
     "source_map": "conversion_manifest.json",
     "generated_provenance": "generated/provenance.json"
@@ -29,7 +29,10 @@
     "source_appendices": "A-J",
     "added_appendix": "K reproducibility",
     "original_references": 102,
-    "supplemental_references": 27
+    "supplemental_references": 27,
+    "native_method_diagrams": 3,
+    "generated_result_plots": 5,
+    "manuscript_figures": 8
   },
   "generated_outputs": {
     "latex_evidence_tables": 19,
@@ -49,12 +52,15 @@
     "source_cells_hash_verified": 1350,
     "source_report_tables_mapped": 16,
     "source_report_figures_mapped": 35,
-    "visual_review": "Complete contact-sheet pass plus full-page critical tables/figures; rotated continuations independently checked with per-page Poppler and Ghostscript."
+    "visual_review": "Prior full-manuscript review plus individually rendered and reviewed research-design, interval-exposure and diagnostic-decision diagrams; no text or connector overlaps.",
+    "generated_outputs_unchanged": 42
   },
   "fresh_checkout_build": {
     "status": "passed",
     "inputs": "committed source and generated assets only",
-    "ssd_or_model_environment_required": false
+    "ssd_or_model_environment_required": false,
+    "commit": "fc25b31a903a4ae8fad2aa62dcc3a4fd2d194341",
+    "pages": 159
   },
   "render_runtime": {
     "implementation": "CPython",
@@ -72,5 +78,49 @@
     "Supervisor review and revisions",
     "Final institution-required length, format, citation, declaration and submission checks"
   ],
-  "external_supervisor_or_institutional_signoff_claimed": false
+  "external_supervisor_or_institutional_signoff_claimed": false,
+  "visual_coverage_checkpoint_before_update": {
+    "thesis_commit": "78ef0419bfd4f3e1001dc2400b4ea03cc476d706",
+    "compiled_pdf": {
+      "path": "Main.pdf",
+      "pages": 157,
+      "sha256": "0c009b765723a06d32bd8d330c0a8bb6274f98b9e5d539cafa13d8e6fc387ec8"
+    }
+  },
+  "native_method_diagrams": [
+    {
+      "path": "figures/diagnostic_decisions.tex",
+      "sha256": "72bb506c90df3f51aa4a54de1e30c485c8ecaf0959ee060ebae3141df77d1f5d"
+    },
+    {
+      "path": "figures/interval_exposure.tex",
+      "sha256": "e2388479278afc21e71c553a42b90952a65944e21f950d5a1c9f7a672f516424"
+    },
+    {
+      "path": "figures/research_design.tex",
+      "sha256": "6668b18db79a3997ae6e719bc60ee75c409abb2a0d3796a868591680784bad0e"
+    }
+  ],
+  "visual_coverage_update": {
+    "reason": "Owner reported missing visualisations including the research design.",
+    "changes": [
+      "Replaced the simplified seven-box workflow with a full branched research-design diagram under the research-design section.",
+      "Added a symbolic six-interval patient-exposure diagram.",
+      "Added the original Bayesian diagnostic gate and bounded-refit decision diagram."
+    ],
+    "printed_pages": {
+      "research_design": 40,
+      "interval_exposure": 49,
+      "diagnostic_decisions": 55
+    },
+    "source_figures_reviewed": 35,
+    "result_tables_csvs_and_plots_changed": false,
+    "original_word_document_changed": false,
+    "model_fitting_performed": false,
+    "project_checks": {
+      "coordination_schemas": "passed",
+      "jargon": "passed",
+      "make_test": "not runnable in rendering environment: Python 3.10.20 lacks datetime.UTC and scikit-survival; 49 import/collection errors, no test cases executed. No numerical code changed."
+    }
+  }
 }

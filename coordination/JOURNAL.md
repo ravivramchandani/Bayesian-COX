@@ -1,5 +1,17 @@
 # JOURNAL
 
+## 2026-10-21 — thesis visual-coverage correction
+
+Overleaf commit `fc25b31` restores a full branched research-design
+diagram and adds symbolic patient-interval exposure and Bayesian diagnostic/
+remedy diagrams. All 35 source figure topics were audited. The current PDF
+has 159 pages and eight figures: three methodology diagrams and five saved-
+result plots. The diagrams were individually rendered and visually checked;
+the thesis compiles without unresolved references or overflow. All 42 generated
+evidence assets and the source Word report retain their previous hashes.
+No statistical code, scientific result or experiment scope changed. The updated
+build and review receipt is `reviews/2026-10-21-thesis-conversion.json`.
+
 ## 2026-10-21 — full thesis replacement from Ravi report
 
 The owner authorised full DOCX-to-LaTeX replacement and updating all sections

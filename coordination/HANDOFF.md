@@ -23,6 +23,13 @@ fields. The full manuscript compiles with resolved citations/references.
 The final commit/build receipt is in
 `coordination/reviews/2026-10-21-thesis-conversion.json`.
 
+The visual-coverage correction is pushed to Overleaf in commit `fc25b31`.
+The 159-page draft now has three native methodology diagrams: the branched
+research design (Figure 3.1, page 40), symbolic interval exposure (Figure 3.2,
+page 49), and diagnostic/remedy decisions (Figure 3.3, page 55). All 35 source
+figure topics were checked. The five result plots, 19 generated tables and
+accompanying numeric CSVs are unchanged and hash-verified.
+
 Ravi's next task is to review the full Overleaf draft, confirm the wording and
 resolve supervisor feedback; he does not need another model run. This technical
 conversion is not university submission or supervisor sign-off. The earlier
