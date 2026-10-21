@@ -1,5 +1,25 @@
 # JOURNAL
 
+## 2026-10-21 - full report clarity and evidence revision
+
+Overleaf commit `253ac00` contains the revised 147-page thesis. All five
+chapters use consistent model terms and connected plain prose. The abstract
+includes patient/event counts and predictive effect estimates. Results explain
+calibration and explanation stability and give paired comparator and robustness
+estimates. A summary table connects RQs and H1/H2/H3a/H3b to their final evidence.
+The original failures, incomplete contrasts and post-hoc labels remain.
+
+Seven duplicate bibliography entries were consolidated, three direct primary
+sources added and 20 load-bearing citation claims checked. All 52 reporting
+subitems were considered without claiming certification. A new calibration
+figure displays stored fold means and SDs with partial coverage marked. All 42
+original generated outputs are unchanged; five additional summary files
+reproduce byte-identically from the saved aggregates. No model was fitted.
+The source Word report remains unchanged. A fresh source copy builds with no
+reference/citation or overflow errors; the full-page visual review found and
+resolved one orphan-word page. The current build and review receipt is
+`reviews/2026-10-21-thesis-conversion.json`.
+
 ## 2026-10-21 — thesis visual-coverage correction
 
 Overleaf commit `fc25b31` restores a full branched research-design

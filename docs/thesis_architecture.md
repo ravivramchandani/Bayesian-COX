@@ -2,7 +2,8 @@
 
 Current draft: the owner authorised preserving Ravi's complete report in LaTeX
 and replacing the Overleaf version on 2026-10-21. All chapters and appendices
-now exist with regenerated results; see
+now exist with regenerated results and the full clarity/coherence revision.
+The current PDF has 147 pages; see
 `coordination/reviews/2026-10-21-thesis-conversion.json`. The current structure
 retains source appendices A–J and adds reproducibility appendix K. The table
 below preserves the earlier planning budget, not a claim about current length.
@@ -28,7 +29,7 @@ explanation gate stay visible.
 | Abstract | State the question, design, strongest supported findings and limits. Avoid a winner claim. | Locked claim ledger and final results chapter. | 250–300 words, separately counted |
 | Chapter 1: Introduction | Define the prediction problem, gap, questions, contribution and scope. State that this is retrospective multi-cohort benchmarking, not clinical deployment or external validation. | Frozen protocol; source-bounded cohort descriptions; locked claim ledger. | 2,000 (1,800–2,200) |
 | Chapter 2: Literature review | Cover survival prediction, Bayesian coefficient priors, comparator models, calibration and explanation measures; position the contribution without a “first study” claim. | Verified bibliography; protocol and permitted novelty wording. | 6,000 (5,000–7,000) |
-| Chapter 3: Methodology | Specify cohorts, eligibility, predictor timing, fold-local preprocessing, models, validation, metrics, diagnostics, inference, robustness, explanation analysis, ethics and reproducibility. | Frozen protocol/configuration, data manifest, exact lock, implementation and run manifests. | 5,000 (4,500–5,500) |
+| Chapter 3: Methodology | Specify cohorts, eligibility, predictor timing, fold-local preprocessing, models, validation, metrics, diagnostics, inference, robustness, explanation analysis and reproducibility. | Frozen protocol/configuration, data manifest, exact lock, implementation and run manifests. | 5,000 (4,500–5,500) |
 | Chapter 4: Results and discussion | Present the frozen results with failures and uncertainty, then answer each research question only at its supported strength. Keep primary, robustness and post-hoc evidence visibly distinct. | Rendered frozen result tables/figures, evidence manifest, claim ledger and review receipts. | 7,000 (6,000–8,000), approximately 4,000 results and 3,000 discussion |
 | Chapter 5: Conclusion | Summarise the supported methodological findings, limitations and next research steps without extending to clinical utility or deployment. | Chapter 4 and locked claim ledger. | 1,000 (800–1,200) |
 | Appendix A: Reproducibility | Record code, environment, data access, seeds, immutable manifests and reproduction commands. | Frozen environment and release manifests. | Separate from main-text budget |
@@ -38,10 +39,10 @@ The owner-approved main-text planning target is 21,000 words, with a planning ra
 18,100–23,900. The abstract and appendices are tracked separately. At the 7 October checkpoint, review estimates were approximately 1,880 words
 for the introduction, 6,180 for the literature review and 5,240 for methodology;
 results and conclusion were unfinished. Those counts and writing states are
-historical. The complete 21 October source-report conversion is longer than
-the earlier planning budget because the owner requested all substantive
-content be retained. Author/supervisor review should reconcile final length
-with the institution's actual requirements.
+historical. The 21 October revision retains the source topics while consolidating repeated
+prose. Its 147-page total includes front matter, tables, figures, appendices and
+references; page count is not a main-text word count. Author/supervisor review
+should reconcile final length with the institution's actual requirements.
 
 ## Owner-adopted planning convention
 

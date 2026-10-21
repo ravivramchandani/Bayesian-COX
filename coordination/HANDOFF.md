@@ -23,12 +23,25 @@ fields. The full manuscript compiles with resolved citations/references.
 The final commit/build receipt is in
 `coordination/reviews/2026-10-21-thesis-conversion.json`.
 
-The visual-coverage correction is pushed to Overleaf in commit `fc25b31`.
-The 159-page draft now has three native methodology diagrams: the branched
-research design (Figure 3.1, page 40), symbolic interval exposure (Figure 3.2,
-page 49), and diagnostic/remedy decisions (Figure 3.3, page 55). All 35 source
-figure topics were checked. The five result plots, 19 generated tables and
-accompanying numeric CSVs are unchanged and hash-verified.
+The revised report is pushed to Overleaf at `253ac00`. The current PDF
+has 147 pages, nine figures and 125 unique references. All five chapters were
+edited for plain language and a consistent argument. Results now include
+specific paired estimates, a calibration summary figure, a fixed-rule robustness
+display and an RQ/hypothesis summary table. Twenty load-bearing citation claims
+and all 52 TRIPOD+AI reporting subitems were reviewed within the stated scope;
+no full reporting certification is claimed. Seven duplicate reference entries
+were consolidated and three direct primary sources added.
+
+All 42 original generated evidence files retain their hashes. Five additional
+summary files reproduce the saved estimates without fitting; a fresh source
+copy builds without the SSD or model environment. The numeric review and final
+PDF/source hashes are in the review receipt above and the thesis repository's
+`conversion/report_revision_20261021.json`.
+
+Standing owner instruction for the manuscript: omit funding, competing-interest
+and ethics approval/exemption statements everywhere in the thesis, including
+appendices. Do not reinsert these sections from an earlier template or checklist.
+This is a content instruction, not a change to the underlying data or evidence.
 
 Ravi's next task is to review the full Overleaf draft, confirm the wording and
 resolve supervisor feedback; he does not need another model run. This technical

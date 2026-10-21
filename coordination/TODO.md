@@ -27,6 +27,13 @@ and independent numerical review are recorded in
 `reviews/2026-10-21-thesis-conversion.json` and the Overleaf repository's
 `conversion_manifest.json`.
 
+The full clarity/coherence revision is also complete: current PDF 147 pages,
+with a quantitative abstract, interpreted results, an RQ/hypothesis matrix,
+additional aggregate displays and deduplicated references. Author/supervisor
+acceptance is still pending. The owner explicitly excludes funding,
+competing-interest and ethics approval/exemption statements from the manuscript
+and appendices; do not add them as checklist requirements.
+
 T-150–T-156 now have complete draft material; their remaining author/supervisor
 acceptance and final length checks are not represented as obtained. T-157–T-161
 remain the full-draft review, revision, institutional audit and submission path.
@@ -498,7 +505,7 @@ or explanation stability.
 - [ ] T-152 (T, W2–6, owners R/SS; depends progressively T-101–T-131) — Draft
   methodology to match the frozen implementation. Acceptance: cohorts,
   eligibility, missingness, predictors, validation, equations, priors,
-  diagnostics, metrics, explainability, ethics and deviations are complete.
+  diagnostics, metrics, explainability and deviations are complete.
   The full methodology was updated on 2026-10-21 to the frozen code, exact
   validation, diagnostic implementation and current evidence. Recorded technical
   corrections are applied; author/supervisor acceptance remains.
@@ -522,9 +529,10 @@ or explanation stability.
   timing, missingness, PH, explanation and absence of clinical deployment. A complete discussion/conclusion draft was
   produced on 2026-10-21 and awaits author/supervisor acceptance.
 - [ ] T-155 (T, W9–10, owners R/DO; depends T-102/T-103/T-129) — Complete
-  reproducibility, ethics and data appendices. Acceptance: exact commands,
+  reproducibility and data appendices. Acceptance: exact commands,
   environment/hardware, seeds, manifests, access/licensing, diagnostic
-  supplements, data-availability wording and governance statements are present.
+  supplements and data-availability wording are present, following the owner's
+  manuscript-content exclusions above.
   Appendices now contain the production identities, exact source/release hashes,
   corrected diagnostic details and regeneration commands; final institutional
   wording and author/supervisor acceptance remain.

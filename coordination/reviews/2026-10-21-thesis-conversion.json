@@ -10,12 +10,12 @@
   },
   "thesis": {
     "repository": "https://www.overleaf.com/project/6a750f3e68075fe560b0c306",
-    "commit": "fc25b31a903a4ae8fad2aa62dcc3a4fd2d194341",
+    "commit": "253ac00ca34f1f14609ae107c0fcced829d09ef8",
     "previous_commit": "a5f026a165645638f4b202f7c7f427f7444e8914",
     "compiled_pdf": {
       "path": "Main.pdf",
-      "pages": 159,
-      "sha256": "fec103c8eb5cbb9f879b53ba3c63170ca33c1ca0b2973e97c58db4164814ab1a"
+      "pages": 147,
+      "sha256": "89522aa6f1b7bf5330f9a5a9862412e978289b31239196424c42c857307b6d86"
     },
     "source_map": "conversion_manifest.json",
     "generated_provenance": "generated/provenance.json"
@@ -31,14 +31,19 @@
     "original_references": 102,
     "supplemental_references": 27,
     "native_method_diagrams": 3,
-    "generated_result_plots": 5,
-    "manuscript_figures": 8
+    "generated_result_plots": 6,
+    "manuscript_figures": 9,
+    "final_unique_references": 125,
+    "duplicate_reference_entries_consolidated": 7,
+    "additional_direct_primary_sources": 3
   },
   "generated_outputs": {
-    "latex_evidence_tables": 19,
-    "vector_figures": 5,
-    "numeric_csvs": 17,
-    "output_artifacts": 42
+    "latex_evidence_tables": 21,
+    "vector_figures": 6,
+    "numeric_csvs": 19,
+    "output_artifacts": 47,
+    "original_outputs_unchanged": 42,
+    "new_report_summary_outputs": 5
   },
   "verification": {
     "latexmk": "passed",
@@ -52,15 +57,35 @@
     "source_cells_hash_verified": 1350,
     "source_report_tables_mapped": 16,
     "source_report_figures_mapped": 35,
-    "visual_review": "Prior full-manuscript review plus individually rendered and reviewed research-design, interval-exposure and diagnostic-decision diagrams; no text or connector overlaps.",
-    "generated_outputs_unchanged": 42
+    "visual_review": "All 148 pre-final pages reviewed on13 contact sheets plus detailed pages. Single-word pagination defect corrected; final 147-page abstract and changed pages independently rendered;70 downstream pages text-identical except footers.",
+    "generated_outputs_unchanged": 42,
+    "new_report_numeric_review": {
+      "secondary_rows": 27,
+      "estimable_secondary_rows": 21,
+      "unavailable_secondary_rows": 6,
+      "exact_secondary_effect_interval_values": 63,
+      "secondary_coverage_status_hash_and_missing_checks": 126,
+      "displayed_normal_reference_rows": 9,
+      "selected_information_rows": 12,
+      "exact_information_effect_interval_values": 36,
+      "bootstrap_count_comparisons": 24,
+      "source_cell_hash_checks": 450,
+      "calibration_mean_sd_count_values": 108,
+      "instrumented_plot_errorbars": 36,
+      "correct_partial_markers": 4,
+      "prose_review": "All quoted predictive means, calibration summaries, design/feature effects, intervals, failure counts and hypothesis decisions checked against saved evidence. No unresolved numerical findings."
+    },
+    "whole_report_coherence": "Independent read-only review of abstract and all five chapters; technical contradictions corrected.",
+    "citation_content_checks": 20,
+    "reporting_subitems_reviewed": 52
   },
   "fresh_checkout_build": {
     "status": "passed",
-    "inputs": "committed source and generated assets only",
+    "commit": "253ac00ca34f1f14609ae107c0fcced829d09ef8",
+    "inputs": "fresh source copy matching final committed manuscript and aggregate assets",
+    "pages": 147,
     "ssd_or_model_environment_required": false,
-    "commit": "fc25b31a903a4ae8fad2aa62dcc3a4fd2d194341",
-    "pages": 159
+    "offline_summary_rerender": "five outputs byte-identical"
   },
   "render_runtime": {
     "implementation": "CPython",
@@ -122,5 +147,24 @@
       "jargon": "passed",
       "make_test": "not runnable in rendering environment: Python 3.10.20 lacks datetime.UTC and scikit-survival; 49 import/collection errors, no test cases executed. No numerical code changed."
     }
+  },
+  "checkpoint_before_plain_language_revision": {
+    "commit": "fc25b31a903a4ae8fad2aa62dcc3a4fd2d194341",
+    "compiled_pdf": {
+      "path": "Main.pdf",
+      "pages": 159,
+      "sha256": "fec103c8eb5cbb9f879b53ba3c63170ca33c1ca0b2973e97c58db4164814ab1a"
+    }
+  },
+  "plain_language_revision": {
+    "report_record": "Overleaf: conversion/report_revision_20261021.json",
+    "citation_audit": "Overleaf: conversion/citation_claim_audit_20261021.json",
+    "reporting_review": "Overleaf: conversion/reporting_review_20261021.json",
+    "style": "Plain connected academic prose; standardised model terms; no em/triple dash in manuscript sources.",
+    "hypothesis_summary": "Added RQ1-RQ4 and H1/H2/H3a/H3b evidence/claim matrix.",
+    "new_calibration_plot": "Exact stored fold means and sample SDs; no model or calibration-curve fitting.",
+    "original_word_document_changed": false,
+    "owner_content_exclusions": "Funding, competing interests and ethics approval/exemption statements omitted throughout compiled thesis, including appendices.",
+    "full_model_test_suite": "Attempted as AGENTS.md requests; 49 collection/import errors in available Python3.10 rendering environment (datetime.UTC and absent scikit-survival). No model source changed. Do not report this suite as passing."
   }
 }
