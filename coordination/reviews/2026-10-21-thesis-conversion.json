@@ -10,12 +10,12 @@
   },
   "thesis": {
     "repository": "https://www.overleaf.com/project/6a750f3e68075fe560b0c306",
-    "commit": "253ac00ca34f1f14609ae107c0fcced829d09ef8",
+    "commit": "466209e675a3dd089be32ef1ef26f3203613e693",
     "previous_commit": "a5f026a165645638f4b202f7c7f427f7444e8914",
     "compiled_pdf": {
       "path": "Main.pdf",
       "pages": 147,
-      "sha256": "89522aa6f1b7bf5330f9a5a9862412e978289b31239196424c42c857307b6d86"
+      "sha256": "c52f09beefcd6db01aa3639b7ecb2435c4f9c87c84741e94c702d6408a2eb30f"
     },
     "source_map": "conversion_manifest.json",
     "generated_provenance": "generated/provenance.json"
@@ -166,5 +166,20 @@
     "original_word_document_changed": false,
     "owner_content_exclusions": "Funding, competing interests and ethics approval/exemption statements omitted throughout compiled thesis, including appendices.",
     "full_model_test_suite": "Attempted as AGENTS.md requests; 49 collection/import errors in available Python3.10 rendering environment (datetime.UTC and absent scikit-survival). No model source changed. Do not report this suite as passing."
+  },
+  "checkpoint_before_abstract_contribution_revision": {
+    "commit": "253ac00ca34f1f14609ae107c0fcced829d09ef8",
+    "compiled_pdf": {
+      "path": "Main.pdf",
+      "pages": 147,
+      "sha256": "89522aa6f1b7bf5330f9a5a9862412e978289b31239196424c42c857307b6d86"
+    }
+  },
+  "abstract_contribution_revision": {
+    "source_comparison": "Original Word abstract read directly; original source SHA-256 unchanged.",
+    "reason": "Owner found contribution understated.",
+    "change": "Abstract now leads with the integrated framework and restores posterior interpretation as a completed output. Includes the original and robustness evaluation scale; keeps current findings and limits. Detailed post-hoc accounting remains in the body.",
+    "scope": "Only PDF page 3 text changed; 147 pages total; all 47 evidence assets unchanged.",
+    "review": "Independent contribution/overclaim check passed; one-page layout reviewed; no build reference/citation or overflow errors."
   }
 }

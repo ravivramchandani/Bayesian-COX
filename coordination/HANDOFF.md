@@ -23,8 +23,11 @@ fields. The full manuscript compiles with resolved citations/references.
 The final commit/build receipt is in
 `coordination/reviews/2026-10-21-thesis-conversion.json`.
 
-The revised report is pushed to Overleaf at `253ac00`. The current PDF
-has 147 pages, nine figures and 125 unique references. All five chapters were
+The revised report is pushed to Overleaf at `466209e`. The current PDF
+has 147 pages, nine figures and 125 unique references. The abstract now leads
+with the integrated framework and completed posterior interpretation, following
+a direct comparison with Ravi's original Word abstract. Current quantitative
+findings and their limits remain. Only the abstract page changed in this update. All five chapters were
 edited for plain language and a consistent argument. Results now include
 specific paired estimates, a calibration summary figure, a fixed-rule robustness
 display and an RQ/hypothesis summary table. Twenty load-bearing citation claims

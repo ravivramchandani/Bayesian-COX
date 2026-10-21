@@ -1,5 +1,16 @@
 # JOURNAL
 
+## 2026-10-21 - abstract contribution framing
+
+Overleaf commit `466209e` revises the abstract after direct comparison
+with the unchanged original Word report. It restores the integrated framework
+and posterior coefficients, hazard ratios, credible intervals and directional
+probabilities as completed contributions. The evaluation scale, current
+predictive findings and explanation-stability result remain. Detailed post-hoc
+accounting stays in the body. Only PDF page 3 text changed; the report remains
+147 pages and all 47 evidence assets retain their hashes. Build and one-page
+layout checks passed, with an independent overclaim review.
+
 ## 2026-10-21 - full report clarity and evidence revision
 
 Overleaf commit `253ac00` contains the revised 147-page thesis. All five
