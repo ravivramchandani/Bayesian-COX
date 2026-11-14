@@ -1,0 +1,441 @@
+\chapter{Literature Review}
+\label{ch:literature-review}
+
+\section{Multimodal mock-interview scoring}
+
+Naim et al. introduced automated analysis of mock job interviews using verbal, vocal and visual
+behaviour~\cite{Naim2015}, then reported an expanded treatment of interview-performance
+prediction~\cite{Naim2018}. That work motivates the present corpus and feature boundary. It does
+not turn a crowd rating into an observed employment outcome. Related studies compare asynchronous
+and face-to-face communication-skill measurement~\cite{Rasipuram2016}. Automated video-interview
+personality assessments have separately been tested for reliability, validity and
+generalisation~\cite{Hickman2022}. Together, this literature makes construct validity central:
+prediction of a rater aggregate is evidence about agreement with that aggregate, not validation of
+hiring decisions.
+
+Employment-interview validity is conditional on what is asked, how responses are scored and
+which later criterion is tested. McDaniel et al.'s meta-analysis established a foundation for
+examining interview validity~\cite{McDaniel1994InterviewValidity}. Levashina et al. review the
+design and evidence for structured interviews~\cite{Levashina2014Structured}, while Wingate et
+al. estimate validity for distinct constructs rather than treating every interview rating as the
+same measure~\cite{Wingate2025ConstructValidity}.
+Re-estimates of personnel-selection validity also caution against carrying inflated summary
+coefficients into a new setting~\cite{Sackett2022Validity}. The supplied MIT label is an
+aggregate judgement about a mock interview, with no observed job-performance criterion.
+Consequently, even a perfectly reproduced predictive score would leave the employment-validity
+question open.
+
+The target is also an operational measure inside a social process, not the construct itself.
+Measurement theory distinguishes an abstract concept from its observed proxy
+~\cite{JacobsWallach2021}. Selbst et al. show how abstraction from an actual institution can
+conceal social context~\cite{Selbst2019}. Suresh and Guttag trace possible sources of harm across
+the machine-learning life cycle~\cite{SureshGuttag2021}. Studies of commercial hiring tools
+caution against accepting broad fairness claims without checking what is predicted and how it is used
+~\cite{Raghavan2020}. An external audit of hiring-related personality predictions examined
+stability~\cite{Rhea2022}, while an evaluation of algorithmic recruitment-video analysis found
+that accuracy and group disparity could coexist~\cite{Kochling2021}. Both concern different models,
+data and targets. They motivate the present audit but cannot make its crowd rating an employment
+outcome or turn its observed score gaps into evidence of deployed discrimination.
+
+Visual and vocal cues cannot simply be dismissed as noise or assumed to measure competence.
+DeGroot and Motowidlo examined their influence on interviewers' judgements and relation to job
+performance~\cite{DeGroot1999Cues}; a later meta-analysis synthesised evidence on nonverbal
+cues across interviews~\cite{MartinRaugh2023Nonverbal}. Human judgments can also contain implicit
+bias~\cite{Purkiss2006InterviewBias}, and criterion-related validity has varied among interviewers
+and panels~\cite{VanIddekinge2006Interviewers}. Those findings support a
+two-sided interpretation here: modality signal may help predict the recorded rater aggregate,
+while neither signal use nor rater agreement proves a fair, job-relevant construct. The MIT
+target audit assesses agreement among its outcome raters, but cannot establish which cues were
+valid predictors of later employment outcomes.
+
+The source of a rating is part of the measurement problem. In a study of video-interview
+personality assessments, Hickman et al. found that evidence of reliability and validity differed
+between models trained against interviewer reports and those trained against self-reports
+~\cite{Hickman2022}. That finding is not a performance benchmark for this study: personality and
+crowd-perceived hireability are different targets. Booth et al. likewise analyse multimodal
+hireability inference through a psychometric account of bias, drawing attention to the distinction
+between the behaviour recorded, the judgement elicited from a rater and the model that learns that
+judgement~\cite{Booth2021}. Consequently, a small error against the supplied rating would not, on
+its own, establish that the rating measures job-relevant ability or that a model should inform
+selection.
+
+Recent automated-assessment work has tested psychometric properties of specific video-interview
+competencies~\cite{Liff2024Competency} and the reliability, validity and bias of automated
+cognitive-ability assessments~\cite{Hickman2025Cognitive}. Another study examines the transfer
+of personality scores from low-stakes verbal data to high-stakes interviews
+~\cite{Stevenor2024HighStakes}. Booth et al. explicitly combine psychometric and computational fairness perspectives on
+automated video interviews~\cite{Booth2021Psychometrics}. This literature offers a standard
+for what stronger validation would require, not a surrogate validation dataset for the present
+crowd-perceived score. In particular, transfer from a low-stakes verbal task to a high-stakes
+interview is an empirical question rather than an automatic property of a trained encoder.
+
+Interview format also changes the social and measurement setting. Research on digital interviews
+examines applicant reactions and interviewer ratings~\cite{Langer2017DigitalInterviews}.
+Videoconference-interview research examines factors contributing to differences from
+face-to-face ratings and perceptions~\cite{Basch2021Camera}. For asynchronous interviews,
+Brenner et al. study the applicant's perspective~\cite{Brenner2016AVIReactions}; Lukacik et al.
+set out design and use questions~\cite{Lukacik2022AVIDesign}; and Suen et al. test how synchrony
+and AI framing affect ratings and attitudes~\cite{Suen2019SynchronyAI}.
+Applicant reactions to algorithmic rather than recruiter evaluation have also been studied
+~\cite{Oostrom2024ApplicantReactions}. These are deployment and format-validity concerns;
+the MIT mock-interview data cannot estimate those reactions or isolate a format effect.
+
+Gucluturk et al. model first impressions from short public videos with multimodal residual
+networks~\cite{Gucluturk2018}. Escalante et al. examine modelling, recognition and explanation
+of apparent personality from videos~\cite{Escalante2022}. They are discussed here only as
+adjacent literature. Their benchmark is not the study corpus, is not included in the analysis and
+does not supply targets or protected annotations for this thesis.
+
+The MIT material has also supported a distinct multimodal feedback task. Agrawal et al. used its
+69 candidates and 138 pre/post interviews to classify behavioural ratings such as engagement,
+speaking rate and eye contact~\cite{Agrawal2020}. This is a closer data precedent than a generic
+video benchmark, but its classified cues are not this thesis's continuous
+\emph{RecommendHiring} outcome and its reported accuracy is not a directly comparable baseline.
+Other automated-interview systems have been evaluated on separately collected online interviews
+~\cite{Chen2017}, with window-consistency multimodal scoring for asynchronous video
+~\cite{Lv2024} and psychometric analysis of asynchronous interview ratings
+~\cite{Koutsoumpis2024}. Their differing interview formats, targets and populations motivate
+comparison of measurement choices rather than numerical
+ranking against the present 69-person corpus.
+
+Earlier computational studies illustrate why the interview setting is not a single prediction
+task. Nguyen et al. related nonverbal behaviour in employment interviews to evaluators'
+hirability judgements~\cite{Nguyen2014HireMe}; Chen et al. scored one-way monologues
+~\cite{Chen2016Monologue}; and HireNet modelled questions in asynchronous applications
+~\cite{Hemamou2019HireNet}.
+These studies differ in who judges the interview, which behaviours are available and whether the
+target is a score or a recruiter decision. Their model accuracies cannot be imported as evidence
+that the present crowd rating measures job performance. A closer recent MIT comparison uses
+pretrained transformers and facial embeddings alongside a second interview corpus
+~\cite{Fithian2025}; its cross-context results help frame modality dependence, but do not
+replicate this thesis's frozen-feature, proxy-group or audited-disparity design. Transfer from
+interviews to oral-presentation assessment has likewise been examined in a related small-data
+setting~\cite{Tun2023Transfer}, not established for this thesis's outcome.
+
+Recording conditions are an additional measurement pathway. Controlled experiments with video
+interviews found that audiovisual quality changed assessments of candidates
+~\cite{Fiechter2018}. That finding makes lighting, framing and sound quality plausible
+nuisance factors in visual and audio representations; it does not establish that they caused
+any observed gap in the MIT recordings. The appropriate response here is to state the input
+boundary and avoid interpreting a representation cluster as an applicant attribute.
+
+\section{Multimodal representation learning}
+
+Modern frozen encoders permit a small study to reuse large-scale representation learning without
+fine-tuning millions of parameters. DINOv2 produces general-purpose visual representations
+~\cite{Oquab2024}; WavLM learns speech representations from self-supervised pretraining
+~\cite{Chen2022WavLM}; MPNet combines masked and permuted pre-training
+~\cite{Song2020MPNet}; Sentence Transformers describes the sentence-embedding framework
+~\cite{Reimers2019}, and the exact contrastively tuned MPNet-based checkpoint used here has its
+own model record~\cite{SentenceTransformersAllMPNet2025}. Their scale does
+not eliminate dataset limitations. Encoder lineage, input selection and pooling can encode
+appearance, active-interval mixed-speaker acoustic and linguistic correlates unrelated to the intended score
+construct.
+
+The choice of frozen features and a small fitted head has methodological precedent, not a
+guarantee of superiority. Kornblith et al. examine transfer of image-model representations
+~\cite{Kornblith2019Transfer}; Tian et al. study simple baselines in few-shot classification
+~\cite{Tian2020FewShot}. Both make the target domain and evaluation design important. Those
+image-classification results do not measure DINOv2 performance on candidate-face crops or
+justify transferring their accuracy estimates to continuous interview scoring.
+
+The present design therefore freezes all three encoders, stores their exact revisions and uses a
+small, shared downstream backbone. Fresh representations are the primary inputs. Corpus-supplied
+facial, SHORE and prosodic features are retained for coverage checks and secondary explanations,
+not silently mixed into the primary model.
+
+Fusion architectures in neighbouring multimodal work include tensor interactions
+~\cite{Zadeh2017TFN} and gated units~\cite{Arevalo2017GMU}. A later survey also covers
+attention- and sequence-based approaches~\cite{Zhao2024}. Their capacity and temporal alignment
+assumptions are not interchangeable with this study's
+low-capacity, fixed-fusion scorer. Changing the fusion mechanism would also change capacity and
+alignment in the proxy-versus-sampling comparison on only 69 independent participants. The fixed
+backbone is an experimental control, not a claim that simple fusion is generally optimal.
+
+The three inputs also have different evidential boundaries. A candidate-face crop is an appearance
+measurement, the candidate-only transcript is a selected record of speech content, and the
+active-interview audio includes both candidate and interviewer speech. A frozen encoder cannot
+separate these sources merely because its parameters are fixed. This matters when an apparent
+modality effect is interpreted: an audio-derived cluster may reflect the interviewer or recording
+conditions as well as the candidate. The present work therefore treats modality diagnostics as
+evidence about these representations, not as proof of a participant trait.
+
+Nor does freezing make an embedding socially neutral. Soft-biometric information has been
+recovered from face-recognition embeddings~\cite{Terhorst2021SoftBiometric}. Gender and language
+signals have been studied in pretrained speech representations~\cite{Guillaume2024Speech}.
+Association tests have exposed biases or measurement problems in sentence embeddings
+~\cite{May2019SentenceBias} and contextual word embeddings~\cite{Kurita2019ContextBias}.
+These papers concern different face, speech and text models from DINOv2, WavLM and MPNet. They
+motivate caution about possible encoded cues, not a claim that the exact frozen checkpoints
+used here leaked any particular attribute at a measured rate.
+
+\section{Fairness evidence with and without demographic labels}
+
+Fairness-aware video-interview research has documented performance and score differences across
+annotated groups~\cite{Booth2021}. Kim et al. evaluate mitigation with an observed sensitive
+label~\cite{Kim2023}. Hemamou et al. use indirect facial signals in an adversarial interview
+model~\cite{HemamouIndirect2021}; Putra et al. adapt adversarial reweighting to multimodal
+interview assessment~\cite{Putra2024}. These studies establish relevant methods, but they do not
+make a demographic-free intervention equivalent to a protected-group intervention.
+
+There is a longer methodological lineage behind these comparisons. Fair representations seek to
+retain task information while limiting association with a designated sensitive variable
+~\cite{Zemel2013}. Gradient reversal was developed for domain-adversarial training
+~\cite{Ganin2015}; adversarial censoring seeks to remove a designated signal from a
+representation~\cite{Edwards2016}, and adversarial fairness objectives explicitly target
+unwanted bias~\cite{ZhangBL2018}. These approaches clarify what the present study does
+\emph{not} assert: a cluster fitted without a sensitive label is
+not evidence that a sensitive variable has been removed from the representation. Prior work on
+multimodal apparent-personality assessment has also evaluated bias-mitigation strategies on
+different annotated video corpora~\cite{Yan2020}; its results remain adjacent evidence, not an
+MIT-specific fairness result.
+
+The distinction is visible in the objectives. Kim et al. optimise a Wasserstein score-distribution
+penalty and an adversarial representation objective using an available binary sensitive-attribute
+annotation~\cite{Kim2023}. Hemamou et al. instead use face representations as indirect adversarial
+targets without collecting the sensitive attribute for training, then evaluate recoverability
+against labelled groups~\cite{HemamouIndirect2021}. Neither procedure is the experiment here:
+the present W1 penalty uses clusters fitted separately from visual or interview-audio features,
+and the perceived-attribute labels are withheld until the ordinary predictions are fixed. The
+comparison borrows a distributional objective, not another study's protected-group estimand,
+architecture or empirical result.
+
+For regression, fairness definitions and reduction-based algorithms specify
+the quantity constrained and the sensitive attribute observed~\cite{Agarwal2019FairRegression}.
+Zhao examines the costs and benefits of fair regression under an explicit fairness objective
+~\cite{Zhao2023FairRegression}. Petersen et al. examine fairness assessment for risk-score
+models~\cite{Petersen2023RiskScores}; Corbett-Davies et al. show more broadly how the choice of
+measure can misstate fairness~\cite{CorbettDavies2023}. Thus distributional parity, calibration,
+error balance and eventual decision rules are distinct questions.
+This thesis reports a continuous predicted-score contrast; it has no decision threshold,
+calibrated employment risk or observed job-performance criterion. Thus its W1 result is not a
+complete assessment of a hiring decision, even if the audited categories were measured without
+error.
+
+ARL searches for high-loss regions without demographic annotations by learning adversarial
+example weights~\cite{Lahoti2020}. It is an appropriate generic comparator because it does not
+require a hand-designed face or audio grouping. Kenfack et al. address scarce demographic
+annotations during model development~\cite{Kenfack2024}; Kallus et al. instead study disparity
+assessment when the protected class is unobserved in the main data~\cite{Kallus2022}.
+Putra et al. adapted ARL to continuous interview-score prediction, but their combined MSE+BCE
+variant rather than MSE alone was their strongest reported First Impressions system~\cite{Putra2024}.
+The present MSE comparator is therefore a disclosed architecture-controlled adaptation, not an
+exact reproduction.
+The key distinction in this thesis is temporal and operational: audit annotations may exist in a
+sealed store, but ordinary training and proxy construction behave as if those annotations do not
+exist.
+
+These label-scarce approaches address different information problems. Kenfack et al. study
+partially observed demographics and an uncertainty-aware classifier for missing sensitive
+attributes~\cite{Kenfack2024}. Kallus et al. examine what can be inferred about disparity when
+protected classes are unobserved in the main data but an auxiliary data source is available;
+proxy-based assessment can remain only partially identified~\cite{Kallus2022}. This study does
+not estimate a participant's protected identity from its clusters. Its narrower question is
+whether training without access to the supplied perceived-attribute annotations changes a later,
+directly joined descriptive audit. ARL supplies a distinct comparison because its high-loss
+example reweighting pursues worst-case predictive performance rather than parity between two
+preselected proxy score distributions~\cite{Lahoti2020}.
+
+The proxy-fairness literature is particularly useful for stating the missing implication.
+Constraining a surrogate group metric can affect an unobserved group only under assumptions
+about the surrogate's relation to the group and the objective
+~\cite{Gupta2018ProxyFairness}. Chen et al. assess disparity when the protected class is
+unobserved~\cite{Chen2019Unawareness}. Awasthi et al. study uncertain or incomplete group
+information~\cite{Awasthi2021Uncertain}, whereas Zhu et al. analyse weak proxies for missing
+sensitive attributes~\cite{Zhu2023WeakProxies}. Each makes its information requirements explicit.
+Robust methods for noisy protected groups also do not license substituting any convenient
+cluster for an audited category~\cite{Wang2020NoisyGroups}. The present visual and audio
+partitions are not imputed identities, and no theorem in these papers guarantees that their
+W1 regularisation will reduce the later perceived-attribute W1.
+
+Other demographic-free objectives target a different failure mode. Hashimoto et al. study
+repeated-loss minimisation for latent high-loss groups~\cite{Hashimoto2018}; Martinez et al.
+develop blind Pareto subgroup robustness~\cite{Martinez2021}. By contrast, this experiment
+constrains a two-cluster
+predicted-score distribution even if neither cluster has high error. Work on fairness
+assessment with proxies is closer to the final audit problem, but its assumptions likewise
+cannot identify this study's unlabeled clusters as actual demographic groups
+~\cite{Harvey2024Proxies}. These distinctions justify evaluating both utility and a separate,
+phase-aligned annotation audit rather than treating improvement of the training penalty as the
+fairness result.
+
+\section{Proxy groups and distributional regularisation}
+
+A proxy partition can identify a region of representation space over which to impose a training
+constraint. It cannot, by construction alone, identify gender, race, ethnicity or skin tone.
+Face and interview audio may capture identity, the interviewer's contribution, recording
+conditions, speaking style or other nuisance
+variation. The thesis therefore calls the learned clusters \emph{proxy groups}, assigns neutral
+identifiers, repeats construction within each training fold, and prohibits choosing a proxy by
+post-hoc agreement with audit annotations.
+
+Transfer from proxy parity to an audited category is a hypothesis, not a property of clustering.
+The proxy and the perceived-attribute axis partition participants differently. Equal score
+distributions across one partition can coexist with unequal distributions across the other;
+reducing proxy W1 therefore gives no guarantee of reducing the audited disparity. A
+sampling-only model matched to each visual or audio partition separates the effect of balanced
+training batches from the additional W1 penalty. The fixed random partition tests whether an
+apparent benefit depends on input-derived grouping rather than an arbitrary partition. None of
+these controls identifies a cluster as a demographic class.
+
+Wasserstein distance is useful for continuous predictions because it compares complete empirical
+score distributions rather than a single threshold. Kim et al. apply a distributional objective
+to continuous interview scores~\cite{Kim2023}; Yoon et al. study score-distribution alignment
+for threshold-robust fair classification~\cite{Yoon2020}. For two empirical distributions with
+quantile functions $F^{-1}_a$ and $F^{-1}_b$, the one-dimensional distance is
+\begin{equation}
+    W_1(F_a,F_b)=\int_0^1\left|F^{-1}_a(u)-F^{-1}_b(u)\right|\,du.
+\end{equation}
+In training, the distance is computed across a proxy partition. In the final audit, it is computed
+across reportable perceived-attribute groups. These are different variables and must never be
+conflated.
+
+The one-dimensional integral is grounded in the classical CDF identity for Wasserstein
+distance~\cite{Vallender1974}. Jiang et al. study score-distribution matching for
+observed-group classification~\cite{Jiang2020Wasserstein}; Chiappa et al. develop a broader
+optimal-transport fairness formulation~\cite{Chiappa2020OT}. For continuous outcomes, Chzhen et
+al. study group-conditioned barycentres~\cite{Chzhen2020Barycenters} and then
+recalibration~\cite{Chzhen2020Recalibration}.
+The latter papers assume an observed, meaningful sensitive grouping. They help explain the
+choice of a continuous-distribution statistic, but their statistical guarantees do not carry
+over to independently learned, unlabeled visual or audio clusters.
+
+For a binary grouping, the same one-dimensional W1 is the integrated absolute difference in
+selection rates over all possible score thresholds. Kim et al. use this score-distribution
+criterion for interview assessment~\cite{Kim2023}; Yoon et al. relate it to threshold-robust
+classification fairness in a domain-transfer setting~\cite{Yoon2020}. It is still an
+unconditional score-distribution comparison. It does not measure whether the model's errors or
+residuals are similar across groups, nor does it measure an actual hiring decision. Different
+fairness criteria address different aspects of a test and its use. Hutchinson and Mitchell
+trace this issue through the history of test fairness~\cite{Hutchinson2019}; Verma and Rubin
+compare the technical definitions that need not agree~\cite{Verma2018}. A nearly constant score
+could narrow a distributional gap while
+destroying useful prediction. Accordingly, the present study reports predictive utility and
+groupwise error diagnostics alongside disparity, without treating lower W1 as a complete fairness
+verdict. The multicategory audit also retains its categories rather than forcing them into the
+binary form required by the training penalty.
+
+Marginal parity can also conceal variation across intersections of attributes, the concern
+formalised by subgroup-fairness research~\cite{Kearns2018}. This thesis does not estimate
+intersectional effects: 69 independent post participants and sparse categories make that a
+different, inadequately supported estimand. Reporting the available axes separately is a
+transparent scope choice, not a claim that all relevant subgroups have been audited.
+
+In personnel selection, statistical parity also has to be read beside the validity of the
+selection measure and the possibility of subgroup differences in that measure
+~\cite{Ployhart2008}. This thesis neither observes selection decisions nor validates job
+performance. A broad survey maps bias and fairness across machine learning
+~\cite{Mehrabi2021}; a more focused survey catalogues in-processing interventions
+~\cite{10.1145/3551390}. Neither catalogue of
+metrics resolves which construct the supplied crowd rating measures or whether a proxy partition
+corresponds to an applicant group.
+
+\section{Perceived attributes are audit constructs}
+
+Many face datasets attach demographic-style labels to images; FairFace is a prominent example
+~\cite{Karkkainen2021FairFace}. Such taxonomies are dataset-specific and visual labels cannot
+establish a person's self-identified gender or ethnicity. The available audit source in this
+study contains one observer's session-level perceptions of gender presentation, racialised
+appearance and skin tone. The analysis preserves those source judgements, uses them only in
+phase-aligned comparisons and treats ``cannot determine'' as unknown. Skin-tone annotation is
+subjective and sensitive to imagery, lighting and annotator experience; evidence supporting
+diverse annotators and higher replication therefore defines a limitation of this single-observer
+source and an important direction for external validation~\cite{Schumann2023}.
+
+The history of automated facial classification makes the measurement boundary consequential.
+Gender Shades demonstrated intersectional accuracy disparities in commercial gender
+classifiers~\cite{BuolamwiniGebru2018}. Scheuerman et al. examined how facial-analysis systems
+assign gender categories~\cite{Scheuerman2019}; Khan and Fu examined how computer-vision
+datasets construct racial labels~\cite{KhanFu2021}. Those studies do not measure the MIT outcome,
+but they
+undermine an interpretation of a visual or model-assigned category as self-reported identity.
+The binary F/M entries observed in this source are a single rater's perceived presentation,
+not evidence that all participants' identities are binary.
+
+Schumann et al. studied a different, ten-category skin-tone instrument; their evidence supports
+the caution about annotation conditions and replication, not the validity of this study's
+project-defined five-point codes~\cite{Schumann2023}. Here the supplied labels come from one
+observer, and each applies to a particular session. Their pre/post differences cannot be used as
+inter-rater agreement or collapsed into a fixed participant identity. Participant-level bootstrap
+intervals can quantify sampling uncertainty in the audited sample, but cannot recover the
+unmeasured disagreement that independent raters might have shown. Phase-aligned joins and
+sparse-category suppression keep the numerical audit faithful to what was actually annotated;
+they do not repair its measurement limits.
+
+Barrett et al. document how image context and annotator judgement affect skin-tone
+annotations~\cite{Barrett2023}. Krishnapriya et al. compare manual and automated assignments
+~\cite{Krishnapriya2022}, while Howard et al. examine the agreement of image-based and
+self-reported skin phenotype~\cite{Howard2021}.
+More recent colorimetric work offers a different instrument for improving annotation
+~\cite{Cook2025}. None retrospectively validates the project-defined five-point visual
+scale, and it must not be renamed as a Fitzpatrick or Monk scale. Guidance on releasing
+annotator-level information reinforces the need to report the source and subjectivity of the
+single available rater~\cite{Prabhakaran2021}; it does not create inter-rater evidence that
+was never collected.
+
+These labels support a bounded disparity audit of model scores. They do not support claims about
+true identity, discrimination experienced by participants, legal compliance or equitable hiring.
+
+\section{Dependent observations and small-sample evaluation}
+
+The unit of generalisation is a participant, not an interview file. Cross-validation for
+correlated data requires accounting for dependence~\cite{RabinowiczRosset2022}; repeated
+measurements from one person can likewise make session-level train/test splits answer an easier,
+different question~\cite{Saeb2017}. The study's participant-grouped folds prevent a
+candidate's pre interview from entering training while the same candidate's post interview is
+tested. These sources justify the dependence boundary; they do not independently verify the
+correctness of this corpus's source-to-participant mapping.
+
+Uncertainty must respect that same unit. Cluster-bootstrap theory treats whole clusters as the
+resampling units~\cite{FieldWelsh2007}; a comparison of internal-validation bootstrap schemes
+examines the consequences of clustering in risk models~\cite{Bouwmeester2013}. The
+participant-cluster intervals in this
+thesis quantify variation under its chosen resampling procedure. They do not cover annotation
+disagreement, an alternative applicant population or unmeasured recording effects. Small-sample
+cross-validation can produce large error bars~\cite{Varoquaux2018}; fold-to-fold variance is not
+a general unbiased estimator of $K$-fold uncertainty~\cite{BengioGrandvalet2004}. This is why the
+reported seed range, paired contrasts and intervals are interpreted together rather than
+declaring a winner from one split.
+
+Model selection on noisy validation estimates can itself bias the reported performance
+~\cite{CawleyTalbot2010}. A fixed fit matrix reduces opportunities for retrospective
+choice within an experiment. It does not make a follow-up independent of previously
+inspected results. The original comparison, its audit-informed MIT extension and the
+independent-corpus analysis therefore require distinct interpretations. These design
+safeguards do not prove external validity or remedy a small participant sample.
+
+Sparse intersectional cells can be evaluated with structured estimators, but this thesis did
+not fit such a model~\cite{Herlihy2024}. Small-group disparity estimates and even the metrics
+used to summarise them may be noisy or biased~\cite{Lum2022}. Simultaneous inference procedures
+have been developed for multiple fairness-audit claims~\cite{CherianCandes2024}; the present
+participant-percentile intervals are descriptive and are not simultaneous coverage guarantees
+for every configuration-by-axis comparison. The predeclared primary contrasts therefore carry
+more interpretive weight than ranking the 99 reported post-session point summaries.
+
+\section{Research gap}
+
+The gap addressed here is the empirical link between three questions that are often
+conflated: whether a predictor works, whether a proxy constraint changes held-out scores,
+and whether that change benefits independently audited groups. The original MIT
+comparison isolates visual- and audio-proxy W1 from matched sampling controls. Random
+proxies, adversarial reweighting and an annotation-supervised comparator provide
+additional diagnostics. The linear follow-up tests the mechanism on a competitive
+scorer, reports every declared penalty strength and separates training from held-out
+proxy response. This contributes controlled explanatory evidence rather than a new
+fairness metric or a claim that proxy parity solves hiring fairness.
+
+The independent AVI-Personality corpus supplies a complementary interview context with
+recruiter-rated outcomes and self-reported attributes~\cite{Zhang2026AVI}. That source
+distinction permits external prediction and group-error analysis, but not an assumption
+that an observer's appearance code and a participant's self-report measure the same
+construct. A descriptive external baseline is also different from an independent
+replication of the W1 intervention. The research questions preserve those boundaries
+instead of pooling incompatible ratings or treating access to another corpus as
+evidence of mitigation.
+
+The provenance record is part of that contribution. Model cards call for explicit intended use
+and evaluation reporting~\cite{Mitchell2019ModelCards}; datasheets document a dataset's
+collection and limitations~\cite{Gebru2021Datasheets}. The sealed stages, source
+mapping, annotation provenance and bounded claim ledger make these bounded empirical findings
+inspectable. Documentation cannot itself validate the target or generalise the findings, but
+it makes the limits of the study traceable.

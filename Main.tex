@@ -1,0 +1,178 @@
+% Master's thesis manuscript. Compile with:
+% pdflatex Main && bibtex Main && pdflatex Main && pdflatex Main
+
+\documentclass[12pt,a4paper]{report}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{setspace}
+\usepackage{xurl}
+\usepackage[hidelinks, hypertexnames=false,
+  pdftitle={Proxy-Group Regularisation and Audited Perceived-Attribute Disparity in Multimodal Mock-Interview Scoring},
+  pdfauthor={Deepa Singh}]{hyperref}
+\usepackage{tocbibind}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{parskip}
+\usepackage{adjustbox}
+\usepackage{placeins}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\makeatletter
+\def\theHALG@line{\thealgorithm.\arabic{ALG@line}}
+\makeatother
+\usepackage{cleveref}
+\renewcommand{\baselinestretch}{1.5}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\usepackage[en-GB]{datetime2}
+\DTMlangsetup[en-GB]{ord=omit}
+
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\bibname}{References}
+
+\begin{document}
+    % Cover Page
+    \pagenumbering{gobble}
+    \begin{titlepage}
+        \begin{center}
+            % \includegraphics[width=0.22\textwidth]{<institution-logo>.png}
+            % \\[0.4cm]
+            \textbf{\Large Unitec Institute of Technology}\\
+            \vspace{0.6cm}
+            \textbf{\Large Master's Thesis}
+
+            \vspace{0.6cm}
+            \HRule \\[0.3cm]
+            {\textbf{\LARGE Proxy-Group Regularisation and Audited Perceived-Attribute Disparity in Multimodal Mock-Interview Scoring}}\\[0.3cm]
+            \HRule
+
+            \vspace{0.8cm}
+            \textbf{\large Deepa Singh}\\
+            \textbf{Student ID: 1608536}
+
+            \vspace{0.6cm}
+            \textbf{Supervisor: Ali Keivanmarz}\\
+
+            \vfill
+
+            A thesis submitted in partial fulfilment of the requirements\\
+            for the degree of \textbf{Master of Applied Technologies}
+
+            \vspace{0.5cm}
+            \textbf{December 2026}
+        \end{center}
+    \end{titlepage}
+
+
+    % === Front Matter (Roman: i, ii, iii...) ===
+    \clearpage
+    \pagenumbering{roman}
+    \setcounter{page}{1}
+
+    \chapter*{Abstract}
+    \addcontentsline{toc}{chapter}{Abstract}
+    \begin{spacing}{1.1}
+    This thesis examines whether Wasserstein-1 regularisation across groups learned from
+    visual or audio representations changes later-audited group disparity while preserving
+    useful interview-score prediction. It connects prediction validity, the response of the
+    proxy penalty and transfer to audited attributes. The evidence includes the MIT Interview
+    corpus's 138 recordings from 69 participants and AVI-Personality's independent set of
+    646 participants with 644 available recruiter-rated outcomes. Neither corpus observes
+    hiring decisions or subsequent job performance.
+
+    Frozen DINOv2, WavLM-Base+ and MPNet representations support participant-grouped MIT
+    comparisons. An initial neural experiment separates balanced sampling from its additional
+    proxy penalty. A subsequent exploratory linear study evaluates natural and balanced
+    exposure with three fixed penalty strengths. One observer's perceived attributes are used
+    after prediction fitting; 69 post-interview annotations form the primary audit and
+    57 pre-interview annotations a separate sensitivity. AVI-Personality supplies video/audio
+    participant features and a distinct self-reported-group error audit.
+
+    The original learned models underperformed ridge references, and the additional W1 term
+    reduced ranking utility relative to matched sampling controls. The linear follow-up starts
+    from a working ridge-equivalent predictor with pooled Spearman correlation 0.418 and
+    normalised mean absolute error 0.089. At penalty strength 0.02, visual-proxy W1 fell from
+    0.045 to 0.035 on held-out groups. Post-session perceived-gender score disparity fell from
+    0.049 to 0.029, but its paired gain interval included zero. Comparable improvements did
+    not extend uniformly across the other perceived axes. The independent AVI ridge analysis
+    achieved mean absolute error 0.419 against a training-mean reference of 0.479 on its
+    original 1--5 scale.
+
+    A matched fifteen-arm comparison on those independent participants then tested the
+    intervention directly. At the primary strength it changed original-scale error by 0.002,
+    rank correlation by $-0.018$ and the audited gender score gap by 0.001, with every
+    interval containing zero. Separating training from held-out proxy response showed why:
+    the visual penalty collapsed the training proxy gap from 0.021 to below 0.001 while leaving
+    the held-out gap at 0.031 against a control value of 0.032. The audio proxy constraint did
+    generalise, reducing the held-out proxy gap from 0.074 to 0.023, and still produced no
+    demonstrable disparity benefit while raising error by 0.034 and lowering rank correlation
+    by 0.178. Because the external baseline had already been inspected, this comparison is
+    exploratory on independent people rather than confirmatory.
+
+    The findings show that a penalty can change held-out proxy-score distributions on a
+    competitive scorer without establishing a general audited-fairness benefit, and that a
+    proxy constraint which does transfer to new participants still fails to move the audited
+    gap. Validation-selected shrinkage reached its search boundary in every fold, leaving
+    predictions at roughly half the dispersion of the ratings and bounding the disparity
+    change any penalty could express; the absence of movement is therefore consistent both
+    with an ineffective method and with an insufficiently competitive scorer. They distinguish
+    single-observer perceptions from self-reported attributes and score parity from prediction
+    error. Small MIT group sizes, low outcome-rater agreement and different corpus constructs
+    limit generalisation. No result establishes demographic identity, hiring fairness or
+    employment-outcome validity.
+
+    \textbf{Keywords:} mock-interview assessment; multimodal learning; proxy groups;
+    perceived-attribute audit; crowd-perceived hireability; cross-fitting
+    \end{spacing}
+    \newpage
+
+    % Table of Contents
+    \tableofcontents
+    \newpage
+
+    % List of Tables
+    \listoftables
+    \newpage
+
+    % List of Abbreviations
+    \chapter*{List of Abbreviations}
+    \addcontentsline{toc}{chapter}{List of Abbreviations}
+    \begin{description}
+        \item[ARL] Adversarially Reweighted Learning
+        \item[ARI] Adjusted Rand Index
+        \item[AVI] Asynchronous Video Interview
+        \item[EM] Expectation Maximisation
+        \item[ERM] Empirical Risk Minimisation
+        \item[NMI] Normalised Mutual Information
+        \item[OOF] Out of fold
+        \item[SRCC] Spearman Rank Correlation Coefficient
+        \item[W1] Wasserstein-1 Distance
+    \end{description}
+    \newpage
+
+    % === Main Matter (Arabic: 1, 2, 3...) ===
+    \clearpage
+    \pagenumbering{arabic}
+    \setcounter{page}{1}
+
+    \input{chapters/introduction.tex}
+    \input{chapters/literature_review.tex}
+    \input{chapters/methodology.tex}
+    \input{chapters/results.tex}
+    \input{chapters/discussion.tex}
+    \input{chapters/conclusion.tex}
+
+    % References
+    \bibliographystyle{IEEEtran}
+    {\small
+        \bibliography{refs}
+    }
+
+    % Appendices
+    \appendix
+    \input{chapters/appendix_reproducibility.tex}
+
+\end{document}

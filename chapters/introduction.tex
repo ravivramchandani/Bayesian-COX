@@ -1,0 +1,106 @@
+\chapter{Introduction}
+\label{ch:introduction}
+
+\section{Problem and construct boundary}
+
+Recorded mock interviews contain language, vocal delivery and visual behaviour that can be used
+to predict how observers score a participant. Such prediction is scientifically useful only when
+the target is named accurately. The first study predicts the MIT Interview corpus's aggregate
+\emph{RecommendHiring} rating. That quantity is a crowd-perceived hireability judgement collected
+from recordings; it is not an employer decision, a measure of job performance, or evidence that an
+automated score is suitable for deployment. The original MIT Interview analysis introduced
+automated prediction from mock interviews~\cite{Naim2015}, and its extended analysis examined
+interview-performance prediction in more depth~\cite{Naim2018}. Comparisons of asynchronous with
+face-to-face interviews raise a separate question about communication-skill measurement
+~\cite{Rasipuram2016}; psychometric investigations of automated video-interview personality
+assessments raise distinct reliability, validity and generalisation questions
+~\cite{Hickman2022}.
+
+The scientific question is whether a model trained without demographic attributes can use
+regularisation across learned visual or audio groups to change disparity later observed across
+audited groups, at a stated predictive cost. Answering it requires three distinct checks:
+the underlying scorer must make useful predictions, the penalty must change the intended proxy
+quantity on held-out people, and that change must be evaluated against separately sourced audit
+attributes. A learned proxy is not a demographic identity. A visual judgement is not a person's
+self-identified gender or ethnicity. The thesis therefore separates the intervention, the
+held-out audit and the interpretation of each construct.
+
+\section{Study corpora and empirical sequence}
+
+The MIT Interview distribution contains 138 mock-interview sessions from 69 participants, each
+recorded before and after coaching. Media, transcript and aggregate-outcome records join at the
+source-session level. A corpus-wide identity check established the participant pairs and corrected
+a reciprocal numbering error in the post-session recordings for participants 32 and 33 before
+feature extraction or splitting. The observation is a session ($n=138$), while the independent
+generalisation and uncertainty unit is a participant ($n=69$). Both sessions remain together in
+every split. The primary target is the expectation--maximisation aggregate
+\emph{RecommendHiring} rating.
+
+The MIT representations use DINOv2~\cite{Oquab2024} for candidate-face crops and
+WavLM-Base+~\cite{Chen2022WavLM} for bounded mixed-speaker interview audio from the same
+active interval. MPNet supplies the text encoder's base~\cite{Song2020MPNet}; its sentence
+representation follows Sentence Transformers~\cite{Reimers2019}, using the fixed
+all-mpnet-base-v2 checkpoint~\cite{SentenceTransformersAllMPNet2025}.
+Only audited candidate transcript turns enter the text representation. The audio does not
+isolate the candidate and is not interpreted as a candidate-voice attribute.
+
+The original neural experiment supplies a diagnostic starting point. It compares proxy W1
+with an unchanged task-only model and proxy-matched sampling controls. A subsequent linear
+follow-up uses the same cached representations and participant folds to examine a competitive
+scorer, natural and balanced exposure, and the complete fixed penalty-strength grid. This
+follow-up was motivated by the original audit, so its hypotheses are exploratory even though
+perceived attributes remain excluded from fitting and selection.
+
+AVI-Personality supplies an independent interview setting with six question-response clips
+per participant and recruiter-rated outcomes~\cite{Zhang2026AVI}. The delivered release contains
+646 participants and 644 available primary interview-performance ratings. Its official split,
+participant-level video/audio features and self-reported gender source support a separate
+prediction and error audit. Transcripts and skin-tone annotations are absent from the received
+release. The different population, visual input boundary and rating construct prevent its raw
+scores from being pooled with MIT's crowd rating or described as an identical replication.
+
+\section{Research questions}
+
+\begin{description}
+    \item[RQ1] How predictable are the interview ratings for unseen participants after correcting
+    source pairing, examining outcome measurement and comparing competitive simple scorers?
+
+    \item[RQ2] Does increasing a proxy W1 penalty change held-out proxy-score disparity beyond
+    the effect of balanced exposure, and what happens to predictive error and ranking?
+
+    \item[RQ3] Do proxy changes transfer to phase-matched perceived-group score disparity or
+    group errors, given single-observer annotation and sparse-category uncertainty?
+
+    \item[RQ4] What prediction and group-error evidence is obtained in an independent interview
+    corpus with different rating and attribute sources, and which conclusions remain
+    specific to the MIT experiment?
+\end{description}
+
+These questions organise the thesis synthesis; they do not retrospectively make follow-up
+analyses part of the original fixed design. Original contrasts remain separately reported.
+The paired MIT recordings additionally support descriptive analysis of observed and predicted
+post-minus-pre change. Without a randomised untreated comparison group, those differences
+cannot identify a causal coaching effect.
+
+\section{Study contributions}
+
+The contributions form one connected argument. First, the thesis establishes a mock-interview
+benchmark for unseen participants with an explicit pairing correction and outcome-reliability audit.
+Second, it identifies the adverse incremental utility effect of adding W1 to matched sampling
+controls in the original model. Third, a working linear follow-up tests the proxy mechanism
+across the fixed strength grid and distinguishes held-out proxy response from uncertain transfer
+to perceived-group disparities. Finally, independent video/audio prediction and self-reported-group
+error results show how the inference changes with the corpus and rating construct. Separate
+model and audit inputs support these comparisons as validity safeguards, rather than as the
+headline research contribution.
+
+The thesis does not claim that a learned proxy represents a protected class, that visual
+annotations recover identity, or that distributional parity alone establishes hiring fairness.
+
+\section{Thesis structure}
+
+Chapter~\ref{ch:literature-review} reviews the relevant literature.
+Chapter~\ref{ch:methodology} distinguishes the original design, exploratory linear follow-up and
+independent-corpus analysis. Chapter~\ref{ch:results} reports prediction, proxy manipulation and
+audited-group evidence in that order. Chapters~\ref{ch:discussion}--\ref{ch:conclusion} answer the
+research questions and identify the limits of the conclusions.

@@ -1,0 +1,648 @@
+\chapter{Methodology}
+\label{ch:methodology}
+
+\section{Analysis principle}
+
+The design separates the original MIT experiment, an exploratory linear follow-up and an
+independent-corpus prediction study. The original model configurations and contrasts were
+fixed before the perceived-attribute audit. Its findings subsequently motivated the linear
+follow-up, which therefore cannot be interpreted as a prospectively independent confirmation.
+Audit attributes remained outside ordinary fitting and selection in both analyses. The first
+sections describe the original design; the later sections state the changes used in the
+follow-up and independent corpus. Their distinct units, outcome scales and summaries are
+retained in the Results.
+
+\section{Dataset contract}
+
+\subsection{Units, identifiers and target}
+
+The authorised MIT Interview distribution contains 138 raw audiovisual source sessions: 69 with
+the \texttt{P} prefix and 69 with the \texttt{PP} prefix. Video, audio, transcript and aggregate-
+outcome records join one-to-one under the raw source-session identifier. Filename numbers are not
+treated as intrinsic participant identity. The approved canonical-to-source mapping defines 69
+participant pairs. Canonical \texttt{P32} loads source \texttt{P32}, canonical \texttt{PP32}
+loads source \texttt{PP33}, canonical \texttt{P33} loads source \texttt{P33}, and canonical
+\texttt{PP33} loads source \texttt{PP32}. The completed corpus-wide audit confirms that all other
+rows are identity mappings. Raw identifiers and files remain
+unchanged.
+
+This correction was established before participant grouping, feature extraction, proxy
+construction or paired analysis. The mapping preserves session phase and uniquely matches all
+138 source recordings to the 69 participant pairs. The face audit covers 138 sessions and the
+identity audit covers all 69 pairs. A valid primary-analysis row requires a
+readable video, readable audio, non-empty supplied transcript, one aggregate rating row, its raw
+source-session identifier and its canonical participant/session keys.
+
+The primary target is the expectation--maximisation aggregate value for
+\emph{RecommendHiring}:
+\begin{equation}
+    y_{is}=\frac{\text{AGGR RecommendHiring}_{is}-1}{6}.
+\end{equation}
+The documented 1--7 rating is therefore mapped to $[0,1]$. It is called
+\emph{crowd-perceived hireability} throughout. Individual-rater rows and the other
+rating dimensions may describe measurement reliability or support explicitly secondary analyses;
+they do not replace the primary target after results are known.
+
+Measurement quality is audited before scorer interpretation. Ordinal Krippendorff alpha is
+computed over individual \emph{RecommendHiring} ratings with sessions as units and workers as
+raters. The EM aggregate is compared with the unweighted per-session mean using Pearson and
+Spearman association plus raw-scale absolute error. These checks describe target reliability; they
+do not tune the target or model.
+
+The supplied inventory establishes 138 matched audio/video records, 138 aggregate ratings and
+138 non-empty transcripts. Before modelling, the data checks confirmed these joins, the 69
+participant pairs and modality completeness. Any unresolved source discrepancy would exclude
+the affected analysis row rather than be filled by assumption.
+
+\subsection{Pre/post interpretation}
+
+The pre/post indicator is not used to suggest randomisation. Primary models predict sessions from
+both phases. Supplementary tables report paired participant differences in observed ratings and
+locked OOF predictions. These estimates are descriptive associations. They cannot identify a
+causal effect of counselling because the corpus has no randomised untreated comparison group and
+time is confounded with intervention exposure.
+
+\subsection{Permitted legacy features}
+
+The supplied facial and SHORE tables have known missingness or truncation in some sessions, while
+the prosody files require schema correction. They are excluded from primary model inputs. Their
+permitted uses are (i) verifying duration and coverage, (ii) documenting quality failures, and
+(iii) predeclared secondary explanations that are clearly separated from the fresh-encoder
+results. In particular, they cannot be used as a fallback when a primary modality fails.
+
+\section{Modality representation boundaries}
+
+\begin{sloppypar}
+Visual and text inputs are candidate-only. Audio is a bounded sample of mixed-speaker interview
+context containing participant and interviewer. A single outcome-blind, candidate-presence-based
+active interval governs visual and audio sampling.
+\end{sloppypar}
+
+\begin{description}
+    \item[Visual input.] The full video recording is scanned at one
+    hertz with the pinned SCRFD-10GF detector~\cite{Guo2022SCRFD}. At each second, the operational
+    candidate is the unique most-central detection: its centre must lie within 0.35 frame diagonals
+    of the frame centre and, when another face is present, must lead the runner-up by at least 0.05
+    frame diagonals. The first valid second must occur within 30 seconds. Starting there, the scan
+    closes after a run of 30 invalid seconds once at least 60 seconds have elapsed, or at the end of
+    the stream; the half-open active interval ends one second after its last valid detection. At
+    least 32 candidate-valid seconds are required. This is a deterministic appearance-and-position
+    heuristic with sample-level quality assurance, not face recognition or identity tracking.
+
+    All candidate-valid integer-second indices inside that interval are retained when there are at
+    most 128. Otherwise, if their ordered list has length $N_v$, retain the values at ranks
+    $\lfloor j(N_v-1)/127\rfloor$, $j=0,\ldots,127$. Only those validated crops enter DINOv2.
+    Interviewer or background faces and full frames are never substituted. The selection record
+    preserves the interval, accepted crops and reasons for any failure.
+
+    \item[Interview audio.] The corpus channels are
+    near-duplicates and are not speaker-isolated. The deterministic mono 16-kHz waveform is sliced
+    to the exact face-derived half-open interval before WavLM processing, so it still contains both
+    participant and interviewer. The active waveform is divided into non-overlapping 20-second
+    windows, including a non-empty final partial window. All windows are retained up to 16;
+    otherwise 16 are selected by the endpoint-rank rule over the ordered active-interval windows.
+    The model therefore sees at most 320 seconds of standardised active-interview context. Full and
+    active durations, interval samples, window indices and source-sample boundaries are stored,
+    with no cross-window padding leakage. Exact FFprobe timestamp integers bind each supplied WAV
+    to the embedded audio stream by rational cross-multiplication, and the decoded 16-kHz sample
+    count must agree exactly. Only when the active interval closes at the final video grid cell may
+    physical audio end slightly earlier: the shortfall must be strictly below one verified source
+    audio timestamp tick (3/125 seconds, or 384 decoded samples) and is recorded without padding.
+    Every other shortage is a structured failure. The modality is called \emph{interview audio}, never
+    candidate voice. Verified candidate-speech segmentation, if later available, is an optional
+    sensitivity analysis and cannot replace or tune the core result.
+
+    \item[Text.] Exact audited speaker aliases define candidate and interviewer roles. A colonless
+    pipe fragment inherits candidate status only from the most recent explicit candidate marker;
+    fragments after interviewer/unclassified markers or before any role are excluded. The observed
+    \texttt{r:} marker is counted as unclassified, and any new colon-labelled marker fails rather
+    than being guessed. The current inventory retains 77 continuation fragments (18,214 source
+    characters) and excludes 3 (522 characters).
+\end{description}
+
+A boundary audit samples sessions across both phases and records false-candidate inclusion,
+candidate omission and unresolved identity. Boundary rules are fixed without outcomes or audit
+attributes. Sessions that cannot satisfy a modality boundary receive a structured failure code;
+primary results use the frozen common complete-pair participant manifest, with failure counts and reasons reported
+without post-hoc imputation.
+
+Before any model is fitted, an outcome-blind boundary pass establishes a common eligibility
+roster. A participant is retained only when both sessions have
+valid visual, interview-audio and candidate-text summaries. No failed modality is imputed and no
+unpaired session is retained. The original 69-participant fold and random-proxy assignments are
+subselected without reranking. Let $E$ denote the eligible complete-pair count; the report gives
+$E$, retained counts per original fold, every exclusion and its structured reason.
+
+\subsection{Frozen encoders}
+
+The visual representation is the final-layer CLS vector from DINOv2-large~\cite{Oquab2024}.
+The audio representation is the final hidden state of WavLM-Base+ at
+16 kHz~\cite{Chen2022WavLM}. Each selected bounded session-audio window is encoded independently; valid frame
+centres are pooled into consecutive zero-based one-second bins, retaining a non-empty final
+partial second, and each bin concatenates mean and maximum values. Window summaries are then
+aggregated deterministically without weighting padded samples. The text representation uses
+MPNet pretraining~\cite{Song2020MPNet} within the Sentence Transformers
+framework~\cite{Reimers2019}, specifically the
+all-mpnet-base-v2 checkpoint~\cite{SentenceTransformersAllMPNet2025}.
+Tokenizer IDs are divided into non-overlapping chunks of at most 382 content
+tokens plus model special tokens, followed by masked mean pooling and L2 normalisation.
+
+Encoder versions, preprocessing settings and output dimensions were fixed for all configurations.
+Each source recording was checked against its approved identity and content before extraction;
+completed representations were accepted on resumption only after the same checks passed. The
+encoders remained frozen throughout model training.
+
+\section{Session-level perceived-attribute annotations}
+
+\subsection{Supplied source and construct}
+
+The restricted annotation source contains 126 session-level rows supplied as one observer's
+perceptions: all 69 post sessions and 57 of the 69 pre sessions. The source rows were preserved
+and matched to the verified participant/session mapping without altering the observer's codes. The
+annotations were supplied only after the Stage-A predictions and proxy assignments had been
+locked, so they could not affect ordinary fitting or model selection.
+
+The accepted visual constructs are:
+\par\noindent\begin{minipage}{\linewidth}
+\begin{enumerate}
+    \item perceived gender presentation, preserving the observed source codes \texttt{F} and
+    \texttt{M} as feminine and masculine presentation;
+    \item perceived racialised appearance, preserving the source categories and treating
+    \texttt{CD} (cannot determine) as unknown; and
+    \item perceived skin tone under the recorded imagery and lighting on the integer ordinal
+    scale from 1 (lightest) to 5 (darkest).
+\end{enumerate}
+\end{minipage}\par
+These labels describe one observer's perception in a particular recording. They are never
+described as true gender, race or ethnicity, and the source column headed ``Ethnicity'' is renamed
+only as perceived racialised appearance in analysis. Self-reported attributes, if later
+authorised, remain a separate construct and are never combined with these visual judgements. The
+source age-band values are retained only for provenance and reconciliation; age is excluded from
+Stages B and C.
+
+The source does not provide a reproducible rater identifier, field-level confidence, collection
+instructions or a blinding record. These facts remain unknown and are reported as limitations.
+No independent second judgement exists, so the study makes no inter-rater agreement or consensus
+claim and does not manufacture either from the pre/post rows.
+
+\subsection{Phase-aligned primary and sensitivity analyses}
+
+The primary Stage-C audit joins each of the 69 locked post-session OOF predictions only to its
+matching post-session annotation. The 57 available pre annotations define a separate,
+reduced-coverage sensitivity: each is joined only to its matching pre-session prediction. A post
+annotation is never attached to a pre prediction, and pre/post values are neither averaged nor
+adjudicated into a participant consensus. Post is primary because it supplies a common complete
+roster, not because a post judgement is assumed to be more accurate or stable.
+
+For the 57 participants with both rows, an additional stability diagnostic reports exact
+pre/post matches for the nominal fields and the absolute pre/post difference distribution for the
+ordinal skin-tone field. This is an intra-source, across-session sensitivity to presentation,
+recording and phase; it is not inter-rater reliability, and it cannot establish that either value
+is a stable identity attribute. The incomplete pre roster is reported explicitly and never
+substitutes for the complete post primary audit.
+
+\subsection{Sparse-group rule}
+
+A category is reportable only if it has at least 10 unique participants in the relevant
+phase-aligned roster. No category is merged with another after outcomes or predictions are
+viewed. An axis with fewer than two reportable groups receives counts and coverage only; no
+disparity estimate is produced. Intersectional analysis uses the same 10-participant minimum and
+is secondary. Unknown responses are reported as missing audit information, never treated as a
+demographic group in the headline comparison. Perceived skin tone remains ordinal 1--5 and is
+never thresholded or binarised to increase support.
+
+\subsection{One-way firewall}
+
+Audit annotations may be collected early, but are stored separately, unreadable by ordinary
+loaders and not inspected by model developers until the ordinary scorer artefacts are locked. The
+analysis proceeds through exactly three irreversible stages:
+\begin{enumerate}
+    \item[Stage A.] Evaluate nine deterministic reference models and seven learned
+    configurations (105 fits). Preserve their held-out predictions, participant folds and proxy
+    assignments before opening the audit annotations. No perceived-attribute label is used.
+    \item[Stage B.] Use the post-session \texttt{F}/\texttt{M} field for one exploratory,
+    segregated perceived-gender-presentation oracle. Although the source legend also
+    permits \texttt{A} (androgynous or ambiguous) and \texttt{CD} (cannot determine), every
+    supplied row is coded \texttt{F} or \texttt{M}; no observed
+    category is dropped or merged. This observed-data binary axis was chosen after annotation
+    receipt, not before rating, and is frozen before any Stage-B fit or Stage-C audit. Within each
+    rotation, the oracle may use the one post-derived label for each training participant, but no
+    held-out-participant annotation. It runs only if both training groups contain at least 10
+    participants; otherwise it records a zero-fit omission.
+    \item[Stage C.] In a read-only evaluator, join post predictions to the 69 post labels for the
+    primary audit and pre predictions to the 57 available pre labels for the sensitivity. Then
+    permit no model rerun, proxy choice, hyperparameter change or selective omission in response
+    to the audit; any later analysis is labelled post hoc.
+\end{enumerate}
+
+\section{Fixed cross-fitting design}
+
+Participants, not sessions, define folds. A fixed, outcome-independent ordering of the corrected
+participant identifiers assigns each person to one of five folds, with sizes 14, 14, 14, 14 and
+13. Both pre- and post-intervention sessions follow that assignment, irrespective of the raw
+recording number. The assignments were fixed before outcomes were used for training and before
+perceived-attribute annotations were examined.
+
+For outer fold $f$, fold $f$ is test, fold $(f+1)\bmod 5$ is validation, and the other three folds
+are training data. For each configuration and seed $r\in\{1,11,21\}$, the model predicts only the
+outer test fold. Training-only means, scales, proxy transforms and cluster centres are estimated
+on the three training folds; stopping uses the fixed validation fold. The five test parts form one
+OOF prediction for
+every eligible session; no in-fold prediction enters a primary metric. With five folds and three
+seeds, each learned configuration has 15 fits. Each configuration--seed pair has exactly $2E$
+OOF session predictions, or $6E$ prediction rows across three seeds; these totals are 138 and 414
+only if $E=69$. The three seed-specific OOF vectors are retained, not collapsed before
+diagnostics.
+
+There are exactly seven learned Stage-A configurations, hence $7\times5\times3=105$ learned
+fits. Exactly nine deterministic cross-fitted diagnostic floors are outside this matrix and add no
+seeded learned fits: \texttt{mean}, \texttt{phase\_mean}, \texttt{ridge\_video},
+\texttt{ridge\_audio}, \texttt{ridge\_text}, \texttt{ridge\_video\_audio},
+\texttt{ridge\_video\_text}, \texttt{ridge\_audio\_text} and \texttt{ridge}.
+
+The original experiment contains no broad hyperparameter search on its 69 participants.
+Architecture and optimisation settings are frozen through synthetic tests and outcome-blind
+engineering checks. Ordinary ERM shuffles complete participants deterministically and uses full
+16-participant batches followed by the final complete-participant remainder; it never drops or
+pads that remainder, and both sessions of each participant remain together. On the complete
+69-participant fold manifest the training schedule is therefore 16/16/9 or 16/16/10 participants,
+depending on the rotation. Proxy-balanced configurations retain their separately fixed
+16-participant cyclic policy. Every learned configuration uses AdamW with learning rate
+$10^{-3}$ and weight decay $10^{-2}$, at most 200
+epochs, gradient-norm clipping at 1.0, and patience 25 on validation SRCC. The maximum-validation-
+SRCC checkpoint is retained, with the earliest epoch resolving an exact tie. Linear weights use
+Xavier-uniform initialisation, linear biases are zero, and LayerNorm scale/bias begin at one/zero.
+The W1 coefficient is fixed at $\lambda_W=0.02$ from the first parameter update and is never
+swept or changed using audit information.
+
+\section{Shared low-capacity predictor}
+
+For each session, valid DINOv2 face vectors, bounded-window WavLM summaries and MPNet chunk
+vectors are averaged within modality. A separate standard scaler is fit on training participants
+only. Each modality then passes through \texttt{Linear}$(d_m,8)$, \texttt{LayerNorm}$(8)$ and a
+GELU activation. The three eight-dimensional outputs are concatenated into 24 dimensions and
+passed through \texttt{Linear}$(24,1)$ and a sigmoid. The 26,721 trainable parameters are
+deliberately modest for 69 independent participants; encoder weights remain
+frozen. This late-fusion network is used unchanged for ERM, sampling controls, random-proxy W1,
+visual-proxy W1, audio-proxy W1, ARL and the oracle; only the declared sampler or loss term changes.
+The \texttt{mean} floor predicts the rotation's arithmetic training-target mean, while
+\texttt{phase\_mean} predicts separate arithmetic means for canonical pre and post training rows.
+Seven participant-safe ridge floors use video, audio, text, each pair, and all three modalities,
+respectively. Within each rotation, each ridge concatenates only its named 1024-dimensional
+DINOv2, 1536-dimensional WavLM and/or 768-dimensional MPNet session summaries. A StandardScaler is
+fitted on training session rows, followed by scikit-learn Ridge on the normalised target with
+\texttt{alpha=1}, an intercept, \texttt{solver=lsqr}, tolerance $10^{-6}$ and 10,000 maximum
+iterations. The unchanged scaler and model are applied to held-out rows; there is no tuning or
+validation refit.
+
+The base loss for session $j$ is mean squared error,
+\begin{equation}
+    \mathcal{L}_{\mathrm{ERM}}=\frac{1}{m}\sum_{j=1}^{m}(y_j-\hat y_j)^2.
+\end{equation}
+These optimisation, regularisation, batch-construction and stopping settings are recorded in every
+run manifest. The sigmoid head already constrains predictions to $[0,1]$; no additional clipping
+or post-processing is selected from validation or audit results.
+
+\section{Proxy construction}
+
+\begin{sloppypar}
+Visual proxies are constructed from participant-level DINOv2 candidate-face aggregates across both
+available sessions within the applicable fold; audio proxies are constructed analogously from
+participant-level active-interval interview-audio WavLM aggregates across both sessions. For each source, a
+training-only standard scaler followed by scikit-learn k-means is fit in ascending numeric
+participant ID order, using two clusters, k-means++ initialisation, 20 initialisations, 300 maximum
+iterations, tolerance $10^{-4}$, Lloyd's algorithm and random state 0. Both sessions contribute to the participant representation only within the same training
+fold, and each participant receives one proxy assignment. Held-out assignments use the frozen
+nearest-centre rule. Cluster identifiers are arbitrary and do not denote a perceived attribute.
+\end{sloppypar}
+
+Proxy-balanced sampling draws eight participants from each available proxy group into a
+16-participant batch and includes both sessions, yielding 32 rows. Both groups are required. A
+deterministic, seed-controlled cyclic reshuffle is used within each
+eight-participant half; duplication within a half occurs only when its training group has fewer
+than eight participants. Participant-level unique and duplication rates are logged. The
+sampling-only controls use this policy with the ERM loss and do not pass proxy groups to the
+objective. If a rotation contains $N_{\mathrm{train}}$ training participants, every proxy-
+balanced configuration performs exactly $\lceil N_{\mathrm{train}}/16\rceil$ optimizer updates
+per completed epoch. A single seeded cyclic sampler state advances continuously across epoch
+boundaries, and every draw and repeat is persisted. Validation and test use their complete natural
+role distributions rather than balanced resampling. The
+W1 configurations add
+\begin{equation}
+    \mathcal{L}=\mathcal{L}_{\mathrm{ERM}}+\lambda_W
+    W_1\!\left(\{\hat y_j:g_j=0\},\{\hat y_j:g_j=1\}\right),
+\end{equation}
+using the same corresponding balanced sampler. The coefficient $\lambda_W=0.02$ is applied exactly
+once from the first update and is fixed before the annotation audit. The proxy assignments,
+training schedule, fitted scalers and model checkpoints were preserved for the subsequent
+comparison.
+
+The random control uses one fixed, outcome-independent participant ordering: the first 34 form
+group 0 and the remaining 35 group 1. This assignment is
+identical across both sessions and all fold rotations, and is independent of phase, outcome,
+representations and audit annotations.
+
+Adversarially reweighted learning (ARL) adapts the example-reweighting idea of
+Lahoti et al.~\cite{Lahoti2020} to continuous regression. Putra et al.\ applied a related
+approach to interview videos~\cite{Putra2024}; the present model is not an exact reproduction
+of their system. Let
+$h_j\in\mathbb{R}^{24}$ be the common scorer's pre-head representation and let $y_j$ be the
+normalised continuous target. A training-only affine adversary with 26 parameters receives
+$[\operatorname{stopgrad}(h_j),y_j]$ and produces $q_j=\operatorname{sigmoid}(a_\phi(\cdot))$.
+For the current minibatch of $m$ session rows, its learner weight is
+\begin{equation}
+    w_j=1+\frac{q_j}{\max\!\left(m^{-1}\sum_{k=1}^{m}q_k,10^{-4}\right)},
+    \qquad
+    \mathcal{L}_{\mathrm{ARL}}=\frac{1}{m}\sum_{j=1}^{m}
+    \operatorname{stopgrad}(w_j)(y_j-\hat y_j)^2.
+\end{equation}
+The loss is a batch mean and is not renormalised by the weight sum; the full 32-row batch has
+upper bound $w_j\leq33$. The first six learner minibatch updates use ordinary MSE and do not call
+or step the adversary. From update seven onward, the learner is updated first; current detached
+representations and squared errors are then recomputed, and the adversary alone minimises the
+negative weighted mean error. Learner and adversary use separate AdamW optimisers with the common
+learning rate and weight decay and separate norm-1 gradient clipping. ARL retains the ordinary
+participant-paired sampler, including its complete final remainder, and the unweighted validation-
+SRCC checkpoint rule. Each checkpoint stores both models, both optimiser states, the train-only
+scalers, training phase and update counts. Canonical minibatch and epoch records persist the
+objectives; adversary-logit, sigmoid-score, guarded-denominator and weight summaries; effective
+sample size; weight--error Pearson correlation; mean absolute within-participant-pair weight
+difference; pre-clipping gradient norms; and unweighted validation SRCC and MSE. Statistics
+undefined during learner-only pretraining or for a constant vector are stored as JSON null rather
+than NaN. Putra et al.'s combined MSE+BCE variant, not its MSE-only variant, was its strongest
+reported First Impressions system; consequently this architecture-controlled MSE comparator is
+not described as reproducing that result.
+
+The corpus-annotated oracle replaces the proxy group in the W1 loss with the supplied
+post-session perceived-gender-presentation field, using one post-derived label for each training
+participant. All observed values are \texttt{F} or \texttt{M}, mapped to feminine and masculine
+presentation. This is a binary coding of the observed source rows, not a claim that gender itself
+or the source legend is binary. The axis was selected after the annotations were received and is
+therefore an exploratory comparison; it was not preregistered or designated before rating. It is
+nevertheless frozen before any Stage-B fit or Stage-C audit. Self-reported and perceived
+provenance are never pooled participant by participant.
+
+The oracle is not a deployable demographic-free method; it is a segregated diagnostic of whether
+weak proxy--audit alignment can explain a result. If either perceived-presentation group has fewer
+than 10 training participants in any rotation, the oracle is omitted by rule and the omission is
+reported. No alternative axis is substituted and no category is collapsed merely to make the
+oracle run. Perceived skin tone is restricted to Stage C and remains ordinal 1--5.
+
+\section{Comparators and contrasts}
+
+\begin{table}[htbp]
+\centering
+\caption{Predeclared configurations and their inferential roles.}
+\label{tab:configurations}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lll}
+\toprule
+Configuration & Training signal & Role \\
+\midrule
+Nine fixed floors & mean/phase mean and seven ridge modality subsets & deterministic diagnostics \\
+ERM & MSE, ordinary participant sampling & common-backbone reference \\
+Visual sampling & visual-proxy balanced sampling, MSE & sampling control \\
+Audio sampling & audio-proxy balanced sampling, MSE & sampling control \\
+Random W1 & random groups, balanced sampling, W1 & generic penalty control \\
+Visual W1 & visual proxy, balanced sampling, W1 & primary intervention \\
+Audio W1 & interview-audio proxy, balanced sampling, W1 & primary intervention \\
+ARL & adversarial example weights & generic demographic-free comparator \\
+Oracle W1 & training-fold audit group, W1 & segregated explanatory comparator \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+The primary total-effect contrasts are Visual W1 minus ERM and Audio W1 minus ERM. Incremental W1
+contrasts are Visual W1 minus Visual sampling and Audio W1 minus Audio sampling. Random W1 minus ERM
+tests a generic partition penalty, ARL minus ERM tests a generic demographic-free method, and
+Oracle W1 minus ERM describes the label-supervised reference where estimable. A mitigation
+interpretation requires each eligible contrast to be assessed for both utility and audited
+disparity; conclusions cannot be based on one axis alone.
+
+\section{Outcomes and uncertainty}
+
+\subsection{Utility}
+
+Primary utility is Spearman rank correlation between all eligible session-level OOF predictions
+and aggregate \emph{RecommendHiring}. Mean absolute error is co-primary descriptive support, and
+root mean squared error and Pearson correlation are secondary. Metrics are computed separately
+for seeds 1, 11 and 21;
+the three OOF vectors are not averaged into an ensemble. Paired model contrasts are formed within
+seed and their arithmetic mean is the declared summary effect. A constant prediction within one
+test fold has undefined within-fold rank correlation. The cross-fitted mean floor can vary across
+outer training folds, so its pooled held-out correlations are reported alongside its errors.
+
+\subsection{Audited disparity}
+
+For each reportable phase-aligned audit axis, the disparity statistic is the maximum pairwise
+empirical W1 distance between the score distributions of the single-observer perceived groups:
+\begin{equation}
+    D_{\mathrm{audit}}=\max_{a<b}W_1(\hat Y_a,\hat Y_b).
+\end{equation}
+Group means, medians, quantiles and counts accompany this maximum so that it is not interpreted
+without scale or composition. Direction is reported for two-group axes; multi-group results name
+the pair attaining the maximum. Observed target disparity is reported beside prediction disparity
+to distinguish reproduction of the rating distribution from model-added disparity.
+
+\subsection{Participant-cluster intervals}
+
+Uncertainty respects the participant as the independent unit. For the primary Stage-C audit, a
+fixed 10,000-replicate bootstrap with seed 2026 samples the 69 post-phase participants with
+replacement and retains each sampled participant's matching post prediction and annotation. The
+pre sensitivity independently resamples its 57 available participants and retains each matching
+pre prediction and annotation. Each replicate recomputes group disparity, every within-seed paired
+configuration difference and their arithmetic mean on locked OOF predictions. Percentile 95\%
+intervals and the fraction of valid replicates are reported. A replicate in which a required group
+is absent is invalid for that attribute only and is never imputed. Inference emphasises effect
+sizes, interval width and consistency across seeds rather than dichotomous significance tests.
+
+\subsection{Descriptive paired-change accuracy}
+
+For participant $i$, define the observed and predicted changes from the two OOF sessions as
+\begin{equation}
+    \Delta y_i=y_{i,\mathrm{post}}-y_{i,\mathrm{pre}},\qquad
+    \Delta\hat y_i=\hat y_{i,\mathrm{post}}-\hat y_{i,\mathrm{pre}}.
+\end{equation}
+The secondary paired-change package reports Spearman correlation between these $E$ deltas, delta
+MAE $E^{-1}\sum_i|\Delta y_i-\Delta\hat y_i|$, and signed delta bias
+$E^{-1}\sum_i(\Delta\hat y_i-\Delta y_i)$. These are computed from pooled OOF predictions, never
+in-fold fits, and receive participant-bootstrap intervals. They measure descriptive change
+tracking only; they do not estimate a coaching effect.
+
+\section{Explanatory and sensitivity analyses}
+
+The fixed failure-analysis package contains:
+\begin{enumerate}
+    \item proxy size, stability across outer rotations, byte identity across seeds, centre
+    separation and visual--audio agreement;
+    \item post-firewall proxy--audit association using contingency tables, adjusted Rand index and
+    normalised mutual information, interpreted only as association;
+    \item inference-only modality masks on each locked ERM model: set one modality's
+    training-standardised summary to zero (the training mean), with no refitting or retuning;
+    \item signed-residual and absolute-error summaries by reportable audit group;
+    \item phase-stratified summaries and paired pre/post delta correlation, MAE and signed bias;
+    \item complete-pair eligibility coverage and structured modality-boundary failure summaries; and
+    \item secondary comparisons with legacy-feature quality indicators, not primary replacements.
+\end{enumerate}
+These analyses explain mechanisms and boundary failures. They cannot select the preferred proxy,
+change sparse-group thresholds or rescue an unfavourable primary result.
+
+\section{Exploratory linear follow-up on MIT}
+\label{sec:linear-followup-method}
+
+The original scorer's weak predictive performance limits what its penalty comparison can
+explain. The follow-up therefore uses the same accepted three-modality summaries and
+participant folds with an identity-output linear scorer. This gives 3,328 input coefficients
+and an intercept. A training-row standard scaler is fitted within each outer rotation.
+The natural task-only objective is the alpha-1 ridge objective, with the intercept left
+unpenalised. The model is initialised at its exact task-only solution rather than at a new
+zero or random predictor. Predictions are not clipped to the target range.
+
+For training rows $j=1,\ldots,n$, the common objective is
+\begin{equation}
+ J_q(w,b)=\sum_{j=1}^{n}q_j\bigl(y_j-x_j^{\mathsf T}w-b\bigr)^2
+       +\frac{\|w\|_2^2}{n}
+       +\lambda W_1(\hat Y_{g=0},\hat Y_{g=1}).
+\end{equation}
+Natural exposure uses $q_j=1/n$. Deterministic balanced exposure uses
+$q_j=1/(2n_{g_j})$, where $n_{g_j}$ is the number of session rows in that proxy group.
+The latter is the expected group-balanced task weighting; it is not an exact replay of
+the original cyclic minibatch sampler. Each participant's two sessions share one group.
+Visual and audio proxies retain the original training-only participant-mean clustering
+policy. No outcome or perceived attribute selects the proxy partition.
+
+The full training-fold W1 uses the integral of the empirical step quantile functions,
+including unequal group sizes. Linearly interpolating two sorted samples onto a shared grid
+would generally produce a different statistic and is not used. Optimisation takes place in
+the training design's singular-vector row space, preserving the minimum-L2 linear model
+class. L-BFGS-B receives the analytic score subgradient, with derivatives averaged within
+exact score ties. The fixed cap is 1,000 iterations. Since projected-score W1 is not globally
+convex in the coefficients, termination is reported without a global-optimum claim.
+
+The comparison contains one natural task-only reference, visual and audio balanced task-only
+references, and three strengths ($0.002$, $0.02$, $0.2$) for each proxy under natural and
+balanced exposure. These 15 deterministic configurations run in all five outer folds,
+giving 75 fits. Repeating identical full-fold fits under nominal seeds would not provide
+additional independent evidence. Each penalty is compared with its own zero-penalty exposure
+control, and every strength is reported rather than selecting a winner from test or audit
+results. The four contrasts at $\lambda=0.02$ are the primary descriptive comparisons.
+
+All predictions are fixed before joining the accepted phase-specific perceived annotations.
+The 69-post/57-pre audit and sparse-category rules remain unchanged. The manipulation check
+computes proxy W1 separately within each outer test fold, with that fold's fitted group
+assignments; neutral cluster IDs are not stitched into a global group identity. Utility and
+audited-disparity contrasts use 10,000 paired participant bootstrap draws, conditional on
+the fitted models. Both sessions stay together for pooled utility. The post and pre audits
+resample only the matching phase. All numerical terminations remain visible.
+
+\subsection{Outcome-only ridge selection analysis}
+
+A separate predictive comparison examines whether regularisation selection improves the
+benchmark without consulting perceived attributes. Within each outer rotation, its three
+training folds supply three inner participant-grouped rotations. All scalers are fitted
+only on the corresponding inner training people. Ridge alpha is chosen from
+$\{0.1,1,10,100,1000\}$ by pooled inner absolute error, with smaller alpha for an exact tie.
+The broader comparison also includes a ridge-objective-matched linear candidate, a small
+late-fusion neural candidate and the fixed reference predictors. No test outcome selects
+the candidate or alpha, and the reserved outer validation fold is not added to training.
+
+The available selected-ridge summary is an unweighted mean of the five outer-fold metrics.
+It is reported with that label. In particular, a mean of fold-specific Spearman correlations
+is not the pooled out-of-fold correlation used for the original and compact comparisons.
+The summary does not supply a participant-bootstrap interval or a paired comparison with
+those pooled estimates, so neither is inferred from the point values.
+
+\section{AVI-Personality prediction and error audit}
+\label{sec:avi-method}
+
+AVI-Personality supplies six recorded answers per participant and participant-level
+recruiter ratings~\cite{Zhang2026AVI}. The validated feature release covers all 646 people.
+The official splits contain 452 training, 64 validation and 130 test participants. Two
+training participants lack the primary interview-performance outcome, leaving 450 people
+for supervised fitting; they remain represented in source missingness and feature coverage.
+No person or question clip crosses an official split.
+
+The visual input differs from the MIT candidate-face boundary. DINOv2 encodes full frames
+sampled at one hertz, capped at 128 per question clip. Their mean forms a 1,024-dimensional
+clip vector. Embedded audio is decoded to mono 16 kHz and divided into non-overlapping
+20-second windows. WavLM representations are mean--maximum pooled into one-second bins,
+then averaged into a 1,536-dimensional clip vector. A final residual shorter than the
+encoder's 400-sample receptive field is omitted rather than padded into invented content.
+Each modality's six question vectors receive equal weight in the participant mean.
+The modelling release requires all six valid clips. No transcript representation is supplied,
+and no zero text vector is created to imitate a third modality.
+
+The predictive baseline concatenates the visual and audio participant vectors and standardises
+each feature using training participants only. A ridge scorer selects alpha from
+$\{0.1,1,10,100,1000\}$ by validation MAE, preferring smaller alpha on an exact tie.
+It predicts the original 1--5 recruiter rating and clips predictions to that range.
+The training-target mean is a separate reference. A preliminary division of modality blocks
+by their dimensional scales is cancelled by subsequent featurewise standardisation;
+the executed model is therefore described as standardised concatenated ridge, without
+claiming a distinct modality-balancing effect.
+
+After predictions are fixed, a separate audit joins source self-reported gender. The test
+contains 67 male and 62 female respondents, one prefer-not-to-say response and no non-binary
+or third-gender respondent. The two supported groups receive descriptive MAE estimates;
+the nonresponse is counted without forming a one-person disparity estimate. The signed
+male-minus-female MAE gap and its absolute magnitude describe prediction error, not score
+parity or the effect of a fairness intervention. A percentile interval obtained by
+bootstrapping the absolute gap is not used as a test of a nonzero signed population
+difference. Self-report is not substituted for the MIT observer's perceived presentation.
+
+This independent baseline estimates prediction and group-conditioned error in another
+corpus. Considered alone it contains no W1-versus-control comparison, and the matched
+comparison described next was specified only after these baseline results had been
+inspected. Outcome scales, visual boundaries and rating sources
+differ, so raw scores or errors are not pooled across the two corpora. Any method
+comparison designed after inspecting these test results is exploratory on independent
+people, rather than an untouched confirmatory holdout.
+
+\subsection{Matched intervention and control comparison}
+\label{sec:avi-compact-method}
+
+A subsequent comparison applies the proxy-regularisation design of the main study to these
+independent participants. Because the predictive baseline and its group-error audit above
+had already been inspected, this comparison is exploratory on independent people rather
+than an untouched confirmatory holdout. Its purpose is to establish whether the proxy
+penalty behaves on a second corpus as it did on the first, not to confirm an effect.
+
+Fifteen fixed settings are fitted. Three task-only controls carry no penalty: a
+natural-exposure control, and one balanced-exposure control for each proxy source. Twelve
+penalised arms cross two proxy sources, visual and audio, with two exposure policies,
+natural and balanced, and the three penalty strengths $\lambda\in\{0.002,0.02,0.2\}$ used
+in the main study. Each penalised arm is paired with the matched control sharing its
+exposure policy, so a penalty effect is never read against an unmatched reference. The
+complete grid is reported; no strength is selected using test or audit results.
+
+Proxies are obtained without protected labels, by the same unsupervised partition of
+frozen representations used in the main study. The visual partition assigns 368 training
+and 103 test participants to its larger group against 82 and 27 respectively; the audio
+partition assigns 143 training and 35 test participants to its smaller group against 307
+and 95. Ridge regularisation is selected once on validation error and held fixed across
+all arms, so arms differ only in exposure policy, proxy source and penalty strength.
+
+All held-out predictions for all fifteen arms are locked before the separate source gender
+file is opened, so audit attributes cannot influence fitting or model selection. The locked
+test set contains 130 participants and 1{,}950 prediction rows. Paired uncertainty uses
+10{,}000 participant-level bootstrap draws, with the same draws applied to every arm so
+that matched contrasts share resampling noise. The resulting intervals are pointwise and
+conditional on these fitted models; they describe sampling variation in the evaluated
+predictions rather than uncertainty over refitting, and they are not corrected for
+inspecting twelve penalised arms across several outcome measures.
+
+Three quantities are reported for each matched contrast: the change in original-scale
+mean absolute error, the change in Spearman rank correlation, and the change in the
+Wasserstein-1 distance between the predicted-score distributions of the two supported
+source gender groups. The last is reported as a disparity gain, where a positive value
+indicates a smaller score gap than the matched control. Held-out proxy-group W1 is
+reported separately from audited gender disparity, because a penalty acting on an
+unsupervised partition is not thereby acting on a protected attribute.
+
+\section{Reproducibility and data protection}
+
+The study preserves its source inventory, participant folds, fixed encoder and model settings,
+training seeds and held-out predictions for verification. The raw recordings, identifiable face
+crops and individual annotations are not redistributed. Published results are aggregate, and
+the analysis of perceived attributes remained separate from ordinary model development.

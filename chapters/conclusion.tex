@@ -1,0 +1,81 @@
+\chapter{Conclusion}
+\label{ch:conclusion}
+
+This thesis examined a practical question in interview-score modelling: does making a
+predictor's scores more similar across learned visual or audio groups also reduce
+disparity across independently supplied attributes, without losing useful prediction?
+The answer requires separating predictive validity, proxy response and audited-group
+transfer. None can be inferred from a small score-distribution distance alone.
+
+The MIT experiment uses 138 recordings from 69 correctly paired participants. Its
+outcome is crowd-perceived hireability, not employment success, and the low agreement
+among individual raters remains a substantive measurement limit. The original neural
+scorer is weaker than the ridge references. Within that design, adding a W1 penalty
+to either matched sampling control lowers rank correlation, and none of the six
+primary perceived-attribute disparity contrasts resolves a reduction. This is a
+controlled negative result for the evaluated model, not a general rejection of proxy
+regularisation.
+
+The exploratory linear follow-up makes the mechanism test more informative. Its
+task-only scorer achieves pooled SRCC 0.418 and normalised MAE 0.089 on the same
+predictions for participants held out together across sessions. At penalty strength 0.02, the visual intervention
+reduces mean held-out proxy W1 from 0.045 to 0.035; the corresponding audio intervention
+reduces it from 0.087 to 0.068. Thus a working predictor can respond to the proxy
+constraint. The full strength grid also exposes the predictive cost rather than
+selecting a favourable point after inspecting the audit. All primary-strength fits
+converge, while some strongest-penalty fits reach the iteration limit.
+
+Transfer to the perceived attributes is less certain. The visual intervention lowers
+the post-session perceived-gender W1 point estimate from 0.049 to 0.029, but its
+paired reduction interval includes zero. Other appearance axes do not show a consistent
+benefit. The annotations describe one observer's perception of particular recordings;
+they do not establish demographic identity or inter-rater reliability. Visual proxy
+partitions agree with this observer's gender-presentation codes in the held-out folds,
+but that association is not a general demographic-classification result. The central
+finding is therefore an active proxy mechanism with a conditional utility cost and
+uncertain transfer across audited groups, not demonstrated hiring fairness.
+
+AVI-Personality extends the evidence to independent participants and recruiter-rated
+interview performance. A video/audio ridge predictor achieves test MAE 0.419 on its
+1--5 scale, compared with 0.479 for the training-target mean. Its observed self-reported
+male--female error difference is 0.067 rating points and remains descriptive.
+
+A matched fifteen-arm comparison on those independent participants then supplies the
+treatment-versus-control evidence the baseline alone could not. At the primary strength
+the penalty changes original-scale error by 0.002, rank correlation by $-0.018$ and the
+audited gender score gap by 0.001, with every interval containing zero. The independent
+corpus therefore reproduces the main study's outcome under a different outcome construct
+and rating source rather than revising it. Separating training from held-out proxy
+response makes the reason legible: the penalty collapses the training visual proxy gap
+almost entirely while leaving the held-out gap essentially unchanged, so the constraint is
+satisfied on the participants used to fit it and does not describe those it is applied to.
+The audio proxy constraint does transfer, reducing the held-out proxy gap by two thirds,
+and still yields no demonstrable disparity benefit while incurring clear utility damage.
+A proxy whose constraint generalises is therefore still not a usable stand-in for the
+audited attribute. Because the comparison was specified after the external baseline had
+been inspected, it is exploratory on independent people rather than confirmatory, and
+different outcomes, full-frame rather than face-crop video and the absence of transcripts
+continue to prevent an exact replication claim.
+
+One limitation conditions all of these results and is stated here rather than left to be
+inferred. Validation-selected shrinkage reached the upper limit of its search range in
+every fold of every study reported here, leaving predicted scores with roughly half the
+dispersion of the ratings they predict. A score-disparity penalty acts on the separation
+between group prediction distributions, so a compressed predictor offers little separation
+for it to remove. The absence of disparity movement is accordingly consistent with two
+explanations this evidence cannot separate: that proxy regularisation does not reduce
+audited disparity, or that the scorers available to it were too compressed for such a
+reduction to be expressed. The learned configurations' failure to reach the deterministic
+ridge floors, and the random-proxy control's equivalence to the structured proxies, both
+favour the second as a contributing factor.
+
+The contribution is a coherent empirical distinction between predicting a subjective
+interview rating, manipulating a learned partition and improving a separately audited
+group metric, together with evidence that the second does not deliver the third even when
+it succeeds on held-out participants. Matched task-only controls, complete
+penalty-strength reporting and the separation of training from held-out proxy response
+make that distinction observable. Stronger evidence would require a scorer competitive
+with its own deterministic floors, a regularisation search that does not terminate at its
+boundary, more reliable measurement and replication across adequately supported groups.
+The present findings justify those specific tests, while providing no basis for automated
+hiring, causal coaching or employment-validity claims.

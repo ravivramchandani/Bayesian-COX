@@ -1,0 +1,310 @@
+\chapter{Discussion}
+\label{ch:discussion}
+\begin{spacing}{1.4}
+
+\section{Prediction validity before a fairness interpretation}
+
+The findings answer the research questions in a sequence: establish a useful predictor,
+check the proxy mechanism, inspect transfer to audited groups, and distinguish the
+independent corpus's evidence from a replication of mitigation. The original neural
+experiment alone cannot support a broad conclusion about proxy regularisation because
+its ordinary model is weaker than the simple references. Its pooled three-seed SRCC of
+0.170 and original-scale MAE of 0.951 compare unfavourably with the fixed all-modality
+ridge MAE of 0.535. This is an important baseline diagnosis, not evidence that every
+possible fairness intervention must fail.
+
+% Sources: results/study2-compact-2026-10-21-aggregate.json; results/study2_rq1_aggregate_v1.json.
+The linear follow-up addresses that weakness without changing the frozen representations
+or participant roster. Its natural task-only reference reproduces the working ridge
+predictor, with pooled SRCC 0.418 and normalised MAE 0.089. The separate outcome-only
+selection analysis also selects a strongly regularised ridge in every outer fold.
+Its mean fold SRCC of 0.567 and mean fold MAE of 0.081 describe that selection procedure;
+they cannot be compared directly with a pooled OOF correlation as a paired improvement.
+A stronger point estimate is not a substitute for a common estimand and uncertainty
+analysis. This distinction follows the broader small-sample evaluation problem:
+cross-validation estimates can vary substantially~\cite{Varoquaux2018}, and selection
+on noisy development estimates can bias apparent performance~\cite{CawleyTalbot2010}.
+
+Prediction validity remains conditional on the rating. The MIT outcome is a crowd-perceived
+hireability judgement, not employment success. Ordinal Krippendorff alpha of 0.232 among
+individual raters shows a substantial measurement limitation. The strong agreement of the
+EM aggregate with an unweighted session mean indicates agreement between aggregation
+methods, not that either is an objective criterion. Measurement choices determine what
+the subsequent audit can establish~\cite{JacobsWallach2021}. Interview criterion validity
+depends on the construct and later outcome measured~\cite{Wingate2025ConstructValidity};
+neither corpus here contains a job-performance criterion.
+
+\section{What the proxy penalty changes}
+
+The original experiment supplies one clear component result. Adding W1 to the matched
+visual or audio sampler lowers predictive utility. The incremental SRCC changes are
+$-0.038$ [$-0.072$, $-0.005$] for visual proxies and $-0.047$
+[$-0.091$, $-0.002$] for audio proxies. Original-scale MAE also worsens relative to
+each sampling-only control. The matched design therefore prevents a combined
+sampling-and-penalty change from being attributed to W1 alone. The random proxy and
+adversarial reweighting comparisons further show why an arbitrary regulariser cannot
+automatically be credited with meaningful group structure.
+
+% Source: results/study2-compact-2026-10-21-aggregate.json.
+The working linear model makes the mechanism question more informative. At strength
+0.02, visual natural-exposure W1 reduces mean training proxy distance from 0.036 to
+0.009 and mean held-out distance from 0.045 to 0.035. Audio natural exposure also reduces
+held-out proxy W1, from 0.087 to 0.068. Thus the intervention is active in the observed
+training and test distributions. The empirical interpretation no longer rests on
+assuming that a numerically small coefficient must have been ineffective.
+
+This response is accompanied by a trade-off. The visual natural-exposure SRCC change is
+$-0.030$ [$-0.069$, 0.008], and the audio natural-exposure change is $-0.044$
+[$-0.080$, $-0.008$]. Error changes are smaller and less resolved. A reduction in
+proxy-score distance consequently does not establish a beneficial joint change in
+ranking and error. The complete strength grid is more informative than a single favourable
+point: the strongest audio penalty has considerably weaker ranking, while the smallest
+penalty changes little. Thirteen highest-strength fits reach the declared iteration limit,
+so these points are bounded numerical outcomes rather than evidence of converged optima.
+
+The two studies also evaluate different balancing mechanisms. The original uses cyclic
+group-balanced minibatches, whereas the linear follow-up uses the corresponding full-fold
+group-weighted task objective. Its balanced and natural controls have nearly identical
+rounded utility, but this does not erase the original sampling result or establish that
+stochastic exposure is irrelevant. The shared lesson is that the penalty must be compared
+with its own matched task-only objective, optimiser and exposure policy.
+
+\section{Why proxy response does not establish audited fairness}
+
+% Source: results/study2-compact-2026-10-21-aggregate.json.
+The compact visual intervention reduces the post-session perceived-gender W1 point
+estimate from 0.049 to 0.029. Its paired gain of approximately 0.020 has interval
+[$-0.005$, 0.025]. This is a plausible observed transfer to that partition, but the
+data do not resolve a reduction at the population level. The other perceived axes
+give a different pattern: racialised-appearance point gains are negative, and skin-tone
+gains are small, with all primary intervals spanning zero. A model can narrow one
+learned partition while leaving another unchanged or increasing its score distance.
+
+This is the missing implication identified in proxy-fairness research. Surrogate
+constraints require assumptions about their relationship with the groups of
+interest~\cite{Gupta2018ProxyFairness}. The present clustering and score penalty do not
+supply those assumptions automatically. Nor does a lower W1 answer the error-balance
+question. Score-distribution parity and prediction errors are distinct properties of a
+regression model~\cite{Petersen2023RiskScores}; neither alone defines the fairness of a
+future hiring decision.
+
+The original perceived-attribute comparison is consistent with that caution. All six
+primary neural-model disparity-gain intervals include zero, as do the matched incremental
+penalty contrasts. Small distances also occur for weak mean predictors. A nearly constant
+score can make two groups look similar while failing to predict the target. The linear
+follow-up is valuable because it demonstrates proxy response on a stronger predictor,
+yet it still does not establish a general improvement across the audited attributes.
+
+The observer source bounds the interpretation. Perceived gender presentation, racialised
+appearance and skin tone are responses to a particular recording, not measurements of
+self-identified attributes. The 57 pre/post annotation pairs show stable gender codes but
+only 31 exact appearance matches and 26 exact skin-tone matches. These are repeated
+conditions rated by one source, not independent raters. Evidence on contextual subjectivity
+in skin-tone annotation reinforces the need for caution~\cite{Barrett2023}; it cannot
+supply a missing reliability estimate for this observer. Skin tone remains a five-point
+ordinal field, and the maximum pairwise score distance does not test an ordinal trend.
+
+The complete post audit is primary because it includes all 69 participants, not because
+a post rating is intrinsically more valid. The 57-person pre sensitivity has a different
+support pattern and twelve missing annotations whose missingness is not assumed random.
+A positive secondary point or a lower interval endpoint rounding to zero cannot replace
+the uncertain primary result. Bootstrap precision does not create more independent
+people or recover unobserved rater disagreement.
+
+\section{Representation and proxy meaning}
+
+Visual and audio features occupy different measurement boundaries. MIT visual inputs are
+candidate-face crops, while its audio contains both interviewer and participant.
+The audio clusters may reflect room, channel, timing and interviewer behaviour as well as
+candidate speech. Calling them candidate-voice or speaker-identity groups would overstate
+what the representation measures.
+
+The visual partition agrees exactly with this observer's post-session
+gender-presentation codes in each held-out fold. Training-participant-only alignment
+also permits a pooled description because all visual partitions are identical up to
+label permutation. It yields the same perfect association across the 69 OOF
+participants. This is a partition-association result within one corpus, not a general
+demographic classifier or evidence of gender identity. It nevertheless makes an
+important distinction visible: training without supplied gender labels does not mean
+that the visual features contain no gender-presentation information. Audio's low
+fold-local gender association and changing partitions show that the same interpretation
+cannot simply be assigned to every modality.
+
+Neutral k-means identifiers also have no cross-fold identity. An unaligned concatenation
+can manufacture an apparent disagreement even when partitions are identical up to a
+permutation. The held-out manipulation analysis therefore keeps fold-specific groups.
+It does not use the invalid stitched grouping to justify demographic meaning or to
+calculate a pooled proxy effect. Score disparities calculated directly from perceived
+annotations remain separate from this cluster-number issue.
+
+The original inference-only masks provide a further bounded explanation. Removing the
+training-standardised audio summary lowers ERM SRCC in every seed, by 0.325 on average,
+whereas removing video or text sometimes improves error. These are dependence diagnostics
+of one weak fitted model, not causal evidence about human communication or the value of
+retraining with fewer modalities. Temporal averaging discards order, and zero-mask
+inference may create inputs unlike those seen in training. Such diagnostics motivate
+simple competitive references rather than a claim that visual behaviour or language is
+generally uninformative.
+
+\section{What the independent corpus adds}
+
+% Source: results/avi-baseline-2026-11-02-reconciled.json.
+AVI-Personality adds independent participants and a different rating source
+~\cite{Zhang2026AVI}. Its official test contains 130 people, and the selected ridge
+predictor has original-scale MAE 0.419 against 0.479 for the training-target mean.
+The approximately 12.6\% lower error shows useful predictive signal in its audio/video
+features on this test. It does not imply that its raw MAE is better than MIT's:
+the target scale, recruiter judgement, interview format and visual input boundary differ.
+
+The group-error audit adds another source distinction. Self-reported male respondents
+have test MAE 0.452 and female respondents 0.385, a descriptive signed gap of 0.067
+rating points. One prefer-not-to-say response and the absence of a non-binary or
+third-gender test respondent limit the categories that can be estimated. Those source
+categories cannot be collapsed or moved between splits to create support. The positive
+lower endpoint of a bootstrap interval for an absolute gap does not establish a nonzero
+signed population difference; the reported point gap is therefore kept descriptive.
+
+This external ridge analysis does not contain a W1 treatment/control comparison.
+Consequently, it supports independent interview-score prediction and group-error
+description rather than confirmation that the proxy penalty transports. That boundary
+is central to RQ4. An external dataset does not, by itself, convert an exploratory MIT
+finding into a confirmed general method effect. A method comparison formulated after
+the external baseline and audit have been inspected is also exploratory, even though
+its participants are independent of MIT.
+
+The visual representation further limits an exact replication claim. AVI features
+average sampled full frames, whereas MIT uses operationally selected face crops.
+The independent release supplies audio/video but no transcripts. These differences can
+affect both prediction and the proxy partition. They are part of the scope of the
+external procedure, not a reason to pool results as if the same outcome and inputs had
+been observed twice.
+
+
+\section{The matched comparison on independent participants}
+
+% Source: results/avi-compact-reconciled-v1.json.
+The matched fifteen-arm comparison supplies the treatment-versus-control evidence the
+baseline could not. Its primary contrast, the visual natural-exposure penalty at the
+strength that served as the main study's primary setting, changes original-scale error by
+0.002 rating points, rank correlation by $-0.018$ and the audited gender score gap by
+0.001. Every interval contains zero. The independent corpus therefore reproduces the
+main study's central outcome rather than correcting it: at the primary strength, proxy
+regularisation leaves both utility and audited disparity where it found them.
+
+The more informative result is the separation between training and held-out proxy response.
+The penalty succeeds completely on its own optimisation target, collapsing the training
+visual proxy gap from 0.021 to below 0.001 at the strongest setting. Almost none of that
+reduction survives on held-out participants, where the same arm leaves the gap at 0.031
+against a control value of 0.032. The failure is therefore one of generalisation, not of
+optimisation: the constraint is satisfied on the participants used to fit it and does not
+describe the participants it is then applied to. This distinction matters for interpreting
+the main study, where the same pattern appears in weaker form, and it is not visible from
+utility and disparity summaries alone.
+
+The audio proxy behaves differently and is the more instructive case. Its constraint does
+generalise, reducing the held-out proxy gap from 0.074 to 0.023. If reducing a proxy-group
+score gap were sufficient to reduce an audited group gap, this is the arm in which the
+effect should appear. It does not: the corresponding disparity gain is 0.012 with interval
+$[-0.006, 0.029]$, while original-scale error rises by 0.034 and rank correlation falls by
+0.178, both with intervals excluding zero. A proxy constraint that transfers successfully
+to new participants thus purchased a substantial utility loss without a demonstrable
+fairness return. This is direct evidence that the unsupervised partition is not a usable
+stand-in for the attribute the audit measures, and it is stronger evidence than a null
+obtained from a constraint that never transferred at all.
+
+Three of the thirty-six intervals across the twelve penalised arms exclude zero on the
+disparity measure. None is the primary contrast, no correction was applied for examining
+twelve arms on three measures, and two of the three have lower endpoints within 0.0001 of
+zero. The remaining one occurs at the strongest penalty, where ranking utility is also
+declining. Treating any of these as a mitigation result would be selecting an outcome
+after seeing it. They are reported because the complete grid is reported, and they are
+interpreted as consistent with multiplicity rather than with a located effect.
+
+One structural feature bounds all of these comparisons. Validation-selected shrinkage leaves
+predicted scores with a standard deviation of 0.081 against an outcome standard deviation
+of 0.149, before any penalty is applied. A score-disparity penalty acts on the separation
+between two group prediction distributions, so a predictor compressed to roughly half the
+dispersion of its target offers correspondingly little separation to remove. The regularisation
+strength was selected at the upper limit of its search range in every fold of every study
+reported here, which indicates a shrinkage-dominated regime rather than a boundary chosen
+among competitive alternatives. The absence of disparity movement is consequently
+consistent with two explanations that this evidence cannot separate: that proxy
+regularisation does not reduce audited disparity, or that the scorers available to it
+were too compressed for any such reduction to be expressed. The second explanation is
+reinforced by the main study, where the learned configurations did not reach the utility of
+the deterministic ridge floors, and by the random-proxy control, which performed as well as
+the structured proxies.
+
+\section{Answering the research questions}
+
+\textbf{RQ1, whether a participant-safe benchmark supports a competitive scorer.} Partly,
+and less well than intended. Correct pairing, a reliable-enough aggregated target and a
+participant-grouped evaluation were established, and the deterministic floors demonstrate
+recoverable signal, reaching rank correlation 0.424 and original-scale error 0.535 on MIT
+and 0.473 and 0.419 on the independent corpus. The learned configurations did not match
+those floors on any of the four utility measures. The benchmark is therefore sound as a
+measurement instrument while the learned scorer built on it is not competitive, and that
+gap conditions every answer that follows.
+
+\textbf{RQ2, whether proxy regularisation measurably changes held-out proxy-score
+distributions beyond balanced sampling.} Only partly, and the answer depends on the proxy.
+In training the penalty controls the proxy gap completely, on both corpora. On held-out
+participants the visual constraint barely transfers, while the audio constraint transfers
+substantially. Balanced sampling alone did not reproduce the training effect. The mechanism
+is therefore real but unreliable, and its reliability is a property of the specific
+representation partitioned rather than of the method.
+
+\textbf{RQ3, whether proxy change is accompanied by changes in perceived-group disparity at
+an explicit utility cost.} No. On MIT the paired disparity intervals include zero, and on
+the independent corpus the primary contrast does likewise. Where a proxy constraint did
+transfer, the utility cost materialised without the disparity benefit. The utility cost is
+thus demonstrable and the fairness return is not, which is the opposite of the trade-off the
+method is intended to offer.
+
+\textbf{RQ4, whether the evidence transports to an independent corpus.} The null transports;
+a mitigation effect does not, because none was established to transport. The independent
+comparison reproduces the main study's outcome under a different outcome construct, rating
+source and visual boundary, which strengthens the negative finding. It does not convert any
+exploratory result into a confirmed general effect, and the comparison was itself specified
+after the external baseline had been inspected.
+
+\section{Internal and statistical validity}
+
+Participant isolation is essential in both corpora. The corrected MIT mapping keeps
+each person's pre and post recording in one fold; AVI keeps all six responses in one
+official participant split. Cross-fitting nevertheless reuses participants across training
+sets, so folds and training seeds are not independent experimental samples. Dependence
+also complicates general cross-validation uncertainty~\cite{BengioGrandvalet2004}.
+
+The participant bootstrap conditions on the fitted models and observed splits. Its
+paired draws preserve configuration matching, but it does not estimate the variability
+of retraining and selecting a model on a fresh sample. Intervals are pointwise rather
+than simultaneous guarantees across the full strength, proxy and audit grid. Fairness
+measurement itself can have finite-sample bias~\cite{Lum2022}; neither a nonnegative
+distance nor an absolute-gap interval is a general null test.
+
+The strongest-penalty numerical terminations, mixed-speaker MIT audio, full-frame AVI
+inputs, source-label missingness and low rating agreement are substantive limits.
+The input and label separation protects the declared fit from direct audit selection;
+it cannot remove bias already encoded upstream or validate the target against
+employment outcomes. The reciprocal source correction for two MIT post sessions is
+likewise a prerequisite for valid participant analysis rather than an independent
+contribution to mitigation.
+
+\section{Practical limits and further evidence}
+
+The research audits scores in mock-interview datasets. It does not construct or
+validate a hiring tool. Outcome prediction, score-distribution similarity and observed
+group error must remain separate from job-performance validity, discrimination
+experienced by applicants and compliance conclusions.
+
+The most informative further evidence would address the limits exposed here: independently
+documented perceived-attribute judgements, better outcome reliability, and an external
+matched intervention comparison with a credible predictor. None can be replaced by
+adding more seeds, bootstrap draws or weak model variants. Candidate-speech separation
+and temporal modelling are also distinct experiments rather than retrospective repairs
+of these results. The supported conclusion is an active proxy mechanism with a
+conditional predictive cost and uncertain audited transfer, alongside an independent
+demonstration of interview-score prediction.
+
+\end{spacing}
