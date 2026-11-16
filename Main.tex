@@ -1,0 +1,111 @@
+% Unitec thesis template adapted for Ravi V. Ramchandani from supplied Word thesis.
+% Main file: set pdfLaTeX compiler in Overleaf (Settings > Compiler).
+\documentclass[12pt,a4paper]{report}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tgtermes}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,longtable,array,calc}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{indentfirst}
+\usepackage{cite} % IEEE numeric citation formatting and sorting
+% Make the bibliography numbers blue links to their publication DOI.
+\providecommand{\currentbiburl}{https://doi.org}
+\makeatletter
+\renewcommand{\@biblabel}[1]{\href{\currentbiburl}{\textcolor{blue}{[#1]}}}
+\makeatother
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue, filecolor=blue}
+\usepackage[nottoc]{tocbibind}
+\renewcommand{\contentsname}{Table of Contents}
+\renewcommand{\bibname}{References}
+\setlength{\emergencystretch}{3em}
+\newcommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\begin{document}
+\pagenumbering{gobble}
+\begin{titlepage}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{unitec-logo.png}\\[1.2cm]
+{\Large\bfseries Manukau Institute of Technology and Unitec (MITU)}\\[0.5cm]
+{\Large\bfseries School of Computing}\\[0.8cm]
+{\Large\bfseries Master's Thesis}\\[1.4cm]
+\rule{\linewidth}{0.5mm}\\[0.4cm]
+{\huge\bfseries Explainable Bayesian Survival Models}\\[0.4cm]
+\rule{\linewidth}{0.5mm}\\[1cm]
+{\Large\bfseries Ravi V. Ramchandani}\\[1cm]
+\textbf{Principal Supervisor: Dr Iman Ardekani}\\[0.2cm]
+\textbf{Associate Supervisor: Ali Keivanmarz}
+\vfill
+A thesis submitted in partial fulfilment of the requirements\\
+for the degree of \textbf{Master of Applied Technologies}
+\vfill
+\textbf{November 2026}
+\end{center}
+\end{titlepage}
+\clearpage\pagenumbering{roman}\setcounter{page}{1}
+%\chapter*{Acknowledgements}\addcontentsline{toc}{chapter}{Acknowledgements}
+%\input{ack.tex}
+
+\clearpage
+\chapter*{Acknowledgements}
+\addcontentsline{toc}{chapter}{Acknowledgements}
+
+\begingroup
+\justifying
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+\input{ack.tex}
+\endgroup
+
+\clearpage
+%\chapter*{Abstract}\addcontentsline{toc}{chapter}{Abstract}
+%\input{abstract.tex}
+
+\clearpage
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\begingroup
+\justifying
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+\input{abstract}
+\endgroup
+
+\clearpage
+
+\clearpage\tableofcontents
+\clearpage\listoffigures
+\clearpage\listoftables
+\clearpage\chapter*{List of Abbreviations}\addcontentsline{toc}{chapter}{List of Abbreviations}
+\input{abbreviations.tex}
+\clearpage\pagenumbering{arabic}\setcounter{page}{1}
+\input{introduction.tex}
+\input{literature_review.tex}
+\input{methodology.tex}
+\input{results.tex}
+\input{conclusion.tex}
+\clearpage
+{\small\input{references.tex}}
+\appendix
+\input{appendix_a.tex}
+\input{appendix_b.tex}
+\input{appendix_c.tex}
+\input{appendix_d.tex}
+\input{appendix_e.tex}
+\input{appendix_f.tex}
+\input{appendix_g.tex}
+\input{appendix_h.tex}
+\input{appendix_i.tex}
+\input{appendix_j.tex}
+\end{document}
