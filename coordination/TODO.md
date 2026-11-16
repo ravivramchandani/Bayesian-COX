@@ -20,7 +20,7 @@ artefacts satisfy the stated gate.
 
 ADR-053 supersedes the earlier manuscript-production sequence. The complete report is 92 pages, with five chapters, six scientific appendices, nine figures, 28 tables and 76 cited references. The methods, interpretation and all numerical displays use existing verified results. No new experiment is required.
 
-The source and PDF are published at GitHub branch `thesis/final-report-20261117`, commit `397c54c`; the source ZIP is in `reports/thesis_final/`. The active Overleaf project is `6af91395a2e68e546f56fbc0`. Its direct Git push was rejected, so only the editor upload remains for that destination. The final files and upload steps are linked in `docs/ravi_thesis_next_steps.md`.
+The source and PDF are published at GitHub branch `thesis/final-report-20261117`, commit `397c54c`; the source ZIP is in `reports/thesis_final/`. The active Overleaf project is `6af91395a2e68e546f56fbc0`. The final source and saved PDF are now published there at revision `397c54c`. The final files and editing steps are linked in `docs/ravi_thesis_next_steps.md`.
 
 All 47 evidence-file hashes, 2,204 presentation-table numeric tokens, 54 all-horizon calibration rows and 27 secondary contrasts passed checks. Independent scientific review, PDF layout review and a fresh ZIP build passed. The receipt is `reviews/2026-11-17-thesis-rereview.json`. The report omits planning history and internal metadata while accurately expressing the scientific findings. The owner's manuscript-content exclusions remain in force.
 

@@ -1,5 +1,11 @@
 # HANDOFF
 
+## Overleaf publication verified — 2026-11-17
+
+Write access is working. The final thesis was pushed successfully to [the active Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0). Its remote `main` and `HEAD` are both `397c54c1b97e729d18c009afbfbc4c318fad11e9`, matching the verified source and GitHub thesis branch. The `Main.tex` and `Main.pdf` Git blobs are identical across the local and Overleaf copies. The saved PDF is the reviewed 92-page report.
+
+Manual upload is no longer required. The current editing instructions are in [Ravi's thesis next steps](../docs/ravi_thesis_next_steps.md). The publication receipt is [2026-11-17-overleaf-publication.json](reviews/2026-11-17-overleaf-publication.json). No scientific content or result changed during publication. Earlier access-denial notices below describe the preceding checkpoint.
+
 ## Examiner review and concision — 2026-11-17
 
 The owner requested a full review under the supplied Master's thesis examiner prompt, prioritising a strong standalone argument and removal of unnecessary repetition. The revised PDF is 92 pages, with five chapters, six scientific appendices, nine figures, 28 tables and 76 cited references. It removes 2,221 whitespace-delimited source tokens from the main chapters while adding a closest-work comparison and exact analytical interpretation of posterior-contribution/SHAP scores. This is a source-text comparison, not an institutional word count.

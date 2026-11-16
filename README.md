@@ -7,10 +7,10 @@ The completed 92-page report, **Explainable Bayesian Survival Models**, is saved
 
 - [Read the final PDF](https://github.com/ravivramchandani/Bayesian-COX/blob/397c54c1b97e729d18c009afbfbc4c318fad11e9/Main.pdf).
 - [Download the Overleaf source ZIP](reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-17.zip).
-- [Ravi's file and upload instructions](docs/ravi_thesis_next_steps.md).
+- [Ravi's thesis instructions](docs/ravi_thesis_next_steps.md).
 - [Latest examiner-style assessment](assessment/Ravi_thesis_assessment_Codex_v2.md).
 
-The source and PDF are pushed to GitHub. Overleaf rejected the direct push to the new project, so the prepared source is ready for an editor upload. The code and experiment records below remain available independently of thesis editing.
+The verified final source and saved PDF are now published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) at revision `397c54c`, and backed up on GitHub. The code and experiment records below remain available independently of thesis editing.
 
 Code and reproducibility materials for a Master of Applied Technologies
 thesis at the School of Computing, Unitec.

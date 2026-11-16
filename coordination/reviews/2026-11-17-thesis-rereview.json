@@ -57,7 +57,8 @@
   "source_zip_bytes": 386340,
   "publication": {
     "github_branch": "thesis/final-report-20261117",
-    "overleaf": "direct Git write access remains unavailable; upload package prepared"
+    "overleaf": "Published and verified at 397c54c1b97e729d18c009afbfbc4c318fad11e9",
+    "overleaf_receipt": "coordination/reviews/2026-11-17-overleaf-publication.json"
   },
   "code_repository_checks": {
     "coordination_schemas": "passed",

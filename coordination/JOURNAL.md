@@ -1,5 +1,9 @@
 # JOURNAL
 
+## 2026-11-17 — Final thesis published to Overleaf
+
+After the owner enabled full edit access, the direct Git push succeeded. Overleaf `HEAD` and `main` are `397c54c1b97e729d18c009afbfbc4c318fad11e9`, matching the final GitHub thesis revision. The local and remote `Main.tex` and saved `Main.pdf` blobs match exactly. The published report is the reviewed 92-page version. The current handoff and editing instructions now point to the live final project; no manual upload remains.
+
 ## 2026-11-17 — Examiner review and report consolidation
 
 Reviewed the complete thesis against the owner's supplied nine-criterion prompt. Corrected question-to-estimand alignment, a benchmark citation and two bibliographic details. Added a five-row closest-work synthesis, an exact posterior-averaging/background-centring decomposition and its bounds, and the implemented variance-mixture prior interpretation. The mathematical identities were independently checked. The observed computation comparison now supports concrete recommendations.

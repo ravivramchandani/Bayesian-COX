@@ -1,6 +1,6 @@
 # Ravi: thesis files and research handoff
 
-Start with [the final thesis files and upload steps](ravi_thesis_next_steps.md). The finished 92-page report and source are on GitHub branch `thesis/final-report-20261117` at `397c54c`. The active Overleaf project is [6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0); its direct Git push was rejected, so the prepared source awaits an editor's upload. Reading or editing the thesis requires only a browser on any operating system.
+Start with [the final thesis files and editing steps](ravi_thesis_next_steps.md). The finished 92-page report and source are on GitHub branch `thesis/final-report-20261117` at `397c54c`. The active Overleaf project is [6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0); it now contains the verified final source and saved PDF at revision `397c54c`. Reading or editing the thesis requires only a browser on any operating system.
 
 The technical release and experiment details below are retained for their separate uses.
 
@@ -217,7 +217,7 @@ Git commands.
 
 The completed thesis source and PDF are backed up in this GitHub repository's [thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117). The code and original experiment evidence remain on `main`.
 
-For Overleaf upload or browser editing, use [the final thesis instructions](ravi_thesis_next_steps.md). The active project is [6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0). The earlier 6a750f3e project is a historical checkpoint. The report is complete; it does not need numerical replay.
+For browser editing or source backups, use [the final thesis instructions](ravi_thesis_next_steps.md). The active project is [6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0). The earlier 6a750f3e project is a historical checkpoint. The report is complete; it does not need numerical replay.
 
 ## Optional locked-environment verification and restore on a fresh Apple Silicon Mac
 

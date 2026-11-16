@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-17",
+  "status": "published_and_remote_verified",
+  "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+  "remote_head": "397c54c1b97e729d18c009afbfbc4c318fad11e9",
+  "remote_main": "397c54c1b97e729d18c009afbfbc4c318fad11e9",
+  "github_thesis_branch": "thesis/final-report-20261117",
+  "local_revision": "397c54c1b97e729d18c009afbfbc4c318fad11e9",
+  "fast_forward_from": "69a7f0461b8e052161a6b9a1530ca53c1523861c",
+  "main_tex_git_blob": "aab65bb47406a51e4f6e018883b3e7f2d747edcc",
+  "main_pdf_git_blob": "ff5fe7c4b4a79c1a554fcdae4db60a02aa13226b",
+  "source_and_saved_pdf_match": true,
+  "saved_pdf_pages": 92,
+  "scientific_content_changed": false,
+  "overleaf_browser_compilation_observed": false
+}
