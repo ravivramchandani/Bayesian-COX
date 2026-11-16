@@ -1,5 +1,16 @@
 # Bayesian Survival Models for Explainable Prediction of Diseases
 
+
+## Final thesis report
+
+The completed 100-page report, **Explainable Bayesian Survival Models**, is saved on the [thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117). It includes the current methods and results, nine figures, 29 tables and 76 cited references.
+
+- [Read the final PDF](https://github.com/ravivramchandani/Bayesian-COX/blob/feae8e289ab3309c0a76684bbd2b15ec315c7655/Main.pdf).
+- [Download the Overleaf source ZIP](reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-17.zip).
+- [Ravi's file and upload instructions](docs/ravi_thesis_next_steps.md).
+
+The source and PDF are pushed to GitHub. Overleaf rejected the direct push to the new project, so the prepared source is ready for an editor upload. The code and experiment records below remain available independently of thesis editing.
+
 Code and reproducibility materials for a Master of Applied Technologies
 thesis at the School of Computing, Unitec.
 
@@ -31,9 +42,7 @@ new lineage; its 1,625-fit grid, catalytic correction, rendering, visual
 review and remote restoration remain incomplete. This research may continue
 in parallel but does not block the baseline thesis or support full-grid
 claims yet. Follow [extension execution](docs/extensions_execution.md) and
-the current HANDOFF before running anything. The separate Overleaf thesis
-has not been edited under this code/results checkpoint; paper drafting is
-deferred until after thesis submission.
+the current HANDOFF before running anything. The thesis report is complete under ADR-053; paper drafting remains deferred until after thesis submission.
 
 ## Start here — Ravi's handoff
 
@@ -147,8 +156,7 @@ New confirmatory execution remains closed. Production execution refuses
 methodological overrides and hash mismatches.
 Each cell is checkpointed with data, dependency, configuration, code, seed,
 runtime, diagnostic and prediction lineage. Figures and tables are rendered
-from frozen artefacts without refitting. The current instruction is to complete the code/results programme described
-in `coordination/HANDOFF.md` and `coordination/TODO.md`; Overleaf edits are excluded.
+from frozen artefacts without refitting. Current manuscript instructions are in ADR-053 and `docs/ravi_thesis_next_steps.md`.
 
 ## Refactor verification and separate sampler sensitivity
 
@@ -224,8 +232,7 @@ overwrites existing files.
   and 33 fully paired rows. Partial and unavailable estimates stay explicit.
   Confirmatory explanation production stored 1,845 comparisons, but 102 of 1,640 evaluable convergence comparisons
   failed, so no RQ3 claim is permitted. Code/results claim review is complete;
-  thesis wording and supervisor sign-off are later tasks. Overleaf edits
-  remain excluded from the current programme.
+  the completed thesis wording is recorded under ADR-053.
   No complete-family superiority or equivalence claim is accepted. ADR-033
   permits a separately labelled post-hoc bound on the incomplete Holm family.
 

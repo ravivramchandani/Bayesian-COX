@@ -1,10 +1,8 @@
-# Ravi: restore the results and continue the work
+# Ravi: thesis files and research handoff
 
-For the thesis, start with [Ravi's thesis next steps](ravi_thesis_next_steps.md). It works
-on Windows, Linux and macOS: check private GitHub/Overleaf access, read the
-claim limits, and download only the reviewed figures and tables you need.
-No Mac, conda installation or numerical replay is required to begin writing.
-This longer handoff preserves technical release and experiment details.
+Start with [the final thesis files and upload steps](ravi_thesis_next_steps.md). The finished 100-page report and source are on GitHub branch `thesis/final-report-20261117` at `feae8e2`. The active Overleaf project is [6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0); its direct Git push was rejected, so the prepared source awaits an editor's upload. Reading or editing the thesis requires only a browser on any operating system.
+
+The technical release and experiment details below are retained for their separate uses.
 
 The baseline code and results programme is complete and remotely verified.
 The separate 1,625-cell post-hoc extension and catalytic correction remain
@@ -20,7 +18,7 @@ its partial results. The owner authorised full Overleaf replacement on 2026-10-2
 and appendices are now a complete LaTeX draft with regenerated results. Ravi
 should review that draft and resolve supervisor feedback; no new model run is
 required. The dated conversion receipt is in
-`coordination/reviews/2026-10-21-thesis-conversion.json`.
+`coordination/reviews/2026-10-21-thesis-conversion.json `.
 
 A separate [post-hoc clinical methods study](clinical_methods_results.md)
 is now complete and privately released. Its fixed 225 penalised-Cox cells
@@ -215,24 +213,11 @@ run directories or partial extension results; the published evidence is in
 the four releases above. Thesis writing in Overleaf does not require these
 Git commands.
 
-## Thesis source is a separate Overleaf project
+## Thesis source and PDF
 
-`Main.tex` and the thesis chapters are not in the GitHub code repository.
-They are in the separate [Overleaf Git project](https://git.overleaf.com/6a750f3e68075fe560b0c306).
-Ravi needs access to that project as well as the private GitHub repository;
-access from this Mac does not verify his own login. With access, he can view
-the draft in Overleaf now. Editing the separate thesis project awaits Ali's
-instruction and coordination. If local work is later needed, clone it beside
-`bayesian-cox`:
+The completed thesis source and PDF are backed up in this GitHub repository's [thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117). The code and original experiment evidence remain on `main`.
 
-```bash
-git clone https://git.overleaf.com/6a750f3e68075fe560b0c306 ../thesis-overleaf
-```
-
-`make thesis` expects `../thesis-overleaf` by default; set `THESIS_DIR` if it
-lives elsewhere. The remote thesis is a draft: its results and conclusion
-chapters and abstract still need the verified findings and review. Restored
-figures and tables come from the GitHub releases above.
+For Overleaf upload or browser editing, use [the final thesis instructions](ravi_thesis_next_steps.md). The active project is [6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0). The earlier 6a750f3e project is a historical checkpoint. The report is complete; it does not need numerical replay.
 
 ## Optional locked-environment verification and restore on a fresh Apple Silicon Mac
 
@@ -331,7 +316,7 @@ mkdir "$RAVI_AUDIT"
 tar -xzf "$RAVI_AUDIT_ASSETS/programme-audit-evidence.tar.gz" -C "$RAVI_AUDIT"
 ```
 
-`programme-audit-manifest.json` records every member hash and size. Historical
+`programme-audit-manifest.json ` records every member hash and size. Historical
 logs and PID files describe earlier states; use the current HANDOFF for what
 to run next. The final QA status is passed; earlier pending or format-rejected
 records are retained for provenance.
@@ -366,7 +351,7 @@ family and failed explanation-convergence gate remain part of the evidence.
 The 75 new sampler fits are post-hoc sensitivity results and cannot replace
 them. Preserve the actual earlier Holm-bound and sampler-probe chronology.
 
-Overleaf editing still requires the owner's instruction. Paper drafting,
+Thesis editing is authorised under ADR-053. Paper drafting,
 submission and DOI minting are deferred until after thesis submission.
 
 ## Post-hoc extension evidence

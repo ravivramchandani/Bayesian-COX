@@ -1,5 +1,17 @@
 # HANDOFF
 
+## Final standalone thesis — 2026-11-17
+
+The owner's current instruction is to finish Ravi's new report around the completed study, with clear fluent prose and subject-focused scientific content. ADR-053 supersedes the earlier manuscript-production sequence. The complete report now has 100 pages, 9 figures, 29 tables and 76 cited references. Its five chapters and seven scientific appendices describe the existing repeated-validation, posterior, calibration, robustness and explanation evidence. Planning history, internal paths/hashes and repeated caveats are absent from the manuscript. Interpretation-essential diagnostic and uncertainty results remain accurate.
+
+The source and PDF are pushed to GitHub branch `thesis/final-report-20261117`, commit `feae8e289ab3309c0a76684bbd2b15ec315c7655`. The upload-ready source ZIP is `reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-17.zip`. Start with [the final thesis instructions](../docs/ravi_thesis_next_steps.md).
+
+The active Overleaf target is [6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0). A direct push was rejected by Overleaf as forbidden; its remote remains at `69a7f04`. Browser access was unavailable. Therefore the new Overleaf publication is not claimed. An editor can upload the prepared files; the finished PDF and source are already remotely available on GitHub.
+
+The fresh upload ZIP builds independently to an identical 100-page text result. All 47 saved evidence assets retain their hashes; 21 presentation tables preserve 2,204 numeric tokens over 435 rows, and the additional 54 calibration rows and 27 secondary contrasts match their saved aggregates. Independent content and numeric checks, full-PDF layout review, citations and cross-references passed. No models were fitted. The receipt is [2026-11-17-final-thesis.json](reviews/2026-11-17-final-thesis.json).
+
+Earlier dated sections below describe their own checkpoints. The October Overleaf URL and 147-page report are historical. The excluded experiments remain outside this manuscript and are not needed to finish it.
+
 ## Full thesis replacement — 2026-10-21
 
 The owner explicitly authorised replacing the separate Overleaf thesis from

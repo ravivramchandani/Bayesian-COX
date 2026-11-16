@@ -1,7 +1,6 @@
 # TODO
 
-Live task register for the 15-week thesis programme, 2026-08-17 to the
-owner-set 2026-11-30 planning target; paper work is deferred. Completed tasks
+Current task register. Manuscript production follows ADR-053; paper work is deferred. Completed tasks
 are checked and later pruned; durable findings
 belong in `JOURNAL.md`. The design and claim rules are in
 `docs/study_protocol.md` and `docs/claim_evidence_register.md`.
@@ -17,34 +16,14 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
-## Current thesis gate - 2026-10-21
+## Current manuscript — 2026-11-17
 
-The owner-authorised DOCX-to-LaTeX replacement is complete as a full technical
-and scientific draft: Introduction, Literature Review, Methodology, Results and
-Discussion, Conclusion, front matter and appendices. Tables and plots use the
-latest verified ADR-044 baseline. No new experiment was needed. The conversion
-and independent numerical review are recorded in
-`reviews/2026-10-21-thesis-conversion.json` and the Overleaf repository's
-`conversion_manifest.json`.
+ADR-053 supersedes the earlier manuscript-production sequence. The complete report is 100 pages, with five chapters, seven scientific appendices, nine figures, 29 tables and 76 cited references. The methods, interpretation and all numerical displays use existing verified results. No new experiment is required.
 
-The full clarity/coherence revision is also complete: current PDF 147 pages,
-with a quantitative abstract, interpreted results, an RQ/hypothesis matrix,
-additional aggregate displays and deduplicated references. Author/supervisor
-acceptance is still pending. The owner explicitly excludes funding,
-competing-interest and ethics approval/exemption statements from the manuscript
-and appendices; do not add them as checklist requirements.
+The source and PDF are published at GitHub branch `thesis/final-report-20261117`, commit `feae8e2`; the source ZIP is in `reports/thesis_final/`. The active Overleaf project is `6af91395a2e68e546f56fbc0`. Its direct Git push was rejected, so only the editor upload remains for that destination. The final files and upload steps are linked in `docs/ravi_thesis_next_steps.md`.
 
-T-150–T-156 now have complete draft material; their remaining author/supervisor
-acceptance and final length checks are not represented as obtained. T-157–T-161
-remain the full-draft review, revision, institutional audit and submission path.
-Ravi should review the current Overleaf manuscript rather than start the results
-chapter from a stub or rerun the completed experiments.
+All 47 evidence-file hashes, 2,204 presentation-table numeric tokens, 54 all-horizon calibration rows and 27 secondary contrasts passed checks. Independent scientific review, PDF layout review and a fresh ZIP build passed. The receipt is `reviews/2026-11-17-final-thesis.json`. The report omits planning history and internal metadata while accurately expressing the scientific findings. The owner's manuscript-content exclusions remain in force.
 
-T-106, T-108 and T-147 remain complete under ADR-048's recorded owner override;
-no external reviewer approval is implied. The earlier 21,000-word main-text
-budget remains a planning convention, not a verified university limit. The
-owner's current request preserved the full substantive content of Ravi's report.
-The excluded post-hoc experiments remain non-blocking.
 
 ## Historical recovery and programme checkpoints - 2026-10-01
 
@@ -491,72 +470,20 @@ or explanation stability.
   no external approval is claimed. The extension tasks remain nonblocking
   under ADR-044.
 
-## Weeks 1–14 — Thesis writing and audit
+## Thesis production and use — ADR-053
 
-- [ ] T-150 (T, W1–4, owners R/PS; depends T-101/T-109) — Replace the
-  oversized literature review with a 5,000–7,000-word critical healthcare
-  synthesis. Acceptance: exact gap/RQs follow from reviewed evidence; no
-  duplicated textbook, cybersecurity, business or unsupported material. The complete literature review from Ravi's report is now in LaTeX; supervisor
-  review and final length alignment remain.
-- [ ] T-151 (T, W1–3, owners R/PS; depends T-101) — Draft the introduction.
-  Acceptance: context, gap, contribution, operational RQs, scope and chapter
-  map are substantive and supervisor-approved. The full source-report introduction is now in LaTeX with the frozen research
-  questions restored; supervisor text review remains.
-- [ ] T-152 (T, W2–6, owners R/SS; depends progressively T-101–T-131) — Draft
-  methodology to match the frozen implementation. Acceptance: cohorts,
-  eligibility, missingness, predictors, validation, equations, priors,
-  diagnostics, metrics, explainability and deviations are complete.
-  The full methodology was updated on 2026-10-21 to the frozen code, exact
-  validation, diagnostic implementation and current evidence. Recorded technical
-  corrections are applied; author/supervisor acceptance remains.
-- [ ] T-153 (T, W7–10, owners R/SS; depends progressively T-134–T-147) —
-  Draft results from generated artefacts. Acceptance: exploratory and
-  confirmatory evidence are separated; diagnostics, calibration, negative
-  results and sensitivities are included without manual number transcription.
-  A complete results/discussion draft and regenerated evidence tables/plots were
-  produced on 2026-10-21 under explicit owner authority. Author/supervisor
-  acceptance remains; the chapter is no longer an empty Overleaf heading.
-  Under ADR-044, use the verified baseline, robustness, explanation, ADR-032
-  sensitivity and ADR-033 Holm evidence. The original incomplete primary
-  family and failed explanation gate remain explicit. Include a separate
-  post-hoc extension only if its full evidence bundle, including the separate
-  correction and T-186 gates, finishes before the thesis results lock;
-  otherwise describe it as unfinished future work without partial-grid
-  comparative claims. The owner supplied that instruction on 2026-10-21 for the full replacement.
-- [ ] T-154 (T, W9–10, owners R/PS/SS; depends T-147) — Draft discussion and
-  conclusion. Acceptance: each RQ is answered at its supported strength;
-  limitations cover internal evaluation, endpoint heterogeneity, predictor
-  timing, missingness, PH, explanation and absence of clinical deployment. A complete discussion/conclusion draft was
-  produced on 2026-10-21 and awaits author/supervisor acceptance.
-- [ ] T-155 (T, W9–10, owners R/DO; depends T-102/T-103/T-129) — Complete
-  reproducibility and data appendices. Acceptance: exact commands,
-  environment/hardware, seeds, manifests, access/licensing, diagnostic
-  supplements and data-availability wording are present, following the owner's
-  manuscript-content exclusions above.
-  Appendices now contain the production identities, exact source/release hashes,
-  corrected diagnostic details and regeneration commands; final institutional
-  wording and author/supervisor acceptance remain.
-- [ ] T-156 (T, W10–11, owners R/PS; depends T-150–T-155) — Write abstract,
-  keywords and front matter last. Acceptance: structured abstract agrees
-  exactly with frozen results; no template text remains. The abstract, keywords
-  and source front matter were completed on 2026-10-21; final review remains.
-- [ ] T-157 (T, end W11, owners PS/SS; depends T-150–T-156) — Full-draft
-  gate. Acceptance: every chapter is substantive, all RQs are answered and no
-  thesis-critical claim lacks evidence.
-- [ ] T-158 (T, W11–12, owners R/PS/SS; depends T-157) — Complete two
-  supervisor review cycles. Acceptance: consolidated comments are resolved or
-  dispositioned with rationale; holiday weeks are protected from new scope.
-- [ ] T-159 (T, W12–13, owners R/IR; depends T-158) — Run independent
-  statistical, citation, equation, figure, accessibility, TRIPOD+AI,
-  PROBAST+AI and reproducibility audits. Acceptance: checklists are page-
-  referenced; clean LaTeX has zero undefined items or material overflow.
-- [ ] T-160 (T, end W13, owners R/PS/SS; depends T-159) — Produce the
-  examiner-ready thesis. Acceptance: content, statistics, ethics, citations,
-  formatting and archive receive final sign-off.
-- [ ] T-161 (T, W14, owners R/PS; depends T-160) — Submit the university-
-  format thesis/source/evidence archive, leaving Week 15 as contingency before
-  the 2026-11-30 planning target; confirm the university deadline with the
-  supervisors before committing to a submission date.
+- [x] T-150 (T, owners R/PS) — Complete the critical literature synthesis. Acceptance: current study rationale, source-supported comparisons, clear research gap and accurate citations.
+- [x] T-151 (T, owners R/PS) — Complete the introduction. Acceptance: contribution, aims, research questions and study design align with the implemented analysis.
+- [x] T-152 (T, owners R/SS) — Complete methodology. Acceptance: exact cohorts, preprocessing, models, priors, diagnostics, validation, calibration, inference and explanation methods match the implementation.
+- [x] T-153 (T, owners R/SS) — Complete results from saved evidence. Acceptance: numerical tables, figures and prose match their sources; original and post-hoc analyses retain their scientific identities.
+- [x] T-154 (T, owners R/PS/SS) — Complete discussion and conclusion. Acceptance: each research question is answered at its supported strength, with clear contributions and coherent interpretation.
+- [x] T-155 (T, owners R/DO) — Complete scientific appendices. Acceptance: cohort, predictor, survival, diagnostic, calibration, explanation, robustness and supplementary inference details support the main text.
+- [x] T-156 (T, owners R/PS) — Complete abstract and front matter. Acceptance: contribution-led one-page abstract, consistent terminology, accurate results and professional presentation.
+- [x] T-157 (T, owners R/PS/SS) — Review whole-report coherence. Acceptance: independent checks find consistent definitions, research questions, methods, findings and citations.
+- [ ] T-158 (T, owners R/PS/SS) — Incorporate any subsequent author or supervisor feedback. This is separate from the completed manuscript-production work.
+- [x] T-159 (T, owners R/IR) — Verify the manuscript. Acceptance: source-based numeric and citation checks, preserved evidence hashes, clean references, PDF layout review and successful fresh-source compilation. No external reporting certification is claimed.
+- [x] T-160 (T, owners R/PS/SS) — Produce and preserve the final report files. Acceptance: PDF and complete source are committed and remotely available; an independently verified upload ZIP is provided.
+- [ ] T-161 (T, owners R/PS) — Complete the institutional submission process. Actual submission has not been performed.
 
 ## Paper drafting and DOI — deferred until after thesis submission (ADR-044)
 

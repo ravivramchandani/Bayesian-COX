@@ -1449,3 +1449,17 @@ Format:
   The new implementation is available for the separately tracked study, but
   no model has been fitted and no experiment result is produced by this
   decision. Production and result verification remain outstanding.
+
+
+## ADR-053 — Finalise the standalone thesis from completed evidence
+
+- Status: ACCEPTED
+- Date: 2026-11-17
+- Context: The owner supplied Ravi's new Overleaf project and requested a complete, coherent report of the study that exists now. The report should foreground its scientific contribution, with clear natural prose and no planning history, internal metadata or repetitive caveats.
+- Decision:
+  - Use the new project `6af91395a2e68e546f56fbc0` as the manuscript target. Preserve the previous source checkpoints.
+  - Finalise all five chapters and scientific appendices using the existing prediction, calibration, posterior, explanation, robustness and separately identified post-hoc results. No new model fitting is required.
+  - Present precise scientific findings and interpretation-essential coverage and uncertainty. Remove proposal-versus-completion narration, recovery records, machine paths, hashes and administrative material from the manuscript. Maintain the owner's existing manuscript-content exclusions.
+  - Replace outdated result screenshots with verified vector figures and source-derived tables. Preserve the original numerical evidence; presentation changes may improve labels and notes without changing values.
+  - Treat T-150 through T-157, T-159 and T-160 as manuscript-production tasks under the current acceptance criteria below. Author feedback and actual university submission remain separate activities, not prerequisites for producing the completed files.
+- Consequences: The completed source and PDF are published on GitHub branch `thesis/final-report-20261117`. The prepared source ZIP is independently build-verified. Overleaf rejected the direct Git push as forbidden; its live replacement is not claimed. The editor-upload procedure is recorded in `docs/ravi_thesis_next_steps.md`. Original experiments and code remain unchanged.

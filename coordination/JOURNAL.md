@@ -1,5 +1,13 @@
 # JOURNAL
 
+## 2026-11-17 — Completed standalone thesis
+
+Completed the new report from the existing verified study evidence. The five chapters and seven scientific appendices use clear connected prose, with nine figures, 29 tables and 76 cited references. The PDF has 100 pages. Outdated single-fold descriptions and result screenshots were replaced by the repeated-validation evidence and vector displays. The contribution, methods, interpretation and research-question synthesis are consistent throughout.
+
+All 47 original evidence assets retain their hashes. The 21 presentation tables preserve 2,204 numerical tokens across 435 rows; 54 all-horizon calibration rows and 27 secondary contrasts match the saved aggregates. Independent scientific checks, complete layout review and a fresh upload-ZIP build passed with zero undefined references/citations or overfull boxes. No model fitting or model-code change occurred.
+
+Source and PDF are on GitHub branch `thesis/final-report-20261117`, commit `feae8e2`. A source ZIP is stored at `reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-17.zip`. The live Overleaf project's Git endpoint rejected the push as forbidden and remains at `69a7f04`; browser access was unavailable. The completed report is ready for an editor upload. Current steps are in `docs/ravi_thesis_next_steps.md`; verification is in `reviews/2026-11-17-final-thesis.json`.
+
 ## 2026-10-21 - abstract contribution framing
 
 Overleaf commit `466209e` revises the abstract after direct comparison
