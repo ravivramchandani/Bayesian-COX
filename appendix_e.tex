@@ -2,12 +2,12 @@
 \label{app:explainability}\label{app:explanation}
 
 \section{Prior-Specific Posterior Quantities}
-Table~\ref{tab:gen-prior-signals} describes the scale of the continuous variance-mixing weights and horseshoe shrinkage proxies in the first repeat and first fold. Their definitions differ, while the coefficient and hazard-ratio quantities share an interpretation across all three priors. Continuous effects are expressed per training-fold standard deviation, and categorical effects compare the encoded level with its reference category.
+Table~\ref{tab:gen-prior-signals} summarises prior-specific quantities in the first repeat and first fold. Their definitions are given in Section~\ref{sec:method-explainability}.
 
 \input{tables/table_prior_signals.tex}
 
 \section{Comparison with CoxPH Explanations}
-The common intrinsic importance measure is the posterior expected absolute contribution of a clinical predictor group to the linear predictor. Signed encoded contributions are summed within a group before taking the absolute value. Table~\ref{tab:gen-explanation-cross-model} compares these rankings with exact linear SHAP for the paired CoxPH model. Its differences use the same folds and explanation seeds.
+Table~\ref{tab:gen-explanation-cross-model} gives the secondary paired comparison between Bayesian intrinsic rankings and CoxPH SHAP. Folds, subjects and explanation seeds are matched as described in Section~\ref{sec:method-explainability}.
 
 \input{tables/table_explanation_cross_model.tex}
 

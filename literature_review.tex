@@ -4,15 +4,11 @@
 \section{Survival Data and the Prediction Task}
 \label{survival-analysis-and-right-censored-data}
 
-Survival prediction connects an event definition, an observation process and a model for time to that event. In healthcare, the endpoint may be mortality, disease recurrence or another recorded clinical outcome. The event and time origin determine the meaning of every subsequent prediction. In and Lee explain the relationship between event times, risk sets and survival estimates, while Perera and Dwivedi place these quantities within study design and analysis choices \cite{ravi14,ravi15}. These foundations remain relevant when the predictor is a neural network or tree ensemble: the model learns from the event process represented in the data.
+Survival methods connect an event definition, an observation process and a model for time to that event. In and Lee explain how event times and risk sets define survival estimates, while Perera and Dwivedi relate these quantities to study design \cite{ravi14,ravi15}. Their central implication for prediction is that the endpoint and time origin define the task before a learning algorithm is selected. Mortality and recurrence models can use similar statistical machinery while answering different clinical questions.
 
-For event time $T$, survival probability is $S(t)=P(T>t)$. The hazard $h(t)$ is the instantaneous event rate conditional on remaining event-free to time $t$, and cumulative hazard is $H(t)=\int_0^t h(u)\,du$. For a continuous event-time distribution, $S(t)=\exp\{-H(t)\}$. This relationship links a hazard-based regression model to an absolute survival prediction. It also separates the interpretation of a relative hazard from the probability of experiencing an event by a particular horizon \cite{ravi14,ravi22}.
+Censoring also links estimation to evaluation. Survival likelihoods and inverse-probability-weighted scores use partial follow-up under assumptions about the censoring process \cite{ravi15,ravi26}. At a fixed horizon, early-censored patients have unknown outcome status; changing the algorithm does not remove that observation problem. A suitable comparison therefore aligns endpoints, prediction horizons and censoring adjustment as well as predictor inputs.
 
-Right censoring provides partial information: the event time exceeds the observed follow-up. A record censored at two years contributes information about survival to that time, while a record followed for ten years contributes a longer observed event history. Standard survival likelihoods and censoring-adjusted evaluation use this information under assumptions about the observation process. The role of censoring is therefore shared by estimation and validation. Both require a clear account of which outcomes are observed at each time \cite{ravi15,ravi26}.
-
-A fixed-horizon binary prediction and a survival prediction can be useful for different purposes. Binary prediction concerns event status at a selected time. Survival prediction describes event timing across follow-up and makes use of observed durations. At a fixed horizon, patients censored earlier have unknown event status, so their contribution requires an appropriate censoring adjustment. Survival-specific measures make this adjustment explicit rather than treating every censored patient as a non-event \cite{ravi3,ravi26}.
-
-The information available to a survival model depends on more than the number of records. Observed events identify effects, follow-up determines when those events can be seen, and predictor dependence influences how well individual associations can be separated. These considerations motivate the use of several clinical cohorts and controlled changes in training information. The present study retains the separate endpoint and time scale of each cohort, allowing model comparisons to address a common within-cohort prediction task.
+Observed events, follow-up and predictor dependence jointly determine the information available to estimate effects. Comparing models across clinical cohorts retains real differences in these quantities, whereas matched changes within a cohort examine information more directly. These two designs provide complementary evidence about prior behaviour. The event-time notation and the implemented censoring rules are specified in Chapter~\ref{chap:methods}.
 
 \section{Regression and Survival Ensembles}
 \label{classical-survival-models}
@@ -183,10 +179,23 @@ Clear reporting makes these relationships assessable. Reviews of machine-learnin
 \section{Synthesis and Study Rationale}
 \label{chapter-summary-and-research-gap}
 
-The literature establishes several complementary routes to survival prediction. Cox regression provides an interpretable proportional-hazards structure, RSF models interactions through survival ensembles, and DeepSurv learns a nonlinear risk function. Bayesian full-likelihood models represent uncertainty in both coefficient effects and the baseline hazard. Shrinkage and mixture priors add different forms of regularisation within this structure.
+\begin{table}[tbp]
+\centering
+\singlespacing
+\small
+\caption{Closest methodological studies and the focus of the present comparison.}
+\label{tab:closest-work}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+Study & Focus and design & Relationship to this study\\
+\midrule
+SurvBenchmark \cite{ravi33} & Clinical and omics model-family benchmarking across predictive, stability and computational measures. & The present benchmark centres coefficient-prior contrasts under a common full likelihood and clinical predictor representation.\\[0.4em]
+Tang et al. \cite{ravi25} & Spike-and-slab lasso Cox modelling for survival prediction and associated-gene detection. & The present comparison evaluates a continuous variance mixture alongside Normal and horseshoe priors, using shared posterior and predictive quantities.\\[0.4em]
+Song et al. \cite{ravi98} & A Gaussian-and-diffused-gamma prior with rank-based Cox partial-likelihood inference, iterative conditional modes and MCMC. & The present three-prior comparison models the baseline hazard explicitly and examines matched changes in training information.\\[0.4em]
+Suresh et al. \cite{ravi61} & Local LIME explanations for time-specific survival probabilities and survival curves. & The present explanation target is grouped log-risk contribution; posterior averaging, same-model SHAP agreement and sampling stability are assessed separately.\\[0.4em]
+Present study & Three coefficient priors within one piecewise-exponential survival model across three clinical cohorts. & Paired prior contrasts and information perturbations connect prediction, diagnostic acceptance, posterior interpretation and explanation behaviour.\\
+\bottomrule
+\end{tabularx}
+\end{table}
 
-The closest prior-related studies examine baseline regularisation, global--local shrinkage and several forms of survival variable selection. Their different likelihoods, prior distributions and inferential targets show why the implemented specification matters. A shared likelihood and predictor representation provide a direct way to compare the three coefficient priors considered here. Repeating that comparison across clinical cohorts and matched information conditions connects prior behaviour to observed events, censoring and predictor structure.
-
-The explanation literature adds a second dimension. Coefficient distributions describe uncertain associations, while contribution and SHAP rankings describe the fitted function from different perspectives. Assessing both agreement and repeatability connects an explanation's numerical form to its observed consistency. Combining this assessment with prediction and sampling diagnostics provides a fuller account of each prior's behaviour.
-
-The study connects prior choice, predictive evaluation, information sensitivity and explanation stability within one controlled survival framework. This produces multi-cohort evidence linking coefficient priors to predictive and interpretive behaviour.
+The contribution lies in this controlled empirical design. A shared likelihood, predictor matrix and validation partition make the prior contrast directly interpretable. Matched training-information changes then examine the same contrast under altered information, and the posterior/explanation analysis connects it to the fitted risk function. This yields evidence about what changes with a coefficient prior across prediction, computation and interpretation within the evaluated clinical settings.

@@ -2,9 +2,7 @@
 \label{app:data}\label{app:exploratory}
 
 \section{Analysis Populations and Source Predictors}
-The analysis includes 686 GBSG2 participants, 500 WHAS500 participants and 1,980 METABRIC participants. GBSG2 records recurrence-free survival in days; WHAS500 records all-cause mortality in days; METABRIC records overall survival in months. Each cohort is analysed on its own endpoint and time scale.
-
-Table~\ref{tab:gen-predictor-missingness} lists the clinical source predictors before categorical expansion and training-fold preprocessing. Numeric medians, scaling factors, category levels and reference categories are estimated within each training partition. METABRIC stage is included in the stage and multiple-imputation sensitivity specifications; its 514 missing values are handled within those analyses.
+Table~\ref{tab:gen-predictor-missingness} reports missingness for the primary clinical source variables before categorical expansion. Predictor definitions and training-fold transformations are specified in Section~\ref{sec:method-preprocessing}. The separate stage and multiple-imputation sensitivities include METABRIC stage.
 
 \input{tables/table_predictor_missingness.tex}
 

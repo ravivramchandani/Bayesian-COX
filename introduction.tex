@@ -6,8 +6,6 @@
 
 Clinical prognosis concerns both whether an event occurs and when it occurs. A patient may remain free of recurrence for several years, experience an event soon after diagnosis, or reach the end of observation before the event is recorded. Survival analysis uses event timing and censored follow-up to represent these different observations. It provides a common framework for studying mortality, recurrence and other clinical time-to-event outcomes \cite{ravi14,ravi15}.
 
-For event time $T$, the survival function is $S(t)=P(T>t)$, the probability of remaining event-free beyond time $t$. A model can estimate this probability at several future times using patient characteristics. The hazard describes the instantaneous event rate among patients who remain event-free. These complementary quantities support different interpretations: survival probabilities describe prognosis over a period, while hazard ratios describe relative event rates under a fitted model.
-
 Right censoring occurs when observation ends before the event is recorded. The patient's exact event time is unknown, but their observed event-free duration remains informative. Survival models retain that information through their likelihoods, and survival-specific evaluation measures account for incomplete outcome status at a prediction horizon. This treatment of follow-up makes survival analysis appropriate for healthcare cohorts with varying observation periods \cite{ravi3,ravi14}.
 
 The range of available methods has expanded from descriptive survival curves and regression to tree ensembles, neural networks and Bayesian models. Cox proportional-hazards regression provides a widely used model with directly interpretable coefficients. Random survival forest (RSF) represents nonlinear associations through ensembles of survival trees. DeepSurv uses a neural risk function within a proportional-hazards framework \cite{cox1972,ishwaran2008,ravi4}. Each offers a different balance of predictive flexibility, estimation and interpretation.
@@ -23,16 +21,12 @@ The amount of survival information also varies. Sample size, observed event coun
 
 Interpretation presents a related question. A coefficient distribution describes an association and its uncertainty. A feature-contribution ranking describes which predictors contribute most strongly to a fitted risk function. SHAP attributes that function to predictors relative to a reference background \cite{lundberg2017,ravi30}. These summaries answer complementary questions. Their agreement and repeatability provide additional information about the explanation of a model beyond its prediction error.
 
-This thesis brings prior choice, predictive evaluation, computational diagnostics and explanation analysis into one controlled study. Its central comparison changes the coefficient prior within a common Bayesian piecewise-exponential proportional-hazards model. CoxPH, RSF and DeepSurv provide context for the predictive results. The shared design makes it possible to examine how coefficient priors behave across clinical cohorts and under controlled changes in training information.
-
 \section{Research Contribution}
 \label{research-gap}
 
-The contribution is an integrated empirical assessment of Bayesian survival prediction and interpretation. Three coefficient priors are evaluated under the same likelihood, baseline-hazard structure, preprocessing rules and validation partitions. This isolates prior choice more directly than comparisons in which the model structure and estimation method change together.
+This thesis contributes a survival benchmark centred on coefficient priors. Normal, horseshoe and continuous spike-and-slab priors share a full piecewise-exponential likelihood, baseline-hazard structure, predictors and validation partitions. Their comparison therefore concerns coefficient-prior choice within a defined survival model. CoxPH, RSF and DeepSurv provide reference predictions, while matched reductions in training information connect the prior differences to the evidence available for estimation.
 
-The study has four linked elements. First, paired predictive comparisons assess probability error, discrimination and calibration across three healthcare cohorts. Second, controlled changes in training size and follow-up examine how prior effects respond to available information. Third, posterior coefficients and grouped contributions connect uncertainty-aware interpretation with same-model SHAP agreement and explanation stability. Fourth, design sensitivities examine the influence of predictor representation, missing-data handling, baseline intervals and prior settings.
-
-This combination provides evidence about prediction, computation and explanation on common model fits. It also distinguishes coefficient magnitude, directional certainty and contribution importance, making their roles in interpretation explicit. The resulting framework supports a coherent assessment of what a coefficient prior changes and how those changes appear in held-out prediction and posterior interpretation.
+The second contribution connects this predictive comparison to posterior interpretation. Coefficients and hazard ratios describe uncertain associations; grouped contributions and exact linear SHAP describe participation in the fitted risk function. Comparing their agreement and sampling stability distinguishes these explanatory properties empirically. Table~\ref{tab:closest-work} positions the combined design alongside the closest benchmarking, prior-modelling and explanation studies.
 
 \section{Aim and Objectives}
 \label{aim}
@@ -42,12 +36,10 @@ The aim is to assess how Normal, horseshoe and continuous spike-and-slab coeffic
 The objectives are to:
 
 \begin{enumerate}
-\item prepare GBSG2, METABRIC and WHAS500 using defined outcomes, clinical predictor sets and training-only preprocessing;
-\item compare the three Bayesian prior specifications with a shared likelihood and with CoxPH, RSF and DeepSurv as predictive comparators;
-\item assess posterior sampling through convergence, effective sample size and Hamiltonian Monte Carlo diagnostics;
-\item evaluate held-out survival predictions using integrated Brier score, concordance, time-dependent AUC and calibration;
-\item interpret posterior coefficients, hazard ratios, credible intervals and directional probabilities, and evaluate grouped contribution rankings and SHAP agreement;
-\item examine sensitivity to training information and defined modelling choices, and synthesise the findings across the three cohorts.
+\item construct a paired clinical survival benchmark with shared data preparation and validation;
+\item quantify predictive accuracy, calibration and computational acceptance under the three coefficient priors;
+\item interpret clinical associations and compare posterior contribution rankings with SHAP;
+\item characterise how prior contrasts change under controlled information and modelling conditions.
 \end{enumerate}
 
 \section{Research Questions}
@@ -56,17 +48,17 @@ The objectives are to:
 \subsection*{RQ1: Prediction under different coefficient priors}
 How do Normal, horseshoe and continuous spike-and-slab priors affect out-of-sample survival prediction, and how do their predictions compare with CoxPH, RSF and DeepSurv?
 
-The primary predictive quantity is the within-cohort paired difference in inverse-probability-of-censoring-weighted integrated Brier score (IPCW IBS). Three pairwise prior contrasts in each cohort form a nine-comparison primary family. The associated hypothesis, H1, is that shrinkage-prior benefit relative to Normal increases as observed training events per predictor degree of freedom falls. Discrimination, calibration and comparisons with the other model families provide complementary estimates.
+The primary predictive quantity is the within-cohort paired difference in inverse-probability-of-censoring-weighted integrated Brier score (IPCW IBS). Three pairwise prior contrasts in each cohort form a nine-comparison primary family. Discrimination, calibration and comparisons with the other model families provide complementary estimates.
 
 \subsection*{RQ2: Information-regime robustness}
 How does the prior effect change as training information falls or administrative censoring increases?
 
-Training fractions of 25\%, 50\%, 75\% and 100\%, together with training-derived follow-up truncation, define the information conditions. Differences-in-differences compare prior effects between reduced-information and full-information settings. Hypothesis H2 is that shrinkage relative to Normal becomes more beneficial as effective information falls.
+Matched training subsets and training-derived follow-up truncation define the information conditions. Differences-in-differences measure how a prior contrast changes between each reduced-information condition and its full-information reference.
 
 \subsection*{RQ3: Explanation agreement and stability}
 How stable are Bayesian global feature rankings, and how do they agree with SHAP rankings of the same fitted risk function?
 
-Posterior expected absolute grouped contributions provide a common intrinsic importance measure across priors. Hypothesis H3a concerns stable positive agreement with SHAP of the Bayesian posterior-mean log-risk function. H3b concerns whether this agreement is stronger than agreement with CoxPH on the same subjects and reference backgrounds. Correlation, top-five overlap, rank variability and resampling quantify agreement and stability.
+Posterior expected absolute grouped contributions provide a common intrinsic importance measure across priors. They are compared with SHAP of the Bayesian posterior-mean log-risk function and, secondarily, with CoxPH explanations on the same subjects and reference backgrounds. Correlation, top-five overlap, rank variability and resampling quantify agreement and stability.
 
 \subsection*{RQ4: Design robustness}
 How do the main contrasts respond to choices about predictors, missingness, censoring, baseline-hazard intervals and prior settings?
@@ -76,7 +68,7 @@ The analysis compares effect direction, uncertainty and computational acceptance
 \section{Study Scope}
 \label{scope-and-boundaries}
 
-The study analyses GBSG2, METABRIC and WHAS500 separately, retaining each cohort's endpoint, time unit and clinical predictor definition. Five repeats of five-fold outer cross-validation define 25 outer evaluation partitions for each model and cohort. Preprocessing is fitted within training partitions, with three-fold inner tuning for RSF and DeepSurv. The Bayesian arms share six baseline-hazard intervals and differ in their coefficient priors.
+The study analyses GBSG2, METABRIC and WHAS500 separately, retaining each cohort's endpoint, time unit and clinical predictor definition. Repeated outer cross-validation evaluates predictions, with preprocessing and model selection fitted within training partitions. The Bayesian arms share six baseline-hazard intervals and differ in their coefficient priors.
 
 Evaluation combines IPCW IBS, Uno's and Harrell's concordance, cumulative/dynamic AUC and calibration. Interpretation combines posterior associations with grouped contribution rankings and exact interventional linear SHAP of the posterior-mean log-risk. Original comparisons and prespecified sensitivities form the main analysis; the higher-target-acceptance horseshoe sensitivity and Holm bound are identified separately as post-hoc analyses. The conclusions concern the evaluated prediction procedures and their behaviour within these clinical cohorts.
 

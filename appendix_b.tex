@@ -1,8 +1,6 @@
 \chapter{Proportional-Hazards Assessment}
 \label{app:baselines}
 
-CoxPH coefficients describe conditional log-hazard associations on each training fold's processed predictor scale. Exponentiating a coefficient gives its hazard ratio. CoxPH and the Bayesian models share a linear proportional-hazards structure; DeepSurv uses a nonlinear proportional-hazards risk function.
-
 Table~\ref{tab:gen-proportional-hazards} reports rank-transformed Schoenfeld tests across the outer-training fits. Holm adjustment is applied to the covariate tests within each fit. The rejection fraction is a descriptive summary across overlapping training sets. Encoded categorical levels with fewer than 25 tests were absent from some training partitions.
 
 These checks describe the behaviour of the proportional-hazards assumption alongside the held-out prediction results. The METABRIC age and Nottingham Prognostic Index checks show repeated departures, which inform the interpretation of constant hazard-ratio summaries. The prediction comparisons evaluate the fitted specifications on the common validation design.

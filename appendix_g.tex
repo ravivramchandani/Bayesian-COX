@@ -1,11 +1,8 @@
 \chapter{Supplementary Inference}
 \label{app:horseshoe}\label{app:sampler}
 
-\section{Sampler Sensitivity}
-The post-hoc sampler sensitivity sets target acceptance to 0.999 for all 75 horseshoe evaluations, while retaining the coefficient priors, likelihoods, training partitions and diagnostic criteria. The Normal and continuous spike-and-slab predictions are the original paired comparator results. All 75 horseshoe fits satisfy the diagnostic criteria in this sensitivity. Its nine paired contrasts are reported separately from the original analysis.
-
 \section{Multiplicity Bounds}
-The original nine-contrast prior family contains five estimable tests. The supplementary Holm calculation considers every possible set of values for the other four tests, using all-zero and all-one completions as the extremes. Both bounds are 1.000 for each observed adjusted value. This calculation characterises multiplicity adjustment for the observed tests while preserving the original comparison coverage.
+Table~\ref{tab:gen-holm-bounds} gives the Holm bounds for the five observed tests in the original nine-contrast prior family. The calculation considers all possible values of the remaining four tests, as described in Section~\ref{sec:holm-results}.
 
 \input{tables/table_holm_bounds.tex}
 

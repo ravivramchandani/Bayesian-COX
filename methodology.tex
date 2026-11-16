@@ -11,9 +11,11 @@ The central comparison placed Normal, horseshoe and continuous spike-and-slab co
 
 The study connected four aspects of model assessment: held-out prediction, posterior interpretation, computational reliability and explanation stability. Posterior coefficient distributions describe the magnitude and uncertainty of conditional associations. Survival predictions assess how these fitted relationships translate into event probabilities. Calibration evaluates the correspondence between predicted and observed risk, and explanation analysis examines the agreement and sampling stability of predictor rankings. Keeping these quantities distinct makes the contribution of each prior interpretable \cite{ravi22,ravi40,ravi54}.
 
-The four research questions were operationalised as follows. RQ1 compared predictive performance among the three priors and against the reference models. RQ2 examined how prior differences changed with training information and administrative censoring. RQ3 evaluated agreement and stability between grouped posterior contributions and SHAP rankings. RQ4 examined sensitivity to predictor specification, missing-data handling, baseline intervals and prior hyperparameters. H1 concerned shrinkage benefit at lower effective event information; H2 concerned benefit under reduced training information; H3a concerned positive, stable same-model explanation agreement; and H3b concerned stronger same-model agreement than agreement with CoxPH. The inferential rules and comparison families were specified before examining the primary results.
+The four research questions concerned predictive comparisons (RQ1), controlled changes in training information and follow-up (RQ2), explanation agreement and sampling stability (RQ3), and modelling choices (RQ4). The predictive comparison families, explanation criteria and sensitivity conditions were specified before examining the primary results.
 
 Five repeats of five-fold outer cross-validation generated 25 evaluations per cohort. Across three cohorts and six model arms, the primary design comprised 450 model--fold outcomes. Model fitting, diagnostic assessment and evaluation were performed within this repeated structure. All stochastic operations used deterministic derived seeds. Figure~\ref{fig:method-framework} shows the complete research design, from cohort preparation to predictive and explanatory analysis.
+
+The implementation used Python 3.11.15, PyMC 5.28.5 and ArviZ 0.23.4 for Bayesian estimation and diagnostics, with lifelines 0.30.3 and scikit-survival 0.28.0 for survival modelling and evaluation.
 
 \input{figures/research_design.tex}
 
@@ -206,7 +208,14 @@ The continuous variance-mixture specification was
 z_j&\sim\mathcal{N}(0,1),\qquad \beta_j=z_j\sigma_j.
 \label{eq:spike-slab-prior}
 \end{align}
-The narrow and wide components provide different coefficient scales. Their continuous mixing permits gradient-based sampling. Related spike-and-slab approaches motivate the comparison of shrinkage structures \cite{george1993,ravi25,ravi43,ravi44}. In this model, $E(\gamma_j\mid D)$ is a posterior variance-mixing weight; a discrete inclusion probability is a different quantity.
+The independent standard-normal and uniform mixing priors imply
+\begin{equation}
+\operatorname{Var}_{\mathrm{prior}}(\beta_j)
+=E_{\mathrm{prior}}(\sigma_j^2)
+=\tfrac12(0.05^2+2^2).
+\label{eq:mixture-prior-variance}
+\end{equation}
+Thus $\sigma_j^2$ has a uniform prior over the interval between the spike and slab variances, whereas the Normal arm fixes the coefficient variance at one. Continuous mixing permits gradient-based sampling, and $E(\gamma_j\mid D)$ describes posterior variance allocation. Related spike-and-slab approaches motivate the comparison of shrinkage structures \cite{george1993,ravi25,ravi43,ravi44}.
 
 Primary prior hyperparameters were fixed across outer folds. Tighter and wider specifications were evaluated separately, providing a direct assessment of sensitivity to regularisation strength \cite{ravi40,ravi57}.
 
@@ -354,18 +363,37 @@ SHAP analysis targeted the linear log-risk function. For posterior-mean Bayesian
 (x_{ij}-\overline x_{j,\mathrm{background}}).
 \label{eq:linear-shap}
 \end{equation}
-The linear explainer output was checked against this expression \cite{lundberg2017,shaplinear}. Same-model SHAP explained the Bayesian posterior-mean risk score; CoxPH SHAP supplied the secondary cross-model comparison. The intrinsic score averages over posterior uncertainty, while SHAP explains the posterior-mean linear predictor relative to its background. Their agreement therefore addresses a meaningful comparison between two representations of the fitted model. For grouped SHAP importance, signed term attributions were summed within each subject/group before absolute magnitude and averaging.
+The linear explainer output was checked against this expression \cite{lundberg2017,shaplinear}. Same-model SHAP explained the Bayesian posterior-mean risk score; CoxPH SHAP supplied the secondary cross-model comparison. For grouped SHAP importance, signed term attributions were summed within each subject/group before absolute magnitude and averaging.
+
+The relationship between the two Bayesian scores can be stated directly. For the same explained subjects and background, write
+\begin{align}
+A_{ig}&=\sum_{j\in g}x_{ij}\beta_j,
+& \mu_{ig}&=E(A_{ig}\mid D),\\
+c_g&=\sum_{j\in g}\overline x_{j,\mathrm{background}}\overline\beta_j,
+& U_g&=\frac1N\sum_i|\mu_{ig}|.
+\end{align}
+The posterior-averaging gap and the change from background centring are
+\begin{align}
+J_g&=\frac1N\sum_i\{E(|A_{ig}|\mid D)-|\mu_{ig}|\}\geq0,\\
+C_g&=\frac1N\sum_i\{|\mu_{ig}-c_g|-|\mu_{ig}|\}.
+\end{align}
+Jensen's inequality gives the nonnegative averaging gap. Since $I_g=U_g+J_g$ and grouped SHAP importance is $\Phi_g=U_g+C_g$, the scores satisfy
+\begin{equation}
+I_g-\Phi_g=J_g-C_g,\qquad |C_g|\leq|c_g|.
+\label{eq:explanation-decomposition}
+\end{equation}
+The bound follows from the reverse triangle inequality. $J_g$ specifically describes absolute-value averaging: varying contributions can have zero gap when each subject's contribution retains its sign across posterior draws. $C_g$ can have either sign. These identities explain how posterior averaging and reference centring can change importance scores and rankings within the same fitted model.
 
 Three seeds, 104729, 130363 and 155921, controlled sampling without replacement. Nested validation/background budgets were 25/50, 50/100 and 100/200, capped at the available fold sizes. Subject and background selections were paired across priors. Successive budgets within a seed and adjacent seeds at the largest budget were assessed using Spearman correlation of at least 0.95 and at least four common groups in the top five.
 
-At the largest budget, 2,000 three-stage bootstrap replicates resampled repeats, folds and explanation seeds. Summaries included Spearman and Kendall agreement, top-five Jaccard overlap, rank variability and top-five selection frequency. H3a required all evaluable stability comparisons to pass and a same-model Spearman interval wholly above zero. H3b compared same-model agreement with CoxPH agreement; stronger same-model agreement required the stability criteria and a positive Spearman-difference interval. Cohort/prior explanation claims additionally required complete fold coverage. This design separated posterior direction, cross-method agreement and ranking stability \cite{ravi30,ravi61,ravi62}.
+At the largest budget, 2,000 three-stage bootstrap replicates resampled repeats, folds and explanation seeds. Summaries included Spearman and Kendall agreement, top-five Jaccard overlap, rank variability and top-five selection frequency. Stable positive same-model agreement required all evaluable stability comparisons to pass and a Spearman interval wholly above zero. The paired cross-model comparison estimated same-model agreement minus CoxPH agreement; a stronger-agreement interpretation required the stability criteria and a positive Spearman-difference interval. Cohort/prior explanation claims additionally required complete fold coverage. This design separated posterior direction, cross-method agreement and ranking stability \cite{ravi30,ravi61,ravi62}.
 
 \section{Sensitivity Analyses}
 \label{sec:method-robustness}
 
 \subsection{Training Information and Administrative Censoring}
 
-Training-information analyses used nested event/time-stratified subsets containing 25\%, 50\%, 75\% and 100\% of the outer-training observations. Subsets were shared across priors. Observed training events divided by processed predictor degrees of freedom quantified effective information; a condition required at least 20 training events. These analyses used outer folds 1 and 2 in each of five repeats.
+Training-information analyses used nested event/time-stratified subsets containing 25\%, 50\%, 75\% and 100\% of the outer-training observations. Subsets were shared across priors. Observed training events divided by the number of encoded predictor columns quantified the information ratio; a condition required at least 20 training events. These analyses used outer folds 1 and 2 in each of five repeats.
 
 Administrative-censoring conditions truncated follow-up at the outer-training 75th or 50th percentile of observed follow-up, evaluated at full training size. Training fraction and censoring were examined separately. Changes in the relative IBS effect between a shrinkage prior and Normal were summarised by difference-in-differences against the corresponding primary condition. This directly assessed whether the relative contribution of shrinkage changed as information decreased.
 
@@ -382,26 +410,3 @@ The sensitivity design comprised 825 model--condition--fold outcomes and 885 und
 Robustness effects and difference-in-differences used 2,000 paired three-stage bootstrap replicates. Repeats were sampled first, folds within the selected repeat second, and validation subjects within event strata third. Identical subject indices maintained prior pairing. These descriptive intervals quantified sensitivity under each evaluated condition. Directional consistency was assessed alongside the primary interval and the available paired coverage.
 
 Two supplementary analyses were identified as post hoc. First, a sampler sensitivity repeated all 75 horseshoe outer fits with target acceptance 0.999 while retaining the original folds, likelihood, predictors, priors and diagnostic criteria. This assessed the computational response to a higher acceptance target separately from the primary fits. Second, a mathematical Holm bound examined the attainable adjusted values for the observed primary tests while allowing the unobserved tests to vary over their admissible range. This bounded the effect of incomplete test-family coverage without estimating missing model effects.
-
-\section{Summary}
-
-The methods connect prior specification to predictive and explanatory evaluation within one controlled survival framework. Shared repeated-validation folds support paired model comparisons. A common Bayesian likelihood isolates coefficient-prior choice, while diagnostic assessment determines eligible posterior and predictive outputs. Probability error, discrimination, calibration, posterior interpretation and rank stability provide complementary descriptions of model behaviour.
-
-\begin{table}[htbp]
-\centering
-\caption{Research questions and their corresponding analyses.}
-\label{tab:method-rq-alignment}
-\small
-\begin{tabularx}{\textwidth}{@{}lXX@{}}
-\toprule
-Question & Comparison & Main evidence\\
-\midrule
-RQ1 & Priors and reference models & Paired IBS effects, corrected intervals, concordance, AUC and calibration\\
-RQ2 & Reduced information and increased censoring & Paired effects and difference-in-differences across training fractions and truncation conditions\\
-RQ3 & Posterior rankings and SHAP & Same-model and CoxPH agreement, sampling stability and grouped-rank uncertainty\\
-RQ4 & Modelling choices & Predictor, imputation, baseline-interval and prior-scale sensitivities\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-Table~\ref{tab:method-rq-alignment} links the four questions to the analyses presented in Chapter~\ref{chap:results}. The scientific specifications and extended results in the appendices support interpretation of the reported estimates.

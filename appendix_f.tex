@@ -1,9 +1,13 @@
 \chapter{Detailed Robustness Estimates}
 \label{app:sensitivity}
 
-The robustness analyses vary training information, administrative censoring, baseline interval count, prior scale and predictor specification. Table~\ref{tab:gen-robustness-effects} contains all 129 within-condition contrasts and 45 difference-in-differences contrasts. Each row records its paired-fold coverage and bootstrap interval.
+\section{Diagnostic Outcomes}
+Table~\ref{tab:gen-robustness-diagnostics} records diagnostic outcomes by cohort and prior family. Paired effect calculations use accepted fits under the criteria in Section~\ref{sec:method-diagnostics}.
 
-A direct effect is IBS($A$) minus IBS($B$) in the stated condition. A difference-in-differences subtracts the corresponding prior contrast under full training and observed follow-up. Thus a positive Normal-minus-horseshoe difference-in-differences indicates a larger relative horseshoe benefit under the specified information change. Intervals use 2,000 paired three-stage bootstrap replications over repeats, folds and validation subjects.
+\input{tables/table_robustness_diagnostics.tex}
+
+\section{Paired Robustness Effects}
+Table~\ref{tab:gen-robustness-effects} contains all 129 within-condition contrasts and 45 difference-in-differences, with paired-fold counts and bootstrap intervals. Direct effects are IBS($A$) minus IBS($B$). Difference-in-differences subtract the corresponding full-training, observed-follow-up contrast. The paired three-stage bootstrap is specified in Section~\ref{sec:method-robustness}.
 
 \begin{landscape}
 \input{tables/table_robustness_effects.tex}
