@@ -1,5 +1,13 @@
 # JOURNAL
 
+## 2026-11-17 — Examiner review and report consolidation
+
+Reviewed the complete thesis against the owner's supplied nine-criterion prompt. Corrected question-to-estimand alignment, a benchmark citation and two bibliographic details. Added a five-row closest-work synthesis, an exact posterior-averaging/background-centring decomposition and its bounds, and the implemented variance-mixture prior interpretation. The mathematical identities were independently checked. The observed computation comparison now supports concrete recommendations.
+
+Removed duplicate cohort reporting, repeated methods and appendix equations, the redundant methods question-alignment table, and repeated concluding summaries. The revised report is 92 pages with six scientific appendices, nine figures, 28 tables and 76 cited references. Main-chapter source text is reduced by 2,221 whitespace-delimited tokens. All 47 underlying evidence files retain their hashes; no model was fitted.
+
+The source and PDF are pushed at `397c54c1b97e729d18c009afbfbc4c318fad11e9` on `thesis/final-report-20261117`. A fresh upload ZIP builds to the identical 92-page text result with no undefined references/citations or overfull boxes. The current versioned assessment is `assessment/Ravi_thesis_assessment_Codex_v2.md`, with v1 retained. The verification receipt is `reviews/2026-11-17-thesis-rereview.json`. The prepared Overleaf upload remains the publication route under the existing access restriction.
+
 ## 2026-11-17 — Completed standalone thesis
 
 Completed the new report from the existing verified study evidence. The five chapters and seven scientific appendices use clear connected prose, with nine figures, 29 tables and 76 cited references. The PDF has 100 pages. Outdated single-fold descriptions and result screenshots were replaced by the repeated-validation evidence and vector displays. The contribution, methods, interpretation and research-question synthesis are consistent throughout.

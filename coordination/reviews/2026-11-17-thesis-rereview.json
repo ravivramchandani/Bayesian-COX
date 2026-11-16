@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-17",
+  "thesis_commit": "397c54c1b97e729d18c009afbfbc4c318fad11e9",
+  "review_prompt": "/Users/macuser/Documents/Github/thesis/idea/prompts/Master_thesis_review_prompt_2.md",
+  "baseline_commit": "feae8e289ab3309c0a76684bbd2b15ec315c7655",
+  "pdf_pages": 92,
+  "previous_pdf_pages": 100,
+  "chapters": 5,
+  "scientific_appendices": 6,
+  "figures": 9,
+  "tables": 28,
+  "references": 76,
+  "source_word_counts": {
+    "introduction.tex": {
+      "before": 1372,
+      "after": 1078
+    },
+    "literature_review.tex": {
+      "before": 4461,
+      "after": 4316
+    },
+    "methodology.tex": {
+      "before": 4616,
+      "after": 4533
+    },
+    "results.tex": {
+      "before": 3905,
+      "after": 2946
+    },
+    "conclusion.tex": {
+      "before": 1376,
+      "after": 636
+    }
+  },
+  "main_chapter_source_token_reduction": 2221,
+  "source_token_count_method": "whitespace splitting, including LaTeX; not institutional word count",
+  "empirical_evidence_changed": false,
+  "original_evidence_hashes_verified": 47,
+  "presentation_table_numeric_tokens_verified": 2204,
+  "presentation_table_rows_verified": 435,
+  "new_model_fitting": false,
+  "analytical_decomposition": "independently proved; exact rational checks for nine background configurations and a zero-gap variable-posterior case",
+  "fresh_source_zip_build": "Passed: all 92 page texts identical.",
+  "undefined_references": 0,
+  "undefined_citations": 0,
+  "overfull_boxes": 0,
+  "visual_review": "All 92 pages inspected on six contact sheets; full new matrix, derivation, conclusion and changed pages checked; no layout defects.",
+  "assessments": [
+    "assessment/Ravi_thesis_assessment_Codex_v1.md",
+    "assessment/Ravi_thesis_assessment_Codex_v2.md"
+  ],
+  "latest_assessment": "assessment/Ravi_thesis_assessment_Codex_v2.md",
+  "recommended_grade": "A",
+  "pdf_sha256": "52871ef9d46b65b06b69d92d1e41e248520daa92e243c5fd196ac42dae6460ab",
+  "source_zip_sha256": "37f555b16e2b21e1f42eaea473bc4472ca713e2d2c8c90f36881514b11f3c087",
+  "source_zip_bytes": 386340,
+  "publication": {
+    "github_branch": "thesis/final-report-20261117",
+    "overleaf": "direct Git write access remains unavailable; upload package prepared"
+  },
+  "code_repository_checks": {
+    "coordination_schemas": "passed",
+    "make_test": "Attempted; default Python3.15hasnopytest. No model source changed."
+  }
+}

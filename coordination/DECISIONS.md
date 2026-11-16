@@ -1463,3 +1463,17 @@ Format:
   - Replace outdated result screenshots with verified vector figures and source-derived tables. Preserve the original numerical evidence; presentation changes may improve labels and notes without changing values.
   - Treat T-150 through T-157, T-159 and T-160 as manuscript-production tasks under the current acceptance criteria below. Author feedback and actual university submission remain separate activities, not prerequisites for producing the completed files.
 - Consequences: The completed source and PDF are published on GitHub branch `thesis/final-report-20261117`. The prepared source ZIP is independently build-verified. Overleaf rejected the direct Git push as forbidden; its live replacement is not claimed. The editor-upload procedure is recorded in `docs/ravi_thesis_next_steps.md`. Original experiments and code remain unchanged.
+
+
+## ADR-054 — Apply the examiner review and consolidate the report
+
+- Status: ACCEPTED
+- Date: 2026-11-17
+- Context: The owner requested use of `Master_thesis_review_prompt_2.md`, a stronger scholarly argument and removal of redundant or repeated report content.
+- Decision:
+  - Assess all nine supplied criteria and save versioned assessments outside the thesis. Preserve previous review versions.
+  - Express the four research questions through the analyses actually performed. Remove the separate hypothesis labels from the manuscript rather than attributing an unestimated information trend to ordinary within-cohort comparisons. Preserve the original scientific protocol and result records.
+  - Position the contribution against named closest studies. Add the exact algebraic relationship between posterior absolute contributions and centred posterior-mean SHAP as an interpretation of their definitions, with a checked prior-variance identity. Do not present these as new model fits or an invented empirical result.
+  - Consolidate the cohort information, methods and concluding synthesis. Retain complete scientific details in their primary location and supporting estimates in the appendices.
+  - Preserve all original numerical evidence and the separation of original and post-hoc analyses. Commit the revised PDF, source, assessment and independently build-verified upload ZIP to GitHub.
+- Consequences: The revised report is 92 pages, eight fewer than the preceding version, with 2,221 fewer main-chapter source tokens. The current assessment is Codex v2 and recommends A under the supplied rubric. The actual institutional grade and journal decisions are not represented as obtained. The existing Overleaf write-access restriction remains separate from the completed report and review.

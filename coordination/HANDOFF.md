@@ -1,5 +1,15 @@
 # HANDOFF
 
+## Examiner review and concision — 2026-11-17
+
+The owner requested a full review under the supplied Master's thesis examiner prompt, prioritising a strong standalone argument and removal of unnecessary repetition. The revised PDF is 92 pages, with five chapters, six scientific appendices, nine figures, 28 tables and 76 cited references. It removes 2,221 whitespace-delimited source tokens from the main chapters while adding a closest-work comparison and exact analytical interpretation of posterior-contribution/SHAP scores. This is a source-text comparison, not an institutional word count.
+
+The source and PDF are pushed to GitHub branch `thesis/final-report-20261117` at `397c54c1b97e729d18c009afbfbc4c318fad11e9`. The refreshed source ZIP is `reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-17.zip`. The current assessment is [Codex v2](../assessment/Ravi_thesis_assessment_Codex_v2.md); v1 is preserved. Verification is [2026-11-17-thesis-rereview.json](reviews/2026-11-17-thesis-rereview.json).
+
+The review aligned question wording with the actual estimands, corrected benchmark citation use and reference details, and consolidated duplicated methods, tables and conclusions. It retained the four research questions and all original scientific outcomes. The score decomposition is an interpretation of existing definitions, not a new fitted model or prespecified empirical test. All 47 evidence hashes and 2,204 presentation-table numeric tokens remain unchanged. Exact algebraic checks, independent scientific review, full PDF layout review and a fresh upload-ZIP build passed. Overleaf's live replacement remains pending the previously recorded write-access restriction; no new publication there is claimed.
+
+Earlier dated checkpoints below remain historical.
+
 ## Final standalone thesis — 2026-11-17
 
 The owner's current instruction is to finish Ravi's new report around the completed study, with clear fluent prose and subject-focused scientific content. ADR-053 supersedes the earlier manuscript-production sequence. The complete report now has 100 pages, 9 figures, 29 tables and 76 cited references. Its five chapters and seven scientific appendices describe the existing repeated-validation, posterior, calibration, robustness and explanation evidence. Planning history, internal paths/hashes and repeated caveats are absent from the manuscript. Interpretation-essential diagnostic and uncertainty results remain accurate.
