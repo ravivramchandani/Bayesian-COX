@@ -1,0 +1,73 @@
+\begin{figure}[htbp]
+  \centering
+  \begingroup
+  \singlespacing
+  \begin{tikzpicture}[
+    x=1cm,y=1cm,font=\fontsize{10}{12}\selectfont,
+    exposure/.style={draw=blue!65!black,fill=blue!18,line width=0.6pt},
+    empty/.style={draw=gray!65,dashed,line width=0.5pt},
+    patient/.style={anchor=east,align=right,text width=3.1cm},
+    countlabel/.style={anchor=east}
+  ]
+    \node at (8.8,7.15) {Scaled follow-up, $u=t/a$};
+    \draw[-{Stealth[length=2mm]},line width=0.7pt] (3.7,5.5) -- (14.25,5.5);
+    \foreach \m in {0,...,6} {
+      \pgfmathsetmacro{\boundary}{3.7+1.7*\m}
+      \draw (\boundary,5.4) -- (\boundary,5.6);
+      \node[above] at (\boundary,5.6) {$b_{\m}$};
+    }
+    \foreach \m in {1,...,6} {
+      \pgfmathsetmacro{\midpoint}{2.85+1.7*\m}
+      \node at (\midpoint,6.5) {$m=\m$};
+      \pgfmathsetmacro{\leftedge}{2.0+1.7*\m}
+      \pgfmathsetmacro{\rightedge}{3.7+1.7*\m}
+      \draw[empty] (\leftedge,4.15) rectangle (\rightedge,4.55);
+      \draw[empty] (\leftedge,2.25) rectangle (\rightedge,2.65);
+    }
+
+    \node[patient] at (3.2,4.35) {Event patient\\$\delta_E=1$};
+    \foreach \m in {1,2,3} {
+      \pgfmathsetmacro{\leftedge}{2.0+1.7*\m}
+      \pgfmathsetmacro{\rightedge}{3.7+1.7*\m}
+      \draw[exposure] (\leftedge,4.15) rectangle (\rightedge,4.55);
+    }
+    \draw[exposure] (8.8,4.15) rectangle (9.9,4.55);
+    \fill[blue!65!black] (9.9,4.35) circle (2pt);
+    \draw[blue!65!black] (9.9,4.55) -- (9.9,4.85);
+    \node[above] at (9.9,4.85) {event at $Y_E/a$};
+    \node[countlabel] at (3.2,3.65) {Event counts $d_{Em}$};
+    \foreach \m/\eventcount in {1/0,2/0,3/0,4/1,5/0,6/0} {
+      \pgfmathsetmacro{\midpoint}{2.85+1.7*\m}
+      \node at (\midpoint,3.65) {$\eventcount$};
+    }
+
+    \node[patient] at (3.2,2.45) {Censored patient\\$\delta_C=0$};
+    \foreach \m in {1,2} {
+      \pgfmathsetmacro{\leftedge}{2.0+1.7*\m}
+      \pgfmathsetmacro{\rightedge}{3.7+1.7*\m}
+      \draw[exposure] (\leftedge,2.25) rectangle (\rightedge,2.65);
+    }
+    \draw[exposure] (7.1,2.25) rectangle (8.15,2.65);
+    \draw[line width=1pt] (8.15,2.15) -- (8.15,2.75);
+    \draw (8.15,2.75) -- (8.15,3.0);
+    \node[above] at (8.15,3.0) {censored at $Y_C/a$};
+    \node[countlabel] at (3.2,1.65) {Event counts $d_{Cm}$};
+    \foreach \m in {1,...,6} {
+      \pgfmathsetmacro{\midpoint}{2.85+1.7*\m}
+      \node at (\midpoint,1.65) {$0$};
+    }
+
+    \draw[exposure] (3.7,0.45) rectangle (4.3,0.75);
+    \node[anchor=west] at (4.45,0.6) {positive exposure $e_{im}$};
+    \draw[empty] (8.8,0.45) rectangle (9.4,0.75);
+    \node[anchor=west] at (9.55,0.6) {zero exposure: row omitted};
+  \end{tikzpicture}
+  \endgroup
+  \caption[Patient exposure in the piecewise-exponential likelihood.]{Symbolic illustration of expansion into six piecewise-exponential
+    intervals. Shaded lengths are each patient's time at risk within an
+    interval. An observed event contributes one count in the interval containing
+    its time; censoring contributes no event count. Only positive-exposure rows
+    enter the expanded Poisson likelihood. Boundary spacing and patient times
+    are schematic and do not represent cohort observations or fitted results.}
+  \label{fig:interval-exposure}
+\end{figure}

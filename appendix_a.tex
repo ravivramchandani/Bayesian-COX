@@ -1,6 +1,14 @@
-\chapter{Appendix A Dataset and Cohort Preparation}\label{appendix-a-dataset-and-cohort-preparation}
+\chapter{Cohort and Survival Characteristics}
+\label{app:data}\label{app:exploratory}
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=4.34689in]{media/image10.png}
+\section{Analysis Populations and Source Predictors}
+The analysis includes 686 GBSG2 participants, 500 WHAS500 participants and 1,980 METABRIC participants. GBSG2 records recurrence-free survival in days; WHAS500 records all-cause mortality in days; METABRIC records overall survival in months. Each cohort is analysed on its own endpoint and time scale.
 
-\phantomsection\label{_Toc245464049}{}\captionof{figure}{Representative source records from the WHAS500, GBSG2, and METABRIC datasets used in cohort preparation.}
+Table~\ref{tab:gen-predictor-missingness} lists the clinical source predictors before categorical expansion and training-fold preprocessing. Numeric medians, scaling factors, category levels and reference categories are estimated within each training partition. METABRIC stage is included in the stage and multiple-imputation sensitivity specifications; its 514 missing values are handled within those analyses.
 
+\input{tables/table_predictor_missingness.tex}
+
+\section{Observed Follow-up and Estimated Survival}
+Table~\ref{tab:gen-cohort-survival} distinguishes the median observed event-or-censoring duration from the Kaplan--Meier survival median. The former summarises the recorded durations. The latter identifies the first time the estimated survival function reaches one half. Kaplan--Meier curves use the full analysis populations and pointwise log--log Greenwood intervals.
+
+\input{tables/table_cohort_survival.tex}

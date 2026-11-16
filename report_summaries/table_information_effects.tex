@@ -1,0 +1,27 @@
+\begin{table}[p]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Change in the prior IBS contrast under the largest declared perturbations.}
+\label{tab:report-information}
+\begin{tabular}{@{}lllrr@{}}
+\toprule
+Cohort & Condition & Prior $B$ & Pairs & \shortstack[r]{Difference-in-differences\\95\% interval}\\
+\midrule
+GBSG2 & 25\% training & Horseshoe & 3/10 & -0.002549 [-0.009887, +0.003348]\\
+GBSG2 & 25\% training & Spike-and-slab & 10/10 & -0.000173 [-0.000456, +0.000087]\\
+GBSG2 & Median truncation & Horseshoe & 2/10 & -0.000248 [-0.001702, +0.001272]\\
+GBSG2 & Median truncation & Spike-and-slab & 10/10 & -0.000022 [-0.000103, +0.000048]\\
+WHAS500 & 25\% training & Horseshoe & 10/10 & +0.006323 [+0.002512, +0.010561]\\
+WHAS500 & 25\% training & Spike-and-slab & 10/10 & +0.000087 [-0.000343, +0.000511]\\
+WHAS500 & Median truncation & Horseshoe & 10/10 & +0.000156 [-0.000740, +0.001150]\\
+WHAS500 & Median truncation & Spike-and-slab & 10/10 & -0.000008 [-0.000172, +0.000138]\\
+METABRIC & 25\% training & Horseshoe & 10/10 & +0.000211 [-0.001149, +0.001508]\\
+METABRIC & 25\% training & Spike-and-slab & 10/10 & +0.000031 [-0.000107, +0.000158]\\
+METABRIC & Median truncation & Horseshoe & 10/10 & +0.000349 [+0.000002, +0.000734]\\
+METABRIC & Median truncation & Spike-and-slab & 10/10 & -0.000013 [-0.000080, +0.000044]\\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\begin{minipage}{\textwidth}\footnotesize Each effect is the change in IBS(Normal) minus IBS($B$), relative to the corresponding full-training, observed-follow-up condition. Positive values indicate a greater relative benefit for $B$. The display includes both shrinkage priors in all cohorts at the smallest training fraction and earliest administrative cut-off; the display rule does not depend on effect size or interval direction. Truncation occurs at the median outer-training follow-up, using event and censored records. Intervals are stored descriptive bootstrap intervals. Partial rows retain only the available accepted pairs and cannot establish the complete-fold effect.\end{minipage}
+\end{table}

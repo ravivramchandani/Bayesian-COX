@@ -1,0 +1,27 @@
+% Generated from hash-verified saved evidence. Do not edit by hand.
+\begin{table}[htbp]
+\centering
+\caption{Descriptive agreement of intrinsic and SHAP Bayesian explanations.}
+\label{tab:gen-explanation-agreement}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llrrrr}
+\toprule
+Cohort & Prior & Folds & Spearman $\rho$ [95\% interval] & Kendall $\tau$ & Top-five Jaccard \\
+\midrule
+GBSG2 & Horseshoe & 7/25 & 0.966 [0.955, 0.976] & 0.898 & 0.952 \\
+GBSG2 & Normal & 25/25 & 0.927 [0.898, 0.950] & 0.848 & 0.867 \\
+GBSG2 & Spike-and-slab & 25/25 & 0.929 [0.902, 0.952] & 0.852 & 0.871 \\
+METABRIC & Horseshoe & 23/25 & 0.867 [0.848, 0.888] & 0.728 & 0.874 \\
+METABRIC & Normal & 25/25 & 0.863 [0.843, 0.883] & 0.709 & 0.978 \\
+METABRIC & Spike-and-slab & 25/25 & 0.862 [0.845, 0.880] & 0.706 & 0.973 \\
+WHAS500 & Horseshoe & 25/25 & 0.859 [0.827, 0.888] & 0.750 & 0.729 \\
+WHAS500 & Normal & 25/25 & 0.879 [0.847, 0.912] & 0.789 & 0.720 \\
+WHAS500 & Spike-and-slab & 25/25 & 0.872 [0.839, 0.911] & 0.779 & 0.720 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip
+\begin{minipage}{\textwidth}\footnotesize Agreement compares group rankings for the same fitted Bayesian log-relative-hazard function. Intervals use a hierarchical bootstrap. Agreement and sampling stability are assessed separately.\end{minipage}
+\end{table}

@@ -1,0 +1,6 @@
+dataset,model_a,model_b,p_value,best_case_adjusted_p_bound,worst_case_adjusted_p_bound,rejection_possible
+gbsg2,Normal,Spike-and-slab,0.6932041369111692,1.0,1.0,False
+whas500,Normal,Horseshoe,0.7318650125298967,1.0,1.0,False
+whas500,Normal,Spike-and-slab,0.49342487310734645,1.0,1.0,False
+whas500,Horseshoe,Spike-and-slab,0.7595839297206525,1.0,1.0,False
+metabric,Normal,Spike-and-slab,0.8333909379675831,1.0,1.0,False

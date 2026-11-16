@@ -1,0 +1,10 @@
+dataset,model_key,planned,complete,failed
+gbsg2,bayesian_normal,85,85,0
+gbsg2,bayesian_horseshoe,85,45,40
+gbsg2,bayesian_spike_slab,85,85,0
+whas500,bayesian_normal,90,90,0
+whas500,bayesian_horseshoe,90,87,3
+whas500,bayesian_spike_slab,90,90,0
+metabric,bayesian_normal,100,100,0
+metabric,bayesian_horseshoe,100,88,12
+metabric,bayesian_spike_slab,100,100,0

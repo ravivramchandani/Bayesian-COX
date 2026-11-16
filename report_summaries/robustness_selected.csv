@@ -1,0 +1,13 @@
+effect_type,dataset,component,condition,reference_condition,model_a,model_b,n_paired_folds,expected_paired_folds,coverage,status,observed,confidence_lower,confidence_upper,bootstrap_replicates,successful_bootstraps
+Difference-in-differences,gbsg2,rq2,fraction_025_observed,fraction_100_observed,Normal,Horseshoe,3,10,partial,complete,-0.002549013360764253,-0.009887051446517773,0.003347523145852115,2000,2000
+Difference-in-differences,gbsg2,rq2,fraction_025_observed,fraction_100_observed,Normal,Spike-and-slab,10,10,full,complete,-0.00017346937459807222,-0.00045646173230280305,8.672749230189827e-05,2000,2000
+Difference-in-differences,gbsg2,rq2,truncate_at_training_q50,fraction_100_observed,Normal,Horseshoe,2,10,partial,complete,-0.0002478289528121937,-0.0017016544007234435,0.0012715636403922473,2000,2000
+Difference-in-differences,gbsg2,rq2,truncate_at_training_q50,fraction_100_observed,Normal,Spike-and-slab,10,10,full,complete,-2.1660021209745222e-05,-0.00010270431486953595,4.8120938727236535e-05,2000,2000
+Difference-in-differences,whas500,rq2,fraction_025_observed,fraction_100_observed,Normal,Horseshoe,10,10,full,complete,0.00632281097689809,0.0025115389483346203,0.010561230370748145,2000,2000
+Difference-in-differences,whas500,rq2,fraction_025_observed,fraction_100_observed,Normal,Spike-and-slab,10,10,full,complete,8.652122756449235e-05,-0.000342519202734595,0.0005113861032646529,2000,2000
+Difference-in-differences,whas500,rq2,truncate_at_training_q50,fraction_100_observed,Normal,Horseshoe,10,10,full,complete,0.00015582266717064229,-0.0007395398850026276,0.0011504595800754065,2000,2000
+Difference-in-differences,whas500,rq2,truncate_at_training_q50,fraction_100_observed,Normal,Spike-and-slab,10,10,full,complete,-8.169601343966453e-06,-0.00017151549876916276,0.00013833773717854787,2000,2000
+Difference-in-differences,metabric,rq2,fraction_025_observed,fraction_100_observed,Normal,Horseshoe,10,10,full,complete,0.00021123695513672428,-0.0011494471833091739,0.0015081721579076818,2000,2000
+Difference-in-differences,metabric,rq2,fraction_025_observed,fraction_100_observed,Normal,Spike-and-slab,10,10,full,complete,3.069447946039038e-05,-0.00010711046369489007,0.00015753447189463134,2000,2000
+Difference-in-differences,metabric,rq2,truncate_at_training_q50,fraction_100_observed,Normal,Horseshoe,10,10,full,complete,0.0003490379478085184,1.9042837199408228e-06,0.0007341037923610061,2000,2000
+Difference-in-differences,metabric,rq2,truncate_at_training_q50,fraction_100_observed,Normal,Spike-and-slab,10,10,full,complete,-1.2761464624255347e-05,-7.979983221442335e-05,4.3523191317349024e-05,2000,2000

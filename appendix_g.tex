@@ -1,12 +1,15 @@
-\chapter{Appendix G GBSG2 Horseshoe Failure and Recovery}\label{appendix-g-gbsg2-horseshoe-failure-and-recovery}
+\chapter{Supplementary Inference}
+\label{app:horseshoe}\label{app:sampler}
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=4.75775in,height=2.54255in]{media/image31.png}
+\section{Sampler Sensitivity}
+The post-hoc sampler sensitivity sets target acceptance to 0.999 for all 75 horseshoe evaluations, while retaining the coefficient priors, likelihoods, training partitions and diagnostic criteria. The Normal and continuous spike-and-slab predictions are the original paired comparator results. All 75 horseshoe fits satisfy the diagnostic criteria in this sensitivity. Its nine paired contrasts are reported separately from the original analysis.
 
-\phantomsection\label{_Toc245464069}{}\captionof{figure}{Recorded diagnostic results for the GBSG2--Horseshoe sampling attempt}
+\section{Multiplicity Bounds}
+The original nine-contrast prior family contains five estimable tests. The supplementary Holm calculation considers every possible set of values for the other four tests, using all-zero and all-one completions as the extremes. Both bounds are 1.000 for each observed adjusted value. This calculation characterises multiplicity adjustment for the observed tests while preserving the original comparison coverage.
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=4.5908in,height=3.94681in]{media/image32.png}
+\input{tables/table_holm_bounds.tex}
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=6.5in,height=4.29097in]{media/image33.png}
+\section{Secondary Predictive Contrasts}
+Table~\ref{tab:full-secondary} reports the Bayesian--comparator IBS contrasts for every cohort. Effects are Bayesian IBS minus comparator IBS, with negative values favouring the Bayesian model. The interval calculation uses the repeated-validation correction. Counts identify the matched outer folds contributing to each comparison.
 
-\phantomsection\label{_Toc245464070}{}\captionof{figure}{. Paired notebook outputs documenting GBSG2--Horseshoe recovery diagnostics and final status}
-
+\input{tables/table_secondary_complete.tex}

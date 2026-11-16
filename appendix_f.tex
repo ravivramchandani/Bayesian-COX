@@ -1,20 +1,10 @@
-\chapter{Appendix F Bayesian MCMC Sampling and Diagnostics}\label{appendix-f-bayesian-mcmc-sampling-and-diagnostics}
+\chapter{Detailed Robustness Estimates}
+\label{app:sensitivity}
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=3.30169in]{media/image26.png}
+The robustness analyses vary training information, administrative censoring, baseline interval count, prior scale and predictor specification. Table~\ref{tab:gen-robustness-effects} contains all 129 within-condition contrasts and 45 difference-in-differences contrasts. Each row records its paired-fold coverage and bootstrap interval.
 
-\phantomsection\label{_Toc245464065}{}\captionof{figure}{Frozen Bayesian sampling configuration and prior-family model builders}
+A direct effect is IBS($A$) minus IBS($B$) in the stated condition. A difference-in-differences subtracts the corresponding prior contrast under full training and observed follow-up. Thus a positive Normal-minus-horseshoe difference-in-differences indicates a larger relative horseshoe benefit under the specified information change. Intervals use 2,000 paired three-stage bootstrap replications over repeats, folds and validation subjects.
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=4.86111in]{media/image27.png}
-
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.29224in,height=1.91781in]{media/image28.png}
-
-\phantomsection\label{_Toc245464066}{}\captionof{figure}{Paired posterior-registry and parameter-diagnostic outputs after diagnostic reconciliation}
-
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=5.28483in]{media/image29.png}
-
-\phantomsection\label{_Toc245464067}{}\captionof{figure}{Posterior predictive check summaries and observed-versus-replicated event-count diagnostics}
-
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=4.04444in]{media/image30.png}
-
-\phantomsection\label{_Toc245464068}{}\captionof{figure}{Final diagnostic closure record and confirmed scope of the retained Bayesian fits.}
-
+\begin{landscape}
+\input{tables/table_robustness_effects.tex}
+\end{landscape}

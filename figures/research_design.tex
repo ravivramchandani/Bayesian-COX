@@ -1,0 +1,88 @@
+\begin{figure}[p]
+  \centering
+  \begingroup
+  \singlespacing
+  \begin{tikzpicture}[
+    x=1cm,y=1cm,
+    box/.style={draw=black!65,rounded corners=2pt,line width=0.6pt,
+      align=center,font=\fontsize{10}{12}\selectfont,inner sep=4pt,execute at begin node={\hyphenpenalty=10000}},
+    shared/.style={box,fill=blue!7},
+    bayes/.style={box,fill=violet!8},
+    result/.style={box,fill=teal!8},
+    arrow/.style={-{Stealth[length=2mm]},draw=black!70,line width=0.65pt}
+  ]
+    \node[shared,text width=14cm,minimum height=1.05cm] (design) at (7.4,0)
+      {\textbf{Quantitative, retrospective, comparative research design}\\
+       Three separate clinical cohorts; prediction and association};
+    \node[shared,text width=4cm,minimum height=1.05cm] (gbsg) at (2.2,-1.5)
+      {\textbf{GBSG2}\\Recurrence-free survival};
+    \node[shared,text width=4cm,minimum height=1.05cm] (meta) at (7.4,-1.5)
+      {\textbf{METABRIC}\\Overall survival};
+    \node[shared,text width=4cm,minimum height=1.05cm] (whas) at (12.6,-1.5)
+      {\textbf{WHAS500}\\All-cause mortality};
+    \draw[arrow] (design.south) -- ++(0,-0.18) -| (gbsg.north);
+    \draw[arrow] (design.south) -- (meta.north);
+    \draw[arrow] (design.south) -- ++(0,-0.18) -| (whas.north);
+
+    \node[shared,text width=14cm,minimum height=1.9cm] (validation) at (7.4,-3.55)
+      {\textbf{Shared validation and leakage control}\\
+       Five repeats of five outer folds per cohort; identical partitions across model arms\\
+       Three-fold inner tuning for RSF and DeepSurv; other specifications fixed\\
+       Training-only imputation, encoding, scaling and evaluation horizons};
+    \foreach \cohort in {gbsg,meta,whas}
+      \draw[arrow] (\cohort.south) -- (\cohort.south |- validation.north);
+
+    \node[shared,text width=4cm,minimum height=1.25cm] (comparators) at (2.2,-5.65)
+      {\textbf{Reference comparators}\\CoxPH, RSF and DeepSurv};
+    \node[bayes,text width=8.8cm,minimum height=1.25cm] (likelihood) at (10,-5.65)
+      {\textbf{Common Bayesian survival likelihood}\\
+       Piecewise-exponential proportional hazards; six baseline intervals};
+    \draw[arrow] (validation.south -| comparators.north) -- (comparators.north);
+    \draw[arrow] (validation.south -| likelihood.north) -- (likelihood.north);
+
+    \node[bayes,text width=2.8cm,minimum height=1.3cm] (normal) at (6.65,-7.45)
+      {\textbf{Normal}\\Continuous reference};
+    \node[bayes,text width=2.8cm,minimum height=1.3cm] (horse) at (10,-7.45)
+      {\textbf{Horseshoe}\\Global--local\\shrinkage};
+    \node[bayes,text width=2.8cm,minimum height=1.3cm] (spike) at (13.35,-7.45)
+      {\textbf{Spike-and-Slab}\\Variance mixing};
+    \foreach \prior in {normal,horse,spike}
+      \draw[arrow] (likelihood.south -| \prior.north) -- (\prior.north);
+    \node[bayes,text width=8.8cm,minimum height=1.2cm] (gate) at (10,-9.2)
+      {\textbf{NUTS sampling and diagnostic assessment}\\
+       Specified acceptance criteria; at most two specified refits};
+    \foreach \prior in {normal,horse,spike}
+      \draw[arrow] (\prior.south) -- (\prior.south |- gate.north);
+
+    \node[result,text width=4cm,minimum height=1.8cm] (reference) at (2.2,-11.2)
+      {\textbf{Comparator predictions}\\Held-out subjects\\Shared horizons};
+    \node[result,text width=3.35cm,minimum height=1.8cm] (accepted) at (7.65,-11.2)
+      {\textbf{Accepted fits}\\Predictions and\\posterior summaries};
+    \node[box,fill=orange!12,text width=3.55cm,minimum height=1.8cm] (failed) at (12.6,-11.2)
+      {\textbf{Diagnostic outcomes}\\Recorded for each fit\\Predictions use accepted fits};
+    \draw[arrow] (comparators.south) -- (reference.north);
+    \draw[arrow] (gate.south) -- ++(0,-0.2) -| (accepted.north);
+    \draw[arrow] (gate.south) -- ++(0,-0.2) -| (failed.north);
+
+    \coordinate (join) at (4.9,-12.65);
+    \draw[draw=black!70,line width=0.65pt] (reference.south) -- ++(0,-0.55) -| (join);
+    \draw[draw=black!70,line width=0.65pt] (accepted.south) -- ++(0,-0.55) -| (join);
+    \node[result,text width=4cm,minimum height=2.3cm] (prediction) at (2.2,-14.3)
+      {\textbf{Predictive evaluation}\\C-index, IBS and time-dependent AUC\\Explicit calibration\\Paired contrasts (RQ1)};
+    \node[result,text width=4cm,minimum height=2.3cm] (explanation) at (7.4,-14.3)
+      {\textbf{Explanation analysis}\\Posterior effects and grouped rankings\\SHAP agreement and stability (RQ3)};
+    \node[result,text width=4cm,minimum height=2.3cm] (robustness) at (12.6,-14.3)
+      {\textbf{Robustness contrasts}\\Training size; censoring\\Predictors; preprocessing\\Baseline; prior settings\\(RQ2, RQ4)};
+    \foreach \analysis in {prediction,explanation,robustness}
+      \draw[arrow] (join) -- (join -| \analysis.north) -- (\analysis.north);
+
+    \node[shared,text width=14cm,minimum height=1.05cm] (synthesis) at (7.4,-16.6)
+      {\textbf{Study findings and interpretation}\\
+       Prior choice, predictive accuracy, calibration and explanation uncertainty};
+    \foreach \analysis in {prediction,explanation,robustness}
+      \draw[arrow] (\analysis.south) -- (\analysis.south |- synthesis.north);
+  \end{tikzpicture}
+  \endgroup
+  \caption[Research design and methodological framework.]{Research design and methodological framework. The three cohorts are analysed separately. Model arms share validation partitions and training-only preprocessing. Bayesian posterior and predictive summaries use fits satisfying the diagnostic criteria. Predictive, robustness and explanation analyses address complementary aspects of the fitted models.}
+  \label{fig:method-framework}
+\end{figure}

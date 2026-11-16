@@ -1,13 +1,10 @@
-Ravi V. Ramchandani Thesis: IEEE citation-linked Overleaf project
+Explainable Bayesian Survival Models
+Ravi V. Ramchandani
 
-Overleaf: New Project > Upload Project > select this ZIP.
-Compiler: pdfLaTeX (important: this optimized version does not use XeLaTeX). Main document: Main.tex.
+Compile Main.tex with pdfLaTeX. The source includes the figures and tables used by the thesis.
 
-All 95 bibliography entries use LaTeX numeric bibitem labels in references.tex.
-In-text citations use cite commands and hyperlink to corresponding reference entries.
-Existing supplied DOI/URL references remain clickable external links.
-The reference text is based on the supplied document. Bibliographic metadata has NOT been independently checked against publisher records.
+Saved aggregate results are in generated/ and report_summaries/. The manuscript reads its presentation tables from tables/. Supplementary calibration and predictive tables can be regenerated with:
 
-Figures and chapter text are included. Run Recompile twice to refresh cross-references.
+python3 scripts/render_supplementary_tables.py
 
-Optimization: replaced fontspec/XeLaTeX with the closely matching TeX Gyre Termes Type 1 font; converted a small number of Unicode mathematical symbols to LaTeX-compatible commands. All original image files remain included.
+The renderer verifies the saved aggregate checksums and does not fit models.

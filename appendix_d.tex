@@ -1,6 +1,8 @@
-\chapter{Appendix D Bayesian Model Specification and Prior Structures}\label{appendix-d-bayesian-model-specification-and-prior-structures}
+\chapter{Calibration Across Evaluation Horizons}
+\label{app:predictive}\label{app:prediction}
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=3.2684in]{media/image24.png}
+The main results present calibration at the median training-event horizon. The following tables report all three evaluation horizons: the 25th, 50th and 75th percentiles of event times in each outer-training partition. These percentiles define fold-specific times within each cohort's endpoint and unit.
 
-\phantomsection\label{_Toc245464063}{}\captionof{figure}{Notebook record of the Bayesian model builders, prior definitions, and sampling configuration}
+Calibration-in-the-large is the IPCW complementary-log-log calibration intercept estimated with slope fixed at one. Calibration intercept and slope come from the weighted horizon-specific model described in Chapter~\ref{chap:methods}. Reference values are zero for calibration-in-the-large and intercept, and one for slope. Entries are means and sample standard deviations across accepted outer folds.
 
+\input{tables/table_calibration_all_horizons.tex}

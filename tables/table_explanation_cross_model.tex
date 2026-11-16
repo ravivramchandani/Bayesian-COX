@@ -1,0 +1,27 @@
+% Generated from hash-verified saved evidence. Do not edit by hand.
+\begin{table}[htbp]
+\centering
+\caption{Secondary comparison with explanations of the paired CoxPH model.}
+\label{tab:gen-explanation-cross-model}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llrrr}
+\toprule
+Cohort & Bayesian prior & Folds & Cox agreement $\rho$ & Same-model minus Cox $\rho$ [95\% interval] \\
+\midrule
+GBSG2 & Horseshoe & 7/25 & 0.810 & +0.156 [+0.068, +0.256] \\
+GBSG2 & Normal & 25/25 & 0.925 & +0.002 [-0.011, +0.015] \\
+GBSG2 & Spike-and-slab & 25/25 & 0.922 & +0.007 [-0.010, +0.025] \\
+METABRIC & Horseshoe & 23/25 & 0.909 & -0.042 [-0.060, -0.026] \\
+METABRIC & Normal & 25/25 & 0.868 & -0.004 [-0.016, +0.006] \\
+METABRIC & Spike-and-slab & 25/25 & 0.870 & -0.008 [-0.019, +0.002] \\
+WHAS500 & Horseshoe & 25/25 & 0.859 & -0.001 [-0.043, +0.042] \\
+WHAS500 & Normal & 25/25 & 0.871 & +0.009 [-0.016, +0.035] \\
+WHAS500 & Spike-and-slab & 25/25 & 0.871 & +0.002 [-0.028, +0.028] \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip
+\begin{minipage}{\textwidth}\footnotesize Cox agreement compares Bayesian intrinsic contributions with exact linear SHAP for the paired CoxPH risk score. Differences use matched folds and explanation seeds. Intervals are descriptive hierarchical-bootstrap estimates.\end{minipage}
+\end{table}

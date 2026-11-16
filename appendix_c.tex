@@ -1,30 +1,27 @@
-\chapter{Appendix C Classical and Machine-Learning Baselines}\label{appendix-c-classical-and-machine-learning-baselines}
+\chapter{Bayesian Model and Diagnostic Details}
+\label{app:priors}\label{app:poisson}\label{app:likelihood}\label{app:diagnostics}
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=3.95126in]{media/image17.png}
+\section{Coefficient Priors}
+The three Bayesian models share their survival likelihood, predictor matrices, baseline intervals and validation folds. The Normal prior is $\beta_j\sim\mathcal{N}(0,1)$. The horseshoe arm uses global and local half-$t_2$ scales and a regularising slab. The continuous spike-and-slab arm mixes spike and slab variances using $\gamma_j\sim\operatorname{Beta}(1,1)$. Equations~\eqref{eq:normal-prior}--\eqref{eq:spike-slab-prior} give the complete specifications. Continuous mixing weights and local shrinkage summaries describe their respective priors; posterior coefficient and hazard-ratio summaries provide the shared interpretation across families.
 
-\phantomsection\label{_Toc245464056}{}\captionof{figure}{WHAS500 Cox proportional-hazards coefficient estimates and concordance index.}
+\section{Interval Exposure and Prediction}
+Let $a$ be the median observed event time in the current training partition. Follow-up is scaled as $u=t/a$. Six baseline intervals are formed from training-event quantiles, with an initial boundary of zero and a final boundary beyond the maximum scaled training follow-up. Equally spaced boundaries are used when tied quantiles produce insufficient distinct boundaries.
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=3.20778in]{media/image18.png}
+Patient $i$ contributes exposure
+\[
+e_{im}=\max\{0,\min(Y_i/a,b_m)-b_{m-1}\}
+\]
+and event count
+\[
+d_{im}=\delta_i\mathbb{I}\{b_{m-1}<Y_i/a\leq b_m\}
+\]
+in interval $m$. Positive-exposure rows enter a Poisson model with mean $e_{im}\lambda_m\exp(\boldsymbol{x}_i^{\mathsf T}\boldsymbol{\beta})$. This representation yields the full piecewise-exponential survival likelihood up to parameter-independent factors. An event on a boundary belongs to the interval ending at that boundary.
 
-\phantomsection\label{_Toc245464057}{}\captionof{figure}{GBSG2 Cox proportional-hazards coefficient estimates and concordance index.}
+Prediction integrates the interval hazards for each posterior draw and averages the resulting survival probabilities. In original time units, the hazard includes the scaling factor $1/a$. The last interval hazard continues beyond the final boundary. The four- and ten-interval models provide the baseline-resolution sensitivity comparisons.
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=2.57976in]{media/image19.png}
+\section{Sampling Diagnostics}
+Each initial fit uses four chains, with 2,000 warm-up iterations and 2,000 retained draws per chain. Effective sample sizes account for autocorrelation within these draws. The diagnostic criteria and two specified refits are described in Chapter~\ref{chap:methods}. Acceptance requires every component of the diagnostic criterion to be satisfied.
 
-\phantomsection\label{_Toc245464058}{}\captionof{figure}{METABRIC Cox proportional-hazards coefficient estimates and concordance index.}
+The primary Bayesian analysis contains 205 accepted outcomes out of 225 model--fold evaluations. The robustness analysis contains 770 accepted outcomes out of 825 evaluations. Table~\ref{tab:gen-robustness-diagnostics} details diagnostic outcomes by cohort and prior family. Predictive and paired-effect calculations use accepted fits.
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=2.33064in]{media/image20.png}
-
-\phantomsection\label{_Toc245464059}{}\captionof{figure}{Proportional-hazards assumption-check summaries for WHAS500, GBSG2, and METABRIC.}
-
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=3.59271in]{media/image21.png}
-
-\phantomsection\label{_Toc245464060}{}\captionof{figure}{Random survival forest permutation importance for WHAS500 predictors}
-
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=3.66667in]{media/image22.png}
-
-\phantomsection\label{_Toc245464061}{}\captionof{figure}{Random survival forest permutation importance for GBSG2 predictors}
-
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=3.62136in]{media/image23.png}
-
-\phantomsection\label{_Toc245464062}{}\captionof{figure}{Random survival forest permutation importance for METABRIC predictors}
-
+\input{tables/table_robustness_diagnostics.tex}

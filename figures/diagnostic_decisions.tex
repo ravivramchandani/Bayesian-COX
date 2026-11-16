@@ -1,0 +1,56 @@
+\begin{figure}[p]
+  \centering
+  \begingroup
+  \singlespacing
+  \begin{tikzpicture}[
+    x=1cm,y=1cm,
+    box/.style={draw=black!65,rounded corners=2pt,line width=0.6pt,
+      align=center,font=\fontsize{10}{12}\selectfont,inner sep=5pt,execute at begin node={\hyphenpenalty=10000},text width=8.2cm},
+    attempt/.style={box,fill=blue!7},
+    gate/.style={box,fill=violet!8},
+    arrow/.style={-{Stealth[length=2mm]},draw=black!70,line width=0.65pt},
+    edge label/.style={font=\small,fill=white,inner sep=1pt}
+  ]
+    \node[attempt,minimum height=1.2cm] (initial) at (10,0)
+      {\textbf{Initial Bayesian fit}\\
+       Four chains; 2,000 warm-up and 2,000 retained draws per chain};
+    \node[gate,minimum height=2.2cm] (gateone) at (10,-2.3)
+      {\textbf{All diagnostic criteria satisfied?}\\
+       Zero divergences and tree-depth hits\\
+       $\min\mathrm{BFMI}\geq0.30$; $\max\widehat R<1.01$; $\min\mathrm{ESS}_{\rm bulk}>400$\\
+       Finite aggregate BFMI, $\widehat R$ and bulk ESS};
+    \node[attempt,minimum height=1.3cm] (remedyone) at (10,-4.6)
+      {\textbf{First specified refit}\\
+       Target acceptance 0.99; 4,000 warm-up iterations; changed seed};
+    \node[gate,minimum height=0.9cm] (gatetwo) at (10,-6.25)
+      {\textbf{Same diagnostic gate satisfied?}};
+    \node[attempt,minimum height=1.3cm] (remedytwo) at (10,-7.9)
+      {\textbf{Second specified refit}\\
+       Retain first-refit controls; non-centred baseline log-hazards\\
+       Identical statistical prior and likelihood};
+    \node[gate,minimum height=0.9cm] (gatethree) at (10,-9.65)
+      {\textbf{Same diagnostic gate satisfied?}};
+    \node[box,fill=orange!12,minimum height=1.3cm] (failed) at (10,-11.4)
+      {\textbf{Record diagnostic status}\\
+       Record diagnostic summaries;\\
+       paired inference uses accepted fits};
+    \node[box,fill=teal!8,text width=3.25cm,minimum height=2.5cm] (accepted) at (2,-6.25)
+      {\textbf{Retain the first passing attempt}\\[0.3em]
+       Check prediction integrity, then use eligible predictions and posterior summaries};
+
+    \draw[arrow] (initial.south) -- (gateone.north);
+    \draw[arrow] (gateone.south) -- node[edge label,right]{Fail} (remedyone.north);
+    \draw[arrow] (remedyone.south) -- (gatetwo.north);
+    \draw[arrow] (gatetwo.south) -- node[edge label,right]{Fail} (remedytwo.north);
+    \draw[arrow] (remedytwo.south) -- (gatethree.north);
+    \draw[arrow] (gatethree.south) -- node[edge label,right]{Fail} (failed.north);
+    \draw[draw=black!70,line width=0.65pt] (4.65,-2.3) -- (4.65,-9.65);
+    \foreach \test in {gateone,gatetwo,gatethree}
+      \draw[draw=black!70,line width=0.65pt] (\test.west) --
+        node[edge label,above]{Pass} (4.65,0 |- \test.west);
+    \draw[arrow] (4.65,-6.25) -- (accepted.east);
+  \end{tikzpicture}
+  \endgroup
+  \caption[Bayesian sampling and diagnostic assessment.]{Bayesian sampling and diagnostic assessment. Each fit is assessed against the same criteria after the initial attempt and each specified refit. The first accepted attempt supplies posterior and predictive summaries. The horseshoe model starts at target acceptance 0.99. Summary precision and the roles of tail ESS and MCSE are specified in the methods.}
+  \label{fig:diagnostic-decisions}
+\end{figure}

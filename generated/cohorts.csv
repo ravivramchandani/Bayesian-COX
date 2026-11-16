@@ -1,0 +1,4 @@
+dataset,subjects,events,censored,censored_percent,endpoint,unit,median_observed_time,km_median
+gbsg2,686,299,387,56.41399416909621,Recurrence-free survival,days,1084.0,1807.0
+whas500,500,215,285,57.0,All-cause mortality,days,631.5,1627.0
+metabric,1980,1144,836,42.22222222222222,Overall survival,months,116.5,156.333333333333

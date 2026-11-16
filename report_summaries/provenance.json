@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "fitting_performed": false,
+  "script_sha256": "ad3494a4612fb7df1bf4e1e310123a529b66510800772dd3ef340be869268de0",
+  "inputs": {
+    "generated/calibration_all_horizons.csv": "4a09e1fb67e56bc1d3ea2668437517dd7c5d067cd9606d3d0f350f293f275340",
+    "generated/robustness_effects.csv": "d2cd405d150f49cc94ee66f6c9fea82c5726be77cc078ba8cd834a55c93d098d",
+    "frozen/reports/confirmatory/confirmatory_v1_confirmatory_cdcdcee84651/inference.json": "54f53ff0e2e23be2e52e9365716693d9f6b35a11e0d5750644640b38e26edf0e"
+  },
+  "source_provenance_sha256": "e86fc415957fc972c95b8cd3254c58dd570fc31488dadc68cc304c5f90fe7ee7",
+  "runtime": {
+    "python": "3.10.20",
+    "matplotlib": "3.10.9"
+  },
+  "rules": {
+    "secondary": "All 27 original secondary IBS contrasts copied exactly; nine complete Normal-prior reference contrasts displayed without p-values.",
+    "information": "Both Normal-versus-shrinkage DiDs in every cohort at 25 percent training and median outer-training follow-up truncation, 12 rows including partial pairs.",
+    "calibration": "Middle horizon only; exact saved fold means and sample SDs, no confidence intervals or curve fitting; open markers identify partial coverage."
+  },
+  "outputs": {
+    "figure_calibration_summary.pdf": {
+      "sha256": "7dd5c33bf0e5d7a532f3daf1426bf5d8150f5dd4a0c1cd0c5ff620aa8ddc6f16",
+      "bytes": 23341
+    },
+    "robustness_selected.csv": {
+      "sha256": "b0eba58e58890645ff0d3b4c9ffe189c673fdc643ca2da6184fa196f8babe137",
+      "bytes": 2639
+    },
+    "secondary_benchmarks.csv": {
+      "sha256": "97aa08f564852c4e484e0636a5403144bc1ae6d248c86a16a9efe485754f73bb",
+      "bytes": 5101
+    },
+    "table_information_effects.tex": {
+      "sha256": "f0b0eb5a107c28468e7a6f750941705b4616f062a370cb6f583ed51728fa3b01",
+      "bytes": 2102
+    },
+    "table_secondary_benchmarks.tex": {
+      "sha256": "7df785852b07e1840d7821a8d425001f5faaa9dfce370ef4f48d5edaa9374d7a",
+      "bytes": 1300
+    }
+  }
+}

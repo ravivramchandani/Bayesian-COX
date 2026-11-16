@@ -1,609 +1,407 @@
-\chapter{Methodology}\label{methodology}
+\chapter{Research Methodology}
+\label{chap:methods}
+\label{chap:method}
 
-\section{Research Design and Overall Methodological Framework}\label{research-design-and-overall-methodological-framework}
+\section{Research Design}
+\label{sec:method-design}
 
-The research adopts a quantitative, computational, comparative, empirical, and retrospective design to investigate Bayesian survival modelling for explainable time-to-event prediction in healthcare. Three existing healthcare survival datasets, i.e. GBSG2, METABRIC and WHAS500, are utilized in the empirical investigation and offer patient-level data on survival time, event status and predictors. The retrospective design is suitable since the study does not involve a prospective clinical study or gathering of new patient information but analyzes observations previously made.
+This study used a retrospective, comparative design to investigate how coefficient priors affect Bayesian survival prediction and interpretation. Three clinical cohorts, GBSG2, METABRIC and WHAS500, provided different combinations of sample size, event frequency, predictor structure and follow-up. Each cohort was analysed separately using the same modelling and evaluation framework. This preserved the clinical meaning of its endpoint while supporting comparison of methodological findings across settings.
 
-The methodology was developed to provide accurate, Bayesian and interpretable results. Firstly, to compare the performance of different survival modelling techniques. Secondly, to examine how specifying different priors affects the posterior estimation of parameters. Finally, to provide uncertainty sensitive interpretations of covariate effects via the posterior distribution. This is in line with recent papers in survival modelling which have shown that model performance can depend on the characteristics of the dataset, outcome structure and assumptions made in different modelling approaches \cite{ref33} \cite{ref34}.
+The central comparison placed Normal, horseshoe and continuous spike-and-slab coefficient priors within a common Bayesian piecewise-exponential proportional-hazards model. The likelihood, baseline-hazard specification, predictors and validation partitions were shared across the three Bayesian arms. Differences could therefore be examined in relation to coefficient-prior choice. Cox proportional-hazards regression (CoxPH), random survival forest (RSF) and DeepSurv provided statistical, ensemble and neural reference models. These comparators received the same processed predictors and outer-validation observations. Multi-cohort survival benchmarks provide a basis for this comparative approach because model performance varies with the data and the evaluation measure \cite{ravi33,ravi37,ravi45}.
 
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=5.83333in,height=7.15467in]{media/image2.png}
+The study connected four aspects of model assessment: held-out prediction, posterior interpretation, computational reliability and explanation stability. Posterior coefficient distributions describe the magnitude and uncertainty of conditional associations. Survival predictions assess how these fitted relationships translate into event probabilities. Calibration evaluates the correspondence between predicted and observed risk, and explanation analysis examines the agreement and sampling stability of predictor rankings. Keeping these quantities distinct makes the contribution of each prior interpretable \cite{ravi22,ravi40,ravi54}.
 
-\phantomsection\label{_Toc245464042}{}\captionof{figure}{Conceptual overview of the study design, analysis stages, and links between modelling and interpretation}
+The four research questions were operationalised as follows. RQ1 compared predictive performance among the three priors and against the reference models. RQ2 examined how prior differences changed with training information and administrative censoring. RQ3 evaluated agreement and stability between grouped posterior contributions and SHAP rankings. RQ4 examined sensitivity to predictor specification, missing-data handling, baseline intervals and prior hyperparameters. H1 concerned shrinkage benefit at lower effective event information; H2 concerned benefit under reduced training information; H3a concerned positive, stable same-model explanation agreement; and H3b concerned stronger same-model agreement than agreement with CoxPH. The inferential rules and comparison families were specified before examining the primary results.
 
-There are two main areas to the modelling. The first area consists of three different survival models to compare; Cox proportional hazards regression, Random Survival Forest and DeepSurv. The CoxPH model is a traditional statistical model, whereas the RSF and DeepSurv models are non-linear, machine learning and deep learning models. In similar healthcare studies it has been shown that the predictive capabilities of these different models can vary greatly depending on the clinical dataset and analysis scenario \cite{ref35}.
+Five repeats of five-fold outer cross-validation generated 25 evaluations per cohort. Across three cohorts and six model arms, the primary design comprised 450 model--fold outcomes. Model fitting, diagnostic assessment and evaluation were performed within this repeated structure. All stochastic operations used deterministic derived seeds. Figure~\ref{fig:method-framework} shows the complete research design, from cohort preparation to predictive and explanatory analysis.
 
-The second area consists of the fully Bayesian piecewise exponential proportional hazards model. There are three different prior distributions for the coefficients; Normal, Horseshoe and Spike-and-Slab. The piecewise exponential model allows for the baseline hazard to vary over time (i.e. each time interval has a different value). The piecewise exponential model was chosen due to its flexibility in how the baseline hazard is represented \cite{ref35}.
+\input{figures/research_design.tex}
 
-The use of a fully Bayesian model is very important. This is because the analysis does not rely on point estimates. Bayesian inference is a type of inference that combines prior distributions with the likelihood to obtain posterior distributions. These posterior distributions can then be used to measure the uncertainty of the parameters \cite{ref37}. This means that the model will produce posterior distributions for the coefficients, credible intervals, hazard ratio transformations and posteriors for the direction. Bayesian models can also be used to directly compare previous assumptions and how they affect inference \cite{ref39}.
+\section{Datasets and Cohort Preparation}
+\label{sec:method-cohorts}
 
-The three different Bayesian families are used for a variety of different methods. The Normal distribution is a fairly standard choice for continuous shrinkage. The Horseshoe distribution is a global-local shrinkage method. This has the capability to robustly shrink down the weak signals but keep the relatively robust effects unconstrained. This has been analysed in both regression and survival scenarios within Bayesian models where there can be many predictors with a small signal \cite{ref30}. The Spike-and-Slab distribution is another method to encourage sparsity in the model. In recent survival studies the spike-and-slab Cox models have been looked at specifically and shown to be used to detect sparse covariates \cite{ref34}.
+\subsection{Clinical Cohorts and Outcomes}
 
-A variety of different metrics have been used to measure the survival specific predictions. The metrics chosen were; concordance index (C-index), Integrated Brier Score (IBS), time dependent AUC and mean absolute calibration error. This is an important factor as they provide a variety of different characteristics to measure for survival predictions. Other recent analyses have used the C-index and Brier based metrics to differentiate between the predictive discrimination and prediction error \cite{ref33}, \cite{ref38}.
+The cohorts supplied right-censored event times and clinically interpretable predictors. GBSG2 and METABRIC represented breast-cancer settings, while WHAS500 represented cardiovascular survival following acute myocardial infarction. All eligible observations in the respective source populations were included. Table~\ref{tab:method-cohorts} summarises their analysis definitions.
 
-The research design is comparative and associational rather than causal. The aim is not to determine that a given clinical variable leads to a given survival outcome. Rather, the study investigates predictive relationships, posterior uncertainty, model behaviour, and the effects of prior specification using retrospective survival data. This difference is significant as the results of the analysis are not to be viewed as the causal clinical influences but as the statistical relationships and predictive values.
+\begin{table}[htbp]
+\centering
+\caption{Clinical cohorts used in the study. Predictor counts refer to source variables before categorical expansion.}
+\label{tab:method-cohorts}
+\small
+\begin{tabularx}{\textwidth}{@{}lrrrrX@{}}
+\toprule
+Cohort & Records & Events & Censored & Predictors & Endpoint and unit\\
+\midrule
+GBSG2 & 686 & 299 & 387 & 8 & Recurrence-free survival; days\\
+METABRIC & 1,980 & 1,144 & 836 & 8 & Overall survival from diagnosis; months\\
+WHAS500 & 500 & 215 & 285 & 9 & All-cause death from admission; days\\
+\bottomrule
+\end{tabularx}
+\end{table}
 
-In general, the study design combines traditional statistical survival analysis, machine-learning survival prediction, Bayesian probability modelling, posterior diagnostics, posterior predictive evaluation, predictive evaluation and Bayesian explainability into a single empirical model. It is also designed in such a way that explicit model-quality choices are made so that successful computational execution does not necessarily imply evidence that a model is statistically acceptable.
+GBSG2 used the recurrence-free-survival outcome distributed with the dataset. Its eight primary source variables were age, tumour size, positive lymph nodes, progesterone-receptor concentration, oestrogen-receptor concentration, hormone-therapy assignment, menopausal status and ordered tumour grade. The cohort provided 299 events among 686 observations \cite{schumacher1994,polsterl2020}.
 
-\section{Research workflow}\label{research-workflow}
+METABRIC used overall survival in months since initial diagnosis. Patient and sample tables were merged one-to-one by patient identifier. Of the 2,509 source patients, 528 had an incomplete overall-survival outcome and one otherwise complete record had zero follow-up. Requiring complete event status, complete survival time and strictly positive follow-up yielded 1,980 eligible observations. The primary variables were age at diagnosis, Nottingham Prognostic Index (NPI), cellularity, oestrogen-receptor status, progesterone-receptor status, HER2 status, inferred menopausal state and PAM50/claudin-low subtype. These clinical and pathology descriptors define the feature set used here \cite{curtis2012,pereira2016}.
 
-The research pipeline involves creating the dataset, fitting the model, evaluating the model, Bayesian interpretability, prior sensitivity and verifying computational integrity. The workflow was created to keep the model building and model acceptance separate as fitting a Bayesian model does not mean that the posterior samples are reliable enough to be interpreted. A structured Bayesian workflow should contain model building, computation, model checking, validation and model improvement \cite{ref38}.
+WHAS500 used all-cause mortality following admission for acute myocardial infarction. Its nine primary variables were age, sex, heart rate, systolic blood pressure, diastolic blood pressure, body mass index, cardiovascular-disease history, myocardial-infarction order and myocardial-infarction type. This representation focused on information associated with the admission setting. Length of stay and complication variables were reserved for the published-feature sensitivity because their availability relates to the subsequent hospital course \cite{hosmer2008,polsterl2020}.
 
-The first stage involved preparing and reconstructing the GBSG2, METABRIC, and WHAS500 survival datasets. The variables used in the modelling were determined and converted to a standard representation of survival-analysis in the form of explanatory variables, observed survival time and event status. This established a consistent analytical framework for comparing the modelling approaches while preserving the characteristics of each cohort.
+GBSG2 and WHAS500 were obtained from their distributed survival-data sources, and METABRIC was reconstructed from its clinical patient and sample exports. Source versions, patient identities and eligibility rules were preserved with the analysis data. Event counts quantify the information available in these fixed cohorts; repeated validation changes the training and validation partitions while retaining the same underlying patients.
 
-The second phase defined the validation architecture. Twenty-five outer-fold definitions were generated for each cohort, resulting in 75 outer-fold definitions across the three cohorts. These folds are the validation infrastructure behind the experimental pipeline. The canonical numerical analysis, however, was limited to the held-out first outer fold. Due to the unsuitability of the prediction artefacts available to reconstruct a true pooled 25-fold prediction dataset, no pooled 25-fold performance metrics are reported. This distinction prevents the validation infrastructure from being incorrectly represented as a completed pooled out-of-fold evaluation.
+\subsection{Predictor Representation}
+\label{sec:method-preprocessing}
 
-The third stage of the process broke down the modelling into a baseline and Bayesian approach. CoxPH, RSF and DeepSurv were applied to create a reference survival model. DeepSurv is a neural network version of the Cox proportional hazards predictor \cite{ref4}. Studies have shown that the relative performance can vary between different datasets \cite{ref33}, \cite{ref38}. Hence, multiple comparison families should be used.
+Preprocessing was fitted separately within every outer-training and inner-training partition. Numeric variables were median-imputed and standardised with the training mean and population standard deviation. A constant training column received scale one. Ordered GBSG2 tumour grade was mapped from grades I, II and III to positions 0, 1 and 2 and then standardised. The ordinal processor represented missing or unknown values as $-1$ before scaling.
 
-The Bayesian stream was based on piecewise-exponential proportional-hazards formulation and the priors were the Normal, Horseshoe and Spike-and-Slab priors. NUTS-based MCMC with 2,000 warm-up iterations, four chains, and 2,000 iterations of the posterior draw was used to perform Bayesian inference. The core sampling configuration was fixed according to the implemented experimental design, while the target acceptance probability varied by prior specification.
+Nominal variables were encoded using sorted levels observed in the current training partition. The first level was the reference category, and each remaining level received a binary indicator. Missing nominal values formed an explicit category when present in training. An unseen validation level mapped to the all-zero block for that factor. The fitted transformation was applied to the corresponding validation records without re-estimating its parameters. Encoded columns were linked to their clinical source variables for grouped explanation analysis.
 
-The fourth stage involved checking the MCMC diagnostics. This included checking for divergences, rank normalised r-hat, bulk and tail effective sample sizes, BFMI, tree depths and posterior finiteness. Multiple diagnostics were used to ensure that there is no single convergence statistic that can be used to show that the MCMC is behaving properly. The rank normalised diagnostics make the diagnostic more sensitive to sampling issues that may not be picked up by other summaries \cite{ref36}.
+The primary GBSG2 and WHAS500 predictors were complete. Within eligible METABRIC records, cellularity had 64 missing values; NPI, progesterone-receptor status, HER2 status, menopausal state and subtype each had one. Age and oestrogen-receptor status were complete. Stage, which had 514 missing values, entered a separate sensitivity specification. The primary METABRIC representation used NPI as a composite prognostic measure; its size, grade and node components replaced it in a distinct specification rather than being entered alongside the complete composite.
 
-The GBSG2/Horseshoe model had finished sampling but failed to meet the frozen diagnostic criteria. In the given project documentation, attempt 0 had 25 divergences. A new bounded audit was performed resulting in attempt 1 having 4000 warm-up samples, 2000 samples kept, an acceptance rate of 0.99, centre parameterisation and seed 260918 resulting in 8 divergences. Attempt 2 had 4000 warm-up samples, 2000 samples kept, an acceptance rate of 0.99, non-centre parameterisation and seed 778144103 resulting in 4 divergences. All three attempts failed to meet the zero divergence criteria. However, all other criteria were satisfied. Only the 8 accepted fits were passed onto posterior interpretation and prediction.
+All six model arms received the same transformed matrices within a paired outer fold. Imputation, scaling, categorical levels, hyperparameter selection and evaluation horizons were learned from training data. These controls applied throughout inner selection as well as outer evaluation \cite{ravi32,ravi34,ravi35}. Scientific predictor definitions and missingness summaries are provided in Appendix~\ref{app:data}.
 
-Once the Bayesian models had been kept, posterior predictive checks were performed. Posterior predictive checks check whether data generated from the fitted posterior distribution can replicate the important features of the observed data. Posterior predictive checks can be an important part of Bayesian model checking and should be considered with parameter estimation and computational diagnostics \cite{ref37}, \cite{ref32}.
+\section{Survival Outcomes and Notation}
+\label{sec:method-notation}
 
-The second step was held-out predictive assessment with four measures; C-index, Integrated Brier Score, time-dependent AUC and mean absolute calibration error. The last canonical predictive scope has seven model-cohort combinations on the move. In this way, the ultimate analysis is not to be reported as a full 3-cohort all-model predictive benchmark.
-
-The next step was on Bayesian explainability. In the case of retained Bayesian fits, the means of the posterior coefficients, 95 percent credible intervals, estimates and credible interval estimates of the hazard-ratio, and the posterior probability of a positive and negative coefficient value were obtained. These quantities enable interpretation of covariate effects along with their uncertainty and not just by using point estimates.
-
-No additional MCMC runs or posterior sampling was performed during the sensitivity analysis. The bounded GBSG2/Horseshoe recovery audit showed that attempts 1 and 2 were rerun. Neither attempt met the frozen acceptance criteria. The package and regenerated notebook only show attempts 0-2. A fourth attempt is referenced in ancillary documentation, but the supplied project files contain no corresponding sampling object or diagnostic output. Its convergence status therefore cannot be independently verified, and it is excluded from the retained results. The final registry still does not include the GBSG2/Horseshoe model. The integrity checks also stop any pooled out of fold results that cannot be accessed from being reported and permutation importance from being referred to as SHAP.
-
-\includegraphics[keepaspectratio,max width=\linewidth,max height=0.78\textheight,width=6.35in,height=4.33862in]{media/image3.png}
-
-\phantomsection\label{_Toc245464043}{}\captionof{figure}{Completed analysis workflow, first-fold evaluation boundary, and model-checking limits}
-
-\section{Data set and Cohort Preparation.}\label{data-set-and-cohort-preparation.}
-
-\subsection{Healthcare Cohort Selection}\label{healthcare-cohort-selection}
-
-Three publicly available healthcare survival data sets were used in this empirical investigation. They are: GBSG2, METABRIC and WHAS500. They all have varying clinical information, though they are all time-to-event modelling. The importance to have several independent data sets is based on the fact that the survival models can be severely affected by the sample size, the structure of predictors, censoring and clinical situations \cite{ref33}, \cite{ref34}. The recent literature on survival modelling emphasizes the significance of assessing survival prediction models using a wide range of data sets \cite{ref33}, \cite{ref36}.
-
-GBSG2 (German Breast Cancer Study Group 2) is a study cohort of breast-cancer survival. In the ultimate implementation, the sample size is 686 and the predictors are 8. The predictor set includes the age, tumour size (tsize), positive nodes (pnodes), progesterone receptor measurement (progrec), oestrogen receptor measurement (estrec), hormonal therapy (horTh), menopausal status (menostat) and tumour grade (tgrade). Recurrence-free survival is considered the endpoint and the time of survival is in days. The implementation makes 299 observed and 387 censored.
-
-A second data set on breast cancer is METABRIC (Molecular Taxonomy of Breast Cancer International Consortium). The reconstructed confirmatory data set of 1980 observations and 8 predictors that include age, Nottingham Prognostic Index (NPI), cellularity, ER status, PR status, HER2 status, menopausal status and PAM50/claudin-low subtype expression is the final reconstructed data set. The total survival (in months) is the outcome variable. The data set consists of 1144 observed events, and 836 censored observations. METABRIC has been heavily used in recent breast cancer survival modelling investigations including using clinical and molecular information for prognostic modelling \cite{ref38}.
-
-WHAS500 (Worcester Heart Attack Study) does not offer cancer-related survival data, but cardiovascular. The ultimate implementation will include 500 observations and 9 major predictors such as age, gender, heart rate, systolic blood pressure, diastolic blood pressure, body mass index, cardiovascular disease status, order of myocardial infarction and type of myocardial infarction. All cause mortality, in days is the outcome variable. There are 215 observed events and 285 censored events in the data set. WHAS500 is a common criterion to assess survival learning techniques \cite{ref39}, \cite{ref40}.
-
-\subsection{Data Reconstruction and acquisition.}\label{data-reconstruction-and-acquisition.}
-
-These data were considered as secondary, publicly available, survival data. The notebook used the default local CSV representations to inspect the structure; but the confirmatory implementation then re-created the GBSG2 and WHAS500 cohorts with the default scikit-survival dataset loaders. METABRIC was rebuilt using an established cohort-specific process to project the source variables into a frozen primary analysis table. This is significant since the completed modelling dataset is determined by the confirmatory pipeline that has been validated as opposed to the initial exploratory CSV representation.
-
-The reconstruction procedure made a clear distinction between predictors and survival outcomes. GBSG2 time and cens, WHAS500 lenfol and fstat, reconstructed METABRIC table time and event. Before modelling the event variables of GBSG2 and WHAS500 were converted into explicit binary event indicators. The resultant cohort adapters standardised the resultant representation to time and event, enabling a standard survival-analysis interface across the three cohorts.
-
-\subsection{Predictor Preparation}\label{predictor-preparation}
-
-The implementation identifies numerical, ordinal, and nominal categorical predictors instead of making a single transformation of all variables. In the case of GBSG2, the tumour grade was considered as an ordered variable with grades I, II and III being deterministically represented by 1, 2 and 3. Numerical and ordinal predictors were then inputted into a preprocessing pipeline of median imputation, then standardisation using StandardScaler.
-
-Nominal categorical variables were considered independently. Missing categorical values were coded as an explicit missing category, and then coded as one-hot with drop=first and handle\_unknown=ignore. This is to make sure that categorical levels missing in a given validation fold will not lead to transformation failure.
-
-After transformation with the output of the fitted preprocessor (feature-names), names of features were stored. This is relevant to future interpretation and explainability of Bayesian coefficients since it is necessary that the transformed positions of predictors can be traced back to their original variables.
-
-\subsection{Cohort-Specific Preprocessing and Control of Leakage.}\label{cohort-specific-preprocessing-and-control-of-leakage.}
-
-The analysis does not fit one global preprocessing transformation to the complete dataset; instead, preprocessing is fitted on each outer-training partition and applied unchanged to its validation partition. Rather, the outer-training partition is fitted with the preprocessing state, with the same fitted transformation applied to its validation partition. The notebook explicitly verifies training and validation dimensional consistency, finite transformed values and the lack of train validation overlap.
-
-This will guarantee that the statistics of information in the validation data set will not be used in imputation statistics, scaling and categorical encoding in the model. This is especially relevant in the survival prediction because it may add optimistic estimates of the performance in case pre-processing and validation choices are made \cite{ref33}, \cite{ref34}.
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1365}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.2328}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1195}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1180}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1416}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1227}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1290}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Cohort
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Clinical domain
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Records (n)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Predictors
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Time scale
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Events (n)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Censored (n)
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-GBSG2 & Breast cancer & 686 & 8 & Days & 299 & 387 \\
-METABRIC & Breast cancer & 1,980 & 8 & Months & 1,144 & 836 \\
-WHAS500 & Cardiovascular / myocardial infarction & 500 & 9 & Days & 215 & 285 \\
-\end{longtable}
-
-\phantomsection\label{_Toc245465016}{}\captionof{table}{Canonical study cohorts, predictor counts, follow-up scales, and event/censoring totals}
-
-Table 1 reports the confirmatory cohort definitions used in the analysis rather than the dimensions of the exploratory CSV files. The METABRIC analysis cohort contains 1,980 observations and eight predictors, as specified by the Phase 3.4D/3.5B pipeline.
-
-\section{Survival Outcome Definition}\label{survival-outcome-definition}
-
-\subsection{Time-to-Event Representation}\label{time-to-event-representation}
-
-In this study, the main result will be a time-to-event variable, instead of a traditional binary classification label. Given individual i, define:
-
-\[T_{i}\]
-
-Here, \(T_{i}\) Whilst the three data sets have different clinical outcomes and time units, they are all based on survival modelling. GBSG2 models are recurrence free survival, WHAS500 models are all cause mortality after a cardiovascular event and METABRIC models are overall survival.
-
-This stores data on the time when an event will be held. Recent studies on survival prediction emphasize the importance of preserving time varying and time invariant information in time-to-event modelling to enable individual level predictions to be made \cite{ref34}, \cite{ref36}.
-
-\subsection{Event Indicator}\label{event-indicator}
-
-The observed event indicator of each individual is determined to be:
+For patient $i$, let $T_i$ denote event time and $C_i$ censoring time. The observed data are
 \begin{equation}
-    \delta_{i} = \left\{ \begin{matrix}
-    1, & \text{if~the~event~is~observed}, \\
-    0, & \text{if~the~observation~is~right~censored}.
-    \end{matrix} \right.\ \ 
+Y_i=\min(T_i,C_i),\qquad
+\delta_i=\mathbb{I}(T_i\leq C_i),
+\label{eq:observed-survival}
 \end{equation}
+where $\delta_i=1$ indicates an observed event and $\delta_i=0$ indicates right censoring. A censored observation contributes its known event-free exposure. Source event fields were mapped according to their documented coding; in particular, the GBSG2 field named \texttt{cens} supplied the observed-event indicator.
 
+For predictor vector $\boldsymbol{x}$, the survival and cumulative-hazard functions are
+\begin{align}
+S(t\mid\boldsymbol{x})&=\Pr(T>t\mid\boldsymbol{x}),\\
+H(t\mid\boldsymbol{x})&=\int_0^t h(v\mid\boldsymbol{x})\,dv,
+\qquad S(t\mid\boldsymbol{x})=\exp\{-H(t\mid\boldsymbol{x})\}.
+\end{align}
+The hazard $h(t\mid\boldsymbol{x})$ is the instantaneous event rate among patients remaining event-free at $t$. Model predictions included both a ranking score and survival probabilities. Ranking scores support discrimination measures; absolute probabilities also support prediction-error and calibration assessment \cite{ravi14,ravi26,ravi27}.
 
-The cohort-specific covariates are converted to a unified binary variable indicating event status. GBSG2 have their original censoring variable inverted to indicate event status, WHAS500 have their fstat variable indicating event status, and METABRIC provide an event variable.
+The likelihood and inverse-probability-of-censoring-weighted (IPCW) evaluation were interpreted under independent-censoring assumptions over the supported follow-up window. The IPCW calculations used a marginal Kaplan--Meier estimate of the training censoring distribution. Each cohort retained its own endpoint and time unit throughout estimation and reporting.
 
-\subsection{Right Censoring}\label{right-censoring}
+\section{Repeated Validation and Model Selection}
+\label{sec:method-validation}
 
-Let \emph{C\textsubscript{i}} denote the potential censoring time. The recorded follow-up is the earlier of the event time and censoring time:
-
+Each cohort used five repeats of five-fold outer cross-validation. Within an event-status group, follow-up times were ranked, with source-row order resolving ties, and divided into at most four equal-frequency bins. Time subdivision was used when each resulting stratum contained at least five observations; otherwise stratification used event status alone. Repeat $r$ used seed
 \begin{equation}
-    \emph{T\textsubscript{i}\textsuperscript{o}\textsuperscript{b}\textsuperscript{s} = min(T\textsubscript{i}, C\textsubscript{i})}
+s_r=260817+1009(r-1),\qquad r=1,\ldots,5.
 \end{equation}
+The subject partitions were identical across model arms. Every patient appeared in outer validation once per repeat, and all fitting operations used the associated training partition.
 
+RSF and DeepSurv were selected through three-fold inner cross-validation within each outer-training fold. Each inner training partition fitted its own preprocessing state, model and evaluation horizons. Selection minimised mean inner IBS over complete candidate evaluations, with candidate-list order resolving exact ties. The selected configuration was then fitted within the outer-training data. CoxPH penalisation and primary Bayesian prior hyperparameters were fixed. DeepSurv early stopping used a further subset of its training data.
 
+The unit of evaluation was the cohort--model--repeat--fold outcome. Stored results linked observed validation outcomes to risk scores, survival predictions, preprocessing state and fitted settings. Fold-level metrics were summarised over repeated validation. Because the same patient appears in different repeats, uncertainty estimation accounted for dependence between paired folds. Primary prior contrasts and secondary Bayesian--comparator contrasts required all 25 paired outcomes. This requirement gave each estimated contrast the same intended validation coverage.
 
-If the event happens before the censoring time occurs, we have an event (\emph{T\textsubscript{i}} \ensuremath{\leq} \emph{C\textsubscript{i}} ). The event variable will be 1, and the observed time will be \emph{T\textsubscript{i}}. If the event does not occur before the censoring time, we have no event (event variable = 0), and the observed time will be \emph{C\textsubscript{i}}. Having no event does not mean the event will not occur, just that it will not be observed within the follow-up period. We can treat these censored observations as negative observations. However, this removes any information we would have about the time of the event. Survival analysis can be biased due to this \cite{ref35}.
+\section{Reference Survival Models}
+\label{sec:method-models}
 
-\subsection{Survival and Hazard Functions}\label{survival-and-hazard-functions}
+\subsection{Cox Proportional Hazards}
 
-The survival function can be defined as
+CoxPH specifies
 \begin{equation}
-    S(t) = P(T > t),
+h(t\mid\boldsymbol{x}_i)=h_0(t)
+\exp(\boldsymbol{x}_i^{\mathsf T}\boldsymbol{\beta}),
+\label{eq:method-cox}
 \end{equation}
+with coefficients estimated through partial likelihood \cite{cox1972}. The implementation used fixed $L_2$ penalisation of $10^{-4}$. The fitted baseline survival and linear predictor supplied absolute survival probabilities. This provided a linear PH reference for the Bayesian model.
 
+Rank-transformed Schoenfeld-residual tests assessed covariate-level PH departures, with Holm adjustment within each training-fit covariate family \cite{schoenfeld1982,holm1979}. Their summaries describe the suitability of constant coefficient effects across time. Repeated-fit rejection frequencies were interpreted descriptively because the training sets overlap.
 
-The survival function gives the probability of remaining event-free beyond time t. The corresponding hazard function is defined as:
+\subsection{Random Survival Forest}
 
+RSF combines survival trees to represent nonlinear effects and interactions \cite{ishwaran2008,ravi52}. The model used 300 trees, minimum split size 10 and unrestricted maximum depth. The four-candidate inner grid crossed minimum leaf sizes 5 and 15 with either square-root or all-feature candidate sampling. Fits used deterministic derived seeds and one computation thread. Risk scores and survival functions were evaluated on the same validation subjects and time horizons as the other models.
+
+\subsection{DeepSurv}
+
+DeepSurv uses a neural-network risk function within a Cox partial-likelihood objective \cite{ravi4}. The implementation produced a scalar log-risk score and used a Breslow baseline for survival prediction. Four inner-grid candidates combined widths $[32]$ or $[32,16]$ with either no dropout and $L_2=10^{-4}$, or dropout 0.2 and $L_2=10^{-3}$. All candidates used ReLU activation, batch normalisation, Adam learning rate $10^{-3}$, batch size 64 and at most 100 epochs.
+
+An event-stratified 20\% subset of the current training data controlled early stopping, with patience 15 and minimum improvement $10^{-4}$. The fitted network, selected settings and derived random seeds were associated with each outer outcome. The common tuning grid provided a defined computational comparison across cohorts.
+
+\section{Bayesian Piecewise-Exponential Model}
+\label{sec:method-bayes-model}
+
+The Bayesian model combined a proportional-hazards predictor with an explicitly estimated piecewise-constant baseline. Its full survival likelihood was represented through an equivalent expanded Poisson model \cite{laird1981,friedman1982,ibrahim2001}. This formulation provides posterior distributions for both regression coefficients and baseline rates.
+
+Within each training fold, time was scaled by the median observed event time $a>0$, giving $u=t/a$. Six baseline intervals were constructed from equally spaced quantiles of scaled training event times. The first boundary was zero and the final boundary was the maximum scaled training follow-up plus one. Equal-width intervals over that range were used when tied quantiles produced fewer than six distinct intervals. Prediction beyond the final boundary continued the last hazard rate.
+
+For interval $(b_{m-1},b_m]$ with rate $\lambda_m$, the hazard on the original time scale is
 \begin{equation}
-    [h(t) = \lim_{\Delta t \rightarrow 0}\frac{P(t \leq T < t + \Delta t \mid T \geq t)}{\Delta t}.
+h_i(t)=\frac{\lambda_m}{a}
+\exp(\boldsymbol{x}_i^{\mathsf T}\boldsymbol{\beta}),
+\qquad t/a\in(b_{m-1},b_m].
 \end{equation}
+The exposure and event contribution of patient $i$ in interval $m$ are
+\begin{align}
+e_{im}&=\max\{0,\min(Y_i/a,b_m)-b_{m-1}\},\\
+d_{im}&=\delta_i\mathbb{I}(b_{m-1}<Y_i/a\leq b_m).
+\end{align}
+Positive-exposure rows enter the expanded likelihood:
+\begin{align}
+d_{im}&\sim\operatorname{Poisson}(\mu_{im}),\\
+\log\mu_{im}&=\log e_{im}+\log\lambda_m+
+\boldsymbol{x}_i^{\mathsf T}\boldsymbol{\beta}.
+\label{eq:piecewise-poisson}
+\end{align}
+Up to factors independent of the parameters, this is the right-censored piecewise-exponential likelihood. Events at a boundary enter the interval ending at that boundary. Figure~\ref{fig:interval-exposure} illustrates how event and censored observations contribute exposure across intervals.
 
+\input{figures/interval_exposure.tex}
 
-
-The survival function provides us with the probability of surviving at a given time. The hazard provides us with the rate of the event occurring at a specific time, given that the subject is alive. These can be used to help with the prediction problem in the thesis as they take into account the time of the event, rather than binary classification. Modern survival prediction models explicitly take this into account \cite{ref33} \cite{ref36}.
-
-Evaluation metrics such as time-dependent AUC and Brier prediction error take into account the time aspect and censoring \cite{ref37}.
-
-\section{Train/Test Separation and Validation Design}\label{traintest-separation-and-validation-design}
-
-The validation strategy was designed to avoid overfitting and to ensure the 3 healthcare cohorts had the time-to-event structure. Censoring, discrimination, prediction error and calibration need to be considered when predicting survival. Therefore, the evaluation strategy didn't rely on a single measure of performance. A review of methods of evaluating survival prediction highlights that discrimination, calibration and prediction error complement each other \cite{ref29}.
-
-The adopted pipeline created an outer-validation structure that included 5 repeats and 5 folds per cohort with resulting 25 outer-fold definitions per cohort and 75 outer-fold definitions across GBSG2, METABRIC and WHAS500. The explicit training and validation indices were present in each outer fold. This resulting structure gave a prespecified division between observations to be used in developing the model and those to be used in held-out evaluation.
-
-An important methodological aspect was fold-local preprocessing. In the case of every outer fold, the preprocessing state was obtained based on the respective training partition and then applied to the validation partition. This makes sure that information in the held-out validation observations does not affect feature transformation parameters. Training and validation indices, transformed predictor matrices, survival times, event indicators, preprocessing state and supported reporting horizons were stored as fold-specific objects in the fold-preparation routine. As a result, the validation observations were not part of the training transformation process but served as an assessment set.
-
-The modelling pipeline had explicit outer-fold preparation and model-training infrastructure of the implemented comparator models as well. Cox proportional hazards regression, Random Survival Forest and DeepSurv might be linked with the predefined fold structure via the associated training and validation objects. The Bayesian pipeline also had explicit representations of training and validation. The presence of the 75-fold infrastructure, however, should be differentiated with the presence of a pooled out-of-fold prediction dataset.
-
-\section{Baseline Survival Models}\label{baseline-survival-models}
-
-Three different survival model families were selected to compare with the Bayesian survival models. Cox proportional hazards (CoxPH), Random Survival Forest (RSF) and DeepSurv were implemented. This was done to provide different reference models. The performance of these models can be compared to each other based on the amount of events, censoring, structure of predictors, linearity, interactions and evaluation metrics. This can be done using comparative survival analysis \cite{ref29}.
-
-\subsection{Cox Proportional Hazards}\label{cox-proportional-hazards}
-
-As the traditional statistical baseline, the Cox proportional hazards model was applied. Its hazard formulation is
-
+The baseline prior was shared across all Bayesian arms:
 \begin{equation}
-    h_{i}(t) = h_{0}(t)exp\left( \mathbf{x}_{i}^{T}\mathbf{\beta} \right),
+\log\lambda_m\sim\mathcal{N}(-2,2^2),
+\qquad m=1,\ldots,6,
 \end{equation}
-
-
-\(h_{0}(t)\ i\mathbf{\beta}\)Here, h\_0(t) denotes the baseline hazard, x\_i the predictor vector for subject i, and \ensuremath{\beta} the coefficient vector.
-
-The final CoxPH model was fitted using only the outer training fold with a fixed penalizer of 1x10\textsuperscript{-}\textsuperscript{4}. No hyperparameter tuning was performed for the outcome driven CoxPH parameters. Numerical variables and categorical variables with encoding from the outer fold were passed into lifelines. The fitted baseline survival and linear predictor provide absolute survival probabilities for the holdout records. The coefficients are exponentiated to provide the relative hazard ratios. CoxPH provides an appropriate reference model as the Bayesian model has the same proportional hazards structure. This assumes the hazard ratios stay constant over time for the covariates and the linear predictor. If there are time varying effects or non-linear relationships, CoxPH may not be suitable. RSF provides a non-linear reference model. DeepSurv provides a less linear model but still has proportional hazards.
-
-Recent simulations have shown that neither model is always better. CoxPH can provide as strong performance in the presence of linear effects and little information on the event. RSF can benefit from situations with non-linearities and interactions \cite{ref29}.
-
-\subsection{Random Survival Forest}\label{random-survival-forest}
-
-The final RSF model had 300 trees, a minimum split size of 10\textsuperscript{-}\textsuperscript{4}, no maximum depth and 1 worker. Within the outer training fold of GBSG2, 3-fold cross-validation was performed to find the best RSF parameters. The leaf size was either 5 or 15 and the variables used were either the square root or all variables. The best model was found to be using a leaf size of 5 and all variables. The model was refitted using the entire outer training fold. The risk score of the model is the ensemble prediction. The survival probabilities are calculated using the estimated survival functions from the forest. The tree ensemble can provide non-linear relationships and interactions without using the linear predictor from Cox. However, the model must still be evaluated on the holdouts for the different cohorts.
-
-The random survival forest provides a nonlinear comparator for CoxPH and the Bayesian proportional-hazards models. Its results help assess whether the additional Bayesian structure is associated with improved predictive performance in these cohorts. RSF has been used in high dimensional censored survival data \cite{ref30}.
-
-It was also implemented with RSF permutation-based feature importance as a model-specific measure of interpretability. These values of importance are not stored with the Bayesian posterior explanations and are not referred to as SHAP values.
-
-\subsection{DeepSurv}\label{deepsurv}
-
-The DeepSurv model used had 2 hidden layers (32, 16). The model had a dropout of 0.10, Adam optimizer with learning rate 0.001, L2 weight decay of 0.0001 and was trained using full batch training with early stopping (patience 20, max 150 epochs). The model had 3-fold cross-validation within the inner training fold to find the best architecture. The model had either 2 hidden layers (32, 16) or (64, 32) with a dropout of 0 or 0.10. The best model was found to be (32, 16) with a dropout of 0.10. This was trained for 132 epochs. The final model was refitted using the outer training fold. The log risk score was combined with the Breslow baseline from the training fold to predict the survival probabilities of the holdouts. DeepSurv allows for non-linear predictor effects but still uses the Cox proportional hazards objective function \cite{ref4}.
-
-Katzman et al. have shown that DeepSurv performs well on simulated and clinical survival data. It can be seen as a neural version of the Cox survival model for personal risk prediction \cite{ref4}. The model provides a very different computational reference but still has a familiar survival risk prediction structure.The three baselines are used jointly to denote conventional statistical modelling (CoxPH), the nonlinear ensemble learning (RSF), and neural survival modelling (DeepSurv). This combination offers a significant methodological reference to assess the Bayesian piecewise-exponential proportional-hazards models.
-
-The last predictive test should however be differentiated with the larger model-family description. The locked numerical evaluation represents seven canonical pairs of cohort models, as opposed to a full evaluation of all the baseline models in all three cohorts. CoxPH, RSF and DeepSurv are thus characterized as applied families of the baseline, and in the Results chapter only the combinations of cohort models that have been reported in the authoritative final evaluation registry.
-
-\section{Bayesian Piecewise-Exponential Proportional-Hazards Model}\label{bayesian-piecewise-exponential-proportional-hazards-model}
-
-The main Bayesian aspect of the study was developed as a completely Bayesian piecewise-exponential proportional-hazards (PH) model. The implemented Bayesian model, as opposed to the Cox proportional-hazards baseline comparator, which uses a partial likelihood, has an explicit representation of the baseline hazard. The model specification was frozen prior to confirmatory inference and applicable a piecewise-constant baseline hazard broken down into six pre-specified time periods. An extended Poisson representation of the survival likelihood was also used in the implementation as the time-to-event observations could be encoded as interval-specific exposure and event records.
-
-The proportional-hazards formulation of an individual, i, is:
+independently across intervals. With $\ell_m(t/a)$ denoting accumulated exposure through scaled time $t/a$, each posterior draw gives
 \begin{equation}
-    h_{i}(t) = h_{0}(t)exp\left( \mathbf{x}_{i}^{T}\mathbf{\beta} \right),
+S^{(s)}(t\mid\boldsymbol{x})=
+\exp\!\left\{-\exp(\boldsymbol{x}^{\mathsf T}\boldsymbol{\beta}^{(s)})
+\sum_m\lambda_m^{(s)}\ell_m(t/a)\right\}.
+\label{eq:bayes-survival}
 \end{equation}
+Reported survival probabilities average these draw-wise predictions. The ranking score is the posterior-mean linear predictor $\boldsymbol{x}^{\mathsf T}E(\boldsymbol{\beta}\mid D)$. This preserves posterior averaging for the nonlinear probability transformation.
 
-
-In which, h i(t) is the hazard at a given point in time, xi is the predictor variables, and b is the regression coefficients. The initial hazard was denoted as
-
+Writing the prior-specific scale or mixing parameters as $\boldsymbol{\psi}$, posterior inference follows
 \begin{equation}
-    h_{0}(t) = \lambda_{j},\quad\quad t \in I_{j},\quad j = 1,\ldots,6,
+p(\boldsymbol{\beta},\boldsymbol{\lambda},\boldsymbol{\psi}\mid D)
+\propto p(D\mid\boldsymbol{\beta},\boldsymbol{\lambda})
+p(\boldsymbol{\beta}\mid\boldsymbol{\psi})
+p(\boldsymbol{\psi})p(\boldsymbol{\lambda}).
 \end{equation}
+The shared likelihood and baseline prior allow coefficient-prior effects to be studied directly.
 
+\section{Coefficient Priors}
+\label{sec:method-priors}
 
-with the superscript j representing the j th time interval and I j the hazard parameter of the time interval. Therefore, the model enables the baseline hazard to vary across intervals, but with a proportional covariate effect structure across intervals.
+The three coefficient priors express different regularisation assumptions. Numeric and ordered predictors have training-standardised scales, while factor indicators describe contrasts with their training reference category. Prior parameters and posterior coefficients are interpreted on these encoded scales.
 
-The enlarged representation converts the follow-up of every subject into interval data. In interval number, an event-count variable is the event that happened during that interval and the corresponding exposure/offset is the time that the subject contributed. The resulting Poisson formulation can be conceptualized as
+\subsection{Normal Prior}
+
+The reference prior was
 \begin{equation}
-    y_{ij} \sim \text{Poisson}\left( E_{ij}\lambda_{j}\exp\left( \mathbf{x}_{i}^{T}\mathbf{\beta} \right) \right),
+\beta_j\sim\mathcal{N}(0,1).
+\label{eq:normal-prior}
 \end{equation}
+This zero-centred specification supplies a common scale of regularisation across coefficients. Its posterior distributions describe the magnitude, direction and uncertainty of each association.
 
+\subsection{Horseshoe Prior}
+
+The study's regularised global--local shrinkage specification was
+\begin{align}
+\tau&\sim t^+_2(0,0.1), & q_j&\sim t^+_2(0,1),\\
+c^2&\sim\operatorname{InvGamma}(2,8), &
+\widetilde q_j^2&=\frac{c^2q_j^2}{c^2+\tau^2q_j^2},\\
+z_j&\sim\mathcal{N}(0,1), &
+\beta_j&=z_j\tau\widetilde q_j.
+\label{eq:horseshoe-prior}
+\end{align}
+Here $t^+_2$ is a half-Student-$t$ distribution with two degrees of freedom. The global scale $\tau$ controls overall attenuation, local scales $q_j$ allow coefficient-specific shrinkage, and $c^2$ regularises large effective scales \cite{carvalho2010,piironen2017}. The global-scale prior has scale parameter 0.1, while $\tau$ itself is estimated. The implemented half-$t_2$ local scales distinguish this specification from the half-Cauchy version of the regularised horseshoe \cite{piironen2017}. The non-centred representation separates the standard-normal variables from their scale parameters during sampling.
+
+\subsection{Continuous Spike-and-Slab Prior}
+
+The continuous variance-mixture specification was
+\begin{align}
+\gamma_j&\sim\operatorname{Beta}(1,1),\\
+\sigma_j^2&=(1-\gamma_j)(0.05)^2+\gamma_j(2.0)^2,\\
+z_j&\sim\mathcal{N}(0,1),\qquad \beta_j=z_j\sigma_j.
+\label{eq:spike-slab-prior}
+\end{align}
+The narrow and wide components provide different coefficient scales. Their continuous mixing permits gradient-based sampling. Related spike-and-slab approaches motivate the comparison of shrinkage structures \cite{george1993,ravi25,ravi43,ravi44}. In this model, $E(\gamma_j\mid D)$ is a posterior variance-mixing weight; a discrete inclusion probability is a different quantity.
+
+Primary prior hyperparameters were fixed across outer folds. Tighter and wider specifications were evaluated separately, providing a direct assessment of sensitivity to regularisation strength \cite{ravi40,ravi57}.
+
+\section{Posterior Inference and Diagnostic Assessment}
+\label{sec:method-diagnostics}
+
+PyMC's No-U-Turn Sampler (NUTS) was used for posterior inference. NUTS adapts Hamiltonian trajectories to explore continuous posterior distributions \cite{hoffman2014,ravi56}. Every initial fit used four chains, each with 2,000 warm-up iterations and 2,000 retained draws, giving 8,000 nominal posterior draws. Chains ran sequentially on one core. Target acceptance was 0.95 for Normal and continuous spike-and-slab and 0.99 for horseshoe. Distinct deterministic seeds were derived from the base seed 260817 for cohort, repeat, fold, model and attempt.
+
+Diagnostic assessment covered baseline log-hazards, coefficients, deterministic coefficient transformations and prior-specific parameters. Rank-normalised split $\widehat R$ assessed chain agreement; bulk and tail effective sample size (ESS) described sampling information; Monte Carlo standard error (MCSE) quantified simulation uncertainty; divergent transitions and tree-depth hits assessed Hamiltonian exploration; and the Bayesian fraction of missing information (BFMI) assessed energy exploration \cite{ravi39,ravi55,standiagnostics}.
+
+The acceptance rule was
 \begin{equation}
-    y_{ij} and E_{ij} 
+\mathrm{Accept}=\mathbb{I}\{D=0,\ T=0,\ B_{\min}\geq0.30,
+E_{\mathrm{bulk,min}}>400,\ R_{\max}<1.01\},
+\label{eq:diagnostic-gate}
 \end{equation}
+with finite aggregate $B_{\min}$, $E_{\mathrm{bulk,min}}$ and $R_{\max}$. Here $D$ is the total number of divergent transitions, $T$ the number of maximum-tree-depth hits, $B_{\min}$ the minimum chain BFMI, and the remaining quantities the extrema across assessed posterior variables. Table~\ref{tab:method-diagnostic-gate} distinguishes acceptance criteria from additional diagnostic summaries.
 
-are the number of events in the interval, and is the exposure. This provides a computationally friendly Bayesian inference approach. Piecewise exponential Bayesian models have also been used to model time-to-event processes with predefined time intervals. A more general Bayesian survival methodology has been used to include uncertainty in the posterior \cite{ref25} \cite{ref32}.
+\begin{table}[htbp]
+\centering
+\caption{Bayesian sampling assessment and acceptance criteria.}
+\label{tab:method-diagnostic-gate}
+\small
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Quantity & Assessment rule\\
+\midrule
+Divergent transitions & Zero\\
+Maximum-tree-depth hits & Zero\\
+Minimum chain BFMI & At least 0.30; finite\\
+Maximum rank-normalised $\widehat R$ & Below 1.01; finite\\
+Minimum bulk ESS & Above 400; finite\\
+Tail ESS and MCSE & Additional descriptive sampling summaries\\
+Predicted survival & Finite probabilities in $[0,1]$, non-increasing with time\\
+\bottomrule
+\end{tabularx}
+\end{table}
 
-The posterior distribution is thus.
+The gate used the recorded summary precision: $\widehat R$ to two decimal places and ESS to integers. BFMI and diagnostic counts retained their numerical precision. Tail ESS and MCSE were interpreted as supplementary diagnostics rather than threshold criteria. The rule was applied to each attempt before its predictions or substantive posterior summaries entered the analysis.
 
-    \begin{equation}
-    p\left( \mathbf{\beta},\mathbf{\lambda} \mid D \right) \propto p\left( D \mid \mathbf{\beta},\mathbf{\lambda} \right)p\left( \mathbf{\beta} \right)p\left( \mathbf{\lambda} \right),
-\end{equation}
-
-
-where \(D\) is the observed survival data. The use of posterior samples gives distributions and not just point estimates, allowing the determination of posterior means, 95\% credible intervals, hazard-ratio distributions, and directional probabilities of individual predictors.
-
-There were three alternative coefficient-prior structures used to apply the model on GBSG2, METABRIC and WHAS500. These Bayesian variants also maintained the six-interval baseline specification and full-likelihood formulation, so that differences between Bayesian models could be largely due to the prior structure rather than to alterations to the survival likelihood. The application thus offers a regulated framework of researching into the impact of prior presumptions on prediction as well as posterior clarification.
-
-\section{Bayesian Prior Specification}\label{bayesian-prior-specification}
-
-Prior specification was also an important aspect of this thesis since the objective of this research was to determine whether various assumptions around coefficient shrinkage have any effect on inference, predictions and explainability. The Normal, Horseshoe, and Spike-and-Slab priors were compared using the same piecewise-exponential likelihood and six baseline intervals, allowing differences in posterior behaviour to be examined under a common model structure. Various shrinkage and selection prior were employed and this is consistent with the recent Bayesian survival analysis analysis that have employed Horseshoe and Spike-and-Slab structures to control complexities of the coefficients and to determine predictors useful to survival \cite{ref33}, \cite{ref34}.
-
-\subsection{Normal Prior}\label{normal-prior}
-
-The Bayesian specification at the baseline was set to about.
+For an initial diagnostic failure, the first specified refit used target acceptance 0.99 and 4,000 warm-up iterations. The second retained these controls and represented the same baseline prior as
 \begin{equation}
-    \beta_{k} \sim N(0,1)
+\log\lambda_m=-2+2\xi_m,\qquad \xi_m\sim\mathcal{N}(0,1).
 \end{equation}
+Each attempt used a derived seed, and the first passing attempt supplied the model outcome. For horseshoe, whose initial target was already 0.99, the first refit increased warm-up and changed the seed. The likelihood, coefficient priors and diagnostic criteria remained fixed. Attempt status and diagnostic values were retained for every model--fold outcome. Figure~\ref{fig:diagnostic-decisions} presents this assessment sequence.
 
+\input{figures/diagnostic_decisions.tex}
 
-to each regression coefficient. The zero-centred prior offers a moderate level of regularisation with both positive and negative effects being present. It thus is the relatively traditional Bayesian reference with which the more structured shrinkage methods may be compared. Normal-prior model does not explicitly select variables: instead, the uncertainty in the posterior is used to find out how much individual coefficients can be distinguished against zero.
+\subsection{Predictive Model Checks}
 
-\subsection{Horseshoe Prior}\label{horseshoe-prior}
+Prior predictive checks drew 200 coefficient and baseline parameter sets conditional on the training-derived time scale, intervals and covariates. Survival was examined at 0.25, 0.5, 1 and 2 median training event times, both at baseline and across up to 512 deterministically selected training subjects. This described the implications of each prior under the cohort-specific model setup.
 
-The Horseshoe specification uses a global-local shrinkage structure. Conceptually,
+Posterior predictive checks used up to 200 evenly spaced retained parameter draws. Poisson event counts were replicated for every positive-exposure likelihood row and summed overall and by interval. Observed counts were compared with replicated means, medians and central 95\% intervals. A fitted-survival check also compared the training-average predicted survival with Kaplan--Meier estimates at training event-time quartiles. These model checks complemented the separate held-out assessment of predictive performance \cite{ravi22,ravi54}.
+
+\section{Predictive Evaluation}
+\label{sec:method-evaluation}
+
+Evaluation combined probability prediction error, discrimination and calibration. IPCW integrated Brier score (IBS) was the primary predictive measure. Uno's concordance provided the primary discrimination measure, while Harrell's concordance and cumulative/dynamic AUC supplied additional summaries. Calibration was assessed directly through intercepts, slopes and grouped curves \cite{ravi26,ravi27,ravi60}.
+
+\subsection{Evaluation Horizons and Censoring Weights}
+
+Reporting horizons were the 25th, 50th and 75th percentiles of observed event times in each training fold. Duplicate horizons were removed, and at least two distinct times were required. IBS used 25 equally spaced grid points between the first and last horizons. Training censoring survival $\widehat G(t)$ had to remain strictly above 0.10 at every evaluation point. Horizons and the evaluation window were therefore defined from training information.
+
+For IPCW IBS, Uno concordance and AUC, validation follow-up beyond the final training horizon was administratively censored immediately after that horizon. This retained known event-free status throughout the evaluation window while maintaining training censoring support. Harrell concordance and calibration used observed validation follow-up. This support rule was applied consistently across models and was separate from the increased-censoring sensitivity experiments.
+
+\subsection{Prediction Error and Discrimination}
+
+For predicted survival $\widehat S_i(t)$, the IPCW Brier score is
 \begin{equation}
-    \beta_{k} \sim N\left( 0,\tau^{2}\lambda_{k}^{2} \right),
+\widehat{\mathrm{BS}}(t)=\frac{1}{n}\sum_{i=1}^{n}
+\left\{\frac{\delta_i\mathbb{I}(Y_i\leq t)}{\widehat G(Y_i)}
+\widehat S_i(t)^2+
+\frac{\mathbb{I}(Y_i>t)}{\widehat G(t)}
+[1-\widehat S_i(t)]^2\right\}.
 \end{equation}
-
-
-The slab parameter c\textsuperscript{2} limits the scale of extreme coefficient values. The prior hyperparameters were specified explicitly in the notebook to make the model reproducible; the continuous mixture was not treated as a deterministic variable-selection rule \cite{ref34}.
-
-But, empirical investigation of the suitability was considered as opposed to presumption. The GBSG2 Horseshoe model did not pass the predestined rigorous diagnostic acceptance criteria and was thus not included in the ultimate Bayesian inference and predictive analysis of that cohort. Notably, completion of sampling was not considered as evidence to model validity.
-
-\subsection{Spike-and-Slab Prior}\label{spike-and-slab-prior}
-
-\({0.05}^{2}\ 2^{2}\)The continuous Spike-and-Slab was used whereby gamma = Beta(1,1), z j =Normal(0,1), spike standard deviation=0.05 and slab standard deviation=2.0. The two variances were mixed using a continuous mixing weight. The model did not have a discrete feature membership indicator. The mixing weight was thus a summary of the gamma.
-
-\subsection{Rationale for Comparing Prior Families.}\label{rationale-for-comparing-prior-families.}
-
-The three priors were then considered as competing assumptions under the same likelihood framework as opposed to an argument that one prior is universally superior. Their posterior behaviour, predictive performance, and feature-level uncertainty is assessed in the following analysis. This is especially crucial since the smaller the posterior coefficient does not imply a better model; shrinkage needs to be viewed in conjunction with predictive discrimination, prediction error, calibration and credible uncertainty.
-
-\section{MCMC Inference and Computational Configuration}\label{mcmc-inference-and-computational-configuration}
-
-Bayesian posterior inference was done using Hamiltonian Monte Carlo (HMC) with the No-U-Turn Sampler (NUTS). This can be used for Bayesian models with multiple continuous parameters as it uses the gradient information of the posterior to better navigate through parameter space than most traditional MCMC random-walk samplers. More modern approaches have demonstrated that HMC can be quite helpful in computing the Bayesian way and it is necessary to learn how the sampler works \cite{ref36}, \cite{ref37}.
-
-The confirmatory MCMC configuration was prespecified and applied to the Bayesian fits, with prior-specific target acceptance probabilities as reported below. Four independent chains were sampled in each Bayesian model, and 2,000 warm-up iterations and 2,000 retained draws were used in each chain. Therefore, every model that was accepted produced 8,000 retained posterior draws on the four chains. The most frequent reproducibility seed was 260817. The target acceptance probability of the Normal and Spike-and-Slab models was 0.95 and 0.99 of the Horseshoe model, respectively, showing the extra computational cost of hierarchical global-local shrinkage. Bayesian inference used the six-interval piecewise-exponential baseline representation and the training data which were specific to the cohort.
-
-This analysis was divided into three sections, posterior sampling, diagnostics and posterior predictive analysis. This is significant because one cannot assume that by simply having an MCMC algorithm run correctly the draws will be adequate to sample the target posterior completely. Recent Bayesian guidelines workflows concentrate on the computational validation and posterior interpretation \cite{ref37}.
-
-Controlled diagnostic-recovery procedures of problematic posterior fits were also implemented. These operations changed as necessary sampling controls or parameterisation, but held the original likelihood, predictors six baseline intervals and diagnostic acceptance criteria. Recovery thus was an effort to enhance computational exploration and not a process of loosening model-quality criteria.
-
-Prior predictive and posterior predictive checks each used 200 draws, providing complementary assessments of the prior implications and model fit. Bayesian survival analysis emphasizes the importance of computational inference and posterior diagnostics \cite{ref32}, \cite{ref41}.
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5516}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4484}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Configuration
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Implemented specification
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Bayesian sampler & PyMC NUTS \\
-Chains & 4 \\
-Warm-up/tuning & 2,000 \\
-Retained draws & 2,000 per chain \\
-Total retained draws & 8,000/model \\
-Random seed & 260817 \\
-Normal target acceptance & 0.95 \\
-Horseshoe target acceptance & 0.99 \\
-Spike-and-Slab target acceptance & 0.95 \\
-Prior predictive draws & 200 \\
-Posterior predictive draws & 200 \\
-Baseline intervals & 6 \\
-\end{longtable}
-
-\begin{quote}
-\phantomsection\label{_Toc245465017}{}\captionof{table}{Bayesian sampler, chain, warm-up, draw, seed, and predictive-check configuration}
-\end{quote}
-
-\section{MCMC Diagnostic Framework and Model Acceptance}\label{mcmc-diagnostic-framework-and-model-acceptance}
-
-The MCMC diagnostics was not carried out as additional statistics but as an official acceptance of the posterior. This is important as the posterior summaries can be misleading if the chains have not fully sampled the target distribution. Recent literature in Bayesian workflow indicates that computational diagnostics, model checking and sensitivity are a consideration of the Bayesian analysis \cite{ref37}.
-
-The following diagnostics were performed to check the posterior: divergences, tree depth saturation, Bayesian fraction of missing information (BFMI), bulk and tail effective sample size (ESS), rank normalised R-hat, Monte Carlo standard error (MCSE) and posterior finiteness.
-
-First, the divergences had to be zero. Problematic posterior geometry was represented by divergent NUTS transitions and thus was a failure of the strict acceptance gate. This was particularly important for the hierarchical Horseshoe specification, whose additional global-local parameters can generate challenging posterior geometries.
-
-Second, the maximum tree-depth hits needed to be zero. The saturation of tree-depths may hint that the sampler has constantly attained a limit of its computational trajectory without fully exploring it.
-
-Third, BFMI was measured in chains that had minimum required value of 0.30. BFMI was an energy-based diagnostic of whether the sampler was exploring adequately the posterior momentum distribution.
-
-The bulk and tail ESS were checked. Minimum bulk and tail ESS have to be more than 400. The sample size is taken into consideration with the autocorrelation of the MCMC chains. This provides information on how much real independent posterior information is being represented in the simulation. The recent MCMC post-processing literature points out that the amount of draws is not to be confused with the amount of information being utilized \cite{ref35}.
-
-The highest possible rank normalised R-hat value of all parameters must be less than 1.01. This gives a more accurate measure of agreement between the chains in case the posterior distributions are skewed or heavy tailed \cite{ref39}.
-
-Sixth, MCSE was computed and stored as another indicator of Monte Carlo uncertainty. Though MCSE was not directly employed as the main binary exclusion criterion, it offered an extra quantitative measure of the accuracy of posterior Monte Carlo estimates.
-
-Posterior predictive checks (PPC) are conducted to verify whether the data that is replicated by the model fitted resemble the observed data. This is independent of the MCMC convergence.
-
-The strict rule of acceptance so resulting was
-
+Patients censored by $t$ have unknown binary outcome status at that horizon and receive zero direct contribution. The integrated score is
 \begin{equation}
-    \begin{aligned}
-    Accept = \mathbb{I\lbrack} & D = 0,\ T = 0,\ BFMI_{\min} \geq 0.30, \\
-     & ESS_{bulk,min} > 400,\ ESS_{tail,min} > 400, \\
-     & {\widehat{R}}_{\max} < 1.01,\ F = 1\rbrack.
-    \end{aligned}
+\mathrm{IBS}=\frac{1}{t_U-t_L}
+\int_{t_L}^{t_U}\widehat{\mathrm{BS}}(t)\,dt,
 \end{equation}
+where $t_L$ and $t_U$ are the first and last training-defined horizons. Numerical integration used the 25-point evaluation grid. Lower IBS indicates smaller probability prediction error \cite{graf1999}.
 
+Uno's IPCW concordance was evaluated up to $t_U$, Harrell's concordance used the observed follow-up, and cumulative/dynamic AUC was evaluated at each reporting horizon \cite{uno2011,harrell1982,heagerty2000}. The integrated mean AUC was also retained. Larger concordance and AUC indicate better discrimination. The computations used the reference implementations in scikit-survival \cite{polsterl2020}.
 
+\subsection{Calibration}
+\label{sec:method-calibration}
 
-In which, D is the divergences, T is the tree-depth hits and F is the posterior finiteness.
-
-There was a direct methodological implication of the diagnostic framework on GBSG2/Horseshoe. The model failed to meet all the strict diagnostic criteria and although posterior sampling may be performed, it was not. Controlled recovery attempts were then explored, such as the use of more target acceptance and other parameterisation of the baseline. The model, however, was not applicable to being promoted to the final inferential inventory. As a result, GBSG2/Horseshoe did not go through final Bayesian inference, posterior predictive checking and predictive evaluation. This choice is based on the fact that computational completion does not correspond to the posterior validity.
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4811}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5189}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Diagnostic
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Frozen acceptance criterion
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Divergences & \textbf{0} \\
-Maximum tree-depth hits & \textbf{0} \\
-Minimum BFMI & \textbf{\ensuremath{\geq} 0.30} \\
-Minimum bulk ESS & \textbf{\textgreater{} 400} \\
-Minimum tail ESS & \textbf{\textgreater{} 400} \\
-Maximum R-hat & \textbf{\textless{} 1.01} \\
-Posterior finite & \textbf{Yes} \\
-Diagnostic bypass & \textbf{No} \\
-GBSG2/Horseshoe & \textbf{Excluded} \\
-\end{longtable}
-
-\begin{quote}
-\phantomsection\label{posterior-predictive-checking}{}
-\end{quote}
-
-\captionof{table}{Prespecified acceptance criteria for Bayesian sampling diagnostics}
-
-\section{Posterior Predictive Checking}\label{posterior-predictive-checking-1}
-
-Posterior predictive checks (PPC) are conducted to verify whether the data that is replicated by the model fitted resemble the observed data. This is independent of the MCMC convergence.
-
-The PPC results have been verified. There are 200 replicated total event counts for each of the 8 accepted Bayesian fits. The 95\% replicated interval recorded is within the observed count. No saved replicated Kaplan-Meier curves, time or discrepancy statistic stratified event counts or replicated Kaplan-Meier curves. Thus, the number of events has been verified only through the total number. This does not prove that the model reproduces the entire survival pattern.
-
-Following diagnostic exclusion, GBSG2/Horseshoe did not undergo PPC. This maintains the methodological order:
-
-\[\text{MCMC~sampling} \rightarrow \text{diagnostic~acceptance} \rightarrow \text{posterior~predictive~checking}.\]
-
-The number of events PPC will not preclude any failed MCMC diagnostics. The rejected GBSG2/Horseshoe fit did not undergo any PPC.
-
-PPC does not substitute out-of-sample prediction measures. This should be analyzed in the future to determine whether the accepted posterior draws replicate interval stratified event pattern survival trajectories or not. This would be compared to the observed curves taking into account censoring. This is not claimed to have been performed \cite{ref39}, \cite{ref40}.
-
-\section{Predictive Evaluation Framework}\label{predictive-evaluation-framework}
-
-The predictive evaluation model was created to see how well the model discriminates and predicts accurately the censored time-to-event results. Survival prediction is the prediction of the likelihood of a certain event happening and at what time. Thus, there is no single measure that can be applied to adequately describe the model performance. Contemporary methodological literature recommends discrimination, prediction error and calibration to be taken into account \cite{ref29}, \cite{ref43}. C-index informs us on the extent to which the model is able to rank patients based on the relative risk of events. Brier score informs us of the extent to which the forecasted survival is not similar to the actual. Time-dependent AUC informs us on how the model can differentiate at a certain follow-up time. The agreement between the predicted and observed probability of an event is measured by calibration \cite{ref43}, \cite{ref44}.
-
-As the key predictive evaluation criteria were thus four measures maintained:
-
-\[\text{C-index}\]
+At each horizon, predicted event probability was $p_i(t)=1-\widehat S_i(t)$. With $z_i(t)=\log[-\log\widehat S_i(t)]$, IPCW complementary-log--log regression estimated
 \begin{equation}
-    \text{IBS} = \frac{1}{\tau}\int_{0}^{\tau}BS(t)\, dt
+\operatorname{cloglog}\{\Pr(T_i\leq t)\}
+=\alpha_t+\beta_t z_i(t).
+\label{eq:calibration-model}
 \end{equation}
+The ideal joint intercept and slope are zero and one. Calibration-in-the-large was estimated separately by fixing the slope at one and estimating the intercept. An observed event by $t$ received weight $1/\widehat G(Y_i^-)$, known event-free status beyond $t$ received $1/\widehat G(t)$, and censoring by $t$ received weight zero. The event-time weight uses the left limit of censoring survival.
 
+Calibration intervals used 500 event-stratified bootstrap replicates. Training records were resampled to re-estimate censoring, and validation records were resampled with their predictions to refit calibration. At least 80\% of requested replicates, and at least 20, had to be estimable. Percentile 95\% intervals were retained. Descriptive calibration curves grouped validation subjects into five equal-count predicted-survival groups and compared their mean predictions with Kaplan--Meier survival and log--log intervals \cite{ravi60,vancalster2019}.
 
-\[AUC(t)\]
+\subsection{Paired Predictive Comparisons}
+\label{sec:method-inference}
 
-and
+Model contrasts used identical cohort, repeat, fold and validation subjects. For metric $M$, the effect was defined as $M_A-M_B$. Negative IBS differences favour model $A$; positive discrimination differences favour model $A$. All effects were estimated within cohorts.
+
+For paired differences $d_{rk}$ over $R=5$ repeats and $K=5$ folds, with sample variance $s_d^2$, the corrected repeated-cross-validation standard error was
 \begin{equation}
-    MAE_{cal} = \frac{1}{K}\sum_{k = 1}^{K}\left| {\widehat{p}}_{k} - p_{k} \right|,
+\operatorname{SE}_{\mathrm{corr}}=
+\sqrt{\left\{\frac{1}{RK}+\frac{1}{K-1}\right\}s_d^2}.
+\label{eq:nadeau-bengio}
 \end{equation}
+Two-sided nominal 95\% $t$ intervals used 24 degrees of freedom. This correction accounts approximately for dependence from overlapping training sets \cite{nadeau2003}. A contrast required all 25 paired outcomes.
 
+The primary test family comprised the three pairwise prior contrasts in each of three cohorts, giving nine IBS tests. Holm adjustment controlled the family-wise level at 0.05 when the complete test family was available \cite{holm1979}. Directional primary conclusions additionally required the corrected nominal interval to exclude zero in the corresponding direction. Comparisons against CoxPH, RSF and DeepSurv were secondary estimates, interpreted through effect sizes and uncertainty.
 
-The Brier score is defined as the IPCW weighted squared distance between the observed survival indicator and the predicted survival probability at each horizon t. The notebook called integrated\_brier\_score of the scikit-survival package was used to compute the approximate area under the time-dependent Brier curve of the three supported horizons. Accordingly, the reported integrated Brier score is calculated only over the supported time interval and should not be interpreted as an integral from time zero. The Brier score was calculated for the following ranges: 437-1105 days for GBSG2, 42.9667-146.2167 months for METABRIC and 31.75-635 days for WHAS500. The average time-dependent AUC is the unweighted average of the three horizon-specific AUCs. The smaller the IBS, the smaller the prediction error. The absolute event probabilities are compared by use of calibration.
+A paired event-stratified bootstrap with 1,000 replicates assessed sensitivity to the corrected interval method. Within each paired fold, the same validation-subject indices were applied to both models before averaging fold effects. At least 80\% of replicates had to be estimable. Intervals spanning zero describe uncertainty in the direction of a difference; the study's inference concerns predictive differences rather than a prespecified equivalence margin.
 
-The last numerical assessment was intentionally confined to the held-out first outer fold which was locked. The last predictive comparison has seven running cohort-model pairs: GBSG2 Bayesian Normal, GBSG2 Bayesian Spike-and-Slab, GBSG2 CoxPH, GBSG2 DeepSurv, GBSG2 RSF, METABRIC Bayesian Spike-and-Slab and WHAS500 Bayesian Spike-and-Slab. The GBSG2 Bayesian Horseshoe model has been dropped due to the inability of the model to meet the predefined MCMC diagnostic acceptance criteria.
+\section{Posterior Interpretation and Explanation Analysis}
+\label{sec:method-explainability}
 
-The validation infrastructure consisted of 25 outer-fold definitions per cohort, which is five repeats of five folds and a total of 75 outer folds. Nevertheless, true fold-specific out-of-fold prediction artifacts were not stored in a form that would allow to recreate pooled 25-fold predictions. Therefore, no pooled OOF metrics was calculated. Such distinction is methodologically significant in that the application of the predictions obtained by the use of the first frozen fold to other folds would not amount to true out-of-fold assessment.
+\subsection{Coefficient Effects and Uncertainty}
 
-It is a predetermined out of sample fold. The model metrics were not statistically analyzed. Cohort differences were observed to be descriptive. This prevents overstating slight numerical variations to indicate that generalized models are better. Published comparisons of survival models have pointed out that the discrimination and prediction error measures can tend to favour various models based on the structure and complexity of the cohort \cite{ref30}, \cite{ref48}, \cite{ref51}.
-
-\section{Bayesian Explainability Framework}\label{bayesian-explainability-framework}
-
-The explainability framework was built on the probabilistic form of the Bayesian survival models as opposed to solely depending on the post-hoc black-box explanation techniques. Bayesian inference is a direct characterization of the uncertainty in the parameters in the form of posterior distributions, making it possible to interpret the model by including the estimated magnitude of effects and the uncertainty. This is especially suitable when one wants to conduct a survival analysis since the posterior hazard ratios can be interpreted in a probabilistic sense and not just by point estimates.
-
-The posterior coefficient of predictor k of each retained Bayesian model was modeled as.
+Posterior explanations used coefficient distributions, draw-wise hazard ratios, central 95\% credible intervals and sign probabilities. For coefficient draw $s$,
 \begin{equation}
-    \beta_{k} \mid D,
+\mathrm{HR}_j^{(s)}=\exp\{\beta_j^{(s)}\}.
 \end{equation}
+The hazard-ratio mean and median were calculated from transformed draws. This is relevant because $E[\exp(\beta_j)\mid D]$ generally differs from $\exp\{E(\beta_j\mid D)\}$. The posterior probability $\Pr(\beta_j>0\mid D)$ quantifies direction conditional on the fitted model, data and prior. Effect magnitude, interval width and directional probability were interpreted together.
 
+For standardised continuous predictors, a coefficient represents the log-hazard association for a one-training-standard-deviation increase. Indicator coefficients represent contrasts with their factor reference. These are conditional prognostic associations. The primary posterior summaries are conditional on the training-fitted imputation and encoding.
 
-where \(D\) is the observed survival data. The hazard ratio was found to be.
+\subsection{Grouped Posterior Contribution Rankings}
+
+A common importance measure allowed comparison across prior families. For clinical source-variable group $g$, the intrinsic score was
 \begin{equation}
-    HR_{k} = exp\left( \beta_{k} \right)
+I_g=\frac{1}{N}\sum_{i=1}^{N}E_{\mathrm{posterior}}
+\left|\sum_{j\in g}x_{ij}\beta_j\right|.
+\label{eq:absolute-contribution}
 \end{equation}
+Signed contributions from encoded terms were summed within a subject and source-variable group before absolute magnitude was taken. The expectation used all retained coefficient draws, and group scores were averaged over the selected validation subjects. This treats a categorical variable as one clinical group and preserves cancellation among its encoded contributions.
 
+Prior-specific summaries complemented this common measure. The horseshoe local-scale proxy was $E\{1/(1+q_j^2)\mid D\}$, which describes the local-scale component of shrinkage. For continuous spike-and-slab, $E(\gamma_j\mid D)$ describes variance mixing. Grouped contribution scores measure model importance, whereas these auxiliary summaries describe prior-specific posterior behaviour.
 
-There are 8 unique model fits in the explainability registry. These are the GBSG2/Normal, METABRIC/Normal, METABRIC/Horseshoe, METABRIC/Spike-and-Slab, WHAS500/Normal, WHAS500/Horseshoe and WHAS500/Spike-and-Slab. The GBSG2/Horseshoe was rejected. There are 103 rows in the feature-level registry. These do not represent additional model fits but summaries of the coefficients.
+\subsection{Exact Linear SHAP and Rank Agreement}
 
-The posterior mean, 95 percent credible interval, posterior mean hazard ratio and interval are given, by feature. The likelihood that the coefficient is positive or negative is given as well as a direction. In the case of standardised numeric predictors, a one unit change results in the training set increase by 1 standard deviation. In the case of categorical variables, the effect is in relation to the reference category.
+SHAP analysis targeted the linear log-risk function. For posterior-mean Bayesian coefficients $\overline{\boldsymbol{\beta}}$ and a training background, exact interventional linear SHAP is
+\begin{equation}
+\phi_{ij}=\overline\beta_j
+(x_{ij}-\overline x_{j,\mathrm{background}}).
+\label{eq:linear-shap}
+\end{equation}
+The linear explainer output was checked against this expression \cite{lundberg2017,shaplinear}. Same-model SHAP explained the Bayesian posterior-mean risk score; CoxPH SHAP supplied the secondary cross-model comparison. The intrinsic score averages over posterior uncertainty, while SHAP explains the posterior-mean linear predictor relative to its background. Their agreement therefore addresses a meaningful comparison between two representations of the fitted model. For grouped SHAP importance, signed term attributions were summed within each subject/group before absolute magnitude and averaging.
 
-These are the 8 posterior fits, namely GBSG2/Normal, GBSG2/Spike-and-Slab, METABRIC/Normal, METABRIC/Horseshoe, METABRIC/Spike-and-Slab, WHAS500/Normal, WHAS500/Horseshoe, and WHAS500/Spike-and-Slab. The GBSG2/Horseshoe was turned down. There are 103 rows in the feature-level table. There are not 103 model fits.
+Three seeds, 104729, 130363 and 155921, controlled sampling without replacement. Nested validation/background budgets were 25/50, 50/100 and 100/200, capped at the available fold sizes. Subject and background selections were paired across priors. Successive budgets within a seed and adjacent seeds at the largest budget were assessed using Spearman correlation of at least 0.95 and at least four common groups in the top five.
 
-These are backward-based accounts of the manner in which the model is correlating the features. They are not overall scores of importance or causal impacts. They are not mixed with the RSF permutation importance and SHAP attribution \cite{ref52}, \cite{ref53}.
+At the largest budget, 2,000 three-stage bootstrap replicates resampled repeats, folds and explanation seeds. Summaries included Spearman and Kendall agreement, top-five Jaccard overlap, rank variability and top-five selection frequency. H3a required all evaluable stability comparisons to pass and a same-model Spearman interval wholly above zero. H3b compared same-model agreement with CoxPH agreement; stronger same-model agreement required the stability criteria and a positive Spearman-difference interval. Cohort/prior explanation claims additionally required complete fold coverage. This design separated posterior direction, cross-method agreement and ranking stability \cite{ravi30,ravi61,ravi62}.
 
-The posterior probability is not considered to be frequentist statistical significance. A large posterior probability that 0 is negative means that there is posterior support of a positive hazard association under the given model and prior. It is not a standard p-value.
+\section{Sensitivity Analyses}
+\label{sec:method-robustness}
 
-Posterior explainability is a complement of model agnostic explainability. Recent survival-XAI studies have shown that techniques such as LIME and SHAP can be used to explain individual survival predictions. But in fact they are merely putting additional layers of post-hoc attribution \cite{ref44}, \cite{ref45}.
+\subsection{Training Information and Administrative Censoring}
 
-Based on this, the present thesis considers the Bayesian posterior per se to be the main explainability mechanism of the Bayesian models, and the main interpretable outputs to be the posterior hazard ratios and credible intervals.
+Training-information analyses used nested event/time-stratified subsets containing 25\%, 50\%, 75\% and 100\% of the outer-training observations. Subsets were shared across priors. Observed training events divided by processed predictor degrees of freedom quantified effective information; a condition required at least 20 training events. These analyses used outer folds 1 and 2 in each of five repeats.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7029}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2971}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Explainability component
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Status
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Posterior beta mean & Completed \\
-95\% credible interval & Completed \\
-Posterior HR & Completed \\
-HR credible interval & Completed \\
-Posterior (P(beta\textgreater0)) & Completed \\
-Posterior (P(beta\textless0)) & Completed \\
-Effect direction & Completed \\
-Eight retained Bayesian fits & Completed \\
-GBSG2 Horseshoe excluded & Completed \\
-Posterior-based interpretation & Completed \\
-\end{longtable}
+Administrative-censoring conditions truncated follow-up at the outer-training 75th or 50th percentile of observed follow-up, evaluated at full training size. Training fraction and censoring were examined separately. Changes in the relative IBS effect between a shrinkage prior and Normal were summarised by difference-in-differences against the corresponding primary condition. This directly assessed whether the relative contribution of shrinkage changed as information decreased.
 
-\begin{quote}
-\phantomsection\label{_Toc245465019}{}\captionof{table}{Bayesian posterior explainability outputs and their completion status}
-\end{quote}
+\subsection{Predictors, Missingness, Baseline and Prior Scales}
 
-\section{Prior-Sensitivity Methodology}\label{prior-sensitivity-methodology}
+The design sensitivities examined engineered GBSG2 predictors, published and engineered WHAS500 predictors, and METABRIC NPI-component, stage and treatment-augmented representations. These conditions used outer fold 1 in each repeat with the matching primary anchor. A METABRIC stage sensitivity used five training-only iterative posterior-sampling numeric imputations based on age, NPI and stage. Missing nominal and ordered values in that specification were filled using training modes before encoding. Risk and survival predictions were averaged across imputations at subject level, and metrics were recalculated from those averages.
 
-To comprehend whether the conclusions made out of the posterior were sensitive to the prior family in the Bayesian survival model, a sensitivity analysis was carried out. Prior sensitivity is a key consideration in Bayesian analysis. When the observed data have little data or the parameters are not well defined the assumptions made in the prior may have an impact on the posterior inferences. Prior specification should balance the information encoded by the prior with the information contributed by the observed data \cite{ref38}, \cite{ref46}.
+Baseline-hazard sensitivity used 4, 6 and 10 intervals. Prior-scale sensitivity halved or doubled the primary regularisation scales. Normal standard deviations were 0.5, 1 and 2. Horseshoe global-prior and slab-scale pairs were $(0.05,1)$, $(0.1,2)$ and $(0.2,4)$, with degrees of freedom held fixed. Continuous spike/slab standard-deviation pairs were $(0.025,1)$, $(0.05,2)$ and $(0.1,4)$, retaining the uniform Beta mixing prior. Interval and prior-scale changes were assessed one factor at a time.
 
-Three prior families were compared in this study:
+The sensitivity design comprised 825 model--condition--fold outcomes and 885 underlying Bayesian fits, including the repeated fits required for multiple imputation. Effects used common available paired outcomes, with coverage reported alongside estimates. The IBS-focused design sensitivities used the same evaluation definitions as the primary comparison.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Normal prior, which is relatively regular and weakly informative specification of the coefficient;
-\item
-  Horseshoe prior, with global-local shrinkage of possibly weak or noisy predictors; and
-\item
-  Spike-and-Slab prior, which explicates a mixture of concentrated spike and more diffuse slab.
-\end{enumerate}
+\subsection{Robustness Uncertainty and Supplementary Analyses}
 
-The sensitivity analysis output gives posterior feature summaries of all the remaining priors. These are PRIOR\_SENSITIVITY\_FEATURE\_DF, PRIOR\_SENSITIVITY\_MODEL\_DF, PRIOR\_SENSITIVITY\_ ComparisMEN\_DF and SPIKESLAB SENSITIVITY\_DF. The last file provides summaries of the mixing weights from the continuous mixture.
+Robustness effects and difference-in-differences used 2,000 paired three-stage bootstrap replicates. Repeats were sampled first, folds within the selected repeat second, and validation subjects within event strata third. Identical subject indices maintained prior pairing. These descriptive intervals quantified sensitivity under each evaluated condition. Directional consistency was assessed alongside the primary interval and the available paired coverage.
 
-The sensitivity framework included all the eight retained Bayesian fits. The analysis therefore considered the available prior-family variations among the retained Bayesian fits.
+Two supplementary analyses were identified as post hoc. First, a sampler sensitivity repeated all 75 horseshoe outer fits with target acceptance 0.999 while retaining the original folds, likelihood, predictors, priors and diagnostic criteria. This assessed the computational response to a higher acceptance target separately from the primary fits. Second, a mathematical Holm bound examined the attainable adjusted values for the observed primary tests while allowing the unobserved tests to vary over their admissible range. This bounded the effect of incomplete test-family coverage without estimating missing model effects.
 
-It is not an MCMC experiment where MCMC draws are independent of each other. No new model fits, posterior draws or outer folds were added. This analysis gives the information regarding the variation in the retained estimates amongst the fitted priors. This is not a complete robustness analysis of the hyperparameters or prior predictive.
+\section{Summary}
 
-This is according to the Bayesian methodological advice that prior sensitivity be considered as relative to the information that the current data gives but not as a different model selection test. Recent survival analyses with the shrinkage and spike-and-slab models of the censored results are also to favour using multiple Bayesian prior structures \cite{ref53}.
+The methods connect prior specification to predictive and explanatory evaluation within one controlled survival framework. Shared repeated-validation folds support paired model comparisons. A common Bayesian likelihood isolates coefficient-prior choice, while diagnostic assessment determines eligible posterior and predictive outputs. Probability error, discrimination, calibration, posterior interpretation and rank stability provide complementary descriptions of model behaviour.
 
-\subsection{Interpretability, SHAP Boundary and Permutation Importance}\label{interpretability-shap-boundary-and-permutation-importance}
+\begin{table}[htbp]
+\centering
+\caption{Research questions and their corresponding analyses.}
+\label{tab:method-rq-alignment}
+\small
+\begin{tabularx}{\textwidth}{@{}lXX@{}}
+\toprule
+Question & Comparison & Main evidence\\
+\midrule
+RQ1 & Priors and reference models & Paired IBS effects, corrected intervals, concordance, AUC and calibration\\
+RQ2 & Reduced information and increased censoring & Paired effects and difference-in-differences across training fractions and truncation conditions\\
+RQ3 & Posterior rankings and SHAP & Same-model and CoxPH agreement, sampling stability and grouped-rank uncertainty\\
+RQ4 & Modelling choices & Predictor, imputation, baseline-interval and prior-scale sensitivities\\
+\bottomrule
+\end{tabularx}
+\end{table}
 
-Predictive evaluation was kept separate from interpretability. SHAP is a popular post-hoc explanation framework that has been increasingly used for survival prediction, including to compare between machine learning survival models in cancer \cite{ref47}, \cite{ref48}. Further studies have shown that model agnostic explanation methods can give individualised explanations for survival curves and time-dependent survival predictions \cite{ref45}.
-
-Although the computational environment provided SHAP-related functionality, a completed and validated SHAP-value analysis was not available in the final implementation. Consequently, the thesis does not report SHAP-value tables, SHAP summary plots, or quantitative SHAP-based comparisons as completed empirical results.
-
-In the Random Survival Forest, the interpretability output was permutation based variable importance. This is a separate interpretability approach to SHAP. Variable importance in random forests can be useful for understanding predictor importance. Uncertainty in variable importance has also been explored in survival forests \cite{ref54}.
-
-In this way, the completed thesis differentiates three layers Bayesian posterior explainability, RSF permutation importance, and SHAP as a recognized yet unfinished supplemental explainability pathway.
-
-\subsection{Reproducibility and Computational Integrity.}\label{reproducibility-and-computational-integrity.}
-
-Reproducibility was an important part of the computational analysis. A fixed random seed was used (260817). All parameters were specified for the models, priors, MCMC settings, diagnostics and what was being evaluated. The Bayesian models had 2000 warmup iterations and 2000 posterior samples were drawn. The target acceptance probabilities were specified per model. For the Normal and Spike-and-Slab models the target acceptance probabilities were 0.95. For the Horseshoe model the target acceptance probabilities were 0.99. The Normal, Horseshoe, and Spike-and-Slab model settings were recorded explicitly to support reproducibility.. This reduces the chance that differences in results are not due to changes in the calculations. Reproducible Bayesian workflows focus on specifying the computational details, diagnostics and re-validating model assumptions \cite{ref26}, \cite{ref35}, \cite{ref36}, \cite{ref37}.
-
-This included divergences, maximum tree depths, BFMI, bulk and tail ESS, Monte Carlo error and whether the posterior values were finite. The acceptance gate was specified. There should be zero divergences, zero maximum tree depths, a BFMI of 0.30 or higher, a bulk and tail ESS of 400 or higher, rank normalised R-hat less than 1.01 and finite posterior values. The GBSG2/Horseshoe model didn't meet the divergence criteria and was therefore excluded.
-
-A canonical evaluation registry was recorded. The final predictive models were specified along with what was being evaluated. Only the held out first outer fold was reported. The pooled OOF predictions were not reconstructed \cite{ref38}.
-
-Above all, the last closure procedure never retrained models, did new MCMC sampling, resampled posterior draws, recovered the failed Horseshoe model, re-computed locked metrics, or increased the predictive range. These conditions were explicitly checked during closure and that the final reporting layer did not silently change the underlying analysis.
-
-\section{Methodological Deviations from the Original Proposal}\label{methodological-deviations-from-the-original-proposal}
-
-The implemented methodology differs from the initial proposal in several important respects. This section documents those differences between the planned design and the analyses completed.
-
-\subsection{Validation Scope}\label{validation-scope}
-
-The original proposal stated a wider repeated and pooled validation approach. An outer validation was created with 5 repeats of 5 folds in each cohort. This meant there were 25 outer folds for each of the 3 cohorts (75 total). However, the out-of-fold predictions for each fold were not saved in a way that could be reconstructed to give valid pooled performance measures. Therefore, the canonical analysis was identified as being the held out first outer fold. As the pooled 25-fold metrics could not be reconstructed without the original fold predictions they were not reported.
-
-\subsection{GBSG2 Horseshoe Model}\label{gbsg2-horseshoe-model}
-
-The planned analysis included a broader comparison of Bayesian priors. The GBSG2--Horseshoe fit failed the prespecified diagnostic criteria after the documented recovery attempts and was excluded from posterior interpretation. This decision preserves the diagnostic acceptance rule, although it limits the completeness of the prior comparison \cite{ref40}.
-
-\subsection{SHAP Explainability}\label{shap-explainability}
-
-Explainability using SHAP was specified. Whilst SHAP functionality was available in the environment, the final SHAP values weren't available. Therefore SHAP results weren't reported \cite{ref41}. Instead Bayesian posterior coefficients, hazard ratios, credible intervals and posterior directionality probability were used. Along with RSF permutation importance.
-
-\subsection{Sensitivity Analysis}\label{sensitivity-analysis}
-
-The planned sensitivity analysis covered censoring, missingness, baseline-hazard intervals, and prior hyperparameters. The completed analysis was narrower and compared retained posterior summaries across the Normal, Horseshoe, and Spike-and-Slab prior families. This analysis utilized the retained posterior outputs and did not add a new MCMC experiment.
-
-Overall comparison of the models in the cohort. Comparing between the different models in the full cohort \cite{ref6}.
-
-The planned comparison was broader than the final numerical evaluation. The entire three-cohort x six-model space has 18 potential combinations of cohort models, yet only seven canonical pairs of predictors with locked final predictive outputs. The other combinations are thus not to be expressed as fulfilled predictive experiments.
-
-These deviations are explicitly documented so that the thesis reports the analyses that were actually completed rather than presenting the original proposal as though all planned analyses had been performed.
-
-\section{Cross-Check of Chapter and Methodology.}\label{cross-check-of-chapter-and-methodology.}
-
-This chapter describes the methods used to address the research questions. Bayesian survival models were evaluated across three clinical cohorts alongside statistical and machine-learning comparators. Three prior families were examined, and posterior uncertainty was assessed using MCMC diagnostics and Bayesian explainability summaries \cite{ref42}.
-
-The last methodological scope is 3 cohorts, 3 Bayesian prior families, 3 comparator model families, 8 retained Bayesian explainability fits, 7 final predictive pairs, 4 predictive metrics and 75 outer-fold definitions. The final analysis does not claim to make a pooled 25-fold OOF performance claim or a completed SHAP claim. The GBSG2/Horseshoe model was discarded due to diagnostic failure. These limits provide assurance that only computations whose analysis is backed by the final validated computational record will be reported in the next Results chapter.
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2003}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7997}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Research Question
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Methodological Component
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-RQ1 & Bayesian models versus CoxPH, RSF, and DeepSurv predictive evaluation \\
-RQ2 & Normal, Horseshoe, and Spike-and-Slab posterior comparison \\
-RQ3 & Posterior coefficients, hazard ratios, credible intervals, and directional probabilities \\
-RQ4 & MCMC diagnostics, prior sensitivity, and computational/methodological integrity \\
-\end{longtable}
-
-\begin{quote}
-\phantomsection\label{_Toc245465020}{}\captionof{table}{Mapping of the research questions to the methodological components}
-\end{quote}
-
+Table~\ref{tab:method-rq-alignment} links the four questions to the analyses presented in Chapter~\ref{chap:results}. The scientific specifications and extended results in the appendices support interpretation of the reported estimates.
