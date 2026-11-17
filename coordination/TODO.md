@@ -22,9 +22,11 @@ The current [v3 assessment](../assessment/Ravi_thesis_assessment_Codex_v3.md) is
 
 ADR-055 restores Ravi's supplied source as the manuscript base, retaining his structure and accurate prose while correcting methods, citations and current results. The 109-page report has five chapters, ten appendices, six figures, 34 tables and 55 cited references. No new experiment is required.
 
-The source and PDF are published on Overleaf and GitHub branch `thesis/final-report-20261117`, commit `a57cd31`. The source ZIP is in `reports/thesis_final/`. All 47 evidence-output hashes and all presentation-table files are unchanged. The independent source-package build, citation/cross-reference checks and visual PDF review passed. Current files and editing steps are in `docs/ravi_thesis_next_steps.md`; verification is `reviews/2026-11-17-ravi-preservation.json`.
+The source and PDF are published on Overleaf and GitHub branch `thesis/final-report-20261117`, commit `ea93d7f`. The source ZIP is in `reports/thesis_final/`. All 47 evidence-output hashes and all presentation-table files are unchanged. The independent source-package build, citation/cross-reference checks and visual PDF review passed. Current files and editing steps are in `docs/ravi_thesis_next_steps.md`; current publication verification is `reviews/2026-11-17-overleaf-reconnection.json`.
 
 The preceding broad rewrite and its assessments remain archived. They are superseded for manuscript editing by the owner's preservation instruction. Original experiment scope and scientific records remain unchanged.
+
+The active editing project is [6af7b210b843f23a84c4de8d](https://www.overleaf.com/project/6af7b210b843f23a84c4de8d). The local thesis `origin` is connected to it, and the matching source/PDF publication is verified. Earlier project URLs are historical.
 
 ## Historical recovery and programme checkpoints - 2026-10-01
 

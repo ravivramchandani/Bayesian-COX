@@ -1,5 +1,13 @@
 # JOURNAL
 
+## 2026-11-17 - Connected the current Overleaf project
+
+The owner identified `6af7b210b843f23a84c4de8d` as the current thesis destination and confirmed that the local version is authoritative. Preserved the previous online state in a verified Git bundle and the merge history, then connected the thesis checkout's `origin` to the new project. Published local revision `ea93d7fce0f816133ded3e5dc9929382902e4375` through a normal fast-forward remote update, without force pushing. Overleaf `HEAD/main` and the GitHub thesis branch match the local revision.
+
+The saved 109-page PDF retains SHA-256 `37277ac41f53376ec87004f50af3cafdac3d9a675510ef530f40b0ba0408c888`. Only the README link changed in the current source tree; report prose, results, figures and all 47 evidence outputs are unchanged. The refreshed source ZIP independently builds to identical text on all pages. Current instructions and coordination links now point to the new project. The earlier Overleaf destination remains available as an archived remote. Browser verification could not run because its host was unavailable; Git publication and saved source/PDF identity were verified directly.
+
+Receipt: `coordination/reviews/2026-11-17-overleaf-reconnection.json`.
+
 ## 2026-11-17 - Re-reviewed the restored manuscript
 
 Reviewed all five chapters, ten appendices, figures, tables and bibliography of the current 109-page thesis against the supplied examiner prompt. Focused implementation and saved-output checks found the numerical reporting accurate; all 47 evidence assets retain their hashes. Selected primary-source checks identified an inaccurate Park censoring criticism and reference metadata, while the manuscript also contains a BFMI terminology error, an absent-stage-row statement, ambiguous eligibility denominators and several local wording errors.

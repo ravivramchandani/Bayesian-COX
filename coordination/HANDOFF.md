@@ -1,5 +1,13 @@
 # HANDOFF
 
+## Active Overleaf connection - 2026-11-17
+
+The local thesis checkout now tracks [the owner's current Overleaf project](https://www.overleaf.com/project/6af7b210b843f23a84c4de8d). Its `origin/main`, local `main` and the GitHub thesis branch `thesis/final-report-20261117` all match `ea93d7fce0f816133ded3e5dc9929382902e4375`. The latest saved 109-page PDF is published there and retains the reviewed PDF's exact checksum. The only current-tree change from `a57cd31` is the active link in `README.txt`; manuscript text, results and figures are unchanged. The v3 assessment and its outstanding recommendations still apply.
+
+The prior online state was preserved in a verified local Git bundle and in the merge history before publication. No force push was used. The earlier project `6af91395a2e68e546f56fbc0` is retained as remote `overleaf-previous-20261117`; it is no longer the active editing target. Current reader instructions and the source ZIP point to the new project. A fresh ZIP build reproduces all 109 page texts. Remote source/PDF verification succeeded; browser compilation was not observed because the browser host was unavailable.
+
+Verification: [2026-11-17-overleaf-reconnection.json](reviews/2026-11-17-overleaf-reconnection.json). Earlier project links in dated records below are historical.
+
 ## Current manuscript re-review - 2026-11-17
 
 The [v3 examiner-style assessment](../assessment/Ravi_thesis_assessment_Codex_v3.md) reviews the current restored 109-page manuscript at `a57cd31` against the owner's supplied nine-criterion prompt. It recommends B+ overall, with A-level technical application. Numerical checks match the saved evidence; ten bounded factual, reference and terminology amendments remain to be applied. The recommendations toward A+ strengthen synthesis, discussion and the use of existing evidence rather than expanding the experiment programme.
