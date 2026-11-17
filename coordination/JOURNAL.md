@@ -1,5 +1,13 @@
 # JOURNAL
 
+## 2026-11-17 - Restored Ravi's manuscript with focused corrections
+
+The owner objected to the extent of the preceding rewrite and explicitly authorised restoring Ravi's wording and structure with necessary scientific corrections. Restored the supplied `69a7f04` manuscript as the editing base. Retained all introduction/literature headings and over 92% of their original whitespace-delimited token sequences. Methods retain 30 of 37 original headings. Results and conclusions required larger factual updates because the supplied report used obsolete first-fold outcomes and described completed analyses as unavailable. Exact per-file preservation measures and reasons are retained in the receipt; they are source comparisons, not institutional word counts.
+
+The final PDF has 109 pages, five chapters and ten appendices. Corrected numerical displays use the existing evidence. The original research-design structure is preserved in a vector recreation with the rejected-fit path, diagnostic label and explanation branch corrected. All 47 evidence outputs and presentation tables remain byte-identical. A fresh source ZIP builds to identical text on all 109 pages. Citations, references, embedded fonts and visual layout passed checks. No model was fitted or model implementation changed.
+
+Overleaf `main` and GitHub `thesis/final-report-20261117` both match `a57cd31cfc81935da477385368201e72c61ff187`. The prior broad rewrite is backed up on `archive/full-rewrite-20261117`; the original author source remains in history. Earlier assessments are labelled as applying to those earlier revisions. Current instructions and the source ZIP are updated. Verification: `coordination/reviews/2026-11-17-ravi-preservation.json`.
+
 ## 2026-11-17 — Final thesis published to Overleaf
 
 After the owner enabled full edit access, the direct Git push succeeded. Overleaf `HEAD` and `main` are `397c54c1b97e729d18c009afbfbc4c318fad11e9`, matching the final GitHub thesis revision. The local and remote `Main.tex` and saved `Main.pdf` blobs match exactly. The published report is the reviewed 92-page version. The current handoff and editing instructions now point to the live final project; no manual upload remains.

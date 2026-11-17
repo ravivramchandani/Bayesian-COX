@@ -3,14 +3,13 @@
 
 ## Final thesis report
 
-The completed 92-page report, **Explainable Bayesian Survival Models**, is saved on the [thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117). It includes the current methods and results, nine figures, 28 tables and 76 cited references.
+The corrected 109-page report, **Explainable Bayesian Survival Models**, preserves Ravi's supplied manuscript structure and accurate prose, with the completed methods, results and verified numerical displays.
 
-- [Read the final PDF](https://github.com/ravivramchandani/Bayesian-COX/blob/397c54c1b97e729d18c009afbfbc4c318fad11e9/Main.pdf).
+- [Read the current PDF](https://github.com/ravivramchandani/Bayesian-COX/blob/a57cd31cfc81935da477385368201e72c61ff187/Main.pdf).
 - [Download the Overleaf source ZIP](reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-17.zip).
 - [Ravi's thesis instructions](docs/ravi_thesis_next_steps.md).
-- [Latest examiner-style assessment](assessment/Ravi_thesis_assessment_Codex_v2.md).
 
-The verified final source and saved PDF are now published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) at revision `397c54c`, and backed up on GitHub. The code and experiment records below remain available independently of thesis editing.
+The source and saved PDF are published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and on the [GitHub thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117) at `a57cd31`. The previous broad rewrite is preserved on `archive/full-rewrite-20261117`; its assessments apply to that earlier version. The code and experiment records below remain available independently of thesis editing.
 
 Code and reproducibility materials for a Master of Applied Technologies
 thesis at the School of Computing, Unitec.

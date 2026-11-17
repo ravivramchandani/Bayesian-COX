@@ -1477,3 +1477,17 @@ Format:
   - Consolidate the cohort information, methods and concluding synthesis. Retain complete scientific details in their primary location and supporting estimates in the appendices.
   - Preserve all original numerical evidence and the separation of original and post-hoc analyses. Commit the revised PDF, source, assessment and independently build-verified upload ZIP to GitHub.
 - Consequences: The revised report is 92 pages, eight fewer than the preceding version, with 2,221 fewer main-chapter source tokens. The current assessment is Codex v2 and recommends A under the supplied rubric. The actual institutional grade and journal decisions are not represented as obtained. The existing Overleaf write-access restriction remains separate from the completed report and review.
+
+
+## ADR-055 - Preserve Ravi's manuscript and apply focused scientific corrections
+
+- Status: ACCEPTED
+- Date: 2026-11-17
+- Context: The owner objected to the breadth of the previous rewrite and explicitly authorised restoring Ravi's wording and structure, with only necessary scientific corrections and focused consistency edits.
+- Decision:
+  - Use Ravi's supplied Overleaf revision `69a7f04` as the actual editorial base. Preserve accurate author prose, the five-chapter structure, research questions, cover and ten appendix topics.
+  - Correct obsolete validation scope, numerical results, model settings, citation assignments and interpretation. Replace inaccurate result screenshots with existing verified evidence. Correct the research-design diagram while preserving its arrangement and colours.
+  - Remove obsolete proposal/completion history, direct duplication and uncited bibliography entries. Do not reintroduce the optional theoretical additions or wholesale chapter rewrite from ADR-054.
+  - Preserve all frozen evidence and the original/post-hoc distinction. Do not fit new models. Continue the owner's manuscript-content exclusions.
+  - Keep the preceding broad rewrite and its version-specific assessments as historical records. Do not apply their grade recommendation to this restored version.
+- Consequences: The restored report is published at `a57cd31` on Overleaf and the GitHub thesis branch. All 47 evidence assets are unchanged, and the source ZIP independently rebuilds the 109-page report. This decision supersedes ADR-053/ADR-054 only where their editorial approach conflicts with preserving the author's manuscript.

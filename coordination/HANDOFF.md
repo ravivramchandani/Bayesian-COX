@@ -1,5 +1,15 @@
 # HANDOFF
 
+## Ravi manuscript restored and published - 2026-11-17
+
+The current report starts from Ravi's supplied manuscript at `69a7f04`, preserving his chapter structure, research questions and accurate explanatory text. Necessary corrections update the methods, citations, obsolete single-fold results and interpretation to the completed study. The supplied research-design layout is retained in a corrected vector diagram. The report has 109 pages, five chapters, ten appendices, six figures, 34 tables and 55 cited references. Uncited bibliography entries were removed.
+
+The source and saved PDF are published in [the active Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and GitHub branch `thesis/final-report-20261117`, both at `a57cd31cfc81935da477385368201e72c61ff187`. The previous broad rewrite is preserved on GitHub branch `archive/full-rewrite-20261117` at `397c54c`. The original Ravi source remains in Git history. The earlier examiner assessments apply to their previous revisions, not this restored manuscript.
+
+All 47 saved evidence outputs and all presentation-table files are unchanged. The source ZIP builds independently to the same 109 page texts. Citations and cross-references resolve; the PDF was visually checked, including the corrected abstract and research-design figure. No model fitting or model-code changes occurred. The receipt is [2026-11-17-ravi-preservation.json](reviews/2026-11-17-ravi-preservation.json). Use [Ravi's current editing steps](../docs/ravi_thesis_next_steps.md).
+
+Earlier manuscript checkpoints below are historical; their page counts and revision-specific assessments do not describe the current report.
+
 ## Overleaf publication verified — 2026-11-17
 
 Write access is working. The final thesis was pushed successfully to [the active Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0). Its remote `main` and `HEAD` are both `397c54c1b97e729d18c009afbfbc4c318fad11e9`, matching the verified source and GitHub thesis branch. The `Main.tex` and `Main.pdf` Git blobs are identical across the local and Overleaf copies. The saved PDF is the reviewed 92-page report.

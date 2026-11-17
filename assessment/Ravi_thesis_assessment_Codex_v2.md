@@ -1,5 +1,7 @@
 ## Overall Assessment
 
+Version note: this assessment concerns the earlier rewritten manuscript at `397c54c`. It is preserved as a historical review and does not assess the restored Ravi manuscript at `a57cd31`.
+
 The revised *Explainable Bayesian Survival Models* is a complete, technically strong applied research thesis with a defined empirical contribution and a coherent analytical argument. The 92-page manuscript supports an A-range assessment under the supplied rubric: its strongest features are the controlled comparison, careful evaluation and clear separation of prediction, posterior interpretation and explanation stability.
 
 This assessment covers the revised manuscript, including the corrections and consolidation completed during this review. It applies the supplied nine criteria to the written evidence.

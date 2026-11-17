@@ -1,6 +1,6 @@
 # Ravi: thesis files and research handoff
 
-Start with [the final thesis files and editing steps](ravi_thesis_next_steps.md). The finished 92-page report and source are on GitHub branch `thesis/final-report-20261117` at `397c54c`. The active Overleaf project is [6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0); it now contains the verified final source and saved PDF at revision `397c54c`. Reading or editing the thesis requires only a browser on any operating system.
+Start with [the current thesis files and editing steps](ravi_thesis_next_steps.md). Ravi's supplied manuscript has been restored with focused scientific corrections. The 109-page source and PDF are on GitHub branch `thesis/final-report-20261117` and in [the active Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0), both at `a57cd31`. Reading or editing requires only a browser on any operating system.
 
 The technical release and experiment details below are retained for their separate uses.
 

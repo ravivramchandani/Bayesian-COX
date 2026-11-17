@@ -1,6 +1,6 @@
 # TODO
 
-Current task register. Manuscript production follows ADR-053; paper work is deferred. Completed tasks
+Current task register. Manuscript production follows ADR-055; paper work is deferred. Completed tasks
 are checked and later pruned; durable findings
 belong in `JOURNAL.md`. The design and claim rules are in
 `docs/study_protocol.md` and `docs/claim_evidence_register.md`.
@@ -16,16 +16,13 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
-## Current manuscript — 2026-11-17
+## Current manuscript - 2026-11-17
 
-ADR-053 supersedes the earlier manuscript-production sequence. The complete report is 92 pages, with five chapters, six scientific appendices, nine figures, 28 tables and 76 cited references. The methods, interpretation and all numerical displays use existing verified results. No new experiment is required.
+ADR-055 restores Ravi's supplied source as the manuscript base, retaining his structure and accurate prose while correcting methods, citations and current results. The 109-page report has five chapters, ten appendices, six figures, 34 tables and 55 cited references. No new experiment is required.
 
-The source and PDF are published at GitHub branch `thesis/final-report-20261117`, commit `397c54c`; the source ZIP is in `reports/thesis_final/`. The active Overleaf project is `6af91395a2e68e546f56fbc0`. The final source and saved PDF are now published there at revision `397c54c`. The final files and editing steps are linked in `docs/ravi_thesis_next_steps.md`.
+The source and PDF are published on Overleaf and GitHub branch `thesis/final-report-20261117`, commit `a57cd31`. The source ZIP is in `reports/thesis_final/`. All 47 evidence-output hashes and all presentation-table files are unchanged. The independent source-package build, citation/cross-reference checks and visual PDF review passed. Current files and editing steps are in `docs/ravi_thesis_next_steps.md`; verification is `reviews/2026-11-17-ravi-preservation.json`.
 
-All 47 evidence-file hashes, 2,204 presentation-table numeric tokens, 54 all-horizon calibration rows and 27 secondary contrasts passed checks. Independent scientific review, PDF layout review and a fresh ZIP build passed. The receipt is `reviews/2026-11-17-thesis-rereview.json`. The report omits planning history and internal metadata while accurately expressing the scientific findings. The owner's manuscript-content exclusions remain in force.
-
-
-The examiner-style re-review is complete under ADR-054. The latest assessment is `assessment/Ravi_thesis_assessment_Codex_v2.md`; the previous version is preserved. The report now has a named closest-work comparison, a checked explanation-score decomposition, and a concise conclusion. Repeated definitions and duplicate cohort and question-alignment tables were removed.
+The preceding broad rewrite and its assessments remain archived. They are superseded for manuscript editing by the owner's preservation instruction. Original experiment scope and scientific records remain unchanged.
 
 ## Historical recovery and programme checkpoints - 2026-10-01
 
