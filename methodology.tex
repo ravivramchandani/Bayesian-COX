@@ -325,6 +325,8 @@ Specified refits could change warm-up, target acceptance or the baseline paramet
 
 Prior predictive summaries used 200 draws of coefficients and baseline rates. Baseline survival and survival conditional on up to 512 evenly spaced training covariate rows were evaluated at 0.25, 0.5, 1 and 2 times the median training event time. These summaries describe the survival implications of the specified priors conditional on the training-derived time scale, interval boundaries and covariates. They include survival quantiles and the proportions of subject--draw predictions below 0.01 or above 0.99. Posterior predictive summaries used up to 200 retained draws, as described below. Both checks complement parameter estimation and diagnostics \cite{ref22,ref53}.
 
+\begingroup
+\singlespacing
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5516}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4484}}@{}}
@@ -356,6 +358,7 @@ Prior predictive draws & 200 \\
 Posterior predictive draws & 200 \\
 Baseline intervals & 6 \\
 \end{longtable}
+\endgroup
 
 
 
