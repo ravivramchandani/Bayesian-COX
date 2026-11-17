@@ -8,7 +8,7 @@
 \definecolor{ravipurple}{HTML}{E0D9FC}
 \definecolor{ravipink}{HTML}{FFD0D0}
 \definecolor{ravistart}{HTML}{6298EB}
-\resizebox{0.98\linewidth}{!}{%
+\resizebox{0.96\linewidth}{!}{%
 \begin{tikzpicture}[
   x=1cm,y=1cm,
   base/.style={draw=black!80,rounded corners=2pt,line width=0.55pt,
@@ -109,7 +109,7 @@
 \draw[arrow] (gate.east) -- node[edge label,above]{No} (record.west);
 
 \node[yellow] (ppc) at (7.45,-12.68)
-  {Posterior Predictive and Prior-Sensitivity Assessment};
+  {Posterior Predictive Interpretation\\and Prior-Sensitivity Assessment};
 \draw[arrow] (retain.south) -- (2.4,-12.68) -- (ppc.west);
 \node[green] (evaluation) at (7.45,-13.52) {Held-Out Predictive Evaluation};
 \draw[arrow] (ppc.south) -- (evaluation.north);
@@ -155,6 +155,6 @@
 \end{tikzpicture}%
 }
 \endgroup
-\caption{Conceptual overview of the study design, analysis stages, and links between modelling and interpretation. Posterior and predictive analyses use accepted Bayesian fits.}
+\caption{Conceptual overview of the study design, analysis stages, and links between modelling and interpretation. Predictive checks are computed for each sampled attempt; posterior interpretation and held-out evaluation use accepted Bayesian fits.}
 \label{_Toc245464042}
 \end{figure}
