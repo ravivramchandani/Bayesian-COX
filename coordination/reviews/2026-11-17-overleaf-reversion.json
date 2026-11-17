@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-17",
+  "status": "original_project_contents_and_connection_restored",
+  "owner_instruction": "The link was for Deepa; revert back to the original.",
+  "deepa": {
+    "deepa_project": "https://git.overleaf.com/6af7b210b843f23a84c4de8d",
+    "before_misdirected_publication": "a38f049660c492a1132e412fd1773cdd79ba1fdf",
+    "misdirected_publication": "ea93d7fce0f816133ded3e5dc9929382902e4375",
+    "restored_revision": "a89d48361350fdcedbcfe96fee24a08ae170aef5",
+    "restored_tree": "d591f76c6e1236e48a9c3b6129629fc7eb788453",
+    "original_tree_matches_exactly": true,
+    "force_push_used": false
+  },
+  "ravi": {
+    "project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+    "published_revision": "d1f6c0b8a0fb904f430a176e4d5c0fca9bc9eaa6",
+    "original_reviewed_revision": "a57cd31cfc81935da477385368201e72c61ff187",
+    "complete_tree_identical_to_original": true,
+    "pdf_pages": 109,
+    "pdf_sha256": "37277ac41f53376ec87004f50af3cafdac3d9a675510ef530f40b0ba0408c888",
+    "source_zip_restored_byte_for_byte": true,
+    "source_zip_sha256": "49b551ab5dcd21705b87e6aba44ad32c2a05490da6821a54dfcd535d393fc206",
+    "local_upstream": "origin/main",
+    "temporary_remote_removed": true,
+    "temporary_push_override_removed": true
+  },
+  "supersedes_current_connection_record": "coordination/reviews/2026-11-17-overleaf-reconnection.json",
+  "force_push_used": false,
+  "new_model_fitting": false,
+  "additional_deepa_work_performed": false,
+  "numerical_evidence_changed": false
+}

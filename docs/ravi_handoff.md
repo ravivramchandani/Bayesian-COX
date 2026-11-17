@@ -1,6 +1,6 @@
 # Ravi: thesis files and research handoff
 
-Start with [the current thesis files and editing steps](ravi_thesis_next_steps.md). Ravi's supplied manuscript has been restored with focused scientific corrections. The 109-page source and PDF are on GitHub branch `thesis/final-report-20261117` and in [the active Overleaf project](https://www.overleaf.com/project/6af7b210b843f23a84c4de8d), both at `ea93d7f`. Reading or editing requires only a browser on any operating system.
+Start with [the current thesis files and editing steps](ravi_thesis_next_steps.md). Ravi's supplied manuscript has been restored with focused scientific corrections. The 109-page source and PDF are on GitHub branch `thesis/final-report-20261117` and in [the active Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0), both at `d1f6c0b`. Reading or editing requires only a browser on any operating system.
 
 The technical release and experiment details below are retained for their separate uses.
 
@@ -217,7 +217,7 @@ Git commands.
 
 The completed thesis source and PDF are backed up in this GitHub repository's [thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117). The code and original experiment evidence remain on `main`.
 
-For browser editing or source backups, use [the final thesis instructions](ravi_thesis_next_steps.md). The active project is [6af7b210b843f23a84c4de8d](https://www.overleaf.com/project/6af7b210b843f23a84c4de8d). The earlier 6a750f3e project is a historical checkpoint. The report is complete; it does not need numerical replay.
+For browser editing or source backups, use [the final thesis instructions](ravi_thesis_next_steps.md). The active project is [6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0). The earlier 6a750f3e project is a historical checkpoint. The report is complete; it does not need numerical replay.
 
 ## Optional locked-environment verification and restore on a fresh Apple Silicon Mac
 

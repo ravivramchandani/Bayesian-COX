@@ -1,12 +1,10 @@
 # JOURNAL
 
-## 2026-11-17 - Connected the current Overleaf project
+## 2026-11-17 - Reverted the misdirected project connection
 
-The owner identified `6af7b210b843f23a84c4de8d` as the current thesis destination and confirmed that the local version is authoritative. Preserved the previous online state in a verified Git bundle and the merge history, then connected the thesis checkout's `origin` to the new project. Published local revision `ea93d7fce0f816133ded3e5dc9929382902e4375` through a normal fast-forward remote update, without force pushing. Overleaf `HEAD/main` and the GitHub thesis branch match the local revision.
+The owner clarified that `6af7b210b843f23a84c4de8d` was Deepa's project and explicitly requested restoration. Verified that its remote had no intervening edits, then published a compensating commit `a89d48361350fdcedbcfe96fee24a08ae170aef5` whose entire tree equals the original `a38f049` tree. Deepa's original project files are restored exactly. The original backup remains verified, and no additional Deepa work occurred.
 
-The saved 109-page PDF retains SHA-256 `37277ac41f53376ec87004f50af3cafdac3d9a675510ef530f40b0ba0408c888`. Only the README link changed in the current source tree; report prose, results, figures and all 47 evidence outputs are unchanged. The refreshed source ZIP independently builds to identical text on all pages. Current instructions and coordination links now point to the new project. The earlier Overleaf destination remains available as an archived remote. Browser verification could not run because its host was unavailable; Git publication and saved source/PDF identity were verified directly.
-
-Receipt: `coordination/reviews/2026-11-17-overleaf-reconnection.json`.
+Restored Ravi's `origin` to `6af91395a2e68e546f56fbc0`, removed the temporary remote and push override, and restored the original active links and source ZIP. Ravi's source at `d1f6c0b8a0fb904f430a176e4d5c0fca9bc9eaa6` is byte-identical to the complete reviewed `a57cd31` tree. Its saved PDF and all numerical evidence are unchanged. Normal fast-forward pushes published the restorations; no server history was force-rewritten. The earlier transfer receipt is preserved as historical evidence. Current verification is `coordination/reviews/2026-11-17-overleaf-reversion.json`.
 
 ## 2026-11-17 - Re-reviewed the restored manuscript
 

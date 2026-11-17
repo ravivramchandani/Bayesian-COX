@@ -22,11 +22,11 @@ The current [v3 assessment](../assessment/Ravi_thesis_assessment_Codex_v3.md) is
 
 ADR-055 restores Ravi's supplied source as the manuscript base, retaining his structure and accurate prose while correcting methods, citations and current results. The 109-page report has five chapters, ten appendices, six figures, 34 tables and 55 cited references. No new experiment is required.
 
-The source and PDF are published on Overleaf and GitHub branch `thesis/final-report-20261117`, commit `ea93d7f`. The source ZIP is in `reports/thesis_final/`. All 47 evidence-output hashes and all presentation-table files are unchanged. The independent source-package build, citation/cross-reference checks and visual PDF review passed. Current files and editing steps are in `docs/ravi_thesis_next_steps.md`; current publication verification is `reviews/2026-11-17-overleaf-reconnection.json`.
+The source and PDF are published on Overleaf and GitHub branch `thesis/final-report-20261117`, commit `d1f6c0b`. The source ZIP is in `reports/thesis_final/`. All 47 evidence-output hashes and all presentation-table files are unchanged. The independent source-package build, citation/cross-reference checks and visual PDF review passed. Current files and editing steps are in `docs/ravi_thesis_next_steps.md`; verification is `reviews/2026-11-17-ravi-preservation.json`.
 
 The preceding broad rewrite and its assessments remain archived. They are superseded for manuscript editing by the owner's preservation instruction. Original experiment scope and scientific records remain unchanged.
 
-The active editing project is [6af7b210b843f23a84c4de8d](https://www.overleaf.com/project/6af7b210b843f23a84c4de8d). The local thesis `origin` is connected to it, and the matching source/PDF publication is verified. Earlier project URLs are historical.
+The misdirected connection has been reversed. Ravi's active project is [https://www.overleaf.com/project/6af91395a2e68e546f56fbc0](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0); the local checkout is connected to it. Deepa's separate project was restored exactly to its prior contents. Verification is `reviews/2026-11-17-overleaf-reversion.json`.
 
 ## Historical recovery and programme checkpoints - 2026-10-01
 
