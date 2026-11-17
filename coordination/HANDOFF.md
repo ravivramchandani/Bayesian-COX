@@ -1,5 +1,11 @@
 # HANDOFF
 
+## Current manuscript re-review - 2026-11-17
+
+The [v3 examiner-style assessment](../assessment/Ravi_thesis_assessment_Codex_v3.md) reviews the current restored 109-page manuscript at `a57cd31` against the owner's supplied nine-criterion prompt. It recommends B+ overall, with A-level technical application. Numerical checks match the saved evidence; ten bounded factual, reference and terminology amendments remain to be applied. The recommendations toward A+ strengthen synthesis, discussion and the use of existing evidence rather than expanding the experiment programme.
+
+This turn produced the review and board-summary answers; it did not change the thesis or publish new manuscript edits. The current PDF and Overleaf revision below remain unchanged. Earlier v1/v2 assessments apply to their different manuscript versions. The review receipt is [2026-11-17-thesis-rereview-v3.json](reviews/2026-11-17-thesis-rereview-v3.json).
+
 ## Ravi manuscript restored and published - 2026-11-17
 
 The current report starts from Ravi's supplied manuscript at `69a7f04`, preserving his chapter structure, research questions and accurate explanatory text. Necessary corrections update the methods, citations, obsolete single-fold results and interpretation to the completed study. The supplied research-design layout is retained in a corrected vector diagram. The report has 109 pages, five chapters, ten appendices, six figures, 34 tables and 55 cited references. Uncited bibliography entries were removed.

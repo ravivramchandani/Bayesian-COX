@@ -2,6 +2,8 @@
 
 The corrected report is published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0), revision `a57cd31`. It uses Ravi's supplied manuscript as the base, retaining his structure and accurate wording with the completed methods and results. The saved PDF has 109 pages.
 
+The [current thesis assessment](../assessment/Ravi_thesis_assessment_Codex_v3.md) lists ten local corrections and focused recommendations for a higher grade. These findings have not yet been applied to the published manuscript.
+
 ## Open and edit the report
 
 1. Open the shared Overleaf project.

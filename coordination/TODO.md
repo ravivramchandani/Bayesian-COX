@@ -18,6 +18,8 @@ artefacts satisfy the stated gate.
 
 ## Current manuscript - 2026-11-17
 
+The current [v3 assessment](../assessment/Ravi_thesis_assessment_Codex_v3.md) is complete. Its ten local required amendments are outstanding; the manuscript has not been changed during this review. Recommended A+ improvements are listed separately and use existing evidence.
+
 ADR-055 restores Ravi's supplied source as the manuscript base, retaining his structure and accurate prose while correcting methods, citations and current results. The 109-page report has five chapters, ten appendices, six figures, 34 tables and 55 cited references. No new experiment is required.
 
 The source and PDF are published on Overleaf and GitHub branch `thesis/final-report-20261117`, commit `a57cd31`. The source ZIP is in `reports/thesis_final/`. All 47 evidence-output hashes and all presentation-table files are unchanged. The independent source-package build, citation/cross-reference checks and visual PDF review passed. Current files and editing steps are in `docs/ravi_thesis_next_steps.md`; verification is `reviews/2026-11-17-ravi-preservation.json`.
