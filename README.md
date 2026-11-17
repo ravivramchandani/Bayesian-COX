@@ -3,14 +3,15 @@
 
 ## Final thesis report
 
-The corrected 109-page report, **Explainable Bayesian Survival Models**, preserves Ravi's supplied manuscript structure and accurate prose, with the completed methods, results and verified numerical displays.
+The revised 112-page report, **Explainable Bayesian Survival Models**, preserves Ravi's manuscript structure and completed results. Its literature review and methodology have been strengthened using his original sources, Consensus, Undermind and primary-source checks. All 25 previously removed cited sources are restored in accurate contexts; the report now cites 85 sources.
 
-- [Read the current PDF](https://github.com/ravivramchandani/Bayesian-COX/blob/d1f6c0b8a0fb904f430a176e4d5c0fca9bc9eaa6/Main.pdf).
+- [Read the current PDF](https://github.com/ravivramchandani/Bayesian-COX/blob/thesis/final-report-20261117/Main.pdf).
 - [Download the Overleaf source ZIP](reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-17.zip).
 - [Ravi's thesis instructions](docs/ravi_thesis_next_steps.md).
-- [Current thesis assessment and focused amendments](assessment/Ravi_thesis_assessment_Codex_v3.md).
+- [Literature and methodology source checks](research/literature_methodology_20261117/README.md).
+- [Previous manuscript assessment](assessment/Ravi_thesis_assessment_Codex_v3.md).
 
-The source and saved PDF are published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and on the [GitHub thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117) at `d1f6c0b`. The previous broad rewrite is preserved on `archive/full-rewrite-20261117`; its assessments apply to that earlier version. The code and experiment records below remain available independently of thesis editing.
+The source and saved PDF are published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and on the [GitHub thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117). All 47 saved evidence outputs and numerical table files are unchanged. The previous broad rewrite is preserved on `archive/full-rewrite-20261117`; its assessments apply to that earlier version. The code and experiment records below remain available independently of thesis editing.
 
 Code and reproducibility materials for a Master of Applied Technologies
 thesis at the School of Computing, Unitec.

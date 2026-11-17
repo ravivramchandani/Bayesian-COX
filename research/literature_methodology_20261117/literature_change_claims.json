@@ -1,0 +1,508 @@
+{
+  "file": "literature_review.tex",
+  "scope": "Only literature chapter edited; no bibliography, other chapter, numerical result or experiment changed by this agent.",
+  "sha256": "dae6ed59a5a441bd8729bee22dc882286b84b684ed877cd7accb526e80b9c680",
+  "preservation": {
+    "all_15_headings_and_labels_unchanged": true,
+    "original_discussed_paper_keys_omitted": [],
+    "lost_25_previously_cited_keys_omitted": [],
+    "source_words_before": 5025,
+    "source_words_after": 4859,
+    "distinct_cited_sources_before": 25,
+    "distinct_cited_sources_after": 54
+  },
+  "evidence_policy": "Consensus report was used for discovery and comparison planning, not as a source of thesis prose. Claims use primary-source abstracts/full text at stated access levels. No numerical source-performance values were added.",
+  "scientific_corrections": [
+    "Park et al. explicitly discuss censoring effects; previous claim that they omitted this removed.",
+    "Concordance associates higher risk with earlier events, not more recent events.",
+    "DeepSurv retains proportional hazards because of its model formulation.",
+    "Changing baseline rates is distinct from time-varying covariate effects.",
+    "NLP and MAFN examples are horizon-specific classifiers, not complete survival-curve benchmarks.",
+    "BHCox/BHAFT and spatial Cox prior structures are distinguished from the current clinical main-effects comparison.",
+    "Continuous mixture weights are not discrete inclusion probabilities.",
+    "Intrinsic draw-wise magnitude and centred posterior-mean linear SHAP are different summaries of the fitted Bayesian model.",
+    "RQ4 separates predictive sensitivity from attribution sampling stability.",
+    "Diagnostic gate applies before posterior interpretation, not before inference."
+  ],
+  "source_recovery_independent_audit": "original_reference_recovery agent read all restored25 paragraphs against source evidence and reported no correction needed. methodology_repair independently checked core distinctions, interpretation, objectives and questions; two wording corrections were applied and re-read; no further substantive corrections found.",
+  "new_citation_claims": [
+    {
+      "key": "ref7",
+      "title": "Explainable AI for survival analysis: a median-SHAP approach",
+      "doi": "10.48550/arXiv.2402.00072",
+      "was_originally_cited": false,
+      "manuscript_paragraphs": [
+        "Ter-Minassian et al. \\cite{ref7} show that Shapley interpretations also depend on the summary of the prediction distribution and the reference against which contributions are measured. Their median-SHAP approach is designed for models predicting individual survival times. Langbein et al. \\cite{ref61} review interpretable machine learning for survival analysis and illustrate several methods with GBSG2. Together, these papers show why two attribution methods can produce different summaries without either being incorrectly calculated: they may explain different outputs, use different references, or aggregate across time and patients differently."
+      ],
+      "source_access": "primary_main_manuscript_abstract_and_section_2_read",
+      "source_anchor": "Abstract; Introduction; Section 2 Shapley Values",
+      "cached_full_text": "build/recovery-investigation-20261117/lit_pdf_text/ref7.txt",
+      "urls": [],
+      "original_claim_fit_assessment": null
+    },
+    {
+      "key": "ref8",
+      "title": "Data mining and machine learning in cancer survival research: An overview and future recommendations,",
+      "doi": "10.1016/j.jbi.2022.104026",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Huang et al. \\cite{ref1} review survival prediction using real-world healthcare data. They describe substantial variation in clinical conditions, sample sizes, algorithms, validation and performance measures, with random survival forests and neural networks appearing frequently. Kaur, Doja and Ahmad \\cite{ref8} similarly review data-mining and machine-learning approaches in cancer survival research. Together, these reviews establish the breadth of the field, but the diversity of their included studies makes a single pooled ordering of algorithms inappropriate. A reported improvement depends on the endpoint, predictors and comparison against which it was obtained."
+      ],
+      "source_access": "author_abstract",
+      "source_anchor": "Abstract",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1016/j.jbi.2022.104026"
+      ],
+      "original_claim_fit_assessment": "The original generic prior/regularisation claims require a Bayesian methodological source. Preserve this review in the clinical landscape."
+    },
+    {
+      "key": "ref9",
+      "title": "Machine learning and deep learning to improve overall survival prediction in cervical cancer patients,",
+      "doi": "10.21037/tcr-2024-2304",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Clinical applications add detail that broad rankings cannot capture. Jiang et al. \\cite{ref9} compare machine-learning and DeepSurv models for cervical-cancer survival using clinical and tumour characteristics. Kim et al. \\cite{ref77} compare deep learning, Cox regression and RSF in oral cancer. Matysiak, Hojdis and Szewczuk \\cite{ref12} use Cox regression and RSF to study immune-nutritional predictors in advanced gastric cancer. These studies share a prognostic aim, but differ in patient selection, clinical variables, follow-up and model development. Their findings motivate testing flexible methods in several clinical settings while keeping the comparison within each cohort consistent."
+      ],
+      "source_access": "fulltext_methods_and_results",
+      "source_anchor": "Methods: Patients and data collection; Constructing survival prognostic models; Key features extraction of the optimal model; Results: Construction of survival prediction models",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref9_PMC12170117.txt",
+      "urls": [
+        "https://doi.org/10.21037/tcr-2024-2304",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC12170117/"
+      ],
+      "original_claim_fit_assessment": "The source is a cervical-cancer application, not evidence for the exact cohorts or model settings used in this thesis."
+    },
+    {
+      "key": "ref10",
+      "title": "Artificial neural networks for diagnosis and survival prediction in colon cancer,",
+      "doi": "10.1186/1476-4598-4-29",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Kantidakis, Hazewinkel and Fiocco \\cite{ref5} critically review neural networks for medical survival prediction. They describe a range of architectures and assess the assumptions, validation and reporting of the applied studies. Their review helps explain why neural-model results cannot be interpreted independently of the event definition, training sample and development procedure. Ahmed's earlier review of neural networks in colon-cancer diagnosis and survival \\cite{ref10} shows that interest in nonlinear prognostic relationships predates DeepSurv. The newer architectures expand the available representations, while the need to specify the prediction target and evaluate on held-out data remains."
+      ],
+      "source_access": "publisher_fulltext_abstract_and_introduction",
+      "source_anchor": "Abstract; Section1 Introduction and Development of Artificial Neural Networks",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref10_PMC1208946.txt",
+      "urls": [
+        "https://doi.org/10.1186/1476-4598-4-29",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC1208946/"
+      ],
+      "original_claim_fit_assessment": "Use as historical clinical context; it cannot establish which cohorts, Bayesian priors or contemporary models this thesis implemented."
+    },
+    {
+      "key": "ref11",
+      "title": "Predicting the survival of patients with cancer from their initial oncology consultation document using natural language processing,",
+      "doi": "10.1001/jamanetworkopen.2023.0813",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "The target can change substantially when richer inputs are introduced. Nunez et al. \\cite{ref11} predict survival from initial oncology-consultation text using horizon-specific binary outcomes. Guo et al. \\cite{ref48} combine gene-expression, copy-number and clinical information to classify five-year breast-cancer survival. These are useful examples of text and multimodal prognosis, but their classification targets differ from estimating a censoring-aware survival curve. Their results therefore inform the choice of data representation without providing a directly interchangeable benchmark for the models studied here."
+      ],
+      "source_access": "fulltext_scientific_body",
+      "source_anchor": "Methods: Data Selection and Preparation; Natural Language Models; Statistical Analysis; Discussion; Conclusions",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref11_PMC9972192.txt",
+      "urls": [
+        "https://doi.org/10.1001/jamanetworkopen.2023.0813",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9972192/"
+      ],
+      "original_claim_fit_assessment": "The original general metrics/posterior-inference placement is mismatched. The paper uses binary6/36/60month labels, text inputs, integrated gradients and coefficient explanations, not our full likelihood or SHAP target."
+    },
+    {
+      "key": "ref12",
+      "title": "Survival modelling using machine learning and Immune--Nutritional profiles in advanced gastric cancer on home parenteral nutrition,",
+      "doi": "10.3390/nu17152414",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Clinical applications add detail that broad rankings cannot capture. Jiang et al. \\cite{ref9} compare machine-learning and DeepSurv models for cervical-cancer survival using clinical and tumour characteristics. Kim et al. \\cite{ref77} compare deep learning, Cox regression and RSF in oral cancer. Matysiak, Hojdis and Szewczuk \\cite{ref12} use Cox regression and RSF to study immune-nutritional predictors in advanced gastric cancer. These studies share a prognostic aim, but differ in patient selection, clinical variables, follow-up and model development. Their findings motivate testing flexible methods in several clinical settings while keeping the comparison within each cohort consistent."
+      ],
+      "source_access": "fulltext_methods_results_discussion",
+      "source_anchor": "Sections2.1,2.3,2.4;3.5;4Discussion",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref12_PMC12348630.txt",
+      "urls": [
+        "https://doi.org/10.3390/nu17152414",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC12348630/"
+      ],
+      "original_claim_fit_assessment": "Valid clinical application. It does not substantiate this thesis diagnostic exclusions or confirmatory registry boundaries. Do not transplant its unusually high C-index into a common-model ranking."
+    },
+    {
+      "key": "ref28",
+      "title": "Machine learning explainability in nasopharyngeal cancer survival using LIME and SHAP,",
+      "doi": "10.1038/s41598-023-35795-0",
+      "was_originally_cited": false,
+      "manuscript_paragraphs": [
+        "Clinical applications provide examples of these choices. Moncada-Torres et al. \\cite{ref62} compare Cox, RSF, survival SVM and XGBoost for breast-cancer survival, and use SHAP to interpret relative mortality-risk predictions. Those attributions explain risk scores rather than fixed-horizon survival probabilities. Alabi et al. \\cite{ref28} apply LIME and SHAP to nasopharyngeal-cancer prognosis, demonstrating the use of local explanations in an applied oncology setting. Rather's SHAP framework \\cite{ref29} uses a synthetic COVID-19 cohort, providing a methodological illustration rather than patient-based clinical validation. Across these examples, specifying the output and the data context is essential to interpreting an attribution."
+      ],
+      "source_access": "primary_published_article_abstract_read",
+      "source_anchor": "Abstract: LIME/SHAP for NPC survival-group prognosis",
+      "cached_full_text": "build/recovery-investigation-20261117/lit_pdf_text/Alabi_2023_Machine-learning-explainability-in-nasopharyngeal-cancer-survival-using-LIME-and-SHAP.txt",
+      "urls": [],
+      "original_claim_fit_assessment": null
+    },
+    {
+      "key": "ref29",
+      "title": "SHAP-integrated machine learning framework for interpretable survival modeling in a synthetic COVID-19 cohort,",
+      "doi": "10.1016/j.insi.2025.100136",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Clinical applications provide examples of these choices. Moncada-Torres et al. \\cite{ref62} compare Cox, RSF, survival SVM and XGBoost for breast-cancer survival, and use SHAP to interpret relative mortality-risk predictions. Those attributions explain risk scores rather than fixed-horizon survival probabilities. Alabi et al. \\cite{ref28} apply LIME and SHAP to nasopharyngeal-cancer prognosis, demonstrating the use of local explanations in an applied oncology setting. Rather's SHAP framework \\cite{ref29} uses a synthetic COVID-19 cohort, providing a methodological illustration rather than patient-based clinical validation. Across these examples, specifying the output and the data context is essential to interpreting an attribution."
+      ],
+      "source_access": "publisher_supplied_abstract_in_DOAJ_only",
+      "source_anchor": "DOAJ indexed author abstract; publisher fulltext route403",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1016/j.insi.2025.100136",
+        "https://doaj.org/article/c319e9570854483f94ee3986841f9236",
+        "https://www.sciencedirect.com/science/article/pii/S3050787125001349"
+      ],
+      "original_claim_fit_assessment": "Explicitly synthetic, so it is not real-patient clinical validation. Original metrics-review and general Cox-versus-RSF simulation claims require other methodological sources. Detailed results were not verified from the full paper."
+    },
+    {
+      "key": "ref35",
+      "title": "Reporting of prognostic clinical prediction models based on machine learning methods in oncology needs to be improved,",
+      "doi": "10.1016/j.jclinepi.2021.06.024",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Clear reporting is part of making such evidence interpretable. Dhiman et al. \\cite{ref35} document incomplete reporting in oncology prediction models developed using machine learning. Their review supports explicit descriptions of predictor handling, model development, validation and performance assessment. These details allow readers to distinguish an improvement due to a learning method from one arising from a different feature set or evaluation procedure. The methodological contribution of a controlled comparison therefore includes making those choices common and visible, alongside reporting the predictive results."
+      ],
+      "source_access": "fulltext_discussion_and_author_abstract",
+      "source_anchor": "Discussion: Summary of findings; Literature; Future research; Conclusions; author Abstract",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref35_PMC8592577.txt",
+      "urls": [
+        "https://doi.org/10.1016/j.jclinepi.2021.06.024",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC8592577/"
+      ],
+      "original_claim_fit_assessment": "Preserve for reporting rationale. It does not derive a piecewise baseline, censoring likelihood, MCMC ESS or sampler convergence rule."
+    },
+    {
+      "key": "ref36",
+      "title": "Comparison of time-to-event machine learning models in predicting oral cavity cancer prognosis,",
+      "doi": "10.1016/j.ijmedinf.2021.104635",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Applied comparisons illustrate the consequences of using several domains. Paquette et al. \\cite{ref66}, studying kidney-graft survival, found different strengths across discrimination, calibration and integrated Brier score. Adeoye et al. \\cite{ref36} also evaluated several neural and forest models for oral-cavity cancer using concordance and Brier error. Such studies show why the model with the strongest discrimination need not produce the best-calibrated probabilities. Brier error is itself an overall prediction-error measure, influenced by both discrimination and calibration; it should not be described as a pure measure of calibration."
+      ],
+      "source_access": "author_abstract",
+      "source_anchor": "Abstract: Materials and methods; Results",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1016/j.ijmedinf.2021.104635"
+      ],
+      "original_claim_fit_assessment": "A relevant clinical comparison, with different models favoured by discrimination and overall prediction-error measures. It is not an HMC or rank-normalised convergence-diagnostic source."
+    },
+    {
+      "key": "ref41",
+      "title": "Machine learning-based prediction of 1-year mortality for acute coronary syndrome\\ensuremath{\\star},",
+      "doi": "10.1016/j.jjcc.2021.11.006",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Validation context is equally important. Hadanny et al. \\cite{ref41} compared machine-learning and Cox models for one-year mortality after acute coronary syndrome, including validation in a separate registry. Skalitzky et al. \\cite{ref88} examined an existing metastatic-disease prediction algorithm using discrimination, calibration, overall performance and decision curves in an external population. These studies distinguish internal predictive assessment from performance in a new setting. Here, repeated cross-validation measures performance within each cohort, and evaluation horizons are defined from training information and restricted to follow-up with adequate censoring support."
+      ],
+      "source_access": "author_abstract",
+      "source_anchor": "Abstract: Methods; Results",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1016/j.jjcc.2021.11.006"
+      ],
+      "original_claim_fit_assessment": "Restore cardiovascular/external-validation context. Original prior-predictive and posterior-diagnostic uses, or proof that our SHAP results were unavailable, are mismatched."
+    },
+    {
+      "key": "ref46",
+      "title": "Survival prediction models: an introduction to discrete-time modeling,",
+      "doi": "10.1186/s12874-022-01679-6",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Kvamme and Borgan \\cite{ref21} compare continuous- and discrete-time neural survival models. They show why the likelihood and time representation are substantive modelling decisions. Suresh, Severn and Ghosh \\cite{ref46} explain how discrete-time hazards can be fitted through a person-period representation, permitting binary-learning methods to model interval event probabilities. Interval boundaries affect the representation of event timing and the reconstructed survival curve. A piecewise-exponential model also uses intervals, but specifies a continuous-time event process with constant hazard within each interval; it is not simply a binary classifier applied to the original patient records."
+      ],
+      "source_access": "fulltext_methods_and_discussion",
+      "source_anchor": "Methods: Discrete-time survival models; Alternative approaches; Building discrete-time survival prediction models; Discussion",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref46_PMC9316420.txt",
+      "urls": [
+        "https://doi.org/10.1186/s12874-022-01679-6",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9316420/"
+      ],
+      "original_claim_fit_assessment": "Restore the alternative time-formulation discussion. The article also explicitly contrasts this binomial formulation with a Poisson piecewise-exponential model using interval exposure. It is not primary evidence on Bayesian prior sensitivity."
+    },
+    {
+      "key": "ref48",
+      "title": "A multimodal affinity fusion network for predicting the survival of breast cancer patients,",
+      "doi": "10.3389/fgene.2021.709027",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "The target can change substantially when richer inputs are introduced. Nunez et al. \\cite{ref11} predict survival from initial oncology-consultation text using horizon-specific binary outcomes. Guo et al. \\cite{ref48} combine gene-expression, copy-number and clinical information to classify five-year breast-cancer survival. These are useful examples of text and multimodal prognosis, but their classification targets differ from estimating a censoring-aware survival curve. Their results therefore inform the choice of data representation without providing a directly interchangeable benchmark for the models studied here."
+      ],
+      "source_access": "fulltext_methods_results_discussion",
+      "source_anchor": "Section2.1Materials;2.3Methods;2.4Optimization;3.4Comparison With Other Methods",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref48_PMC8417828.txt",
+      "urls": [
+        "https://doi.org/10.3389/fgene.2021.709027",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC8417828/"
+      ],
+      "original_claim_fit_assessment": "The supervised target is binary five-year status with cross-entropy. It does not supply full censoring-aware survival curves, SHAP methodology or Kaplan-Meier foundations."
+    },
+    {
+      "key": "ref49",
+      "title": "Scaling survival analysis in healthcare with federated survival forests: A comparative study on heart failure and breast cancer genomics,",
+      "doi": "10.1016/j.future.2023.07.036",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "The learning setting can also change what a forest comparison measures. Archetti, Ieva and Matteucci \\cite{ref49} develop federated survival forests for distributed data, evaluating heart-failure and breast-cancer genomics applications. Their question concerns learning across separate data holders and heterogeneous sources. The present study instead compares models within individual clinical cohorts. This distinction matters because advantages arising from data access or distributed learning do not isolate the effect of the survival model itself."
+      ],
+      "source_access": "institutional_author_abstract",
+      "source_anchor": "Politecnico institutional repository abstract; accepted-manuscript PDF route403 in browser",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1016/j.future.2023.07.036",
+        "https://iris.polito.it/handle/11583/2980983"
+      ],
+      "original_claim_fit_assessment": "Restore federated-learning context; not a foundation for Kaplan-Meier curves or this study specific METABRIC feature table. Abstract confirms heterogeneous federations and FedSurF++."
+    },
+    {
+      "key": "ref50",
+      "title": "Survival Analysis as Imprecise Classification with Trainable Kernels,",
+      "doi": "10.3390/math13183040",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Other formulations handle censored event times through imprecise probabilities. Konstantinov et al. \\cite{ref50} represent censored observations by interval-valued probability distributions and learn kernel-based survival predictions. This provides a further contrast to the Cox objective and a fully specified Bayesian likelihood. In the present comparison, DeepSurv supplies a nonlinear proportional-hazards predictor, while the Bayesian models use an explicit piecewise baseline. Training-derived time intervals and shared evaluation times make the role of that representation clear."
+      ],
+      "source_access": "publisher_fulltext_abstract_introduction_and_method_formulation",
+      "source_anchor": "Abstract; Sections1Introduction,3Preliminaries,4Survival Analysis as an Imprecise Multi-Label Classification Problem",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.3390/math13183040",
+        "https://www.mdpi.com/2227-7390/13/18/3040"
+      ],
+      "original_claim_fit_assessment": "This is a distinct censoring/kernel model, not a Kaplan-Meier or causal-effect source. No general superiority claim is needed for restoration."
+    },
+    {
+      "key": "ref52",
+      "title": "BHCox: Bayesian heredity-constrained Cox proportional hazards models for detecting gene-environment interactions,",
+      "doi": "10.1186/s12859-025-06077-5",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Sun et al.'s BHCox study \\cite{ref52} is especially close to the present prior comparison. It develops heredity-constrained Bayesian proportional-hazards models with spike-and-slab and regularised horseshoe priors for gene--environment interactions. Its baseline hazard uses M-splines, while heredity constraints link interaction effects to their main effects. The related BHAFT study \\cite{ref68} examines heredity-constrained shrinkage in an accelerated failure-time formulation. These studies establish that comparing structured shrinkage priors in survival models is already an active research direction. They also identify the distinction relevant here: a low-dimensional clinical main-effects comparison, with a common piecewise-exponential baseline and a Normal reference, asks a different question from selecting high-dimensional interactions."
+      ],
+      "source_access": "fulltext_methods_simulations_realdata_discussion",
+      "source_anchor": "Methods: Heredity-constrained Cox proportional hazard model; Prior distribution; MCMC sampling; Simulation study; Real data analysis; Discussion",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref52_PMC11834309.txt",
+      "urls": [
+        "https://doi.org/10.1186/s12859-025-06077-5",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11834309/"
+      ],
+      "original_claim_fit_assessment": "Essential close related work, not a disposable application citation. Distinguish its heredity-constrained high-dimensional interaction target and M-spline baseline from the common piecewise-exponential main-effects comparison here. Do not claim the thesis first compares these prior families."
+    },
+    {
+      "key": "ref58",
+      "title": "Bayesian inference using Hamiltonian Monte\\textendash{}Carlo algorithm for nonlinear joint modeling in the context of cancer immunotherapy,",
+      "doi": "10.1002/sim.8756",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Alvares et al. \\cite{ref90} review Bayesian survival analysis using Integrated Nested Laplace Approximation. INLA provides deterministic approximate inference for suitable latent Gaussian model structures, offering a different computational route from MCMC. Kerioui et al. \\cite{ref58}, by contrast, use Hamiltonian Monte Carlo for nonlinear joint modelling of tumour dynamics and survival in cancer immunotherapy. Together, these studies show that the inference method depends on the model's structure as well as its scientific purpose. This thesis uses NUTS to sample the specified hierarchical models and evaluates computational reliability alongside prediction, since posterior summaries require adequately explored parameter distributions."
+      ],
+      "source_access": "author_abstract",
+      "source_anchor": "Abstract",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1002/sim.8756"
+      ],
+      "original_claim_fit_assessment": "Preserve Bayesian computation/joint-model context. It is not an empirical Cox-versus-RSF benchmark or a universal performance-ranking source."
+    },
+    {
+      "key": "ref61",
+      "title": "Interpretable machine learning for survival analysis,",
+      "doi": "10.1002/bimj.70089",
+      "was_originally_cited": false,
+      "manuscript_paragraphs": [
+        "Ter-Minassian et al. \\cite{ref7} show that Shapley interpretations also depend on the summary of the prediction distribution and the reference against which contributions are measured. Their median-SHAP approach is designed for models predicting individual survival times. Langbein et al. \\cite{ref61} review interpretable machine learning for survival analysis and illustrate several methods with GBSG2. Together, these papers show why two attribution methods can produce different summaries without either being incorrectly calculated: they may explain different outputs, use different references, or aggregate across time and patients differently."
+      ],
+      "source_access": "primary_main_manuscript_abstract_and_GBSG2_tutorial_scope_read",
+      "source_anchor": "Abstract; survival IML taxonomy; GBSG2 application",
+      "cached_full_text": "build/recovery-investigation-20261117/lit_pdf_text/Langbein_2025_Interpretable-Machine-Learning-for-Survival-Analysis.txt",
+      "urls": [],
+      "original_claim_fit_assessment": null
+    },
+    {
+      "key": "ref62",
+      "title": "Explainable machine learning can outperform Cox regression predictions and provide insights in breast cancer survival,",
+      "doi": "10.1038/s41598-021-86327-7",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Clinical applications provide examples of these choices. Moncada-Torres et al. \\cite{ref62} compare Cox, RSF, survival SVM and XGBoost for breast-cancer survival, and use SHAP to interpret relative mortality-risk predictions. Those attributions explain risk scores rather than fixed-horizon survival probabilities. Alabi et al. \\cite{ref28} apply LIME and SHAP to nasopharyngeal-cancer prognosis, demonstrating the use of local explanations in an applied oncology setting. Rather's SHAP framework \\cite{ref29} uses a synthetic COVID-19 cohort, providing a methodological illustration rather than patient-based clinical validation. Across these examples, specifying the output and the data context is essential to interpreting an attribution."
+      ],
+      "source_access": "fulltext_methods_results_discussion",
+      "source_anchor": "Methods: Models; Evaluation; Results; Discussion; Outlook and conclusion",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref62_PMC7998037.txt",
+      "urls": [
+        "https://doi.org/10.1038/s41598-021-86327-7",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7998037/"
+      ],
+      "original_claim_fit_assessment": "Original RSF-improvement claim is inaccurate for this paper: Cox,RSF,SVM were similar and XGBoost had higher concordance. Its SHAP output is log relative mortality risk, distinct from fixed-horizon survival probability."
+    },
+    {
+      "key": "ref66",
+      "title": "Machine Learning Support for Decision-Making in Kidney Transplantation: Step-by-step development of a technological solution,",
+      "doi": "10.2196/34554",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Applied comparisons illustrate the consequences of using several domains. Paquette et al. \\cite{ref66}, studying kidney-graft survival, found different strengths across discrimination, calibration and integrated Brier score. Adeoye et al. \\cite{ref36} also evaluated several neural and forest models for oral-cavity cancer using concordance and Brier error. Such studies show why the model with the strongest discrimination need not produce the best-calibrated probabilities. Brier error is itself an overall prediction-error measure, influenced by both discrimination and calibration; it should not be described as a pure measure of calibration."
+      ],
+      "source_access": "fulltext_results_and_discussion",
+      "source_anchor": "Results: Model Performance; Discussion: Evaluation of ML Models; Conclusions",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref66_PMC9240927.txt",
+      "urls": [
+        "https://doi.org/10.2196/34554",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9240927/"
+      ],
+      "original_claim_fit_assessment": "This is a direct multi-metric comparison: different models lead concordance,IBS and ICI. Preserve as a use-case-specific comparison rather than asserting an ordering across all datasets."
+    },
+    {
+      "key": "ref68",
+      "title": "BHAFT\\,: Bayesian heredity\\textendash{}constrained accelerated failure time models for detecting gene\\textendash{}environment interactions in survival analysis,",
+      "doi": "10.1002/sim.10145",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Sun et al.'s BHCox study \\cite{ref52} is especially close to the present prior comparison. It develops heredity-constrained Bayesian proportional-hazards models with spike-and-slab and regularised horseshoe priors for gene--environment interactions. Its baseline hazard uses M-splines, while heredity constraints link interaction effects to their main effects. The related BHAFT study \\cite{ref68} examines heredity-constrained shrinkage in an accelerated failure-time formulation. These studies establish that comparing structured shrinkage priors in survival models is already an active research direction. They also identify the distinction relevant here: a low-dimensional clinical main-effects comparison, with a common piecewise-exponential baseline and a Normal reference, asks a different question from selecting high-dimensional interactions."
+      ],
+      "source_access": "publisher_and_indexed_author_abstract",
+      "source_anchor": "Abstract",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1002/sim.10145"
+      ],
+      "original_claim_fit_assessment": "Genuinely relevant prior literature. Explicitly distinguish AFT from proportional hazards; no detailed performance generalisation beyond the tested interaction setting."
+    },
+    {
+      "key": "ref77",
+      "title": "Deep learning-based survival prediction of oral cancer patients,",
+      "doi": "10.1038/s41598-019-43372-7",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Clinical applications add detail that broad rankings cannot capture. Jiang et al. \\cite{ref9} compare machine-learning and DeepSurv models for cervical-cancer survival using clinical and tumour characteristics. Kim et al. \\cite{ref77} compare deep learning, Cox regression and RSF in oral cancer. Matysiak, Hojdis and Szewczuk \\cite{ref12} use Cox regression and RSF to study immune-nutritional predictors in advanced gastric cancer. These studies share a prognostic aim, but differ in patient selection, clinical variables, follow-up and model development. Their findings motivate testing flexible methods in several clinical settings while keeping the comparison within each cohort consistent."
+      ],
+      "source_access": "fulltext_results_discussion_and_modelling_methods",
+      "source_anchor": "Results: Comparing the performance of deep-learning based survival prediction with RSF and CPH; Discussion; Methods: Modelling process",
+      "cached_full_text": "build/recovery-investigation-20261117/paper_text/ref77_PMC6502856.txt",
+      "urls": [
+        "https://doi.org/10.1038/s41598-019-43372-7",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC6502856/"
+      ],
+      "original_claim_fit_assessment": "Preserve the disease-specific comparative result. Do not generalise one study to universal rankings, or describe it as colon-cancer evidence."
+    },
+    {
+      "key": "ref79",
+      "title": "Comparison of nomogram with random survival forest for prediction of survival in patients with spindle cell carcinoma,",
+      "doi": "10.4103/jcrt.jcrt\\_2375\\_21",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Baralou, Kalpourtzi and Touloumi \\cite{ref37} compare Cox regression and random forests through simulation. Such comparisons help identify when the additional flexibility is useful: nonlinear effects and interactions provide opportunities for tree-based methods, while simpler relationships may be represented efficiently by a suitable Cox model. Sample size, censoring and tuning influence the balance. In applied spindle-cell carcinoma modelling, Zhang et al. \\cite{ref79} report comparable prediction from a Cox nomogram and RSF. Taken together, these studies support including both model classes and assessing their probability predictions, rather than assuming a general replacement of Cox regression by forests."
+      ],
+      "source_access": "author_abstract",
+      "source_anchor": "Abstract: Methods; Results; Conclusions",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.4103/jcrt.jcrt_2375_21"
+      ],
+      "original_claim_fit_assessment": "Useful applied counterpoint to assuming more flexible models always dominate. It is not a general calibration-estimator reference."
+    },
+    {
+      "key": "ref88",
+      "title": "The preoperative machine learning algorithm for extremity metastatic disease can predict 90\\textendash{}day and 1\\textendash{}year survival: An external validation study,",
+      "doi": "10.1002/jso.26708",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Validation context is equally important. Hadanny et al. \\cite{ref41} compared machine-learning and Cox models for one-year mortality after acute coronary syndrome, including validation in a separate registry. Skalitzky et al. \\cite{ref88} examined an existing metastatic-disease prediction algorithm using discrimination, calibration, overall performance and decision curves in an external population. These studies distinguish internal predictive assessment from performance in a new setting. Here, repeated cross-validation measures performance within each cohort, and evaluation horizons are defined from training information and restricted to follow-up with adequate censoring support."
+      ],
+      "source_access": "author_abstract",
+      "source_anchor": "Abstract: Methods; Results",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1002/jso.26708"
+      ],
+      "original_claim_fit_assessment": "Restore external-validation and clinical evaluation context. It cannot substantiate the thesis number of accepted Bayesian fits or its HMC diagnostic ledger."
+    },
+    {
+      "key": "ref91",
+      "title": "A novel Bayesian continuous piecewise linear log\\textendash{}hazard model, with estimation and inference via reversible jump Markov chain Monte Carlo,",
+      "doi": "10.1002/sim.8511",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Chapple, Peak and Hemal \\cite{ref91} extend the piecewise-exponential approach through a continuous piecewise-linear log-hazard model fitted using reversible-jump MCMC. Their formulation allows the hazard representation itself to adapt, whereas the present study uses a fixed number of training-derived intervals. These alternatives illustrate two separate places to introduce flexibility: the baseline and the predictor effects. Keeping the baseline common here concentrates the prior comparison on regression coefficients, while retaining an explicit model for absolute survival."
+      ],
+      "source_access": "author_abstract_and_institutional_record",
+      "source_anchor": "Abstract",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1002/sim.8511",
+        "https://digitalscholar.lsuhsc.edu/llcc_facpubs/40/"
+      ],
+      "original_claim_fit_assessment": "Preserve baseline flexibility and computation contrast. It is not a principled-Bayesian-workflow reference or a Cox-versus-RSF comparison."
+    },
+    {
+      "key": "ref93",
+      "title": "Extending beyond Bagust and Beale: Fully parametric piecewise exponential models for extrapolation of survival outcomes in health technology assessment,",
+      "doi": "10.1016/j.jval.2023.06.007",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Freeman et al. \\cite{ref92} compare flexible parametric, piecewise-exponential and fractional-polynomial approaches for Bayesian pairwise meta-analysis under non-proportional hazards. Their simulations examine restricted mean survival and extrapolation under limited follow-up. Cooney and White \\cite{ref93} investigate fully parametric piecewise-exponential extrapolation for health technology assessment. Both studies show why assumptions beyond the observed follow-up can have a substantial role when the target extends into the survival tail. The current predictive assessment instead concentrates on horizons supported by the training and validation follow-up."
+      ],
+      "source_access": "author_abstract",
+      "source_anchor": "Abstract: Objectives; Methods; Conclusions",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1016/j.jval.2023.06.007"
+      ],
+      "original_claim_fit_assessment": "This paper concerns change-point estimation and health-technology-assessment extrapolation, not horseshoe shrinkage. Appropriate baseline/tail context, with extrapolation distinguished from within-follow-up prediction."
+    },
+    {
+      "key": "ref94",
+      "title": "Bayesian Inference for High Dimensional Cox Models with Gaussian and Diffused-Gamma Priors: A Case Study of Mortality in COVID-19 Patients Admitted to the ICU,",
+      "doi": "10.1007/s12561-023-09395-5",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Song, Guha and Li \\cite{ref94} investigate Gaussian and diffused-gamma priors in high-dimensional Cox models using partial likelihood. Mu et al. \\cite{ref95} combine horseshoe sparsity with a point-mass mixture for spatial variation in Cox coefficients. Their two-stage approach uses site-specific partial-likelihood information before MCMC estimation. These approaches broaden the prior literature beyond a single type of sparsity, but also show why likelihood and coefficient structure must be specified when comparing findings. Spatially varying effects, interaction heredity and ordinary main effects produce different posterior interpretation tasks."
+      ],
+      "source_access": "full_supplied_article_text_read_via_Consensus",
+      "source_anchor": "Sections 1 Introduction; 2.1 Cox models; 2.2 Rank-based Bayesian inference; 3 GD prior; 4.1 ICM, 4.2 MCMC, 4.3 tuning; 5 simulations; 6 Michigan Medicine EHR; 7 discussion",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1007/s12561-023-09395-5",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11034914/",
+        "https://consensus.app/papers/details/a8041cb78e36521d96e8f1ace4ae5e3c/"
+      ],
+      "original_claim_fit_assessment": "Relevant close prior study. Its rank/partial-likelihood procedure avoids specifying a baseline prior, unlike the common full likelihood used here. The complete supplied primary text was read through Consensus and confirms this distinction; numerical equations partly lost in that export were not reconstructed."
+    },
+    {
+      "key": "ref95",
+      "title": "Bayesian variable selection for the Cox regression model with spatially varying coefficients with applications to Louisiana respiratory cancer data,",
+      "doi": "10.1002/bimj.202000047",
+      "was_originally_cited": true,
+      "manuscript_paragraphs": [
+        "Song, Guha and Li \\cite{ref94} investigate Gaussian and diffused-gamma priors in high-dimensional Cox models using partial likelihood. Mu et al. \\cite{ref95} combine horseshoe sparsity with a point-mass mixture for spatial variation in Cox coefficients. Their two-stage approach uses site-specific partial-likelihood information before MCMC estimation. These approaches broaden the prior literature beyond a single type of sparsity, but also show why likelihood and coefficient structure must be specified when comparing findings. Spatially varying effects, interaction heredity and ordinary main effects produce different posterior interpretation tasks."
+      ],
+      "source_access": "author_preprint_fulltext_methods_sections3_4_examined",
+      "source_anchor": "Author manuscript arXiv:2008.00615v2, Section 3 pp6–8 and Section 4.1 pp9–10",
+      "cached_full_text": null,
+      "urls": [
+        "https://doi.org/10.1002/bimj.202000047"
+      ],
+      "original_claim_fit_assessment": "Restore structured Bayesian prior context. This is Louisiana respiratory-cancer spatial modelling, not the original conclusion claim about deep learning versus Cox in colon cancer; two-stage sitewise partial-likelihood/MCMC differs from our joint full-likelihood model."
+    },
+    {
+      "key": "piironen2017",
+      "title": "Sparsity information and regularization in the horseshoe and other shrinkage priors",
+      "doi": "10.1214/17-EJS1337SI",
+      "was_originally_cited": false,
+      "manuscript_paragraphs": [
+        "The regularised horseshoe provides strong shrinkage of small effects while allowing larger effects through local scales and a finite slab \\cite{piironen2017}. Its behaviour depends on the global scale, local scales and slab specification, as well as on the data. Similarly, the spike-and-slab label can refer to a point mass, a latent selection model, or a continuous mixture of narrow and wide components. In this thesis, the continuous mixture has Beta-distributed variance weights; those weights are not posterior probabilities that a coefficient is exactly zero or included in a selected model."
+      ],
+      "source_access": "primary_author_abstract_verified_online_by_literature_and_methodology_agents",
+      "source_anchor": "arXiv1707.01694 abstract paragraphs1–3: global shrinkage hyperparameter, effective number of nonzero parameters, regularised horseshoe and finite slab",
+      "cached_full_text": null,
+      "urls": [
+        "https://arxiv.org/abs/1707.01694",
+        "https://doi.org/10.1214/17-EJS1337SI"
+      ],
+      "original_claim_fit_assessment": null
+    }
+  ],
+  "originally_cited_sources_excluded_with_rationale": []
+}

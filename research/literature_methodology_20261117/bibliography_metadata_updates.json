@@ -1,0 +1,443 @@
+[
+  {
+    "key": "ref1",
+    "doi": "10.1186/s12874-023-02078-1",
+    "year": "2023",
+    "title": "Application of machine learning in predicting survival outcomes involving real-world data: a scoping review",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref2",
+    "doi": "10.1016/j.jbi.2021.103959",
+    "year": "2022",
+    "title": "AutoScore-Survival: Developing interpretable machine learning-based time-to-event scores with right-censored survival data",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref4",
+    "doi": "10.1186/s12874-018-0482-1",
+    "year": "2018",
+    "title": "DeepSurv: personalized treatment recommender system using a Cox proportional hazards deep neural network",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref5",
+    "doi": "10.1155/2022/1176060",
+    "year": "2022",
+    "title": "Neural Networks for Survival Prediction in Medicine Using Prognostic Factors: A Review and Critical Appraisal",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref6",
+    "doi": "10.1214/20-aoas1325",
+    "year": "2020",
+    "title": "Bayesian variable selection for survival data using inverse moment priors",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref8",
+    "doi": "10.1016/j.jbi.2022.104026",
+    "year": "2022",
+    "title": "Data mining and machine learning in cancer survival research: An overview and future recommendations",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref9",
+    "doi": "10.21037/tcr-2024-2304",
+    "year": "2025",
+    "title": "Machine learning and deep learning to improve overall survival prediction in cervical cancer patients",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref10",
+    "doi": "10.1186/1476-4598-4-29",
+    "year": "2005",
+    "title": "Artificial neural networks for diagnosis and survival prediction in colon cancer",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref11",
+    "doi": "10.1001/jamanetworkopen.2023.0813",
+    "year": "2023",
+    "title": "Predicting the Survival of Patients With Cancer From Their Initial Oncology Consultation Document Using Natural Language Processing",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref12",
+    "doi": "10.3390/nu17152414",
+    "year": "2025",
+    "title": "Survival Modelling Using Machine Learning and Immune–Nutritional Profiles in Advanced Gastric Cancer on Home Parenteral Nutrition",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref14",
+    "doi": "10.4097/kja.d.18.00067",
+    "year": "2018",
+    "title": "Survival analysis: Part I — analysis of time-to-event",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref15",
+    "doi": "10.1002/cnr2.1176",
+    "year": "2020",
+    "title": "Statistical issues and methods in designing and analyzing survival studies",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref17",
+    "doi": "10.1186/s12874-019-0749-1",
+    "year": "2019",
+    "title": "Are non-constant rates and non-proportional treatment effects accounted for in the design and analysis of randomised controlled trials? A review of current practice",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref19",
+    "doi": "10.1016/j.eswa.2016.07.018",
+    "year": "2016",
+    "title": "On the use of Harrell’s C for clinical risk prediction via random survival forests",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref21",
+    "doi": "10.1007/s10985-021-09532-6",
+    "year": "2021",
+    "title": "Continuous and discrete-time survival prediction with neural networks",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref22",
+    "doi": "10.1002/sim.8933",
+    "year": "2021",
+    "title": "Bayesian survival analysis with BUGS",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref23",
+    "doi": "10.1002/bimj.201900211",
+    "year": "2021",
+    "title": "Bayesian regularization for flexible baseline hazard functions in Cox survival models",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref25",
+    "doi": "10.1093/bioinformatics/btx300",
+    "year": "2017",
+    "title": "The spike-and-slab lasso Cox model for survival prediction and associated genes detection",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref26",
+    "doi": "10.3348/kjr.2021.0223",
+    "year": "2021",
+    "title": "Review of Statistical Methods for Evaluating the Performance of Survival or Other Time-to-Event Prediction Models (from Conventional to Deep Learning Approaches)",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref27",
+    "doi": "10.1016/j.jbi.2020.103496",
+    "year": "2020",
+    "title": "A practical perspective on the concordance index for the evaluation and selection of prognostic time-to-event models",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref28",
+    "doi": "10.1038/s41598-023-35795-0",
+    "year": "2023",
+    "title": "Machine learning explainability in nasopharyngeal cancer survival using LIME and SHAP",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref29",
+    "doi": "10.1016/j.insi.2025.100136",
+    "year": "2025",
+    "title": "SHAP-integrated machine learning framework for interpretable survival modeling in a synthetic COVID-19 cohort",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref30",
+    "doi": "10.1016/j.knosys.2022.110234",
+    "year": "2023",
+    "title": "SurvSHAP(t): Time-dependent explanations of machine learning survival models",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref32",
+    "doi": "10.1093/bioinformatics/btaa046",
+    "year": "2020",
+    "title": "Consensus features nested cross-validation",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref33",
+    "doi": "10.1093/gigascience/giac071",
+    "year": "2022",
+    "title": "SurvBenchmark: comprehensive benchmarking study of survival analysis methods using both omics data and clinical data",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref34",
+    "doi": "10.1186/s12874-021-01469-6",
+    "year": "2022",
+    "title": "Completeness of reporting of clinical prediction models developed using supervised machine learning: a systematic review",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref35",
+    "doi": "10.1016/j.jclinepi.2021.06.024",
+    "year": "2021",
+    "title": "Reporting of prognostic clinical prediction models based on machine learning methods in oncology needs to be improved",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref36",
+    "doi": "10.1016/j.ijmedinf.2021.104635",
+    "year": "2022",
+    "title": "Comparison of time-to-event machine learning models in predicting oral cavity cancer prognosis",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref37",
+    "doi": "10.1002/bimj.202100380",
+    "year": "2023",
+    "title": "Individual risk prediction: Comparing random forests with Cox proportional‐hazards model by a simulation study",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref38",
+    "doi": "10.1002/pst.2256",
+    "year": "2023",
+    "title": "A <scp>Bayesian</scp> piecewise exponential phase <scp>II</scp> design for monitoring a time‐to‐event endpoint",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref40",
+    "doi": "10.1038/s43586-020-00001-2",
+    "year": "2021",
+    "title": "Bayesian statistics and modelling",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref41",
+    "doi": "10.1016/j.jjcc.2021.11.006",
+    "year": "2022",
+    "title": "Machine learning-based prediction of 1-year mortality for acute coronary syndrome✰",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref42",
+    "doi": "10.1186/s12859-022-04770-3",
+    "year": "2022",
+    "title": "A hierarchical spike-and-slab model for pan-cancer survival using pan-omic data",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref43",
+    "doi": "10.1080/02664763.2021.1893285",
+    "year": "2022",
+    "title": "Spike-and-slab type variable selection in the Cox proportional hazards model for high-dimensional features",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref44",
+    "doi": "10.1186/s41512-022-00124-y",
+    "year": "2022",
+    "title": "A scoping methodological review of simulation studies comparing statistical and machine learning approaches to risk prediction for time-to-event data",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref45",
+    "doi": "10.1155/2021/9307475",
+    "year": "2021",
+    "title": "Handling Censoring and Censored Data in Survival Analysis: A Standalone Systematic Literature Review",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref46",
+    "doi": "10.1186/s12874-022-01679-6",
+    "year": "2022",
+    "title": "Survival prediction models: an introduction to discrete-time modeling",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref47",
+    "doi": "10.1002/sim.9216",
+    "year": "2021",
+    "title": "Censoring‐robust time‐dependent receiver operating characteristic curve estimators",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref48",
+    "doi": "10.3389/fgene.2021.709027",
+    "year": "2021",
+    "title": "A Multimodal Affinity Fusion Network for Predicting the Survival of Breast Cancer Patients",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref49",
+    "doi": "10.1016/j.future.2023.07.036",
+    "year": "2023",
+    "title": "Scaling survival analysis in healthcare with federated survival forests: A comparative study on heart failure and breast cancer genomics",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref50",
+    "doi": "10.3390/math13183040",
+    "year": "2025",
+    "title": "Survival Analysis as Imprecise Classification with Trainable Kernels",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref51",
+    "doi": "10.22283/qbs.2017.36.2.85",
+    "year": "2017",
+    "title": "A Selective Review on Random Survival Forests for High Dimensional Data",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref52",
+    "doi": "10.1186/s12859-025-06077-5",
+    "year": "2025",
+    "title": "BHCox: Bayesian heredity-constrained Cox proportional hazards models for detecting gene-environment interactions",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref53",
+    "doi": "10.1037/met0000275",
+    "year": "2021",
+    "title": "Toward a principled Bayesian workflow in cognitive science.",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref55",
+    "doi": "10.1080/00031305.2020.1865198",
+    "year": "2021",
+    "title": "Learning Hamiltonian Monte Carlo in R",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref56",
+    "doi": "10.1111/biom.13124",
+    "year": "2020",
+    "title": "Quantification of prior impact in terms of effective current sample size",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref58",
+    "doi": "10.1002/sim.8756",
+    "year": "2020",
+    "title": "Bayesian inference using Hamiltonian Monte‐Carlo algorithm for nonlinear joint modeling in the context of cancer immunotherapy",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref59",
+    "doi": "10.1002/sim.8570",
+    "year": "2020",
+    "title": "Graphical calibration curves and the integrated calibration index (ICI) for survival models",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref60",
+    "doi": "10.1002/sim.10057",
+    "year": "2024",
+    "title": "Model‐agnostic explanations for survival prediction models",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref61",
+    "doi": "10.1002/bimj.70089",
+    "year": "2025",
+    "title": "Interpretable Machine Learning for Survival Analysis",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref62",
+    "doi": "10.1038/s41598-021-86327-7",
+    "year": "2021",
+    "title": "Explainable machine learning can outperform Cox regression predictions and provide insights in breast cancer survival",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref66",
+    "doi": "10.2196/34554",
+    "year": "2022",
+    "title": "Machine Learning Support for Decision-Making in Kidney Transplantation: Step-by-step Development of a Technological Solution",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref68",
+    "doi": "10.1002/sim.10145",
+    "year": "2024",
+    "title": "<scp>BHAFT</scp>: Bayesian heredity‐constrained accelerated failure time models for detecting gene‐environment interactions in survival analysis",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref77",
+    "doi": "10.1038/s41598-019-43372-7",
+    "year": "2019",
+    "title": "Deep learning-based survival prediction of oral cancer patients",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref79",
+    "doi": "10.4103/jcrt.jcrt_2375_21",
+    "year": "2022",
+    "title": "Comparison of nomogram with random survival forest for prediction of survival in patients with spindle cell carcinoma",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref84",
+    "doi": "10.7326/m22-0844",
+    "year": "2023",
+    "title": "Assessing Performance and Clinical Usefulness in Prediction Models With Survival Outcomes: Practical Guidance for Cox Proportional Hazards Models",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref88",
+    "doi": "10.1002/jso.26708",
+    "year": "2022",
+    "title": "The preoperative machine learning algorithm for extremity metastatic disease can predict 90‐day and 1‐year survival: An external validation study",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref90",
+    "doi": "10.1002/sim.10160",
+    "year": "2024",
+    "title": "Bayesian survival analysis with INLA",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref91",
+    "doi": "10.1002/sim.8511",
+    "year": "2020",
+    "title": "A novel Bayesian continuous piecewise linear log‐hazard model, with estimation and inference via reversible jump Markov chain Monte Carlo",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref92",
+    "doi": "10.1002/jrsm.1722",
+    "year": "2024",
+    "title": "Bayesian pairwise meta‐analysis of time‐to‐event outcomes in the presence of non‐proportional hazards: A simulation study of flexible parametric, piecewise exponential and fractional polynomial models",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref93",
+    "doi": "10.1016/j.jval.2023.06.007",
+    "year": "2023",
+    "title": "Extending Beyond Bagust and Beale: Fully Parametric Piecewise Exponential Models for Extrapolation of Survival Outcomes in Health Technology Assessment",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref94",
+    "doi": "10.1007/s12561-023-09395-5",
+    "year": "2024",
+    "title": "Bayesian Inference for High Dimensional Cox Models with Gaussian and Diffused-Gamma Priors: A Case Study of Mortality in COVID-19 Patients Admitted to the ICU",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  },
+  {
+    "key": "ref95",
+    "doi": "10.1002/bimj.202000047",
+    "year": "2021",
+    "title": "Bayesian variable selection for the Cox regression model with spatially varying coefficients with applications to Louisiana respiratory cancer data",
+    "metadata_basis": "Crossref DOI match; article issue year used for Song2024; Park page range checked against main article PDF."
+  }
+]

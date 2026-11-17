@@ -18,11 +18,13 @@ artefacts satisfy the stated gate.
 
 ## Current manuscript - 2026-11-17
 
-The current [v3 assessment](../assessment/Ravi_thesis_assessment_Codex_v3.md) is complete. Its ten local required amendments are outstanding; the manuscript has not been changed during this review. Recommended A+ improvements are listed separately and use existing evidence.
+The requested literature and methodology investigation and revision is complete. Its [source evidence](../research/literature_methodology_20261117/README.md) covers all 95 original bibliography entries, restored-source claims, primary-paper access and implementation checks. All 25 previously removed cited sources are restored in accurate contexts. The bibliography now has 85 cited sources, with all 63 originally cited sources preserved.
 
-ADR-055 restores Ravi's supplied source as the manuscript base, retaining his structure and accurate prose while correcting methods, citations and current results. The 109-page report has five chapters, ten appendices, six figures, 34 tables and 55 cited references. No new experiment is required.
+ADR-055 remains the preservation basis. The owner's subsequent instruction authorises the focused strengthening of Chapters 2 and 3 using his original work, Consensus, Undermind and primary-source verification. The 112-page report retains five chapters, ten appendices, six figures and all 34 table numbers. No new experiment or numerical result was introduced.
 
-The source and PDF are published on Overleaf and GitHub branch `thesis/final-report-20261117`, commit `d1f6c0b`. The source ZIP is in `reports/thesis_final/`. All 47 evidence-output hashes and all presentation-table files are unchanged. The independent source-package build, citation/cross-reference checks and visual PDF review passed. Current files and editing steps are in `docs/ravi_thesis_next_steps.md`; verification is `reviews/2026-11-17-ravi-preservation.json`.
+The source and PDF are published on Overleaf and GitHub branch `thesis/final-report-20261117`, commit `c8ed95c`. The independently verified source ZIP is in `reports/thesis_final/`. All 47 evidence-output hashes and numerical table files are unchanged. The independent package build matches all 112 PDF page texts; citations, active labels and focused layout checks passed. Current files and editing steps are in `docs/ravi_thesis_next_steps.md`; verification is `reviews/2026-11-17-literature-methodology.json`.
+
+The previous [v3 assessment](../assessment/Ravi_thesis_assessment_Codex_v3.md) concerns the earlier 109-page manuscript. Its ten local factual amendments have been addressed. The remaining higher-grade recommendations in that review are historical recommendations, not a newly expanded experiment programme or a grade assigned to the revised report.
 
 The preceding broad rewrite and its assessments remain archived. They are superseded for manuscript editing by the owner's preservation instruction. Original experiment scope and scientific records remain unchanged.
 

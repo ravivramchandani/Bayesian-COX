@@ -1,5 +1,15 @@
 # JOURNAL
 
+## 2026-11-17 - Strengthened the literature review and methodology
+
+Investigated Ravi's original 95-source bibliography and exact citation contexts, used the completed Consensus dossier for discovery, and used Undermind metadata lookups and three main PDFs. Broader Undermind search was quota-limited. Primary claims were checked against accessible full text or explicitly identified abstracts. The source record distinguishes these access levels. Sixty-eight original main PDFs and three additional methods PDFs were verified and registered in the central paper bank.
+
+Revised the literature review while retaining all 15 sections and original discussed papers. Restored all 25 removed originally cited sources in accurate contexts, added two relevant original sources and three primary computational sources, and retained the previous 55 entries. All 63 originally cited sources now appear in the 85-source bibliography. The synthesis distinguishes BHCox/BHAFT, partial-likelihood and full-likelihood models, clinical main effects, interpretation targets and the role of validation.
+
+Checked the methods against the completed implementation and clarified eligibility, scaled-time likelihood and prediction, complete prior specifications, sampler diagnostics, predictive-check computation, calibration, paired inference and attribution. Corrected the METABRIC result-table population note and Appendix A's absent-stage claim. Independent source and methodology reviews passed after bounded wording fixes.
+
+The final source and 112-page PDF are at thesis revision `c8ed95c`. All 47 evidence hashes and numerical table files remain unchanged; 34 table numbers and 85 resolving citations are preserved. The source-only ZIP independently builds to identical text on all 112 pages. Focused visual checks passed. No model code or numerical outcome changed. Verification is `coordination/reviews/2026-11-17-literature-methodology.json`; research records are under `research/literature_methodology_20261117/`.
+
 ## 2026-11-17 - Reverted the misdirected project connection
 
 The owner clarified that `6af7b210b843f23a84c4de8d` was Deepa's project and explicitly requested restoration. Verified that its remote had no intervening edits, then published a compensating commit `a89d48361350fdcedbcfe96fee24a08ae170aef5` whose entire tree equals the original `a38f049` tree. Deepa's original project files are restored exactly. The original backup remains verified, and no additional Deepa work occurred.

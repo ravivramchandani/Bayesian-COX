@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-17",
+  "status": "completed_and_published",
+  "author_source_commit": "69a7f0461b8e052161a6b9a1530ca53c1523861c",
+  "comparison_commit": "d1f6c0b8a0fb904f430a176e4d5c0fca9bc9eaa6",
+  "thesis_commit": "c8ed95c957625a250996bd88a7c0128f62c9d2d5",
+  "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+  "github_thesis_branch": "thesis/final-report-20261117",
+  "preserved_backup_branch": "archive/before-literature-methods-investigation-20261117",
+  "pdf_sha256": "a15cfc1c8c9ee33da830fdaf94f97fc7eb722e2e8c67c0b491e41be8ec7b9835",
+  "pdf_pages": 112,
+  "cited_references": 85,
+  "reference_recovery": {
+    "original_entries": 95,
+    "originally_cited": 63,
+    "originally_uncited": 32,
+    "previous_entries": 55,
+    "previous_original_entries": 40,
+    "previous_added_methods_entries": 15,
+    "restored_originally_cited": 25,
+    "additional_originally_uncited": 2,
+    "additional_primary_methods": 3,
+    "previous_entries_preserved": 55,
+    "originally_cited_sources_now_preserved": 63,
+    "original_entries_now_cited": 67,
+    "original_main_pdfs_verified_and_banked": 68,
+    "additional_methods_pdfs_verified_and_banked": 3
+  },
+  "literature_preservation": {
+    "sections_retained": 15,
+    "original_discussed_papers_omitted": []
+  },
+  "methodology_verified_against": [
+    "cohort reconstruction and eligibility",
+    "fold preprocessing and tuning",
+    "scaled-time full likelihood and prediction",
+    "actual prior parameterisations",
+    "diagnostics and acceptance ordering",
+    "prior and posterior predictive checks",
+    "censoring-adjusted metrics and calibration",
+    "paired repeated-CV inference and multiplicity",
+    "posterior contribution and SHAP targets",
+    "sensitivity and attribution sampling scope"
+  ],
+  "research_services": {
+    "Consensus": {
+      "thread_id": "8Qpw-PVWQZ-Wfg-_cv1GUg",
+      "completed_dossier": true,
+      "citation_records": 62,
+      "verbatim_dossier_saved": true,
+      "generated_prose_copied_to_thesis": false,
+      "additional_primary_full_text_read": "Song, Guha and Li, DOI10.1007/s12561-023-09395-5"
+    },
+    "Undermind": {
+      "original_DOI_records_submitted": 95,
+      "parsed_paper_records": 87,
+      "main_pdfs_retrieved_and_verified": [
+        "BHCox",
+        "Park survival evaluation review",
+        "Vehtari rank-normalised MCMC diagnostics"
+      ],
+      "broader_search_results_used": false,
+      "search_and_read_pdfs_quota_reset_utc": "2026-11-17T10:00:00Z"
+    }
+  },
+  "evidence_output_hashes_checked": 47,
+  "evidence_outputs_unchanged": true,
+  "numerical_table_files_unchanged": true,
+  "table_numbers_preserved": 34,
+  "new_model_fitting": false,
+  "model_code_changed": false,
+  "checks": {
+    "independent_restored_source_review": "passed",
+    "independent_literature_methodology_consistency": "passed",
+    "latex_build": "passed",
+    "active_citations": 85,
+    "active_labels": 176,
+    "unresolved_citations_or_references": 0,
+    "duplicate_active_labels": 0,
+    "overfull_boxes": 0,
+    "latex_errors": 0,
+    "focused_visual_review": "passed; revised literature, likelihood/prior equations, research-design and diagnostic figures, complete sampler table, question mapping and bibliography",
+    "fresh_zip_build": "passed",
+    "pdf_page_texts_matching": 112,
+    "coordination_schemas": "passed",
+    "model_test_attempt": "make test PYTHON=python3: schema validation passed; pytest unavailable in default Python3.15. No model code changed."
+  },
+  "source_zip": {
+    "path": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-17.zip",
+    "sha256": "441b34c328073aa89f5c207825e0058212bede3aa4ccb1d899b3ad44857ee320",
+    "files": 101
+  },
+  "research_record": "research/literature_methodology_20261117/README.md",
+  "artifact_checks": "research/literature_methodology_20261117/artifact_checks.json",
+  "previous_assessment": "assessment/Ravi_thesis_assessment_Codex_v3.md",
+  "previous_assessment_applies_to_this_revision": false,
+  "previous_ten_factual_amendments_addressed": true
+}

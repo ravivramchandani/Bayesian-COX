@@ -1,5 +1,17 @@
 # HANDOFF
 
+## Literature and methodology revised - 2026-11-17
+
+The owner's requested investigation and revision of Chapters 2 and 3 is complete. The report preserves Ravi's literature section structure, all originally discussed papers and all 63 sources cited in his supplied manuscript. It restores the 25 previously removed cited sources in accurate contexts, adds two useful original sources and three primary methods sources, and retains the previous 55 entries. The revised bibliography has 85 cited sources.
+
+The literature now compares the closest Bayesian survival studies directly and connects prediction, computational diagnostics and interpretation to a specific clinical prior-comparison question. The methods were checked against the actual cohort, preprocessing, fitting, diagnostic, predictive-check, metric, inference and attribution implementation. Two related reporting corrections clarify METABRIC table denominators and remove the absent-stage-row statement. No new fitting, model-code changes or numerical results were introduced.
+
+The revised PDF has 112 pages. All 47 evidence outputs and numerical table files remain unchanged; all 34 table numbers are preserved. The source ZIP builds independently to identical text on all 112 pages. All 85 citations resolve, active labels are unique, and the build has no errors, undefined references or overfull boxes. Focused visual checks covered the revised argument, equations, figures, settings table, question mapping and references.
+
+Consensus supplied the completed discovery dossier; Undermind supplied original-reference lookups and three checked main PDFs. Its broader search was quota-limited, and no unavailable search result is claimed. Full-text and abstract-only access are distinguished in the [source evidence](../research/literature_methodology_20261117/README.md). The v3 assessment applies to the prior manuscript; its ten factual amendments have been addressed without assigning a new grade.
+
+The current report is revision `c8ed95c` in [Ravi's Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and GitHub branch `thesis/final-report-20261117`. The original source and pre-investigation backup remain preserved. Use [Ravi's editing steps](../docs/ravi_thesis_next_steps.md). Verification is [2026-11-17-literature-methodology.json](reviews/2026-11-17-literature-methodology.json). Entries below describe earlier checkpoints.
+
 ## Original project connection restored - 2026-11-17
 
 The owner clarified that the other project link was for Deepa and requested reversion. Deepa's project `6af7b210b843f23a84c4de8d` has been restored to the exact original file tree from `a38f049`, at restoration commit `a89d48361350fdcedbcfe96fee24a08ae170aef5`. No subsequent Deepa work was performed.
