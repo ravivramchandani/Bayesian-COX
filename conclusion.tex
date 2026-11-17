@@ -1,30 +1,174 @@
-\chapter{Conclusion and Contributions}
-\label{chap:conclusion}
+\chapter{Conclusion, Contributions and Future Work}\label{conclusion-contributions-and-future-work}
 
-\section{Main Conclusion}
-This thesis assessed how coefficient-prior choice affects Bayesian survival prediction and interpretation under a common likelihood and validation design. The clinical cohorts provided contrasting event patterns and predictor structures, while CoxPH, random survival forest and DeepSurv placed the prior comparison within a wider predictive context. The study connects the predictions of these models to their calibration, posterior associations and computational behaviour.
+\section{Chapter Introduction}\label{chapter-introduction}
 
-Normal and continuous spike-and-slab produced closely aligned probability predictions across the three cohorts. Larger differences arose between model families in METABRIC and under reduced training information for horseshoe in WHAS500. Prior choice therefore mattered through several properties of the fitted model, including the posterior summaries it supplied and the computation required to obtain them.
+The chapter summarizes the findings of Bayesian survival prediction models. Datasets analysed were GBSG2, METABRIC and WHAS500. The Bayesian models were compared with classical and machine learning survival models. The meaning of posterior uncertainty is provided alongside the repeated-validation, explainability and robustness findings.
 
-\section{Answers to the Research Questions}
-\paragraph{RQ1: Prior choice and prediction.}
-The complete prior contrasts showed small IBS differences relative to their uncertainty. Normal and CoxPH also gave closely aligned prediction error. The comparator ordering differed by cohort: RSF and DeepSurv had lower IBS in the secondary METABRIC estimates, while WHAS500 favoured the linear specifications descriptively. These findings identify the prediction procedure and clinical setting, rather than the model-family label alone, as the relevant unit of comparison.
+\section{Overall Research Conclusion}\label{overall-research-conclusion}
 
-\paragraph{RQ2: Reduced information.}
-Reducing training size changed the relative horseshoe benefit in WHAS500. The same response was not shared uniformly by the other cohorts or by continuous spike-and-slab. Controlled information changes within a cohort therefore supplied a more specific account of shrinkage behaviour than a comparison based only on cohort size or event frequency.
+\subsection{Research Problem Revisited}\label{research-problem-revisited}
 
-\paragraph{RQ3: Interpretation and explanation.}
-Posterior coefficients, hazard ratios, credible intervals and directional probabilities described uncertain conditional associations. Grouped posterior contributions agreed positively with same-model linear SHAP, while the sampling checks identified variation across budgets and seeds. The score decomposition clarifies the distinction: posterior averaging and background centring are different operations. The analysis thus separates the agreement between explanation targets from the consistency with which their rankings are estimated.
+The impact of the choice of coefficient priors was investigated. The Cox regression offers a proportional hazards baseline which can be interpreted. The DeepSurv and RSF models are flexible in relationship non-linearities. The Bayesian models give posterior uncertainty, and rely on the specification of the priors. The diagnostics and adequate validation are needed to make sure that there is a reliable model. No family was presumed to be the best.
 
-\paragraph{RQ4: Modelling choices.}
-The evaluated changes in follow-up, predictors, missing-data handling, baseline intervals and prior scales generally retained small Normal versus continuous-spike-and-slab contrasts, with condition-specific changes in precision. Calibration and proportional-hazards checks further described the fitted risk structure. Together, these analyses show how the main predictive comparison behaves under the specified modelling choices.
+\subsection{Overall Methodological Conclusion}\label{overall-methodological-conclusion}
 
-\section{Research Contribution}
-The contribution is a controlled empirical and analytical assessment of coefficient priors for clinical survival prediction. Shared likelihoods, predictor representations and repeated validation make the prior effects directly comparable. The information and design sensitivities extend that comparison to defined changes in the data available for estimation. The posterior and explanation analyses connect effect uncertainty with group importance, while the algebraic relationship between contribution scores explains the role of posterior averaging and reference centring. The separately reported sampler sensitivity adds evidence that computational settings can change diagnostic acceptance while measured predictive differences remain small.
+The research used a completely Bayesian piecewise-exponential proportional-hazards framework based on three healthcare cohorts, GBSG2, METABRIC and WHAS500. Normal, Horseshoe and continuous Spike-and-Slab coefficient priors were explored in the Bayesian framework. Comparative modelling approaches were Cox proportional-hazards regression (CoxPH), Random Survival Forest (RSF) and DeepSurv.
 
-\section{Recommendations from the Findings}
-For clinical predictor sets such as those studied here, Normal provides a useful reference specification against which to assess a more elaborate coefficient prior. It supplied complete diagnostic coverage and similar average IBS to continuous spike-and-slab with shorter observed computation times. The comparison should retain the posterior quantities needed for interpretation as well as the predictive scores and computation involved.
+The methodology included fold-safe preprocessing, five repeats of five-fold cross-validation and rigorous Markov chain Monte Carlo (MCMC) diagnostics. Complementary measures of predictive performance included concordance, Integrated Brier Score (IBS), time-dependent area under the curve (AUC) and survival calibration. Explainability in Bayesian models was analysed through posterior coefficients, credible intervals, hazard ratios and posterior directional probabilities. Exact linear SHAP and prior-family sensitivity were also examined to assess alternative explanations and model specifications.
 
-Model structure should be assessed within the intended cohort and prediction window. The METABRIC forest result and WHAS500 linear-model pattern show the value of paired evaluation rather than choosing flexibility in the abstract. Calibration offsets and slopes should accompany discrimination and IBS, since the GBSG2 results show how average calibration level and risk spread can differ.
+The diagnostic criteria determined which posterior fits were used for interpretation. Normal and continuous Spike-and-Slab each supplied 75 accepted fits, while Horseshoe supplied 55. This connects the computational reliability of the posterior estimates with their predictive and explanatory use.
 
-Posterior interpretation and feature attribution should be communicated as distinct outputs. Coefficient intervals and directional probabilities describe associations under the fitted model; grouped contributions describe participation in a specified risk function. Reporting the explanation target, reference background and observed sampling behaviour makes those contributions interpretable alongside the survival predictions.
+\subsection{Overall Empirical Conclusion}\label{overall-empirical-conclusion}
+
+The models showed varying levels of predictive performance. RSF obtained the lowest mean IBS in GBSG2 and METABRIC. In WHAS500, CoxPH and the Bayesian models had lower mean IBS than RSF and DeepSurv. Bayesian Normal and continuous Spike-and-Slab gave closely aligned prediction error across the three cohorts.
+
+The numerical comparison covers all 18 cohort--model combinations, with 430 accepted outcomes from 450 outer evaluations. The same likelihood was applied to all Bayesian models, enabling coefficient-prior choice to be examined within a common survival model. Censoring-aware metrics and paired repeated-validation intervals provide the basis for comparing their predictions.
+
+\section{Conclusions by Research Question}\label{conclusion-contributions-and-future-work-1}
+
+\subsection{RQ1: Predictive Performance}
+
+Bayesian Normal and continuous Spike-and-Slab provided prediction error close to CoxPH across cohorts. The secondary paired comparison in METABRIC favoured RSF over Normal by 0.007956 IBS units, with a corrected 95\% interval of [0.004531, 0.011381]. The corresponding DeepSurv interval also favoured the neural comparator. In GBSG2 and WHAS500, the paired comparator intervals included zero.
+
+These findings are consistent with evidence that the relative performance of statistical and deep-learning survival models can vary across datasets and evaluation metrics \cite{ref33,ref44}.
+
+The results therefore indicate that survival-model performance is cohort- and metric-dependent rather than governed by a single global model hierarchy.
+
+\subsection{RQ2: Effect of Prior Choice}
+
+The same features were compared under different priors. Five primary paired IBS contrasts met the complete-fold criterion, and each 95\% interval included zero. Normal minus continuous Spike-and-Slab IBS ranged from -0.000008 to +0.000061 across the cohorts. The separate post-hoc Horseshoe sampler sensitivity analysis supplied complete fold coverage and also gave nine intervals containing zero.
+
+The explainability and posterior sensitivity findings revealed differences between coefficient estimates, credible intervals, shrinkage and continuous mixture weights. The continuous weights are not discrete inclusion probabilities. Wiesenfarth and Calderazzo \cite{ref56} and related work \cite{ref53} motivate checking how prior specification changes posterior inference.
+
+Prior selection should therefore be treated as a substantive modelling decision rather than merely a technical implementation choice. The chosen prior influences coefficient regularisation, uncertainty representation and posterior interpretation.
+
+\subsection{RQ3: Posterior Explainability}\label{rq3-posterior-explainability}
+
+A positive coefficient shows greater conditional hazard (HR $>1$). A negative coefficient means decreasing conditional hazard (HR $<1$). If a coefficient's 95\% credible interval contains zero, the direction is uncertain. If it lies entirely below zero, the association is negative. Posterior directional probabilities describe this uncertainty within the fitted model; they do not imply causation.
+
+The illustrative GBSG2/Normal fit had a positive pnodes coefficient ($\beta=0.2634$) and a mean HR of 1.303 [1.183, 1.420]. It had a negative progrec coefficient ($\beta=-0.4497$) and a mean HR of 0.643 [0.492, 0.808]. Standardised continuous coefficients represent a one-standard-deviation increase, while categorical coefficients compare with a reference category.
+
+Intrinsic and exact linear SHAP rankings for the same Bayesian log-relative-hazard function had mean Spearman correlations from 0.859 to 0.966. This agreement complements the posterior interpretation. The sampling-stability assessment placed 1,538 of 1,640 evaluable checks within tolerance; 102 were outside tolerance, so the agreement estimates remain descriptive.
+
+\subsection{RQ4: Robustness}\label{rq4-robustness}
+
+Robustness was examined through changes in training information, administrative follow-up, prior scales, baseline intervals and predictor representation. Of 825 condition-level outcomes, 770 met the diagnostic criteria. The acceptance rules required zero divergences and tree-depth hits, acceptable R-hat and bulk effective sample size, minimum BFMI of 0.30 and finite posterior summaries.
+
+Reduced information changed the relative prior comparison in WHAS500. At 25\% training, the change in IBS(Normal) minus IBS(Horseshoe), relative to full training, was +0.006323 [0.002512, 0.010561]. The corresponding METABRIC interval included zero. These findings show how prior behaviour can depend on the information available for estimation \cite{ref53}.
+
+\section{Achievement of Research Objectives}\label{achievement-of-research-objectives}
+
+The research objectives were examined against the implemented framework and empirical results. The outcomes are summarised below.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1967}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2840}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.5193}}@{}}
+\caption{Research objectives and outcomes.}\label{tab:ravi-objectives}\\
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Research Objective
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Intended Purpose
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Final Outcome
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Research Objective
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Intended Purpose
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Final Outcome
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Develop a Bayesian survival framework & Develop a Bayesian model for time-to-event prediction & \textbf{Achieved.} A fully Bayesian piecewise-exponential proportional-hazards framework was implemented using an expanded Poisson representation of the survival likelihood. \\
+Compare Bayesian and existing models & Evaluate predictive performance across modelling approaches & \textbf{Achieved.} All 18 cohort--model combinations were evaluated with repeated cross-validation using concordance, Integrated Brier Score, time-dependent AUC and calibration. \\
+Investigate the effect of prior choice & Examine Normal, Horseshoe and Spike-and-Slab prior structures & \textbf{Achieved.} Posterior estimates, paired prior contrasts and prior-scale sensitivities were used to investigate differences in shrinkage and coefficient behaviour. \\
+Develop an explainability framework & Provide interpretable information about survival effects & \textbf{Achieved.} Posterior \ensuremath{\beta} coefficients, hazard ratios, credible intervals, directional probabilities and exact linear SHAP comparisons were evaluated for accepted Bayesian fits. \\
+Assess model reliability & Ensure that Bayesian inference was based on diagnostically acceptable sampling & \textbf{Achieved.} A strict diagnostic acceptance framework was applied using convergence, effective sample size, divergences, BFMI, tree-depth and posterior-finiteness checks. \\
+Assess robustness & Examine sensitivity to modelling choices and diagnostic conditions & \textbf{Achieved.} The 825-condition analysis examined changes in information, follow-up, prior scales, intervals and predictors. \\
+\end{longtable}
+
+
+
+\section{Main Contributions of the Research}\label{main-contributions-of-the-research}
+
+The research adds a cohesive framework in which Bayesian survival modelling, predictive evaluation, posterior uncertainty and diagnostic validity are integrated as a unit.
+
+\subsection{Methodological Contribution}\label{methodological-contribution}
+
+The research uses a complete Bayesian piecewise-exponential proportional-hazards model of healthcare time-to-event prediction. The expanded Poisson representation expresses the piecewise-exponential survival likelihood and supports joint Bayesian estimation of regression coefficients and baseline hazards. The use of Normal, Horseshoe and continuous Spike-and-Slab priors provides different mechanisms for regularisation and uncertainty representation. Notably, only posterior estimates were maintained to be interpreted when the corresponding MCMC output met the pre-determined diagnostic acceptance criteria.
+
+\subsection{Empirical Contribution}\label{empirical-contribution}
+
+Three healthcare survival cohorts GBSG2, METABRIC and WHAS500 were analyzed within the frame of the framework. The obtained evidence shows that the predictive performance is different in cohorts and assessment criteria. The Bayesian models were competitive with CoxPH, while the relative performance of forest and neural models varied by cohort. The repeated-validation comparisons quantify these differences rather than assuming that greater model complexity produces better survival prediction.
+
+\subsection{Explainability Contribution}\label{explainability-contribution}
+
+The study offers a concrete Bayesian explanation framework on the basis of posterior quantities. Survival effects can be interpreted with their uncertainty by using regression coefficients, hazard ratios, 95\% credible intervals and posterior probabilities of direction. Conceptually, this is different than using only a separate post-hoc explanation algorithm, since uncertainty is directly added to the evidence of the model.
+
+\subsection{Computational Reliability}\label{methodological-integrity-contribution}
+
+The diagnostic criteria link posterior interpretation to sampling reliability. Accepted-fold counts accompany predictive comparisons, while the post-hoc sampler analysis is reported separately. Scientific reproduction checks matched the numerical outputs and diagnostic outcomes of all 450 original model--fold evaluations. These checks support reuse of the results and independent examination of the analyses.
+
+\section{Interpretation of the Findings}\label{limitations-of-the-research}
+
+The findings apply to the evaluated cohorts, survival endpoints and model specifications. The following conditions guide their interpretation.
+
+\subsection{Final Validation Scope}\label{final-validation-scope}
+
+Five repeats of five-fold cross-validation provide 25 held-out evaluations per cohort and model. Repeated predictions of the same participant create dependence between evaluations. The paired intervals use the repeated-validation correction specified in Chapter~\ref{methodology}. Fold means and standard deviations describe the evaluated training and test partitions.
+
+\subsection{Diagnostic Coverage}\label{incomplete-model-matrix}
+
+All 18 cohort--model combinations were evaluated. Horseshoe supplied seven accepted folds in GBSG2 and 23 in METABRIC, compared with 25 in WHAS500. Its original summaries retain these counts. The separate sampler sensitivity analysis provides complete Horseshoe coverage under its stated target acceptance setting.
+
+\subsection{Explanation Agreement}\label{shap-boundary}
+
+Intrinsic importance and exact linear SHAP explain the same fitted Bayesian log-relative-hazard function. Their agreement is therefore interpreted within that common model. Sampling stability was assessed separately, and the global criterion was not satisfied. Posterior intervals describe uncertainty conditional on the likelihood, prior and training data.
+
+\subsection{Prior-Sensitivity Scope}\label{prior-sensitivity-scope}
+
+The robustness analysis covers the specified changes in training information, follow-up, prior scales, baseline intervals and predictor representation. Each paired estimate retains its available-fold count, so the information supporting a sensitivity result can be read alongside its magnitude and interval.
+
+\subsection{Cohort Heterogeneity}\label{cohort-heterogeneity}
+
+There are differences in the sample size, frequency of events, predictor structure and clinical characteristics of the GBSG2, METABRIC and WHAS500 cohorts. Therefore, the differences between cohorts should be given a descriptive meaning instead of using them as indicators of a statistically significant better outcome across groups.
+
+\section{Future Research}\label{future-research}
+
+The findings provide a basis for extending the research to other survival structures and clinical populations.
+
+\subsection{Expanded Bayesian Survival Models}\label{expanded-bayesian-survival-models}
+
+Future research could investigate alternative baseline-hazard specifications, time-varying effects, hierarchical Bayesian survival models, nonlinear Bayesian survival models and competing-risks or multi-state extensions. These methods would address additional survival structures beyond the present proportional-hazards formulation.
+
+\subsection{Advanced Explainability}\label{advanced-explainability}
+
+Further work could examine explanations of absolute survival probability at clinically relevant times and their usefulness to clinical readers. This would extend the present analysis of log-relative-hazard contributions and posterior uncertainty.
+
+\subsection{External Validation}\label{external-validation}
+
+Finally, evaluation on genuinely external healthcare cohorts would help determine whether the predictive and explanatory behaviour observed in this study generalises to independent populations.
+
+\section{Practical and Research Implications}\label{practical-and-research-implications}
+
+The results are relevant to both survival-analysis studies and healthcare analytics. To researchers, the research shows that Bayesian survival modelling cannot be evaluated using a single measure of discrimination. Diagnostic validity, prior specification, predictive calibration and uncertainty need to be taken collectively. The findings also show the relevance of differentiating model-based posterior explanations and post-hoc attribution methods.
+
+In the healthcare analytics application, Bayesian survival models may be used to give interpretable hazard effects along with credible intervals and statements about the direction of coefficients. Such properties may be useful where uncertainty plays a crucial role in decision-making. Nevertheless, the results do not warrant the unquestioning substitution of CoxPH, Random Survival Forest or DeepSurv with Bayesian models.
+
+The main implication is that evidence-based selection of survival models needs to be cohort-specific and should not rely on a hypothesis that the Bayesian or machine-learning approaches are universally better.
+
+\section{Final Conclusion}\label{final-conclusion}
+
+This study investigated Bayesian survival modelling for explainable healthcare time-to-event prediction using the GBSG2, METABRIC and WHAS500 cohorts. A fully Bayesian piecewise-exponential proportional-hazards model was implemented using Normal, Horseshoe and continuous Spike-and-Slab coefficient priors and compared with established survival-modelling approaches.
+
+The repeated-validation analysis supplied 430 accepted outcomes from 450 model--fold evaluations, including 205 accepted Bayesian fits. Prediction error was closely aligned between Normal, continuous Spike-and-Slab and CoxPH, while RSF and DeepSurv showed cohort-dependent differences. Posterior coefficients, hazard ratios, credible intervals and directional probabilities provided interpretable associations with clinical predictors. Explanation agreement and the 825-condition robustness analysis extended this assessment across attribution methods and information conditions.
+
+Overall, the findings show that Bayesian survival modelling provides predictive analysis, uncertainty quantification and interpretable posterior evidence within a common, diagnostically assessed framework.

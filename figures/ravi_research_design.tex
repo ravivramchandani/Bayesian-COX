@@ -1,0 +1,160 @@
+\begin{figure}[p]
+\centering
+\begingroup
+\singlespacing
+\definecolor{raviblue}{HTML}{CDDEFC}
+\definecolor{ravigreen}{HTML}{B4EED1}
+\definecolor{raviyellow}{HTML}{FFF5B4}
+\definecolor{ravipurple}{HTML}{E0D9FC}
+\definecolor{ravipink}{HTML}{FFD0D0}
+\definecolor{ravistart}{HTML}{6298EB}
+\resizebox{0.98\linewidth}{!}{%
+\begin{tikzpicture}[
+  x=1cm,y=1cm,
+  base/.style={draw=black!80,rounded corners=2pt,line width=0.55pt,
+    align=center,font=\sffamily\fontsize{7.0}{7.5}\selectfont,inner sep=2pt,
+    text width=4.5cm,minimum height=0.44cm,execute at begin node={\hyphenpenalty=10000}},
+  blue/.style={base,fill=raviblue},
+  green/.style={base,fill=ravigreen},
+  yellow/.style={base,fill=raviyellow},
+  purple/.style={base,fill=ravipurple},
+  pink/.style={base,fill=ravipink},
+  smallgreen/.style={green,text width=3.18cm,minimum height=0.57cm},
+  smallpurple/.style={purple,text width=3.18cm,minimum height=0.57cm},
+  arrow/.style={-{Stealth[length=1.7mm]},draw=black!75,line width=0.6pt},
+  line/.style={draw=black!75,line width=0.6pt},
+  edge label/.style={font=\fontsize{7.2}{8}\selectfont,fill=white,inner sep=1pt}
+]
+% The arrangement follows Ravi's supplied conceptual diagram.
+\node[base,ellipse,fill=ravistart,text width=2.7cm,minimum height=0.6cm]
+  (start) at (2.4,0) {Start: Research Methodology};
+\node[blue] (design) at (2.4,-0.79)
+  {Research Design: Quantitative, Computational and Comparative Study};
+\node[blue] (focus) at (2.4,-1.56)
+  {Bayesian Survival Modelling:\\Prior Specification and Explainability};
+\node[green] (cohorts) at (2.4,-2.33)
+  {Survival Cohorts: GBSG2, METABRIC, WHAS500};
+\node[green] (data) at (2.4,-3.04)
+  {Data Acquisition and Cohort Reconstruction};
+\node[green] (checks) at (2.4,-3.78)
+  {Cohort Checks: Outcomes and Events\\Survival Times and Predictors};
+\foreach \a/\b in {start/design,design/focus,focus/cohorts,cohorts/data,data/checks}
+  \draw[arrow] (\a.south) -- (\b.north);
+
+\node[green] (preprocessing) at (7.45,-0.69)
+  {Training-Fold Preprocessing\\Applied to Held-Out Data};
+\node[yellow] (protocol) at (7.45,-1.56)
+  {Fixed Models, Seeds and Design\\Prespecified Evaluation Rules};
+\node[yellow] (validation) at (7.45,-2.33)
+  {Outer Validation: $5\times5$ Folds\\Three Inner Folds: RSF and DeepSurv};
+\node[blue] (development) at (7.45,-3.04) {Parallel Model Development};
+\draw[arrow] (checks.east) -- (4.95,-3.78) -- (4.95,-0.79) -- (preprocessing.west);
+\foreach \a/\b in {preprocessing/protocol,protocol/validation,validation/development}
+  \draw[arrow] (\a.south) -- (\b.north);
+
+\node[pink] (classical) at (2.4,-4.73) {Classical Survival Baseline};
+\node[purple] (machine) at (7.45,-4.73) {Machine Learning Baselines};
+\node[blue] (bayesian) at (12.5,-4.73) {Bayesian Survival Models};
+\draw[line] (development.south) -- (7.45,-4.26);
+\draw[arrow] (7.45,-4.26) -| (classical.north);
+\draw[arrow] (7.45,-4.26) -- (machine.north);
+\draw[arrow] (7.45,-4.26) -| (bayesian.north);
+
+\node[pink] (cox) at (2.4,-5.45) {Cox Proportional Hazards Model};
+\node[purple] (rsf) at (7.45,-5.45) {Random Survival Forest};
+\node[purple] (deep) at (7.45,-6.18) {DeepSurv};
+\node[blue] (piecewise) at (12.5,-5.45)
+  {Fully Bayesian Piecewise-Exponential\\Proportional Hazards Model};
+\node[blue] (likelihood) at (12.5,-6.25)
+  {Expanded Poisson Full Likelihood\\Six Baseline Hazard Intervals};
+\node[green] (baselinefit) at (2.4,-6.95) {Model Fitting and Prediction};
+\draw[arrow] (classical.south) -- (cox.north);
+\draw[arrow] (cox.south) -- (baselinefit.north);
+\draw[line] (machine.south) -- (7.45,-5.08) -- (4.97,-5.08) -- (4.97,-6.18);
+\draw[arrow] (4.97,-5.45) -- (rsf.west);
+\draw[arrow] (4.97,-6.18) -- (deep.west);
+\draw[line] (rsf.east) -- (9.93,-5.45) -- (9.93,-6.95);
+\draw[line] (deep.east) -- (9.93,-6.18);
+\draw[arrow] (9.93,-6.95) -- (baselinefit.east);
+\draw[arrow] (bayesian.south) -- (piecewise.north);
+\draw[arrow] (piecewise.south) -- (likelihood.north);
+
+\node[blue] (priors) at (7.45,-7.71) {Alternative Coefficient Priors};
+\draw[arrow] (likelihood.south) -- (12.5,-7.22) -| (priors.north);
+\node[blue] (normal) at (2.4,-8.47) {Normal Prior};
+\node[blue] (horseshoe) at (7.45,-8.47) {Regularised Horseshoe Prior};
+\node[blue] (spike) at (12.5,-8.47) {Continuous Spike-and-Slab Prior};
+\draw[line] (priors.south) -- (7.45,-8.1);
+\draw[arrow] (7.45,-8.1) -| (normal.north);
+\draw[arrow] (7.45,-8.1) -- (horseshoe.north);
+\draw[arrow] (7.45,-8.1) -| (spike.north);
+
+\node[yellow] (posterior) at (7.45,-9.28) {Bayesian Posterior Inference};
+\draw[line] (normal.south) -- (2.4,-8.86) -- (12.5,-8.86) -- (spike.south);
+\draw[line] (horseshoe.south) -- (7.45,-8.86);
+\draw[arrow] (7.45,-8.86) -- (posterior.north);
+\node[yellow] (eligibility) at (7.45,-10.03) {MCMC Diagnostics and Model Eligibility};
+\node[yellow] (diagnostics) at (7.45,-10.72)
+  {Sampling Diagnostics: R-hat and ESS\\Divergences, Tree Depth and BFMI};
+\draw[arrow] (posterior.south) -- (eligibility.north);
+\draw[arrow] (eligibility.south) -- (diagnostics.north);
+\node[base,diamond,aspect=3.8,fill=ravigreen,text width=2.65cm,
+  inner sep=1pt,minimum height=0.72cm]
+  (gate) at (7.45,-11.72) {Does the Model Meet\\Diagnostic Criteria?};
+\draw[arrow] (diagnostics.south) -- (gate.north);
+\node[yellow] (retain) at (2.4,-11.72) {Retain Eligible Bayesian Results};
+\node[yellow] (record) at (12.5,-11.72)
+  {Record Diagnostic Outcome; Exclude Non-Eligible Fit from Inference and Prediction};
+\draw[arrow] (gate.west) -- node[edge label,above]{Yes} (retain.east);
+\draw[arrow] (gate.east) -- node[edge label,above]{No} (record.west);
+
+\node[yellow] (ppc) at (7.45,-12.68)
+  {Posterior Predictive and Prior-Sensitivity Assessment};
+\draw[arrow] (retain.south) -- (2.4,-12.68) -- (ppc.west);
+\node[green] (evaluation) at (7.45,-13.52) {Held-Out Predictive Evaluation};
+\draw[arrow] (ppc.south) -- (evaluation.north);
+\draw[arrow] (baselinefit.west) -- (-0.18,-6.95) -- (-0.18,-13.52) -- (evaluation.west);
+
+\node[smallgreen] (concordance) at (1.65,-14.58)
+  {Discrimination: Concordance Index};
+\node[smallgreen] (brier) at (5.5,-14.58)
+  {Prediction Error: Brier Score and Integrated Brier Score};
+\node[smallgreen] (auc) at (9.35,-14.58)
+  {Time-Dependent Discrimination:\\Time-Dependent AUC};
+\node[smallgreen] (calibration) at (13.2,-14.58)
+  {Calibration: Survival Calibration Assessment};
+\draw[line] (evaluation.south) -- (7.45,-14.03);
+\foreach \n in {concordance,brier,auc,calibration}
+  \draw[arrow] (7.45,-14.03) -| (\n.north);
+\node[green] (combined) at (7.45,-15.63) {Combined Model Evaluation};
+\foreach \n in {concordance,brier,auc,calibration}
+  \draw[line] (\n.south) -- (\n.south |- 0,-15.12) -- (7.45,-15.12);
+\draw[arrow] (7.45,-15.12) -- (combined.north);
+\node[purple] (explain) at (7.45,-16.43) {Bayesian Explainability};
+\draw[arrow] (combined.south) -- (explain.north);
+
+\node[smallpurple] (coefficients) at (1.65,-17.43) {Posterior Coefficient Distributions};
+\node[smallpurple] (intervals) at (5.5,-17.43) {Credible Intervals and Hazard Ratios};
+\node[smallpurple] (direction) at (9.35,-17.43) {Posterior Directional Probabilities};
+\node[smallpurple] (shap) at (13.2,-17.43) {Exact Linear SHAP Rankings and Stability};
+\draw[line] (explain.south) -- (7.45,-16.91);
+\foreach \n in {coefficients,intervals,direction,shap}
+  \draw[arrow] (7.45,-16.91) -| (\n.north);
+\node[green] (synthesis) at (7.45,-18.47) {Comparative Results Synthesis};
+\foreach \n in {coefficients,intervals,direction,shap}
+  \draw[line] (\n.south) -- (\n.south |- 0,-17.98) -- (7.45,-17.98);
+\draw[arrow] (7.45,-17.98) -- (synthesis.north);
+\node[green] (interpretation) at (7.45,-19.27)
+  {Interpretation against Research Questions and Objectives};
+\node[green] (coverage) at (7.45,-20.07)
+  {Evaluation Coverage and Generalisability};
+\node[base,fill=ravistart] (output) at (7.45,-20.9)
+  {Final Output: Evidence-Based Conclusions and Recommendations};
+\foreach \a/\b in {synthesis/interpretation,interpretation/coverage,coverage/output}
+  \draw[arrow] (\a.south) -- (\b.north);
+\end{tikzpicture}%
+}
+\endgroup
+\caption{Conceptual overview of the study design, analysis stages, and links between modelling and interpretation. Posterior and predictive analyses use accepted Bayesian fits.}
+\label{_Toc245464042}
+\end{figure}

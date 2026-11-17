@@ -1,12 +1,9 @@
-\chapter{Supplementary Inference}
-\label{app:horseshoe}\label{app:sampler}
+\chapter{GBSG2 Horseshoe Diagnostics and Sampler Sensitivity}\label{appendix-g-gbsg2-horseshoe-failure-and-recovery}\label{app:horseshoe}
 
-\section{Multiplicity Bounds}
-Table~\ref{tab:gen-holm-bounds} gives the Holm bounds for the five observed tests in the original nine-contrast prior family. The calculation considers all possible values of the remaining four tests, as described in Section~\ref{sec:holm-results}.
+The original Horseshoe model met the diagnostic criteria in seven of 25 GBSG2 folds, 23 of 25 METABRIC folds and all 25 WHAS500 folds. A separate post-hoc sensitivity changed target acceptance to 0.999 across all 75 Horseshoe folds, retaining the original data partitions, seeds, refit rules and diagnostic criteria. It accepted all 75 fits. Table~\ref{tab:gen-sampler-sensitivity} reports its nine paired prior contrasts against the unchanged comparators.
+
+\input{tables/table_sampler_sensitivity.tex}
+
+Table~\ref{tab:gen-holm-bounds} reports a separate post-hoc multiplicity calculation for the original primary family. Each of the five estimable tests has an adjusted value of 1.000 under every possible completion of the four unavailable tests.
 
 \input{tables/table_holm_bounds.tex}
-
-\section{Secondary Predictive Contrasts}
-Table~\ref{tab:full-secondary} reports the Bayesian--comparator IBS contrasts for every cohort. Effects are Bayesian IBS minus comparator IBS, with negative values favouring the Bayesian model. The interval calculation uses the repeated-validation correction. Counts identify the matched outer folds contributing to each comparison.
-
-\input{tables/table_secondary_complete.tex}

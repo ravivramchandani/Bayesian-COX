@@ -1,17 +1,5 @@
-\chapter{Posterior and Explanation Summaries}
-\label{app:explainability}\label{app:explanation}
+\chapter{Piecewise-Exponential Model Construction}\label{appendix-e-piecewise-exponential-model-construction}\label{app:intervals}
 
-\section{Prior-Specific Posterior Quantities}
-Table~\ref{tab:gen-prior-signals} summarises prior-specific quantities in the first repeat and first fold. Their definitions are given in Section~\ref{sec:method-explainability}.
+An event contributes one count in its final interval, while a censored observation contributes exposure without an event count. Intervals beyond a patient's observed follow-up have zero exposure and do not enter the expanded likelihood. Figure~\ref{fig:interval-exposure} illustrates this construction.
 
-\input{tables/table_prior_signals.tex}
-
-\section{Comparison with CoxPH Explanations}
-Table~\ref{tab:gen-explanation-cross-model} gives the secondary paired comparison between Bayesian intrinsic rankings and CoxPH SHAP. Folds, subjects and explanation seeds are matched as described in Section~\ref{sec:method-explainability}.
-
-\input{tables/table_explanation_cross_model.tex}
-
-\section{Leading Predictor Groups}
-Table~\ref{tab:gen-explanation-top-groups} presents the three groups with the largest mean posterior expected absolute contributions for each cohort and prior. Mean rank, top-five frequency and resampling intervals describe how their positions vary. This display summarises fitted model behaviour; all predictor groups remain part of their specified models.
-
-\input{tables/table_explanation_top_groups.tex}
+\input{figures/interval_exposure.tex}

@@ -1,78 +1,89 @@
-\chapter{Introduction}
-\label{chap:intro}
+\chapter{Introduction}\label{introduction}
 
-\section{Survival Prediction in Healthcare}
-\label{background}
+\section{Background}\label{background}
 
-Clinical prognosis concerns both whether an event occurs and when it occurs. A patient may remain free of recurrence for several years, experience an event soon after diagnosis, or reach the end of observation before the event is recorded. Survival analysis uses event timing and censored follow-up to represent these different observations. It provides a common framework for studying mortality, recurrence and other clinical time-to-event outcomes \cite{ravi14,ravi15}.
+Survival analysis deals with time-to-event outcomes. It accounts for both the time to the occurrence of an event and right-censored data. In healthcare, events may include death, recurrence, progression, treatment failure and re-admission. The survival literature has recently reviewed how these techniques have been extended to machine learning prediction \cite{ref1,ref3}.
 
-Right censoring occurs when observation ends before the event is recorded. The patient's exact event time is unknown, but their observed event-free duration remains informative. Survival models retain that information through their likelihoods, and survival-specific evaluation measures account for incomplete outcome status at a prediction horizon. This treatment of follow-up makes survival analysis appropriate for healthcare cohorts with varying observation periods \cite{ravi3,ravi14}.
+A central quantity in survival analysis is the survival function, defined as
+\begin{equation}
+    S(t) = P(T > t),
+\end{equation}
 
-The range of available methods has expanded from descriptive survival curves and regression to tree ensembles, neural networks and Bayesian models. Cox proportional-hazards regression provides a widely used model with directly interpretable coefficients. Random survival forest (RSF) represents nonlinear associations through ensembles of survival trees. DeepSurv uses a neural risk function within a proportional-hazards framework \cite{cox1972,ishwaran2008,ravi4}. Each offers a different balance of predictive flexibility, estimation and interpretation.
 
-Bayesian survival modelling adds a distributional account of uncertainty. Prior distributions describe plausible parameter values, and the likelihood updates them using observed events and follow-up. Posterior distributions then support coefficient estimates, hazard ratios, credible intervals and probabilities of direction. These quantities are useful when several predictors contain overlapping information or the number of observed events is modest relative to the model's complexity \cite{ravi22,ibrahim2001}.
+Here, \(T\) is the event time and \(t\) is a specified follow-up time. The survival function is the probability of surviving until after time \(t\). The hazard is the instantaneous rate at which events occur in an individual that has survived up until just before time t. Cox regression models relative hazards; to calculate absolute risk you need to determine the probability of surviving to a certain time. This affects how results are interpreted throughout the thesis \cite{ref14}.
 
-\section{Research Motivation}
-\label{problem-statement}
+A major difference between survival data and most standard regression datasets is that there is a term called right censoring. Under right censoring, the event has not been observed by the end of the available follow-up period. For example, a patient may remain alive until the end of the study, meaning that the exact event time is unknown, although it is known that the patient remained event-free throughout the observed follow-up period. As a result, the time that is observed is the minimum between the true times and the censoring time. Specifically, survival methods are meant to hold onto the information found in such observations and not to take them merely as missing outcomes \cite{ref14,ref3}.
 
-The coefficient prior is a substantive part of a Bayesian survival model. A Normal prior applies a common scale to regression effects. A hierarchical shrinkage prior allows the amount of regularisation to vary across coefficients, while a continuous spike-and-slab specification interpolates between narrow and broad coefficient scales. These choices can alter posterior effect estimates, uncertainty and predictions even when the observed data and likelihood are identical \cite{carvalho2010,piironen2017,ravi25}.
+Conventional classification and regression methods are inadequate for many clinical time-to-event problems because they do not naturally account for censoring and the timing of events. A classification model is capable of estimating whether or not an event happens in a known time frame, but is not naturally descriptive of the entire distribution of the time of the event. Likewise, standard regression generally assumes that the outcome is observed for each individual and does not explicitly model right-censored event times \cite{ref3}. This is a critical difference in the context of healthcare since two patients can end up having the same clinical outcome but with significantly different timeframes to such outcome.
 
-The amount of survival information also varies. Sample size, observed event count, censoring and predictor dependence jointly influence how well effects can be estimated. A prior that gives useful regularisation in one information setting may behave differently after reducing the training sample or shortening follow-up. Understanding this interaction requires a comparison in which the likelihood, predictors and validation subjects remain common across prior specifications.
+Therefore, survival analysis provides an appropriate methodological foundation for this thesis because the research concerns not only whether a clinical event occurs, but also when it occurs under incomplete follow-up.
 
-Interpretation presents a related question. A coefficient distribution describes an association and its uncertainty. A feature-contribution ranking describes which predictors contribute most strongly to a fitted risk function. SHAP attributes that function to predictors relative to a reference background \cite{lundberg2017,ravi30}. These summaries answer complementary questions. Their agreement and repeatability provide additional information about the explanation of a model beyond its prediction error.
+\section{Applications of Survival Prediction in Healthcare}\label{applications-of-survival-prediction-in-healthcare}
 
-\section{Research Contribution}
-\label{research-gap}
+Survival analysis is widely used in healthcare because many clinically important outcomes are inherently time-dependent. Survival prediction can be applied to overall mortality, disease recurrence, disease progression, treatment outcomes, and patient prognosis. In cancer biology, overall survival and progression-free survival are often employed to measure survival time and disease progression in the patient. Recent surveys of machine-learning survival models in clinical data reveal that oncology is one of the main fields of application, and survival models are often applied to forecast the prognosis and clinical events of disease \cite{ref1}.
 
-This thesis contributes a survival benchmark centred on coefficient priors. Normal, horseshoe and continuous spike-and-slab priors share a full piecewise-exponential likelihood, baseline-hazard structure, predictors and validation partitions. Their comparison therefore concerns coefficient-prior choice within a defined survival model. CoxPH, RSF and DeepSurv provide reference predictions, while matched reductions in training information connect the prior differences to the evidence available for estimation.
+The prediction of survival can also be used to analyze recurrence and progress of the disease. Instead of categorizing patients as either likely or unlikely to recur, a survival model is able to attempt to determine the likelihood of patients spending a series of future time points without recurrence. This gives data, which might be applicable in deciding on the intensity of follow-up and monitoring needs. On the same note, estimates of mortality risk can be done using survival methods and taking into consideration variations in patient characteristics and follow-up time \cite{ref1,ref5}.
 
-The second contribution connects this predictive comparison to posterior interpretation. Coefficients and hazard ratios describe uncertain associations; grouped contributions and exact linear SHAP describe participation in the fitted risk function. Comparing their agreement and sampling stability distinguishes these explanatory properties empirically. Table~\ref{tab:closest-work} positions the combined design alongside the closest benchmarking, prior-modelling and explanation studies.
+A deep learning method named DeepSurv was proposed for personalized survival prediction and treatment recommendation \cite{ref4}. Although the model-based prediction can help in prognosis, causal treatment effects can only be identified with a specific design and assumptions.
 
-\section{Aim and Objectives}
-\label{aim}
+The growing availability of electronic health records, genomic data, and other clinical data sources has created further opportunities for survival prediction. Machine-learning techniques can accommodate complex predictor structures and identify nonlinear relationships that may be difficult to capture using conventional linear predictors. A scoping review of recent real-world healthcare published papers in 2023 reported that time-to-event prediction based on random survival forests and neural networks is becoming highly popular and that many involve prognosis and clinical event predictions \cite{ref1}.
 
-The aim is to assess how Normal, horseshoe and continuous spike-and-slab coefficient priors affect prediction, posterior inference and explanation stability in Bayesian piecewise-exponential proportional-hazards models for healthcare survival data.
+The above developments are tightly linked with the concept of precision medicine, where forecasts are becoming more likely to be based on patient-specific traits, rather than just on averages within the population. Specific manifestations of interpretable time-to-event scoring have further been devised with the purpose of preserving transparency as well as to integrate machine-learning techniques in clinical survival prediction \cite{ref2}. Bayesian survival modelling provides an alternative perspective by representing uncertainty in model parameters through posterior distributions. This especially applies to cases where likely predictions of survival are to be made not only to convey a perceived risk, but also to reflect the uncertainty of that risk.
 
-The objectives are to:
+In this manner, health care makes an appropriate empirical context to study Bayesian survival prediction since the implications of uncertainty, censoring, non-homogenous patient characteristics and personalised prognosis are directly applicable in clinical prediction.
 
-\begin{enumerate}
-\item construct a paired clinical survival benchmark with shared data preparation and validation;
-\item quantify predictive accuracy, calibration and computational acceptance under the three coefficient priors;
-\item interpret clinical associations and compare posterior contribution rankings with SHAP;
-\item characterise how prior contrasts change under controlled information and modelling conditions.
-\end{enumerate}
+\section{History of Survival Modelling}\label{history-of-survival-modelling}
 
-\section{Research Questions}
-\label{research-questions}
+Survival modelling may be seen as a continuum of descriptive statistical estimation to more flexible predictive and probabilistic models.
 
-\subsection*{RQ1: Prediction under different coefficient priors}
-How do Normal, horseshoe and continuous spike-and-slab priors affect out-of-sample survival prediction, and how do their predictions compare with CoxPH, RSF and DeepSurv?
+The Kaplan-Meier estimator is a significant basis for analysing survival data under censoring. It gives a non-parametric estimate of the survival function and makes it possible to visualise the patterns of survival across time. Kaplan-Meier analysis is especially effective in exploratory evaluation and comparison of survival experience across groups, but it lacks the multivariate predictive model that would be necessary to concurrently model a large number of patient variables.
 
-The primary predictive quantity is the within-cohort paired difference in inverse-probability-of-censoring-weighted integrated Brier score (IPCW IBS). Three pairwise prior contrasts in each cohort form a nine-comparison primary family. Discrimination, calibration and comparisons with the other model families provide complementary estimates.
+The Cox proportional-hazards model then offered a model to correlate individual covariates with the risk of occurrence of an event. Its semi-parametric formulation permits the covariate effects to be estimated without any specific parametric distribution of the baseline hazard. As a result, Cox regression has been a critical reference point in clinical survival prediction, and will still be a relatively interpretable reference point to the newer methods \cite{ref14}.
 
-\subsection*{RQ2: Information-regime robustness}
-How does the prior effect change as training information falls or administrative censoring increases?
+The advent of machine-learning survival models added more flexibility in modeling nonlinear relationships and interactions. Random survival forests, such as those, are an extension of tree-based ensemble learning to censored time-to-event observations. These methods have the capability of capturing structures that might be challenging to represent with a standard linear predictor \cite{ref3}.
 
-Matched training subsets and training-derived follow-up truncation define the information conditions. Differences-in-differences measure how a prior contrast changes between each reduced-information condition and its full-information reference.
+There have been many proposed deep learning survival models. These utilise neural networks to represent relationships between covariates and outcome. DeepSurv uses a Cox regression loss function \cite{ref4}. A review of neural networks for survival analysis can be found in \cite{ref5}. Continuous and discrete time models are compared in \cite{ref21}.
 
-\subsection*{RQ3: Explanation agreement and stability}
-How stable are Bayesian global feature rankings, and how do they agree with SHAP rankings of the same fitted risk function?
+Bayesian survival modelling represents another methodological development, providing posterior distributions rather than only point estimates. Bayesian approaches provide a kind of probability distribution of unknown parameters and combine prior knowledge with observed data to get the posterior distributions. Survival methods based on Bayesian methods can thus offer a clear description of parameter uncertainty as well as allow other prior structures to be explored. Bayesian variable-selection studies have shown that prior distributions can be used to control the choice of coefficients and shrinkage in censored survival data, especially in high-dimensional clinical and genomic settings \cite{ref6}.
 
-Posterior expected absolute grouped contributions provide a common intrinsic importance measure across priors. They are compared with SHAP of the Bayesian posterior-mean log-risk function and, secondarily, with CoxPH explanations on the same subjects and reference backgrounds. Correlation, top-five overlap, rank variability and resampling quantify agreement and stability.
+Such methods do not have to be mutually exclusive. Instead, they offer alternative tradeoffs between descriptive analysis, statistical interpretability, nonlinear predictive flexibility and quantifying probabilistic uncertainty. This thesis expands on this line of development by considering Bayesian proportional-hazards survival models with well-known Cox, random-survival-forest and DeepSurv methods as points of comparison.
 
-\subsection*{RQ4: Design robustness}
-How do the main contrasts respond to choices about predictors, missingness, censoring, baseline-hazard intervals and prior settings?
+\section{Problem Statement}\label{problem-statement}
 
-The analysis compares effect direction, uncertainty and computational acceptance under the defined sensitivity conditions. Together, the four questions connect prior specification to prediction, interpretation and the conditions under which the fitted models are evaluated.
+The growing use of Bayesian methods for survival prediction raises an important methodological question concerning the specification of regression-coefficient priors. In Bayesian inference, prior distributions represent assumptions about plausible parameter values before the observed data are incorporated. The posterior distribution is then obtained by combining the prior distribution with the likelihood of the observed data. Therefore, the chosen prior may affect the posterior coefficient estimates, the uncertainty and predictive behaviour, especially when the information in the data is restricted \cite{ref6}.
 
-\section{Study Scope}
-\label{scope-and-boundaries}
+This issue is particularly important for survival datasets because the information available for estimating covariate effects depends not only on sample size but also on the number of observed events and the extent of censoring. Moreover, clinical datasets can also have correlated predictors, and it can be hard to tell whether a closely related variable is an independent one. It has been demonstrated that Bayesian variable-selection studies can regularise coefficients with prior structures to solve variable-selection issues in censored survival data \cite{ref6}.
 
-The study analyses GBSG2, METABRIC and WHAS500 separately, retaining each cohort's endpoint, time unit and clinical predictor definition. Repeated outer cross-validation evaluates predictions, with preprocessing and model selection fitted within training partitions. The Bayesian arms share six baseline-hazard intervals and differ in their coefficient priors.
+Different prior structures impose different assumptions about coefficient behaviour. A fairly regularising prior can regularise the value of extreme coefficients whereas shrinkage or mixture priors can induce weak effects to be close to zero and strong effects to be identifiable. These differences may consequently affect both model estimation and interpretation. The key issue is therefore not simply whether Bayesian modelling can produce effective predictions, but how prior specification interacts with the available survival information and influences posterior inference.
 
-Evaluation combines IPCW IBS, Uno's and Harrell's concordance, cumulative/dynamic AUC and calibration. Interpretation combines posterior associations with grouped contribution rankings and exact interventional linear SHAP of the posterior-mean log-risk. Original comparisons and prespecified sensitivities form the main analysis; the higher-target-acceptance horseshoe sensitivity and Holm bound are identified separately as post-hoc analyses. The conclusions concern the evaluated prediction procedures and their behaviour within these clinical cohorts.
+The key issue that this thesis will focus on is thus:
 
-\section{Thesis Structure}
-\label{thesis-structure}
+Bayesian proportional-hazards survival prediction may be sensitive to the prior on regression coefficients, especially when there is limited information on the events, particularly when predictors are correlated or censoring diminishes effective information.
 
-Chapter~\ref{chap:lit} reviews survival models, coefficient priors, evaluation and explanation, and develops the rationale for a controlled comparison. Chapter~\ref{chap:methods} specifies the cohorts, modelling framework, validation, diagnostics and sensitivity analyses. Chapter~\ref{chap:results} presents and discusses the predictive, posterior and robustness findings. Chapter~\ref{chap:conclusion} brings together the answers to the research questions and the study's methodological contribution.
+The empirical research thus explores Bayesian proportional-hazards survival modelling with alternative coefficient-prior structures and compares their predictive power and interpretability with existing survival modelling methods. The research does not presuppose that a single prior is necessarily better than the others. Rather, it studies the behaviour of various prior specifications in the same modelling framework, and how the resultant predictions and posterior explanations may be compared.
+
+This issue forms the basis of the following literature review which identifies classical, machine-learning, deep-learning and Bayesian survival methods in more details, followed by the definition of the methodological framework that the empirical analysis will be conducted.
+
+\section{Scope and Boundaries}\label{scope-and-boundaries}
+
+The empirical analysis of Bayesian proportional-hazards survival modelling, based on healthcare time-to-event data, is the focus of this thesis. Even though the general research rationale acknowledges the fact that the survival analysis can be used in cybersecurity, engineering, technology and business contexts, the final empirical study is limited to cohorts in healthcare. The research thus concentrates on patient-level survival outcomes that encompass observed event time, censoring variables, and predictor variables that can be used in survival modelling.
+
+The methodological coverage encompasses three healthcare cohorts used in the study: GBSG2, METABRIC and WHAS500. The analysis takes on board the known survival methods, i.e. Cox proportional-hazards regression, Random Survival Forest and DeepSurv, and fully Bayesian piecewise-exponential proportional-hazards models. The Bayesian framework explores three coefficient-prior structures, namely, Normal, regularised Horseshoe and continuous Spike-and-Slab.
+
+Discrimination, prediction error, time-dependent discrimination and calibration are assessed by the measures, such as the C-index, the Integrated Brier Score, time-dependent AUC and survival calibration. Bayesian interpretation emphasizes on posterior coefficients, credible intervals, hazard ratios and posterior directional probabilities \cite{ref22}.
+
+The study compares the models using five repeats of five-fold outer cross-validation, with preprocessing and model selection performed within training partitions. The six model arms across three cohorts produce 450 model-fold outcomes, of which 430 meet the evaluation requirements. The Bayesian analyses retain fits that satisfy the predefined MCMC diagnostic acceptance criteria. Matched changes in training information, follow-up and modelling choices assess robustness, while posterior summaries and feature-attribution analyses assess interpretation. The conclusions concern prediction and model associations within these healthcare cohorts.
+
+\section{Thesis Structure}\label{thesis-structure}
+
+This thesis is divided into five chapters, in order of the theoretical background and research gap, methods, empirical assessment and conclusions.
+
+Chapter 1, Introduction, sets the scene and the motivation of survival analysis and its applicability to healthcare prediction. It presents the ideas of time-to-event outcomes, survival probability, time-to-event hazard and time-to-event censoring, and then covers healthcare uses and the development of survival modelling.
+
+Chapter 2, Literature Review, contains theoretical and empirical base of the research. It covers survival analysis and right-censored data, classical survival modeling, machine-learning and deep-learning modeling of survival, and Bayesian survival modelling. Special focus is placed on Bayesian coefficient priors, shrinkage methods, survival-model analysis and interpretability. The chapter then outlines the research problem, research gap, aim, objectives, research questions and ends with the determination of the research gap filled by the empirical research.
+
+Chapter 3, Methodology, explains the implementation of the research. It introduces the research design, healthcare cohorts, data collection and reconstruction, survival-outcome definition, pre-processing and validation plan. It describes the Cox proportional-hazards, Random Survival Forest and DeepSurv baselines, then the completely Bayesian piecewise-exponential proportional-hazards model. Specifications of the Bayesian prior, sampling, MCMC diagnostics, posterior predictive checks, evaluation metrics, explainability procedures and prior sensitivity analysis are also introduced.
+
+Chapter 4, Results and Discussion, shows the empirical results. It reports cohort attributes, exploratory survival findings, baseline-model findings, Bayesian sampling diagnostics and the acceptance of fits across cohorts and priors. The last predictive performance based on C-index, Integrated Brier Score, time-dependent AUC and calibration, and then Bayesian explainability, prior sensitivity, and model comparison are presented in the chapter. The results are discussed concerning the research questions and literature.
+
+Chapter 5, Conclusion, Contributions and Future Work, summarizes the main findings and answers each research question. It explains the value of the contribution of the research, the methodological constraints and future development opportunities, such as a wider validation of Bayesian survival modelling and explainability.

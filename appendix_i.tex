@@ -1,0 +1,16 @@
+\chapter{Bayesian Posterior Explainability}\label{appendix-i-bayesian-posterior-explainability}\label{app:explanation}
+
+\section{Prior-Specific Posterior Quantities}
+Table~\ref{tab:gen-prior-signals} reports first-repeat, first-fold prior-specific quantities. The continuous Spike-and-Slab mixing weight is an auxiliary parameter rather than a discrete inclusion probability. The Horseshoe local-scale proxy omits the global scale and regularising slab and is interpreted accordingly.
+
+\input{tables/table_prior_signals.tex}
+
+\section{Comparison with CoxPH Explanations}
+The secondary comparison in Table~\ref{tab:gen-explanation-cross-model} matches Bayesian intrinsic rankings with CoxPH SHAP rankings on the same subjects and explanation seeds.
+
+\input{tables/table_explanation_cross_model.tex}
+
+\section{Leading Predictor Groups}
+Table~\ref{tab:gen-explanation-top-groups} summarises the three groups with the largest mean posterior expected absolute contributions. Mean rank, top-five frequency and resampling intervals describe how their positions vary.
+
+\input{tables/table_explanation_top_groups.tex}

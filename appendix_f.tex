@@ -1,14 +1,5 @@
-\chapter{Detailed Robustness Estimates}
-\label{app:sensitivity}
+\chapter{Bayesian MCMC Sampling and Diagnostics}\label{appendix-f-bayesian-mcmc-sampling-and-diagnostics}\label{app:diagnostics}
 
-\section{Diagnostic Outcomes}
-Table~\ref{tab:gen-robustness-diagnostics} records diagnostic outcomes by cohort and prior family. Paired effect calculations use accepted fits under the criteria in Section~\ref{sec:method-diagnostics}.
+Table~\ref{tab:gen-diagnostics} gives the outcome counts for every cohort and model across the 25 outer folds. Bayesian acceptance follows the criteria and specified refits described in Chapter~\ref{methodology}. Computation times describe the original fitting environment and include the specified attempts.
 
-\input{tables/table_robustness_diagnostics.tex}
-
-\section{Paired Robustness Effects}
-Table~\ref{tab:gen-robustness-effects} contains all 129 within-condition contrasts and 45 difference-in-differences, with paired-fold counts and bootstrap intervals. Direct effects are IBS($A$) minus IBS($B$). Difference-in-differences subtract the corresponding full-training, observed-follow-up contrast. The paired three-stage bootstrap is specified in Section~\ref{sec:method-robustness}.
-
-\begin{landscape}
-\input{tables/table_robustness_effects.tex}
-\end{landscape}
+\input{tables/table_diagnostics.tex}

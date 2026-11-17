@@ -1,8 +1,5 @@
-\chapter{Proportional-Hazards Assessment}
-\label{app:baselines}
+\chapter{Exploratory Survival Analysis}\label{appendix-b-exploratory-survival-analysis}\label{app:survival}
 
-Table~\ref{tab:gen-proportional-hazards} reports rank-transformed Schoenfeld tests across the outer-training fits. Holm adjustment is applied to the covariate tests within each fit. The rejection fraction is a descriptive summary across overlapping training sets. Encoded categorical levels with fewer than 25 tests were absent from some training partitions.
+The median observed time summarises recorded event-or-censoring durations. The Kaplan--Meier median is the first time at which estimated survival reaches one half. Table~\ref{tab:gen-cohort-survival} distinguishes these quantities for each cohort.
 
-These checks describe the behaviour of the proportional-hazards assumption alongside the held-out prediction results. The METABRIC age and Nottingham Prognostic Index checks show repeated departures, which inform the interpretation of constant hazard-ratio summaries. The prediction comparisons evaluate the fitted specifications on the common validation design.
-
-\input{tables/table_proportional_hazards.tex}
+\input{tables/table_cohort_survival.tex}

@@ -70,9 +70,9 @@
     \node[result,text width=4cm,minimum height=2.3cm] (prediction) at (2.2,-14.3)
       {\textbf{Predictive evaluation}\\C-index, IBS and time-dependent AUC\\Explicit calibration\\Paired contrasts (RQ1)};
     \node[result,text width=4cm,minimum height=2.3cm] (explanation) at (7.4,-14.3)
-      {\textbf{Explanation analysis}\\Posterior effects and grouped rankings\\SHAP agreement and stability (RQ3)};
+      {\textbf{Explanation analysis}\\Posterior effects and grouped rankings\\SHAP agreement and stability (RQ2, RQ3)};
     \node[result,text width=4cm,minimum height=2.3cm] (robustness) at (12.6,-14.3)
-      {\textbf{Robustness contrasts}\\Training size; censoring\\Predictors; preprocessing\\Baseline; prior settings\\(RQ2, RQ4)};
+      {\textbf{Robustness contrasts}\\Training size; censoring\\Predictors; preprocessing\\Baseline; prior settings\\(RQ4)};
     \foreach \analysis in {prediction,explanation,robustness}
       \draw[arrow] (join) -- (join -| \analysis.north) -- (\analysis.north);
 

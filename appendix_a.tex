@@ -1,12 +1,5 @@
-\chapter{Cohort and Survival Characteristics}
-\label{app:data}\label{app:exploratory}
+\chapter{Dataset and Cohort Preparation}\label{appendix-a-dataset-and-cohort-preparation}\label{app:cohorts}
 
-\section{Analysis Populations and Source Predictors}
-Table~\ref{tab:gen-predictor-missingness} reports missingness for the primary clinical source variables before categorical expansion. Predictor definitions and training-fold transformations are specified in Section~\ref{sec:method-preprocessing}. The separate stage and multiple-imputation sensitivities include METABRIC stage.
+Table~\ref{tab:gen-predictor-missingness} reports missingness in the source predictors before training-fold imputation and categorical encoding. GBSG2 and WHAS500 primary predictors were complete. METABRIC stage is included here because it entered a separate sensitivity analysis.
 
 \input{tables/table_predictor_missingness.tex}
-
-\section{Observed Follow-up and Estimated Survival}
-Table~\ref{tab:gen-cohort-survival} distinguishes the median observed event-or-censoring duration from the Kaplan--Meier survival median. The former summarises the recorded durations. The latter identifies the first time the estimated survival function reaches one half. Kaplan--Meier curves use the full analysis populations and pointwise log--log Greenwood intervals.
-
-\input{tables/table_cohort_survival.tex}

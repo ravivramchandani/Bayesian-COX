@@ -1,10 +1,15 @@
-Explainable Bayesian Survival Models
-Ravi V. Ramchandani
+Ravi V. Ramchandani: Explainable Bayesian Survival Models
 
-Compile Main.tex with pdfLaTeX. The source includes the figures and tables used by the thesis.
+Main document: Main.tex. Compiler: pdfLaTeX.
 
-Saved aggregate results are in generated/ and report_summaries/. The manuscript reads its presentation tables from tables/. Supplementary calibration and predictive tables can be regenerated with:
+The manuscript follows Ravi's supplied Overleaf source, with focused factual
+corrections using the completed experiments. Original cohort descriptions and
+chapter structure are retained. Outdated result screenshots are replaced by
+verified tables and figures.
 
-python3 scripts/render_supplementary_tables.py
+The active project is https://www.overleaf.com/project/6af91395a2e68e546f56fbc0
+Use Recompile to build the report; Download PDF saves a copy.
 
-The renderer verifies the saved aggregate checksums and does not fit models.
+The original supplied source is retained in Git at 69a7f04. The preceding broad
+rewrite is preserved on branch archive/full-rewrite-20261117. Evidence CSVs,
+figures and their manifests are in generated/ and report_summaries/.
