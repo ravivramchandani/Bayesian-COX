@@ -1,8 +1,8 @@
 # Ravi: final thesis files
 
-The revised report is published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0), revision `6f4539d`. It starts from Ravi's latest edits at `132f7aa` and incorporates the principal supervisor's corrections. The saved PDF has 120 pages, 85 cited references, 38 tables and seven figures.
+The polished report is published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0), revision `05f1739`. It starts from Ravi's latest edits at `a4d2324` and incorporates the supervisor corrections and final examiner-focused polish. The saved PDF has 125 pages, 97 cited references, 43 tables and seven figures.
 
-The additions are Table C.3 (matched-fold comparisons), Table F.2 (predictive checks), Table H.4 (calibration bootstrap intervals), Figure H.1 (calibration curves) and Table H.5 (paired IBS bootstrap sensitivity). Methods and interpretation now distinguish the relevant estimands, assumptions and uncertainty measures. The [correction record](../coordination/reviews/2026-11-19-supervisor-corrections.json) lists the changes and verification. Earlier assessments apply to their stated manuscript versions.
+Questions and objectives are aligned throughout. The report now includes matched-fold posterior comparisons, stored prior-predictive checks, and diagnostic and attribution breakdowns, with clearer calibration and sensitivity interpretation. All 85 previously cited sources and all original results are preserved. The [verification record](../coordination/reviews/2026-11-19-examiner-polish.json) identifies the final files and completed checks.
 
 ## Open and edit the report
 
@@ -17,7 +17,7 @@ The report is titled **Explainable Bayesian Survival Models**. No manual source 
 
 - [Current PDF on GitHub](https://github.com/ravivramchandani/Bayesian-COX/blob/thesis/final-report-20261117/Main.pdf).
 - [Complete source on the thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117).
-- [Overleaf source ZIP](../reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19.zip).
+- [Overleaf source ZIP](../reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_polished.zip).
 - [Previous broad rewrite](https://github.com/ravivramchandani/Bayesian-COX/tree/archive/full-rewrite-20261117).
 
-Read the corrected methods, results and implications alongside the new appendix tables and figure. Confirm the wording and incorporate any final author or supervisor changes in the same Overleaf project. The original results remain unchanged; the additions report existing saved outputs. The source ZIP includes the complete supplementary CSVs and builds independently. Use the programme's final submission process when ready.
+Read the methods, results and conclusions alongside the updated appendix tables and figures. Confirm the wording and incorporate any final author or supervisor changes in the same Overleaf project. The original results remain unchanged; the additions report existing saved outputs. The source ZIP includes the complete supplementary CSVs and builds independently. Use the programme's final submission process when ready.

@@ -1,0 +1,121 @@
+{
+  "pdf_pages": 125,
+  "cited_references": 97,
+  "tables": 43,
+  "figures": 7,
+  "source_zip": {
+    "path": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_polished.zip",
+    "files": 138,
+    "sha256": "c08dce2cb9ed5d0d3947aa0023046651ce3d43c6ba2bb21f3137499fe621958c",
+    "fresh_build_page_texts_matching": 125
+  },
+  "fresh_build_matching_page_texts": 125,
+  "original_evidence_hashes_matching": 47,
+  "new_evidence_hashes_matching": 20,
+  "baseline_reference_keys_preserved": 85,
+  "active_labels_unique": 187,
+  "latex_warnings": 0,
+  "abstract_including_keywords_one_page": true,
+  "source_sha256": {
+    "Main.tex": "899e3b1e7e057300683ee05ae4c7c80893d47b16fb9b3d2c4d0b0649524a2fa7",
+    "Main.pdf": "70db06b1617105cf2a9718ebdcf6a60603a74989f8981f02cd7a486bce4fac20",
+    "references.tex": "fb2d237d85ce7b92fe4a446c535e01eccf44a9a39b87e8586ff5ed6e9ae5d8a8"
+  },
+  "visual_review": {
+    "contact_sheets_cover_pages": [
+      1,
+      125
+    ],
+    "high_resolution_pages": [
+      3,
+      12,
+      66,
+      70,
+      79,
+      101,
+      104,
+      116,
+      117
+    ],
+    "material_layout_defects_found": false
+  },
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-19",
+  "status": "verified_publication_pending",
+  "base_thesis_commit": "a4d2324a73a4c52866dae2976c0dcaed2e2bf199",
+  "thesis_commit": "05f1739979c18068bf46f72839059219237b5e87",
+  "reporting_code_commit": "3598bfe645d5ab146f23ce91f2b22ee70899eb6a",
+  "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+  "github_thesis_branch": "thesis/final-report-20261117",
+  "backup_branch": "archive/before-examiner-polish-20261119",
+  "fitting_performed": false,
+  "bootstrap_sampling_performed": false,
+  "predictive_simulation_performed": false,
+  "verified_original_cells": 450,
+  "verified_robustness_cells": 825,
+  "reporting_tests": {
+    "new_tests_passed": 7,
+    "archive_integration_included": true,
+    "independent_portable_arithmetic_review_passed": true,
+    "ruff_passed": true,
+    "model_suite": "Not certified: default Python3.13 collection fails on missing modelling dependencies and historical AST/fixture guards. No model code or frozen environment changed.",
+    "model_suite_collection_errors": 26
+  },
+  "substantive_corrections": [
+    "Canonical four RQs and mapping to all eight original objectives",
+    "Primary Uno concordance aligned across methods, results, figure and conclusions",
+    "Matched accepted-fold prior comparison of coefficients, HR interval widths and directional probabilities",
+    "Saved full-model prior-predictive summaries and precise continuous variance-mixture interpretation",
+    "Divergence-only causes verified for 20 original and 55 robustness rejected outcomes",
+    "Attribution 102/1,640 failures classified by cohort/budget/seed; all Spearman-only with required top-five overlap retained",
+    "WHAS early calibration and absolute reduced-training IBS interpreted on correct scales",
+    "METABRIC PH findings discussed with shared PH assumption and nonlinear score distinction",
+    "Preserved 85 cited sources and added 12 verified primary methods/software/clinical shrinkage sources",
+    "Language, notation, callouts, typography, figures and frontmatter polished without new fits"
+  ],
+  "new_summary_provenance_sha256": "58f741e31359045dc0ddfaf410185b42be4c2dfafa8baa8c5bbf0b5f82e4b0c4",
+  "presentation_provenance_sha256": "b614f2fd7cdd29155e584cf334fd2b6d6b86fdd97d606ec1e401a83d4947a9c0",
+  "independent_numerical_audit": {
+    "failures": [],
+    "whas500_training_fraction_groups_checked": 6,
+    "whas500_training_fraction_fold_rows_checked": 60,
+    "posterior_groups_checked": 96,
+    "posterior_fit_feature_rows_checked": 1878,
+    "prior_groups_checked": 72,
+    "prior_fit_checks_checked": 1640,
+    "diagnostic_summary_rows_checked": 6,
+    "attribution_groups_checked": 36,
+    "attribution_raw_checked": 1640,
+    "all_passed": true
+  },
+  "independent_test_audit": {
+    "pytest": {
+      "command": "python -m pytest -q tests/test_examiner_presentation.py tests/test_examiner_summaries.py -k 'not frozen_sources_to_portable_report'",
+      "passed": 6,
+      "deselected": 1,
+      "reason_for_deselection": "Archive integration already run by evidence agent; this audit independently rechecks portable arithmetic and final output hashes."
+    },
+    "ruff": {
+      "files": [
+        "scripts/render_examiner_presentation.py",
+        "scripts/render_examiner_summaries.py",
+        "tests/test_examiner_presentation.py",
+        "tests/test_examiner_summaries.py"
+      ],
+      "passed": true
+    },
+    "presentation_source_review": {
+      "primary_discrimination_data_field": "uno_c_index_mean",
+      "primary_discrimination_axis_label": "Uno concordance (higher is better)",
+      "predictive_error_fields": [
+        "uno_c_index_sd",
+        "ibs_sd"
+      ],
+      "calibration_error_field": "standard_deviation",
+      "bars": "sample fold SD, correctly described in captions and provenance",
+      "partial_coverage": "accepted/25 labels and open markers",
+      "no_fitting_or_simulation": true
+    },
+    "remaining_material_fixes": []
+  }
+}

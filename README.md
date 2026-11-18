@@ -3,16 +3,15 @@
 
 ## Final thesis report
 
-The revised 120-page report, **Explainable Bayesian Survival Models**, incorporates the principal supervisor's corrections while preserving Ravi's manuscript structure and original results. It now reports matched-fold comparisons, saved predictive checks, calibration bootstrap intervals and curves, and the paired IBS bootstrap sensitivity. The bibliography retains all 85 cited sources.
+The polished 125-page report, **Explainable Bayesian Survival Models**, preserves Ravi's chapter structure and original results. It aligns the questions and objectives, strengthens interpretation of the existing evidence, adds matched-fold posterior and prior-predictive summaries, and clarifies diagnostic and attribution stability. All 85 previously cited sources remain; the bibliography now has 97 references.
 
 - [Read the current PDF](https://github.com/ravivramchandani/Bayesian-COX/blob/thesis/final-report-20261117/Main.pdf).
-- [Download the Overleaf source ZIP](reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19.zip).
+- [Download the Overleaf source ZIP](reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_polished.zip).
 - [Ravi's thesis instructions](docs/ravi_thesis_next_steps.md).
 - [Literature and methodology source checks](research/literature_methodology_20261117/README.md).
-- [Supervisor-correction verification](coordination/reviews/2026-11-19-supervisor-corrections.json).
-- [Previous manuscript assessment](assessment/Ravi_thesis_assessment_Codex_v3.md).
+- [Final correction and verification record](coordination/reviews/2026-11-19-examiner-polish.json).
 
-The source and saved PDF are published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and on the [GitHub thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117), revision `6f4539d`. All 47 original evidence outputs and original numerical table files are unchanged. Four supplementary tables and one calibration figure were derived from existing records; no models or bootstraps were rerun. The code and experiment records below remain available independently of thesis editing.
+The source and saved PDF are published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and on the [GitHub thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117), revision `05f1739`. The report has 43 tables and seven figures. All 47 original evidence outputs are unchanged. The source ZIP builds independently to identical text on all 125 pages. No model fitting, bootstrap sampling or predictive simulation was required.
 
 Code and reproducibility materials for a Master of Applied Technologies
 thesis at the School of Computing, Unitec.

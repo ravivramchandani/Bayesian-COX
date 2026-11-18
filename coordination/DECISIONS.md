@@ -1504,3 +1504,17 @@ Format:
   - Retain the specified corrected primary inference. Report the different WHAS500 conditional-bootstrap interval without promoting it to a complete-family superiority finding.
   - Generate new presentation files and portable CSVs from verified stored outputs. Preserve original cells, aggregates, table files and inference records; annotated robustness-table copies change prose only.
 - Consequences: The corrected report and independently verified source package are published for author review. No new fit, bootstrap sampling or predictive simulation is introduced. The original and post-hoc study distinctions remain intact.
+
+
+## ADR-057 - Final consistency and saved-evidence interpretation
+
+- Status: ACCEPTED
+- Date: 2026-11-19
+- Context: The owner authorised focused amendments following the independent examiner assessment and requested a polished report for submission and examiner review.
+- Decision:
+  - Preserve Ravi's latest source, all valid cited scholarship, the original likelihood, acceptance criteria and frozen primary results.
+  - Align RQs and objectives, make the specified primary Uno measure prominent, and distinguish descriptive comparisons from corrected primary inference.
+  - Summarise stored coefficients, HR interval widths, directional probabilities, prior-predictive behaviour and diagnostic/attribution failure causes in new portable presentation files. Treat matched-fold averages as descriptive summaries, not a pooled posterior.
+  - Explain the continuous variance mixture and relevant calibration/PH findings with their actual scales and assumptions. Retain the existing interpretation section rather than requiring a particular limitations heading.
+  - Add verified missing primary method/software citations and focused clinical-shrinkage context. Keep the owner's manuscript-content exclusions and avoid new experiments.
+- Consequences: The final 125-page report, 97-source bibliography and independently rebuilt source ZIP are delivered on the existing thesis branch and Overleaf project. Original evidence is unchanged. The work certifies the stated reporting checks; it does not represent a new model-suite pass or an examiner's grade.
