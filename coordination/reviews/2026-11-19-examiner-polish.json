@@ -41,7 +41,7 @@
   },
   "schema_version": "1.0.0",
   "date_nz": "2026-11-19",
-  "status": "verified_publication_pending",
+  "status": "completed_and_published",
   "base_thesis_commit": "a4d2324a73a4c52866dae2976c0dcaed2e2bf199",
   "thesis_commit": "05f1739979c18068bf46f72839059219237b5e87",
   "reporting_code_commit": "3598bfe645d5ab146f23ce91f2b22ee70899eb6a",
@@ -117,5 +117,10 @@
       "no_fitting_or_simulation": true
     },
     "remaining_material_fixes": []
-  }
+  },
+  "remote_heads_verified": {
+    "overleaf_main": "05f1739979c18068bf46f72839059219237b5e87",
+    "github_thesis_branch": "05f1739979c18068bf46f72839059219237b5e87"
+  },
+  "coordination_schemas_passed": true
 }
