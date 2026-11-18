@@ -1,6 +1,6 @@
 # Ravi: final thesis files
 
-The polished report is published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0), revision `041ecc1`. It starts from Ravi's latest edits at `a4d2324` and incorporates the supervisor corrections and final examiner-focused polish. The saved PDF has 125 pages, 97 cited references, 43 tables and seven figures.
+The polished report is published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0), revision `6bb61e6`. It starts from Ravi's latest edits at `a4d2324` and incorporates the supervisor corrections and final examiner-focused polish. The saved PDF has 125 pages, 97 cited references, 43 tables and seven figures.
 
 Questions and objectives are aligned throughout. The report now includes matched-fold posterior comparisons, stored prior-predictive checks, and diagnostic and attribution breakdowns, with clearer calibration and sensitivity interpretation. All 85 previously cited sources and all original results are preserved. The [verification record](../coordination/reviews/2026-11-19-examiner-polish.json) identifies the final files and completed checks.
 

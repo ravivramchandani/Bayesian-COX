@@ -6,7 +6,7 @@
   "source_zip": {
     "path": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_polished.zip",
     "files": 138,
-    "sha256": "d2475780c23a92f19957403fa97f17133b2ea6fd75e6c85d20d19b1b08031179",
+    "sha256": "dd7514d66c0f08dce03524d74e43d5058e33429139001d56f27c2c9fdb2100a3",
     "fresh_build_page_texts_matching": 125
   },
   "fresh_build_matching_page_texts": 125,
@@ -18,7 +18,7 @@
   "abstract_including_keywords_one_page": true,
   "source_sha256": {
     "Main.tex": "443a2b63ecbf74f52947af84c69148a39a3200db8fc0be28b67a57f888468901",
-    "Main.pdf": "9cd404d998b020b0ab8746f888d08571b88f5881120e7cc6e0bb6788617bff8e",
+    "Main.pdf": "0344dda72b78f7a02e8ac7d1a1c48c18fc0751ce467dfaa207a3cc8426cb1ecd",
     "references.tex": "fb2d237d85ce7b92fe4a446c535e01eccf44a9a39b87e8586ff5ed6e9ae5d8a8"
   },
   "visual_review": {
@@ -43,7 +43,7 @@
   "date_nz": "2026-11-19",
   "status": "completed_and_published",
   "base_thesis_commit": "a4d2324a73a4c52866dae2976c0dcaed2e2bf199",
-  "thesis_commit": "041ecc144ad29e1d99b45c8a724cd29a4f0c123d",
+  "thesis_commit": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f",
   "reporting_code_commit": "3598bfe645d5ab146f23ce91f2b22ee70899eb6a",
   "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
   "github_thesis_branch": "thesis/final-report-20261117",
@@ -119,26 +119,17 @@
     "remaining_material_fixes": []
   },
   "remote_heads_verified": {
-    "overleaf_main": "041ecc144ad29e1d99b45c8a724cd29a4f0c123d",
-    "github_thesis_branch": "041ecc144ad29e1d99b45c8a724cd29a4f0c123d"
+    "overleaf_main": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f",
+    "github_thesis_branch": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f"
   },
   "coordination_schemas_passed": true,
   "pdf_reproducibility": {
-    "unchanged_pages": 125,
-    "all_page_texts_unchanged": true,
-    "all_decoded_page_streams_unchanged": true,
+    "validated_revision": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f",
+    "pdf_sha256": "0344dda72b78f7a02e8ac7d1a1c48c18fc0751ce467dfaa207a3cc8426cb1ecd",
+    "independent_builds_byte_identical": true,
     "volatile_dates_omitted": true,
     "volatile_document_id_omitted": true,
-    "warnings": 0,
-    "pdf_sha256": "9cd404d998b020b0ab8746f888d08571b88f5881120e7cc6e0bb6788617bff8e",
-    "source_zip": {
-      "path": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_polished.zip",
-      "files": 138,
-      "sha256": "d2475780c23a92f19957403fa97f17133b2ea6fd75e6c85d20d19b1b08031179",
-      "fresh_build_page_texts_matching": 125
-    },
-    "independent_builds_byte_identical": true,
-    "editor_pdf_byte_identical": true
+    "latex_warnings": 0
   },
   "local_duplicate_cleanup": {
     "redundant_copies_removed": 22,
@@ -146,5 +137,34 @@
     "identical_to_historical_tracked_metadata": 1,
     "historical_metadata_commit": "1714e747cce8a62c3c6e0d0f229ffb773a0a918d",
     "unique_thesis_content_removed": false
+  },
+  "previous_pdf_reproducibility_checks": [
+    {
+      "unchanged_pages": 125,
+      "all_page_texts_unchanged": true,
+      "all_decoded_page_streams_unchanged": true,
+      "volatile_dates_omitted": true,
+      "volatile_document_id_omitted": true,
+      "warnings": 0,
+      "pdf_sha256": "9cd404d998b020b0ab8746f888d08571b88f5881120e7cc6e0bb6788617bff8e",
+      "source_zip": {
+        "path": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_polished.zip",
+        "files": 138,
+        "sha256": "d2475780c23a92f19957403fa97f17133b2ea6fd75e6c85d20d19b1b08031179",
+        "fresh_build_page_texts_matching": 125
+      },
+      "independent_builds_byte_identical": true,
+      "editor_pdf_byte_identical": true,
+      "validated_revision": "041ecc144ad29e1d99b45c8a724cd29a4f0c123d"
+    }
+  ],
+  "latest_owner_amendment": {
+    "revision": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f",
+    "change": "Removed Professor before Ali Keivanmarz in acknowledgements.",
+    "changed_pdf_pages": [
+      2
+    ],
+    "other_page_texts_unchanged": 124,
+    "ack_tex_sha256": "adfd5b3ba7a73b96ff17ac18a11ac1093becdd3fa246090815ffa3ba107e75b0"
   }
 }
