@@ -2,6 +2,8 @@
 
 The robustness analysis varied training information, follow-up truncation, baseline intervals, prior scales, predictors and preprocessing. It comprised 825 model--condition--fold outcomes, of which 770 were accepted. These outcomes involved 885 underlying Bayesian fits. A multiple-imputation outcome required all five imputation-specific fits to pass the diagnostic criteria; their subject-level survival predictions were then averaged. Training-size and censoring comparisons use ten outer pairs when complete; design and feature comparisons use five. Intervals use 2,000 paired hierarchical bootstrap replicates.
 
+Table~\ref{tab:gen-robustness-diagnostics} reports acceptance by condition and prior. Table~\ref{tab:gen-robustness-coverage} distinguishes complete, partial and unavailable paired effects. Table~\ref{tab:report-information} gives the largest specified information changes; a difference-in-differences is the change in the Normal-minus-comparator IBS contrast relative to full training. The complete set of effect estimates appears in Table~\ref{tab:gen-robustness-effects}.
+
 \input{report_summaries/supervisor_comparisons/table_robustness_diagnostics.tex}
 \input{report_summaries/supervisor_comparisons/table_robustness_coverage.tex}
 \input{tables/table_information_effects.tex}

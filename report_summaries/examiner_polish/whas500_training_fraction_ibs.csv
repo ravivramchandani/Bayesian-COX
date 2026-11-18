@@ -1,0 +1,7 @@
+dataset,model_key,training_fraction,n_matched_folds,mean_ibs,sd_ibs,matching
+whas500,bayesian_normal,1.0,10,0.15399416943665953,0.01404135041720766,all three priors complete under quarter training; full training uses the same folds
+whas500,bayesian_normal,0.25,10,0.16497083279116945,0.011898913737034021,all three priors complete under quarter training; full training uses the same folds
+whas500,bayesian_horseshoe,1.0,10,0.15329640130367042,0.013972740166660204,all three priors complete under quarter training; full training uses the same folds
+whas500,bayesian_horseshoe,0.25,10,0.15794896667989292,0.011035565002667431,all three priors complete under quarter training; full training uses the same folds
+whas500,bayesian_spike_slab,1.0,10,0.15389683910648433,0.014003925945570496,all three priors complete under quarter training; full training uses the same folds
+whas500,bayesian_spike_slab,0.25,10,0.16482424386596228,0.01190428985215764,all three priors complete under quarter training; full training uses the same folds

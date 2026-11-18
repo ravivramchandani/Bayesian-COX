@@ -1,0 +1,35 @@
+\begin{table}[htbp]
+\centering
+\begingroup\singlespacing\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Directional posterior probabilities and continuous-mixture weights across matched folds.}\label{tab:exam-posterior-direction}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lllrr@{}}
+\toprule Cohort & Predictor & Prior & Mean $P(\beta>0)$ & Mean weight\\\midrule
+GBSG2 & Age & N & 0.247 & --\\
+GBSG2 & Age & H & 0.448 & --\\
+GBSG2 & Age & S & 0.266 & 0.356\\
+GBSG2 & Positive nodes & N & $>0.999$ & --\\
+GBSG2 & Positive nodes & H & $>0.999$ & --\\
+GBSG2 & Positive nodes & S & $>0.999$ & 0.388\\
+WHAS500 & Age & N & $>0.999$ & --\\
+WHAS500 & Age & H & $>0.999$ & --\\
+WHAS500 & Age & S & $>0.999$ & 0.471\\
+WHAS500 & Heart rate & N & $>0.999$ & --\\
+WHAS500 & Heart rate & H & $>0.999$ & --\\
+WHAS500 & Heart rate & S & $>0.999$ & 0.401\\
+METABRIC & Age & N & $>0.999$ & --\\
+METABRIC & Age & H & $>0.999$ & --\\
+METABRIC & Age & S & $>0.999$ & 0.451\\
+METABRIC & NPI & N & $>0.999$ & --\\
+METABRIC & NPI & H & $>0.999$ & --\\
+METABRIC & NPI & S & $>0.999$ & 0.396\\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip
+\begin{minipage}{\textwidth}
+All entries average the separate matched-fold posterior summaries; they do not define a pooled posterior. Probabilities at the displayed bounds are rounded conservatively. The weight is the stored continuous-mixture variance weight, available for S only; it is not a probability of a non-zero coefficient. N: Normal; H: Horseshoe; S: continuous Spike-and-Slab. Fold counts and scales match Table~\ref{tab:exam-posterior-summary}.
+\end{minipage}
+\endgroup
+\end{table}

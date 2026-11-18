@@ -1,0 +1,7 @@
+programme,dataset,evaluated_outcomes,failed_outcomes,divergence_only_failures,failures_involving_divergences,failures_involving_rhat,failures_involving_ess,failures_involving_bfmi,failures_involving_tree_depth,minimum_final_divergences,maximum_final_divergences,maximum_tree_depth_reached_among_failures
+Original,gbsg2,75,18,18,18,0,0,0,0,1,7,9
+Original,whas500,75,0,0,0,0,0,0,0,0,0,
+Original,metabric,75,2,2,2,0,0,0,0,1,1,10
+Robustness,gbsg2,255,40,40,40,0,0,0,0,1,10,9
+Robustness,whas500,270,3,3,3,0,0,0,0,1,2,8
+Robustness,metabric,300,12,12,12,0,0,0,0,1,8,10

@@ -1,0 +1,23 @@
+\begin{table}[htbp]
+\centering
+\begingroup\singlespacing\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Recorded final-attempt causes of diagnostic rejection.}\label{tab:exam-diagnostic-failures}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}llrrrrl@{}}
+\toprule Analysis & Cohort & Outcomes & Rejected & Divergence only & Divergences & Other gates\\\midrule
+Original & GBSG2 & 75 & 18 & 18 & 1--7 & 0/0/0/0\\
+Original & WHAS500 & 75 & 0 & 0 & 0--0 & 0/0/0/0\\
+Original & METABRIC & 75 & 2 & 2 & 1--1 & 0/0/0/0\\
+Robustness & GBSG2 & 255 & 40 & 40 & 1--10 & 0/0/0/0\\
+Robustness & WHAS500 & 270 & 3 & 3 & 1--2 & 0/0/0/0\\
+Robustness & METABRIC & 300 & 12 & 12 & 1--8 & 0/0/0/0\\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip
+\begin{minipage}{\textwidth}
+Outcomes count all three Bayesian priors; every rejected outcome was a Horseshoe fit. Divergences are the range in the final attempt among rejected outcomes (0--0 denotes no rejections). Other gates report counts of rejections involving $\widehat R$/ESS/BFMI/tree depth, in that order. Failures are classified from the recorded diagnostic flags, rather than from the thresholds alone. The configured default tree-depth ceiling was 10; maximum reached depth and ceiling-hit counts are retained separately in the supporting summary.
+\end{minipage}
+\endgroup
+\end{table}

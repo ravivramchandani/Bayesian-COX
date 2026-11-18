@@ -9,3 +9,16 @@ Table~\ref{tab:gen-diagnostics} gives the outcome counts for every cohort and mo
 Table~\ref{tab:sup-predictive-checks} summarises the saved checks from the first accepted attempt in each Bayesian outer fit. Total and interval-specific event counts were compared with Poisson replications at the observed exposures. Separately, training Kaplan--Meier estimates were compared with posterior intervals for mean fitted survival at three training-event quartiles. These quantities describe count replication and fitted-survival agreement, respectively; they were reported separately from the MCMC acceptance criteria.
 
 \input{report_summaries/supervisor_checks/table_predictive_checks.tex}
+
+
+\section{Prior Predictive Survival}
+
+Table~\ref{tab:exam-prior-predictive} summarises the stored full-model prior predictive survival distributions at one and two times each outer-training median event time. The summaries use the training predictor distribution and include coefficient and baseline uncertainty. The accepted-fit counts differ across priors, as shown; quantiles are averaged across fits rather than pooled across fits.
+
+\input{report_summaries/examiner_polish/table_prior_predictive.tex}
+
+\section{Diagnostic Rejection Criteria}
+
+Table~\ref{tab:exam-diagnostic-failures} identifies the recorded criteria responsible for final rejection in the original and robustness analyses. Every rejection involved a Horseshoe model and divergent transitions only. The remaining acceptance gates did not account for additional rejections.
+
+\input{report_summaries/examiner_polish/table_diagnostic_failures.tex}

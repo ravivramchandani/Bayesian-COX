@@ -1,7 +1,12 @@
 \chapter{Bayesian Posterior Explainability}\label{appendix-i-bayesian-posterior-explainability}\label{app:explanation}
 
 \section{Prior-Specific Posterior Quantities}
-Table~\ref{tab:gen-prior-signals} reports first-repeat, first-fold prior-specific quantities. The continuous Spike-and-Slab mixing weight is an auxiliary parameter rather than a discrete inclusion probability. The Horseshoe local-scale proxy omits the global scale and regularising slab and is interpreted accordingly.
+Table~\ref{tab:gen-prior-signals} reports prior-specific quantities from repeat 1, fold 1. The continuous Spike-and-Slab mixing weight is an auxiliary variance parameter rather than a discrete inclusion probability. For Horseshoe, the reported local-scale proxy is
+\[
+\overline{\kappa}^{\mathrm{local}}_k
+=\operatorname{E}\!\left[\frac{1}{1+q_k^2}\,\middle|\,\mathcal{D}\right],
+\]
+where $q_k$ is the local scale. Larger values correspond to smaller local scales. The proxy omits the global scale and regularising slab, so it is not the total coefficient shrinkage factor. The GBSG2 Horseshoe example is absent because that particular outer fit did not meet the diagnostic criteria; seven other GBSG2 Horseshoe fits were accepted.
 
 \input{tables/table_prior_signals.tex}
 
@@ -14,3 +19,17 @@ The secondary comparison in Table~\ref{tab:gen-explanation-cross-model} matches 
 Table~\ref{tab:gen-explanation-top-groups} summarises the three groups with the largest mean posterior expected absolute contributions. Mean rank, top-five frequency and resampling intervals describe how their positions vary.
 
 \input{tables/table_explanation_top_groups.tex}
+
+
+\section{Matched-Fold Posterior Comparisons}
+
+Tables~\ref{tab:exam-posterior-summary} and~\ref{tab:exam-posterior-direction} compare selected named predictors on folds accepted under all three priors: seven in GBSG2, 25 in WHAS500 and 23 in METABRIC. Each entry averages a stored summary from separate fitted posteriors. The interval widths are on the hazard-ratio scale; neither the mean width nor the fold average of a coefficient is a pooled posterior interval. The mean absolute paired difference from Normal measures sensitivity of the posterior mean to prior configuration, rather than shrinkage towards zero.
+
+\input{report_summaries/examiner_polish/table_posterior_summary.tex}
+\input{report_summaries/examiner_polish/table_posterior_direction.tex}
+
+\section{Attribution Sampling Stability}
+
+Table~\ref{tab:exam-attribution-failures} separates the 102 comparisons outside tolerance by cohort, prior, adjacent budget and seed. These are comparisons within fitted models, not independent validation studies. All failures arose from Spearman correlation below 0.95; none arose from having fewer than four shared top-five groups.
+
+\input{report_summaries/examiner_polish/table_attribution_failures.tex}

@@ -1,0 +1,5 @@
+dataset,feature,reason
+metabric,her2_status=__MISSING__,not present in every matched fit
+metabric,inferred_menopausal_state=__MISSING__,not present in every matched fit
+metabric,pam50_+_claudin-low_subtype=__MISSING__,not present in every matched fit
+metabric,pr_status=__MISSING__,not present in every matched fit
