@@ -49,7 +49,8 @@ def select_rows(rows: list[dict[str, str]], dataset: str,
     return [by_model[model] for model in MODELS]
 
 
-def draw_panel(ax, rows, mean: str, sd: str, count: str) -> None:
+def draw_panel(ax: plt.Axes, rows: list[dict[str, str]], mean: str,
+               sd: str, count: str) -> None:
     """Plot means and sample SDs, distinguishing partial fold coverage."""
     for index, (row, color) in enumerate(zip(rows, COLORS, strict=True)):
         partial = int(row[count]) < 25
