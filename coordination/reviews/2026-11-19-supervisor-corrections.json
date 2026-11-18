@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-19",
+  "status": "completed_and_published",
+  "review_basis": "Principal-supervisor comments supplied by the owner; focused correction pass authorised by owner.",
+  "base_thesis_commit": "132f7aa955af599706977a810e95e34360460f6f",
+  "thesis_commit": "6f4539d2673930eda347a340db6b6aeaf528d7f8",
+  "reporting_code_commit": "6fd811e419dbf2e782a9ee78865cd9a272ba3a8c",
+  "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+  "github_thesis_branch": "thesis/final-report-20261117",
+  "backup_branch": "archive/before-supervisor-corrections-20261119",
+  "pdf_pages": 120,
+  "pdf_sha256": "59f01102919a886dd1dc81b30e2c856759806614415b1bc1ade78f22fe86fd40",
+  "cited_references": 85,
+  "tables": 38,
+  "figures": 7,
+  "original_table_numbers_preserved": 34,
+  "source_zip": {
+    "path": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19.zip",
+    "files": 118,
+    "sha256": "b83e42a8b582c7745fb838236709a13a233442545934326043193c2329930827",
+    "fresh_build_page_texts_matching": 120
+  },
+  "comment_dispositions": [
+    {
+      "item": "hazard_definition",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Already correct; preserved division by Delta t and checked the printed equation."
+    },
+    {
+      "item": "signed_IBS_range",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Explicit mathematical minus sign retained for -0.000008; primary intervals described as including zero."
+    },
+    {
+      "item": "training_fraction_and_effect",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Corrected to retaining 25% of the training observations, and a change in the Normal-minus-Horseshoe contrast relative to full training."
+    },
+    {
+      "item": "prior_notation",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Baseline interval rates use lambda_j; Horseshoe local scales use q_k consistently."
+    },
+    {
+      "item": "robustness_units",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "825 model-condition-fold outcomes, 770 accepted and 885 underlying fits. All five imputation-specific fits must pass. Both active robustness-table notes use the correct units."
+    },
+    {
+      "item": "unequal_fold_coverage",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Added post-hoc descriptive means for all six models on identical Horseshoe-accepted folds: seven in GBSG2, 25 in WHAS500 and 23 in METABRIC. Original primary coverage rules remain unchanged."
+    },
+    {
+      "item": "no_predictive_disadvantage",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Replaced with no difference detected in the estimable corrected primary comparisons."
+    },
+    {
+      "item": "proportional_hazards",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Connected the CoxPH age and NPI rejections in all 25 overlapping METABRIC training fits to the shared constant-effect assumption and Bayesian hazard-ratio interpretation."
+    },
+    {
+      "item": "SHAP_related_summaries",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Explained posterior-draw uncentred contributions versus centred posterior-mean log-risk SHAP, categorical-reference dependence, and the separate 102 of 1,640 stability checks outside tolerance."
+    },
+    {
+      "item": "predictive_checks",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Reported 205 total-event checks, 1,230 interval-count checks and 615 fitted-survival comparisons. Each observed training quantity lies within its stored interval. Complete saved summaries are included."
+    },
+    {
+      "item": "calibration_uncertainty",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Added nine first-fold Normal calibration parameter and bootstrap-interval examples and 15 grouped curve points. Portable CSVs contain all 3,870 parameter rows and 6,450 curve bins. The different uncertainty measures are labelled separately."
+    },
+    {
+      "item": "paired_IBS_bootstrap",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Reported all five saved complete contrasts, including the positive WHAS500 Normal-minus-Spike-and-Slab bootstrap interval alongside its zero-containing corrected primary interval. No complete-family superiority claim is added."
+    },
+    {
+      "item": "AUC_definition",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Specified three training-event quartile horizons, model-specific time-constant risk scores, survival-weighted time summary and arithmetic averaging across accepted folds."
+    },
+    {
+      "item": "Uno_truncation",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Specified explicit tau at the final training horizon, together with administrative recensoring immediately after tau."
+    },
+    {
+      "item": "abstract",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Used right-censored time-to-event wording and kept the complete abstract and keywords on one page."
+    },
+    {
+      "item": "sampler_and_comparator_wording",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Described sensitivity to NUTS target acceptance, RSF mean IBS, secondary contrasts and the paired Normal-minus-CoxPH zero-containing intervals precisely; unrelated student wording absent."
+    },
+    {
+      "item": "RSF_DeepSurv_ordering",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Used larger estimated IBS reduction and distinguished this descriptive ordering from a direct RSF-versus-DeepSurv test."
+    },
+    {
+      "item": "diagnostic_finiteness_consistency",
+      "status": "addressed_or_verified_already_correct",
+      "resolution": "Aligned the results table and objectives with finiteness of diagnostic aggregates rather than a claimed all-posterior-draw gate."
+    }
+  ],
+  "original_confirmatory_cells_hash_verified": 450,
+  "original_evidence_outputs_hash_verified": 47,
+  "original_cells_and_aggregates_unchanged": true,
+  "original_numerical_table_files_unchanged": true,
+  "model_code_changed": false,
+  "new_model_fitting": false,
+  "new_bootstrap_sampling": false,
+  "new_predictive_simulation": false,
+  "saved_output_reporting": {
+    "matched_fold_summary_rows": 18,
+    "saved_paired_bootstrap_contrasts": 5,
+    "accepted_Bayesian_fits": 205,
+    "accepted_calibration_records": 430,
+    "portable_predictive_rows_including_prior_checks": 3690,
+    "portable_calibration_parameter_rows": 3870,
+    "portable_calibration_curve_bins": 6450,
+    "new_presentation_and_CSV_outputs": 15
+  },
+  "checks": {
+    "independent_scientific_audit": "passed",
+    "raw_cell_and_aggregate_value_comparisons": "passed",
+    "focused_reporting_tests": "7 passed",
+    "ruff": "passed on both new scripts and tests",
+    "coordination_schemas": "passed",
+    "latex_build": "passed without warnings",
+    "source_ZIP_independent_build": "All 120 page texts match",
+    "citations": "85 resolved",
+    "active_labels": "182 unique",
+    "original_evidence_hashes": "47 unchanged",
+    "focused_visual_review": "passed; final abstract, hazard, metric definitions, results, implications, four new tables, notation, robustness notes and calibration curves",
+    "full_model_test_attempt": "make test PYTHON=python3: schema validation passed; default Python 3.15 has no pytest. No full model-suite pass is claimed. Seven focused reporting tests passed in the isolated Python 3.14 environment."
+  },
+  "scientific_check": "coordination/reviews/2026-11-19-supervisor-science-check.md",
+  "artifact_check": "coordination/reviews/2026-11-19-supervisor-artifact-checks.json",
+  "new_outputs": [
+    "report_summaries/supervisor_checks/",
+    "report_summaries/supervisor_comparisons/"
+  ]
+}

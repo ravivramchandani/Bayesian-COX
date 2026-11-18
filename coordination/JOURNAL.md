@@ -1,5 +1,12 @@
 # JOURNAL
 
+## 2026-11-19 - Applied the principal supervisor's corrections
+
+Used Ravi's latest Overleaf revision `132f7aa` as the base and preserved it on a backup branch. Corrected the specified wording, numerical signs and interpretation, unified prior notation, distinguished model--condition--fold outcomes from underlying fits, and specified the implemented AUC and Uno procedures. The already-correct hazard denominator was retained. The shared PH assumption and the dependence of grouped importance on coding are now linked to the reported posterior interpretation.
+
+Verified all 450 stored original cell hashes and extracted saved predictive checks and calibration uncertainty. All 205 event-total, 1,230 interval-count and 615 fitted-survival comparisons contain the observed training quantity within their stored intervals. Added fold-specific calibration bootstrap examples and grouped curves, with distinct uncertainty labels. Reaggregated all six model arms over the original Horseshoe-accepted folds and reported all five saved paired-bootstrap contrasts. The WHAS500 Normal-minus-Spike bootstrap interval excludes zero while the corrected primary interval includes it; both are retained. No fitting, bootstrap sampling or predictive simulation occurred.
+
+The published report at `6f4539d` has 120 pages, 85 cited sources, 38 tables and seven figures. All 34 original table numbers and all 47 evidence outputs are unchanged. Independent scientific review, seven focused tests, Ruff and schema checks passed. The source-only 118-file ZIP independently builds to identical text on all 120 pages; no unresolved citations, duplicate labels or layout warnings remain. Current verification is `coordination/reviews/2026-11-19-supervisor-corrections.json`.
 ## 2026-11-17 - Strengthened the literature review and methodology
 
 Investigated Ravi's original 95-source bibliography and exact citation contexts, used the completed Consensus dossier for discovery, and used Undermind metadata lookups and three main PDFs. Broader Undermind search was quota-limited. Primary claims were checked against accessible full text or explicitly identified abstracts. The source record distinguishes these access levels. Sixty-eight original main PDFs and three additional methods PDFs were verified and registered in the central paper bank.

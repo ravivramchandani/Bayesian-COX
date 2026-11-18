@@ -1,5 +1,17 @@
 # HANDOFF
 
+## Supervisor corrections completed - 2026-11-19
+
+The owner authorised the recommended response to the principal supervisor's comments. Revision `6f4539d` starts from Ravi's latest Overleaf source `132f7aa`; the pre-correction tree is preserved on `archive/before-supervisor-corrections-20261119`. The source and saved PDF are published in Ravi's correct Overleaf project and GitHub branch `thesis/final-report-20261117`.
+
+The report now has 120 pages, 85 references, 38 tables and seven figures. All 34 original table numbers and all 47 original evidence outputs are preserved. The corrections cover the signed IBS range and interval wording, training-size difference-in-differences, prior notation, 825 outcomes versus 885 fits, imputation acceptance, matched-fold comparison, shared PH assumptions, SHAP coding dependence, exact AUC/Uno definitions and the requested language fixes. The hazard equation already contained its denominator and was verified without changing it.
+
+Existing records supply four new tables and one calibration figure: matched-fold summaries, predictive checks, calibration bootstrap examples and paired IBS bootstrap sensitivity. Full portable CSVs accompany them in the thesis source. All 450 original cell hashes were verified, and an independent check reproduced every new reported estimate from those records. The positive WHAS500 conditional-bootstrap interval is reported alongside its zero-containing corrected primary interval. No model, bootstrap or predictive simulation was rerun, and no original inference was replaced.
+
+Seven focused reporting tests, Ruff, coordination schemas, a warning-free LaTeX build and focused visual review passed. The source ZIP contains 118 files and independently compiles to identical text on every one of the 120 pages. The default full model-suite attempt could not collect pytest in Python 3.15; no full model-test pass is claimed. Model code and model environments were unchanged.
+
+Use [Ravi's editing steps](../docs/ravi_thesis_next_steps.md). Verification and the comment dispositions are in [2026-11-19-supervisor-corrections.json](reviews/2026-11-19-supervisor-corrections.json), with separate scientific and artifact checks. Earlier entries below describe their own manuscript versions.
+
 ## Literature and methodology revised - 2026-11-17
 
 The owner's requested investigation and revision of Chapters 2 and 3 is complete. The report preserves Ravi's literature section structure, all originally discussed papers and all 63 sources cited in his supplied manuscript. It restores the 25 previously removed cited sources in accurate contexts, adds two useful original sources and three primary methods sources, and retains the previous 55 entries. The revised bibliography has 85 cited sources.

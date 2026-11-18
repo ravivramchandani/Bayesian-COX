@@ -1,0 +1,177 @@
+{
+  "base_revision": "132f7aa955af599706977a810e95e34360460f6f",
+  "source_editing": false,
+  "checks": {
+    "generated/provenance.json": {
+      "output_count": 42,
+      "mismatches": [],
+      "status": "pass"
+    },
+    "report_summaries/provenance.json": {
+      "output_count": 5,
+      "mismatches": [],
+      "status": "pass"
+    },
+    "original_evidence_outputs": {
+      "verified": 47,
+      "status": "pass"
+    },
+    "original_tables_and_evidence_unchanged": {
+      "command": "git diff 132f7aa -- tables generated report_summaries",
+      "diff_bytes": 0,
+      "status": "pass"
+    },
+    "supervisor_checks": {
+      "outputs_verified": 9,
+      "sources_verified": 455,
+      "script_verified": "render_supervisor_checks.py",
+      "mismatches": [],
+      "status": "pass"
+    },
+    "supervisor_comparisons": {
+      "outputs_verified": 6,
+      "sources_verified": 4,
+      "script_verified": "render_supervisor_comparisons.py",
+      "mismatches": [],
+      "status": "pass"
+    },
+    "citations_and_labels": {
+      "cited_keys": 85,
+      "bibliography_items": 85,
+      "active_labels": 182,
+      "duplicate_labels": [],
+      "status": "pass"
+    },
+    "current_build": {
+      "latex_errors": 0,
+      "overfull_boxes": 0,
+      "undefined": 0,
+      "duplicate_label_warnings": 0,
+      "latex_warnings": []
+    },
+    "numbering": {
+      "original_table_count": 34,
+      "original_table_numbers": [
+        "3.1",
+        "3.2",
+        "3.3",
+        "3.4",
+        "3.5",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.5",
+        "4.6",
+        "4.7",
+        "4.8",
+        "4.9",
+        "4.10",
+        "5.1",
+        "A.1",
+        "B.1",
+        "C.1",
+        "C.2",
+        "D.1",
+        "F.1",
+        "G.1",
+        "G.2",
+        "H.1",
+        "H.2",
+        "H.3",
+        "I.1",
+        "I.2",
+        "I.3",
+        "J.1",
+        "J.2",
+        "J.3",
+        "J.4"
+      ],
+      "current_table_count": 38,
+      "current_table_numbers": [
+        "3.1",
+        "3.2",
+        "3.3",
+        "3.4",
+        "3.5",
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.5",
+        "4.6",
+        "4.7",
+        "4.8",
+        "4.9",
+        "4.10",
+        "5.1",
+        "A.1",
+        "B.1",
+        "C.1",
+        "C.2",
+        "C.3",
+        "D.1",
+        "F.1",
+        "F.2",
+        "G.1",
+        "G.2",
+        "H.1",
+        "H.2",
+        "H.3",
+        "H.4",
+        "H.5",
+        "I.1",
+        "I.2",
+        "I.3",
+        "J.1",
+        "J.2",
+        "J.3",
+        "J.4"
+      ],
+      "current_figures": [
+        "3.1",
+        "3.2",
+        "4.1",
+        "4.2",
+        "4.3",
+        "E.1",
+        "H.1"
+      ],
+      "all_original_table_numbers_preserved": true,
+      "status": "pass"
+    },
+    "source_zip": {
+      "path": "/Users/macuser/Documents/Github/bayesian_survival_for_prediction-disease/thesis-overleaf/build/supervisor-corrections-20261119/Ravi_Thesis_Overleaf_2026-11-19.zip",
+      "files": 118,
+      "bytes": 966918,
+      "sha256": "b83e42a8b582c7745fb838236709a13a233442545934326043193c2329930827",
+      "source_manifest_sha256": "caa379f785028bdf649e92ccdca9e4578f21ea9b50f46e3ee9a1a3614a8a6522",
+      "new_supervisor_files": 17,
+      "status": "pass"
+    },
+    "fresh_zip_build": {
+      "command": "latexmk -pdf -interaction=nonstopmode -halt-on-error Main.tex",
+      "exit_code": 0,
+      "latex_errors": 0,
+      "overfull_boxes": 0,
+      "undefined": 0,
+      "duplicate_label_warnings": 0,
+      "latex_warnings": []
+    },
+    "pdf_comparison": {
+      "current_pages": 120,
+      "fresh_pages": 120,
+      "mismatching_pages": [],
+      "current_pdf_sha256": "59f01102919a886dd1dc81b30e2c856759806614415b1bc1ade78f22fe86fd40",
+      "fresh_pdf_sha256": "88fe4a4215b14f8f68577f1260bd1c771ef24a597b4ebb85ba04921178393b27",
+      "page_text_sha256": "10be9e2afb80b49deb6655581134507d193c64052a86ac24217af9e1be1dfb95",
+      "status": "pass"
+    },
+    "source_freeze": {
+      "all_source_files_unchanged": true,
+      "pdf_unchanged": true,
+      "status": "pass"
+    }
+  },
+  "overall_status": "pass"
+}

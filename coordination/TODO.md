@@ -16,7 +16,13 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
-## Current manuscript - 2026-11-17
+## Current manuscript - 2026-11-19
+
+The principal supervisor's corrections are implemented and verified under ADR-056. The current report at `6f4539d` has 120 pages, 85 cited sources, 38 tables and seven figures. It starts from Ravi's latest edits and adds existing predictive checks, calibration uncertainty/curves, conditional matched-fold summaries and paired-bootstrap sensitivity. Original scientific outcomes and all 47 evidence assets are unchanged. No fitting or new simulation was required.
+
+The source ZIP independently matches every final PDF page. Seven focused tests, Ruff, coordination schemas, independent scientific checks and focused layout review passed. Current files and editing steps are in `docs/ravi_thesis_next_steps.md`; the receipt is `reviews/2026-11-19-supervisor-corrections.json`. Author review and final submission follow the existing process.
+
+## Previous manuscript checkpoint - 2026-11-17
 
 The requested literature and methodology investigation and revision is complete. Its [source evidence](../research/literature_methodology_20261117/README.md) covers all 95 original bibliography entries, restored-source claims, primary-paper access and implementation checks. All 25 previously removed cited sources are restored in accurate contexts. The bibliography now has 85 cited sources, with all 63 originally cited sources preserved.
 

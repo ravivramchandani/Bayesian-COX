@@ -1491,3 +1491,16 @@ Format:
   - Preserve all frozen evidence and the original/post-hoc distinction. Do not fit new models. Continue the owner's manuscript-content exclusions.
   - Keep the preceding broad rewrite and its version-specific assessments as historical records. Do not apply their grade recommendation to this restored version.
 - Consequences: The restored report is published at `a57cd31` on Overleaf and the GitHub thesis branch. All 47 evidence assets are unchanged, and the source ZIP independently rebuilds the 109-page report. This decision supersedes ADR-053/ADR-054 only where their editorial approach conflicts with preserving the author's manuscript.
+
+## ADR-056 - Report saved checks and descriptive matched-fold comparisons
+
+- Status: ACCEPTED
+- Date: 2026-11-19
+- Context: The owner authorised focused corrections following the principal supervisor's comments on Ravi's latest manuscript.
+- Decision:
+  - Preserve the latest author source and original evidence. Correct mathematical notation, estimand wording and cross-section consistency without changing the frozen study or model code.
+  - Report the saved count checks, fitted-survival comparisons, calibration bootstrap intervals/curves and paired IBS bootstrap sensitivity. Keep within-fold bootstrap uncertainty, between-fold standard deviations and bin-specific Kaplan--Meier intervals distinct.
+  - Add a post-hoc descriptive comparison of all six models on the same original Horseshoe-accepted folds: seven in GBSG2, 25 in WHAS500 and 23 in METABRIC. Label its conditioning explicitly; it does not restore unavailable original primary contrasts.
+  - Retain the specified corrected primary inference. Report the different WHAS500 conditional-bootstrap interval without promoting it to a complete-family superiority finding.
+  - Generate new presentation files and portable CSVs from verified stored outputs. Preserve original cells, aggregates, table files and inference records; annotated robustness-table copies change prose only.
+- Consequences: The corrected report and independently verified source package are published for author review. No new fit, bootstrap sampling or predictive simulation is introduced. The original and post-hoc study distinctions remain intact.
