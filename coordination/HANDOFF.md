@@ -2,7 +2,7 @@
 
 ## Final examiner polish completed - 2026-11-19
 
-Revision `6bb61e6` preserves Ravi's latest source `a4d2324` and strengthens the existing report without new experiments. It aligns four RQs and all eight objectives, foregrounds Uno concordance, explains clinical calibration and PH findings, and reports saved matched-fold posterior, prior-predictive, divergence and attribution summaries. All 85 earlier citation keys remain; 12 verified primary method/software and clinical-shrinkage sources bring the total to 97.
+Revision `d7cbd01` preserves Ravi's latest source `a4d2324` and strengthens the existing report without new experiments. It aligns four RQs and all eight objectives, foregrounds Uno concordance, explains clinical calibration and PH findings, and reports saved matched-fold posterior, prior-predictive, divergence and attribution summaries. All 85 earlier citation keys remain; 12 verified primary method/software and clinical-shrinkage sources bring the total to 97.
 
 The final PDF has 125 pages, 43 tables and seven figures. All 47 original evidence outputs remain unchanged; 450 original and 825 robustness cells were verified. Independent arithmetic and scientific checks, seven new reporting tests and Ruff passed. Both the working-source and fresh 138-file source-ZIP builds are warning-free and have identical text on all 125 pages. Full-page contact sheets and focused high-resolution checks show no material layout defects. The default full model-suite attempt is not certified because its Python environment lacks modelling dependencies and fails historical fixture guards; no model code or frozen environment changed.
 

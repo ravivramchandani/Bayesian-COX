@@ -11,7 +11,7 @@ The polished 125-page report, **Explainable Bayesian Survival Models**, preserve
 - [Literature and methodology source checks](research/literature_methodology_20261117/README.md).
 - [Final correction and verification record](coordination/reviews/2026-11-19-examiner-polish.json).
 
-The source and saved PDF are published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and on the [GitHub thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117), revision `6bb61e6`. The report has 43 tables and seven figures. All 47 original evidence outputs are unchanged. The source ZIP builds independently to identical text on all 125 pages. No model fitting, bootstrap sampling or predictive simulation was required.
+The source and saved PDF are published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and on the [GitHub thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117), revision `d7cbd01`. The report has 43 tables and seven figures. All 47 original evidence outputs are unchanged. The source ZIP builds independently to identical text on all 125 pages. No model fitting, bootstrap sampling or predictive simulation was required.
 
 Code and reproducibility materials for a Master of Applied Technologies
 thesis at the School of Computing, Unitec.

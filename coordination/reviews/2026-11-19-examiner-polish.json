@@ -43,7 +43,7 @@
   "date_nz": "2026-11-19",
   "status": "completed_and_published",
   "base_thesis_commit": "a4d2324a73a4c52866dae2976c0dcaed2e2bf199",
-  "thesis_commit": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f",
+  "thesis_commit": "d7cbd019bef770c557aff99fd627429f3323dcb8",
   "reporting_code_commit": "3598bfe645d5ab146f23ce91f2b22ee70899eb6a",
   "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
   "github_thesis_branch": "thesis/final-report-20261117",
@@ -119,17 +119,21 @@
     "remaining_material_fixes": []
   },
   "remote_heads_verified": {
-    "overleaf_main": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f",
-    "github_thesis_branch": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f"
+    "overleaf_main": "d7cbd019bef770c557aff99fd627429f3323dcb8",
+    "github_thesis_branch": "d7cbd019bef770c557aff99fd627429f3323dcb8"
   },
   "coordination_schemas_passed": true,
   "pdf_reproducibility": {
-    "validated_revision": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f",
+    "validated_revision": "d7cbd019bef770c557aff99fd627429f3323dcb8",
     "pdf_sha256": "0344dda72b78f7a02e8ac7d1a1c48c18fc0751ce467dfaa207a3cc8426cb1ecd",
     "independent_builds_byte_identical": true,
     "volatile_dates_omitted": true,
     "volatile_document_id_omitted": true,
-    "latex_warnings": 0
+    "latex_warnings": 0,
+    "isolated_build_verified": true,
+    "poppler_verified": true,
+    "committed_pdf_blob_verified": true,
+    "source_zip_inputs_verified_identical": 138
   },
   "local_duplicate_cleanup": {
     "redundant_copies_removed": 22,
@@ -159,7 +163,7 @@
     }
   ],
   "latest_owner_amendment": {
-    "revision": "6bb61e6468c4201f7ad3bc5eb1517ec30610584f",
+    "revision": "d7cbd019bef770c557aff99fd627429f3323dcb8",
     "change": "Removed Professor before Ali Keivanmarz in acknowledgements.",
     "changed_pdf_pages": [
       2
