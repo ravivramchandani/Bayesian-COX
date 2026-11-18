@@ -48,7 +48,7 @@ The sensitivity analysis examined training information, administrative censoring
 
 \input{figures/diagnostic_decisions.tex}
 
-\section{Data set and Cohort Preparation.}\label{data-set-and-cohort-preparation.}
+\section{Dataset and Cohort Preparation.}\label{data-set-and-cohort-preparation.}
 
 \subsection{Healthcare Cohort Selection}\label{healthcare-cohort-selection}
 
@@ -60,7 +60,7 @@ METABRIC (Molecular Taxonomy of Breast Cancer International Consortium) provides
 
 WHAS500 (Worcester Heart Attack Study) contains 500 myocardial-infarction admissions and nine primary predictors: age, sex, heart rate, systolic blood pressure, diastolic blood pressure, body mass index, cardiovascular-disease history, order of myocardial infarction and type of myocardial infarction. This set represents the admission-time predictors. All-cause mortality is measured in days from admission, with 215 observed deaths and 285 censored observations \cite{hosmer2008,polsterl2020}.
 
-\subsection{Data Reconstruction and acquisition.}\label{data-reconstruction-and-acquisition.}
+\subsection{Data Reconstruction and Acquisition}\label{data-reconstruction-and-acquisition.}
 
 GBSG2 and WHAS500 were obtained from the cohorts distributed with scikit-survival \cite{polsterl2020}. METABRIC was reconstructed from the cBioPortal patient and sample clinical tables, joined one-to-one by patient identifier. Both source tables contained 2,509 unique patient records. Of these, 528 lacked an overall-survival time or status, and one had zero follow-up. Requiring complete survival outcomes and positive follow-up yielded the 1,980 eligible patients used in the analysis.
 
@@ -309,7 +309,7 @@ z_k&\sim N(0,1),\qquad \beta_k=z_k\sigma_k.
 \end{align}
 The Beta weight continuously interpolates between the two variances. With $\gamma_k\sim\operatorname{Beta}(1,1)$, the conditional variance ranges from $0.05^2$ to $2.0^2$. This permits coefficient-specific regularisation while retaining continuous parameters for NUTS. The study uses the name continuous Spike-and-Slab for this variance-mixture specification. It has neither a discrete feature-membership indicator nor a point mass at zero, so the posterior mean of $\gamma_k$ describes variance allocation rather than a probability of variable inclusion.
 
-\subsection{Rationale for Comparing Prior Families.}\label{rationale-for-comparing-prior-families.}
+\subsection{Rationale for Comparing Prior Families}\label{rationale-for-comparing-prior-families.}
 
 The three priors represent different assumptions about coefficient scale and adaptation: common-scale Normal regularisation, global-local shrinkage with a regularised slab, and continuous coefficient-specific variance allocation. Their numerical scales encode different regularisation strengths, so the comparison assesses each complete prior specification. Half-scale and double-scale conditions examine sensitivity to those choices. Prior impact is assessed through predictive error, discrimination, calibration, diagnostic acceptance and posterior uncertainty; coefficient magnitude alone does not determine predictive quality \cite{piironen2017,ref40}.
 

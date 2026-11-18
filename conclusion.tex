@@ -99,7 +99,7 @@ Assess robustness & Examine sensitivity to modelling choices and diagnostic cond
 
 \section{Main Contributions of the Research}\label{main-contributions-of-the-research}
 
-The research adds a cohesive framework in which Bayesian survival modelling, predictive evaluation, posterior uncertainty and diagnostic validity are integrated as a unit.
+This contribution is a controlled empirical study of the impact of specified coefficient priors for prediction, posterior interpretation and computational reliability in three clinical survival cohorts.
 
 \subsection{Methodological Contribution}\label{methodological-contribution}
 
@@ -115,7 +115,7 @@ The study offers a concrete Bayesian explanation framework on the basis of poste
 
 \subsection{Computational Reliability}\label{methodological-integrity-contribution}
 
-The diagnostic criteria link posterior interpretation to sampling reliability. Accepted-fold counts accompany predictive comparisons, while the post-hoc sampler analysis is reported separately. Scientific reproduction checks matched the numerical outputs and diagnostic outcomes of all 450 original model--fold evaluations. These checks support reuse of the results and independent examination of the analyses.
+The evidence was impacted in a material way by computational reliability. Normal and continuous Spike-and-Slab each had 75 accepted original fits, while Horseshoe had 55. A separate sampler sensitivity raised Horseshoe acceptance to 75 but left the overall prediction conclusion unchanged. This, along with the runtime results, illustrates why it is important to have sampling configuration and diagnostic coverage in addition to predictive comparisons. Reproduction checks were also consistent with the scientific results and diagnostics of the 450 original model–folds evaluations.
 
 \section{Interpretation of the Findings}\label{limitations-of-the-research}
 
@@ -159,9 +159,17 @@ Finally, evaluation on genuinely external healthcare cohorts would help determin
 
 \section{Practical and Research Implications}\label{practical-and-research-implications}
 
-The results are relevant to both survival-analysis studies and healthcare analytics. To researchers, the research shows that Bayesian survival modelling cannot be evaluated using a single measure of discrimination. Diagnostic validity, prior specification, predictive calibration and uncertainty need to be taken collectively. The findings also show the relevance of differentiating model-based posterior explanations and post-hoc attribution methods.
+If posterior coefficient interpretation is needed, a reasonable Bayesian initial specification for clinical predictor sets similar to the ones studied is Normal. It had the best original diagnostic coverage and the quickest Bayesian computation time and the primary prior comparison was estimable and showed no predictive disadvantage. This recommendation applies to the assessed previous settings and cohorts.
 
-In the healthcare analytics application, Bayesian survival models may be used to give interpretable hazard effects along with credible intervals and statements about the direction of coefficients. Such properties may be useful where uncertainty plays a crucial role in decision-making. Nevertheless, the results do not warrant the unquestioning substitution of CoxPH, Random Survival Forest or DeepSurv with Bayesian models.
+When computational efficiency and familiar interpretation of coefficients are important, CoxPH is a helpful baseline. It required 3.4–6.4 seconds to compute the median, the paired Normal-minus-CoxPH IBS intervals included zero in all three cohorts in comparison with Normal using paired IBS comparisons. However, model assumptions should be tested, especially in a setting similar to METABRIC, where a number of predictors had violations of the proportional-hazards assumption.
+
+When the information available for training is limited and the shrinkage assumptions are suitable, horseshoe is a potential option to consider. Decreasing the amount of information in training by 25\% resulted in a relative gain of 0.006323 IBS units [0.002512, 0.010561] over Normal. This sensitivity finding is to support evaluation in similar settings, not to provide a blanket recommendation for all small data sets. Sample reliability should be defined prior to interpretation.
+
+The structure of continuous Spike-and-Slab is continuous, suitable for substantive modelling. It obtained a 100\% original diagnostic coverage but took about 3 times the Normal runtime without any primary predictive gain detected. It should not be reported as probabilities of variable inclusion; that is, the variance weights should not be interpreted as probabilities.
+
+In a prediction-dominant environment like in a METABRIC-like scenario, RSF and DeepSurv are worth considering. Both methods were favored in their secondary IBS comparisons with the Normal, with RSF having the larger estimated IBS reduction observed. Calibration at the intended horizon should also be taken into consideration. These internally validated findings are not representative of performance in an alternate clinical population.
+
+If it is necessary to explain, then credible intervals, Directional probabilities, and predictor coding are the recommended methods. This interpretation can be complemented by an interpretation via SHAP, but should not be used independently as clinical validation as the global explanation-stability criterion was not met.
 
 The main implication is that evidence-based selection of survival models needs to be cohort-specific and should not rely on a hypothesis that the Bayesian or machine-learning approaches are universally better.
 

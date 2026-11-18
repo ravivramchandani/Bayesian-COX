@@ -218,6 +218,8 @@ Seven of the 25 GBSG2 Horseshoe fits met the diagnostic criteria after the speci
 
 A separate post-hoc sampler sensitivity analysis increased the target acceptance rate to 0.999 and obtained 75 accepted Horseshoe fits across the three cohorts. All nine paired prior IBS intervals in that analysis included zero. The original estimates and this sensitivity analysis are reported separately in Appendix~\ref{app:horseshoe}.
 
+The enhancements on the sensitivity of the sampler show that the exclusions sensitive to the NUTS target acceptance setting. The sensitivity analysis changed a sampler setting. They should not be considered therefore as proof of the generality of the suitability of Horseshoe priors for survival analysis. Full diagnostic coverage however did not show any clear predictive advantage between priors. The difference between the ability to generate reliable posterior samples and the benefit of the resulting model, consistent with splitting up computation and model assessment in the Bayesian workflow \cite{ref53} \cite{ref39}
+
 \section{Bayesian Posterior Results}\label{bayesian-posterior-results}
 
 The Bayesian posterior analysis was the main component of the inferential analysis. This directly answered RQ2 and RQ3 by looking at the effect of different coefficient priors on the posterior estimates. Posterior summaries were available for 205 accepted outer-fold fits. The examples below use the first repeat and first fold, allowing the same predictors to be compared under a fixed evaluation rule.
@@ -308,15 +310,18 @@ The Horseshoe outputs give feature-level summaries of shrinkage, enabling the st
 
 \subsection{Did Bayesian models outperform classical models?}\label{did-bayesian-models-outperform-classical-models}
 
-Bayesian Normal and continuous Spike-and-Slab had prediction error close to CoxPH in all three cohorts. The paired Normal minus CoxPH IBS intervals included zero throughout. The Bayesian models also give posterior distributions and credible intervals through which uncertainty can be analysed directly. This adds inferential information alongside the predictive comparison.
+Bayesian Normal and continuous Spike-and-Slab had prediction error close to CoxPH in all three cohorts. No improvement in prediction was seen with the Bayesian specification in the paired Normal-minus-CoxPH IBS intervals; all of these intervals contained zero in each cohort. The added value of its direct reporting of posterior uncertainty was in the hazard ratios, credible intervals and the directionality probabilities. The distinction is not between the possibility of interpretation and CoxPH, but rather the type of inference, as CoxPH offers coefficient interpretations and uncertainty estimates. The Bayesian method is most applicable when a statement of posterior probability or explicit prior assumptions are needed when choosing a model. This is in line with the distinction made by McLernon et al. \cite{ref84}between interpreting fitted associations and evaluating their predictive usefulness.
 
 \subsection{Did nonlinear machine learning always outperform Bayesian models?}\label{did-nonlinear-machine-learning-always-outperform-bayesian-models}
 
-The model ordering depended on the cohort. RSF had lower mean IBS in GBSG2 and METABRIC, while the linear proportional-hazards models had lower mean IBS in WHAS500. The secondary paired METABRIC intervals favoured RSF and DeepSurv over Normal. This supports selecting a model for the clinical prediction setting rather than assuming that greater flexibility always improves prediction.
+Compared with the linear models, the benefit of the nonlinear models varied by cohort. RSF had the lowest mean IBS in both GBSG2 and METABRIC, although a paired interval between RSF and Normal, which included zero, was found in GBSG2. In METABRIC, Normal-minus-RSF IBS was +0.007956 [0.004531, 0.011381], while Normal-minus-DeepSurv was +0.002893 [0.000707, 0.005079]. Both secondary contrasts favoured the nonlinear comparators. The same comparisons made with the WHAS500 did not show such an advantage. The trend is similar to SurvBenchmark \cite{ref33} and Baralou et al. \cite{ref37} which highlight the importance of data structure and model assumptions for comparative performance.
+
 
 \subsection{Did one Bayesian prior dominate?}\label{did-one-bayesian-prior-dominate}
 
-Interval widths, shrinkage and posterior estimates differed across features and cohorts. The five estimable primary IBS contrasts all had intervals containing zero. The separate Horseshoe sampler analysis gave the same broad predictive conclusion with complete matched-fold coverage. The results describe similar probability prediction under these clinical predictor sets, without establishing equivalence between priors.
+The key comparisons failed to reveal a clear best prior consistently. The differences between the normal and continuous-Spike-and-Slab IBS models ranged from −0.000008 to +0.000061 (normal minus continuous-Spike-and-Slab), with all five fully estimable primary prior intervals being centered around zero. The separate sampler sensitivity provided full Horseshoe coverage and all of the intervals contained zero for the nine previous contrasts. These results indicate that there was little identified separation between the primary configurations under evaluation, but they are not evidence of equivalence since there was no specified margin of equivalence.
+
+The outcomes are consistent with but do not conflict with the structured-prior studies reviewed in Chapter 2. Tang et al. \cite{ref25} and Samorodnitsky et al. \cite{ref42} studied high dimensional genomic selection; and Sun et al. \cite{ref52} studied heredity-constrained interaction models. Smaller clinical main-effects predictor sets were employed and various prior specifications used in the present study. Its results show that it is not sufficient to have more prior hierarchy to improve prediction in those contexts, though its relative value in those environments might be higher in situations with fewer training instances.
 
 \subsection{Why might performance differ?}\label{why-might-performance-differ}
 
