@@ -623,17 +623,24 @@ def _reduced_training_rows(
 def _table(caption: str, label: str, columns: str, header: str, rows: list[str], note: str) -> str:
     return "\n".join(
         [
+            r"\begin{table}[htbp]",
+            r"\centering",
             r"\begingroup\singlespacing\footnotesize",
             r"\setlength{\tabcolsep}{3pt}",
-            rf"\begin{{longtable}}{{@{{}}{columns}@{{}}}}",
-            rf"\caption{{{caption}}}\label{{{label}}}\\",
-            r"\toprule " + header + r"\\\midrule\endfirsthead",
-            rf"\multicolumn{{{len(columns)}}}{{l}}{{\tablename\ \thetable\ (continued)}}\\",
-            r"\toprule " + header + r"\\\midrule\endhead",
-            r"\bottomrule\endfoot",
+            rf"\caption{{{caption}}}\label{{{label}}}",
+            r"\begin{adjustbox}{max width=\textwidth}",
+            rf"\begin{{tabular}}{{@{{}}{columns}@{{}}}}",
+            r"\toprule " + header + r"\\\midrule",
             *rows,
-            r"\end{longtable}",
-            note + r"\par\endgroup",
+            r"\bottomrule",
+            r"\end{tabular}",
+            r"\end{adjustbox}",
+            r"\par\smallskip",
+            r"\begin{minipage}{\textwidth}",
+            note,
+            r"\end{minipage}",
+            r"\endgroup",
+            r"\end{table}",
             "",
         ]
     )
