@@ -8,7 +8,7 @@
     "tables/table_posterior_examples.tex": "4c87e800656d238814cdd2e18a873a41e9d1411a2b742160861e1276e19fcf83",
     "tables/table_calibration.tex": "269e1268cbbcfa8d4a6eea731bf39071e10c2003dd76e5525f848c1be27d752b"
   },
-  "script_sha256": "4fbdb9917c33f5b5f3cd0b57c06a88a06b93608fad4d9fd00731dcd30cea270c",
+  "script_sha256": "d12b6fe257f144f4b180c1660482831adf9cc51c653d8c88a7a071ce5c59dfae",
   "rules": {
     "predictive": "Saved Uno C and IBS means plus sample fold SDs.",
     "calibration": "Saved middle-horizon slope and fixed-slope intercept; sample fold SDs.",
