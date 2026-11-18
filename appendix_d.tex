@@ -1,14 +1,14 @@
 \chapter{Bayesian Model Specification and Prior Structures}\label{appendix-d-bayesian-model-specification-and-prior-structures}\label{app:model-specification}
 
-The three Bayesian arms share the piecewise-exponential likelihood and the independent baseline log-hazard prior $\log\lambda_m\sim\mathcal{N}(-2,2^2)$. Their coefficient priors are specified in Chapter~\ref{methodology}. Table~\ref{tab:prior-configuration} collects their hyperparameters.
+The three Bayesian arms share the piecewise-exponential likelihood and the independent baseline log-hazard prior $\log\lambda_j\sim\mathcal{N}(-2,2^2)$. Their coefficient priors are specified in Chapter~\ref{methodology}. Table~\ref{tab:prior-configuration} collects their hyperparameters; $j$ indexes baseline intervals and $k$ indexes coefficients.
 
 \begin{table}[htbp]
 \centering\small
 \caption{Coefficient-prior configuration.}\label{tab:prior-configuration}
 \begin{tabularx}{\textwidth}{@{}lX@{}}\toprule
 Prior & Configuration\\\midrule
-Normal & $\beta_j\sim\mathcal{N}(0,1)$.\\
-Regularised Horseshoe & Global $\tau\sim\operatorname{HalfStudent}\text{-}t_2(0,0.1)$; local $\lambda_j\sim\operatorname{HalfStudent}\text{-}t_2(0,1)$; slab $c^2\sim\operatorname{InvGamma}(2,8)$.\\
-Continuous Spike-and-Slab & $\gamma_j\sim\operatorname{Beta}(1,1)$; $\sigma_j^2=(1-\gamma_j)0.05^2+\gamma_j2^2$; $\beta_j=z_j\sigma_j$, $z_j\sim\mathcal{N}(0,1)$.\\\bottomrule
+Normal & $\beta_k\sim\mathcal{N}(0,1)$.\\
+Regularised Horseshoe & Global $\tau\sim\operatorname{HalfStudent}\text{-}t_2(0,0.1)$; local $q_k\sim\operatorname{HalfStudent}\text{-}t_2(0,1)$; slab $c^2\sim\operatorname{InvGamma}(2,8)$.\\
+Continuous Spike-and-Slab & $\gamma_k\sim\operatorname{Beta}(1,1)$; $\sigma_k^2=(1-\gamma_k)0.05^2+\gamma_k2^2$; $\beta_k=z_k\sigma_k$, $z_k\sim\mathcal{N}(0,1)$.\\\bottomrule
 \end{tabularx}
 \end{table}

@@ -1,0 +1,290 @@
+{
+  "schema_version": "1.0.0",
+  "analysis": "Descriptive matched-fold reaggregation and extraction of saved bootstrap results",
+  "new_fitting": false,
+  "new_bootstrap_sampling": false,
+  "source_run": "confirmatory_v1_confirmatory_cdcdcee84651",
+  "inputs": {
+    "manifest.json": "2a1817365675aa179174b5edf5b3da67bbcb2be1b2eb4143347e4b295052ce02",
+    "completion.json": "44d5d6e2c3cf4d0350c3bc8cb27291436c9934b219c4c895cb139525e6fa25f6",
+    "fold_metrics.csv": "e27aca1fffa74719ada0999ae5a200a44a5ac49dd11711457185ac33c7b5f86e",
+    "inference.json": "54f53ff0e2e23be2e52e9365716693d9f6b35a11e0d5750644640b38e26edf0e"
+  },
+  "source_embedded_seals": {
+    "manifest.json": "9ec040841b4751ee3064c93d21d5069ed27bf3bfd6641f0dfffff76557bbf9f7",
+    "completion.json": "03870efdae3134305794ea977fd9cbe7913c0d693f1b009337546319aa03bee1"
+  },
+  "script_sha256": "84614cc43bf1401a4d0dbaa14d09c36eb41166ebae4a1f4da98a66f86dbd8e15",
+  "source_accepted_rows": 430,
+  "matched_summary_rows": 18,
+  "saved_bootstrap_contrasts": 5,
+  "matched_folds": {
+    "gbsg2": [
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        5,
+        2
+      ]
+    ],
+    "whas500": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        1
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        5,
+        5
+      ]
+    ],
+    "metabric": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        4,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        5,
+        4
+      ],
+      [
+        5,
+        5
+      ]
+    ]
+  },
+  "frozen_primary_inference_changed": false,
+  "robustness_coverage_source": {
+    "table_sha256": "9fd8cf61b69dfc1d22f3e6a4c7d033003e6892abe47aa2282219a700f837713b",
+    "frozen_generated_table_sha256": "1adf1afa3fec1fc3b2046b651297fe49c41533389baa6c9503bc86fa79f88792",
+    "generated_provenance_sha256": "e86fc415957fc972c95b8cd3254c58dd570fc31488dadc68cc304c5f90fe7ee7",
+    "numerical_rows_unchanged": true,
+    "caption_and_label_unchanged": true
+  },
+  "robustness_diagnostics_source": {
+    "table_sha256": "2527f842cf9430a2da014515e768834ea6fc012c4f22742a85691e6e2e2149c4",
+    "frozen_generated_table_sha256": "7dd36fb9371f0180ed014afb1c4817a0976f91589a720bd106f3c5ef5ae348f8",
+    "generated_provenance_sha256": "e86fc415957fc972c95b8cd3254c58dd570fc31488dadc68cc304c5f90fe7ee7",
+    "numerical_rows_unchanged": true,
+    "caption_and_label_unchanged": true
+  },
+  "outputs": {
+    "matched_fold_metrics.csv": {
+      "sha256": "25047424823c55ed831feea9910c5cc2e895e04063eb30df439bb3b96b357378",
+      "bytes": 1994
+    },
+    "paired_ibs_bootstrap.csv": {
+      "sha256": "fa97909e8afceb7be180265e2dfed3d77ead7420af0d5c1978327cf32b371942",
+      "bytes": 1219
+    },
+    "table_matched_folds.tex": {
+      "sha256": "cf44486f3302dc371715b4e11f36557d2763f80eb62e67240f8c621e0d51f068",
+      "bytes": 2142
+    },
+    "table_paired_bootstrap.tex": {
+      "sha256": "40198480110fcd8f9cfc2ff5d1a637989181512c524c5e85d42ecc5fdeb99b29",
+      "bytes": 1587
+    },
+    "table_robustness_coverage.tex": {
+      "sha256": "f1a3151357d285ee1c7643016b57e68b113ac3c0ce6f19f066514e654b3378fa",
+      "bytes": 961
+    },
+    "table_robustness_diagnostics.tex": {
+      "sha256": "9327ff9383fac2e6e2a878f2a58345b44a15496e111be4506d3809412f78cdb0",
+      "bytes": 935
+    }
+  }
+}

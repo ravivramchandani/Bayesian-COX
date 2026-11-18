@@ -1,0 +1,6 @@
+dataset,model_a,model_b,n_pairs,estimate,corrected_lower,corrected_upper,bootstrap_lower,bootstrap_upper,n_bootstraps,n_successful,resampling_unit
+gbsg2,Normal,Spike-and-Slab,25,2.474518594912878e-05,-0.00010315792165734528,0.00015264829355560283,-1.7783777703836408e-05,7.058841609825048e-05,1000,1000,event-stratified validation subjects within paired folds
+whas500,Normal,Horseshoe,25,0.00034447389251349934,-0.0017063867973574824,0.002395334582384481,-0.00027496948217193656,0.000995004338757069,1000,999,event-stratified validation subjects within paired folds
+whas500,Normal,Spike-and-Slab,25,6.0968430197702036e-05,-0.0001199567824993662,0.00024189364289477027,1.3232178700618486e-06,0.00011741241336648154,1000,1000,event-stratified validation subjects within paired folds
+whas500,Horseshoe,Spike-and-Slab,25,-0.00028350546231579733,-0.0021738281386186865,0.0016068172139870917,-0.0008910394210594365,0.00030669365338063944,1000,998,event-stratified validation subjects within paired folds
+metabric,Normal,Spike-and-Slab,25,-8.100414503736663e-06,-8.671756919204219e-05,7.051674018456886e-05,-2.9854846199288126e-05,1.453737353650178e-05,1000,1000,event-stratified validation subjects within paired folds

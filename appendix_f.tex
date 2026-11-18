@@ -3,3 +3,9 @@
 Table~\ref{tab:gen-diagnostics} gives the outcome counts for every cohort and model across the 25 outer folds. Bayesian acceptance follows the criteria and specified refits described in Chapter~\ref{methodology}. Computation times describe the original fitting environment and include the specified attempts.
 
 \input{tables/table_diagnostics.tex}
+
+\section{Training-Data Predictive Checks}
+
+Table~\ref{tab:sup-predictive-checks} summarises the saved checks from the first accepted attempt in each Bayesian outer fit. Total and interval-specific event counts were compared with Poisson replications at the observed exposures. Separately, training Kaplan--Meier estimates were compared with posterior intervals for mean fitted survival at three training-event quartiles. These quantities describe count replication and fitted-survival agreement, respectively; they were reported separately from the MCMC acceptance criteria.
+
+\input{report_summaries/supervisor_checks/table_predictive_checks.tex}

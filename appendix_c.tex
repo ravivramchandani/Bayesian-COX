@@ -9,3 +9,9 @@ Table~\ref{tab:full-secondary} gives all secondary IBS contrasts. Differences ar
 Training-fold checks assess the CoxPH comparator. Rejection frequencies describe overlapping training sets and are reported by encoded covariate.
 
 \input{tables/table_proportional_hazards.tex}
+
+\section{Performance on Matched Accepted Folds}
+
+This post-hoc descriptive comparison uses the same folds for every model: the seven GBSG2, 25 WHAS500 and 23 METABRIC folds accepted by the original Horseshoe model. Means and sample standard deviations describe these selected validation partitions. They show how partial diagnostic coverage affects the comparison, without supplying the unavailable complete-fold primary contrasts.
+
+\input{report_summaries/supervisor_comparisons/table_matched_folds.tex}

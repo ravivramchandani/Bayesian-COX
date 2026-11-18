@@ -1,0 +1,29 @@
+\begingroup\singlespacing\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{@{}llrrr@{}}
+\caption{Predictive performance on the folds accepted by the original Horseshoe model.}\label{tab:matched-horseshoe-folds}\\
+\toprule Cohort & Model & Folds & IBS, mean (SD) & Mean AUC, mean (SD)\\\midrule\endfirsthead
+\multicolumn{5}{l}{\tablename\ \thetable\ (continued)}\\
+\toprule Cohort & Model & Folds & IBS, mean (SD) & Mean AUC, mean (SD)\\\midrule\endhead
+\midrule\multicolumn{5}{r}{Continued on next page}\\\endfoot
+\bottomrule\endlastfoot
+GBSG2 & Normal & 7 & 0.1685 (0.0059) & 0.7450 (0.0232) \\
+GBSG2 & Horseshoe & 7 & 0.1678 (0.0058) & 0.7530 (0.0310) \\
+GBSG2 & Continuous Spike-and-Slab & 7 & 0.1684 (0.0059) & 0.7454 (0.0236) \\
+GBSG2 & CoxPH & 7 & 0.1687 (0.0063) & 0.7449 (0.0219) \\
+GBSG2 & RSF & 7 & 0.1587 (0.0076) & 0.7683 (0.0272) \\
+GBSG2 & DeepSurv & 7 & 0.1639 (0.0095) & 0.7537 (0.0369) \\
+WHAS500 & Normal & 25 & 0.1524 (0.0112) & 0.7697 (0.0369) \\
+WHAS500 & Horseshoe & 25 & 0.1521 (0.0109) & 0.7691 (0.0389) \\
+WHAS500 & Continuous Spike-and-Slab & 25 & 0.1523 (0.0111) & 0.7699 (0.0370) \\
+WHAS500 & CoxPH & 25 & 0.1525 (0.0114) & 0.7693 (0.0363) \\
+WHAS500 & RSF & 25 & 0.1551 (0.0108) & 0.7645 (0.0479) \\
+WHAS500 & DeepSurv & 25 & 0.1557 (0.0110) & 0.7614 (0.0432) \\
+METABRIC & Normal & 23 & 0.1883 (0.0044) & 0.6889 (0.0204) \\
+METABRIC & Horseshoe & 23 & 0.1888 (0.0040) & 0.6858 (0.0197) \\
+METABRIC & Continuous Spike-and-Slab & 23 & 0.1883 (0.0044) & 0.6888 (0.0202) \\
+METABRIC & CoxPH & 23 & 0.1882 (0.0045) & 0.6898 (0.0204) \\
+METABRIC & RSF & 23 & 0.1802 (0.0039) & 0.7231 (0.0158) \\
+METABRIC & DeepSurv & 23 & 0.1852 (0.0046) & 0.7063 (0.0202) \\
+\end{longtable}
+\noindent Each cohort uses one shared set of repeat--fold pairs for all six models: 7 in GBSG2, 25 in WHAS500 and 23 in METABRIC. Entries are equally weighted fold means (sample SD); each fold's mean AUC is the survival-weighted summary across its evaluation horizons. Selection is conditional on original Horseshoe diagnostic acceptance. These descriptive summaries do not replace the complete-fold primary contrasts.\par\endgroup

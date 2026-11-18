@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+\centering\small
+\caption{Fold-specific calibration estimates and bootstrap intervals for the first outer Normal-prior fit.}
+\label{tab:sup-calibration-bootstrap}
+\begin{tabular}{@{}llrrr@{}}\toprule
+Cohort & Parameter & Estimate & Lower 95\% & Upper 95\%\\\midrule
+GBSG2 & Calibration-in-the-large & +0.098 & -0.254 & +0.363 \\
+GBSG2 & Joint intercept & +0.346 & -0.521 & +1.911 \\
+GBSG2 & Joint slope & +1.191 & +0.607 & +2.338 \\
+METABRIC & Calibration-in-the-large & +0.039 & -0.155 & +0.182 \\
+METABRIC & Joint intercept & -0.115 & -0.483 & +0.176 \\
+METABRIC & Joint slope & +0.831 & +0.558 & +1.110 \\
+WHAS500 & Calibration-in-the-large & -0.243 & -0.729 & +0.161 \\
+WHAS500 & Joint intercept & -0.621 & -1.190 & -0.126 \\
+WHAS500 & Joint slope & +0.487 & +0.164 & +0.923 \\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{\linewidth}\footnotesize Repeat 1, fold 1; middle training-event horizon: GBSG2 646 days; METABRIC 86.0667 months; WHAS500 169 days. Each estimate had 500 successful bootstrap replicates. Models were held fixed; training observations were resampled to re-estimate censoring and validation observations were resampled with their predictions. These are within-fold bootstrap intervals, distinct from the between-fold standard deviations in Figure~\ref{fig:ravi-calibration}.\end{minipage}
+\end{table}
