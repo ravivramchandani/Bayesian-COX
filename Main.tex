@@ -1,9 +1,7 @@
-% Unitec thesis template adapted for Ravi V. Ramchandani from supplied Word thesis.
-% Main file: set pdfLaTeX compiler in Overleaf (Settings > Compiler).
 \documentclass[12pt,a4paper]{report}
-% Keep identical source builds stable in Git by omitting volatile PDF metadata.
 \pdfinfoomitdate=1
 \pdftrailerid{}
+\pdfsuppressptexinfo=15
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -32,13 +30,12 @@
 \makeatletter
 \renewcommand{\@biblabel}[1]{\href{\currentbiburl}{\textcolor{blue}{[#1]}}}
 \makeatother
-\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue, filecolor=blue}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,filecolor=blue,pdfcreator={},pdfproducer={},pdftrapped={}}
 \usepackage[nottoc]{tocbibind}
 \renewcommand{\contentsname}{Table of Contents}
 \renewcommand{\bibname}{References}
 \setlength{\emergencystretch}{3em}
 \newcommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\input{generated/results_macros.tex}
 \begin{document}
 \pagenumbering{gobble}
 \begin{titlepage}

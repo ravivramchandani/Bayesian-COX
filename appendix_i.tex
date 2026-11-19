@@ -23,13 +23,13 @@ Table~\ref{tab:gen-explanation-top-groups} summarises the three groups with the 
 
 \section{Matched-Fold Posterior Comparisons}
 
-Tables~\ref{tab:exam-posterior-summary} and~\ref{tab:exam-posterior-direction} compare selected named predictors on folds accepted under all three priors: seven in GBSG2, 25 in WHAS500 and 23 in METABRIC. Each entry averages a stored summary from separate fitted posteriors. The interval widths are on the hazard-ratio scale; neither the mean width nor the fold average of a coefficient is a pooled posterior interval. The mean absolute paired difference from Normal measures sensitivity of the posterior mean to prior configuration, rather than shrinkage towards zero.
+Tables~\ref{tab:exam-posterior-summary} and~\ref{tab:exam-posterior-direction} compare selected named predictors on folds accepted under all three priors: seven in GBSG2, 25 in WHAS500 and 23 in METABRIC. Each entry averages a summary from separate fitted posteriors. The interval widths are on the hazard-ratio scale; neither the mean width nor the fold average of a coefficient is a pooled posterior interval. The mean absolute paired difference from Normal measures sensitivity of the posterior mean to prior configuration, rather than shrinkage towards zero.
 
-\input{report_summaries/examiner_polish/table_posterior_summary.tex}
-\input{report_summaries/examiner_polish/table_posterior_direction.tex}
+\input{report_summaries/standalone_presentation/table_posterior_summary.tex}
+\input{report_summaries/standalone_presentation/table_posterior_direction.tex}
 
 \section{Attribution Sampling Stability}
 
 Table~\ref{tab:exam-attribution-failures} separates the 102 comparisons outside tolerance by cohort, prior, adjacent budget and seed. These are comparisons within fitted models, not independent validation studies. All failures arose from Spearman correlation below 0.95; none arose from having fewer than four shared top-five groups.
 
-\input{report_summaries/examiner_polish/table_attribution_failures.tex}
+\input{report_summaries/standalone_presentation/table_attribution_failures.tex}

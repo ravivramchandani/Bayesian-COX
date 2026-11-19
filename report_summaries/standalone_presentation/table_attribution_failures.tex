@@ -1,0 +1,26 @@
+\begin{table}[htbp]
+\centering
+\begingroup\singlespacing\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Attribution sampling-stability comparisons that did not meet the specified criterion.}\label{tab:exam-attribution-failures}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}lllllll@{}}
+\toprule Cohort & Prior & Budget 1--2 & Budget 2--3 & Seed 1--2 & Seed 2--3 & Total\\\midrule
+GBSG2 & N & 21/75 & 12/75 & 0/25 & 3/25 & 36/200\\
+GBSG2 & H & 4/21 & 0/21 & 0/7 & 0/7 & 4/56\\
+GBSG2 & S & 21/75 & 12/75 & 0/25 & 3/25 & 36/200\\
+WHAS500 & N & 3/75 & 0/75 & 0/25 & 0/25 & 3/200\\
+WHAS500 & H & 1/75 & 0/75 & 0/25 & 0/25 & 1/200\\
+WHAS500 & S & 2/75 & 0/75 & 0/25 & 0/25 & 2/200\\
+METABRIC & N & 5/75 & 3/75 & 0/25 & 1/25 & 9/200\\
+METABRIC & H & 1/69 & 1/69 & 0/23 & 0/23 & 2/184\\
+METABRIC & S & 4/75 & 3/75 & 0/25 & 2/25 & 9/200\\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip
+\begin{minipage}{\textwidth}
+Entries are failed/evaluable comparisons. Budgets use 25/50, 50/100 and 100/200 validation/background subjects, respectively, with three seeds. Seed comparisons use the largest budget. The rule requires Spearman correlation at least 0.95 and at least four shared top-five groups. Comparisons share fitted models and are not independent experiments. There were 102 failures among 1640 evaluable comparisons; all involved Spearman correlation alone, and none failed the top-five overlap criterion. N: Normal; H: Horseshoe; S: continuous Spike-and-Slab.
+\end{minipage}
+\endgroup
+\end{table}

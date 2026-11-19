@@ -8,7 +8,7 @@ There were 75 outer-fold definitions, 25 for each of the three cohorts. All six 
 
 \section{Cohort Characteristics}\label{cohort-characteristics}
 
-There are 686 patients in the GBSG2 cohort and 299 patients who have an event (43.6\%). The data set has 8 raw covariates, namely, age, oestrogen receptor (estrec), hormone therapy (horTh), menopausal status (menostat), number of positive lymph nodes (pnodes), progesterone receptor (progrec), tumour grade (tgrade) and tumour size (tsize). The maximum observed follow-up is 2,659 days. Table~\ref{tab:ravi-cohorts} gives the median and quartiles of the observed follow-up times.
+There are 686 patients in the GBSG2 cohort and 299 patients who have an event (43.6\%). The data set has 8 raw covariates, namely, age, oestrogen receptor, hormonal therapy, menopausal status, number of positive lymph nodes, progesterone receptor, tumour grade and tumour size. The maximum observed follow-up is 2,659 days. Table~\ref{tab:ravi-cohorts} gives the median and quartiles of the observed follow-up times.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2481}}
@@ -48,7 +48,7 @@ Observed events, n & \textbf{299} & \textbf{1,144} & \textbf{215} \\
 Censored, n & \textbf{387} & \textbf{836} & \textbf{285} \\
 Event rate & \textbf{43.6\%} & \textbf{57.8\%} & \textbf{43.0\%} \\
 Predictor structure & Clinical and tumour characteristics & Clinical, receptor, molecular/subtype characteristics & Clinical and physiological characteristics \\
-Selected raw model predictors & age, estrec, horTh, menostat, pnodes, progrec, tgrade, tsize & age, NPI, cellularity, ER\_status, PR\_status, HER2\_status, menopausal\_status, PAM50/\allowbreak{}claudin-low subtype & age, sex, hr, sysbp, diasbp, bmi, cvd, miord, mitype \\
+Predictors & Age, oestrogen receptor, hormonal therapy, menopausal status, positive lymph nodes, progesterone receptor, tumour grade, tumour size & Age, NPI, cellularity, ER status, PR status, HER2 status, menopausal status, PAM50/\allowbreak{}claudin-low subtype & Age, sex, heart rate, systolic and diastolic blood pressure, body mass index, cardiovascular disease, order and type of myocardial infarction \\
 Encoded columns in the first outer training fold & 8 & 19 & 9 \\
 Mean observed follow-up & 1,124.49 & 125.31 & 882.44 \\
 Median observed follow-up & 1,084.00 & 116.50 & 631.50 \\
@@ -113,7 +113,7 @@ Outcome checks and predictor missingness in Table~\ref{tab:ravi-metabric} refer 
 
 \subsection{WHAS500}\label{whas500}
 
-The WHAS500 cohort contains 500 patients, including 215 observed deaths (43.0\%). Fourteen predictors are supplied with the source data; the primary analysis uses nine admission-time predictors: age, sex, heart rate (hr), systolic blood pressure (sysbp), diastolic blood pressure (diasbp), BMI, cardiovascular disease (cvd), order of myocardial infarction (miord) and infarction type (mitype). They generate nine encoded coefficients in the first outer training fold. Table~\ref{tab:ravi-cohorts} describes observed follow-up separately from the censoring-adjusted Kaplan--Meier estimates.
+The WHAS500 cohort contains 500 patients, including 215 observed deaths (43.0\%). Fourteen predictors are supplied with the source data; the primary analysis uses nine admission-time predictors: age, sex, heart rate, systolic blood pressure, diastolic blood pressure, body mass index, cardiovascular disease, order of myocardial infarction and infarction type. They generate nine encoded coefficients in the first outer training fold. Table~\ref{tab:ravi-cohorts} describes observed follow-up separately from the censoring-adjusted Kaplan--Meier estimates.
 
 \subsection{Cross-Cohort Comparison}\label{cross-cohort-comparison}
 
@@ -198,7 +198,7 @@ Acceptance requirement
 MCMC chains & 4 & All chains required \\
 Warm-up & 2,000 iterations & Initial fit; 4,000 for specified refits \\
 Retained draws & 2,000 per chain & Required posterior sample \\
-Baseline intervals & 6 & Frozen across Bayesian models \\
+Baseline intervals & 6 & Common across Bayesian models \\
 Maximum R-hat & Rank-normalised diagnostic, rounded to two decimals & \textless{} 1.01 \\
 Bulk ESS & Rounded effective sample size & \textbf{\textgreater{} 400} \\
 Tail ESS and Monte Carlo SE & Sampling precision & Recorded for assessment \\
@@ -224,7 +224,7 @@ The change in diagnostic coverage shows that these outcomes were sensitive to th
 
 The full-model prior predictive summaries in Table~\ref{tab:exam-prior-predictive} describe survival before updating with the outcomes. At the median training-event time, continuous Spike-and-Slab placed about 21--22\% of subject--draw survival probabilities below 0.01, compared with 15--17\% for Normal and 4--5\% for Horseshoe. The three priors therefore did not represent the same predictive regularisation despite sharing a likelihood. These broad distributions are checked separately from posterior fit and held-out calibration.
 
-The saved training-data checks were examined for all 205 accepted Bayesian fits (Table~\ref{tab:sup-predictive-checks}). Observed event totals fell within their stored central 95\% replicated-count intervals in all 205 fits. The six interval-specific event counts also fell within their intervals in all 1,230 checks. Count replication used the observed exposure records.
+The training-data checks were examined for all 205 accepted Bayesian fits (Table~\ref{tab:sup-predictive-checks}). Observed event totals fell within their central 95\% replicated-count intervals in all 205 fits. The six interval-specific event counts also fell within their intervals in all 1,230 checks. Count replication used the observed exposure records.
 
 All 615 Kaplan--Meier comparisons at the three training-event quartiles fell within the posterior intervals for mean fitted survival. Across the nine cohort--prior combinations, the mean absolute difference between fitted and Kaplan--Meier survival ranged from 0.0024 to 0.0107. These checks assess aggregate training-data fit. The proportional-hazards checks address the interpretation of time-constant covariate effects separately, and held-out evaluation assesses prediction.
 
@@ -234,7 +234,7 @@ Posterior summaries were available for all 205 accepted Bayesian fits. RQ2 is as
 
 \subsection{Normal Prior}\label{normal-prior-1}
 
-In GBSG2/Normal, pnodes had a posterior hazard-ratio interval entirely above one, while progrec had an interval entirely below one. The estrec interval crossed one, indicating uncertainty about its direction. Coefficient summaries and hazard ratios can be found in the Bayesian explainability section.
+In GBSG2 under the Normal prior, the number of positive lymph nodes had a posterior hazard-ratio interval entirely above one, while progesterone receptor expression had an interval entirely below one. The oestrogen receptor interval crossed one, indicating uncertainty about its direction. Coefficient summaries and hazard ratios can be found in the Bayesian explainability section.
 
 \subsection{Horseshoe Prior}\label{horseshoe-prior-1}
 
@@ -295,7 +295,7 @@ Table~\ref{tab:gen-calibration} summarises the middle-horizon estimates.
 
 The calibration summaries provide additional information to discrimination \cite{ref59,ref84}. At the middle horizon, the complete Bayesian arms had mean calibration-in-the-large close to zero. Normal and continuous Spike-and-Slab had similar mean slopes: approximately 1.25 in GBSG2, 0.95 in WHAS500 and 0.93 in METABRIC. Slopes above one indicate predictions with less spread than the fitted observed relationship; slopes below one indicate greater spread. The fixed-slope offset and freely estimated slope therefore describe different properties of the predictions. Appendix~\ref{app:predictive} reports all three horizons. At the earliest horizon in WHAS500, mean calibration-in-the-large was +0.176 to +0.180 for the three Bayesian priors, compared with $-0.011$ for CoxPH, +0.006 for RSF and +0.004 for DeepSurv. The positive Bayesian intercepts indicate underprediction of early event risk. On the complementary-log--log scale, an intercept of 0.180 corresponds to multiplying the predicted cumulative hazard by $\exp(0.180)\approx1.20$; it does not mean an 18-percentage-point difference in event probability. The near-zero middle-horizon offsets therefore do not describe every part of follow-up.
 
-The saved within-fold bootstrap intervals provide a separate uncertainty summary. In the first Normal-prior outer fit, middle-horizon slopes were 1.191 [0.607, 2.338] in GBSG2, 0.831 [0.558, 1.110] in METABRIC and 0.487 [0.164, 0.923] in WHAS500 (Table~\ref{tab:sup-calibration-bootstrap}). The WHAS500 interval was below one, indicating greater spread in predicted risk than in the fitted observed relationship in that fold. Figure~\ref{fig:sup-calibration-curves} shows the corresponding grouped calibration curves. These within-fold estimates and intervals describe the specified examples; the bars in Figure~\ref{fig:ravi-calibration} describe between-fold standard deviations.
+The within-fold bootstrap intervals provide a separate uncertainty summary. In the first Normal-prior outer fit, middle-horizon slopes were 1.191 [0.607, 2.338] in GBSG2, 0.831 [0.558, 1.110] in METABRIC and 0.487 [0.164, 0.923] in WHAS500 (Table~\ref{tab:sup-calibration-bootstrap}). The WHAS500 interval was below one, indicating greater spread in predicted risk than in the fitted observed relationship in that fold. Figure~\ref{fig:sup-calibration-curves} shows the corresponding grouped calibration curves. These within-fold estimates and intervals describe the specified examples; the bars in Figure~\ref{fig:ravi-calibration} describe between-fold standard deviations.
 
 \begin{figure}[htbp]
 \centering
@@ -310,7 +310,7 @@ The distribution of posterior coefficients of the retained Bayesian models was u
 
 \input{report_summaries/examiner_presentation/table_posterior_examples.tex}
 
-In GBSG2, pnodes had a posterior coefficient mean of 0.2634 and a mean hazard ratio of 1.303, with a 95\% credible interval of [1.183, 1.420]. The progrec coefficient mean was -0.4497, with a mean hazard ratio of 0.643 [0.492, 0.808]. Age and Nottingham Prognostic Index were positively associated with hazard in METABRIC. Age and heart rate were positive in WHAS500, while BMI was negative. The coefficients of standardised continuous variables refer to a one-standard-deviation increase; categorical coefficients are relative to their reference category.
+In GBSG2, the number of positive lymph nodes had a posterior coefficient mean of 0.2634 and a mean hazard ratio of 1.303, with a 95\% credible interval of [1.183, 1.420]. The progesterone receptor coefficient mean was -0.4497, with a mean hazard ratio of 0.643 [0.492, 0.808]. Age and Nottingham Prognostic Index were positively associated with hazard in METABRIC. Age and heart rate were positive in WHAS500, while BMI was negative. The coefficients of standardised continuous variables refer to a one-standard-deviation increase; categorical coefficients are relative to their reference category.
 
 In this thesis, posterior coefficients and credible intervals provide uncertainty-aware explanations within the Bayesian model itself. They do not establish causality. Exact linear SHAP contributions were also calculated for the same fitted log-relative-hazard function, using training-fold background distributions and grouped clinical predictors.
 

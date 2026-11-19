@@ -1,0 +1,19 @@
+\begin{table}[htbp]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Training-data predictive checks for accepted Bayesian fits.}
+\label{tab:sup-predictive-checks}
+\begin{tabular}{@{}llrrrrr@{}}\toprule
+Cohort & Prior & \shortstack{Accepted\\fits} & \shortstack{Total count\\within interval} & \shortstack{Interval counts\\within interval} & \shortstack{KM within\\fitted interval} & \shortstack{Mean absolute\\survival difference}\\\midrule
+GBSG2 & Normal & 25 & 25/25 & 150/150 & 75/75 & 0.0042 \\
+GBSG2 & Horseshoe & 7 & 7/7 & 42/42 & 21/21 & 0.0036 \\
+GBSG2 & Spike-and-Slab & 25 & 25/25 & 150/150 & 75/75 & 0.0039 \\
+METABRIC & Normal & 25 & 25/25 & 150/150 & 75/75 & 0.0029 \\
+METABRIC & Horseshoe & 23 & 23/23 & 138/138 & 69/69 & 0.0024 \\
+METABRIC & Spike-and-Slab & 25 & 25/25 & 150/150 & 75/75 & 0.0029 \\
+WHAS500 & Normal & 25 & 25/25 & 150/150 & 75/75 & 0.0107 \\
+WHAS500 & Horseshoe & 25 & 25/25 & 150/150 & 75/75 & 0.0092 \\
+WHAS500 & Spike-and-Slab & 25 & 25/25 & 150/150 & 75/75 & 0.0107 \\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{\linewidth}\footnotesize Counts use the central 95\% intervals. Poisson replication conditions on observed exposures. The fitted-survival check compares training Kaplan--Meier estimates with posterior intervals for mean fitted survival at three training-event quartiles. The final column averages $|\overline S(t)-\widehat S_{\mathrm{KM}}(t)|$ over those checks. Frequencies are descriptive across overlapping training fits.\end{minipage}
+\end{table}
