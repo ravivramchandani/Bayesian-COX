@@ -1,0 +1,16 @@
+\begin{table}[htbp]\centering\begingroup\singlespacing\small
+\setlength{\tabcolsep}{5pt}
+\caption{Observed training events per encoded covariate coefficient.}\label{tab:training-information}
+\begin{tabular}{@{}llrrrr@{}}\toprule
+Condition & Cohort & Patients & Events & Coefficients & Events/coefficient\\\midrule
+Primary & GBSG2 & 548--549 & 239--240 & 8 & 29.875--30.000\\
+Primary & WHAS500 & 400 & 172 & 9 & 19.111\\
+Primary & METABRIC & 1584 & 914--916 & 15, 19 & 48.105--61.067\\
+\midrule
+25\% training & GBSG2 & 135 & 59 & 8 & 7.375\\
+25\% training & WHAS500 & 96 & 40 & 9 & 4.444\\
+25\% training & METABRIC & 392--393 & 228 & 14, 15, 19 & 12.000--16.286\\
+\bottomrule\end{tabular}
+\par\smallskip\begin{minipage}{\textwidth}
+Primary counts cover 25 outer-training folds per cohort; the 25\% condition covers ten nested training subsets per cohort, shared across priors. Ratios are computed within each subset before taking their range and are rounded to three decimals. Coefficients count encoded covariate columns, including categorical contrasts, but exclude baseline hazards and prior hyperparameters. They do not measure effective model complexity under shrinkage.
+\end{minipage}\endgroup\end{table}

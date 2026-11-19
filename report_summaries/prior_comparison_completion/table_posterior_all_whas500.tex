@@ -1,0 +1,46 @@
+\begingroup\singlespacing\footnotesize
+\setlength{\tabcolsep}{3pt}
+\setlength{\LTcapwidth}{\textwidth}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth}lrrrrrrr@{}}
+\caption{Complete matched-fold posterior comparison for WHAS500.}\label{tab:posterior-all-whas500}\\
+\toprule
+Predictor contrast & Prior & Mean $\beta$ & $|\beta|$ & HR width & Excludes 1 & $|\Delta\beta_N|$ & $P(\beta>0)$ & Weight\\
+\midrule\endfirsthead
+\multicolumn{9}{l}{\tablename\ \thetable\ (continued)}\\
+\toprule
+Predictor contrast & Prior & Mean $\beta$ & $|\beta|$ & HR width & Excludes 1 & $|\Delta\beta_N|$ & $P(\beta>0)$ & Weight\\
+\midrule\endhead
+\midrule
+\multicolumn{9}{r}{Continued on next page}\\\endfoot
+\bottomrule\endlastfoot
+Age & N & 0.759 & 0.759 & 0.923 & 25/25 & 0.000 & $>0.999$ & --\\*
+ & H & 0.770 & 0.770 & 0.938 & 25/25 & 0.011 & $>0.999$ & --\\*
+ & S & 0.760 & 0.760 & 0.922 & 25/25 & 0.002 & $>0.999$ & 0.471\\[2pt]
+Body mass index & N & -0.217 & 0.217 & 0.302 & 17/25 & 0.000 & 0.027 & --\\*
+ & H & -0.162 & 0.162 & 0.302 & 7/25 & 0.056 & 0.068 & --\\*
+ & S & -0.214 & 0.214 & 0.304 & 17/25 & 0.004 & 0.029 & 0.375\\[2pt]
+Cardiovascular disease (1/0) & N & 0.081 & 0.099 & 0.844 & 0/25 & 0.000 & 0.642 & --\\*
+ & H & 0.027 & 0.035 & 0.525 & 0/25 & 0.064 & 0.575 & --\\*
+ & S & 0.075 & 0.092 & 0.818 & 0/25 & 0.008 & 0.639 & 0.370\\[2pt]
+Diastolic blood pressure & N & -0.259 & 0.259 & 0.353 & 19/25 & 0.000 & 0.021 & --\\*
+ & H & -0.182 & 0.182 & 0.332 & 8/25 & 0.077 & 0.047 & --\\*
+ & S & -0.253 & 0.253 & 0.354 & 18/25 & 0.006 & 0.023 & 0.384\\[2pt]
+Sex (1/0) & N & -0.152 & 0.152 & 0.541 & 0/25 & 0.000 & 0.185 & --\\*
+ & H & -0.050 & 0.050 & 0.409 & 0/25 & 0.102 & 0.341 & --\\*
+ & S & -0.143 & 0.143 & 0.533 & 0/25 & 0.009 & 0.194 & 0.370\\[2pt]
+Heart rate & N & 0.350 & 0.350 & 0.431 & 25/25 & 0.000 & $>0.999$ & --\\*
+ & H & 0.308 & 0.308 & 0.423 & 25/25 & 0.042 & $>0.999$ & --\\*
+ & S & 0.347 & 0.347 & 0.430 & 25/25 & 0.003 & $>0.999$ & 0.401\\[2pt]
+Infarction order (1/0) & N & 0.019 & 0.063 & 0.662 & 0/25 & 0.000 & 0.542 & --\\*
+ & H & 0.024 & 0.030 & 0.450 & 0/25 & 0.038 & 0.582 & --\\*
+ & S & 0.020 & 0.061 & 0.645 & 0/25 & 0.004 & 0.547 & 0.364\\[2pt]
+Infarction type (1/0) & N & -0.079 & 0.084 & 0.749 & 0/25 & 0.000 & 0.364 & --\\*
+ & H & -0.048 & 0.048 & 0.479 & 0/25 & 0.044 & 0.369 & --\\*
+ & S & -0.079 & 0.083 & 0.728 & 0/25 & 0.005 & 0.359 & 0.370\\[2pt]
+Systolic blood pressure & N & 0.020 & 0.036 & 0.426 & 0/25 & 0.000 & 0.572 & --\\*
+ & H & -0.016 & 0.022 & 0.304 & 0/25 & 0.036 & 0.419 & --\\*
+ & S & 0.016 & 0.034 & 0.417 & 0/25 & 0.004 & 0.559 & 0.353\\[2pt]
+\end{longtable}
+\noindent\begin{minipage}{\textwidth}
+N: Normal; H: Horseshoe; S: continuous Spike-and-Slab. Each entry averages 25 separate accepted fits with equal weight. Numeric predictors are expressed per training-fold standard deviation; categorical contrasts show the level/reference. The $|\beta|$ column averages the absolute posterior coefficient mean in each fold. HR width is the mean 95\% hazard-ratio interval width. Excludes 1 counts those intervals excluding unity. $|\Delta\beta_N|$ is the mean same-fold absolute difference from the Normal posterior mean. Directional probabilities are averaged across folds; the weight is the continuous variance-mixture weight for S. Comparisons use unrounded values. These summaries do not form a pooled posterior interval.
+\end{minipage}\endgroup

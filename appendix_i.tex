@@ -23,10 +23,13 @@ Table~\ref{tab:gen-explanation-top-groups} summarises the three groups with the 
 
 \section{Matched-Fold Posterior Comparisons}
 
-Tables~\ref{tab:exam-posterior-summary} and~\ref{tab:exam-posterior-direction} compare selected named predictors on folds accepted under all three priors: seven in GBSG2, 25 in WHAS500 and 23 in METABRIC. Each entry averages a summary from separate fitted posteriors. The interval widths are on the hazard-ratio scale; neither the mean width nor the fold average of a coefficient is a pooled posterior interval. The mean absolute paired difference from Normal measures sensitivity of the posterior mean to prior configuration, rather than shrinkage towards zero.
+Tables~\ref{tab:posterior-all-gbsg2}--\ref{tab:posterior-all-metabric} give post-hoc descriptive comparisons of every encoded covariate coefficient present with the same coding and reference level across folds accepted under all three priors: eight coefficients in seven GBSG2 folds, nine in 25 WHAS500 folds and 15 in 23 METABRIC folds. Eligibility requires consistent representation across those fits. The four METABRIC missing-category indicators for PR status, HER2 status, menopausal state and subtype are absent in some matched fits and therefore have no complete matched-fold comparison.
 
-\input{report_summaries/standalone_presentation/table_posterior_summary.tex}
-\input{report_summaries/standalone_presentation/table_posterior_direction.tex}
+Each entry averages a summary from separate fitted posteriors. The interval widths are on the hazard-ratio scale; neither the mean width nor the fold average of a coefficient is a pooled posterior interval. The mean absolute paired difference from Normal measures sensitivity of the posterior mean to prior configuration. Movement towards zero is assessed separately by comparing the mean across folds of the absolute posterior coefficient means. Continuous predictors and the ordinal tumour-grade score use their training-fold standard deviations; categorical coefficients use the level/reference contrasts shown in the tables.
+
+\input{report_summaries/prior_comparison_completion/table_posterior_all_gbsg2.tex}
+\input{report_summaries/prior_comparison_completion/table_posterior_all_whas500.tex}
+\input{report_summaries/prior_comparison_completion/table_posterior_all_metabric.tex}
 
 \section{Attribution Sampling Stability}
 

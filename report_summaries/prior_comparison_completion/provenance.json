@@ -1,0 +1,125 @@
+{
+  "fitting_performed": false,
+  "simulation_performed": false,
+  "source_hashes": {
+    "outer_training_epc.csv": "96cb60ea1662333f10c12a5ba644a3e8b05fda3cb86cc98adae192375878b510",
+    "quarter_training_cells_epc.csv": "c3051ef5fe3f441fc4a3a484e01b144feadf82ac13d07934086ac04dea6cc395",
+    "epc_verification.json": "2b9b79b6cb742575655649fe70c52c39e330ac8d7df2083eed014fa59ccbbc2f",
+    "quarter_training_epc_verification.json": "90fb875cc61fc41cc4adc5a0f3eb9ec2163f7098ca3610f9e8542ff1c7b1faf2",
+    "full_cohort_epc.json": "1f3806a3c51ab94b24099c253184f1339ddcc535c92cdd67ac6ae54448edf9bc",
+    "posterior_matched_all_features.csv": "41ced61f743ea6c9d5f3958ec4caea6ec5b19804ff12ce792e0b59af8b3c4e76",
+    "posterior_matched_by_fold.csv": "028451acf473182719d357a029f7e4f8cba97c2b899f4befd267a8e11dc0f1b4"
+  },
+  "information_summary": [
+    {
+      "condition": "Primary",
+      "dataset": "gbsg2",
+      "n_folds": 25,
+      "n_train": [
+        548,
+        549
+      ],
+      "events": [
+        239,
+        240
+      ],
+      "p": [
+        8
+      ],
+      "minimum_exact": "239/8",
+      "maximum_exact": "30"
+    },
+    {
+      "condition": "Primary",
+      "dataset": "whas500",
+      "n_folds": 25,
+      "n_train": [
+        400
+      ],
+      "events": [
+        172
+      ],
+      "p": [
+        9
+      ],
+      "minimum_exact": "172/9",
+      "maximum_exact": "172/9"
+    },
+    {
+      "condition": "Primary",
+      "dataset": "metabric",
+      "n_folds": 25,
+      "n_train": [
+        1584
+      ],
+      "events": [
+        914,
+        915,
+        916
+      ],
+      "p": [
+        15,
+        19
+      ],
+      "minimum_exact": "914/19",
+      "maximum_exact": "916/15"
+    },
+    {
+      "condition": "25\\% training",
+      "dataset": "gbsg2",
+      "n_folds": 10,
+      "n_train": [
+        135
+      ],
+      "events": [
+        59
+      ],
+      "p": [
+        8
+      ],
+      "minimum_exact": "59/8",
+      "maximum_exact": "59/8"
+    },
+    {
+      "condition": "25\\% training",
+      "dataset": "whas500",
+      "n_folds": 10,
+      "n_train": [
+        96
+      ],
+      "events": [
+        40
+      ],
+      "p": [
+        9
+      ],
+      "minimum_exact": "40/9",
+      "maximum_exact": "40/9"
+    },
+    {
+      "condition": "25\\% training",
+      "dataset": "metabric",
+      "n_folds": 10,
+      "n_train": [
+        392,
+        393
+      ],
+      "events": [
+        228
+      ],
+      "p": [
+        14,
+        15,
+        19
+      ],
+      "minimum_exact": "12",
+      "maximum_exact": "114/7"
+    }
+  ],
+  "outputs": {
+    "table_posterior_all_gbsg2.tex": "aa4e42b255e0ad11c548a3d0df8f3dfac1bc6961589d4965418c5254fb7f3162",
+    "table_posterior_all_metabric.tex": "00e9332f0d280209a78fc42e0e0d70576d34a5b538b3ffa992f249387c5d3069",
+    "table_posterior_all_whas500.tex": "4e8071c9734c5d456314dc1503f06a5b56eedaeac2e95ddb737ff0fc18f6a239",
+    "table_training_information.tex": "2b27c4afb16ab1f4ed25a81d8980b9d319435f02c1ec7a89f754d2a645349a88"
+  }
+}

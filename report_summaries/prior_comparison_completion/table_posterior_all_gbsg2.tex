@@ -1,0 +1,43 @@
+\begingroup\singlespacing\footnotesize
+\setlength{\tabcolsep}{3pt}
+\setlength{\LTcapwidth}{\textwidth}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth}lrrrrrrr@{}}
+\caption{Complete matched-fold posterior comparison for GBSG2.}\label{tab:posterior-all-gbsg2}\\
+\toprule
+Predictor contrast & Prior & Mean $\beta$ & $|\beta|$ & HR width & Excludes 1 & $|\Delta\beta_N|$ & $P(\beta>0)$ & Weight\\
+\midrule\endfirsthead
+\multicolumn{9}{l}{\tablename\ \thetable\ (continued)}\\
+\toprule
+Predictor contrast & Prior & Mean $\beta$ & $|\beta|$ & HR width & Excludes 1 & $|\Delta\beta_N|$ & $P(\beta>0)$ & Weight\\
+\midrule\endhead
+\midrule
+\multicolumn{9}{r}{Continued on next page}\\\endfoot
+\bottomrule\endlastfoot
+Age & N & -0.074 & 0.074 & 0.380 & 0/7 & 0.000 & 0.247 & --\\*
+ & H & -0.010 & 0.012 & 0.253 & 0/7 & 0.064 & 0.448 & --\\*
+ & S & -0.067 & 0.067 & 0.374 & 0/7 & 0.008 & 0.266 & 0.356\\[2pt]
+Oestrogen receptor & N & 0.020 & 0.032 & 0.302 & 0/7 & 0.000 & 0.608 & --\\*
+ & H & 0.003 & 0.012 & 0.227 & 0/7 & 0.021 & 0.526 & --\\*
+ & S & 0.019 & 0.031 & 0.295 & 0/7 & 0.002 & 0.603 & 0.350\\[2pt]
+Hormonal therapy (yes/no) & N & -0.361 & 0.361 & 0.394 & 6/7 & 0.000 & 0.010 & --\\*
+ & H & -0.235 & 0.235 & 0.426 & 2/7 & 0.126 & 0.068 & --\\*
+ & S & -0.353 & 0.353 & 0.401 & 5/7 & 0.008 & 0.013 & 0.403\\[2pt]
+Menopause (pre/post) & N & -0.260 & 0.260 & 0.622 & 0/7 & 0.000 & 0.102 & --\\*
+ & H & -0.076 & 0.076 & 0.431 & 0/7 & 0.183 & 0.281 & --\\*
+ & S & -0.242 & 0.242 & 0.618 & 0/7 & 0.018 & 0.114 & 0.387\\[2pt]
+Positive nodes & N & 0.274 & 0.274 & 0.244 & 7/7 & 0.000 & $>0.999$ & --\\*
+ & H & 0.274 & 0.274 & 0.252 & 7/7 & 0.004 & $>0.999$ & --\\*
+ & S & 0.274 & 0.274 & 0.244 & 7/7 & 0.001 & $>0.999$ & 0.388\\[2pt]
+Progesterone receptor & N & -0.444 & 0.444 & 0.322 & 7/7 & 0.000 & $<0.001$ & --\\*
+ & H & -0.395 & 0.395 & 0.345 & 7/7 & 0.049 & $<0.001$ & --\\*
+ & S & -0.442 & 0.442 & 0.320 & 7/7 & 0.002 & $<0.001$ & 0.420\\[2pt]
+Tumour grade & N & 0.167 & 0.167 & 0.318 & 7/7 & 0.000 & 0.989 & --\\*
+ & H & 0.144 & 0.144 & 0.326 & 3/7 & 0.023 & 0.973 & --\\*
+ & S & 0.165 & 0.165 & 0.320 & 6/7 & 0.002 & 0.989 & 0.368\\[2pt]
+Tumour size & N & 0.123 & 0.123 & 0.279 & 3/7 & 0.000 & 0.970 & --\\*
+ & H & 0.087 & 0.087 & 0.260 & 0/7 & 0.036 & 0.914 & --\\*
+ & S & 0.122 & 0.122 & 0.280 & 3/7 & 0.002 & 0.968 & 0.359\\[2pt]
+\end{longtable}
+\noindent\begin{minipage}{\textwidth}
+N: Normal; H: Horseshoe; S: continuous Spike-and-Slab. Each entry averages 7 separate accepted fits with equal weight. Numeric predictors and the ordinal tumour-grade score are expressed per training-fold standard deviation; categorical contrasts show the level/reference. The $|\beta|$ column averages the absolute posterior coefficient mean in each fold. HR width is the mean 95\% hazard-ratio interval width. Excludes 1 counts those intervals excluding unity. $|\Delta\beta_N|$ is the mean same-fold absolute difference from the Normal posterior mean. Directional probabilities are averaged across folds; the weight is the continuous variance-mixture weight for S. Comparisons use unrounded values. These summaries do not form a pooled posterior interval.
+\end{minipage}\endgroup
