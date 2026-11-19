@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-19",
+  "status": "completed_and_published",
+  "base_thesis_commit": "bf9f2acc03189a2cea67ac82aba2e54b811be2b8",
+  "thesis_commit": "b2b9aa978f8416a8dd9d10133489caf5b6f8d30d",
+  "reporting_code_commit": "85e752a23bee9f82a149e9c65fc9bd370b5c315e",
+  "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+  "github_thesis_branch": "thesis/final-report-20261117",
+  "remote_heads_verified": {
+    "origin": "b2b9aa978f8416a8dd9d10133489caf5b6f8d30d",
+    "github": "b2b9aa978f8416a8dd9d10133489caf5b6f8d30d"
+  },
+  "scope": [
+    "Replace six-predictor display tables with all32 consistently represented encoded coefficients under all3 priors",
+    "Report mean of absolute posterior means before averaging folds, alongside signed mean, HR width, interval-exclusion count, paired prior difference, direction probability and variance-mixture weight",
+    "Use complete comparisons in results, discussion and RQ2 answer",
+    "Explain prespecified central observed-event-time interval and separate censoring support safeguard",
+    "Report exact primary and25-percent training events per encoded covariate coefficient",
+    "Retain standalone manuscript exclusions and all97 existing references; add3 verified primary references"
+  ],
+  "original_predictions_diagnostics_and_inference_changed": false,
+  "fitting_performed": false,
+  "simulation_performed": false,
+  "bootstrap_sampling_performed": false,
+  "all_original_evidence_directories_unchanged_from_base": true,
+  "prior_provenance_outputs_hash_verified": 77,
+  "prior_presentation_copy_hashes_verified": 7,
+  "new_table_provenance": "thesis-overleaf/report_summaries/prior_comparison_completion/provenance.json",
+  "source_zip": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_complete_comparisons.zip",
+  "artifact_verification": {
+    "pdf_pages": 128,
+    "references": 100,
+    "all_previous_97_references_retained": true,
+    "tables": 46,
+    "figures": 7,
+    "active_source_files": 61,
+    "fresh_source_zip_build_byte_identical": true,
+    "pdf_sha256": "12fd3e9f9e4963b5a08a5d2c7dd5c93b332d719aa53f291ed7beaad7e3d6652d",
+    "source_zip_sha256": "58569c598d16ccc8cadd232361bc0eba74037553bb54e2ae8dce4ae6affa6f4c",
+    "active_labels_unique": true,
+    "all_100_references_cited": true,
+    "latex_warnings": 0,
+    "overfull_boxes": 0,
+    "underfull_boxes": 0,
+    "known_nonfatal_engine_notices": 7,
+    "engine_notice_reference": "https://github.com/latex3/latex2e/issues/1907",
+    "forbidden_text_hits": 0,
+    "project_or_local_links": 0,
+    "authoring_metadata_blank": true,
+    "document_id": false,
+    "xmp_metadata": false,
+    "embedded_attachments": false,
+    "visual_pages_checked": [
+      49,
+      53,
+      65,
+      78,
+      117,
+      118,
+      119
+    ],
+    "material_visual_defects_found": false
+  },
+  "numerical_verification": {
+    "original_cells_verified": 450,
+    "robustness_cells_verified": 825,
+    "posterior_aggregate_rows": 96,
+    "posterior_fold_rows": 1878,
+    "matched_folds": {
+      "GBSG2": 7,
+      "WHAS500": 25,
+      "METABRIC": 23
+    },
+    "lower_horseshoe_mean_absolute_beta_terms": 30,
+    "narrower_horseshoe_mean_hr_interval_terms": 25,
+    "primary_training_splits": 75,
+    "quarter_training_cells": 90,
+    "mean_absolute_beta_definition": "Within each fold take absolute posterior coefficient mean, then average those values across matched folds",
+    "metabric_dimension_explanation_corrected": "Primary15/19 varies with4missing-category indicators; quarter14 additionally lacksNCsubtypecontrast"
+  },
+  "independent_audit": {
+    "status": "passed_after_correction",
+    "issue_addressed": "Explain absentNCsubtype in14-column reduced-training designs",
+    "no_other_material_issues": true
+  },
+  "validation": {
+    "focused_reporting_tests_passed": 11,
+    "final_four_completion_tests_passed": true,
+    "ruff_passed": true,
+    "coordination_schemas_passed": true,
+    "full_model_suite": "Not certified:25collectionerrors in reportingPython environment; missing modelling dependencies include scikit-survival andPyYAML. No model code or environment changed."
+  },
+  "primary_sources": [
+    {
+      "key": "nagpal2021mixtures",
+      "url": "https://proceedings.mlr.press/v149/nagpal21a.html",
+      "supports": "Event-time quartile point-horizon precedent, not optimality of q25-to-q75 IBS window"
+    },
+    {
+      "key": "kvamme2023brier",
+      "url": "https://www.jmlr.org/papers/v24/19-1030.html",
+      "supports": "Small censoring-survival estimates can generate large inverse weights"
+    },
+    {
+      "key": "riley2019samplesize",
+      "url": "https://doi.org/10.1002/sim.7992",
+      "supports": "Predictor-parameter denominator and context-dependent sample-size requirements",
+      "correction_checked": "https://doi.org/10.1002/sim.8409; corrected exponential-null-likelihood formula not applied in this amendment"
+    }
+  ]
+}

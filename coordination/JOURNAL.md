@@ -1,5 +1,11 @@
 # JOURNAL
 
+## 2026-11-19 - Completed full posterior comparison and training-information reporting
+
+Revision `b2b9aa9` reports all 32 consistently represented coefficients under the three priors, replacing the six-predictor display subset. The results, discussion and RQ2 answer use the complete matched-fold comparison. Methods explain the prespecified event-time window and report exact events per encoded coefficient for the primary and 25% training conditions. METABRIC dimensions are explained through training-observed category levels.
+
+The report has 128 pages, 100 cited references, 46 tables and seven figures. All 97 previous references and all original scientific evidence are retained. No fitting, bootstrap sampling or simulation was run. Eleven focused reporting tests, Ruff, coordination schemas, independent arithmetic review, citation/metadata checks and focused layout review passed. The 61-file source ZIP independently produces a byte-identical PDF. Current files are linked from `docs/ravi_thesis_next_steps.md`; the receipt is `coordination/reviews/2026-11-19-prior-comparison-completion.json`. Earlier checkpoints below retain their stated versions.
+
 ## 2026-11-19 - Removed operational material from the report
 
 Revision `bf9f2ac` removes operational wording, raw predictor aliases and the external supporting-summary pointer. Hidden authoring fields are blank, with no software fingerprint, dates, document ID, XMP or attachments. Scholarly citations, publication years and the cover date are retained. The methodology is self-contained; scientific model settings and results are unchanged. Numeric seed identifiers and the package patch-version inventory are omitted from the reader-facing text, while full computational records remain preserved.

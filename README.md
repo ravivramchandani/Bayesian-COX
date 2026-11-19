@@ -3,14 +3,14 @@
 
 ## Final thesis report
 
-The standalone 125-page report, **Explainable Bayesian Survival Models**, contains the study, its results and 97 scholarly references. Operational wording, raw predictor aliases, the external supporting-summary pointer and authoring-software metadata have been removed. All scientific results are preserved.
+The standalone 128-page report, **Explainable Bayesian Survival Models**, contains the complete study, its results and 100 scholarly references. The full matched-fold posterior comparisons cover 32 encoded coefficients under three priors. Methods explain the evaluation window and report exact training events per coefficient. All original results and references are preserved.
 
 - [Read the current PDF](https://github.com/ravivramchandani/Bayesian-COX/blob/thesis/final-report-20261117/Main.pdf).
-- [Download the standalone Overleaf source ZIP](reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_standalone.zip).
+- [Download the current Overleaf source ZIP](reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_complete_comparisons.zip).
 - [Ravi's thesis instructions](docs/ravi_thesis_next_steps.md).
-- [Standalone-report verification](coordination/reviews/2026-11-19-standalone-cleanup.json).
+- [Verification record](coordination/reviews/2026-11-19-prior-comparison-completion.json).
 
-The source and saved PDF are published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and on the [GitHub thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117), revision `bf9f2ac`. The report has 44 tables and seven figures. Its 59-file source ZIP contains only the LaTeX files and figures required to compile the report; an independent build produces an identical PDF. Full data exports and evidence records remain preserved separately in the repositories.
+The source and saved PDF are published in the [shared Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0) and on the [GitHub thesis branch](https://github.com/ravivramchandani/Bayesian-COX/tree/thesis/final-report-20261117), revision `b2b9aa9`. The report has 46 tables and seven figures. Its 61-file source ZIP contains only the LaTeX files and figures required to compile the report; an independent build produces an identical PDF. Operational material and authoring metadata remain excluded from the report. Full evidence records remain preserved separately in the repositories.
 
 Code and reproducibility materials for a Master of Applied Technologies
 thesis at the School of Computing, Unitec.
