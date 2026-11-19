@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-19",
+  "status": "completed_and_published",
+  "scope": "Owner-authorised synthesis and concision pass; no new experiments.",
+  "base_thesis_commit": "d7cbd019bef770c557aff99fd627429f3323dcb8",
+  "thesis_commit": "749f6fc99fd7946ac621aefaaa5d33d9383f052d",
+  "backup_branch": "archive/before-synthesis-20261119",
+  "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+  "github_thesis_branch": "thesis/final-report-20261117",
+  "remote_heads_verified": {
+    "overleaf_main": "749f6fc99fd7946ac621aefaaa5d33d9383f052d",
+    "github_thesis_branch": "749f6fc99fd7946ac621aefaaa5d33d9383f052d"
+  },
+  "fitting_performed": false,
+  "bootstrap_sampling_performed": false,
+  "predictive_simulation_performed": false,
+  "reporting_code_changed": false,
+  "methodology_unchanged": true,
+  "acknowledgement_unchanged": true,
+  "previous_table_definitions_and_numerical_assets_unchanged": true,
+  "original_evidence_outputs_unchanged": 47,
+  "all_existing_evidence_hashes_verified": 82,
+  "artifact_verification": {
+    "pdf_pages": 125,
+    "references": 97,
+    "tables": 44,
+    "figures": 7,
+    "pdf_sha256": "09fa395580491e755e9f47df24b060ede100b4d47018353932753c5c78607033",
+    "fresh_build_byte_identical": true,
+    "fresh_build_matching_page_texts": 125,
+    "latex_warnings": 0,
+    "poppler_pdfinfo_and_text_passed": true,
+    "abstract_including_keywords_one_page": true,
+    "visual_pages_checked": [
+      3,
+      16,
+      28,
+      29,
+      72,
+      83,
+      84
+    ],
+    "material_visual_defects_found": false,
+    "source_word_counts": {
+      "abstract.tex": {
+        "before": 298,
+        "after": 313
+      },
+      "introduction.tex": {
+        "before": 1503,
+        "after": 1544
+      },
+      "literature_review.tex": {
+        "before": 4960,
+        "after": 5060
+      },
+      "results.tex": {
+        "before": 4992,
+        "after": 5429
+      },
+      "conclusion.tex": {
+        "before": 2677,
+        "after": 2054
+      }
+    },
+    "objective_table_unchanged": true,
+    "new_guidance_table": "5.2",
+    "source_zip": {
+      "path": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_synthesis.zip",
+      "files": 138,
+      "sha256": "5ef64673f45916b712a5e0119d124fc03eb98c0262ba9166b69a2edf3838f17c"
+    }
+  },
+  "source_verification": {
+    "references": 97,
+    "all_previous_references_retained": true,
+    "citation_order_unchanged": true,
+    "active_labels": 188,
+    "all_active_labels_unique": true,
+    "all_cross_references_resolve": true,
+    "all_tables_and_figures_called_out": true,
+    "existing_evidence_hashes_verified": 82,
+    "changed_after_snapshot": [],
+    "pdf_pages": 125,
+    "latex_warnings": 0,
+    "locations": {
+      "This thesis compares Normal": [
+        16
+      ],
+      "The selection studies also show": [
+        28
+      ],
+      "The main distinction in these results": [
+        72
+      ],
+      "Methodological choices supported": [
+        83
+      ],
+      "The value of added prior hierarchy": [
+        84
+      ]
+    }
+  },
+  "independent_reviews": {
+    "literature_primary_support": "Passed; partial-likelihood/nonlocal selection, log-normal inclusion sharing, structured interaction and prediction targets accurately distinguished.",
+    "cross_chapter_claims": "Passed; central contribution, primary coverage, sensitivity boundaries, PH/nonlinearity and attribution component criteria coherent.",
+    "discussion_factual_checks": "Passed; prior results before Section4.14 preserved apart from one added calibration-table callout; all tail citation keys/labels preserved.",
+    "conclusion": "All previous labels, headings and citation keys retained; objective table byte-unchanged; new methodological guidance table5.2."
+  },
+  "recommendations_completed": [
+    "Central argument made explicit across abstract, problem statement, synthesis, discussion and conclusion.",
+    "Closest-literature discussion explains the different inferential targets and what the present findings support.",
+    "Methodological decision table links model-choice needs to existing evidence.",
+    "Repeated RQ answers and numerical recitations consolidated; conclusion shortened while retaining four RQs and eight-objective mapping."
+  ],
+  "validation_scope": "Focused source/claim checks, existing evidence hashes, LaTeX, Poppler, changed-page visual checks and independent source-ZIP build. No new numerical tests or full modelling-suite pass claimed.",
+  "primary_source_support": [
+    {
+      "key": "ref6",
+      "doi": "10.1214/20-AOAS1325",
+      "access": "Cached author preprint arXiv1712.02964v7,14March2020; abstract, methods and discussion."
+    },
+    {
+      "key": "ref42",
+      "doi": "10.1186/s12859-022-04770-3",
+      "access": "Published full PDF; separate selection and posterior-predictive assessment."
+    },
+    {
+      "key": "ref52",
+      "doi": "10.1186/s12859-025-06077-5",
+      "access": "Published XML, PMC11834309; prior distribution and discussion."
+    },
+    {
+      "key": "ref44",
+      "doi": "10.1186/s41512-022-00124-y",
+      "access": "Published full PDF; discussion of comparator specification and C-index/calibration."
+    }
+  ],
+  "source_sha256": {
+    "Main.tex": "443a2b63ecbf74f52947af84c69148a39a3200db8fc0be28b67a57f888468901",
+    "Main.pdf": "09fa395580491e755e9f47df24b060ede100b4d47018353932753c5c78607033",
+    "abstract.tex": "3704dc5a1ac1a48e9c3e7701367dcf73ba2ffdc08748a8ef108cba9c340f449c",
+    "introduction.tex": "e37b2e47357b01f4165098e6e38bb5dbd46fe6b946713b41a1ec520316963639",
+    "literature_review.tex": "0eab6ff6af344fe27106762fbe504c49c4872bcd5d35ed6f9b52757defb708aa",
+    "results.tex": "e0e2cd567b280bca99b939d33e2f1b1bd1bb927953a7e9d9f58b4a54e4305838",
+    "conclusion.tex": "d5d4d7d058643509ca3bf704e29e68780b6d867bdb1c73641c2a4989b32672b3",
+    "references.tex": "fb2d237d85ce7b92fe4a446c535e01eccf44a9a39b87e8586ff5ed6e9ae5d8a8",
+    "ack.tex": "adfd5b3ba7a73b96ff17ac18a11ac1093becdd3fa246090815ffa3ba107e75b0"
+  }
+}

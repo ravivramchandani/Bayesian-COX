@@ -18,6 +18,12 @@ artefacts satisfy the stated gate.
 
 ## Current manuscript - 2026-11-19
 
+Revision `749f6fc` implements the owner's four recommendations while preserving the source at `d7cbd01` on `archive/before-synthesis-20261119`. The abstract, introduction and literature synthesis now establish the practical prior-hierarchy question; the discussion relates the findings to the closest primary studies; repeated RQ answers are consolidated; and Table 5.2 gives methodological guidance. Conclusion source text fell from 2,677 to 2,054 whitespace-delimited words (23.3%), including the new table; this is a source comparison, not an institutional word count.
+
+The report has 125 pages, 97 cited references, 44 tables and seven figures. The methodology, acknowledgement, objective table and all previous numerical tables/results are unchanged. All 82 existing evidence-output hashes pass. Independent source/claim checks, zero-warning LaTeX builds, Poppler validation and focused visual review passed. The 138-file source ZIP rebuilds to a byte-identical PDF. No fits or simulations were run. Current instructions are in `docs/ravi_thesis_next_steps.md`; verification is `coordination/reviews/2026-11-19-thesis-synthesis.json`. Earlier checkpoints below retain their original versions.
+
+## Previous examiner-polish checkpoint - 2026-11-19
+
 Revision `d7cbd01` preserves Ravi's latest source `a4d2324` and strengthens the existing report without new experiments. It aligns four RQs and all eight objectives, foregrounds Uno concordance, explains clinical calibration and PH findings, and reports saved matched-fold posterior, prior-predictive, divergence and attribution summaries. All 85 earlier citation keys remain; 12 verified primary method/software and clinical-shrinkage sources bring the total to 97.
 
 The final PDF has 125 pages, 43 tables and seven figures. All 47 original evidence outputs remain unchanged; 450 original and 825 robustness cells were verified. Independent arithmetic and scientific checks, seven new reporting tests and Ruff passed. Both the working-source and fresh 138-file source-ZIP builds are warning-free and have identical text on all 125 pages. Full-page contact sheets and focused high-resolution checks show no material layout defects. The default full model-suite attempt is not certified because its Python environment lacks modelling dependencies and fails historical fixture guards; no model code or frozen environment changed.
