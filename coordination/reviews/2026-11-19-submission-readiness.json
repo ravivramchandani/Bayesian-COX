@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-19",
+  "status": "submission_ready_manuscript",
+  "base_thesis_commit": "0df4597906ec3d38f0f83d1f73738764fdc15293",
+  "thesis_commit": "9e8f96647718c235a4026c3d39c6fa9ba4f9511c",
+  "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+  "remote_heads_verified": {
+    "origin": "9e8f96647718c235a4026c3d39c6fa9ba4f9511c",
+    "github": "9e8f96647718c235a4026c3d39c6fa9ba4f9511c"
+  },
+  "source_zip": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_submission.zip",
+  "source_zip_sha256": "f3632496b37e0bc733660f7bef0c97b80310d2133e83b3aeb18001b7222ce051",
+  "source_files": 61,
+  "independent_source_zip_build_byte_identical": true,
+  "artifact_checks": {
+    "pages": 128,
+    "changed_page_texts": [
+      5,
+      10,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      80
+    ],
+    "registered_outputs_hash_checked": 81,
+    "references": 100,
+    "tables": 46,
+    "figures": 7,
+    "latex_warnings": 0,
+    "overfull_boxes": 0,
+    "underfull_boxes": 0,
+    "forbidden_text_hits": 0,
+    "pdf_metadata_cleared": true,
+    "document_id": false,
+    "xmp": false,
+    "attachments": false,
+    "pdf_sha256": "99cb21b301cca6065fe25c6304c3a1810c6c59c018099e91a37ede50e45f5742"
+  },
+  "content_checks": {
+    "independent_snapshot_review_passed": true,
+    "four_questions_and_eight_objectives_aligned": true,
+    "methods_results_conclusions_consistent": true,
+    "original_evidence_tables_and_figures_unchanged": true,
+    "all_100_reference_entries_preserved_and_cited": true,
+    "active_labels_unique": true,
+    "all_cross_references_resolve": true,
+    "no_placeholders_found": true,
+    "no_outstanding_substantive_report_issues_found": true
+  },
+  "correction": "Remove numeric seed identifier from narrative and sampler table; retain deterministic seed derivation and align objective8wording. Preserve all current author prose edits and scientific content.",
+  "visual_review": {
+    "changed_methods_layouts_checked": [
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56
+    ],
+    "detailed_pages_checked": [
+      46,
+      80
+    ],
+    "material_visual_defects_found": false
+  },
+  "fitting_performed": false,
+  "simulation_performed": false,
+  "model_code_changed": false,
+  "new_tests_required": false,
+  "validation_scope": "Final manuscript and compiled-artifact check; earlier focused reporting tests and numerical audits remain applicable because model/reporting code and evidence inputs are unchanged.",
+  "earlier_verification_records": [
+    "2026-11-19-prior-comparison-completion.json",
+    "2026-11-19-conservative-prose.md"
+  ]
+}
