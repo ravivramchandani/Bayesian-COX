@@ -1,0 +1,87 @@
+\clearpage\begingroup\singlespacing\footnotesize
+\setlength{\LTpre}{6pt}\setlength{\LTpost}{6pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{1.3cm}p{0.5cm}p{2.9cm}p{2.9cm}p{2.9cm}@{}}
+\caption{Calibration across the three evaluation horizons in GBSG2.}\label{tab:calibration-all-gbsg2}\\
+\toprule Model & \shortstack[l]{Time\\quantile} & $n$ & \shortstack[l]{Calibration\\in-the-large} & Intercept & Slope \\\midrule\endfirsthead
+\multicolumn{6}{l}{\tablename\ \thetable\ (continued)}\\
+\toprule Model & \shortstack[l]{Time\\quantile} & $n$ & \shortstack[l]{Calibration\\in-the-large} & Intercept & Slope \\\midrule\endhead
+\midrule\multicolumn{6}{r}{Continued on next page}\\\endfoot
+\bottomrule\endlastfoot
+CoxPH & 25th & 25 & -0.032 (0.128) & 0.429 (0.952) & 1.235 (0.469) \\
+CoxPH & 50th & 25 & -0.037 (0.129) & 0.216 (0.553) & 1.186 (0.417) \\
+CoxPH & 75th & 25 & 0.024 (0.066) & 0.188 (0.259) & 1.226 (0.321) \\
+RSF & 25th & 25 & 0.004 (0.103) & 0.243 (0.495) & 1.150 (0.296) \\
+RSF & 50th & 25 & -0.002 (0.082) & 0.121 (0.327) & 1.119 (0.311) \\
+RSF & 75th & 25 & 0.013 (0.076) & 0.070 (0.243) & 1.084 (0.319) \\
+DeepSurv & 25th & 25 & -0.045 (0.111) & 0.288 (0.783) & 1.180 (0.397) \\
+DeepSurv & 50th & 25 & -0.052 (0.110) & 0.005 (0.384) & 1.040 (0.292) \\
+DeepSurv & 75th & 25 & -0.016 (0.068) & 0.070 (0.253) & 1.118 (0.315) \\
+Normal & 25th & 25 & 0.006 (0.115) & 0.543 (0.968) & 1.274 (0.470) \\
+Normal & 50th & 25 & -0.003 (0.101) & 0.309 (0.548) & 1.244 (0.409) \\
+Normal & 75th & 25 & 0.019 (0.060) & 0.216 (0.264) & 1.275 (0.333) \\
+Horseshoe & 25th & 7 & -0.025 (0.119) & 0.553 (1.090) & 1.291 (0.528) \\
+Horseshoe & 50th & 7 & -0.038 (0.101) & 0.191 (0.663) & 1.175 (0.516) \\
+Horseshoe & 75th & 7 & 0.019 (0.076) & 0.495 (0.481) & 1.652 (0.612) \\
+Spike-and-Slab & 25th & 25 & 0.006 (0.114) & 0.550 (0.972) & 1.277 (0.472) \\
+Spike-and-Slab & 50th & 25 & -0.003 (0.100) & 0.317 (0.551) & 1.250 (0.411) \\
+Spike-and-Slab & 75th & 25 & 0.019 (0.060) & 0.225 (0.270) & 1.288 (0.340) \\
+\end{longtable}
+\noindent Horizon is the percentile of event times within each training fold. Entries are fold means (sample SD).\par\endgroup
+\clearpage\begingroup\singlespacing\footnotesize
+\setlength{\LTpre}{6pt}\setlength{\LTpost}{6pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{1.3cm}p{0.5cm}p{2.9cm}p{2.9cm}p{2.9cm}@{}}
+\caption{Calibration across the three evaluation horizons in WHAS500.}\label{tab:calibration-all-whas500}\\
+\toprule Model & \shortstack[l]{Time\\quantile} & $n$ & \shortstack[l]{Calibration\\in-the-large} & Intercept & Slope \\\midrule\endfirsthead
+\multicolumn{6}{l}{\tablename\ \thetable\ (continued)}\\
+\toprule Model & \shortstack[l]{Time\\quantile} & $n$ & \shortstack[l]{Calibration\\in-the-large} & Intercept & Slope \\\midrule\endhead
+\midrule\multicolumn{6}{r}{Continued on next page}\\\endfoot
+\bottomrule\endlastfoot
+CoxPH & 25th & 25 & -0.011 (0.147) & -0.204 (0.543) & 0.903 (0.303) \\
+CoxPH & 50th & 25 & -0.005 (0.132) & -0.087 (0.309) & 0.912 (0.234) \\
+CoxPH & 75th & 25 & -0.046 (0.172) & -0.057 (0.240) & 0.941 (0.209) \\
+RSF & 25th & 25 & 0.006 (0.115) & 0.435 (1.232) & 1.267 (0.702) \\
+RSF & 50th & 25 & 0.004 (0.095) & 0.114 (0.538) & 1.097 (0.448) \\
+RSF & 75th & 25 & -0.047 (0.122) & 0.055 (0.315) & 1.149 (0.404) \\
+DeepSurv & 25th & 25 & 0.004 (0.140) & -0.143 (0.820) & 0.934 (0.466) \\
+DeepSurv & 50th & 25 & -0.010 (0.114) & -0.064 (0.360) & 0.943 (0.295) \\
+DeepSurv & 75th & 25 & -0.071 (0.152) & -0.083 (0.232) & 0.942 (0.216) \\
+Normal & 25th & 25 & 0.180 (0.141) & 0.036 (0.626) & 0.937 (0.317) \\
+Normal & 50th & 25 & 0.010 (0.125) & -0.038 (0.316) & 0.947 (0.241) \\
+Normal & 75th & 25 & 0.001 (0.164) & 0.012 (0.249) & 0.988 (0.214) \\
+Horseshoe & 25th & 25 & 0.176 (0.129) & 0.187 (0.702) & 1.018 (0.356) \\
+Horseshoe & 50th & 25 & 0.006 (0.114) & 0.028 (0.331) & 1.017 (0.264) \\
+Horseshoe & 75th & 25 & -0.005 (0.150) & 0.043 (0.253) & 1.058 (0.238) \\
+Spike-and-Slab & 25th & 25 & 0.180 (0.140) & 0.044 (0.630) & 0.942 (0.319) \\
+Spike-and-Slab & 50th & 25 & 0.010 (0.124) & -0.034 (0.316) & 0.952 (0.242) \\
+Spike-and-Slab & 75th & 25 & 0.001 (0.163) & 0.014 (0.249) & 0.993 (0.214) \\
+\end{longtable}
+\noindent Horizon is the percentile of event times within each training fold. Entries are fold means (sample SD).\par\endgroup
+\clearpage\begingroup\singlespacing\footnotesize
+\setlength{\LTpre}{6pt}\setlength{\LTpost}{6pt}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}p{1.3cm}p{0.5cm}p{2.9cm}p{2.9cm}p{2.9cm}@{}}
+\caption{Calibration across the three evaluation horizons in METABRIC.}\label{tab:calibration-all-metabric}\\
+\toprule Model & \shortstack[l]{Time\\quantile} & $n$ & \shortstack[l]{Calibration\\in-the-large} & Intercept & Slope \\\midrule\endfirsthead
+\multicolumn{6}{l}{\tablename\ \thetable\ (continued)}\\
+\toprule Model & \shortstack[l]{Time\\quantile} & $n$ & \shortstack[l]{Calibration\\in-the-large} & Intercept & Slope \\\midrule\endhead
+\midrule\multicolumn{6}{r}{Continued on next page}\\\endfoot
+\bottomrule\endlastfoot
+CoxPH & 25th & 25 & -0.002 (0.037) & -0.010 (0.251) & 0.997 (0.147) \\
+CoxPH & 50th & 25 & -0.015 (0.041) & -0.098 (0.160) & 0.905 (0.161) \\
+CoxPH & 75th & 25 & -0.008 (0.043) & -0.028 (0.066) & 0.931 (0.135) \\
+RSF & 25th & 25 & 0.015 (0.045) & 0.289 (0.344) & 1.181 (0.214) \\
+RSF & 50th & 25 & 0.005 (0.039) & 0.129 (0.228) & 1.145 (0.241) \\
+RSF & 75th & 25 & 0.013 (0.035) & 0.065 (0.092) & 1.147 (0.224) \\
+DeepSurv & 25th & 25 & -0.002 (0.040) & 0.168 (0.377) & 1.106 (0.223) \\
+DeepSurv & 50th & 25 & -0.024 (0.041) & -0.049 (0.185) & 0.970 (0.202) \\
+DeepSurv & 75th & 25 & -0.023 (0.045) & -0.029 (0.072) & 0.971 (0.186) \\
+Normal & 25th & 25 & -0.006 (0.038) & 0.014 (0.263) & 1.013 (0.152) \\
+Normal & 50th & 25 & 0.002 (0.040) & -0.066 (0.167) & 0.924 (0.167) \\
+Normal & 75th & 25 & -0.007 (0.041) & -0.019 (0.066) & 0.960 (0.137) \\
+Horseshoe & 25th & 23 & -0.005 (0.035) & 0.058 (0.291) & 1.039 (0.168) \\
+Horseshoe & 50th & 23 & 0.003 (0.039) & -0.039 (0.178) & 0.954 (0.178) \\
+Horseshoe & 75th & 23 & -0.005 (0.039) & 0.002 (0.068) & 1.018 (0.138) \\
+Spike-and-Slab & 25th & 25 & -0.006 (0.038) & 0.017 (0.264) & 1.015 (0.153) \\
+Spike-and-Slab & 50th & 25 & 0.002 (0.039) & -0.065 (0.168) & 0.926 (0.167) \\
+Spike-and-Slab & 75th & 25 & -0.007 (0.041) & -0.018 (0.067) & 0.963 (0.137) \\
+\end{longtable}
+\noindent Horizon is the percentile of event times within each training fold. Entries are fold means (sample SD).\par\endgroup

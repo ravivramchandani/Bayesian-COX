@@ -168,33 +168,11 @@ The MCMC diagnostics included rank-normalised R-hat, bulk and tail effective sam
 
 The requirements are summarised in Table~\ref{tab:ravi-diagnostic-requirements}. Normal and continuous Spike-and-Slab each supplied 75 accepted fits. Horseshoe supplied 55: seven in GBSG2, 25 in WHAS500 and 23 in METABRIC. Each of its 20 unaccepted final outcomes had between one and seven divergent transitions; the other acceptance criteria were satisfied. Appendix~\ref{app:diagnostics} reports the outcome counts, computation times and exact diagnostic breakdown.
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2792}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3761}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3448}}@{}}
-\caption{Bayesian sampling configuration and diagnostic requirements used in the results analysis}\label{tab:ravi-diagnostic-requirements}\\
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Diagnostic component
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Implemented specification
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Acceptance requirement
-\end{minipage} \\
-\midrule\noalign{}
-\endfirsthead
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Diagnostic component
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Implemented specification
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Acceptance requirement
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
+\begin{table}[htbp]
+\centering\begingroup\singlespacing\small
+\caption{Bayesian sampling configuration and diagnostic requirements used in the results analysis}\label{tab:ravi-diagnostic-requirements}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.32\textwidth}>{\raggedright\arraybackslash}X@{}}
+\toprule Diagnostic component & Implemented specification & Acceptance requirement\\\midrule
 MCMC chains & 4 & All chains required \\
 Warm-up & 2,000 iterations & Initial fit; 4,000 for specified refits \\
 Retained draws & 2,000 per chain & Required posterior sample \\
@@ -207,7 +185,7 @@ Divergences & Divergent transitions & \textbf{0} \\
 Tree-depth events & Maximum tree-depth hits & \textbf{0} \\
 Diagnostic aggregates & Finite BFMI, R-hat and bulk ESS & \textbf{Required} \\
 Accepted Bayesian outer fits & 205 of 225 & Used for prediction and interpretation \\
-\end{longtable}
+\bottomrule\end{tabularx}\endgroup\end{table}
 \subsection{Diagnostic Decision and Recovery Protocol}\label{diagnostic-decision-and-recovery-protocol}
 
 The refitting protocol held the cohort, likelihood, predictor matrix and diagnostic acceptance criteria constant. It allowed two specified refits, increasing warm-up to 4,000 iterations and then using a non-centred baseline-hazard parameterisation. The zero-divergence rule was retained. Posterior interpretation and prediction used the accepted outcome from this procedure.
@@ -252,17 +230,13 @@ Comparing the mean across folds of the absolute posterior coefficient means, Hor
 
 For example, the GBSG2 age coefficient averaged $-0.074$ under Normal and $-0.010$ under Horseshoe, with mean HR interval widths of 0.380 and 0.253; none of the age intervals excluded one. The positive-node coefficient averaged 0.274 under all three priors and its interval excluded one in all seven folds. In WHAS500, the mean heart-rate coefficient was 0.350 under Normal and 0.308 under Horseshoe, with intervals above one in all 25 folds. METABRIC age remained positively associated under both priors, but Horseshoe's mean HR interval was slightly wider (0.398 versus 0.391). The fold averages are descriptive summaries, not a pooled posterior.
 
-The prior comparison uses the same feature names and posterior summaries. For example, the METABRIC age coefficient had positive posterior mean values for all three priors in the illustrative first fit: 0.6638 for Horseshoe, 0.6921 for Normal and 0.6927 for continuous Spike-and-Slab. The mean hazard ratios were 1.945, 2.001 and 2.002, respectively, and all three 95\% hazard-ratio intervals were above one.
-
-These METABRIC age estimates are conditional on a time-constant covariate effect. The CoxPH training checks rejected proportional hazards for age and NPI in all 25 overlapping folds (Table~\ref{tab:gen-proportional-hazards}). The Bayesian models and DeepSurv share the proportional-hazards assumption: varying a baseline rate or using a nonlinear risk function does not by itself allow predictor effects to change with time. Their single hazard ratios summarise associations under the fitted proportional-hazards model, rather than demonstrating that the associations remain constant throughout follow-up.
-
-The WHAS500 age coefficient means were 0.9273, 0.9214 and 0.9232 for Horseshoe, Normal and continuous Spike-and-Slab. Their mean hazard ratios were 2.545, 2.531 and 2.535, with intervals above one. The prior-specific summaries in Appendix~\ref{app:explanation} complement these coefficient estimates with local shrinkage proxies and continuous variance-mixing weights.
+Prior choice also changed how often an association's HR interval excluded one. For METABRIC ER status, the count fell from 12 of 23 folds under Normal to zero under Horseshoe. In WHAS500, the corresponding counts fell from 19 to eight of 25 for diastolic blood pressure and from 17 to seven for BMI. Age and heart rate in WHAS500, age and NPI in METABRIC, and positive nodes in GBSG2 retained intervals above one across all matched folds and priors. These comparisons describe posterior support for conditional associations under the stated prior configurations.
 
 \section{Final Predictive Performance}\label{final-predictive-performance}
 
 The final predictive analysis covers all 18 cohort--model combinations. Table~\ref{tab:gen-predictive-metrics} reports the mean and sample standard deviation of IBS, primary Uno concordance, secondary Harrell concordance and mean time-dependent AUC. Comparisons are made within each cohort. Patients, follow-up scales and event patterns differ between cohorts.
 
-\input{tables/table_predictive_metrics.tex}
+\input{report_summaries/examiner_v3_presentation/table_predictive_metrics.tex}
 
 Figure~\ref{fig:ravi-predictive} summarises discrimination and prediction error. Among the models evaluated on all 25 folds, RSF had the lowest mean IBS in GBSG2 (0.1624) and METABRIC (0.1806). In WHAS500, where all models had complete coverage, CoxPH and the Bayesian models had lower mean IBS than RSF and DeepSurv; Horseshoe had a mean IBS of 0.1521. The Normal and continuous Spike-and-Slab values were close in each cohort. The GBSG2 and METABRIC Horseshoe means describe their accepted subsets and are compared on matching folds below.
 
@@ -277,7 +251,7 @@ A post-hoc descriptive comparison restricts every model to the original Horsesho
 
 Paired comparisons provide uncertainty around these descriptive results. The primary analysis compares the coefficient priors within the same Bayesian likelihood. Five of the nine contrasts met the requirement for all 25 matched folds, and each nominal 95\% interval included zero (Table~\ref{tab:gen-primary-contrasts}). The Normal minus continuous Spike-and-Slab IBS differences were +0.000025 in GBSG2, +0.000061 in WHAS500 and -0.000008 in METABRIC.
 
-\input{tables/table_primary_contrasts.tex}
+\input{report_summaries/examiner_v3_presentation/table_primary_contrasts.tex}
 
 The other four contrasts were unavailable for primary inference because Horseshoe did not supply all 25 accepted pairs. Thus, the zero-divergence acceptance rule and complete-pair requirement affect both the number of usable fits and the coverage of the primary contrast family. The Holm-bound analysis in Appendix~\ref{app:horseshoe} gives an adjusted $p$-value of one for each of the five observed tests for every possible completion of the four unavailable tests. The separate sampler sensitivity analysis also gave intervals containing zero for all nine prior contrasts.
 
@@ -293,7 +267,7 @@ Calibration was assessed at three training-defined time horizons for each accept
 
 Table~\ref{tab:gen-calibration} summarises the middle-horizon estimates.
 
-\input{report_summaries/examiner_presentation/table_calibration.tex}
+\input{report_summaries/examiner_v3_presentation/table_calibration.tex}
 
 The calibration summaries complement the discrimination measures \cite{ref59,ref84}. At the middle horizon, the complete Bayesian arms had mean calibration-in-the-large close to zero. Normal and continuous Spike-and-Slab had similar mean slopes: approximately 1.25 in GBSG2, 0.95 in WHAS500 and 0.93 in METABRIC. Slopes above one indicate predictions with less spread than the fitted observed relationship; slopes below one indicate greater spread. The fixed-slope offset and freely estimated slope therefore describe different properties of the predictions. Appendix~\ref{app:predictive} reports all three horizons. At the earliest horizon in WHAS500, mean calibration-in-the-large was +0.176 to +0.180 for the three Bayesian priors, compared with $-0.011$ for CoxPH, +0.006 for RSF and +0.004 for DeepSurv. The positive Bayesian intercepts indicate underprediction of early event risk. On the complementary-log--log scale, an intercept of 0.180 corresponds to multiplying the predicted cumulative hazard by $\exp(0.180)\approx1.20$; it does not mean an 18-percentage-point difference in event probability. The near-zero middle-horizon offsets therefore do not describe every part of follow-up.
 
@@ -316,7 +290,7 @@ In GBSG2, the number of positive lymph nodes had a posterior coefficient mean of
 
 In this thesis, posterior coefficients and credible intervals provide uncertainty-aware explanations within the Bayesian model itself. They do not establish causality. Exact linear SHAP contributions were also calculated for the same fitted log-relative-hazard function, using training-fold background distributions and grouped clinical predictors.
 
-\input{tables/table_explanation_agreement.tex}
+\input{report_summaries/examiner_v3_presentation/table_explanation_agreement.tex}
 
 Table~\ref{tab:gen-explanation-agreement} shows mean Spearman agreement between intrinsic and SHAP importance rankings from 0.859 to 0.966 across the nine cohort--prior combinations. This describes agreement between two explanations of the same Bayesian risk function. Appendix~\ref{app:explanation} reports the comparison with the paired CoxPH model and the most influential predictor groups.
 
@@ -324,13 +298,15 @@ The sampling-stability assessment used 1,845 comparison records. Of the 1,640 ev
 
 \input{tables/table_explanation_gate.tex}
 
-\section{Predictive Sensitivity Results}\label{prior-sensitivity-results-1}
+\section{Prior-Sensitivity Results}\label{prior-sensitivity-results-1}
 
 Robustness was also examined under changes in training information, administrative follow-up, prior scales, baseline intervals and predictor representation. Of 825 model--condition--fold outcomes, 770 were accepted. These outcomes involved 885 underlying Bayesian fits, including the five imputation-specific fits for each multiple-imputation ensemble. Appendix~\ref{app:robustness} reports diagnostic coverage and paired effects for these analyses.
 
 At 25\% training information, the change in IBS(Normal) minus IBS(Horseshoe), relative to full training, was +0.006323 in WHAS500, with a 95\% bootstrap interval of [+0.002512, +0.010561]. This indicates a shift in the relative contrast towards Horseshoe when information was reduced; it is not a direct IBS gain of 0.006323 over Normal. The corresponding METABRIC change was +0.000211 [-0.001149, +0.001508]. Under median follow-up truncation, the METABRIC change was +0.000349 [+0.000002, +0.000734]. These estimates describe the specified perturbations and their matched-fold coverage. On the ten WHAS500 folds shared by all three priors, mean IBS changed from 0.1540 to 0.1650 for Normal, from 0.1533 to 0.1579 for Horseshoe and from 0.1539 to 0.1648 for continuous Spike-and-Slab when training information fell from full to 25\%. Thus, all three had higher prediction error with less training data, but Horseshoe deteriorated less in these matched evaluations. These sensitivity comparisons are exploratory.
 
-The Horseshoe outputs complement coefficient estimates with feature-level local-scale summaries. Across the evaluated clinical predictor sets, the primary comparisons did not identify a uniformly better prior family.
+For changes in prior scale, baseline intervals and predictor representation, 29 Normal-reference contrasts had all five planned pairs, excluding repeated reference-setting rows. All ten Normal-minus-Horseshoe intervals included zero; their point estimates ranged from $-0.000331$ to $+0.002112$. The 19 Normal-minus-continuous-Spike-and-Slab estimates ranged from $-0.000130$ to $+0.000142$. One nominal interval excluded zero: GBSG2 with ten baseline intervals, $+0.000107$ [$+0.000009$, $+0.000209$]. The sensitivity intervals are exploratory and are not multiplicity-adjusted; this also applies to the METABRIC median-truncation interval reported above.
+
+Appendix~\ref{app:robustness} retains the complete sensitivity estimates and their coverage. Partial-coverage intervals describe the available accepted comparisons. When only one fold pair is retained, patient resampling supplies variation conditional on that fitted comparison, while repeat and fold resampling cannot represent variation across different fitted partitions. The main synthesis above therefore uses conditions with all planned pairs.
 
 \section{Cross-Model and Cross-Cohort Discussion}\label{cross-model-and-cross-cohort-discussion}
 
@@ -348,6 +324,8 @@ The secondary comparisons favoured RSF and DeepSurv over Normal in METABRIC, whe
 
 This pattern gives a focused clinical counterpart to SurvBenchmark's broad comparison across clinical and omics data \cite{ref33}. Here, Normal and the nonlinear comparators used the same outer patient partitions and clinical predictor sets. Their cohort-specific IBS contrasts can therefore be read within a consistent development and assessment procedure. Smith et al. \cite{ref44} emphasise how the predictor relationships represented by comparison models affect their interpretation, while Baralou et al. \cite{ref37} use simulation to examine the conditions favouring forest flexibility. Here, the METABRIC result supports assessing nonlinear representations alongside a linear predictor. It supplies no single explanation for why that flexibility was useful.
 
+Published concordance results provide context for these benchmarks. Katzman et al. reported DeepSurv C-indices of 0.8667 for WHAS and 0.6545 for METABRIC \cite{ref4}; the corresponding Harrell values here were 0.7406 and 0.6682. Langbein et al. reported an RSF C-index of 0.740 in GBSG2 \cite{ref61}, compared with Harrell concordance of 0.6915 here. The original WHAS experiment used 1,638 patients and five predictors, and the METABRIC experiment included gene and treatment information; both used a 20\% test set. Langbein et al. used a separate training/test analysis and did not identify the concordance estimator in the reported example. Differences in populations, predictors, metrics and validation therefore frame these as contextual benchmarks rather than common-design performance contrasts.
+
 The PH checks help distinguish two possible model properties. Age and NPI departed from proportional hazards in all 25 overlapping METABRIC CoxPH training folds, qualifying a time-constant hazard-ratio interpretation in CoxPH and the Bayesian models. DeepSurv also retains proportional hazards, yet had lower IBS than Normal. Its result therefore directs attention to nonlinear covariate representation as well as to time-varying effects. The comparison identifies these as distinct explanations to consider; it does not isolate their contributions experimentally.
 
 \subsection{Prior Hierarchy and Available Information}\label{did-one-bayesian-prior-dominate}
@@ -360,11 +338,13 @@ The survival-selection literature makes this context important. Nikooienejad et 
 
 The exploratory WHAS500 analysis illustrates a change in information conditions. All three priors had higher absolute IBS with quarter training, but Horseshoe deteriorated less than Normal and continuous Spike-and-Slab on the same ten folds. Its more favourable relative contrast therefore reflects greater resilience to that particular information reduction, rather than improved prediction after discarding data. Riley et al. \cite{riley2021shrinkage} and Van Calster et al. \cite{vancalster2020shrinkage} likewise connect clinical shrinkage behaviour to available information and the uncertainty of regularisation. Their logistic-regression evidence concerns different models and outcomes; the common lesson is to evaluate regularisation together with prediction and calibration under the information conditions in which it will be used.
 
+The 25\% WHAS500 subsets had 40 events for nine covariate coefficients, or 4.444 events per coefficient, compared with 7.375 in GBSG2 and 12.000--16.286 in METABRIC (Table~\ref{tab:training-information}). Thus, the observed relative Horseshoe benefit occurred in the setting with the fewest events per coefficient. These counts provide context for the information-dependent comparison, consistent with Riley et al.'s setting-specific view of time-to-event model development \cite{riley2019samplesize}. The prior predictive checks also showed less mass near zero survival under Horseshoe than Normal (Table~\ref{tab:exam-prior-predictive}), describing different predictive regularisation assumptions before fitting.
+
 \subsection{Calibration, Computation and Interpretation}\label{why-might-performance-differ}
 
-Calibration explains differences that risk ordering alone can conceal. The Bayesian WHAS500 models underpredicted early event risk despite near-zero middle-horizon calibration-in-the-large. In GBSG2, slopes above one indicated compressed differences in predicted risk. They provide a clinical example of the problem with C-index-only evaluation identified by Smith et al. \cite{ref44}: useful ordering can coexist with horizon-specific probability error. This supports the separate calibration assessment advocated by Austin et al. \cite{ref59} and McLernon et al. \cite{ref84}. The similar early WHAS500 pattern across all three priors also draws attention to shared model components when assessing absolute survival probabilities. Baseline-hazard estimation and predictor form are plausible contributors, without an identified causal explanation in this comparison.
+Calibration explains differences that risk ordering alone can conceal. The Bayesian WHAS500 models underpredicted early event risk despite near-zero middle-horizon calibration-in-the-large. In GBSG2, slopes above one indicated compressed differences in predicted risk. They provide a clinical example of the problem with C-index-only evaluation identified by Smith et al. \cite{ref44}: useful ordering can coexist with horizon-specific probability error. This supports the separate calibration assessment advocated by Austin et al. \cite{ref59} and McLernon et al. \cite{ref84}. CoxPH used the same nine primary WHAS500 predictors and a linear log-risk score, but its early offset was $-0.011$, compared with $+0.176$ to $+0.180$ for the Bayesian models. This contrast directs attention to their different baseline-hazard representations: the Breslow estimate versus six piecewise-constant rates. Coefficient estimation and prior regularisation also differ, so the comparison concerns whole fitted models and does not isolate a baseline-hazard effect.
 
-Computation changes which posterior summaries can support those assessments. All 20 original Horseshoe exclusions involved divergences, with the other recorded gate criteria satisfied. Increasing target acceptance in the separate sampler sensitivity recovered complete coverage but did not yield a consistent predictive advantage. Sampling recovery and predictive utility are consequently separate findings. Hierarchical posterior geometry provides a reason to examine sampler behaviour closely, while the cohort-specific cause of the observed exclusions remains unresolved \cite{ref39,ref53}.
+Computation changes which posterior summaries can support those assessments. All 20 original Horseshoe exclusions involved divergences, with the other recorded gate criteria satisfied. In the ten GBSG2 outer partitions used for training-information sensitivity, Horseshoe acceptance was 10/10, 7/10, 5/10 and 3/10 at 25\%, 50\%, 75\% and 100\% training, respectively. These counts show how sampling behaviour changed across the nested information conditions. Increasing target acceptance in the separate sampler sensitivity recovered complete coverage but did not yield a consistent predictive advantage. Sampling recovery and predictive utility are consequently separate findings. Hierarchical posterior geometry provides a reason to examine sampler behaviour closely; the observed pattern does not identify the cause of the divergences \cite{ref39,ref53}.
 
 The attribution results make a similar distinction between assessment targets. Full-ranking correlation fell outside tolerance in 102 comparisons, while every evaluable comparison retained at least four of the same top-five groups. The leading-group overlap rule was therefore met throughout, whereas the full-ranking correlation rule was not. These criteria assess different aspects of agreement; neither requires the entire leading set or its ordering to be identical. Together with posterior intervals, this supports reporting the aspect of interpretation a reader can rely on: uncertainty about a fitted association, the principal contribution groups, or a detailed rank ordering. Agreement between related summaries of the same risk function addresses a different question from independent confirmation of clinical importance.
 

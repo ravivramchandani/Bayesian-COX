@@ -2,17 +2,17 @@
 
 Calibration summaries are reported at the 25th, 50th and 75th percentiles of outer-training event times. Calibration-in-the-large is the complementary-log--log intercept fitted with the prediction term as an offset. The joint calibration model estimates both intercept and slope, whose ideal values are zero and one. Tables~\ref{tab:calibration-all-gbsg2}, \ref{tab:calibration-all-whas500} and~\ref{tab:calibration-all-metabric} report fold means and standard deviations, with the number of accepted folds for each model. Positive calibration-in-the-large indicates underprediction of event risk on the complementary-log--log scale; an intercept $\alpha$ corresponds to a cumulative-hazard multiplier $\exp(\alpha)$, rather than an absolute probability difference.
 
-\input{tables/table_calibration_all_horizons.tex}
+\input{report_summaries/examiner_v3_presentation/table_calibration_all_horizons.tex}
 
 \section{Calibration Uncertainty and Grouped Curves}
 
 The following examples use repeat 1, fold 1 of the Normal-prior model in each cohort, at its middle training-event horizon. Table~\ref{tab:sup-calibration-bootstrap} gives the calibration-in-the-large, joint intercept and joint slope estimates with their within-fold bootstrap intervals. Figure~\ref{fig:sup-calibration-curves} displays the five equal-count prediction groups for the same examples. The vertical bars in these curves are bin-specific Kaplan--Meier intervals; they describe a different quantity from the calibration-parameter bootstrap intervals.
 
-\input{report_summaries/supervisor_checks/table_calibration_bootstrap.tex}
+\input{report_summaries/examiner_v3_presentation/table_calibration_bootstrap.tex}
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{report_summaries/supervisor_checks/figure_calibration_examples.pdf}
+\includegraphics[width=\linewidth]{report_summaries/examiner_v3_presentation/figure_calibration_examples.pdf}
 \caption{Grouped survival calibration for the first Normal-prior outer fit at the middle training-event horizon. Points compare each group's mean predicted survival with its Kaplan--Meier estimate. Vertical bars show bin-specific 95\% Kaplan--Meier intervals; the dashed line marks equality.}
 \label{fig:sup-calibration-curves}
 \end{figure}

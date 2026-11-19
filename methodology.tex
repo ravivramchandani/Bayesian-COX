@@ -452,6 +452,8 @@ The Brier score weights the squared distance between the event-free indicator an
 
 The prespecified central event-time interval provided a common comparison window for all models within a fold, determined without held-out outcomes. Event-time quartiles have precedent as reporting horizons in survival-model benchmarks \cite{nagpal2021mixtures}. Restricting evaluation to this interval avoids extending the score over the full late follow-up tail, where small censoring-survival estimates can produce large inverse weights \cite{kvamme2023brier}. Censoring support was checked separately at every evaluation time. The resulting IBS describes prediction error over the stated interval within each cohort; its endpoints are empirical reporting horizons, rather than disease-specific clinical cutoffs.
 
+Starting the integration at the first quartile focuses the average on this central event-time interval. IBS is not averaged over earlier time points, although patients with earlier events still contribute to scores at later times. Calibration at the first-quartile horizon separately assesses cumulative event risk up to that point.
+
 Uno's IPCW concordance was the primary discrimination measure \cite{uno2011}. Harrell's concordance \cite{harrell1982} and cumulative/dynamic AUC provided additional summaries, with larger values indicating better discrimination. These metrics used one time-constant risk score per patient: the exponentiated linear predictor for CoxPH, the ensemble cumulative hazard summed over distinct training event times for RSF, the neural log-risk for DeepSurv, and the posterior-mean linear predictor for each Bayesian model. Higher scores indicated greater predicted risk.
 
 Cumulative/dynamic AUC compares patients with observed events by a horizon against those still event-free at that horizon. It was evaluated at the three training-event quartile horizons. For each fold, ``Mean AUC'' was the survival-weighted summary returned by scikit-survival, weighting the time-specific AUCs by decreases in the validation Kaplan--Meier survival curve. The model-level Mean AUC was the arithmetic mean of these fold summaries over its accepted folds.
@@ -506,6 +508,8 @@ Table~\ref{_Toc245465019} links the posterior summaries to their interpretations
 
 \begin{table}[htbp]
 \centering
+\caption{Bayesian posterior explainability outputs and their interpretation}
+\label{_Toc245465019}
 \begin{tabular}{@{}p{0.33\linewidth}p{0.63\linewidth}@{}}
 \toprule
 Posterior quantity & Interpretation\\
@@ -517,8 +521,6 @@ $\Pr(\beta_k>0\mid D)$ & Posterior support for a positive association\\
 Contribution ranking & Relative magnitude of predictor contributions\\
 \bottomrule
 \end{tabular}
-\caption{Bayesian posterior explainability outputs and their interpretation}
-\label{_Toc245465019}
 \end{table}
 
 \section{Prior-Sensitivity Methodology}\label{prior-sensitivity-methodology}
@@ -553,6 +555,8 @@ Baseline-hazard sensitivities used 4, 6 and 10 intervals. Prior-scale conditions
 
 Relative IBS changes were summarised as differences from the matching primary condition and as difference-in-differences between priors. Uncertainty used 2,000 paired three-stage bootstrap replicates, resampling repeats, folds within repeats and validation subjects within event strata. Coverage was reported alongside each estimate. These analyses assessed sensitivity to the information available and the specified modelling choices.
 
+Sensitivity intervals were nominal and were not adjusted for multiple comparisons. Main-text synthesis uses contrasts with all planned fold pairs. Estimates with partial coverage remain reported with their counts and concern the accepted subset. With one retained fold pair, the bootstrap varies validation patients but cannot represent variation across different fitted partitions; its interval is conditional on that comparison.
+
 \section{Interpretability and SHAP Comparisons}\label{interpretability-shap-boundary-and-permutation-importance}
 
 The attribution analysis compared posterior contribution rankings with SHAP rankings for specified fitted models. Survival-XAI studies provide a broader context for this comparison, including cancer prediction and time-dependent survival explanations \cite{ref28,ref30,ref60}. Here, the explained target was the linear log-risk score.
@@ -577,7 +581,7 @@ Three sampling seeds and nested validation/background budgets of 25/50, 50/100 a
 
 The analysis was implemented in Python. PyMC supported Bayesian model fitting \cite{pymc2023}, and ArviZ provided posterior diagnostics \cite{arviz2019}. CoxPH was fitted using lifelines \cite{lifelines2019}; scikit-survival supported the survival analyses and performance metrics \cite{polsterl2020}. DeepSurv used PyTorch \cite{pytorch2019} and pycox \cite{pycox2019}. Model settings, preprocessing and validation procedures were applied consistently across the comparisons \cite{ref35,ref39,ref40,ref53}.
 
-Numerical verification compared predictions, posterior summaries and diagnostic outcomes across all 450 original model--fold evaluations. Computation times were assessed separately from the agreement of the scientific estimates.
+Numerical verification compared independently recomputed predictions, posterior summaries and diagnostic outcomes against the original results for all 450 model--fold evaluations. Exact agreement was required for the scientific values and acceptance decisions. Computation times were assessed separately.
 
 \section{Supplementary Analyses}\label{supplementary-analyses}
 

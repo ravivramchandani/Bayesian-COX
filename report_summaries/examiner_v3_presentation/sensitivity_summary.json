@@ -1,0 +1,75 @@
+{
+  "eligible_contrasts": 38,
+  "complete_contrasts": 29,
+  "priors": {
+    "Horseshoe": {
+      "complete_contrasts": 10,
+      "minimum": -0.0003310864538066824,
+      "maximum": 0.00211204737599863,
+      "nominal_intervals_excluding_zero": []
+    },
+    "Spike-and-slab": {
+      "complete_contrasts": 19,
+      "minimum": -0.00013003109910309792,
+      "maximum": 0.00014212083206921006,
+      "nominal_intervals_excluding_zero": [
+        {
+          "effect_type": "Direct",
+          "dataset": "gbsg2",
+          "component": "design",
+          "condition": "baseline_intervals_10",
+          "reference_condition": "",
+          "model_a": "Normal",
+          "model_b": "Spike-and-slab",
+          "n_paired_folds": "5",
+          "expected_paired_folds": "5",
+          "coverage": "full",
+          "status": "complete",
+          "observed": "0.0001065860131829134",
+          "confidence_lower": "8.576007584317494e-06",
+          "confidence_upper": "0.00020948992325555045",
+          "bootstrap_replicates": "2000",
+          "successful_bootstraps": "2000"
+        }
+      ]
+    }
+  },
+  "single_pair_nonzero_intervals": [
+    {
+      "effect_type": "Difference-in-differences",
+      "dataset": "gbsg2",
+      "component": "rq2",
+      "condition": "fraction_075_observed",
+      "reference_condition": "fraction_100_observed",
+      "model_a": "Normal",
+      "model_b": "Horseshoe",
+      "n_paired_folds": "1",
+      "expected_paired_folds": "10",
+      "coverage": "partial",
+      "status": "complete",
+      "observed": "-0.0009869445604801736",
+      "confidence_lower": "-0.0018950907650595009",
+      "confidence_upper": "-8.837438130605423e-05",
+      "bootstrap_replicates": "2000",
+      "successful_bootstraps": "2000"
+    },
+    {
+      "effect_type": "Difference-in-differences",
+      "dataset": "gbsg2",
+      "component": "rq2",
+      "condition": "fraction_075_observed",
+      "reference_condition": "fraction_100_observed",
+      "model_a": "Horseshoe",
+      "model_b": "Spike-and-slab",
+      "n_paired_folds": "1",
+      "expected_paired_folds": "10",
+      "coverage": "partial",
+      "status": "complete",
+      "observed": "0.0009679098502542088",
+      "confidence_lower": "0.0001400051856967669",
+      "confidence_upper": "0.0017522515185959433",
+      "bootstrap_replicates": "2000",
+      "successful_bootstraps": "2000"
+    }
+  ]
+}

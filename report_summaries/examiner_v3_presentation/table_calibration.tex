@@ -1,0 +1,36 @@
+% Generated from hash-verified saved evidence. Do not edit by hand.
+\begin{table}[htbp]
+\centering
+\caption{Calibration estimates at each fold's middle prespecified horizon.}
+\label{tab:gen-calibration}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llrrrr}
+\toprule
+Cohort & Model & $n$ & Calibration-in-the-large & Intercept & Slope \\
+\midrule
+GBSG2 & CoxPH & 25 & -0.037 (0.129) & 0.216 (0.553) & 1.186 (0.417) \\
+GBSG2 & RSF & 25 & -0.002 (0.082) & 0.121 (0.327) & 1.119 (0.311) \\
+GBSG2 & DeepSurv & 25 & -0.052 (0.110) & 0.005 (0.384) & 1.040 (0.292) \\
+GBSG2 & Normal & 25 & -0.003 (0.101) & 0.309 (0.548) & 1.244 (0.409) \\
+GBSG2 & Horseshoe & 7 & -0.038 (0.101) & 0.191 (0.663) & 1.175 (0.516) \\
+GBSG2 & Spike-and-Slab & 25 & -0.003 (0.100) & 0.317 (0.551) & 1.250 (0.411) \\
+WHAS500 & CoxPH & 25 & -0.005 (0.132) & -0.087 (0.309) & 0.912 (0.234) \\
+WHAS500 & RSF & 25 & 0.004 (0.095) & 0.114 (0.538) & 1.097 (0.448) \\
+WHAS500 & DeepSurv & 25 & -0.010 (0.114) & -0.064 (0.360) & 0.943 (0.295) \\
+WHAS500 & Normal & 25 & 0.010 (0.125) & -0.038 (0.316) & 0.947 (0.241) \\
+WHAS500 & Horseshoe & 25 & 0.006 (0.114) & 0.028 (0.331) & 1.017 (0.264) \\
+WHAS500 & Spike-and-Slab & 25 & 0.010 (0.124) & -0.034 (0.316) & 0.952 (0.242) \\
+METABRIC & CoxPH & 25 & -0.015 (0.041) & -0.098 (0.160) & 0.905 (0.161) \\
+METABRIC & RSF & 25 & 0.005 (0.039) & 0.129 (0.228) & 1.145 (0.241) \\
+METABRIC & DeepSurv & 25 & -0.024 (0.041) & -0.049 (0.185) & 0.970 (0.202) \\
+METABRIC & Normal & 25 & 0.002 (0.040) & -0.066 (0.167) & 0.924 (0.167) \\
+METABRIC & Horseshoe & 23 & 0.003 (0.039) & -0.039 (0.178) & 0.954 (0.178) \\
+METABRIC & Spike-and-Slab & 25 & 0.002 (0.039) & -0.065 (0.168) & 0.926 (0.167) \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\smallskip
+\begin{minipage}{\textwidth}\footnotesize Entries are accepted-fold means (sample SD) at the training-event median horizon. Ideal calibration-in-the-large and intercept are zero; ideal slope is one. Each fold defines its horizon from its own training data.\end{minipage}
+\end{table}

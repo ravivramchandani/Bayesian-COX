@@ -8,17 +8,17 @@ Table~\ref{tab:gen-prior-signals} reports prior-specific quantities from repeat 
 \]
 where $q_k$ is the local scale. Larger values correspond to smaller local scales. The proxy omits the global scale and regularising slab, so it is not the total coefficient shrinkage factor. The GBSG2 Horseshoe example is absent because that particular outer fit did not meet the diagnostic criteria; seven other GBSG2 Horseshoe fits were accepted.
 
-\input{tables/table_prior_signals.tex}
+\input{report_summaries/examiner_v3_presentation/table_prior_signals.tex}
 
 \section{Comparison with CoxPH Explanations}
 The secondary comparison in Table~\ref{tab:gen-explanation-cross-model} matches Bayesian intrinsic rankings with CoxPH SHAP rankings on the same subjects and explanation seeds.
 
-\input{tables/table_explanation_cross_model.tex}
+\input{report_summaries/examiner_v3_presentation/table_explanation_cross_model.tex}
 
 \section{Leading Predictor Groups}
 Table~\ref{tab:gen-explanation-top-groups} summarises the three groups with the largest mean posterior expected absolute contributions. Mean rank, top-five frequency and resampling intervals describe how their positions vary.
 
-\input{tables/table_explanation_top_groups.tex}
+\input{report_summaries/examiner_v3_presentation/table_explanation_top_groups.tex}
 
 
 \section{Matched-Fold Posterior Comparisons}
@@ -35,4 +35,4 @@ Each entry averages a summary from separate fitted posteriors. The interval widt
 
 Table~\ref{tab:exam-attribution-failures} separates the 102 comparisons outside tolerance by cohort, prior, adjacent budget and seed. These are comparisons within fitted models, not independent validation studies. All failures arose from Spearman correlation below 0.95; none arose from having fewer than four shared top-five groups.
 
-\input{report_summaries/standalone_presentation/table_attribution_failures.tex}
+\input{report_summaries/examiner_v3_presentation/table_attribution_failures.tex}
