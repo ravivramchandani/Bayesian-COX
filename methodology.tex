@@ -30,7 +30,7 @@ The research pipeline comprises cohort preparation, model fitting, computational
 
 The first stage prepared the GBSG2, METABRIC and WHAS500 cohorts. Each was represented by explanatory variables, observed follow-up and event status, providing a common analysis interface while preserving its clinical endpoint.
 
-The second phase defined the validation architecture. Five repeats of five-fold cross-validation were completed for each cohort, resulting in 75 outer folds across the three cohorts. The six model arms were evaluated within this structure, giving 450 model--fold outcomes. Predictive comparisons use paired fold-level results, with uncertainty adjusted for the overlap between training sets.
+The second stage defined the validation architecture. Five repeats of five-fold cross-validation were completed for each cohort, resulting in 75 outer folds across the three cohorts. The six model arms were evaluated within this structure, giving 450 model--fold outcomes. Predictive comparisons use paired fold-level results, with uncertainty adjusted for the overlap between training sets.
 
 The third stage fitted the reference and Bayesian model families. CoxPH, RSF and DeepSurv supplied linear, tree-based and neural comparisons. This choice reflects evidence that relative model performance varies between datasets and predictor structures \cite{ref4,ref33,ref37}.
 
@@ -38,7 +38,7 @@ The Bayesian stream used a piecewise-exponential proportional-hazards formulatio
 
 The fourth stage assessed MCMC diagnostics: divergences, rank-normalised R-hat, bulk and tail effective sample sizes, Bayesian fraction of missing information (BFMI), tree depth and finiteness of diagnostic aggregates. These examine different aspects of sampling, so acceptance did not depend on a single statistic. Rank-normalised diagnostics improve sensitivity to differences between chains, including those involving skewed or heavy-tailed distributions \cite{ref39}.
 
-The diagnostic criteria were applied to each Bayesian model--fold fit. A fit that did not pass the initial assessment could undergo two specified refits, with increased warm-up and then a non-centred baseline parameterisation. The likelihood, coefficient priors and acceptance criteria remained fixed. Only accepted fits were passed onto posterior interpretation and prediction.
+The diagnostic criteria were applied to each Bayesian model--fold fit. A fit that did not pass the initial assessment could undergo two specified refits, with increased warm-up and then a non-centred baseline parameterisation. The likelihood, coefficient priors and acceptance criteria remained fixed. Only accepted fits were passed on to posterior interpretation and prediction.
 
 Prior and posterior predictive summaries were computed for sampled fits alongside the diagnostics. The first diagnostic-accepted attempt supplied the posterior interpretation and held-out predictions. Predictive checks examined the survival implications of the priors, replicated event counts on the likelihood scale, and fitted survival against the training data. These assess model behaviour separately from the computational acceptance rule \cite{ref22,ref53}.
 
@@ -169,9 +169,9 @@ The survival function gives the probability of remaining event-free beyond time 
 
 
 
-The hazard is the instantaneous event rate among patients who remain event-free. Together, they represent the timing of an outcome and the event-free follow-up contributed by censored patients \cite{ref14,ref26}.
+The hazard is the instantaneous event rate among patients who remain event-free. Together, the survival and hazard functions represent the timing of an outcome and the event-free follow-up contributed by censored patients \cite{ref14,ref26}.
 
-Evaluation metrics such as time-dependent AUC and Brier prediction error take into account the time aspect and censoring \cite{ref26,ref47}.
+Evaluation metrics such as time-dependent AUC and Brier prediction error account for event timing and censoring \cite{ref26,ref47}.
 
 \section{Train/Test Separation and Validation Design}\label{traintest-separation-and-validation-design}
 
@@ -189,7 +189,7 @@ CoxPH, RSF and DeepSurv provide complementary reference model families for the B
 
 \subsection{Cox Proportional Hazards}\label{cox-proportional-hazards}
 
-As the traditional statistical baseline, the Cox proportional hazards model was applied. Its hazard formulation is
+The Cox proportional hazards model was used as the traditional statistical baseline. Its hazard formulation is
 
 \begin{equation}
     h_{i}(t) = h_{0}(t)\exp\left( \mathbf{x}_{i}^{T}\mathbf{\beta} \right).
@@ -208,7 +208,7 @@ Comparative simulations indicate that CoxPH can perform well when effects are li
 
 The RSF model combined survival trees grown using log-rank splits, allowing nonlinear relationships and interactions without a specified linear proportional-hazards predictor \cite{ishwaran2008}. It used 300 trees, a minimum split size of 10, no maximum depth and one computation thread. Within each outer-training fold, three-fold inner cross-validation compared leaf sizes of 5 or 15 and candidate-feature sampling using either the square root of the predictor count or all predictors. The selected configuration was refitted using the outer-training data. Ensemble risk scores and survival functions supplied the held-out predictions.
 
-The random survival forest provides a nonlinear comparator for CoxPH and the Bayesian proportional-hazards models. Its results help assess whether the additional Bayesian structure is associated with improved predictive performance in these cohorts. RSF has been used in high dimensional censored survival data \cite{ref51}.
+The random survival forest provides a nonlinear comparator for CoxPH and the Bayesian proportional-hazards models. Its results help assess whether the additional Bayesian structure is associated with improved predictive performance in these cohorts. RSF has been used in high-dimensional censored survival data \cite{ref51}.
 
 RSF provides a predictive comparator, while the explanation analysis focuses on the Bayesian linear log-risk scores and the CoxPH reference.
 
@@ -237,7 +237,7 @@ Here, $\widetilde h_i(u)$ is the hazard per unit of scaled time, $\mathbf{x}_i$ 
 \end{equation}
 
 
-Here, $I_j$ is the $j$th interval and $\lambda_j$ its hazard rate. Therefore, the model enables the baseline hazard to vary across intervals, but with a proportional covariate effect structure across intervals.
+Here, $I_j$ is the $j$th interval and $\lambda_j$ its hazard rate. The model therefore allows the baseline hazard to vary across intervals, but retains proportional covariate effects throughout follow-up.
 
 Let $0=a_0<a_1<\cdots<a_6$ be the boundaries on the scaled axis and $\widetilde T_i=T_i^{\mathrm{obs}}/s$ the scaled observed follow-up. Exposure and the event indicator within $I_j=(a_{j-1},a_j]$ are
 \begin{equation}
@@ -261,14 +261,14 @@ S_i(t)=\exp\left\{-\exp(\mathbf{x}_i^T\boldsymbol\beta)\sum_{j=1}^{6}\lambda_j E
 \end{equation}
 where $E_j(u)$ is the elapsed scaled time within interval $j$, with the final interval extended for later times. Survival probabilities were then averaged across draws, integrating over posterior uncertainty in baseline rates and coefficients. The ranking score used the posterior-mean linear predictor. Changing the baseline rate across intervals retains the same proportional covariate effects throughout follow-up.
 
-The posterior distribution is thus:
+The posterior distribution is
 
     \begin{equation}
     p\left( \mathbf{\beta},\mathbf{\lambda} \mid D \right) \propto p\left( D \mid \mathbf{\beta},\mathbf{\lambda} \right)p\left( \mathbf{\beta} \right)p\left( \mathbf{\lambda} \right),
 \end{equation}
 
 
-where \(D\) is the observed survival data. The use of posterior samples gives distributions and not just point estimates, allowing the determination of posterior means, 95\% credible intervals, hazard-ratio distributions, and directional probabilities of individual predictors.
+where \(D\) is the observed survival data. Posterior samples describe distributions as well as point estimates. They provide posterior means, 95\% credible intervals, hazard-ratio distributions and directional probabilities for individual predictors.
 
 The primary CoxPH and Bayesian models used linear main effects in the encoded predictors, with no spline terms or interactions. Standardisation changes their scale, not their functional form. RSF and DeepSurv provide nonlinear predictor functions, while DeepSurv retains proportional hazards. The feature-engineering conditions described below examine specified alternative representations separately from the primary comparison.
 
@@ -457,7 +457,7 @@ Uno's IPCW concordance was the primary discrimination measure \cite{uno2011}. Ha
 
 Cumulative/dynamic AUC compares patients with observed events by a horizon against those still event-free at that horizon. It was evaluated at the three training-event quartile horizons. For each fold, ``Mean AUC'' was the survival-weighted summary returned by scikit-survival, weighting the time-specific AUCs by decreases in the validation Kaplan--Meier survival curve. The model-level Mean AUC was the arithmetic mean of these fold summaries over its accepted folds.
 
-The training estimate $\widehat G(t)$ had to exceed 0.10 over the evaluation grid, avoiding evaluation where estimated censoring probabilities would produce large inverse weights. The final training horizon was the truncation time $\tau$. For IPCW IBS, Uno concordance and AUC, validation follow-up greater than $\tau$ was reset to the next representable floating-point time above $\tau$ and its event indicator set to zero. This preserves known event-free status through the final horizon. Uno concordance additionally received $\tau$ explicitly as its truncation argument, restricting the earlier event in a comparable pair to times before $\tau$. Harrell concordance and calibration used observed validation follow-up.
+The training estimate $\widehat G(t)$ had to exceed 0.10 over the evaluation grid, avoiding evaluation where estimated censoring probabilities would produce large inverse weights. The final training horizon was the truncation time $\tau$. For IPCW IBS, Uno concordance and AUC, validation follow-up greater than $\tau$ was reset to the next representable floating-point time above $\tau$ and its event indicator set to zero. This preserves known event-free status through the final horizon. Uno concordance also received $\tau$ explicitly as its truncation argument, restricting the earlier event in a comparable pair to times before $\tau$. Harrell concordance and calibration used observed validation follow-up.
 
 Calibration assessed agreement between predicted and observed event probabilities. At each horizon, with $z_i(t)=\log[-\log\widehat S_i(t)]$, an IPCW complementary-log--log model estimated
 \begin{equation}
@@ -524,7 +524,7 @@ Contribution ranking & Relative magnitude of predictor contributions\\
 
 \section{Prior-Sensitivity Methodology}\label{prior-sensitivity-methodology}
 
-Sensitivity analysis examined how prior comparisons changed with the available training information and specified modelling choices. The influence of a prior depends on its information relative to the likelihood, making training size and event information relevant to this assessment \cite{ref40,ref56}. Predictive sensitivity and diagnostic acceptance were assessed across the conditions below; explanation sampling stability was assessed separately.
+Sensitivity analysis examined how prior comparisons changed with the available training information and specified modelling choices. The influence of a prior depends on its information relative to the likelihood, making training size and event information relevant~\cite{ref40,ref56}. Predictive sensitivity and diagnostic acceptance were assessed across the conditions below; explanation sampling stability was assessed separately.
 
 Three prior families were compared in this study:
 
@@ -538,7 +538,7 @@ Three prior families were compared in this study:
   continuous Spike-and-Slab prior, whose coefficient-specific variance lies between narrow and wide scales.
 \end{enumerate}
 
-Training-information conditions used nested event/time-stratified subsets containing 25\%, 50\%, 75\% and 100\% of outer-training observations. Subsets were shared across priors, and a condition required at least 20 training events. These conditions examine prior behaviour as the information available to fitting changes. Administrative censoring truncated follow-up at the outer-training 75th or 50th percentile, at full training size, examining the effect of shorter observable follow-up. These conditions used outer folds 1 and 2 in each repeat, giving ten intended paired outcomes per cohort and condition.
+Training-information conditions used nested event/time-stratified subsets containing 25\%, 50\%, 75\% and 100\% of outer-training observations. Subsets were shared across priors, and a condition required at least 20 training events. These conditions examine prior behaviour as the information available for fitting changes. Administrative censoring truncated follow-up at the outer-training 75th or 50th percentile, at full training size, examining the effect of shorter observable follow-up. These conditions used outer folds 1 and 2 in each repeat, giving ten intended paired outcomes per cohort and condition.
 
 Table~\ref{tab:training-information} reports the observed training events relative to the number of encoded covariate coefficients in the primary analysis and the 25\% training condition. Each categorical contrast counts as a coefficient. The denominator excludes the six baseline-hazard rates and prior hyperparameters, and it does not estimate effective model complexity under shrinkage. Events per coefficient describe the information available to estimate covariate associations; sample-size requirements also depend on the setting and anticipated model performance \cite{riley2019samplesize}.
 

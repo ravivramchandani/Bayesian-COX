@@ -8,7 +8,7 @@ There were 75 outer-fold definitions, 25 for each of the three cohorts. All six 
 
 \section{Cohort Characteristics}\label{cohort-characteristics}
 
-There are 686 patients in the GBSG2 cohort and 299 patients who have an event (43.6\%). The data set has 8 raw covariates, namely, age, oestrogen receptor, hormonal therapy, menopausal status, number of positive lymph nodes, progesterone receptor, tumour grade and tumour size. The maximum observed follow-up is 2,659 days. Table~\ref{tab:ravi-cohorts} gives the median and quartiles of the observed follow-up times.
+The GBSG2 cohort contains 686 patients, with 299 observed events (43.6\%). Its 8 raw covariates are age, oestrogen receptor, hormonal therapy, menopausal status, number of positive lymph nodes, progesterone receptor, tumour grade and tumour size. The maximum observed follow-up is 2,659 days. Table~\ref{tab:ravi-cohorts} gives the median and quartiles of the observed follow-up times.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2481}}
@@ -60,11 +60,11 @@ Maximum observed follow-up & 2,659.00 & 355.20 & 2,358.00 \\
 
 \subsection{GBSG2}\label{gbsg2}
 
-The final GBSG2 cohort has the observed follow-up times shown in Table~\ref{tab:ravi-cohorts}. The median and quartiles describe the event-or-censoring durations as recorded. The Kaplan--Meier median below accounts for censoring.
+The GBSG2 follow-up summaries in Table~\ref{tab:ravi-cohorts} describe the median and quartiles of the recorded event-or-censoring durations. The Kaplan--Meier median below accounts for censoring.
 
 \subsection{METABRIC}\label{metabric}
 
-The METABRIC cohort has 1,980 eligible patients. In this cohort there were 1,144 deaths and 836 censored subjects. Age, Nottingham Prognostic Index (NPI), cellularity, ER status, PR status, HER2 status, menopausal status and PAM50 claudin-low subtype are the 8 major covariates. Their encoding produced 19 model coefficients in the first outer training fold. Missing predictor values were handled within each training fold.
+The METABRIC cohort contains 1,980 eligible patients, with 1,144 deaths and 836 censored observations. Its 8 source covariates are age, Nottingham Prognostic Index (NPI), cellularity, ER status, PR status, HER2 status, menopausal status and PAM50 claudin-low subtype. Their encoding produced 19 model coefficients in the first outer training fold. Missing predictor values were handled within each training fold.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7605}}
@@ -117,7 +117,7 @@ The WHAS500 cohort contains 500 patients, including 215 observed deaths (43.0\%)
 
 \subsection{Cross-Cohort Comparison}\label{cross-cohort-comparison}
 
-The cohorts vary in the size of their sample, the volume of event data, the volume of censoring, covariate organisation and clinical setting. This has the potential to influence the estimation and prediction performance. As such the results should be interpreted for each cohort, as these characteristics affect comparative and external validation studies \cite{ref33,ref37,ref44}.
+The cohorts differ in sample size, number of events, censoring, covariate structure and clinical setting. These characteristics can influence estimation and predictive performance. Results should therefore be interpreted for each cohort, as these characteristics also affect comparative and external validation studies \cite{ref33,ref37,ref44}.
 
 \section{Kaplan--Meier and Exploratory Survival Findings}\label{kaplanmeier-and-exploratory-survival-findings}
 
@@ -130,7 +130,7 @@ Figure~\ref{fig:ravi-km} shows Kaplan--Meier survival estimates for each cohort 
 \label{fig:ravi-km}
 \end{figure}
 
-The median survival time estimates are 1,807 days for GBSG2, 1,627 days for WHAS500 and 156.33 months for METABRIC. These are descriptive statistics for each cohort taking into account censoring. The time scales and populations differ, so the medians do not provide a direct comparison of prognosis between cohorts.
+The median survival time estimates are 1,807 days for GBSG2, 1,627 days for WHAS500 and 156.33 months for METABRIC. These descriptive estimates account for censoring within each cohort. The time scales and populations differ, so the medians do not provide a direct comparison of prognosis between cohorts.
 
 At 156.33 months, the Kaplan--Meier curve of METABRIC reaches 0.5. The median observed follow-up is 116.5 months. The Kaplan--Meier median can be higher than the median observed follow-up because it estimates survival time while accounting for censoring. Appendix~\ref{app:survival} reports the descriptive time summaries.
 
@@ -154,7 +154,7 @@ Comparative analyses have established that forest performance can be influenced 
 
 DeepSurv was evaluated in all three cohorts. Its mean Uno concordance was 0.6840 in GBSG2, 0.7430 in WHAS500 and 0.6680 in METABRIC. Secondary Harrell concordance was 0.6768, 0.7406 and 0.6682, respectively, with IBS values of 0.1653, 0.1557 and 0.1857. The neural model gave lower mean IBS than CoxPH in GBSG2 and METABRIC, while CoxPH had lower mean IBS in WHAS500.
 
-Overall, baseline performance depended on the sample, censoring, covariate structure and validation setting. This agrees with the comparative literature: CoxPH, RSF and neural survival models do not have a general ordering across all prediction tasks \cite{ref33,ref44}.
+Baseline performance depended on the sample, censoring, covariate structure and validation setting. This agrees with the comparative literature: CoxPH, RSF and neural survival models do not have a general ordering across all prediction tasks \cite{ref33,ref44}.
 
 \section{Bayesian Model Diagnostics}\label{bayesian-model-diagnostics}
 
@@ -234,7 +234,7 @@ Posterior summaries were available for all 205 accepted Bayesian fits. RQ2 is as
 
 \subsection{Normal Prior}\label{normal-prior-1}
 
-In GBSG2 under the Normal prior, the number of positive lymph nodes had a posterior hazard-ratio interval entirely above one, while progesterone receptor expression had an interval entirely below one. The oestrogen receptor interval crossed one, indicating uncertainty about its direction. Coefficient summaries and hazard ratios can be found in the Bayesian explainability section.
+In GBSG2 under the Normal prior, the number of positive lymph nodes had a posterior hazard-ratio interval entirely above one, while progesterone receptor expression had an interval entirely below one. The oestrogen receptor interval crossed one, indicating uncertainty about its direction. Coefficient summaries and hazard ratios are reported in the Bayesian explainability section.
 
 \subsection{Horseshoe Prior}\label{horseshoe-prior-1}
 
@@ -252,7 +252,7 @@ Comparing the mean across folds of the absolute posterior coefficient means, Hor
 
 For example, the GBSG2 age coefficient averaged $-0.074$ under Normal and $-0.010$ under Horseshoe, with mean HR interval widths of 0.380 and 0.253; none of the age intervals excluded one. The positive-node coefficient averaged 0.274 under all three priors and its interval excluded one in all seven folds. In WHAS500, the mean heart-rate coefficient was 0.350 under Normal and 0.308 under Horseshoe, with intervals above one in all 25 folds. METABRIC age remained positively associated under both priors, but Horseshoe's mean HR interval was slightly wider (0.398 versus 0.391). The fold averages are descriptive summaries, not a pooled posterior.
 
-In this analysis, the chosen priors are compared on the same feature names and posterior summaries. For example, the METABRIC age coefficient had positive posterior mean values for all three priors in the illustrative first fit: 0.6638 for Horseshoe, 0.6921 for Normal and 0.6927 for continuous Spike-and-Slab. The mean hazard ratios were 1.945, 2.001 and 2.002, respectively, and all three 95\% hazard-ratio intervals were above one.
+The prior comparison uses the same feature names and posterior summaries. For example, the METABRIC age coefficient had positive posterior mean values for all three priors in the illustrative first fit: 0.6638 for Horseshoe, 0.6921 for Normal and 0.6927 for continuous Spike-and-Slab. The mean hazard ratios were 1.945, 2.001 and 2.002, respectively, and all three 95\% hazard-ratio intervals were above one.
 
 These METABRIC age estimates are conditional on a time-constant covariate effect. The CoxPH training checks rejected proportional hazards for age and NPI in all 25 overlapping folds (Table~\ref{tab:gen-proportional-hazards}). The Bayesian models and DeepSurv share the proportional-hazards assumption: varying a baseline rate or using a nonlinear risk function does not by itself allow predictor effects to change with time. Their single hazard ratios summarise associations under the fitted proportional-hazards model, rather than demonstrating that the associations remain constant throughout follow-up.
 
@@ -260,7 +260,7 @@ The WHAS500 age coefficient means were 0.9273, 0.9214 and 0.9232 for Horseshoe, 
 
 \section{Final Predictive Performance}\label{final-predictive-performance}
 
-The final predictive analysis covers all 18 cohort--model combinations. Table~\ref{tab:gen-predictive-metrics} reports the mean and sample standard deviation of IBS, primary Uno concordance, secondary Harrell concordance and mean time-dependent AUC. All the comparisons are cohort-based. The patients, follow-up scales and event patterns differ between cohorts.
+The final predictive analysis covers all 18 cohort--model combinations. Table~\ref{tab:gen-predictive-metrics} reports the mean and sample standard deviation of IBS, primary Uno concordance, secondary Harrell concordance and mean time-dependent AUC. Comparisons are made within each cohort. Patients, follow-up scales and event patterns differ between cohorts.
 
 \input{tables/table_predictive_metrics.tex}
 
@@ -295,7 +295,7 @@ Table~\ref{tab:gen-calibration} summarises the middle-horizon estimates.
 
 \input{report_summaries/examiner_presentation/table_calibration.tex}
 
-The calibration summaries provide additional information to discrimination \cite{ref59,ref84}. At the middle horizon, the complete Bayesian arms had mean calibration-in-the-large close to zero. Normal and continuous Spike-and-Slab had similar mean slopes: approximately 1.25 in GBSG2, 0.95 in WHAS500 and 0.93 in METABRIC. Slopes above one indicate predictions with less spread than the fitted observed relationship; slopes below one indicate greater spread. The fixed-slope offset and freely estimated slope therefore describe different properties of the predictions. Appendix~\ref{app:predictive} reports all three horizons. At the earliest horizon in WHAS500, mean calibration-in-the-large was +0.176 to +0.180 for the three Bayesian priors, compared with $-0.011$ for CoxPH, +0.006 for RSF and +0.004 for DeepSurv. The positive Bayesian intercepts indicate underprediction of early event risk. On the complementary-log--log scale, an intercept of 0.180 corresponds to multiplying the predicted cumulative hazard by $\exp(0.180)\approx1.20$; it does not mean an 18-percentage-point difference in event probability. The near-zero middle-horizon offsets therefore do not describe every part of follow-up.
+The calibration summaries complement the discrimination measures \cite{ref59,ref84}. At the middle horizon, the complete Bayesian arms had mean calibration-in-the-large close to zero. Normal and continuous Spike-and-Slab had similar mean slopes: approximately 1.25 in GBSG2, 0.95 in WHAS500 and 0.93 in METABRIC. Slopes above one indicate predictions with less spread than the fitted observed relationship; slopes below one indicate greater spread. The fixed-slope offset and freely estimated slope therefore describe different properties of the predictions. Appendix~\ref{app:predictive} reports all three horizons. At the earliest horizon in WHAS500, mean calibration-in-the-large was +0.176 to +0.180 for the three Bayesian priors, compared with $-0.011$ for CoxPH, +0.006 for RSF and +0.004 for DeepSurv. The positive Bayesian intercepts indicate underprediction of early event risk. On the complementary-log--log scale, an intercept of 0.180 corresponds to multiplying the predicted cumulative hazard by $\exp(0.180)\approx1.20$; it does not mean an 18-percentage-point difference in event probability. The near-zero middle-horizon offsets therefore do not describe every part of follow-up.
 
 The within-fold bootstrap intervals provide a separate uncertainty summary. In the first Normal-prior outer fit, middle-horizon slopes were 1.191 [0.607, 2.338] in GBSG2, 0.831 [0.558, 1.110] in METABRIC and 0.487 [0.164, 0.923] in WHAS500 (Table~\ref{tab:sup-calibration-bootstrap}). The WHAS500 interval was below one, indicating greater spread in predicted risk than in the fitted observed relationship in that fold. Figure~\ref{fig:sup-calibration-curves} shows the corresponding grouped calibration curves. These within-fold estimates and intervals describe the specified examples; the bars in Figure~\ref{fig:ravi-calibration} describe between-fold standard deviations.
 
@@ -308,7 +308,7 @@ The within-fold bootstrap intervals provide a separate uncertainty summary. In t
 
 \section{Bayesian Explainability}\label{bayesian-explainability}
 
-The distribution of posterior coefficients of the retained Bayesian models was used to investigate Bayesian explainability. The analysis summarised posterior coefficient means, hazard ratios, 95\% credible intervals and posterior probabilities of positive direction. Table~\ref{tab:gen-posterior-examples} gives examples from the first outer Normal-prior fit in each cohort.
+Bayesian explainability was examined using the posterior coefficient distributions of the retained models. The analysis summarised posterior coefficient means, hazard ratios, 95\% credible intervals and posterior probabilities of positive direction. Table~\ref{tab:gen-posterior-examples} gives examples from the first outer Normal-prior fit in each cohort.
 
 \input{report_summaries/examiner_presentation/table_posterior_examples.tex}
 

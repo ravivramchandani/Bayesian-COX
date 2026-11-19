@@ -2,7 +2,7 @@
 
 \section{Background}\label{background}
 
-Survival analysis deals with time-to-event outcomes. It accounts for both the time to the occurrence of an event and right-censored data. In healthcare, events may include death, recurrence, progression, treatment failure and re-admission. The survival literature has recently reviewed how these techniques have been extended to machine learning prediction \cite{ref1,ref3}.
+Survival analysis deals with time-to-event outcomes. It accounts for both the time until an event occurs and right-censored data. In healthcare, events may include death, recurrence, progression, treatment failure and re-admission. Recent reviews describe extensions of survival analysis to machine-learning prediction \cite{ref1,ref3}.
 
 A central quantity in survival analysis is the survival function, defined as
 \begin{equation}
@@ -16,11 +16,11 @@ Right censoring is a defining feature of survival data. The event may not have o
 
 Conventional classification and regression methods require adaptation for clinical time-to-event problems. Classification can estimate whether an event occurs within a fixed period, whereas survival analysis describes how event risk changes over time. Standard regression generally assumes an observed outcome for every individual and does not explicitly accommodate right-censored event times \cite{ref3}. The timing matters clinically: two patients may experience the same outcome after very different periods of follow-up.
 
-Therefore, survival analysis provides an appropriate methodological foundation for this thesis because the research concerns not only whether a clinical event occurs, but also when it occurs under incomplete follow-up.
+Survival analysis therefore provides an appropriate foundation for examining whether and when clinical events occur under incomplete follow-up.
 
 \section{Applications of Survival Prediction in Healthcare}\label{applications-of-survival-prediction-in-healthcare}
 
-Survival analysis is widely used in healthcare because many clinically important outcomes are inherently time-dependent. Survival prediction can be applied to overall mortality, disease recurrence, disease progression, treatment outcomes, and patient prognosis. In cancer biology, overall survival and progression-free survival are often employed to measure survival time and disease progression in the patient. Recent surveys of machine-learning survival models in clinical data reveal that oncology is one of the main fields of application, and survival models are often applied to forecast the prognosis and clinical events of disease \cite{ref1}.
+Survival analysis is widely used in healthcare because many clinically important outcomes are time-dependent. Survival prediction can be applied to overall mortality, disease recurrence, disease progression, treatment outcomes and patient prognosis. In cancer biology, overall survival and progression-free survival are often used to measure survival time and disease progression. Recent surveys of machine-learning survival models in clinical data identify oncology as a main field of application, with models used to predict prognosis and clinical events \cite{ref1}.
 
 Survival prediction also supports the study of recurrence and disease progression. A survival model estimates the probability of remaining recurrence-free at successive times, providing information that may help guide follow-up and monitoring. Mortality predictions can similarly account for differences in patient characteristics and follow-up time \cite{ref1,ref5}.
 
@@ -50,7 +50,7 @@ These methods offer different combinations of interpretability, nonlinear flexib
 
 \section{Problem Statement}\label{problem-statement}
 
-The growing use of Bayesian methods for survival prediction raises an important methodological question concerning the specification of regression-coefficient priors. In Bayesian inference, prior distributions represent assumptions about plausible parameter values before the observed data are incorporated. The posterior distribution is then obtained by combining the prior distribution with the likelihood of the observed data. Therefore, the chosen prior may affect the posterior coefficient estimates, the uncertainty and predictive behaviour, especially when the information in the data is restricted \cite{ref6}.
+The growing use of Bayesian survival prediction raises a methodological question about the choice of regression-coefficient priors. In Bayesian inference, prior distributions represent assumptions about plausible parameter values before the observed data are incorporated. Combining the prior with the likelihood of the observed data gives the posterior distribution. The chosen prior may therefore affect posterior coefficient estimates, uncertainty and predictive behaviour, especially when information in the data is limited \cite{ref6}.
 
 This issue is particularly important for survival datasets because information about covariate effects depends on sample size, the number of observed events and the extent of censoring. Correlated clinical predictors can also make individual coefficients difficult to estimate. Prior structures provide one way to regularise these estimates and represent uncertainty about predictor associations \cite{ref6}.
 
@@ -72,9 +72,9 @@ The models are compared using five repeats of five-fold outer cross-validation, 
 
 \section{Thesis Structure}\label{thesis-structure}
 
-This thesis is divided into five chapters, in order of the theoretical background and research gap, methods, empirical assessment and conclusions.
+The five chapters cover the theoretical background and research gap, methods, empirical assessment and conclusions.
 
-Chapter 1, Introduction, sets the scene and the motivation of survival analysis and its applicability to healthcare prediction. It presents the ideas of time-to-event outcomes, survival probability, time-to-event hazard and time-to-event censoring, and then covers healthcare uses and the development of survival modelling.
+Chapter 1, Introduction, presents survival analysis and its relevance to healthcare prediction. It explains time-to-event outcomes, survival probability, hazard and censoring, then outlines healthcare applications and the development of survival modelling.
 
 Chapter 2, Literature Review, develops the theoretical and empirical basis of the research. It covers classical, machine-learning and Bayesian survival models, with particular attention to coefficient priors, shrinkage, evaluation and interpretation. The chapter then states the research gap, aim, objectives and questions.
 
