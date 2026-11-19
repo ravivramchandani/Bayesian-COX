@@ -16,7 +16,16 @@ A checked task has met its current acceptance evidence. Implementation alone
 is not a scientific result; production tasks are checked only when their frozen
 artefacts satisfy the stated gate.
 
-## Current manuscript - 2026-11-19
+## Conservative style revision — completed locally, 2026-11-19
+
+Reviewed the whole updated thesis and made 37 local prose edits, preserving the
+existing structure, all technical content and accurate author wording. Checked
+prose is 0.63% shorter. The 128-page PDF, source ZIP and previous-PDF backup are in
+`reports/thesis_final/`. Preservation comparisons, 11 focused reporting tests,
+independent source compilation and layout review pass. No experiment or remote
+publication was performed. See `coordination/reviews/2026-11-19-conservative-prose.md`.
+
+## Published manuscript checkpoint - 2026-11-19
 
 Revision `b2b9aa9` reports all 32 consistently represented coefficients under the three priors, replacing the six-predictor display subset. The results, discussion and RQ2 answer use the complete matched-fold comparison. Methods explain the prespecified event-time window and report exact events per encoded coefficient for the primary and 25% training conditions. METABRIC dimensions are explained through training-observed category levels.
 

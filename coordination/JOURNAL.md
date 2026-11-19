@@ -1,5 +1,17 @@
 # JOURNAL
 
+## 2026-11-19 — Conservative natural-prose edit
+
+Made 37 local wording edits across the five main chapters after reading the full
+report and guide. Checked prose fell from 22,357 to 22,216 words. Numerical/maths,
+citation/ref, heading and protected table/figure comparisons pass; the abstract,
+acknowledgements, bibliography and ten appendices remain exact. Eleven focused
+reporting tests pass. The independently extracted 61-file source builds a 128-page
+PDF with resolving citations and no LaTeX box warnings; visual review passes.
+The previous PDF and earlier ZIPs are preserved. Current copies and review points
+are linked from `coordination/reviews/2026-11-19-conservative-prose.md`. No fitting,
+new analysis, commit or publication was performed.
+
 ## 2026-11-19 - Completed full posterior comparison and training-information reporting
 
 Revision `b2b9aa9` reports all 32 consistently represented coefficients under the three priors, replacing the six-predictor display subset. The results, discussion and RQ2 answer use the complete matched-fold comparison. Methods explain the prespecified event-time window and report exact events per encoded coefficient for the primary and 25% training conditions. METABRIC dimensions are explained through training-observed category levels.

@@ -1,5 +1,20 @@
 # HANDOFF
 
+## Conservative prose pass — local, 2026-11-19
+
+The updated thesis has a conservative style edit across 37 local passages in the
+five main chapters. Checked prose is 0.63% shorter; the abstract, ten appendices,
+author-owned text, all 100 references and all scientific inputs are unchanged.
+The 128-page PDF and 61-file source ZIP build independently. Exact preservation
+checks, 11 focused reporting tests, schemas and visual review pass. No model was
+fitted and no remote update was requested. The local sources remain uncommitted.
+
+Current local PDF: `reports/thesis_final/Ravi_Thesis_Conservative_Prose_2026-11-19.pdf`.
+Matching source: `reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_conservative_prose.zip`.
+Previous PDF and six earlier source archives are preserved. Full pattern counts,
+meaning-sensitive locations and checks are in
+`coordination/reviews/2026-11-19-conservative-prose.md`.
+
 ## Complete posterior comparison and methods reporting - 2026-11-19
 
 Revision `b2b9aa9` reports all 32 consistently represented coefficients under the three priors, replacing the six-predictor display subset. The results, discussion and RQ2 answer use the complete matched-fold comparison. Methods explain the prespecified event-time window and report exact events per encoded coefficient for the primary and 25% training conditions. METABRIC dimensions are explained through training-observed category levels.
