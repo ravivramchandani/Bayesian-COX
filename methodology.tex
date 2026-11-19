@@ -319,7 +319,7 @@ The coefficient scales were fixed before comparing outcomes rather than selected
 
 Bayesian posterior inference used Hamiltonian Monte Carlo (HMC) with the No-U-Turn Sampler (NUTS). HMC uses gradients of the log posterior to construct proposals through continuous parameter space. NUTS adapts the trajectory length, reducing the need to choose a fixed number of integration steps \cite{hoffman2014}. This suits the continuous coefficient, scale and baseline-rate parameters in the three Bayesian specifications. Thomas and Tu provide a complementary practical account of HMC computation and tuning \cite{ref55}.
 
-The initial configuration used four independently seeded chains, each with 2,000 warm-up iterations and 2,000 retained draws, giving 8,000 retained draws per fit. Seeds for cohort, repeat, fold, model and attempt were derived from base seed 260817. Target acceptance was 0.95 for the Normal and continuous Spike-and-Slab models and 0.99 for the Horseshoe model. The higher horseshoe target was a specified sampling control for its hierarchical geometry. These target probabilities control NUTS adaptation and are separate from the diagnostic acceptance rule.
+The initial configuration used four independently seeded chains, each with 2,000 warm-up iterations and 2,000 retained draws, giving 8,000 retained draws per fit. Seeds were derived deterministically for each cohort, repeat, fold, model and attempt. Target acceptance was 0.95 for the Normal and continuous Spike-and-Slab models and 0.99 for the Horseshoe model. The higher horseshoe target was a specified sampling control for its hierarchical geometry. These target probabilities control NUTS adaptation and are separate from the diagnostic acceptance rule.
 
 Posterior sampling, computational diagnostics and predictive checking were treated as distinct parts of the analysis. Diagnostics assess evidence about exploration of the target posterior; predictive checks examine consequences of the fitted model for observable quantities. This follows the distinction between computational assessment and model adequacy in Bayesian workflow \cite{ref53}.
 
@@ -332,7 +332,7 @@ Table~\ref{_Toc245465017} gives the sampling and predictive-check configuration.
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5516}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4484}}@{}}
-\caption{Bayesian sampler, chain, warm-up, draw, seed, and predictive-check configuration}\label{_Toc245465017}\\
+\caption{Bayesian sampler, chain, warm-up, draw and predictive-check configuration}\label{_Toc245465017}\\
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Configuration
@@ -353,7 +353,6 @@ Chains & 4 \\
 Warm-up/tuning & 2,000 \\
 Retained draws & 2,000 per chain \\
 Total retained draws & 8,000/fit \\
-Base random seed & 260817 \\
 Normal target acceptance & 0.95 \\
 Horseshoe target acceptance & 0.99 \\
 Spike-and-Slab target acceptance & 0.95 \\
