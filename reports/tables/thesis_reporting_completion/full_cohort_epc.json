@@ -1,0 +1,91 @@
+{
+  "gbsg2": {
+    "N": 686,
+    "E": 299,
+    "p_full_cohort_encoding": 8,
+    "E_over_p_exact": "299/8",
+    "E_over_p": 37.375,
+    "category_levels": {
+      "horTh": [
+        "no",
+        "yes"
+      ],
+      "menostat": [
+        "Post",
+        "Pre"
+      ]
+    },
+    "raw_sha256": "2158b777d27ecfb69b187d3cbcad13fd1eb92d626935c528a4465fea6490ae5f"
+  },
+  "whas500": {
+    "N": 500,
+    "E": 215,
+    "p_full_cohort_encoding": 9,
+    "E_over_p_exact": "215/9",
+    "E_over_p": 23.88888888888889,
+    "category_levels": {
+      "gender": [
+        "0",
+        "1"
+      ],
+      "cvd": [
+        "0",
+        "1"
+      ],
+      "miord": [
+        "0",
+        "1"
+      ],
+      "mitype": [
+        "0",
+        "1"
+      ]
+    },
+    "raw_sha256": "4bb01775c04eca11d7f06d6e5dfebd0a5cce75aa7e73fe4261732385be106fcc"
+  },
+  "metabric": {
+    "N": 1980,
+    "E": 1144,
+    "p_full_cohort_encoding": 19,
+    "E_over_p_exact": "1144/19",
+    "E_over_p": 60.21052631578947,
+    "category_levels": {
+      "cellularity": [
+        "High",
+        "Low",
+        "Moderate",
+        "__MISSING__"
+      ],
+      "er_status": [
+        "Negative",
+        "Positive"
+      ],
+      "pr_status": [
+        "Negative",
+        "Positive",
+        "__MISSING__"
+      ],
+      "her2_status": [
+        "Negative",
+        "Positive",
+        "__MISSING__"
+      ],
+      "inferred_menopausal_state": [
+        "Post",
+        "Pre",
+        "__MISSING__"
+      ],
+      "pam50_+_claudin-low_subtype": [
+        "Basal",
+        "Her2",
+        "LumA",
+        "LumB",
+        "NC",
+        "Normal",
+        "__MISSING__",
+        "claudin-low"
+      ]
+    },
+    "raw_sha256": "731ea80ce0240cb6aa96ffb0f4a3bb379615202966c954512664bef02b29545c"
+  }
+}

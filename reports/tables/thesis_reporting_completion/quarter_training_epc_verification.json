@@ -1,0 +1,200 @@
+{
+  "archive_sha256": "05918c159acf84367cdcbb8d9fdd5cf8a6ceeb1bf6d72fb56d9a4ab09f7ea7e4",
+  "verified_cells": 825,
+  "status_counts": {
+    "failed_diagnostics": 55,
+    "complete": 770
+  },
+  "quarter_training_cells": 90,
+  "datasets": {
+    "gbsg2": {
+      "planned_fold_subsets": 10,
+      "n_train": [
+        135
+      ],
+      "events_train": [
+        59
+      ],
+      "p": [
+        8
+      ],
+      "minimum": {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_horseshoe",
+        "repeat": 1,
+        "fold": 1,
+        "status": "complete",
+        "n_train": 135,
+        "events_train": 59,
+        "processed_feature_degrees_of_freedom": 8,
+        "effective_information_events_per_degree_of_freedom": 7.375,
+        "training_subset_sha256": "7df1305054051930ab7c176f1e3c43f533a60d18a49690e8f5bf6b243c8a337c",
+        "cell_content_sha256": "421fbd28ca2732d73c2e534ae4f275d86752a510a3a37067a5d6dbe3d4dc13bf",
+        "source_cell": "cells/gbsg2/repeat_01_fold_01/rq2_fraction_025_observed/bayesian_horseshoe.json",
+        "source_file_sha256": "97a680df7bf794847341b3ba9153a36b8835279af424a599d5766ebe15dcddf3",
+        "n_encoded_preprocessing": 8,
+        "p_encoded_covariate_coefficients": 8,
+        "epc_exact": "59/8",
+        "epc": 7.375
+      },
+      "maximum": {
+        "dataset": "gbsg2",
+        "model_key": "bayesian_horseshoe",
+        "repeat": 1,
+        "fold": 1,
+        "status": "complete",
+        "n_train": 135,
+        "events_train": 59,
+        "processed_feature_degrees_of_freedom": 8,
+        "effective_information_events_per_degree_of_freedom": 7.375,
+        "training_subset_sha256": "7df1305054051930ab7c176f1e3c43f533a60d18a49690e8f5bf6b243c8a337c",
+        "cell_content_sha256": "421fbd28ca2732d73c2e534ae4f275d86752a510a3a37067a5d6dbe3d4dc13bf",
+        "source_cell": "cells/gbsg2/repeat_01_fold_01/rq2_fraction_025_observed/bayesian_horseshoe.json",
+        "source_file_sha256": "97a680df7bf794847341b3ba9153a36b8835279af424a599d5766ebe15dcddf3",
+        "n_encoded_preprocessing": 8,
+        "p_encoded_covariate_coefficients": 8,
+        "epc_exact": "59/8",
+        "epc": 7.375
+      },
+      "joint_counts": [
+        {
+          "E": 59,
+          "p": 8,
+          "n": 10,
+          "ratio_exact": "59/8"
+        }
+      ]
+    },
+    "metabric": {
+      "planned_fold_subsets": 10,
+      "n_train": [
+        392,
+        393
+      ],
+      "events_train": [
+        228
+      ],
+      "p": [
+        14,
+        15,
+        19
+      ],
+      "minimum": {
+        "dataset": "metabric",
+        "model_key": "bayesian_horseshoe",
+        "repeat": 2,
+        "fold": 2,
+        "status": "complete",
+        "n_train": 392,
+        "events_train": 228,
+        "processed_feature_degrees_of_freedom": 19,
+        "effective_information_events_per_degree_of_freedom": 12.0,
+        "training_subset_sha256": "c3ccead2910f768ceda6e1f9e8112fa718b67bdabf7a2455f8e864c007509f77",
+        "cell_content_sha256": "18e74cc96a25994b83fb27a482af1710e15fea1ba3b85761450be88edca3a5e2",
+        "source_cell": "cells/metabric/repeat_02_fold_02/rq2_fraction_025_observed/bayesian_horseshoe.json",
+        "source_file_sha256": "d8c6360e5d7123639a537af5923793a9b2caf6f1428530bb4246e35c51a2e585",
+        "n_encoded_preprocessing": 19,
+        "p_encoded_covariate_coefficients": 19,
+        "epc_exact": "12",
+        "epc": 12.0
+      },
+      "maximum": {
+        "dataset": "metabric",
+        "model_key": "bayesian_horseshoe",
+        "repeat": 2,
+        "fold": 1,
+        "status": "complete",
+        "n_train": 393,
+        "events_train": 228,
+        "processed_feature_degrees_of_freedom": 14,
+        "effective_information_events_per_degree_of_freedom": 16.285714285714285,
+        "training_subset_sha256": "94d89c476887714d74d211ef290af2733225dc04e5f2c68aef72bf4546e1fd05",
+        "cell_content_sha256": "b0dc6a669f42841a6da732d2bd51c0e152ab8f573aa0d02e2b661f87df0d0a70",
+        "source_cell": "cells/metabric/repeat_02_fold_01/rq2_fraction_025_observed/bayesian_horseshoe.json",
+        "source_file_sha256": "87895aa915fd4c556ab54921d86f662725c6f81e125a4bb4372f74b0f263dcd3",
+        "n_encoded_preprocessing": 14,
+        "p_encoded_covariate_coefficients": 14,
+        "epc_exact": "114/7",
+        "epc": 16.285714285714285
+      },
+      "joint_counts": [
+        {
+          "E": 228,
+          "p": 14,
+          "n": 2,
+          "ratio_exact": "114/7"
+        },
+        {
+          "E": 228,
+          "p": 15,
+          "n": 5,
+          "ratio_exact": "76/5"
+        },
+        {
+          "E": 228,
+          "p": 19,
+          "n": 3,
+          "ratio_exact": "12"
+        }
+      ]
+    },
+    "whas500": {
+      "planned_fold_subsets": 10,
+      "n_train": [
+        96
+      ],
+      "events_train": [
+        40
+      ],
+      "p": [
+        9
+      ],
+      "minimum": {
+        "dataset": "whas500",
+        "model_key": "bayesian_horseshoe",
+        "repeat": 1,
+        "fold": 1,
+        "status": "complete",
+        "n_train": 96,
+        "events_train": 40,
+        "processed_feature_degrees_of_freedom": 9,
+        "effective_information_events_per_degree_of_freedom": 4.444444444444445,
+        "training_subset_sha256": "46ee340edd66e3632b44de940d4a8dca81f800d79b25424e318dfda2f84806f5",
+        "cell_content_sha256": "cde0254d46a1ba9b5089ae814db007cbfe3bd4eb080bf5084a8023efc2a82410",
+        "source_cell": "cells/whas500/repeat_01_fold_01/rq2_fraction_025_observed/bayesian_horseshoe.json",
+        "source_file_sha256": "94dec5bc4ba84fce573648424acf0b9a8a18851ecfa99e5ef608ef97b6465f4e",
+        "n_encoded_preprocessing": 9,
+        "p_encoded_covariate_coefficients": 9,
+        "epc_exact": "40/9",
+        "epc": 4.444444444444445
+      },
+      "maximum": {
+        "dataset": "whas500",
+        "model_key": "bayesian_horseshoe",
+        "repeat": 1,
+        "fold": 1,
+        "status": "complete",
+        "n_train": 96,
+        "events_train": 40,
+        "processed_feature_degrees_of_freedom": 9,
+        "effective_information_events_per_degree_of_freedom": 4.444444444444445,
+        "training_subset_sha256": "46ee340edd66e3632b44de940d4a8dca81f800d79b25424e318dfda2f84806f5",
+        "cell_content_sha256": "cde0254d46a1ba9b5089ae814db007cbfe3bd4eb080bf5084a8023efc2a82410",
+        "source_cell": "cells/whas500/repeat_01_fold_01/rq2_fraction_025_observed/bayesian_horseshoe.json",
+        "source_file_sha256": "94dec5bc4ba84fce573648424acf0b9a8a18851ecfa99e5ef608ef97b6465f4e",
+        "n_encoded_preprocessing": 9,
+        "p_encoded_covariate_coefficients": 9,
+        "epc_exact": "40/9",
+        "epc": 4.444444444444445
+      },
+      "joint_counts": [
+        {
+          "E": 40,
+          "p": 9,
+          "n": 10,
+          "ratio_exact": "40/9"
+        }
+      ]
+    }
+  }
+}

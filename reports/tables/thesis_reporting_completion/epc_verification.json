@@ -1,0 +1,233 @@
+{
+  "verified_cells": 450,
+  "verified_sources": 455,
+  "matched_train_events_and_ids_cells": 450,
+  "matched_preprocessing_cells": 430,
+  "source_hashes": {
+    "manifest.json": "2a1817365675aa179174b5edf5b3da67bbcb2be1b2eb4143347e4b295052ce02",
+    "completion.json": "44d5d6e2c3cf4d0350c3bc8cb27291436c9934b219c4c895cb139525e6fa25f6",
+    "fold_metrics.csv": "e27aca1fffa74719ada0999ae5a200a44a5ac49dd11711457185ac33c7b5f86e",
+    "inference.json": "54f53ff0e2e23be2e52e9365716693d9f6b35a11e0d5750644640b38e26edf0e",
+    "out_of_fold_predictions.csv.gz": "6e1b03fd60759ef7e6c22e0a64dd5d08f040abd12e9250de566211fbd7fe3c42"
+  },
+  "datasets": {
+    "gbsg2": {
+      "n_cohort": [
+        686
+      ],
+      "events_cohort": [
+        299
+      ],
+      "n_outer_folds": 25,
+      "n_train_unique": [
+        548,
+        549
+      ],
+      "events_train_unique": [
+        239,
+        240
+      ],
+      "p_unique": [
+        8
+      ],
+      "joint_E_p_counts": [
+        {
+          "E": 239,
+          "p": 8,
+          "count": 20,
+          "ratio_exact": "239/8",
+          "ratio": 29.875
+        },
+        {
+          "E": 240,
+          "p": 8,
+          "count": 5,
+          "ratio_exact": "30",
+          "ratio": 30.0
+        }
+      ],
+      "minimum": {
+        "dataset": "gbsg2",
+        "repeat": 1,
+        "fold": 1,
+        "n_train": 548,
+        "events_train": 239,
+        "p_encoded_covariate_coefficients": 8,
+        "epc_exact": "239/8",
+        "epc": 29.875,
+        "n_cohort": 686,
+        "events_cohort": 299,
+        "source_cell": "cells/gbsg2/repeat_01_fold_01/bayesian_normal.json",
+        "source_cell_file_sha256": "142bf4461fcb08e1e69febc012f0d7184eaf6915ca87764e67b2b2c4a0dc43d8",
+        "cell_content_sha256": "fa693d9ba58ab04fcbc93ac91a5583844775a011e73f96f08db0ee46cf33623b"
+      },
+      "maximum": {
+        "dataset": "gbsg2",
+        "repeat": 1,
+        "fold": 5,
+        "n_train": 549,
+        "events_train": 240,
+        "p_encoded_covariate_coefficients": 8,
+        "epc_exact": "30",
+        "epc": 30.0,
+        "n_cohort": 686,
+        "events_cohort": 299,
+        "source_cell": "cells/gbsg2/repeat_01_fold_05/bayesian_normal.json",
+        "source_cell_file_sha256": "551e019a6cceb427d9e3bd8b1f23f69e3b7c7bd9d2aa95b7ebf21f458bee2ea3",
+        "cell_content_sha256": "7902e66b4ddd7bf6115bfe66bb4ba3a30331b7cc9a6f2fa25443ef7ed61a479e"
+      }
+    },
+    "whas500": {
+      "n_cohort": [
+        500
+      ],
+      "events_cohort": [
+        215
+      ],
+      "n_outer_folds": 25,
+      "n_train_unique": [
+        400
+      ],
+      "events_train_unique": [
+        172
+      ],
+      "p_unique": [
+        9
+      ],
+      "joint_E_p_counts": [
+        {
+          "E": 172,
+          "p": 9,
+          "count": 25,
+          "ratio_exact": "172/9",
+          "ratio": 19.11111111111111
+        }
+      ],
+      "minimum": {
+        "dataset": "whas500",
+        "repeat": 1,
+        "fold": 1,
+        "n_train": 400,
+        "events_train": 172,
+        "p_encoded_covariate_coefficients": 9,
+        "epc_exact": "172/9",
+        "epc": 19.11111111111111,
+        "n_cohort": 500,
+        "events_cohort": 215,
+        "source_cell": "cells/whas500/repeat_01_fold_01/bayesian_normal.json",
+        "source_cell_file_sha256": "79ef2754780f752a2fef38de0744fa7ac58d545d68d0a6ebd8cc707f51679ec8",
+        "cell_content_sha256": "e4c8a19ea3511dac7322f65bbdd018c44893e8f5b0b1ee9d78e3afdb6aad5ea8"
+      },
+      "maximum": {
+        "dataset": "whas500",
+        "repeat": 1,
+        "fold": 1,
+        "n_train": 400,
+        "events_train": 172,
+        "p_encoded_covariate_coefficients": 9,
+        "epc_exact": "172/9",
+        "epc": 19.11111111111111,
+        "n_cohort": 500,
+        "events_cohort": 215,
+        "source_cell": "cells/whas500/repeat_01_fold_01/bayesian_normal.json",
+        "source_cell_file_sha256": "79ef2754780f752a2fef38de0744fa7ac58d545d68d0a6ebd8cc707f51679ec8",
+        "cell_content_sha256": "e4c8a19ea3511dac7322f65bbdd018c44893e8f5b0b1ee9d78e3afdb6aad5ea8"
+      }
+    },
+    "metabric": {
+      "n_cohort": [
+        1980
+      ],
+      "events_cohort": [
+        1144
+      ],
+      "n_outer_folds": 25,
+      "n_train_unique": [
+        1584
+      ],
+      "events_train_unique": [
+        914,
+        915,
+        916
+      ],
+      "p_unique": [
+        15,
+        19
+      ],
+      "joint_E_p_counts": [
+        {
+          "E": 914,
+          "p": 15,
+          "count": 2,
+          "ratio_exact": "914/15",
+          "ratio": 60.93333333333333
+        },
+        {
+          "E": 914,
+          "p": 19,
+          "count": 3,
+          "ratio_exact": "914/19",
+          "ratio": 48.10526315789474
+        },
+        {
+          "E": 915,
+          "p": 15,
+          "count": 1,
+          "ratio_exact": "61",
+          "ratio": 61.0
+        },
+        {
+          "E": 915,
+          "p": 19,
+          "count": 9,
+          "ratio_exact": "915/19",
+          "ratio": 48.1578947368421
+        },
+        {
+          "E": 916,
+          "p": 15,
+          "count": 2,
+          "ratio_exact": "916/15",
+          "ratio": 61.06666666666667
+        },
+        {
+          "E": 916,
+          "p": 19,
+          "count": 8,
+          "ratio_exact": "916/19",
+          "ratio": 48.21052631578947
+        }
+      ],
+      "minimum": {
+        "dataset": "metabric",
+        "repeat": 1,
+        "fold": 4,
+        "n_train": 1584,
+        "events_train": 914,
+        "p_encoded_covariate_coefficients": 19,
+        "epc_exact": "914/19",
+        "epc": 48.10526315789474,
+        "n_cohort": 1980,
+        "events_cohort": 1144,
+        "source_cell": "cells/metabric/repeat_01_fold_04/bayesian_normal.json",
+        "source_cell_file_sha256": "1ca0aa0c412b8e2b69e78fbfade3a64adc660317d1118402c606ba8d5228cf6b",
+        "cell_content_sha256": "f7ac34a631842d929d67196fbae25083ccd716ee3bfc3704cb976ec39819a1b8"
+      },
+      "maximum": {
+        "dataset": "metabric",
+        "repeat": 1,
+        "fold": 2,
+        "n_train": 1584,
+        "events_train": 916,
+        "p_encoded_covariate_coefficients": 15,
+        "epc_exact": "916/15",
+        "epc": 61.06666666666667,
+        "n_cohort": 1980,
+        "events_cohort": 1144,
+        "source_cell": "cells/metabric/repeat_01_fold_02/bayesian_normal.json",
+        "source_cell_file_sha256": "6bd0ba2335e1057fb89e9b7fa114a7c655966f24309b99b6f0e98278a722a2e0",
+        "cell_content_sha256": "59fbd30d1016c1827d5b2e598d2d6213755e1cd1b6a95e330d88ec5d560c357f"
+      }
+    }
+  }
+}

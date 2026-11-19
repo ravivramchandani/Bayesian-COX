@@ -1,0 +1,7 @@
+{
+  "outer_training_epc.csv": "96cb60ea1662333f10c12a5ba644a3e8b05fda3cb86cc98adae192375878b510",
+  "quarter_training_cells_epc.csv": "c3051ef5fe3f441fc4a3a484e01b144feadf82ac13d07934086ac04dea6cc395",
+  "epc_verification.json": "2b9b79b6cb742575655649fe70c52c39e330ac8d7df2083eed014fa59ccbbc2f",
+  "quarter_training_epc_verification.json": "90fb875cc61fc41cc4adc5a0f3eb9ec2163f7098ca3610f9e8542ff1c7b1faf2",
+  "full_cohort_epc.json": "1f3806a3c51ab94b24099c253184f1339ddcc535c92cdd67ac6ae54448edf9bc"
+}
