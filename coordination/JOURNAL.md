@@ -1,5 +1,11 @@
 # JOURNAL
 
+## 2026-11-19 - Completed focused examiner amendments
+
+Revision `462e8c6` completes the focused response to Claude's v3 review. The main RQ4 answer summarises all condition categories using complete-pair contrasts, and the appendix explains the conditional meaning of low-coverage intervals while retaining every original estimate. The discussion uses verified posterior-support changes, EPP context, sampling acceptance and CoxPH calibration without assigning an untested cause. Published concordance is compared as context under explicitly different study designs. Repeated examples and remaining presentation inconsistencies are corrected.
+
+The report has 130 pages, 100 cited references, 46 tables and seven figures. All original evidence files and reference destinations are preserved. Fifteen focused reporting tests, Ruff, schemas, independent scientific review, citation/metadata checks and focused visual checks passed. The 61-file source ZIP independently rebuilds to a byte-identical PDF. No fitting, bootstrap sampling or simulation was run. New acknowledgement edits from Overleaf are preserved exactly. Current files are linked from `docs/ravi_thesis_next_steps.md`; the receipt is `coordination/reviews/2026-11-19-examiner-v3-amendments.json`. Earlier checkpoints retain their original scope and versions.
+
 ## 2026-11-19 - Final manuscript submission check
 
 The final manuscript check is complete at thesis revision `9e8f966`, published in Ravi's Overleaf project and the GitHub thesis branch. No outstanding substantive report errors or inconsistencies were found. Independent review confirmed alignment of the four research questions and eight objectives with the methods, findings and conclusions. The final cleanup removes the remaining numeric seed identifier while retaining deterministic sampling and all scientific results. Ravi's latest conservative prose edits are preserved.

@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-19",
+  "status": "completed_and_published",
+  "base_thesis_commit": "9e8f96647718c235a4026c3d39c6fa9ba4f9511c",
+  "incoming_overleaf_acknowledgement_commit": "bbb7d1d8defc4ecce3b830ab6511c342b3fb0855",
+  "thesis_commit": "462e8c6b23712bbaf5f1b72e36d0789582375de3",
+  "reporting_code_commit": "90fe1a5",
+  "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+  "github_thesis_branch": "thesis/final-report-20261117",
+  "remote_heads_verified": {
+    "origin": "462e8c6b23712bbaf5f1b72e36d0789582375de3",
+    "github": "462e8c6b23712bbaf5f1b72e36d0789582375de3"
+  },
+  "source_zip": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_review_amendments.zip",
+  "artifact_verification": {
+    "pdf_pages": 130,
+    "references": 100,
+    "tables": 46,
+    "figures": 7,
+    "source_files": 61,
+    "original_registered_output_hashes_verified": 81,
+    "new_output_hashes_verified": 21,
+    "all_100_reference_keys_and_destinations_preserved": true,
+    "all_references_cited": true,
+    "active_labels_unique": true,
+    "all_cross_references_resolved": true,
+    "latex_warnings": 0,
+    "overfull_boxes": 0,
+    "underfull_boxes": 0,
+    "known_nonfatal_engine_notices": 4,
+    "forbidden_text_hits": 0,
+    "project_or_local_links": 0,
+    "authoring_metadata_blank": true,
+    "document_id": false,
+    "xmp_metadata": false,
+    "embedded_attachments": false,
+    "source_zip_independent_build_byte_identical": true,
+    "pdf_sha256": "7dea0751b04bffcadf07370b0bb43d57eedb6d4874c1ce601ef7cd3a2585190c",
+    "source_zip_sha256": "56f2efbccce462f0d4176f063b9949de75103d47d47700d6391f227e410b96f5",
+    "overleaf_acknowledgement_preserved_exactly": true,
+    "visual_pages_checked": [
+      2,
+      3,
+      11,
+      62,
+      73,
+      74,
+      76,
+      114,
+      130
+    ],
+    "material_visual_defects_found": false
+  },
+  "fitting_performed": false,
+  "simulation_performed": false,
+  "bootstrap_sampling_performed": false,
+  "model_code_changed": false,
+  "all_frozen_predictions_diagnostics_and_inference_preserved": true,
+  "original_table_files_preserved": true,
+  "claude_v3_dispositions": {
+    "RQ4": "Summarise complete-pair prior-scale, interval and predictor contrasts in results and conclusion; retain every original partial estimate in appendix",
+    "low_pair_intervals": "Explain conditional patient-resampling interpretation without a retrospective minimum-pair cutoff or altered numerical output",
+    "discussion": "Report verified ER and related interval-support changes, EPP context, training-size acceptance pattern and CoxPH early calibration comparison; do not claim an established cause",
+    "published_context": "Use exact published Katzman2018 and Langbein2025 concordance as context with cohort, predictors, metric and validation differences stated",
+    "presentation": "Remove repeated first-fold examples and redundant PH passages; round horizon, separate calibration axes, keep diagnostic table together, move Table3.4caption above, shorten I7listentry, expand MIlabels, normalise prior labels and23DOIdisplays",
+    "scope": "Retain existing interpretation section and owner content exclusions; no mandated heading or administrative statements added"
+  },
+  "presentation_copy_count": 20,
+  "summary": {
+    "eligible_contrasts": 38,
+    "complete_contrasts": 29,
+    "priors": {
+      "Horseshoe": {
+        "complete_contrasts": 10,
+        "minimum": -0.0003310864538066824,
+        "maximum": 0.00211204737599863,
+        "nominal_intervals_excluding_zero": []
+      },
+      "Spike-and-slab": {
+        "complete_contrasts": 19,
+        "minimum": -0.00013003109910309792,
+        "maximum": 0.00014212083206921006,
+        "nominal_intervals_excluding_zero": [
+          {
+            "effect_type": "Direct",
+            "dataset": "gbsg2",
+            "component": "design",
+            "condition": "baseline_intervals_10",
+            "reference_condition": "",
+            "model_a": "Normal",
+            "model_b": "Spike-and-slab",
+            "n_paired_folds": "5",
+            "expected_paired_folds": "5",
+            "coverage": "full",
+            "status": "complete",
+            "observed": "0.0001065860131829134",
+            "confidence_lower": "8.576007584317494e-06",
+            "confidence_upper": "0.00020948992325555045",
+            "bootstrap_replicates": "2000",
+            "successful_bootstraps": "2000"
+          }
+        ]
+      }
+    },
+    "single_pair_nonzero_intervals": [
+      {
+        "effect_type": "Difference-in-differences",
+        "dataset": "gbsg2",
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "reference_condition": "fraction_100_observed",
+        "model_a": "Normal",
+        "model_b": "Horseshoe",
+        "n_paired_folds": "1",
+        "expected_paired_folds": "10",
+        "coverage": "partial",
+        "status": "complete",
+        "observed": "-0.0009869445604801736",
+        "confidence_lower": "-0.0018950907650595009",
+        "confidence_upper": "-8.837438130605423e-05",
+        "bootstrap_replicates": "2000",
+        "successful_bootstraps": "2000"
+      },
+      {
+        "effect_type": "Difference-in-differences",
+        "dataset": "gbsg2",
+        "component": "rq2",
+        "condition": "fraction_075_observed",
+        "reference_condition": "fraction_100_observed",
+        "model_a": "Horseshoe",
+        "model_b": "Spike-and-slab",
+        "n_paired_folds": "1",
+        "expected_paired_folds": "10",
+        "coverage": "partial",
+        "status": "complete",
+        "observed": "0.0009679098502542088",
+        "confidence_lower": "0.0001400051856967669",
+        "confidence_upper": "0.0017522515185959433",
+        "bootstrap_replicates": "2000",
+        "successful_bootstraps": "2000"
+      }
+    ]
+  },
+  "independent_scientific_audit": "Passed:38eligible/29complete;10H/19S; all174rows; ERcounts; acceptancepattern; EPP; conditional intervals; causal wording; direct/DiD distinction",
+  "validation": {
+    "focused_reporting_tests_passed": 15,
+    "ruff_passed": true,
+    "coordination_schemas_passed": true,
+    "full_model_suite": "Not certified:25collectionerrors in reporting environment, including missing modelling dependencies. No model code or frozen environment changed."
+  },
+  "published_source_checks": [
+    {
+      "source": "Katzman2018publishedTable1",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5828433/",
+      "verified_primary_XML": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5828433/fullTextXML",
+      "WHAS_DeepSurv_C": 0.866723,
+      "METABRIC_DeepSurv_C": 0.654452,
+      "WHAS_n": 1638,
+      "WHAS_predictors": 5,
+      "test_fraction": 0.2
+    },
+    {
+      "source": "Langbein2025Section3.2",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/bimj.70089",
+      "GBSG2_RSF_C": 0.74,
+      "GBSG2_CoxPH_C": 0.716,
+      "estimator_identity_not_assumed": true
+    },
+    {
+      "source": "InandLee2018title",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29768911/",
+      "corrected_punctuation_only": true
+    }
+  ]
+}
