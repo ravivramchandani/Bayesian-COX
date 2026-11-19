@@ -1,6 +1,6 @@
 # Ravi: thesis files and research handoff
 
-Start with [the current thesis files and editing steps](ravi_thesis_next_steps.md). The revised 125-page source and PDF are on GitHub branch `thesis/final-report-20261117` and in [the active Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0), both at `749f6fc`. The report contains 97 cited references, 44 tables and seven figures, including the new methodological guidance table. Reading or editing requires only a browser on any operating system.
+Start with [the current thesis files and editing steps](ravi_thesis_next_steps.md). The standalone 125-page source and PDF are on GitHub branch `thesis/final-report-20261117` and in [the active Overleaf project](https://www.overleaf.com/project/6af91395a2e68e546f56fbc0), both at `bf9f2ac`. All 97 scholarly references and numerical results are retained. The source ZIP contains only the 59 files required for compilation. Reading or editing needs only a browser on any operating system.
 
 The technical release and experiment details below are retained for their separate uses.
 

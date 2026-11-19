@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0.0",
+  "date_nz": "2026-11-19",
+  "status": "completed_and_published",
+  "base_thesis_commit": "749f6fc99fd7946ac621aefaaa5d33d9383f052d",
+  "thesis_commit": "bf9f2acc03189a2cea67ac82aba2e54b811be2b8",
+  "backup_branch": "archive/before-standalone-cleanup-20261119",
+  "overleaf_project": "https://www.overleaf.com/project/6af91395a2e68e546f56fbc0",
+  "github_thesis_branch": "thesis/final-report-20261117",
+  "remote_heads_verified": {
+    "overleaf_main": "bf9f2acc03189a2cea67ac82aba2e54b811be2b8",
+    "github_thesis_branch": "bf9f2acc03189a2cea67ac82aba2e54b811be2b8"
+  },
+  "audit": {
+    "pdf_pages": 125,
+    "references": 97,
+    "tables": 44,
+    "figures": 7,
+    "pdf_sha256": "9ec98d24dc99a0db891111ed69e4ab05b740b3921a653c699f80beb844e51c87",
+    "forbidden_text_scan": {
+      "internal_paths": [],
+      "internal_filenames": [],
+      "project_pointers": [],
+      "workflow_wording": [],
+      "execution_dates": [],
+      "predictor_aliases": [],
+      "implementation_seed_ids": []
+    },
+    "pdf_metadata": {
+      "/Author": "",
+      "/Title": "",
+      "/Subject": "",
+      "/Creator": "",
+      "/Producer": "",
+      "/Keywords": "",
+      "/Trapped": "/False"
+    },
+    "xmp_metadata": false,
+    "document_id": false,
+    "embedded_attachments": false,
+    "unique_academic_reference_links": 97,
+    "project_or_local_uri_links": false,
+    "publication_years_and_cover_date_retained": true,
+    "source_zip": {
+      "path": "reports/thesis_final/Ravi_Thesis_Overleaf_2026-11-19_standalone.zip",
+      "files": 59,
+      "sha256": "83dd29fa12cb3e09b49a1b5c9528cd4ba669fc687158761aee38d84d423acc90",
+      "contains_only_active_tex_and_figure_assets": true,
+      "contains_analysis_scripts_data_or_manifests": false
+    },
+    "locations": {
+      "Predictors": [
+        32,
+        57
+      ],
+      "Computational Implementation and Verification": [
+        54
+      ],
+      "Full-model prior predictive survival summaries": [
+        104
+      ],
+      "Diagnostic rejection causes after the final sampling attempt": [
+        104
+      ],
+      "Attribution sampling-stability comparisons": [
+        117
+      ]
+    },
+    "latex_warnings": 0,
+    "active_labels_unique": 188,
+    "independent_source_zip_build_byte_identical": true,
+    "fresh_build_matching_page_texts": 125,
+    "existing_evidence_outputs_hash_verified": 82,
+    "independent_audit_passed": true,
+    "imported_source_filename_metadata": false,
+    "visual_pages_checked": [
+      38,
+      54,
+      57,
+      104,
+      116,
+      117
+    ],
+    "material_visual_defects_found": false
+  },
+  "changes": {
+    "prose_changes": [
+      {
+        "file": "Main.tex",
+        "before": "% Unitec thesis template adapted for Ravi V. Ramchandani from supplied Word thesis.\n% Main file: set pdfLaTeX compiler in Overleaf (Settings > Compiler).\n",
+        "after": ""
+      },
+      {
+        "file": "Main.tex",
+        "before": "% Keep identical source builds stable in Git by omitting volatile PDF metadata.\n",
+        "after": ""
+      },
+      {
+        "file": "Main.tex",
+        "before": "\\pdftrailerid{}",
+        "after": "\\pdftrailerid{}\n\\pdfsuppressptexinfo=15"
+      },
+      {
+        "file": "Main.tex",
+        "before": "\\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue, filecolor=blue}",
+        "after": "\\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,filecolor=blue,pdfcreator={},pdfproducer={},pdftrapped={}}"
+      },
+      {
+        "file": "methodology.tex",
+        "before": "age, tumour size (tsize), positive nodes (pnodes), progesterone receptor measurement (progrec), oestrogen receptor measurement (estrec), hormonal therapy (horTh), menopausal status (menostat) and tumour grade (tgrade)",
+        "after": "age, tumour size, number of positive lymph nodes, progesterone receptor measurement, oestrogen receptor measurement, hormonal therapy, menopausal status and tumour grade"
+      },
+      {
+        "file": "methodology.tex",
+        "before": "The reconstruction procedure made a clear distinction between predictors and survival outcomes: GBSG2 time and cens, WHAS500 lenfol and fstat, and METABRIC time and event. Source fields were mapped to explicit binary event indicators according to their documented coding. In particular, the GBSG2 field named cens supplies the observed-event indicator. The cohort adapters standardised the representation to time and event, enabling a common survival-analysis interface across the three cohorts.",
+        "after": "Survival outcomes were defined separately from the predictors. Each observation comprised a follow-up duration and a binary event indicator. Dataset-specific coding was checked before analysis so that one consistently denoted an observed event and zero denoted right censoring across all three cohorts."
+      },
+      {
+        "file": "methodology.tex",
+        "before": "\\section{Reproducibility and Computational Integrity}",
+        "after": "\\section{Computational Implementation and Verification}"
+      },
+      {
+        "file": "methodology.tex",
+        "before": "Reproducibility was supported by specified model configurations, fold definitions, preprocessing rules and deterministic seeds. The computational environment used Python 3.11.15, PyMC 5.28.5 \\cite{pymc2023}, ArviZ 0.23.4 \\cite{arviz2019}, scikit-survival 0.28.0 \\cite{polsterl2020}, lifelines 0.30.3 \\cite{lifelines2019}, PyTorch 2.13.0 \\cite{pytorch2019} and pycox 0.3.0 \\cite{pycox2019}. Reporting the software and diagnostic procedures alongside the mathematical model supports reproducible Bayesian analysis \\cite{ref35,ref39,ref40,ref53}.",
+        "after": "The analysis was implemented in Python. PyMC supported Bayesian model fitting \\cite{pymc2023}, and ArviZ provided posterior diagnostics \\cite{arviz2019}. CoxPH was fitted using lifelines \\cite{lifelines2019}; scikit-survival supported the survival analyses and performance metrics \\cite{polsterl2020}. DeepSurv used PyTorch \\cite{pytorch2019} and pycox \\cite{pycox2019}. Model settings, preprocessing and validation procedures were applied consistently across the comparisons \\cite{ref35,ref39,ref40,ref53}."
+      },
+      {
+        "file": "methodology.tex",
+        "before": "Diagnostic summaries, fitted settings, preprocessing state, validation predictions and posterior summaries were retained for each outcome. Scientific reproduction checks compared all 450 original model--fold outcomes with repeated computations of their scientific outputs and diagnostic outcomes. Machine-dependent execution times were excluded from that comparison.",
+        "after": "Numerical verification compared predictions, posterior summaries and diagnostic outcomes across all 450 original model--fold evaluations. Computation times were assessed separately from the agreement of the scientific estimates."
+      },
+      {
+        "file": "results.tex",
+        "before": "age, oestrogen receptor (estrec), hormone therapy (horTh), menopausal status (menostat), number of positive lymph nodes (pnodes), progesterone receptor (progrec), tumour grade (tgrade) and tumour size (tsize)",
+        "after": "age, oestrogen receptor, hormonal therapy, menopausal status, number of positive lymph nodes, progesterone receptor, tumour grade and tumour size"
+      },
+      {
+        "file": "results.tex",
+        "before": "Selected raw model predictors & age, estrec, horTh, menostat, pnodes, progrec, tgrade, tsize & age, NPI, cellularity, ER\\_status, PR\\_status, HER2\\_status, menopausal\\_status, PAM50/\\allowbreak{}claudin-low subtype & age, sex, hr, sysbp, diasbp, bmi, cvd, miord, mitype \\\\",
+        "after": "Predictors & Age, oestrogen receptor, hormonal therapy, menopausal status, positive lymph nodes, progesterone receptor, tumour grade, tumour size & Age, NPI, cellularity, ER status, PR status, HER2 status, menopausal status, PAM50/\\allowbreak{}claudin-low subtype & Age, sex, heart rate, systolic and diastolic blood pressure, body mass index, cardiovascular disease, order and type of myocardial infarction \\\\"
+      },
+      {
+        "file": "results.tex",
+        "before": "heart rate (hr), systolic blood pressure (sysbp), diastolic blood pressure (diasbp), BMI, cardiovascular disease (cvd), order of myocardial infarction (miord) and infarction type (mitype)",
+        "after": "heart rate, systolic blood pressure, diastolic blood pressure, body mass index, cardiovascular disease, order of myocardial infarction and infarction type"
+      },
+      {
+        "file": "results.tex",
+        "before": "Frozen across Bayesian models",
+        "after": "Common across Bayesian models"
+      },
+      {
+        "file": "results.tex",
+        "before": "The saved training-data checks",
+        "after": "The training-data checks"
+      },
+      {
+        "file": "results.tex",
+        "before": "their stored central 95\\% replicated-count intervals",
+        "after": "their central 95\\% replicated-count intervals"
+      },
+      {
+        "file": "results.tex",
+        "before": "The saved within-fold bootstrap intervals",
+        "after": "The within-fold bootstrap intervals"
+      },
+      {
+        "file": "results.tex",
+        "before": "In GBSG2/Normal, pnodes had a posterior hazard-ratio interval entirely above one, while progrec had an interval entirely below one. The estrec interval crossed one, indicating uncertainty about its direction.",
+        "after": "In GBSG2 under the Normal prior, the number of positive lymph nodes had a posterior hazard-ratio interval entirely above one, while progesterone receptor expression had an interval entirely below one. The oestrogen receptor interval crossed one, indicating uncertainty about its direction."
+      },
+      {
+        "file": "results.tex",
+        "before": "In GBSG2, pnodes had a posterior coefficient mean",
+        "after": "In GBSG2, the number of positive lymph nodes had a posterior coefficient mean"
+      },
+      {
+        "file": "results.tex",
+        "before": "The progrec coefficient mean",
+        "after": "The progesterone receptor coefficient mean"
+      },
+      {
+        "file": "appendix_f.tex",
+        "before": "Computation times describe the original fitting environment and include the specified attempts.",
+        "after": "Computation times include all specified sampling attempts for each fit."
+      },
+      {
+        "file": "appendix_f.tex",
+        "before": "summarises the saved checks",
+        "after": "summarises the checks"
+      },
+      {
+        "file": "appendix_f.tex",
+        "before": "summarises the stored full-model prior predictive",
+        "after": "summarises the full-model prior predictive"
+      },
+      {
+        "file": "appendix_h.tex",
+        "before": "gives the saved calibration-in-the-large",
+        "after": "gives the calibration-in-the-large"
+      },
+      {
+        "file": "appendix_h.tex",
+        "before": "reports the saved sensitivity estimates",
+        "after": "reports the sensitivity estimates"
+      },
+      {
+        "file": "appendix_i.tex",
+        "before": "averages a stored summary from separate fitted posteriors",
+        "after": "averages a summary from separate fitted posteriors"
+      },
+      {
+        "file": "methodology.tex",
+        "before": "The cohort-specific outcome fields are converted to a unified binary event indicator. GBSG2 uses cens as the observed-event indicator, WHAS500 uses fstat, and METABRIC provides an event field.",
+        "after": "Removed duplicate source-field mapping; the binary indicator definition and cohort endpoints remain explicit."
+      }
+    ],
+    "table_presentation_copies": [
+      {
+        "source": "report_summaries/supervisor_checks/table_predictive_checks.tex",
+        "presentation": "report_summaries/standalone_presentation/table_predictive_checks.tex",
+        "source_sha256": "6255d3a0ae9feb5e378ecbcfe0e102ed3de1945926ded0c25e5d0d1b5237ff16",
+        "presentation_sha256": "dcbe2fa6d83a9a464168ad1b9f747f3ba4cc4e8d4803fed729a1493943b476c8",
+        "numerical_tokens_unchanged": true
+      },
+      {
+        "source": "report_summaries/examiner_polish/table_prior_predictive.tex",
+        "presentation": "report_summaries/standalone_presentation/table_prior_predictive.tex",
+        "source_sha256": "c7e5d7ecafc9c3ccc5a1a714fa6a73cd49fca2e2d1f6fd8b9b41b32ef9cd55b8",
+        "presentation_sha256": "ac26fe7f3af143f902ce5aac4ab90c04c5013b7201e0b6698bb0e291f972bb2e",
+        "numerical_tokens_unchanged": true
+      },
+      {
+        "source": "report_summaries/examiner_polish/table_diagnostic_failures.tex",
+        "presentation": "report_summaries/standalone_presentation/table_diagnostic_failures.tex",
+        "source_sha256": "66aa4cdba7f03a524e1e5568af7ebbb4e5da72d95d3e4a98c709084b7f51bcf0",
+        "presentation_sha256": "3e8edc55b669906b7df67e3d0ebfcfcdd33e29d8845739885f711599dc37fa9e",
+        "numerical_tokens_unchanged": true
+      },
+      {
+        "source": "report_summaries/supervisor_comparisons/table_paired_bootstrap.tex",
+        "presentation": "report_summaries/standalone_presentation/table_paired_bootstrap.tex",
+        "source_sha256": "40198480110fcd8f9cfc2ff5d1a637989181512c524c5e85d42ecc5fdeb99b29",
+        "presentation_sha256": "8aec13bfd2b5c9ee519b81fe396a8390f23d6be60e40867684838820852027c8",
+        "numerical_tokens_unchanged": true
+      },
+      {
+        "source": "report_summaries/examiner_polish/table_posterior_summary.tex",
+        "presentation": "report_summaries/standalone_presentation/table_posterior_summary.tex",
+        "source_sha256": "3dea6f30015914654e6bac05c7ed61c26959ec2e04fefaf004f17b67f432dff7",
+        "presentation_sha256": "5b97a3c8a24f7b1bdabf80493dfa9f8c7df6a05ac5d33bbb85000f784d358573",
+        "numerical_tokens_unchanged": true
+      },
+      {
+        "source": "report_summaries/examiner_polish/table_posterior_direction.tex",
+        "presentation": "report_summaries/standalone_presentation/table_posterior_direction.tex",
+        "source_sha256": "f8ffa607bf5d8d85fe33431faf5741fbec31d474ef10e6bc142ce238e7160904",
+        "presentation_sha256": "20b3b8d960576e2e9b1c86bbe6c112268c1f060e659c53ce8dbd8c31cd4e35db",
+        "numerical_tokens_unchanged": true
+      },
+      {
+        "source": "report_summaries/examiner_polish/table_attribution_failures.tex",
+        "presentation": "report_summaries/standalone_presentation/table_attribution_failures.tex",
+        "source_sha256": "c6a798fb760e1827ff05cd08616643204a9be8ae540f57b24bee7c4d349bd04e",
+        "presentation_sha256": "46781504aacf48c918fe048094a74914acc63b24efdb0d02914429d841d9a071",
+        "scientific_estimates_and_counts_unchanged": true,
+        "removed_implementation_identifiers": [
+          "104729",
+          "130363",
+          "155921"
+        ]
+      }
+    ]
+  },
+  "scientific_results_changed": false,
+  "fitting_performed": false,
+  "simulation_performed": false,
+  "all_97_scholarly_references_retained": true,
+  "original_82_evidence_assets_preserved": true,
+  "scope_interpretation": "Remove project-operational and authoring material while preserving scholarly citations, publication years, cover date, study design and scientific results.",
+  "independent_read_only_audit_passed": true,
+  "hidden_metadata_note": "All authoring fields are blank; /Trapped False is the only remaining nonempty Info value and is a standard prepress flag.",
+  "source_zip_note": "Only active LaTeX and required figure files; no analysis scripts, data exports, JSON manifests or repository instructions. Full research data remain preserved in the repositories.",
+  "source_sha256": {
+    "Main.tex": "f06207c043324439afc11528496e0ee4f506b16bbe7c8e839a7dc88a26e35075",
+    "Main.pdf": "9ec98d24dc99a0db891111ed69e4ab05b740b3921a653c699f80beb844e51c87",
+    "methodology.tex": "983906c4d2dfc072cdd3413151e60edc18fa36b91101c8e6c39237de922b01d5",
+    "results.tex": "7499deb811adcba490f70d6e052f91e7cf78c6e9df39a46f1ca25a4cbb97afcc",
+    "references.tex": "fb2d237d85ce7b92fe4a446c535e01eccf44a9a39b87e8586ff5ed6e9ae5d8a8",
+    "ack.tex": "adfd5b3ba7a73b96ff17ac18a11ac1093becdd3fa246090815ffa3ba107e75b0"
+  }
+}

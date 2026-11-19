@@ -1,5 +1,11 @@
 # JOURNAL
 
+## 2026-11-19 - Removed operational material from the report
+
+Revision `bf9f2ac` removes operational wording, raw predictor aliases and the external supporting-summary pointer. Hidden authoring fields are blank, with no software fingerprint, dates, document ID, XMP or attachments. Scholarly citations, publication years and the cover date are retained. The methodology is self-contained; scientific model settings and results are unchanged. Numeric seed identifiers and the package patch-version inventory are omitted from the reader-facing text, while full computational records remain preserved.
+
+The report has 125 pages, 97 references, 44 tables and seven figures. All 82 existing evidence-output hashes pass; seven presentation copies change wording only, with scientific estimates/counts unchanged. Text/link/metadata scans, independent review, zero-warning LaTeX builds, Poppler checks and focused visual checks passed. The active-only 59-file source ZIP produces a byte-identical PDF without scripts, data exports, manifests or repository instructions. Current files are linked from `docs/ravi_thesis_next_steps.md`; the receipt is `coordination/reviews/2026-11-19-standalone-cleanup.json`.
+
 ## 2026-11-19 - Strengthened synthesis and reduced repetition
 
 Revision `749f6fc` implements the owner's four recommendations while preserving the source at `d7cbd01` on `archive/before-synthesis-20261119`. The abstract, introduction and literature synthesis now establish the practical prior-hierarchy question; the discussion relates the findings to the closest primary studies; repeated RQ answers are consolidated; and Table 5.2 gives methodological guidance. Conclusion source text fell from 2,677 to 2,054 whitespace-delimited words (23.3%), including the new table; this is a source comparison, not an institutional word count.
